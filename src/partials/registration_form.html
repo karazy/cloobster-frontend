@@ -1,4 +1,4 @@
-<div class='registration_wrapper'>
+<div class='registration_wrapper' ng-hide='registered'>
 	<form name='registration'>
 		<label>Accountdaten:</label><br/>
 		<input type='text' ng-model="account.name" required><br/>
@@ -21,4 +21,11 @@
         <button ng-click="cancel()" ng-disabled="isCancelDisabled()">Abbrechen</button><br/>
       	<button ng-click="save()" ng-disabled="isSaveDisabled()">Speichern</button>
 	</form>
+</div>
+<div class='registration_message' ng-show='registered'>
+	<p>Vielen dank für die Registrierung {{account.name}} eine E-mail wurde an {{account.email}} gesendet.</p>
+</div>
+<div class='registration_message' ng-show='error'>
+	<p>Fehler!!!</p>
+	<pre>{{errorValue}}</pre>
 </div>
