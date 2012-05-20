@@ -6,6 +6,9 @@
 Cloobster.Registration = function($scope, $resource, Account) {
 	//my code gose here ^^
 
+	$scope.registered = false;
+	$scope.error = false;
+
 	var emptyAccount = {
 			'name' : 'Hans Dampf',
 			'login' : 'hdampf',
@@ -21,12 +24,16 @@ Cloobster.Registration = function($scope, $resource, Account) {
 				'phone' : '123456'
 			} 
 		},
-		account,
-		accountResource = $resource('/b/');
+		account;
 
 	$scope.save = function() {
 		account = new Account($scope.account);
-		account.$register();
+		account.$register(function (account) { 
+			$scope.registered = true;
+		}, function (obj) { 
+			$scope.error = true;
+			$scope.errorValue = obj;
+		});
 	}
 
 	$scope.cancel = function() {
