@@ -13,3 +13,14 @@ angular.module('Cloobster.services', ['ngResource']).
  
       return Account;
 });
+
+angular.module('Cloobster.services', []).
+    factory('facebookApi', function() {
+      var fbApiService; 
+      fbApiService = {
+        getName = function () {
+          
+        }
+      }
+      return fbApiService;
+});
