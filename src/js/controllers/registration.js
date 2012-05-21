@@ -42,6 +42,7 @@ Cloobster.Registration = function($scope, $resource, Account) {
 		$scope.passwordRepeat = emptyAccount.password;
 	}
 
+	//set default values on load
 	$scope.cancel();
 }
 Cloobster.Registration.$inject = ['$scope', '$resource', 'Account'];
