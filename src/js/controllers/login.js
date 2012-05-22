@@ -4,17 +4,14 @@
 
 
 Cloobster.Login = function($scope, facebookApi) {
-	$scope.fbLoggedIn = facebookApi.getLoggedIn();
-	$scope.fbUser = {};
-	$scope.fbLoggedIn.then( function (result) {
-		if(result === true) {
-			$scope.fbUser = facebookApi.getUser();	
-		}
-	});
-
 	$scope.fbLogout = function () {
 		facebookApi.logout();
-		$scope.fbLoggedIn = false;
-	}
+	};
+
+	$scope.fbLogin = function() {
+		facebookApi.login().then(function() {
+
+		});
+	};
 }
 Cloobster.Login.$inject = ['$scope', 'facebookApi'];

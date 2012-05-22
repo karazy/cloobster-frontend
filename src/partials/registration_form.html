@@ -1,21 +1,23 @@
 <h1>Cloobster Registration</h1>
 <div class='registration_wrapper' ng-hide='registered'>
-	<form name='registration'>
+	<a href="" ng-click="connectFb()" ng-show='isLoggedInAndNotFbConnected()'>Use my Facebook account and email for registration.</a>
+	<a href="" ng-click="loginAndConnectFb()" ng-hide="fbLoggedIn">Login with my Facebook account and connect Cloobster.</a>
+	<form name='registrationForm'>
 		<label>Accountdaten:</label><br/>
-		<input type='text' ng-model="account.name" required><br/>
-		<input type='text' ng-model="account.login" required><br/>
-		<input type='email' ng-model="account.email" required><br/>
-		<input type='email' ng-model="emailRepeat" required><br/>
-		<input type='password' ng-model="account.password" required><br/>
-		<input type='password' ng-model="passwordRepeat" required><br/>
-		<input type='text' ng-model="account.phone" required><br/>
+		<input name='fullname' type='text' ng-model="account.name" required ng-disabled="fbConnected"><br/>
+		<input name='login' type='text' ng-model="account.login" required><br/>
+		<input name='email' type='email' ng-model="account.email" required ng-disabled="fbConnected"><br/>
+		<input name='emailRepeat' type='email' ng-model="emailRepeat" required ng-disabled="fbConnected"><br/>
+		<input name='password' type='password' ng-model="account.password" required><br/>
+		<input name='passwordRepeat' type='password' ng-model="passwordRepeat" required><br/>
+		<input name='phone' type='text' ng-model="account.phone" required><br/>
 		<label>Firmendaten:</label><br/>
 		<input name='company_name' type='text' ng-model="account.company.name" required><br/>
-		<input name='address' type='text' ng-model="account.company.address" required><br/>
-		<input name='city' type='text' ng-model="account.company.city" required><br/>
-		<input name='postcode' type='text' ng-model="account.company.postcode"><br/>
-		<input name='phone' type='text' ng-model="account.company.phone"><br/>
-		<select ng-model='account.company.country' required>
+		<input name='company_address' type='text' ng-model="account.company.address" required><br/>
+		<input name='company_city' type='text' ng-model="account.company.city" required><br/>
+		<input name='company_postcode' type='text' ng-model="account.company.postcode"><br/>
+		<input name='company_phone' type='text' ng-model="account.company.phone"><br/>
+		<select name='company_country' ng-model='account.company.country' required>
             <option>Germany</option>
         </select><br/>
 

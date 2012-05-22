@@ -17,20 +17,19 @@ Cloobster.services = angular.module('Cloobster.services', ['ngResource']).
 Cloobster.services.
     factory('facebookApi', ['$q','$rootScope', function($q, $rootScope) {
       var fbApiService; 
-      var loggedIn = $q.defer();
+      var loggedIn = false;
+      $rootScope.fbLoggedIn = false;
       // listen for and handle auth.statusChange events
       FB.Event.subscribe('auth.statusChange', function(response) {
-          $rootScope.$apply(function() {
-            if (response.authResponse) {
-              loggedIn.resolve(true);
+          if (response.authResponse) {
+              $rootScope.$apply('fbLoggedIn = true');
               var uid = response.authResponse.userID;
               var accessToken = response.authResponse.accessToken;
             
             } else {
-              loggedIn.resolve(false);
+              $rootScope.$apply('fbLoggedIn = false');
             }
-          })
-        });
+          });
       
       fbApiService = {
         getUser : function () {
@@ -42,8 +41,21 @@ Cloobster.services.
           });
           return userDeferred.promise;
         },
-        getLoggedIn : function () { return loggedIn.promise; },
-        logout : function() { FB.logout(); }
+        //getLoggedIn : function () { return loggedIn.promise; },
+        logout : function() { FB.logout(); },
+        login : function() {
+          loginDeferred = $q.defer();
+          FB.login(function(response) {
+            $rootScope.$apply(function() {
+              if (response.authResponse) {
+                loginDeferred.resolve();
+            } else {
+                loginDeferred.reject('user cancelled login');
+            }  
+            }); 
+          }, {scope: 'email'});
+          return loginDeferred.promise;
+        }
       }
       return fbApiService;
 }]);

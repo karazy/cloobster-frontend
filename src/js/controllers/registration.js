@@ -4,11 +4,6 @@
 
 
 Cloobster.Registration = function($scope, $resource, Account, facebookApi) {
-	//my code gose here ^^
-
-	$scope.registered = false;
-	$scope.error = false;
-
 	var emptyAccount = {
 			'name' : '',
 			'login' : '',
@@ -24,7 +19,21 @@ Cloobster.Registration = function($scope, $resource, Account, facebookApi) {
 				'phone' : ''
 			} 
 		},
-		account;
+		account,
+		setFbUserData = function(user) {
+			$scope.account.email = user.email;
+			$scope.emailRepeat = user.email;
+			$scope.account.name = user.name;
+			$scope.fbConnected = true;
+		};
+
+	$scope.registered = false;
+	$scope.error = false;
+	$scope.fbConnected = false;
+
+	$scope.isLoggedInAndNotFbConnected = function() {
+		return ( !$scope.fbConnected && $scope.fbLoggedIn );
+	}
 
 	$scope.save = function() {
 		account = new Account($scope.account);
@@ -34,24 +43,23 @@ Cloobster.Registration = function($scope, $resource, Account, facebookApi) {
 			$scope.error = true;
 			$scope.errorValue = obj;
 		});
-	}
+	};
 
 	$scope.cancel = function() {
 		$scope.account = angular.copy(emptyAccount);
 		$scope.emailRepeat = emptyAccount.email;
 		$scope.passwordRepeat = emptyAccount.password;
-	}
+	};
+
+	$scope.connectFb = function() {
+		facebookApi.getUser().then( setFbUserData );
+	};
+
+	$scope.loginAndConnectFb = function() {
+		facebookApi.login().then( facebookApi.getUser ).then( setFbUserData );
+	};
+
 	//set default values on load
 	$scope.cancel();
-
-	$scope.fbLoggedIn = facebookApi.getLoggedIn();
-	$scope.fbLoggedIn.then( function (result) {
-		if(result === true) {
-			facebookApi.getUser().then( function ( user ) {
-				$scope.account.email = user.email;
-				$scope.account.name = user.name;
-			});
-		}
-	});
 }
 Cloobster.Registration.$inject = ['$scope', '$resource', 'Account', 'facebookApi'];

@@ -1,11 +1,10 @@
 <div class="login-greeting">
 	<h1>Cloobster Login</h1>
-	<div class="fb-login-button" scope="email" ng-hide="fbLoggedIn">
-        Login with Facebook
+	<div class="login-facebook" scope="email" ng-hide="fbLoggedIn">
+        <a href="" ng-click="fbLogin()">Login with your Facebook Account</a>
     </div>
     <div class="login-facebookloggedin" ng-show="fbLoggedIn">
     	<p>You are logged in with Facebook.</p>
-    	{{fbUser}}
     	<button ng-click="fbLogout()">Logout</button>
     </div>
 </div>
