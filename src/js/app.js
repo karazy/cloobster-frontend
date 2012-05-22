@@ -7,6 +7,6 @@ var Cloobster =  {};
 angular.module('Cloobster', ['Cloobster.services']).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/registration', {template: 'partials/registration_form.html', controller: Cloobster.Registration});
-    // $routeProvider.when('/view2', {template: 'partials/partial2.html', controller: Cloobster.MyController2});
-    $routeProvider.otherwise({redirectTo: '/registration'});
+    $routeProvider.when('', {template: 'partials/login.html', controller: Cloobster.Login});
+    $routeProvider.otherwise({redirectTo: ''});
   }]);

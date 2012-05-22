@@ -17,30 +17,7 @@
             xfbml      : true,
             oauth      : true,
           });
-          // listen for and handle auth.statusChange events
-        FB.Event.subscribe('auth.statusChange', function(response) {
-          if (response.authResponse) {
-            // user has auth'd your app and is logged into Facebook
-            FB.api('/me', function(me){
-              if (me.name) {
-                document.getElementById('auth-displayname').innerHTML = me.name;
-              }
-            })
-            document.getElementById('auth-loggedout').style.display = 'none';
-            document.getElementById('auth-loggedin').style.display = 'block';
-          } else {
-            // user has not auth'd your app, or is not logged into Facebook
-            document.getElementById('auth-loggedout').style.display = 'block';
-            document.getElementById('auth-loggedin').style.display = 'none';
-          }
-        });
-
-        // respond to clicks on the logout links
-        document.getElementById('auth-logoutlink').addEventListener('click', function(){
-          FB.logout();
-        }); 
-
-        };
+         };
         (function(d){
            var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
            js = d.createElement('script'); js.id = id; js.async = true;
@@ -49,28 +26,16 @@
          }(document));
   </script>
   <ul class="menu">
-    <li><a href="#/registration">Registration</a></li>
+    <li ><a href="#/registration">Registration</a></li>
   </ul>
 
   <div ng-view></div>
-
-  <div>Angular seed app</div>
 
   <script src="lib/angular/angular-1.0.0rc9.js"></script>
   <script src="lib/angular/angular-resource-1.0.0rc9.js"></script>
   <script src="js/app.js"></script>  
   <script src="js/controllers/registration.js"></script>
+  <script src="js/controllers/login.js"></script>
   <script src="js/services/services.js"></script>
-  <div id="auth-status">
-        <div id="auth-loggedout">
-          <div class="fb-login-button" scope="email,user_checkins">
-            Login with Facebook
-          </div>
-        </div>
-        <div id="auth-loggedin" style="display:none">
-          Hi, <span id="auth-displayname"></span>  
-        (<a href="#" id="auth-logoutlink">logout</a>)
-        </div>
-  </div>
 </body>
 </html>

@@ -1,3 +1,4 @@
+<h1>Cloobster Registration</h1>
 <div class='registration_wrapper' ng-hide='registered'>
 	<form name='registration'>
 		<label>Accountdaten:</label><br/>
@@ -23,9 +24,10 @@
 	</form>
 </div>
 <div class='registration_message' ng-show='registered'>
-	<p>Vielen dank für die Registrierung {{account.name}} eine E-mail wurde an {{account.email}} gesendet.</p>
+	<p>Vielen dank für die Registrierung {{account.name}},<br/>
+	eine E-mail mit Bestätigungslink wurde an {{account.email}} gesendet.</p>
 </div>
-<div class='registration_message' ng-show='error'>
+<div class='error_message' ng-show='error'>
 	<p>Fehler!!!</p>
 	<pre>{{errorValue}}</pre>
 </div>

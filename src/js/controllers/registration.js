@@ -1,27 +1,27 @@
 'use strict';
 
-/* Registration */
+/* Registration controller*/
 
 
-Cloobster.Registration = function($scope, $resource, Account) {
+Cloobster.Registration = function($scope, $resource, Account, facebookApi) {
 	//my code gose here ^^
 
 	$scope.registered = false;
 	$scope.error = false;
 
 	var emptyAccount = {
-			'name' : 'Hans Dampf',
-			'login' : 'hdampf',
-			'email' : 'dampf@karazy.net',
-			'password' : 'test',
-			'phone' : '12345',
+			'name' : '',
+			'login' : '',
+			'email' : '',
+			'password' : '',
+			'phone' : '',
 			'company' : {
-				'name' : 'Karazy GmbH',
-				'address' : 'Krautgärten 15',
-				'city' : 'Eschborn',
-				'country' : 'Germany',
-				'postcode' : '123456',
-				'phone' : '123456'
+				'name' : '',
+				'address' : '',
+				'city' : '',
+				'country' : '',
+				'postcode' : '',
+				'phone' : ''
 			} 
 		},
 		account;
@@ -41,8 +41,17 @@ Cloobster.Registration = function($scope, $resource, Account) {
 		$scope.emailRepeat = emptyAccount.email;
 		$scope.passwordRepeat = emptyAccount.password;
 	}
-
 	//set default values on load
 	$scope.cancel();
+
+	$scope.fbLoggedIn = facebookApi.getLoggedIn();
+	$scope.fbLoggedIn.then( function (result) {
+		if(result === true) {
+			facebookApi.getUser().then( function ( user ) {
+				$scope.account.email = user.email;
+				$scope.account.name = user.name;
+			});
+		}
+	});
 }
-Cloobster.Registration.$inject = ['$scope', '$resource', 'Account'];
+Cloobster.Registration.$inject = ['$scope', '$resource', 'Account', 'facebookApi'];
