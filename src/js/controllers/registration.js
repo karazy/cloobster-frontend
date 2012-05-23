@@ -17,7 +17,8 @@ Cloobster.Registration = function($scope, $resource, Account, facebookApi) {
 				'country' : '',
 				'postcode' : '',
 				'phone' : ''
-			} 
+			},
+			'facebookUid' : null
 		},
 		account,
 		setFbUserData = function(user) {

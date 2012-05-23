@@ -1,10 +1,26 @@
-<div class="login-greeting">
-	<h1>Cloobster Login</h1>
-	<div class="login-facebook" scope="email" ng-hide="fbLoggedIn">
+<div class="login-greeting" ng-hide="loggedIn">
+	<h1>Login</h1>
+	<div class="login-facebook" ng-hide="fbLoggedIn">
         <a href="" ng-click="fbLogin()">Login with your Facebook Account</a>
+        <form ng-submit="login()">
+        	<input type="text" ng-model="loginData.login"  size="30" placeholder="login">
+        	<input type="password" ng-model="loginData.password"  size="30" placeholder="password">
+        	<input class="btn-primary" type="submit" value="login">
+      	</form>
     </div>
     <div class="login-facebookloggedin" ng-show="fbLoggedIn">
-    	<p>You are logged in with Facebook.</p>
-    	<button ng-click="fbLogout()">Logout</button>
+    	<p>
+    		You are logged in with Facebook. Do you want to login to Cloobster?<br/>
+    		<form ng-submit="cloobsterFbLogin()">
+    			<input class="btn-primary" type="submit" value="login to Cloobster">
+    		</form>
+    		<a class="btn" href="" ng-click="fbLogout()">logout Facebook</a>
+    	</p>
     </div>
+</div>
+<div class="login-greeting" ng-show="loggedIn">
+	<h1>Welcome {{account.login}}</h1>
+	<p>
+		<a href="#/profile">View my profile.</a>
+	</p>
 </div>
