@@ -25,6 +25,7 @@ Cloobster.Registration = function($scope, $resource, Account, facebookApi) {
 			$scope.account.email = user.email;
 			$scope.emailRepeat = user.email;
 			$scope.account.name = user.name;
+			$scope.account.facebookUid = user.id;
 			$scope.fbConnected = true;
 		};
 

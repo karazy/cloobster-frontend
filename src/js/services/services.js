@@ -16,22 +16,23 @@ factory('Account', function($resource) {
 
 Cloobster.services.
 factory('facebookApi', ['$q','$rootScope', function($q, $rootScope) {
-  var fbApiService, 
-      loggedIn = false,
-      uid,
-      accessToken;
+    var fbApiService, 
+        loggedIn = false,
+        uid,
+        accessToken;
 
-  $rootScope.fbLoggedIn = false;
+    $rootScope.fbLoggedIn = false;
     // listen for and handle auth.statusChange events
-    FB.Event.subscribe('auth.statusChange', function(response) {
-      if (response.authResponse) {
-        $rootScope.$apply('fbLoggedIn = true');
-        uid = response.authResponse.userID;
-        accessToken = response.authResponse.accessToken;
-
-      } else {
-        $rootScope.$apply('fbLoggedIn = false');
-      }
+    $rootScope.$on('fbInit', function (event) {
+        FB.Event.subscribe('auth.statusChange', function(response) {
+            if (response.authResponse) {
+                $rootScope.$apply('fbLoggedIn = true');
+                uid = response.authResponse.userID;
+                accessToken = response.authResponse.accessToken;
+            } else {
+                $rootScope.$apply('fbLoggedIn = false');
+            }
+        });
     });
     
     fbApiService = {

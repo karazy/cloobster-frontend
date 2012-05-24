@@ -1,11 +1,13 @@
 <div class="login-greeting" ng-hide="loggedIn">
 	<h1>Login</h1>
 	<div class="login-facebook" ng-hide="fbLoggedIn">
-        <a href="" ng-click="fbLogin()">Login with your Facebook Account</a>
-        <form ng-submit="login()">
+        <p>
+            <a class="btn btn-primary" href="#" ng-click="fbLogin()">Login with Facebook</a>
+        </p>
+        <form class="form-inline" ng-submit="login()">
         	<input type="text" ng-model="loginData.login"  size="30" placeholder="login">
         	<input type="password" ng-model="loginData.password"  size="30" placeholder="password">
-        	<input class="btn-primary" type="submit" value="login">
+        	<input class="btn btn-primary" type="submit" value="login">
       	</form>
     </div>
     <div class="login-facebookloggedin" ng-show="fbLoggedIn">
@@ -22,5 +24,6 @@
 	<h1>Welcome {{account.login}}</h1>
 	<p>
 		<a href="#/profile">View my profile.</a>
+        <button class="btn">Logout</a>
 	</p>
 </div>

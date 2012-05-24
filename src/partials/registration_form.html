@@ -2,7 +2,7 @@
 <div class='registration_wrapper' ng-hide='registered'>
 	<a href="" ng-click="connectFb()" ng-show='isLoggedInAndNotFbConnected()'>Use my Facebook account and email for registration.</a>
 	<a href="" ng-click="loginAndConnectFb()" ng-hide="fbLoggedIn">Login with my Facebook account and connect Cloobster.</a>
-	<form name='registrationForm'>
+	<form class="form" name='registrationForm'>
 		<label>Accountdaten:</label><br/>
 		<input name='fullname' type='text' ng-model="account.name" required ng-disabled="fbConnected"><br/>
 		<input name='login' type='text' ng-model="account.login" required><br/>
@@ -21,8 +21,8 @@
             <option>Germany</option>
         </select><br/>
 
-        <button ng-click="cancel()" ng-disabled="isCancelDisabled()">Abbrechen</button><br/>
-      	<button ng-click="save()" ng-disabled="isSaveDisabled()">Speichern</button>
+        <button ng-click="cancel()" ng-disabled="isCancelDisabled()" class="btn">Abbrechen</button><br/>
+      	<button ng-click="save()" ng-disabled="isSaveDisabled()" class="btn-primary">Speichern</button>
 	</form>
 </div>
 <div class='registration_message' ng-show='registered'>
