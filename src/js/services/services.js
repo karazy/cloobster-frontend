@@ -104,6 +104,13 @@ function($window, $http, $q, $rootScope, $log, configuration) {
     if(status == 401 || status == 403) {
       $rootScope.loggedIn = false;
       loginDeferred.reject({message: 'invalid login data'});
+      
+      if($window.localStorage['login']) {
+          saveLogin = false;
+
+          $window.localStorage.removeItem('login');
+          $window.localStorage.removeItem('hash');
+      }
     }
     else if (status == 500) {
       // Server returns error object in body
@@ -115,6 +122,20 @@ function($window, $http, $q, $rootScope, $log, configuration) {
   }
 
   loginService = {
+      confirmEmail: function (token) {
+          loginDeferred = $q.defer();
+          if( loggedIn === true) {
+              $http.put( configuration.serviceUrl + '/b/accounts/emailconfirmation', {confirmationToken: token},
+                    { headers: {'login' : account.login, 'passwordHash' : account.passwordHash } }).
+                success(function (data) {
+                    loginDeferred.resolve(data);
+                }).error(loginError);
+          }
+          else {
+              confirmDeferred.reject('account must be logged in');
+          }
+          return loginDeferred.promise;
+      },
       getAccount : function() {
           if( loggedIn === true) {
               return account;

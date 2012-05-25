@@ -1,0 +1,20 @@
+<div class="login-module">
+	<div class="well" ng-hide="loginProgress">
+        <p >
+            <form ng-submit="fbLogin()" >
+                <input class="btn btn-primary" type="submit" value="Login with Facebook">
+            </form>
+        </p>
+        <form class="form-inline" ng-submit="login()">
+        	<input type="text" ng-model="loginData.login"  size="30" placeholder="login">
+        	<input type="password" ng-model="loginData.password"  size="30" placeholder="password">
+            <label class="checkbox">
+                <input type="checkbox" ng-model="loginData.save"> remember login
+            </label>
+        	<input class="btn btn-primary" type="submit" value="login">
+      	</form>
+    </div>
+    <div class="well progress" ng-show="loginProgress">
+        <div class="bar" style="width: 60%;"></div>
+    </div>    
+</div>

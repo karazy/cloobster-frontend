@@ -3,7 +3,7 @@
 /* Registration controller*/
 
 
-Cloobster.Registration = function($scope, $resource, Account, facebookApi) {
+Cloobster.Registration = function($scope, $resource, Account, facebookApi, $routeParams, loginService) {
 	var emptyAccount = {
 			'name' : '',
 			'login' : '',
@@ -20,6 +20,7 @@ Cloobster.Registration = function($scope, $resource, Account, facebookApi) {
 			},
 			'facebookUID' : null
 		},
+
 		account,
 		setFbUserData = function(user) {
 			$scope.account.email = user.email;
@@ -33,6 +34,14 @@ Cloobster.Registration = function($scope, $resource, Account, facebookApi) {
 	$scope.registered = false;
 	$scope.error = false;
 	$scope.fbConnected = false;
+	$scope.emailConfirmed = false;
+	$scope.errorMessage = "";
+	$scope.loginProgress = false;
+	$scope.loginData = {
+		login : "",
+		password : "",
+		save : false
+	}
 
 	$scope.isLoggedInAndNotFbConnected = function() {
 		return ( !$scope.fbConnected && $scope.fbLoggedIn );
@@ -63,7 +72,66 @@ Cloobster.Registration = function($scope, $resource, Account, facebookApi) {
 		facebookApi.login().then( facebookApi.getUser ).then( setFbUserData );
 	};
 
+
+	function confirmEmail() {
+		loginService.confirmEmail($routeParams.emailToken).then(
+			function(result) {
+				$scope.emailConfirmed = result.emailConfirmed;
+			},
+			handleError);
+	}
+
+	function handleLogin ( result) {
+		$scope.loginProgress = false;
+		$scope.account = result;
+		confirmEmail();
+	}
+
+	function handleError (errorData) {
+		$scope.loginProgress = false;
+		$scope.error = true;
+		$scope.errorMessage = errorData.message;
+	}
+
+	function doFbLogin(uid, accessToken) {
+		$scope.loginProgress = true;
+		loginService.loginFb( { uid: uid, token: accessToken } )
+			.then( handleLogin, handleError);
+	}
+
+	$scope.fbLogout = function () {
+		facebookApi.logout();
+	};
+
+	/* Called to do a Facebook and Cloobster login. */
+	$scope.fbLogin = function() {
+		$scope.loginProgress = true;
+		$scope.error = false;
+		if(!$scope.fbLoggedIn) {
+
+			facebookApi.login().then( function (response) {
+				doFbLogin(response.authResponse.userID, response.authResponse.accessToken);
+			});	
+		}
+		else {
+			doFbLogin(facebookApi.getUid(), facebookApi.getAccessToken());
+		}
+		
+	};
+
+	/* Called to do a Cloobster login. */
+	$scope.login = function() {
+		$scope.loginProgress = true;
+		$scope.error = false;
+		loginService.login( $scope.loginData ).then( handleLogin, handleError);
+	}
+
+	if(loginService.existsSavedLogin() && ($scope.loggedIn === false)) {
+		$scope.loginProgress = true;
+		loginService.loginResume().then( handleLogin, handleError);
+	}
+
 	//set default values on load
 	$scope.cancel();
 }
-Cloobster.Registration.$inject = ['$scope', '$resource', 'Account', 'facebookApi'];
+Cloobster.Registration.$inject = ['$scope', '$resource', 'Account', 'facebookApi', '$routeParams', 'login'];
