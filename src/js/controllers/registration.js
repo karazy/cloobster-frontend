@@ -18,14 +18,15 @@ Cloobster.Registration = function($scope, $resource, Account, facebookApi) {
 				'postcode' : '',
 				'phone' : ''
 			},
-			'facebookUid' : null
+			'facebookUID' : null
 		},
 		account,
 		setFbUserData = function(user) {
 			$scope.account.email = user.email;
 			$scope.emailRepeat = user.email;
+			$scope.account.login = user.username;
 			$scope.account.name = user.name;
-			$scope.account.facebookUid = user.id;
+			$scope.account.facebookUID = user.id;
 			$scope.fbConnected = true;
 		};
 
@@ -41,9 +42,9 @@ Cloobster.Registration = function($scope, $resource, Account, facebookApi) {
 		account = new Account($scope.account);
 		account.$register(function (account) { 
 			$scope.registered = true;
-		}, function (obj) { 
+		}, function (result) { 
 			$scope.error = true;
-			$scope.errorValue = obj;
+			$scope.errorValue = result.data;
 		});
 	};
 
@@ -51,6 +52,7 @@ Cloobster.Registration = function($scope, $resource, Account, facebookApi) {
 		$scope.account = angular.copy(emptyAccount);
 		$scope.emailRepeat = emptyAccount.email;
 		$scope.passwordRepeat = emptyAccount.password;
+		$scope.fbConnected = false;
 	};
 
 	$scope.connectFb = function() {

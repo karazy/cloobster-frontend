@@ -47,7 +47,7 @@
             <li class="active"><a href="#/">Home</a></li>
             <li><a href="#/about">About</a></li>
             <li><a href="#/contact">Contact</a></li>
-            <li><a href="#/registration">Registration</a></li>
+            <li ng-hide="loggedIn"><a href="#/registration">Registration</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -58,6 +58,7 @@
     <div ng-view></div>
   </div> <!-- /container -->
   
+  <script src="lib/jquery/jquery-1.7.2.js"></script>
   <script src="lib/bootstrap/bootstrap.js"></script>
   <script src="lib/angular/angular-1.0.0rc9.js"></script>
   <script src="lib/angular/angular-resource-1.0.0rc9.js"></script>

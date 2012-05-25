@@ -1,29 +1,31 @@
 <div class="login-greeting" ng-hide="loggedIn">
 	<h1>Login</h1>
-	<div class="login-facebook" ng-hide="fbLoggedIn">
-        <p>
-            <a class="btn btn-primary" href="#" ng-click="fbLogin()">Login with Facebook</a>
+    <div class='alert alert-error fade in' ng-show='error'>
+        <strong>Error!</strong> {{errorMessage}}
+    </div>
+	<div class="well" ng-hide="loginProgress">
+        <p >
+            <form ng-submit="fbLogin()" >
+                <input class="btn btn-primary" type="submit" value="Login with Facebook">
+            </form>
         </p>
         <form class="form-inline" ng-submit="login()">
         	<input type="text" ng-model="loginData.login"  size="30" placeholder="login">
         	<input type="password" ng-model="loginData.password"  size="30" placeholder="password">
+            <label class="checkbox">
+                <input type="checkbox" ng-model="loginData.save"> remember login
+            </label>
         	<input class="btn btn-primary" type="submit" value="login">
       	</form>
     </div>
-    <div class="login-facebookloggedin" ng-show="fbLoggedIn">
-    	<p>
-    		You are logged in with Facebook. Do you want to login to Cloobster?<br/>
-    		<form ng-submit="cloobsterFbLogin()">
-    			<input class="btn-primary" type="submit" value="login to Cloobster">
-    		</form>
-    		<a class="btn" href="" ng-click="fbLogout()">logout Facebook</a>
-    	</p>
-    </div>
+    <div class="well progress" ng-show="loginProgress">
+        <div class="bar" style="width: 60%;"></div>
+    </div>    
 </div>
 <div class="login-greeting" ng-show="loggedIn">
 	<h1>Welcome {{account.login}}</h1>
 	<p>
 		<a href="#/profile">View my profile.</a>
-        <button class="btn">Logout</a>
+        <button class="btn" ng-click="logout()">Logout</a>
 	</p>
 </div>

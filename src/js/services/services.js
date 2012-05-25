@@ -78,11 +78,41 @@ Cloobster.services.factory('config', ['$q','$rootScope', '$log', function($q, $r
      return config;
 }]);
 
-Cloobster.services.factory('login', ['$http','$q','$rootScope', '$log', 'config', function($http, $q, $rootScope, $log, configuration) {
+Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log', 'config',
+function($window, $http, $q, $rootScope, $log, configuration) {
   var loginService,
       loggedIn = false,
-      account;
+      account,
+      loginDeferred,
+      saveLogin = false;
+
   $rootScope.loggedIn = false;
+
+  function loginSuccess (data, status, headers, config) {
+    //data should contain the account object for the login
+    account = data;
+    loggedIn = true;
+    $rootScope.loggedIn = true;
+    if(saveLogin === true) {
+        $window.localStorage['login'] = account.login;
+        $window.localStorage['hash'] = account.passwordHash;
+    }
+    loginDeferred.resolve(data);
+  }
+
+  function loginError (data, status, headers, config) {
+    if(status == 401 || status == 403) {
+      $rootScope.loggedIn = false;
+      loginDeferred.reject({message: 'invalid login data'});
+    }
+    else if (status == 500) {
+      // Server returns error object in body
+      loginDeferred.reject(data);
+    }
+    else {
+      loginDeferred.reject({message: 'error during login'}); 
+    }
+  }
 
   loginService = {
       getAccount : function() {
@@ -92,6 +122,31 @@ Cloobster.services.factory('login', ['$http','$q','$rootScope', '$log', 'config'
           else {
               return {};
           }
+      },
+      existsSavedLogin: function() {
+          if($window.localStorage['login'] && $window.localStorage['hash']) {
+            return true;
+          }
+          else
+            return false;
+      },
+      loginResume : function () {
+          loginDeferred = $q.defer();
+
+          if($window.localStorage['login']) {
+              saveLogin = true;
+              storedLogin = $window.localStorage['login'];
+              storedHash = $window.localStorage['hash'];
+              
+              $http.get( configuration.serviceUrl + '/accounts/login',
+                        { headers: {'login' : storedLogin, 'passwordHash' : storedHash } }).
+                        success(loginSuccess).error(loginError);
+              
+          }
+          else {
+              loginDeferred.reject({message: 'no saved login found'}); 
+          }
+          return loginDeferred.promise;
       },
       login : function(params) {
           if(angular.isObject(params)) {
@@ -105,24 +160,11 @@ Cloobster.services.factory('login', ['$http','$q','$rootScope', '$log', 'config'
           else {
             $log.error('No login parameters given');
           }
+          saveLogin = params.save;
           loginDeferred = $q.defer();
           $http.get( configuration.serviceUrl + '/accounts/login',
                     { headers: {'login' : params.login, 'password' : params.password } }).
-                success(function(data, status, headers, config) {
-                    //data should contain the account object for the login
-                    account = data;
-                    $rootScope.loggedIn = true;
-                    loginDeferred.resolve(data);
-                }).
-                error(function(data, status, headers, config) {
-                    if(status == 401 || status == 403) {
-                      $rootScope.loggedIn = false;
-                      loginDeferred.reject('invalid login data');
-                    }
-                    else {
-                      loginDeferred.reject('error during login'); 
-                    }
-                });
+                success(loginSuccess).error(loginError);
           return loginDeferred.promise;
       },
       loginFb : function(params) {
@@ -137,25 +179,22 @@ Cloobster.services.factory('login', ['$http','$q','$rootScope', '$log', 'config'
           else {
             $log.error('No login parameters given');
           }
+          saveLogin = params.save;
           loginDeferred = $q.defer();
           $http.get( configuration.serviceUrl + '/accounts/loginfb',
                     { params: {'uid' : params.uid, 'token' : params.token } }).
-                success(function(data, status, headers, config) {
-                    //data should contain the account object for the login
-                    account = data;
-                    $rootScope.loggedIn = true;
-                    loginDeferred.resolve(data);
-                }).
-                error(function(data, status, headers, config) {
-                    if(status == 401 || status == 403) {
-                      $rootScope.loggedIn = false;
-                      loginDeferred.reject('invalid login data');
-                    }
-                    else {
-                      loginDeferred.reject('error during login'); 
-                    }
-                });
+                success(loginSuccess).error(loginError);
           return loginDeferred.promise;
+      },
+      logout : function() {
+          saveLogin = false;
+          loggedIn = false;
+          $rootScope.loggedIn = false;
+          account = null;
+          if($window.localStorage['login']) {
+              $window.localStorage.removeItem('login');
+              $window.localStorage.removeItem('hash');
+          }
       }
   }
   return loginService;
