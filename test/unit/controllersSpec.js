@@ -9,13 +9,25 @@ describe('Cloobster.Login', function() {
         scope;
 
     beforeEach(function(){
-        scope = {};
-        loginServiceMock = jasmine.createSpyObject('login', ['existsSavedLogin']);
+        scope = {
+            loggedIn: false
+        };
+        module('Cloobster.services');
+        inject(function($injector) {
+            loginServiceMock = $injector.get('login');
+            facebookApiMock = $injector.get('facebookApi');
+        });
+
+        spyOn(loginServiceMock, 'getAccount');
+
         ctrl = new Cloobster.Login(scope, facebookApiMock, loginServiceMock);
     });
 
 
-    it('should ....', function() {
-      //spec body
+    it('should retrieve account if already logged in', function() {
+        scope.loggedIn = true;
+        ctrl = new Cloobster.Login(scope, facebookApiMock, loginServiceMock);
+
+        expect(loginServiceMock.getAccount).toHaveBeenCalled();
     });
 });
