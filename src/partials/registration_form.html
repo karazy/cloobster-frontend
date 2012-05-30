@@ -3,32 +3,46 @@
 	<div class='alert alert-error' ng-show='error'>
 		<button class="close" data-dismiss="alert">×</button>
 		<strong>Error!</strong> {{errorValue.message}}
-	</div>
-	<form class="well form-horizontal" name='registrationForm'>
+	</div>	
+	<form class="well form-vertical" name='registrationForm' ng-submit="save()">
+		<div class='row'>
+		<div class='span12'>
 		<input class="btn btn-primary" type="button" value="Use my Facebook account for registration and connect Cloobster"
 			ng-click="connectFb()" ng-show='isLoggedInAndNotFbConnected()'>
 		<input class="btn btn-primary" type="button" value="Login with my Facebook account and connect Cloobster."
 			ng-click="loginAndConnectFb()" ng-hide="fbLoggedIn">
-		<span class="help-block">Your account data.</span>
-		<input name='fullname' type='text' ng-model="account.name" required ng-disabled="fbConnected" placeholder="your name"><br/>
-		<input name='login' type='text' ng-model="account.login" required placeholder="login name"><br/>
-		<input name='email' type='email' ng-model="account.email" required ng-disabled="fbConnected" placeholder="email"><br/>
-		<input name='emailRepeat' type='email' ng-model="emailRepeat" required ng-disabled="fbConnected" placeholder="enter your email again"><br/>
-		<input name='password' type='password' ng-model="account.password" required placeholder="your password"><br/>
-		<input name='passwordRepeat' type='password' ng-model="passwordRepeat" required placeholder="repeat your password"><br/>
-		<input name='phone' type='text' ng-model="account.phone" placeholder="(optional) phone number"><br/>
+		</div>
+		</div>
+		<div class='row'>
+		<fieldset class='span6'>
+			<span class="help-block">Your account data.</span>
+			<input name='fullname' type='text' ng-model="account.name" required ng-disabled="fbConnected" placeholder="your name"><br/>
+			<input name='login' type='text' ng-model="account.login" required placeholder="login name"><br/>
+			<input name='email' type='email' ng-model="account.email" required ng-disabled="fbConnected" placeholder="email"><br/>
+			<input name='emailRepeat' type='email' ng-model="emailRepeat" required ng-disabled="fbConnected" placeholder="enter your email again"><br/>
+			<input name='password' type='password' ng-model="account.password" required placeholder="your password"><br/>
+			<input name='passwordRepeat' type='password' ng-model="passwordRepeat" required placeholder="repeat your password"><br/>
+			<input name='phone' type='text' ng-model="account.phone" placeholder="(optional) phone number"><br/>
+		</fieldset>
+		<fieldset class='span6'>
 		<span class="help-block">Your company data.</span>
-		<input name='company_name' type='text' ng-model="account.company.name" required placeholder="company name"><br/>
-		<input name='company_address' type='text' ng-model="account.company.address"  placeholder="company address" required><br/>
-		<input name='company_city' type='text' ng-model="account.company.city" placeholder="city" required><br/>
-		<input name='company_postcode' type='text' ng-model="account.company.postcode" placeholder="postcode" required ><br/>
-		<input name='company_phone' type='text' ng-model="account.company.phone" placeholder="(optional) phone"><br/>
-		<select name='company_country' ng-model='account.company.country' required>
-            <option>Germany</option>
-        </select>
-
+			<input name='company_name' type='text' ng-model="account.company.name" required placeholder="company name"><br/>
+			<input name='company_address' type='text' ng-model="account.company.address"  placeholder="company address" required><br/>
+			<input name='company_city' type='text' ng-model="account.company.city" placeholder="city" required><br/>
+			<input name='company_postcode' type='text' ng-model="account.company.postcode" placeholder="postcode" required ><br/>
+			<input name='company_phone' type='text' ng-model="account.company.phone" placeholder="(optional) phone"><br/>
+			<select name='company_country' ng-model='account.company.country' required>
+	            <option value="DE">Germany</option>
+	        </select>
+        </fieldset>
+        </div>
+        <div class='row'>
+        <div class='span12'>
         <button ng-click="cancel()" ng-disabled="isCancelDisabled()" class="btn">Cancel</button>
-      	<button ng-click="save()" ng-disabled="isSaveDisabled()" class="btn btn-primary">Register</button>
+      	<button type="submit" ng-disabled="isSaveDisabled()" class="btn btn-primary">Register</button>
+      </div>
+      </div>
+
 	</form>
 </div>
 <div class='registration_message' ng-show='registered'>
