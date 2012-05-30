@@ -77,10 +77,10 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 	}
 
 	$scope.matchMails = function() {
-		if(registrationForm.email.value !== registrationForm.emailRepeat.value) {
-			registrationForm.emailRepeat.$error.match = true;
+		if($scope.registrationForm.email.$viewValue !== $scope.registrationForm.emailRepeat.$viewValue) {
+			$scope.registrationForm.emailRepeat.$setValidity("match", false);
 		} else {
-			registrationForm.emailRepeat.$error.match = false;
+			$scope.registrationForm.emailRepeat.$setValidity("match", true);
 		}
 	}
 

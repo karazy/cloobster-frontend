@@ -44,10 +44,10 @@
 		        	</div>
 		        </div>
         	</div>
-        	<div class="control-group">
+        	<div class="control-group" ng-class="getFieldInputClass(registrationForm.emailRepeat.$dirty, registrationForm.emailRepeat.$invalid)">
 				<label class="control-label" for="emailRepeat">Repeat email*</label>
 				<div class="controls">
-					<input name='emailRepeat' id="emailRepeat" type='email' ng-model="emailRepeat" required ng-change="matchMails()" ng-disabled="fbConnected" placeholder="enter your email again">
+					<input name='emailRepeat' id="emailRepeat" type='text' ng-model="emailRepeat" required ng-change="matchMails()" ng-disabled="fbConnected" placeholder="enter your email again">
 					<div class="help-inline" ng-show="registrationForm.emailRepeat.$dirty && registrationForm.emailRepeat.$invalid">Invalid:
 		          		<span ng-show="registrationForm.emailRepeat.$error.match">Emails don't match.</span>
 	        		</div>
