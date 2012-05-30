@@ -4,7 +4,7 @@
 		<button class="close" data-dismiss="alert">×</button>
 		<strong>Error!</strong> {{errorValue.message}}
 	</div>	
-	<form class="well form-vertical" name='registrationForm' ng-submit="save()">
+	<form class="well form-vertical" name='registrationForm' ng-submit="save()" novalidate>
 		<div class='row'>
 		<div class='span12'>
 		<input class="btn btn-primary" type="button" value="Use my Facebook account for registration and connect Cloobster"
@@ -16,30 +16,81 @@
 		<div class='row'>
 		<fieldset class='span6'>
 			<span class="help-block">Your account data.</span>
-			<input name='fullname' type='text' ng-model="account.name" required ng-disabled="fbConnected" placeholder="your name"><br/>
-			<input name='login' type='text' ng-model="account.login" required placeholder="login name"><br/>
-			<input name='email' type='email' ng-model="account.email" required ng-disabled="fbConnected" placeholder="email"><br/>
-			<input name='emailRepeat' type='email' ng-model="emailRepeat" required ng-disabled="fbConnected" placeholder="enter your email again"><br/>
-			<input name='password' type='password' ng-model="account.password" required placeholder="your password"><br/>
-			<input name='passwordRepeat' type='password' ng-model="passwordRepeat" required placeholder="repeat your password"><br/>
-			<input name='phone' type='text' ng-model="account.phone" placeholder="(optional) phone number"><br/>
+			<div class="control-group" ng-class="getFieldInputClass(registrationForm.fullname.$dirty, registrationForm.fullname.$invalid)">
+				<label for="fullname" class="control-label">Name*</label>
+				<div class="controls">
+					<input name="fullname" id="fullname" type='text' ng-model="account.name" required ng-disabled="fbConnected" placeholder="your name">	
+					 <div class="help-inline" ng-show="registrationForm.fullname.$dirty && registrationForm.fullname.$invalid">Invalid:
+		          		<span ng-show="registrationForm.fullname.$error.required">Tell us your name.</span>
+		        	</div>
+	        	</div>
+        	</div>
+        	<div class="control-group" ng-class="getFieldInputClass(registrationForm.login.$dirty, registrationForm.login.$invalid)">
+	        	<label for="login" class="control-label">Login*</label>
+	        	<div class="controls">
+					<input name="login" id="login" type="text" ng-model="account.login" required placeholder="login name">
+					<div class="help-inline" ng-show="registrationForm.login.$dirty && registrationForm.login.$invalid">Invalid:
+		          		<span ng-show="registrationForm.login.$error.required">Provide a username.</span>
+		        	</div>
+				</div>
+			</div>
+			<div class="control-group" ng-class="getFieldInputClass(registrationForm.email.$dirty, registrationForm.email.$invalid)">
+				<label class="control-label" for="email">Email*</label>
+				<div class="controls">
+					<input name='email' id="email" type='email' ng-model="account.email" required ng-disabled="fbConnected" placeholder="email">
+					 <div class="help-inline" ng-show="registrationForm.email.$dirty && registrationForm.email.$invalid">Invalid:
+		          		<span ng-show="registrationForm.email.$error.required">Tell us your email.</span>
+		          		<span ng-show="registrationForm.email.$error.email">Invalid email.</span>
+		        	</div>
+		        </div>
+        	</div>
+        	<div class="control-group" ng-class="getFieldInputClass(registrationForm.emailRepeat.$dirty, registrationForm.emailRepeat.$invalid)">
+				<label class="control-label" for="emailRepeat">Repeat email*</label>
+				<div class="controls">
+					<input name='emailRepeat' id="emailRepeat" type='text' ng-model="emailRepeat" required ng-change="matchMails()" ng-disabled="fbConnected" placeholder="enter your email again">
+					<div class="help-inline" ng-show="registrationForm.emailRepeat.$dirty && registrationForm.emailRepeat.$invalid">Invalid:
+		          		<span ng-show="registrationForm.emailRepeat.$error.match">Emails don't match.</span>
+	        		</div>
+				</div>
+			</div>
+			<div class="control-group" ng-class="getFieldInputClass(registrationForm.password.$dirty, registrationForm.password.$invalid)">
+				<label for="password" class="control-label">Password*</label>
+				<div class="controls">
+					<input name="password" type="password" ng-model="account.password" required ng-pattern="/^(?=[!-~]{6,}$)(?=.*\d)(?=.*[^A-Za-z0-9]).*$/" placeholder="your password">
+					<div class="help-inline" ng-show="registrationForm.password.$dirty && registrationForm.password.$invalid">Invalid:
+		          		<span ng-show="registrationForm.password.$error.required">Provide a password.</span>
+		          		<span ng-show="registrationForm.password.$error.pattern">Min 6 characters. 1 number and one special character!</span>
+		        	</div>
+				</div>
+			</div>
+			<label>Repeat password*</label>
+			<input name='passwordRepeat' type='password' ng-model="passwordRepeat" required placeholder="repeat your password">
+			<label>Phone</label>
+			<input name='phone' type='text' ng-model="account.phone" placeholder="(optional) phone number">
 		</fieldset>
 		<fieldset class='span6'>
 		<span class="help-block">Your company data.</span>
-			<input name='company_name' type='text' ng-model="account.company.name" required placeholder="company name"><br/>
-			<input name='company_address' type='text' ng-model="account.company.address"  placeholder="company address" required><br/>
-			<input name='company_city' type='text' ng-model="account.company.city" placeholder="city" required><br/>
-			<input name='company_postcode' type='text' ng-model="account.company.postcode" placeholder="postcode" required ><br/>
-			<input name='company_phone' type='text' ng-model="account.company.phone" placeholder="(optional) phone"><br/>
+			<label>Company*</label>
+			<input name='company_name' type='text' ng-model="account.company.name" required placeholder="company name">
+			<label>Address*</label>
+			<input name='company_address' type='text' ng-model="account.company.address"  placeholder="company address" required>
+			<label>City*</label>
+			<input name='company_city' type='text' ng-model="account.company.city" placeholder="city" required>
+			<label>Postcode*</label>
+			<input name='company_postcode' type='text' ng-model="account.company.postcode" placeholder="postcode" required >
+			<label>Business phone*</label>
+			<input name='company_phone' type='text' ng-model="account.company.phone" placeholder="(optional) phone">
+			<label>Country*</label>
 			<select name='company_country' ng-model='account.company.country' required>
+				<option value=""></option>
 	            <option value="DE">Germany</option>
 	        </select>
         </fieldset>
         </div>
         <div class='row'>
         <div class='span12'>
-        <button ng-click="cancel()" ng-disabled="isCancelDisabled()" class="btn">Cancel</button>
-      	<button type="submit" ng-disabled="isSaveDisabled()" class="btn btn-primary">Register</button>
+        <button ng-click="cancel()" class="btn">Cancel</button>
+      	<button type="submit" ng-disabled="registrationForm.$invalid"  class="btn btn-primary">Register</button>
       </div>
       </div>
 
