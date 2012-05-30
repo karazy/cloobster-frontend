@@ -124,16 +124,12 @@ function($window, $http, $q, $rootScope, $log, configuration) {
   loginService = {
       confirmEmail: function (token) {
           loginDeferred = $q.defer();
-          if( loggedIn === true) {
-              $http.put( configuration.serviceUrl + '/b/accounts/emailconfirmation', {confirmationToken: token},
-                    { headers: {'login' : account.login, 'passwordHash' : account.passwordHash } }).
-                success(function (data) {
-                    loginDeferred.resolve(data);
-                }).error(loginError);
-          }
-          else {
-              confirmDeferred.reject('account must be logged in');
-          }
+          
+          $http.put( configuration.serviceUrl + '/b/accounts/emailconfirmation', {confirmationToken: token}).
+              success(function (data) {
+                  loginDeferred.resolve(data);
+            }).error(loginError);
+
           return loginDeferred.promise;
       },
       getAccount : function() {
