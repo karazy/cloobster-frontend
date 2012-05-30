@@ -35,17 +35,24 @@
 				</div>
 			</div>
 			<div class="control-group" ng-class="getFieldInputClass(registrationForm.email.$dirty, registrationForm.email.$invalid)">
-			<label class="control-label" for="email">Email*</label>
-			<div class="controls">
-				<input name='email' id="email" type='email' ng-model="account.email" required ng-disabled="fbConnected" placeholder="email">
-				 <div class="help-inline" ng-show="registrationForm.email.$dirty && registrationForm.email.$invalid">Invalid:
-	          		<span ng-show="registrationForm.email.$error.required">Tell us your email.</span>
-	          		<span ng-show="registrationForm.email.$error.email">Invalid email.</span>
-	        	</div>
-	        </div>
+				<label class="control-label" for="email">Email*</label>
+				<div class="controls">
+					<input name='email' id="email" type='email' ng-model="account.email" required ng-disabled="fbConnected" placeholder="email">
+					 <div class="help-inline" ng-show="registrationForm.email.$dirty && registrationForm.email.$invalid">Invalid:
+		          		<span ng-show="registrationForm.email.$error.required">Tell us your email.</span>
+		          		<span ng-show="registrationForm.email.$error.email">Invalid email.</span>
+		        	</div>
+		        </div>
         	</div>
-			<label>Repeat email*</label>
-			<input name='emailRepeat' type='email' ng-model="emailRepeat" required ng-disabled="fbConnected" placeholder="enter your email again">
+        	<div class="control-group">
+				<label class="control-label" for="emailRepeat">Repeat email*</label>
+				<div class="controls">
+					<input name='emailRepeat' id="emailRepeat" type='email' ng-model="emailRepeat" required ng-change="matchMails()" ng-disabled="fbConnected" placeholder="enter your email again">
+					<div class="help-inline" ng-show="registrationForm.emailRepeat.$dirty && registrationForm.emailRepeat.$invalid">Invalid:
+		          		<span ng-show="registrationForm.emailRepeat.$error.match">Emails don't match.</span>
+	        		</div>
+				</div>
+			</div>
 			<div class="control-group" ng-class="getFieldInputClass(registrationForm.password.$dirty, registrationForm.password.$invalid)">
 				<label for="password" class="control-label">Password*</label>
 				<div class="controls">

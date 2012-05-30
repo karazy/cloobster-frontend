@@ -76,6 +76,14 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 		}
 	}
 
+	$scope.matchMails = function() {
+		if(registrationForm.email.value !== registrationForm.emailRepeat.value) {
+			registrationForm.emailRepeat.$error.match = true;
+		} else {
+			registrationForm.emailRepeat.$error.match = false;
+		}
+	}
+
 	$scope.connectFb = function() {
 		facebookApi.getUser().then( setFbUserData );
 	};
