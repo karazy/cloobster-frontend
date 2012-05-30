@@ -19,7 +19,7 @@
 			<div class="control-group" ng-class="getFieldInputClass(registrationForm.fullname.$dirty, registrationForm.fullname.$invalid)">
 				<label for="fullname" class="control-label">Name*</label>
 				<div class="controls">
-					<input name="fullname" id="fullname" type='text' ng-model="account.name" required ng-minlength="3" ng-disabled="fbConnected" placeholder="your name">	
+					<input name="fullname" id="fullname" type='text' ng-model="account.name" required ng-minlength="3" placeholder="your name">	
 					 <div class="help-inline" ng-show="registrationForm.fullname.$dirty && registrationForm.fullname.$invalid">Invalid:
 		          		<span ng-show="registrationForm.fullname.$error.required">Tell us your name.</span>
 		          		<span ng-show="registrationForm.fullname.$error.minlength">Name must be a least 3 characters long.</span>
@@ -39,7 +39,7 @@
 			<div class="control-group" ng-class="getFieldInputClass(registrationForm.email.$dirty, registrationForm.email.$invalid)">
 				<label class="control-label" for="email">Email*</label>
 				<div class="controls">
-					<input name='email' id="email" type='email' ng-model="account.email" required ng-change="matchMails()" ng-disabled="fbConnected" placeholder="email">
+					<input name='email' id="email" type='email' ng-model="account.email" required ng-change="matchMails()" placeholder="email">
 					 <div class="help-inline" ng-show="registrationForm.email.$dirty && registrationForm.email.$invalid">Invalid:
 		          		<span ng-show="registrationForm.email.$error.required">Tell us your email.</span>
 		          		<span ng-show="registrationForm.email.$error.email">Invalid email.</span>
@@ -49,7 +49,7 @@
         	<div class="control-group" ng-class="getFieldInputClass(registrationForm.emailRepeat.$dirty, registrationForm.emailRepeat.$invalid)">
 				<label class="control-label" for="emailRepeat">Repeat email*</label>
 				<div class="controls">
-					<input name='emailRepeat' id="emailRepeat" type='text' ng-model="emailRepeat" required ng-change="matchMails()" ng-disabled="fbConnected" placeholder="enter your email again">
+					<input name='emailRepeat' id="emailRepeat" type='text' ng-model="emailRepeat" required ng-change="matchMails()" placeholder="enter your email again">
 					<div class="help-inline" ng-show="registrationForm.emailRepeat.$dirty && registrationForm.emailRepeat.$invalid">Invalid:
 		          		<span ng-show="registrationForm.emailRepeat.$error.match">Emails don't match.</span>
 	        		</div>

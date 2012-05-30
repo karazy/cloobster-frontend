@@ -134,6 +134,7 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 		$scope.account.name = user.name;
 		$scope.account.facebookUID = user.id;
 		$scope.fbConnected = true;
+		$scope.matchPasswords();
 	}
 
 	$scope.fbLogout = function () {
