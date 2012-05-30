@@ -1,22 +1,13 @@
-<!-- <div ng-hide="loggedIn">
-    <h1>Login to confirm the registration</h1>
-    <div ng-include src="'partials/login_form.html'"></div>  
-</div> -->
-<!-- <div ng-show="loggedIn"> -->
-<!-- <div class="confirming-message" ng-hide="emailConfirmed">
-    <h1>Confirming the registration</h1>
-    <div class="well progress">
-        <div class="bar" style="width: 60%;"></div>
-    </div>    
-</div> -->
-<div class="confirmed-message" ng-show='emailConfirmed'>
-	<h1>Your E-Mail was confirmed</h1>
-    <p>
-        You can start using the Cloobster service after your account was activated.<br>
-        You will retrieve an e-mail as soon as your account is activated.
-    </p>
-</div>
-<!-- </div> -->
-<div class='alert alert-error fade in' ng-show='error'>
+<div class="confirmed-message">
+    <h1>E-Mail Confirmation</h1>
+    <div ng-show='emailConfirmed'>
+    	<h2>Your E-Mail was confirmed</h2>
+        <p>
+            You can start using the Cloobster service after your account was activated.<br>
+            You will retrieve an e-mail as soon as your account is activated.
+        </p>
+    </div>
+    <div class='alert alert-error fade in' ng-show='error'>
         <strong>Error!</strong> {{errorMessage}}
+    </div>
 </div>
