@@ -3,7 +3,7 @@
 /* Registration controller*/
 
 
-Cloobster.Registration = function($scope, $resource, Account, facebookApi, $routeParams, loginService) {
+Cloobster.Registration = function($scope, $resource, $location, Account, facebookApi, $routeParams, loginService) {
 	var emptyAccount = {
 			'name' : '',
 			'login' : '',
@@ -20,16 +20,9 @@ Cloobster.Registration = function($scope, $resource, Account, facebookApi, $rout
 			},
 			'facebookUID' : null
 		},
-
 		account,
-		setFbUserData = function(user) {
-			$scope.account.email = user.email;
-			$scope.emailRepeat = user.email;
-			$scope.account.login = user.username;
-			$scope.account.name = user.name;
-			$scope.account.facebookUID = user.id;
-			$scope.fbConnected = true;
-		};
+		//URL to activate an account
+		registrationUrlHash = /\/?account\/confirm\/.*/;
 
 	$scope.registered = false;
 	$scope.error = false;
@@ -41,6 +34,11 @@ Cloobster.Registration = function($scope, $resource, Account, facebookApi, $rout
 		login : "",
 		password : "",
 		save : false
+	}
+
+	/*Check URL origin */
+	if($location.url().match(registrationUrlHash) || $location.hash().match(registrationUrlHash)) {
+		confirmEmail();
 	}
 
 	$scope.isLoggedInAndNotFbConnected = function() {
@@ -99,6 +97,15 @@ Cloobster.Registration = function($scope, $resource, Account, facebookApi, $rout
 			.then( handleLogin, handleError);
 	}
 
+	function setFbUserData(user) {
+		$scope.account.email = user.email;
+		$scope.emailRepeat = user.email;
+		$scope.account.login = user.username;
+		$scope.account.name = user.name;
+		$scope.account.facebookUID = user.id;
+		$scope.fbConnected = true;
+	}
+
 	$scope.fbLogout = function () {
 		facebookApi.logout();
 	};
@@ -134,4 +141,4 @@ Cloobster.Registration = function($scope, $resource, Account, facebookApi, $rout
 	//set default values on load
 	$scope.cancel();
 }
-Cloobster.Registration.$inject = ['$scope', '$resource', 'Account', 'facebookApi', '$routeParams', 'login'];
+Cloobster.Registration.$inject = ['$scope', '$resource', '$location', 'Account', 'facebookApi', '$routeParams', 'login'];
