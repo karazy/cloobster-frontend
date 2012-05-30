@@ -84,6 +84,14 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 		}
 	}
 
+	$scope.matchPasswords = function() {
+		if($scope.registrationForm.password.$viewValue !== $scope.registrationForm.passwordRepeat.$viewValue) {
+			$scope.registrationForm.passwordRepeat.$setValidity("match", false);
+		} else {
+			$scope.registrationForm.passwordRepeat.$setValidity("match", true);
+		}
+	}
+
 	$scope.connectFb = function() {
 		facebookApi.getUser().then( setFbUserData );
 	};
