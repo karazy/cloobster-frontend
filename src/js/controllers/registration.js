@@ -22,7 +22,8 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 		},
 		account,
 		//URL to activate an account
-		registrationUrlHash = /\/?account\/confirm\/.*/;
+		registrationUrlHash = /\/?account\/confirm\/.*/,
+		passwordRegex= /^(?=[!-~]{6,}$)(?=.*\\d)(?=.*[^A-Za-z0-9]).*$/;
 
 	$scope.registered = false;
 	$scope.error = false;
@@ -61,6 +62,19 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 		$scope.passwordRepeat = emptyAccount.password;
 		$scope.fbConnected = false;
 	};
+
+	/*
+	* Get css class for field highlighting
+	*/
+	$scope.getFieldInputClass = function(dirty, invalid) {
+		if(dirty && invalid) {
+			return "error";
+		} else if (dirty && !invalid) {
+			return "success";
+		} else {
+			return "";
+		}
+	}
 
 	$scope.connectFb = function() {
 		facebookApi.getUser().then( setFbUserData );
