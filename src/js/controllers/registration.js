@@ -1,8 +1,13 @@
+/** @module Cloobster/Registration */
 'use strict';
 
-/* Registration controller*/
-
-
+/** 
+* @constructor
+* Handles the registration process for business owners.
+* 
+* @author Frederik Reifschneider
+* @author Nils Weiher
+*/
 Cloobster.Registration = function($scope, $resource, $location, Account, facebookApi, $routeParams, loginService) {
 	var emptyAccount = {
 			'name' : '',
@@ -21,7 +26,6 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 			'facebookUID' : null
 		},
 		account,
-		//URL to activate an account
 		registrationUrlHash = /\/?account\/confirm\/.*/,
 		passwordRegex= /^(?=[!-~]{6,}$)(?=.*\\d)(?=.*[^A-Za-z0-9]).*$/;
 
@@ -37,15 +41,21 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 		save : false
 	}
 
-	/*Check URL origin */
-	if($location.url().match(registrationUrlHash) || $location.hash().match(registrationUrlHash)) {
-		confirmEmail();
-	}
-
+	/**
+	* @inner
+	* Checks facebook connection status.
+	*
+	* @return true if user is logged into facebook but not connected to application
+	*/
 	$scope.isLoggedInAndNotFbConnected = function() {
 		return ( !$scope.fbConnected && $scope.fbLoggedIn );
 	}
 
+	/**
+	* @inner
+	* Saves the registration formular.
+	*
+	*/
 	$scope.save = function() {
 		account = new Account($scope.account);
 		account.$register(function (account) { 
@@ -56,6 +66,11 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 		});
 	};
 
+	/**
+	* 
+	* Resets the registration formular.
+	* 
+	*/
 	$scope.cancel = function() {
 		$scope.account = angular.copy(emptyAccount);
 		$scope.emailRepeat = emptyAccount.email;
@@ -64,7 +79,10 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 	};
 
 	/*
-	* Get css class for field highlighting
+	* Get css class for field highlighting.
+	* @returns error if dirty && invalid
+	*		  sucess if dirty && !invalid
+	*         empty string otherwise
 	*/
 	$scope.getFieldInputClass = function(dirty, invalid) {
 		if(dirty && invalid) {
@@ -76,6 +94,10 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 		}
 	}
 
+	/**
+	* Checks if in registration form controller email and email repeat field match.
+	* If they don't match sets the email repeat field as invalid.
+	*/
 	$scope.matchMails = function() {
 		if($scope.registrationForm.email.$viewValue !== $scope.registrationForm.emailRepeat.$viewValue) {
 			$scope.registrationForm.emailRepeat.$setValidity("match", false);
@@ -84,6 +106,10 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 		}
 	}
 
+	/**
+	* Checks if in registration form controller password and password repeat field match.
+	* If they don't match sets the password repeat field as invalid.
+	*/
 	$scope.matchPasswords = function() {
 		if($scope.registrationForm.password.$viewValue !== $scope.registrationForm.passwordRepeat.$viewValue) {
 			$scope.registrationForm.passwordRepeat.$setValidity("match", false);
@@ -92,15 +118,25 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 		}
 	}
 
+	/**
+	* Connect a user to facebook.
+	*/
 	$scope.connectFb = function() {
 		facebookApi.getUser().then( setFbUserData );
 	};
 
+	/**
+	* Log a into facebook and connect to application.
+	*/
 	$scope.loginAndConnectFb = function() {
 		facebookApi.login().then( facebookApi.getUser ).then( setFbUserData );
 	};
 
-
+	/**
+	* Activates and account by sending an email token to the server.
+	* Token is read from URL.
+	* @private
+	*/
 	function confirmEmail() {
 		loginService.confirmEmail($routeParams.emailToken).then(
 			function(result) {
@@ -109,6 +145,10 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 			handleError);
 	}
 
+	/**
+	* @private
+	* 
+	*/
 	function handleLogin ( result) {
 		$scope.loginProgress = false;
 		$scope.account = result;
@@ -121,12 +161,25 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 		$scope.errorMessage = errorData.message;
 	}
 
+	/**
+	* Login to facebook.
+	* @param uid
+	*	user uid
+	* @param accessToken
+	*	Token provided by facebook	
+	*/
 	function doFbLogin(uid, accessToken) {
 		$scope.loginProgress = true;
 		loginService.loginFb( { uid: uid, token: accessToken } )
 			.then( handleLogin, handleError);
 	}
 
+	/**
+	*
+	* Set retrieved facebook data into registration form.
+	* @param user
+	*		user data from facebook
+	*/
 	function setFbUserData(user) {
 		$scope.account.email = user.email;
 		$scope.emailRepeat = user.email;
@@ -137,11 +190,16 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 		$scope.matchPasswords();
 	}
 
+	/**
+	* Log out from facebook.
+	*/
 	$scope.fbLogout = function () {
 		facebookApi.logout();
 	};
 
-	/* Called to do a Facebook and Cloobster login. */
+	/* 
+	* Called to do a Facebook and Cloobster login. 
+	*/
 	$scope.fbLogin = function() {
 		$scope.loginProgress = true;
 		$scope.error = false;
@@ -157,11 +215,18 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 		
 	};
 
-	/* Called to do a Cloobster login. */
+	/**
+	* Login into application.
+	*/
 	$scope.login = function() {
 		$scope.loginProgress = true;
 		$scope.error = false;
 		loginService.login( $scope.loginData ).then( handleLogin, handleError);
+	}
+
+	//Check if URL is an account activation
+	if($location.url().match(registrationUrlHash) || $location.hash().match(registrationUrlHash)) {
+		confirmEmail();
 	}
 
 	if(loginService.existsSavedLogin() && ($scope.loggedIn === false)) {

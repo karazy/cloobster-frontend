@@ -1,8 +1,10 @@
 'use strict';
 
-/* Login controller */
-
-
+/** 
+* @class
+*
+* Login controller 
+*/
 Cloobster.Login = function($scope, facebookApi, loginService) {
 	$scope.loginData = {
 		login : "",
@@ -40,7 +42,7 @@ Cloobster.Login = function($scope, facebookApi, loginService) {
 		facebookApi.logout();
 	};
 
-	/* Called to do a Facebook and Cloobster login. */
+	/** Called to do a Facebook and Cloobster login. */
 	$scope.fbLogin = function() {
 		$scope.loginProgress = true;
 		$scope.error = false;
@@ -56,7 +58,7 @@ Cloobster.Login = function($scope, facebookApi, loginService) {
 		
 	};
 
-	/* Called to do a Cloobster login. */
+	/** Called to do a Cloobster login. */
 	$scope.login = function() {
 		$scope.loginProgress = true;
 		$scope.error = false;
