@@ -27,9 +27,9 @@ describe("Cloobster.Registration", function() {
 		module('Cloobster.services');
 		
         inject(function(_$httpBackend_, $rootScope, $controller) {
-            scope = $rootScope.$new();           
+            scope = $rootScope.$new();
             
-            $httpBackend = _$httpBackend_; 		    
+            $httpBackend = _$httpBackend_; 	   
 
 
             ctrl = $controller(Cloobster.Registration, {$scope: scope});
@@ -56,7 +56,7 @@ describe("Cloobster.Registration", function() {
 	//test save
 	it("save should set registered on success", function() {
 		$httpBackend.expectPOST('/b/accounts').respond(dummyAccount);
-		expect(scope.registered).toBe(false);
+		expect(scope.registered).toBe(false);		
 		scope.save();
 		//flush request queue
 		$httpBackend.flush();

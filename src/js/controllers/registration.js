@@ -49,7 +49,7 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 	*/
 	$scope.isLoggedInAndNotFbConnected = function() {
 		return ( !$scope.fbConnected && $scope.fbLoggedIn );
-	}
+	};
 
 	/**
 	* @inner
