@@ -92,7 +92,7 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 		} else {
 			return "";
 		}
-	}
+	};
 
 	/**
 	* Checks if in registration form controller email and email repeat field match.
@@ -104,7 +104,7 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 		} else {
 			$scope.registrationForm.emailRepeat.$setValidity("match", true);
 		}
-	}
+	};
 
 	/**
 	* Checks if in registration form controller password and password repeat field match.
