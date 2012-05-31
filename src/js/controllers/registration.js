@@ -29,17 +29,16 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 		registrationUrlHash = /\/?account\/confirm\/.*/,
 		passwordRegex= /^(?=[!-~]{6,}$)(?=.*\\d)(?=.*[^A-Za-z0-9]).*$/;
 
+	//indicates in a session if user already registered
 	$scope.registered = false;
+	//error flag
 	$scope.error = false;
+	//true when connected to facebook
 	$scope.fbConnected = false;
+	//true if email is confirmed
 	$scope.emailConfirmed = false;
+	//error message 
 	$scope.errorMessage = "";
-	$scope.loginProgress = false;
-	$scope.loginData = {
-		login : "",
-		password : "",
-		save : false
-	}
 
 	/**
 	* @inner
@@ -67,7 +66,7 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 	};
 
 	/**
-	* 
+	* @inner
 	* Resets the registration formular.
 	* 
 	*/
