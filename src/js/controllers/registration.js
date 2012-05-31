@@ -126,7 +126,7 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 	};
 
 	/**
-	* Log a into facebook and connect to application.
+	* Log into facebook and connect to application.
 	*/
 	$scope.loginAndConnectFb = function() {
 		facebookApi.login().then( facebookApi.getUser ).then( setFbUserData );
@@ -149,29 +149,9 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 	* @private
 	* 
 	*/
-	function handleLogin ( result) {
-		$scope.loginProgress = false;
-		$scope.account = result;
-		confirmEmail();
-	}
-
 	function handleError (errorData) {
-		$scope.loginProgress = false;
 		$scope.error = true;
 		$scope.errorMessage = errorData.message;
-	}
-
-	/**
-	* Login to facebook.
-	* @param uid
-	*	user uid
-	* @param accessToken
-	*	Token provided by facebook	
-	*/
-	function doFbLogin(uid, accessToken) {
-		$scope.loginProgress = true;
-		loginService.loginFb( { uid: uid, token: accessToken } )
-			.then( handleLogin, handleError);
 	}
 
 	/**
@@ -197,41 +177,9 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 		facebookApi.logout();
 	};
 
-	/* 
-	* Called to do a Facebook and Cloobster login. 
-	*/
-	$scope.fbLogin = function() {
-		$scope.loginProgress = true;
-		$scope.error = false;
-		if(!$scope.fbLoggedIn) {
-
-			facebookApi.login().then( function (response) {
-				doFbLogin(response.authResponse.userID, response.authResponse.accessToken);
-			});	
-		}
-		else {
-			doFbLogin(facebookApi.getUid(), facebookApi.getAccessToken());
-		}
-		
-	};
-
-	/**
-	* Login into application.
-	*/
-	$scope.login = function() {
-		$scope.loginProgress = true;
-		$scope.error = false;
-		loginService.login( $scope.loginData ).then( handleLogin, handleError);
-	}
-
 	//Check if URL is an account activation
 	if($location.url().match(registrationUrlHash) || $location.hash().match(registrationUrlHash)) {
 		confirmEmail();
-	}
-
-	if(loginService.existsSavedLogin() && ($scope.loggedIn === false)) {
-		$scope.loginProgress = true;
-		loginService.loginResume().then( handleLogin, handleError);
 	}
 
 	//set default values on load
