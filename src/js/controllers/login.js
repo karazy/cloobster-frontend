@@ -1,9 +1,14 @@
+/** @module Cloobster/Registration */
 'use strict';
 
-/** 
-* @class
+/**
+* 	@name Cloobster.Login 
+*	@requires facebookApi
+*	@requires loginService
 *
-* Login controller 
+* 	Login controller 
+* 	Manages submitting of login data, retrieving facebook login data and resume of a saved login.
+* 	@constructor
 */
 Cloobster.Login = function($scope, facebookApi, loginService) {
 	$scope.loginData = {
@@ -11,66 +16,106 @@ Cloobster.Login = function($scope, facebookApi, loginService) {
 		password : "",
 		save : false
 	}
-	if($scope.loggedIn === true ) {
-		$scope.account = loginService.getAccount();
-	}
-	else
-		$scope.account = {};
-	
+
+	// Retrieve the account if we are already logged in.
+	// Returns empty account if not.
+	$scope.account = loginService.getAccount();
+	// Reset error status, will be set if a login error occured.
 	$scope.error = false;
+	// will be set with a message from the login service explaining the error.
 	$scope.errorMessage = "";
+	// Make known if there is a login in progress, so that views can change accordingly.
 	$scope.loginProgress = false;
 
+	/**
+	*	@name Cloobster.Login~handleLogin
+	*	
+	*	Callback used after a successfull login request.
+	*	@param {Object} result - Contains the user account data.
+	*/
 	function handleLogin ( result) {
 		$scope.loginProgress = false;
 		$scope.account = result;
 	}
 
+	/**
+	*	@name Cloobster.Login~handleError
+	*	
+	*	Callback used after a failed login request.
+	*	@param {Object} result - Contains the error data send from the Cloobser service.
+	*/
 	function handleError (errorData) {
 		$scope.loginProgress = false;
 		$scope.error = true;
 		$scope.errorMessage = errorData.message;
 	}
 
-	function doFbLogin(uid, accessToken) {
+	/**
+	*	@name Cloobster.Login~doFbLogin
+	*	
+	*	Shortcut method to execute a Cloobster login with facebook.
+	*	@see Cloobster.services.login#loginFb
+	*
+	*	@param {string} uid - Id of the Facebook user object, used for authentication.
+	*	@param {string} accessToken - Token issued by the Facebook api after login, used for authentication.
+	*/
+	function doCloobsterFbLogin(uid, accessToken) {
 		$scope.loginProgress = true;
 		loginService.loginFb( { uid: uid, token: accessToken } )
 			.then( handleLogin, handleError);
 	}
 
+	/**
+	*	Interface function, called to logout of Facebook.
+	*	@see Cloobster.services.facebookApi#logout
+	*/
 	$scope.fbLogout = function () {
 		facebookApi.logout();
 	};
 
-	/** Called to do a Facebook and Cloobster login. */
+	/**
+	*	Interface function, called to do a Facebook and Cloobster login.
+	* 	Calls {@link Cloobster.services.facebookApi#login} and then {@link Cloobster.services.login#loginFb}.
+	*/
 	$scope.fbLogin = function() {
 		$scope.loginProgress = true;
 		$scope.error = false;
 		if(!$scope.fbLoggedIn) {
 
 			facebookApi.login().then( function (response) {
-				doFbLogin(response.authResponse.userID, response.authResponse.accessToken);
+				//Call helper method to do the Cloobster login
+				doCloobsterFbLogin(response.authResponse.userID, response.authResponse.accessToken);
 			});	
 		}
 		else {
-			doFbLogin(facebookApi.getUid(), facebookApi.getAccessToken());
+			doCloobsterFbLogin(facebookApi.getUid(), facebookApi.getAccessToken());
 		}
 		
 	};
 
-	/** Called to do a Cloobster login. */
+	/** 
+	*	Interface function, called to do a Cloobster login.
+	*	Calls {@link Cloobster.services.login#logout}
+	*/
 	$scope.login = function() {
 		$scope.loginProgress = true;
 		$scope.error = false;
 		loginService.login( $scope.loginData ).then( handleLogin, handleError);
 	}
 
+	/**
+	*	Interface function, called to do a Cloobster logout.
+	*	Calls {@link Cloobster.services.login#logout}
+	*/
 	$scope.logout = function() {
 		loginService.logout();
 	}
 
+	// Check for saved login data.
 	if(loginService.existsSavedLogin() && ($scope.loggedIn === false)) {
+		// Set so that we can bind views and display e.g. a progress bar.
 		$scope.loginProgress = true;
+		// Authenticate the user with the saved data.
 		loginService.loginResume().then( handleLogin, handleError);
 	}
 		

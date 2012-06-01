@@ -2,13 +2,20 @@
 'use strict';
 
 /** 
-* @constructor
-* Handles the registration process for business owners.
+*	@name Cloobster.Registration
+* 	@constructor
+* 	@requires $location
+*	@requires $routeParams
+*	@requires Account
+*	@requires facebookApi
+*	@requires loginService
+*	
+* 	Handles the registration process for business owners.
 * 
-* @author Frederik Reifschneider
-* @author Nils Weiher
+* 	@author Frederik Reifschneider
+* 	@author Nils Weiher
 */
-Cloobster.Registration = function($scope, $resource, $location, Account, facebookApi, $routeParams, loginService) {
+Cloobster.Registration = function($scope, $location, Account, facebookApi, $routeParams, loginService) {
 	var emptyAccount = {
 			'name' : '',
 			'login' : '',
@@ -188,4 +195,4 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 	//set default values on load
 	$scope.cancel();
 }
-Cloobster.Registration.$inject = ['$scope', '$resource', '$location', 'Account', 'facebookApi', '$routeParams', 'login'];
+Cloobster.Registration.$inject = ['$scope', '$location', 'Account', 'facebookApi', '$routeParams', 'login'];
