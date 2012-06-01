@@ -160,13 +160,17 @@ Cloobster.Registration = function($scope, $resource, $location, Account, faceboo
 	*		user data from facebook
 	*/
 	function setFbUserData(user) {
+		$scope.registrationForm.fullname.$dirty = true;
+		$scope.registrationForm.email.$dirty = true;
+		$scope.registrationForm.emailRepeat.$dirty = true;
+		$scope.registrationForm.login.$dirty = true;
 		$scope.account.email = user.email;
 		$scope.emailRepeat = user.email;
-		$scope.account.login = user.username;
 		$scope.account.name = user.name;
+		$scope.account.login = user.username;
 		$scope.account.facebookUID = user.id;
 		$scope.fbConnected = true;
-		$scope.matchPasswords();
+		//$scope.matchPasswords();
 	}
 
 	/**
