@@ -20,11 +20,11 @@ Cloobster.Login = function($scope, facebookApi, loginService) {
 	// Retrieve the account if we are already logged in.
 	// Returns empty account if not.
 	$scope.account = loginService.getAccount();
-	// Reset error status, will be set if a login error occured.
+	// error flag
 	$scope.error = false;
-	// will be set with a message from the login service explaining the error.
+	// error message
 	$scope.errorMessage = "";
-	// Make known if there is a login in progress, so that views can change accordingly.
+	// true if there is a login in progress, so that views can change accordingly.
 	$scope.loginProgress = false;
 
 	/**
