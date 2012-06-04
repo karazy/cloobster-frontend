@@ -1,4 +1,4 @@
-/** @module Cloobster/Registration */
+/** @module Cloobster/Login */
 'use strict';
 
 /**

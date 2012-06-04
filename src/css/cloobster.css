@@ -28,3 +28,26 @@
   content: "";
   padding: 0;
 }
+
+/* Profile view */
+.content_wrapper {
+
+}
+
+.profile-logo {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 10px;
+}
+
+.noLogo {
+  background-color: gray;
+}
+
+.noLogo div {
+  font-size: 1.5em;
+  text-align: center;
+  top: 45%;
+  position: relative;
+}
