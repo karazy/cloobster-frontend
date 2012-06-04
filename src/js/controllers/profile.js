@@ -10,7 +10,7 @@
 * 	View and manage profiles.
 * 	@constructor
 */
-Cloobster.Profile = function($scope, $http, facebookApi, loginService) {
+Cloobster.Profile = function($scope, $http, facebookApi, loginService, $log) {
 
 	//indicates if logo form is in view or edit mode
 	$scope.logo_form_mode = "view";
@@ -39,20 +39,22 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService) {
 	*/
 	$scope.editLogo = function() {
 		$scope.logo_form_mode = "edit";
+
+		requestFileUploadInformation();
 	}
 
 	/**
 	* Requests information from server needed to upload files.
 	*
 	*/
-	$scope.requestFileUploadInformation = function() {
+	function requestFileUploadInformation() {
 		$http.get('/uploads/images').success(function(data, status) {
 			$scope.fileUploadUrl = data;
 		})
-		.failure(function(data, status) {
-
+		.error(function(data, status) {
+			$log.error('Failed to request file upload information. Status: ' + status);
 		});
 	}
 
 };
-Cloobster.Profile.$inject = ['$scope', '$http', 'facebookApi', 'login'];
+Cloobster.Profile.$inject = ['$scope', '$http', 'facebookApi', 'login', '$log'];

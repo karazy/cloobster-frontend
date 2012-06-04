@@ -1,30 +1,32 @@
 <h1>Company Profile</h1>
 <div class="content_wrapper row">
-	<div ng-switch on="logo_form_mode">
-		<div ng-switch-when="view" ng-class="getEmptyLogoClass()" class="profile-logo" ng-click="editLogo()">
-		<img ng-show="profile.logo" ng-src="{{profile.logo}}" alt="click to edit" />
-		<div ng-show="!profile.logo" style="">Add +</div>
+	<div class='span12'>
+		<div ng-switch on="logo_form_mode">
+			<div ng-switch-when="view" ng-class="getEmptyLogoClass()" class="profile-logo" ng-click="editLogo()">
+			<img ng-show="profile.logo" ng-src="{{profile.logo}}" alt="click to edit" />
+			<div ng-show="!profile.logo" style="">Add +</div>
+			</div>
+			<form class="well" ng-switch-when="edit" novalidate>
+				<input type="file" id="logo"></input>
+			</form>
 		</div>
-		<form class="well" ng-switch-when="edit" novalidate>
-			<input type="file" id="logo"></input>
-		</form>
-	</div>
-	<div ng-switch on="mode" >		
-		<div ng-switch-when="view">
-
-		</div>
-		<div ng-switch-when="edit">
-			<div class="photo-box">
+		<div ng-switch on="mode" >		
+			<div ng-switch-when="view">
 
 			</div>
-			<form class="well" name='profileForm' ng-submit="save()" novalidate>
-				<label for="slogan"></label>
-				<input type="text" name="slogan" id="slogan" ng-model="profile.slogan" required></input> 
-				<label for="description"></label>
-				<textarea name="description" id="description" ng-model="profile.description" cols="50" rows="10"></textarea>
-				<button ng-click="cancel()" class="btn">Cancel</button>
-				<button type="submit" class="btn btn-primary">Save</button>
-			</form>	
+			<div ng-switch-when="edit">
+				<div class="photo-box">
+
+				</div>
+				<form class="well" name='profileForm' ng-submit="save()" novalidate>
+					<label for="slogan"></label>
+					<input type="text" name="slogan" id="slogan" ng-model="profile.slogan" required></input> 
+					<label for="description"></label>
+					<textarea name="description" id="description" ng-model="profile.description" cols="50" rows="10"></textarea>
+					<button ng-click="cancel()" class="btn">Cancel</button>
+					<button type="submit" class="btn btn-primary">Save</button>
+				</form>	
+			</div>
 		</div>
 	</div>
 </div>
