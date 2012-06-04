@@ -11,6 +11,7 @@
 * 	@constructor
 */
 Cloobster.Profile = function($scope, $http, facebookApi, loginService, $log) {
+	var reader = new FileReader(); //used to handles files
 
 	//indicates if logo form is in view or edit mode
 	$scope.logo_form_mode = "view";
@@ -27,6 +28,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, $log) {
 		"logo" : "img/Logo_cloobster_klein.png"
 	};
 
+
 	/**
 	*
 	*/
@@ -39,22 +41,40 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, $log) {
 	*/
 	$scope.editLogo = function() {
 		$scope.logo_form_mode = "edit";
+	};
 
-		requestFileUploadInformation();
-	}
+	/**
+	*
+	*/
+	$scope.saveLogo = function() {
+		// logoForm
+		var reader = new FileReader();
+		reader.onload = (function(logo) {
+        	return function(e) {
+        		$log.log('filereader onload');
+        	};
+      	})(logo);
+
+      	reader.readAsDataURL(logo);
+	};
 
 	/**
 	* Requests information from server needed to upload files.
-	*
+	* Gets called immadiately.
 	*/
-	function requestFileUploadInformation() {
-		$http.get('/uploads/images').success(function(data, status) {
-			$scope.fileUploadUrl = data;
-		})
-		.error(function(data, status) {
-			$log.error('Failed to request file upload information. Status: ' + status);
-		});
-	}
+	(function requestFileUploadInformation() {
+		$log.log('requestFileUploadInformation');
+
+		if(!$scope.fileUploadUrl) {
+			$http.get('/uploads/imagesurl').success(function(data, status) {
+				$log.log('requestFileUploadInformation -> success');
+				$scope.fileUploadUrl = data;
+			})
+			.error(function(data, status) {
+				$log.error('Failed to request file upload information. Status: ' + status);
+			});
+		}
+	})();
 
 };
 Cloobster.Profile.$inject = ['$scope', '$http', 'facebookApi', 'login', '$log'];

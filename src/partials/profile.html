@@ -6,8 +6,10 @@
 			<img ng-show="profile.logo" ng-src="{{profile.logo}}" alt="click to edit" />
 			<div ng-show="!profile.logo" style="">Add +</div>
 			</div>
-			<form class="well" ng-switch-when="edit" novalidate>
-				<input type="file" id="logo"></input>
+			<form class="well form-vertical" name="logoForm" ng-switch-when="edit" ng-submit="saveLogo()" novalidate>
+				<input type="file" name="logo" id="logo"></input>
+				<button ng-click="cancelLogo()" class="btn">Cancel</button>
+				<button type="submit" class="btn btn-primary">Done</button>
 			</form>
 		</div>
 		<div ng-switch on="mode" >		
@@ -18,14 +20,14 @@
 				<div class="photo-box">
 
 				</div>
-				<form class="well" name='profileForm' ng-submit="save()" novalidate>
+			<!-- 	<form class="well" name='profileForm' ng-submit="save()" novalidate>
 					<label for="slogan"></label>
 					<input type="text" name="slogan" id="slogan" ng-model="profile.slogan" required></input> 
 					<label for="description"></label>
 					<textarea name="description" id="description" ng-model="profile.description" cols="50" rows="10"></textarea>
 					<button ng-click="cancel()" class="btn">Cancel</button>
 					<button type="submit" class="btn btn-primary">Save</button>
-				</form>	
+				</form>	 -->
 			</div>
 		</div>
 	</div>
