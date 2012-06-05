@@ -62,6 +62,9 @@
             <span class="caret"></span>
           </a>
            <ul class="dropdown-menu">
+            <div class='alert alert-error fade in' ng-show='error'>
+              <strong>Error!</strong> {{errorMessage}}
+            </div>
             <p >
                 <form ng-submit="fbLogin()" >
                     <input class="btn btn-primary" type="submit" value="Login with Facebook">

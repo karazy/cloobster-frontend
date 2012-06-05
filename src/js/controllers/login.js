@@ -1,7 +1,7 @@
 /** @module Cloobster/Login */
 'use strict';
 
-jQuery('.dropdown-menu').find('form input[type=text]').click(function (e) {
+jQuery('.dropdown-menu').find('form').click(function (e) {
     e.stopPropagation();
 });
 
