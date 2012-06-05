@@ -3,11 +3,11 @@
 	<div class="row-fluid">
 		<div class="span6">
 			<div ng-show="logoFormMode == 'view'" ng-class="getEmptyLogoClass()" ng-click="editLogo()">
-			<img ng-show="company.images.logo.url" ng-src="company.images.logo.url" alt="click to edit" />
+			<img ng-show="company.images.logo.url" ng-src="{{company.images.logo.url}}" alt="click to edit" />
 			<button ng-show="!company.images.logo" class="btn">Add Logo</button>
 			</div>
 			<form class="well form-vertical" name="logoForm" ng-show="logoFormMode == 'edit'" ng-submit="saveLogo()" novalidate>
-				<img ng-show="logoResource.url" ng-src="logoResource.url"/>
+				<img ng-show="logoResource.url" ng-src="{{logoResource.url}}"/>
 				<input type="file" name="logo" id="logo"></input>
 				<button ng-click="cancelLogo()" class="btn">Cancel</button>
 				<button type="submit" ng-disabled="!logoUploadFinished" class="btn btn-primary">Done</button>
