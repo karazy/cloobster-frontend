@@ -117,7 +117,6 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 				$log.error('Failed to request file upload information. Status: ' + status);
 			});
 		}
-
 	})();
 
 	/**
