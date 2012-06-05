@@ -162,7 +162,6 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
     				blobKey: data.blobkey,
     				url: data.url
     			});
-
     			$scope.logoUploadFinished = true;        			
        		}
 		});

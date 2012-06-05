@@ -1,6 +1,10 @@
 /** @module Cloobster/Login */
 'use strict';
 
+jQuery('.dropdown-menu').find('form input[type=text]').click(function (e) {
+    e.stopPropagation();
+});
+
 /**
 * 	@name Cloobster.Login 
 *	@requires facebookApi

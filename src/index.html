@@ -43,13 +43,48 @@
           <span class="icon-bar"></span>
         </a>
         <a class="brand" href="#">Cloobster</a>
+        <!-- Login Drop Down -->
+        <div ng-controller="Cloobster.Login">
+        <div class="btn-group pull-right" ng-show="loggedIn">
+           <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="icon-user"></i> {{account.login}}
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#/profile">Profile</a></li>
+            <li class="divider"></li>
+            <li><a href="#" ng-click="logout()">Logout</a></li>
+          </ul>
+        </div>
+        <div class="btn-group pull-right" ng-hide="loggedIn" id="loginForm">
+           <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="icon-user"></i> Login
+            <span class="caret"></span>
+          </a>
+           <ul class="dropdown-menu">
+            <p >
+                <form ng-submit="fbLogin()" >
+                    <input class="btn btn-primary" type="submit" value="Login with Facebook">
+                </form>
+            </p>
+            <form class="form-inline" ng-submit="login()">
+              <input type="text" ng-model="loginData.login"  size="30" placeholder="login">
+              <input type="password" ng-model="loginData.password"  size="30" placeholder="password">
+                <label class="checkbox">
+                    <input type="checkbox" ng-model="loginData.save"> remember login
+                </label>
+              <input class="btn btn-primary" type="submit" value="login">
+            </form>
+         </ul>
+      </div>
+    </div>
         <div class="nav-collapse">
           <ul class="nav">
             <!-- class="active" -->
             <li><a href="#/" ng-class="getActive('/')">Home</a></li>
             <li><a href="#/about" ng-class="getActive('/about')">About</a></li>
             <li><a href="#/contact" ng-class="getActive('/contact')">Contact</a></li>
-            <li ng-show="loggedIn"><a href="#/profile" ng-class="getActive('/profile')">Profile</a></li>
+            <!-- <li ng-show="loggedIn"><a href="#/profile" ng-class="getActive('/profile')">Profile</a></li> -->
             <li ng-hide="loggedIn" ng-class="getActive('/registration')"><a href="#/registration">Registration</a></li>
           </ul>
         </div><!--/.nav-collapse -->
