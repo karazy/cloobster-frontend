@@ -100,9 +100,8 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 
 	/**
 	* Requests information from server needed to upload files.
-	* Immediate function.
 	*/
-	(function requestFileUploadInformation() {
+	function requestFileUploadInformation() {
 		$log.log('requestFileUploadInformation');
 
 		if(!$scope.fileUploadUrl) {
@@ -115,25 +114,28 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 				$log.error('Failed to request file upload information. Status: ' + status);
 			});
 		}
-
-	})();
+	};
 
 	/**
 	* Loads profile data if user is logged in.
-	* Immediate function.
 	*/
-	(function loadProfileData() {
-		if($scope.loggedIn) {
-			var account = loginService.getAccount();
+	function loadProfileData() {
+		var account = loginService.getAccount();
 
-			$scope.company = Company.buildResource().get({
-				id: account.companyId
-			},function() {
-				ImageResource = Company.buildImageResource($scope.company.id);
-				$scope.company.images = {};
-			});
+		$scope.company = Company.buildResource().get({
+			id: account.companyId
+		},function() {
+			ImageResource = Company.buildImageResource($scope.company.id);
+			$scope.company.images = {};
+		});
+	};
+
+	$scope.$watch(loggedIn, function(newValue, oldValue) {
+		if(newValue == true) {
+			requestFileUploadInformation();
+			loadProfileData();
 		}
-	})();
+	});
 
 	/**
 	* Initializes the upload plugin for all upload fields.
