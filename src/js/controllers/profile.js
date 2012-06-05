@@ -65,7 +65,8 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 		
 			$scope.logoResource.$save({
 				companyId: $scope.company.id
-			}).success(function() {
+			},function() {
+				//success callback
 				//set saved logo as new company logo
 				$scope.company.images.logo = {
 					url: $scope.logoResource.url,
