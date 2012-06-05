@@ -41,6 +41,40 @@ Cloobster.services.factory('Account', function($resource) {
 
 /** 
 * 	@constructor
+* 	Factory function that creates the 'Company' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Frederik Reifschneider
+*/
+Cloobster.services.factory('Company', function($resource) {
+		/**
+		*	@name Cloobster.services.Company
+		*	
+		*/
+		var Company = $resource('/b/companies/:id');
+
+		return Company;
+});
+
+/** 
+* 	@constructor
+* 	Factory function that creates the 'CompanyImage' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Frederik Reifschneider
+*/
+Cloobster.services.factory('CompanyImage', function($resource) {
+		/**
+		*	@name Cloobster.services.CompanyImage
+		*	
+		*/
+		var CompanyImage = $resource('/b/companies/:companyId/image/:id');
+
+		return CompanyImage;
+});
+
+/** 
+* 	@constructor
 * 	Factory function that returns the 'facebookApi' service and
 * 	adds listener for Facebook 'auth.statusChange' events.
 *

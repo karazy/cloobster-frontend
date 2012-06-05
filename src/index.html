@@ -49,7 +49,7 @@
             <li><a href="#/" ng-class="getActive('/')">Home</a></li>
             <li><a href="#/about" ng-class="getActive('/about')">About</a></li>
             <li><a href="#/contact" ng-class="getActive('/contact')">Contact</a></li>
-            <li><a href="#/profile" ng-class="getActive('/profile')">Profile</a></li>
+            <li ng-show="loggedIn"><a href="#/profile" ng-class="getActive('/profile')">Profile</a></li>
             <li ng-hide="loggedIn" ng-class="getActive('/registration')"><a href="#/registration">Registration</a></li>
           </ul>
         </div><!--/.nav-collapse -->

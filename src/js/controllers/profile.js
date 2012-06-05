@@ -10,11 +10,20 @@
 * 	View and manage profiles.
 * 	@constructor
 */
-Cloobster.Profile = function($scope, $http, facebookApi, loginService, $log) {
-	// var reader = new FileReader(); //used to handles files
+Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, CompanyImage, $log) {
+		//Company resource object.
+	var company = null,
+		//Resource for dealing with company images.
+		companyImage = null;
 
-	//indicates if logo form is in view or edit mode
+	//Indicates if logo form is in view or edit mode.
 	$scope.logoFormMode = "view";
+
+	//Indicates if company profile is in view or edit mode.
+	$scope.profileFormMode = "view";	
+
+	//Indicates if logo upload is finished. And toggles the save button accordingly.
+	$scope.logoUploadFinished = false;
 
 	/**
 	* Holds an array of fileUpload Information objects.
@@ -28,7 +37,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, $log) {
 		"logo" : "img/Logo_cloobster_klein.png"
 	};
 
-
+	//<-- start logo related actions -->
 	/**
 	*
 	*/
@@ -41,26 +50,37 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, $log) {
 	*/
 	$scope.editLogo = function() {
 		$scope.logoFormMode = "edit";
+		$scope.logoUploadFinished = false;
 	};
 
 	/**
 	*
 	*/
 	$scope.saveLogo = function() {
-		// logoForm
-		// var reader = new FileReader();
-		// reader.onload = (function(logo) {
-  //       	return function(e) {
-  //       		$log.log('filereader onload');
-  //       	};
-  //     	})(logo);
+		$scope.logoUploadFinished = false;
+		$scope.logoFormMode = "view";
 
-  //     	reader.readAsDataURL(logo);
+		// /b/accounts/{id}/company/{id} PUT
 	};
 
 	$scope.cancelLogo = function() {
 		$scope.logoFormMode = "view";
+		$scope.logoUploadFinished = false;
 	};
+
+	//<-- end logo related actions -->
+
+	//<-- start logo related actions -->
+
+	$scope.editProfile = function() {
+		$scope.profileFormMode = "edit";
+	};
+
+	$scope.cancelProfile = function() {
+		$scope.profileFormMode = "view";
+	};	
+
+	//<-- end logo related actions -->
 
 	/**
 	* Requests information from server needed to upload files.
@@ -82,6 +102,17 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, $log) {
 
 	})();
 
+	(function loadProfileData() {
+		if($scope.loggedInd) {
+					var account = loginService.getAccount();
+
+			company = Company.get({
+				id: account.id
+			});
+
+		}
+	})();
+
 	function initUploadPlugin() {
 		if(!$scope.fileUploadUrl) {
 			$log.error('initUploadPlugin: No fileUploadUrl set!');
@@ -92,14 +123,13 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, $log) {
         		url: $scope.fileUploadUrl,
         		fail: function(e, data) {
         			$log.error('Upload failed. Reason: '+data.errorThrown);
+        			$scope.logoUploadFinished = false;
         		},
         		done: function (e, data) {
-            	$.each(data.result, function (index, file) {
-	                $('<p/>').text(file.name).appendTo(document.body);
-    	        });
+        			$scope.logoUploadFinished = true;        			
        		}
     	});
 	};
 
 };
-Cloobster.Profile.$inject = ['$scope', '$http', 'facebookApi', 'login', '$log'];
+Cloobster.Profile.$inject = ['$scope', '$http', 'facebookApi', 'login', 'Company', 'CompanyImage', '$log'];
