@@ -56,14 +56,17 @@ Cloobster.services.factory('Company', function($resource) {
 			*	
 			*/
 			buildResource: function() {
-				return $resource('/b/companies/:id');	
+				return $resource('/b/companies/:id', {
+					'id': '@id'
+				});	
 			},
 			/**
 			*	
 			*/
 			buildImageResource: function(companyId) {
-				return $resource('/b/companies/:companyId/images/:name', {
-					'companyId': companyId
+				return $resource('/b/companies/:companyId/images/:id', {
+					'companyId': companyId,
+					'id': '@id'
 				});
 			}
 			

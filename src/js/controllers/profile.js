@@ -158,7 +158,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
     			
     			//create logo resource object
     			$scope.logoResource = new ImageResource({
-    				name: 'logo',
+    				id: 'logo',
     				blobKey: data.blobkey,
     				url: data.url
     			});
