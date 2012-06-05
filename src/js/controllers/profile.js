@@ -63,9 +63,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 			$scope.logoUploadFinished = false;
 			$scope.logoFormMode = "view";
 		
-			$scope.logoResource.$save({
-				companyId: $scope.company.id
-			},function() {
+			$scope.logoResource.$save(function() {
 				//success callback
 				//set saved logo as new company logo
 				$scope.company.images.logo = {
@@ -132,6 +130,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 				id: account.companyId
 			},function() {
 				ImageResource = Company.buildImageResource($scope.company.id);
+				$scope.company.images = {};
 			});
 		}
 	})();
