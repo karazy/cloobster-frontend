@@ -10,11 +10,14 @@
 * 	View and manage profiles.
 * 	@constructor
 */
-Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, CompanyImage, $log) {
-		//Company resource object.
-	var company = null,
-		//Resource for dealing with company images.
-		companyImage = null;
+Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, $log) {
+	
+	var ImageResource;
+
+	//Company resource object.
+	$scope.company = {
+		images: {}
+	};
 
 	//Indicates if logo form is in view or edit mode.
 	$scope.logoFormMode = "view";
@@ -25,6 +28,9 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	//Indicates if logo upload is finished. And toggles the save button accordingly.
 	$scope.logoUploadFinished = false;
 
+	//resource to handle CRUD for logo
+	$scope.logoResource = null;
+
 	/**
 	* Holds an array of fileUpload Information objects.
 	* e.g.
@@ -32,21 +38,17 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	*/
 	$scope.fileUploadInformation = [];
 
-	$scope.profile = {
-
-		"logo" : "img/Logo_cloobster_klein.png"
-	};
-
 	//<-- start logo related actions -->
+
 	/**
-	*
+	* Returns an empty string if logo is defined "nologo" otherwise.
 	*/
 	$scope.getEmptyLogoClass = function() {
-		return $scope.profile.logo ? "" : "noLogo";
+		return $scope.company.images ?  ($scope.company.images.logo ? "" : "noLogo") : "nologo";
 	}
 
 	/**
-	*
+	* Toggles edit mode for logo image.
 	*/
 	$scope.editLogo = function() {
 		$scope.logoFormMode = "edit";
@@ -54,18 +56,33 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	};
 
 	/**
-	*
+	* Saves uploaded company logo. 
 	*/
 	$scope.saveLogo = function() {
-		$scope.logoUploadFinished = false;
-		$scope.logoFormMode = "view";
-
-		// /b/accounts/{id}/company/{id} PUT
+		if($scope.logoResource) {
+			$scope.logoUploadFinished = false;
+			$scope.logoFormMode = "view";
+		
+			$scope.logoResource.$save({
+				companyId: company.id
+			}).success(function() {
+				//set saved logo as new company logo
+				$scope.company.images.logo = {
+					url: $scope.logoResource.url,
+					blobKey: $scope.logoResource.blobkey
+				}
+			});
+		}
 	};
 
+	/**
+	* Discards changes made to logo and leaves edit mode.
+	*/
 	$scope.cancelLogo = function() {
 		$scope.logoFormMode = "view";
 		$scope.logoUploadFinished = false;
+
+		//$scope.logoResource.$delete();
 	};
 
 	//<-- end logo related actions -->
@@ -84,7 +101,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 
 	/**
 	* Requests information from server needed to upload files.
-	* Gets called immadiately.
+	* Immediate function.
 	*/
 	(function requestFileUploadInformation() {
 		$log.log('requestFileUploadInformation');
@@ -102,34 +119,55 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 
 	})();
 
+	/**
+	* Loads profile data if user is logged in.
+	* Immediate function.
+	*/
 	(function loadProfileData() {
-		if($scope.loggedInd) {
-					var account = loginService.getAccount();
+		if($scope.loggedIn) {
+			var account = loginService.getAccount();
 
-			company = Company.get({
-				id: account.id
+			$scope.company = Company.buildResource().get({
+				id: account.companyId
+			},function() {
+				ImageResource = Company.buildImageResource($scope.company.id);
 			});
-
 		}
 	})();
 
+	/**
+	* Initializes the upload plugin for all upload fields.
+	* It needs a previously optained fileUpeloadUrl fot setup.
+	*/
 	function initUploadPlugin() {
 		if(!$scope.fileUploadUrl) {
 			$log.error('initUploadPlugin: No fileUploadUrl set!');
 			return;
 		}
-		$('#logo').fileupload({
-        		dataType: 'json',
-        		url: $scope.fileUploadUrl,
-        		fail: function(e, data) {
-        			$log.error('Upload failed. Reason: '+data.errorThrown);
-        			$scope.logoUploadFinished = false;
-        		},
-        		done: function (e, data) {
-        			$scope.logoUploadFinished = true;        			
+
+		//set up filedupload for logo
+		jQuery('#logo').fileupload({
+    		dataType: 'json',
+    		url: $scope.fileUploadUrl,
+    		fail: function(e, data) {
+    			$log.error('Upload failed. Reason: '+data.errorThrown);
+    			$scope.logoUploadFinished = false;
+    		},
+    		done: function (e, data) {
+    			//data properties: name, blobkey, url
+    			
+    			//create logo resource object
+    			$scope.logoResource = new ImageResource({
+    				name: 'logo',
+    				blobKey: data.blobkey,
+    				url: data.url
+    			});
+
+    			$scope.logoUploadFinished = true;        			
        		}
-    	});
+		});
+
 	};
 
 };
-Cloobster.Profile.$inject = ['$scope', '$http', 'facebookApi', 'login', 'Company', 'CompanyImage', '$log'];
+Cloobster.Profile.$inject = ['$scope', '$http', 'facebookApi', 'login', 'Company', '$log'];

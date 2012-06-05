@@ -51,26 +51,25 @@ Cloobster.services.factory('Company', function($resource) {
 		*	@name Cloobster.services.Company
 		*	
 		*/
-		var Company = $resource('/b/companies/:id');
+		var Company = {
+			/**
+			*	
+			*/
+			buildResource: function() {
+				return $resource('/b/companies/:id');	
+			},
+			/**
+			*	
+			*/
+			buildImageResource: function(companyId) {
+				return $resource('/b/companies/:companyId/images/:name', {
+					'companyId': companyId
+				});
+			}
+			
+		}
 
 		return Company;
-});
-
-/** 
-* 	@constructor
-* 	Factory function that creates the 'CompanyImage' resource service.
-* 	See ngResource for further information on resource objects.
-* 
-* 	@author Frederik Reifschneider
-*/
-Cloobster.services.factory('CompanyImage', function($resource) {
-		/**
-		*	@name Cloobster.services.CompanyImage
-		*	
-		*/
-		var CompanyImage = $resource('/b/companies/:companyId/image/:id');
-
-		return CompanyImage;
 });
 
 /** 
