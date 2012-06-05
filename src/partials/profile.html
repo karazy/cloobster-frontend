@@ -3,7 +3,7 @@
 	<div class="row-fluid">
 		<div class="span6">
 			<div ng-show="logoFormMode == 'view'" ng-class="getEmptyLogoClass()" ng-click="editLogo()">
-			<img ng-show="company.images.logo" ng-src="{{company.images.logo}}" alt="click to edit" />
+			<img ng-show="company.images.logo" ng-src="company.images.logo.url" alt="click to edit" />
 			<button ng-show="!company.images.logo" class="btn">Add Logo</button>
 			</div>
 			<form class="well form-vertical" name="logoForm" ng-show="logoFormMode == 'edit'" ng-submit="saveLogo()" novalidate>
