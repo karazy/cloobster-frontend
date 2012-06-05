@@ -11,7 +11,7 @@
 * 	@constructor
 */
 Cloobster.Profile = function($scope, $http, facebookApi, loginService, $log) {
-	var reader = new FileReader(); //used to handles files
+	// var reader = new FileReader(); //used to handles files
 
 	//indicates if logo form is in view or edit mode
 	$scope.logoFormMode = "view";
@@ -48,14 +48,14 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, $log) {
 	*/
 	$scope.saveLogo = function() {
 		// logoForm
-		var reader = new FileReader();
-		reader.onload = (function(logo) {
-        	return function(e) {
-        		$log.log('filereader onload');
-        	};
-      	})(logo);
+		// var reader = new FileReader();
+		// reader.onload = (function(logo) {
+  //       	return function(e) {
+  //       		$log.log('filereader onload');
+  //       	};
+  //     	})(logo);
 
-      	reader.readAsDataURL(logo);
+  //     	reader.readAsDataURL(logo);
 	};
 
 	$scope.cancelLogo = function() {
@@ -73,12 +73,33 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, $log) {
 			$http.get('/uploads/imagesurl').success(function(data, status) {
 				$log.log('requestFileUploadInformation -> success');
 				$scope.fileUploadUrl = data;
+				initUploadPlugin();
 			})
 			.error(function(data, status) {
 				$log.error('Failed to request file upload information. Status: ' + status);
 			});
 		}
+
 	})();
+
+	function initUploadPlugin() {
+		if(!$scope.fileUploadUrl) {
+			$log.error('initUploadPlugin: No fileUploadUrl set!');
+			return;
+		}
+		$('#logo').fileupload({
+        		dataType: 'json',
+        		url: $scope.fileUploadUrl,
+        		fail: function(e, data) {
+        			$log.error('Upload failed. Reason: '+data.errorThrown);
+        		},
+        		done: function (e, data) {
+            	$.each(data.result, function (index, file) {
+	                $('<p/>').text(file.name).appendTo(document.body);
+    	        });
+       		}
+    	});
+	};
 
 };
 Cloobster.Profile.$inject = ['$scope', '$http', 'facebookApi', 'login', '$log'];
