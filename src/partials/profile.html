@@ -1,17 +1,17 @@
 <h1>Company Profile</h1>
 <div class="content_wrapper row">
 	<div class='span12'>
-		<div ng-switch on="logo_form_mode">
-			<div ng-switch-when="view" ng-class="getEmptyLogoClass()" class="profile-logo" ng-click="editLogo()">
+		<!-- <div ng-switch on="logo_form_mode"> -->
+			<div ng-show="logoFormMode == 'view'" ng-class="getEmptyLogoClass()" class="profile-logo" ng-click="editLogo()">
 			<img ng-show="profile.logo" ng-src="{{profile.logo}}" alt="click to edit" />
 			<div ng-show="!profile.logo" style="">Add +</div>
 			</div>
-			<form class="well form-vertical" name="logoForm" ng-switch-when="edit" ng-submit="saveLogo()" novalidate>
+			<form class="well form-vertical" name="logoForm" ng-show="logoFormMode == 'edit'" ng-submit="saveLogo()" novalidate>
 				<input type="file" name="logo" id="logo"></input>
 				<button ng-click="cancelLogo()" class="btn">Cancel</button>
 				<button type="submit" class="btn btn-primary">Done</button>
 			</form>
-		</div>
+		<!-- </div> -->
 		<div ng-switch on="mode" >		
 			<div ng-switch-when="view">
 

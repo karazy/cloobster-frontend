@@ -14,7 +14,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, $log) {
 	var reader = new FileReader(); //used to handles files
 
 	//indicates if logo form is in view or edit mode
-	$scope.logo_form_mode = "view";
+	$scope.logoFormMode = "view";
 
 	/**
 	* Holds an array of fileUpload Information objects.
@@ -40,7 +40,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, $log) {
 	*
 	*/
 	$scope.editLogo = function() {
-		$scope.logo_form_mode = "edit";
+		$scope.logoFormMode = "edit";
 	};
 
 	/**
@@ -56,6 +56,10 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, $log) {
       	})(logo);
 
       	reader.readAsDataURL(logo);
+	};
+
+	$scope.cancelLogo = function() {
+		$scope.logoFormMode = "view";
 	};
 
 	/**

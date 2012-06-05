@@ -192,7 +192,7 @@ Cloobster.services.factory('config', ['$q','$rootScope', '$log', function($q, $r
 * 
 * 	@author Nils Weiher
 */
-Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log', 'config',
+Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log', 'config', 
 	function($window, $http, $q, $rootScope, $log, configuration) {
 		var loginService,
 			loggedIn = false,
@@ -218,6 +218,10 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 			$window.localStorage['login'] = account.login;
 			$window.localStorage['hash'] = account.passwordHash;
 		}
+		//set http default headers
+		$http.defaults.headers.common.login = account.login;
+		$http.defaults.headers.common.passwordHash = account.passwordHash;
+
 		loginDeferred.resolve(data);
 	}
 
@@ -409,6 +413,10 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 			loggedIn = false;
 			$rootScope.loggedIn = false;
 			account = null;
+
+			delete $http.defaults.headers.common.login;
+			delete $http.defaults.headers.common.passwordHash;
+
 			if($window.localStorage['login']) {
 				$window.localStorage.removeItem('login');
 				$window.localStorage.removeItem('hash');
