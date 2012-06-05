@@ -130,7 +130,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 		});
 	};
 
-	$scope.$watch(loggedIn, function(newValue, oldValue) {
+	$scope.$watch('loggedIn', function(newValue, oldValue) {
 		if(newValue == true) {
 			requestFileUploadInformation();
 			loadProfileData();
