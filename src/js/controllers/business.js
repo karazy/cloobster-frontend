@@ -23,7 +23,7 @@ Cloobster.Business = function($scope, $http, loginService, Business, $log) {
 	$scope.loadBusinesses = function() {
 		var account;
 
-		if(!loggedIn) {
+		if(!$scope.loggedIn) {
 			$log.log('Not logged in! Failed to load business.');
 			return;
 		}
@@ -31,7 +31,7 @@ Cloobster.Business = function($scope, $http, loginService, Business, $log) {
 		account =  loginService.getAccount();
 
 		$log.log('loadBusinesses for ' + account.id);
-		$scope.businessResource = Business.buildResource(account.id).get();
+		$scope.businessResource = Business.buildResource(account.id);
 		//load businesses
 		$scope.businesses = $scope.businessResource.query();
 	};
@@ -59,11 +59,11 @@ Cloobster.Business = function($scope, $http, loginService, Business, $log) {
 	 */
 	$scope.$watch('loggedIn', function(newValue, oldValue) {
 		if(newValue == true) {
-			loadBusinesses();
+			$scope.loadBusinesses();
 		}
 	});
 
 
 };
 
-Cloobster.Registration.$inject = ['$scope', '$http', 'loginService', 'Business', '$log'];
+Cloobster.Business.$inject = ['$scope', '$http', 'login', 'Business', '$log'];

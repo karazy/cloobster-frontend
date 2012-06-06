@@ -53,7 +53,7 @@ Cloobster.services.factory('Business', function($resource) {
 	*/
 	var Business = {
 		buildResource: function(accountId) {
-			$resource('/b/businesses/:id',
+			return $resource('/b/businesses/:id',
 					//params
 					{
 							'id': '@id'
