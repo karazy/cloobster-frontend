@@ -2,9 +2,13 @@
 <div class="content_wrapper">
 	<div class="row-fluid">
 		<div class="span6">
-			<div ng-show="logoFormMode == 'view'" ng-class="getEmptyLogoClass()" ng-click="editLogo()">
-			<img ng-show="company.images.logo.url" ng-src="{{company.images.logo.url}}" alt="click to edit" />
-			<button ng-show="!company.images.logo" class="btn">Add Logo</button>
+			<h2>Logo</h2>
+			<div ng-show="logoFormMode == 'view'" >
+				<div ng-show="company.images.logo.url">
+					<img  ng-src="{{company.images.logo.url}}" ng-click="editLogo()" alt="click to edit" />
+					<p>Click image to edit</p>
+				</div>
+				<button ng-show="!company.images.logo" ng-click="editLogo()" class="btn">Add Logo</button>
 			</div>
 			<form class="well form-vertical" name="logoForm" ng-show="logoFormMode == 'edit'" ng-submit="saveLogo()" novalidate>
 				<img ng-show="logoResource.url" ng-src="{{logoResource.url}}"/>
@@ -16,6 +20,7 @@
 	</div>
 	<div class="row-fluid">
 		<div class="span6">
+			<h2>Description</h2>
 			<div ng-show="profileFormMode == 'view'">
 				<p>Slogan: {{company.slogan}}</p>
 				<p>Description: {{company.description}}</p>

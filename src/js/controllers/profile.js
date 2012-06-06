@@ -69,7 +69,9 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 				$scope.company.images.logo = {
 					url: $scope.logoResource.url,
 					blobKey: $scope.logoResource.blobkey
-				}
+				};
+
+				$scope.logoResource = null;
 			});
 		}
 	};
@@ -81,7 +83,16 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 		$scope.logoFormMode = "view";
 		$scope.logoUploadFinished = false;
 
-		//$scope.logoResource.$delete();
+		//delete image from images bucket
+		if($scope.logoResource && $scope.logoResource.blobkey) {
+			$http.delete('/uploads/images/' + $scope.logoResource.blobkey)
+			.success(function() {
+				$scope.logoResource = null;
+			})
+			.failure(function() {
+				//handle error
+			});
+		}
 	};
 
 	//<-- end logo related actions -->
@@ -98,7 +109,19 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 
 	//<-- end logo related actions -->
 
+
+	/** Watches loggedIn status and initializes controller when status changes to true.
+	 *
+	 */
+	$scope.$watch('loggedIn', function(newValue, oldValue) {
+		if(newValue == true) {
+			requestFileUploadInformation();
+			loadProfileData();
+		}
+	});
+
 	/**
+	* @private
 	* Requests information from server needed to upload files.
 	*/
 	function requestFileUploadInformation() {
@@ -117,6 +140,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	};
 
 	/**
+	* @private
 	* Loads profile data if user is logged in.
 	*/
 	function loadProfileData() {
@@ -130,14 +154,8 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 		});
 	};
 
-	$scope.$watch('loggedIn', function(newValue, oldValue) {
-		if(newValue == true) {
-			requestFileUploadInformation();
-			loadProfileData();
-		}
-	});
-
 	/**
+	* @private
 	* Initializes the upload plugin for all upload fields.
 	* It needs a previously optained fileUpeloadUrl fot setup.
 	*/

@@ -53,7 +53,7 @@ Cloobster.services.factory('Company', function($resource) {
 		*/
 		var Company = {
 			/**
-			*	
+			*	Returns a company resource.
 			*/
 			buildResource: function() {
 				return $resource('/b/companies/:id', {
@@ -61,7 +61,7 @@ Cloobster.services.factory('Company', function($resource) {
 				});	
 			},
 			/**
-			*	
+			*	Returns a company image resource used to save, update images assigned to a business.
 			*/
 			buildImageResource: function(companyId) {
 				return $resource('/b/companies/:companyId/images/:id', {
