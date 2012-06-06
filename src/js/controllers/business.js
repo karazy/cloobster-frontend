@@ -10,7 +10,7 @@
 * 	View and manage businesses such as restaurants.
 * 	@constructor
 */
-Cloobster.Business = function($scope, $http, loginService, Business, $log) {
+Cloobster.Business = function($scope, $http, $routeParams, loginService, Business, $log) {
 
 	/** Resource for CRUD on businesses. */	
 	$scope.businessResource = null;
@@ -60,10 +60,23 @@ Cloobster.Business = function($scope, $http, loginService, Business, $log) {
 	$scope.$watch('loggedIn', function(newValue, oldValue) {
 		if(newValue == true) {
 			$scope.loadBusinesses();
+
+			//load business details
+			if($routeParams && $routeParams.id) {
+				$scope.loadBusiness($routeParams.id);
+			}
 		}
 	});
+
+	/**
+	*
+	*/
+	(function init() {
+
+
+	})();
 
 
 };
 
-Cloobster.Business.$inject = ['$scope', '$http', 'login', 'Business', '$log'];
+Cloobster.Business.$inject = ['$scope', '$http','$routeParams', 'login', 'Business', '$log'];
