@@ -149,8 +149,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	* Loads profile data if user is logged in.
 	*/
 	function loadProfileData() {
-		var account = loginService.getAccount(),
-			logo;
+		var account = loginService.getAccount();
 
 		$scope.company = Company.buildResource().get({
 			id: account.companyId
@@ -158,7 +157,6 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 			ImageResource = Company.buildImageResource($scope.company.id);
 			//if no images are included init with empty object
 			$scope.company.images = $scope.company.images || {};
-
 		});
 	};
 
@@ -172,7 +170,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 			$log.error('initUploadPlugin: No fileUploadUrl set!');
 			return;
 		}
-
+		//selector, upload url, imageresource
 		//set up filedupload for logo
 		jQuery('#logo').fileupload({
     		dataType: 'json',

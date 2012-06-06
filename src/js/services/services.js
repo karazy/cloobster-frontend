@@ -41,6 +41,56 @@ Cloobster.services.factory('Account', function($resource) {
 
 /** 
 * 	@constructor
+* 	Factory function that creates the 'Business' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Frederik Reifschneider
+*/
+Cloobster.services.factory('Business', function($resource) {
+	/**
+	*	@name Cloobster.services.Business
+	*	
+	*/
+	var Business = {
+		buildResource: function(accountId) {
+			$resource('/b/businesses/:id',
+					//params
+					{
+							'id': '@id'
+					},
+					//Custom actions can be called with $'methodname' on the Business.
+					{
+						/**
+						* @name Cloobster.services.Business#$query
+						* @override
+						* Overrides default query method by adding account as default parameter
+						*/
+						'query':  {method:'GET', params: {'account' : accountId}, isArray:true},
+						/**
+						*	@name Cloobster.services.Business#$clone
+						* 	Called to register a new business account for the Cloobster service.
+						*	@params {Object} Object containing all the properties of the Business to be created.
+						*/
+						'clone': { method: 'POST'}
+					}
+			)
+		},
+		/**
+		*	Returns a business image resource used to save, update images assigned to a business.
+		*/
+		buildImageResource: function(businessId) {
+			return $resource('/b/businesses/:businessId/images/:id', {
+				'businessId': businessId,
+				'id': '@id'
+			});
+		}
+	}
+
+	return Business;
+});
+
+/** 
+* 	@constructor
 * 	Factory function that creates the 'Company' resource service.
 * 	See ngResource for further information on resource objects.
 * 
@@ -61,7 +111,7 @@ Cloobster.services.factory('Company', function($resource) {
 				});	
 			},
 			/**
-			*	Returns a company image resource used to save, update images assigned to a business.
+			*	Returns a company image resource used to save, update images assigned to a company profile.
 			*/
 			buildImageResource: function(companyId) {
 				return $resource('/b/companies/:companyId/images/:id', {
