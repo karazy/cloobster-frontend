@@ -13,7 +13,7 @@
 			<form class="well form-vertical" name="logoForm" ng-show="logoFormMode == 'edit'" ng-submit="saveLogo()" novalidate>
 				<img ng-show="logoResource.url" ng-src="{{logoResource.url}}"/>
 				<input type="file" name="logo" id="logo"></input>
-				<button ng-click="cancelLogo()" class="btn">Cancel</button>
+				<button type="button" ng-click="cancelLogo()" class="btn">Cancel</button>
 				<button type="submit" ng-disabled="!logoUploadFinished" class="btn btn-primary">Done</button>
 			</form>
 		</div>

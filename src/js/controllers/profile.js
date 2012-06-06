@@ -31,6 +31,11 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	//resource to handle CRUD for logo
 	$scope.logoResource = null;
 
+	// error flag
+	$scope.error = false;
+	// error message
+	$scope.errorMessage = "";
+
 	/**
 	* Holds an array of fileUpload Information objects.
 	* e.g.
@@ -84,12 +89,12 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 		$scope.logoUploadFinished = false;
 
 		//delete image from images bucket
-		if($scope.logoResource && $scope.logoResource.blobkey) {
-			$http.delete('/uploads/images/' + $scope.logoResource.blobkey)
+		if($scope.logoResource && $scope.logoResource.blobKey) {
+			$http.delete('/uploads/images/' + $scope.logoResource.blobKey)
 			.success(function() {
 				$scope.logoResource = null;
 			})
-			.failure(function() {
+			.error(function() {
 				//handle error
 			});
 		}
@@ -105,7 +110,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 
 	$scope.cancelProfile = function() {
 		$scope.profileFormMode = "view";
-	};	
+	};
 
 	//<-- end logo related actions -->
 
@@ -144,13 +149,16 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	* Loads profile data if user is logged in.
 	*/
 	function loadProfileData() {
-		var account = loginService.getAccount();
+		var account = loginService.getAccount(),
+			logo;
 
 		$scope.company = Company.buildResource().get({
 			id: account.companyId
 		},function() {
 			ImageResource = Company.buildImageResource($scope.company.id);
-			$scope.company.images = {};
+			//if no images are included init with empty object
+			$scope.company.images = $scope.company.images || {};
+
 		});
 	};
 
@@ -168,13 +176,20 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 		//set up filedupload for logo
 		jQuery('#logo').fileupload({
     		dataType: 'json',
+    		// acceptFileType: /(\.|\/)(gif|jpe?g|png)$/i,
     		url: $scope.fileUploadUrl,
     		fail: function(e, data) {
     			$log.error('Upload failed. Reason: '+data.errorThrown);
     			$scope.$apply('logoUploadFinished = false');
+    			if(data.textStatus == 400) {
+    				//token is invalid request new one
+    				// requestFileUploadInformation();
+    				// $scope.error = true;
+    				// $scope.errorMessage = "Upload failed. Please retry."
+    			}
     		},
     		done: function (e, data) {
-    			//data properties: name, blobkey, url
+    			//data properties: name, blobKey, url
     			var images = data.result;
     			//create logo resource object
     			$scope.logoResource = new ImageResource({
