@@ -17,6 +17,9 @@ Cloobster.Business = function($scope, $http, $routeParams, loginService, Busines
 	$scope.businesses = null;
 	$scope.activeBusiness = null;
 
+	/** When true user can edit the business profile. */
+	$scope.editMode = false;
+
 	/**
 	* Returns all businesses
 	*/
@@ -53,6 +56,13 @@ Cloobster.Business = function($scope, $http, $routeParams, loginService, Busines
 	$scope.loadBusiness = function(id) {
 		$scope.activeBusiness = $scope.businessResource.get({'id' : id});
 	};
+
+	/**
+	* Switches between view and edit mode.
+	*/
+	$scope.toggleEditMode = function() {
+		$scope.editMode = !$scope.editMode;
+	}
 
 	/** Watches loggedIn status and initializes controller when status changes to true.
 	 *

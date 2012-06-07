@@ -1,4 +1,38 @@
-<h1>{{activeBusiness.name}}</h1>
-<div class="content_wrapper">
-	<p>{{activeBusiness.description}}</p>
+<h1 style="float:left; margin right: 50px;">{{activeBusiness.name}}</h1>
+<button type="button" ng-click="toggleEditMode()">Edit Profile</button> 
+<div style="clear:both;"></div>
+<div class="content_wrapper well row">
+	<div ng-hide="editMode span12">
+		<div class="row">
+			<div class="image-box span6">
+			</div>
+		</div>
+		<div class="data-element">
+			<div class="key">Description</div>
+			<div class="value">{{activeBusiness.description}}</div>
+		</div>
+		<div class="data-element">
+			<div class="key">Slogan</div>
+			<div class="value">{{activeBusiness.slogan}}</div>
+		</div>
+		<div class="data-element">
+			<div class="key">Address</div>
+			<div class="value">{{activeBusiness.address}}</div>
+		</div>
+		<div class="data-element">
+			<div class="key">City</div>
+			<div class="value">{{activeBusiness.city}}</div>
+		</div>
+		<div class="data-element">
+			<div class="key">Postcode</div>
+			<div class="value">{{activeBusiness.postcode}}</div>
+		</div>
+		<div class="data-element">
+			<div class="key">Phone</div>
+			<div class="value">{{activeBusiness.phone}}</div>
+		</div>
+	</div>
+	<div ng-show="editMode">
+		
+	</div>
 </div>
