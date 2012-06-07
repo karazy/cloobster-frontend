@@ -64,6 +64,18 @@ Cloobster.Business = function($scope, $http, $routeParams, loginService, Busines
 		$scope.editMode = !$scope.editMode;
 	}
 
+	$scope.getEditModeClass = function() {
+		return ($scope.editMode) ? "edit" : "";
+	}
+
+	$scope.editSimpleData = function(property) {
+		if(!$scope.editMode) {
+			return;
+		}
+		
+		jQuery('#myModal').modal('toggle');
+	}
+
 	/** Watches loggedIn status and initializes controller when status changes to true.
 	 *
 	 */

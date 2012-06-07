@@ -1,15 +1,28 @@
 <h1 style="float:left; margin right: 50px;">{{activeBusiness.name}}</h1>
 <button type="button" ng-click="toggleEditMode()">Edit Profile</button> 
 <div style="clear:both;"></div>
-<div class="content_wrapper well row">
-	<div ng-hide="editMode span12">
-		<div class="row">
+<div class="content_wrapper well row-fluid">
+	<div  class="span12">
+		<div class="row-fluid">
 			<div class="image-box span6">
 			</div>
 		</div>
-		<div class="data-element">
+		<div class="data-element" ng-class="getEditModeClass()" ng-click="editSimpleData('description')">
 			<div class="key">Description</div>
 			<div class="value">{{activeBusiness.description}}</div>
+		</div>
+		<div class="modal hide" id="myModal">
+		  <div class="modal-header">
+		    <button type="button" class="close" data-dismiss="modal">×</button>
+		    <h3>Description</h3>
+		  </div>
+		  <div class="modal-body">
+		    <input type="text"></input>
+		  </div>
+		  <div class="modal-footer">
+		    <a href="#" class="btn" data-dismiss="modal">Close</a>
+		    <a href="#" class="btn btn-primary">Save</a>
+		  </div>
 		</div>
 		<div class="data-element">
 			<div class="key">Slogan</div>
@@ -32,7 +45,7 @@
 			<div class="value">{{activeBusiness.phone}}</div>
 		</div>
 	</div>
-	<div ng-show="editMode">
+	<div  class="span12">
 		
 	</div>
 </div>

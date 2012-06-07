@@ -54,6 +54,10 @@
   text-align: left;
 }
 
+.data-element.edit:hover {
+    background-color: lightblue;
+}
+
 .data-element .key {
   font-size: 15px;
   font-weight: normal;
