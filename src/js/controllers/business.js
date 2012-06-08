@@ -12,11 +12,16 @@
 */
 Cloobster.Business = function($scope, $http, $routeParams, loginService, Business, $log) {
 
+	/** Holds the Id of the active modal dialog. */
+	var activeModalDialog = "";
+
 	/** Resource for CRUD on businesses. */	
 	$scope.businessResource = null;
 	$scope.businesses = null;
+	/** The currently selected business. */
 	$scope.activeBusiness = null;
-
+	/** Property which is currently edited. */
+	$scope.activeProperty = null;
 	/** When true user can edit the business profile. */
 	$scope.editMode = false;
 
@@ -68,12 +73,49 @@ Cloobster.Business = function($scope, $http, $routeParams, loginService, Busines
 		return ($scope.editMode) ? "edit" : "";
 	}
 
-	$scope.editSimpleData = function(property) {
+	$scope.editSimpleData = function(title, value, property, inputType) {
+		var modalDialog = "";
+
 		if(!$scope.editMode) {
 			return;
 		}
-		
-		jQuery('#myModal').modal('toggle');
+
+		$scope.activeProperty = {
+			'title' : title,
+			'value' : value,
+			'property' : property
+		};
+
+		switch(inputType) {
+			case 'text': modalDialog = '#textModal'; break;
+			case 'textarea': modalDialog = '#textareaModal'; break;
+			default: modalDialog = '#textModal'; break;
+		};
+
+		activeModalDialog = modalDialog;
+
+		$(modalDialog).on('hide', function () {
+  			$scope.cancelProperty();
+		});
+
+		jQuery(modalDialog).modal('toggle');
+	}
+
+	/**
+	* Save edited property.
+	*/
+	$scope.saveProperty = function() {
+		var property = $scope.activeProperty.property;
+		if($scope.activeBusiness[property]) {
+			$scope.activeBusiness[property] = $scope.activeProperty.value;
+			$scope.activeBusiness.$update();
+
+			//$(activeModalDialog).modal('hide');
+		}
+	};
+
+	$scope.cancelProperty = function() {
+		$scope.activeProperty = null;
 	}
 
 	/** Watches loggedIn status and initializes controller when status changes to true.

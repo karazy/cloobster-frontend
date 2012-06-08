@@ -71,7 +71,12 @@ Cloobster.services.factory('Business', function($resource) {
 						* 	Called to register a new business account for the Cloobster service.
 						*	@params {Object} Object containing all the properties of the Business to be created.
 						*/
-						'clone': { method: 'POST'}
+						'clone': { method: 'POST'},
+						/*
+						* @name Cloobster.services.Business#$update
+						* Like a save but uses PUT instead of POST. Feels more restful.
+						*/
+						'update': { method: 'PUT'}
 					}
 			)
 		},
