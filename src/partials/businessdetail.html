@@ -13,10 +13,10 @@
 		<div class="row-fluid">
 			<div class="image-box span6">
 				<div ng-show="activeBusiness.images.logo.url">
-					<img  ng-src="{{activeBusiness.images.logo.url}}" ng-click="editSimpleData('Logo',activeBusiness.images.logo, 'images.logo', 'file')" alt="click to edit" />
+					<img  ng-src="{{activeBusiness.images.logo.url}}" ng-click="editImageData('Logo',activeBusiness.images.logo.url, 'logo', 'file')" alt="click to edit" />
 					<p>Click image to edit</p>
 				</div>
-				<button ng-show="!activeBusiness.images.logo" ng-click="editImageData('Logo',activeBusiness.images.logo, 'images.logo')" class="btn">Add Logo</button>
+				<button ng-show="!activeBusiness.images.logo" ng-click="editImageData('Logo',activeBusiness.images.logo.url, 'logo')" class="btn">Add Logo</button>
 			</div>
 		</div>
 		<div class="data-element" ng-class="getEditModeClass()" ng-click="editSimpleData('Description',activeBusiness.description, 'description', 'textarea')">
@@ -86,9 +86,9 @@
     <button type="button" class="close" data-dismiss="modal">×</button>
     <h3>{{activeProperty.title}}</h3>
   </div>
-  <form novalidate ng-submit="saveProperty()">
+  <form novalidate ng-submit="saveImage()">
 	  <div class="modal-body">
-	    	<input type="file" id="imageUpload" ng-model="activeProperty.value"></textarea>
+	    	<input type="file" id="imageUpload"></textarea>
 	  </div>
 	  <div class="modal-footer">
 	    <button type="button" class="btn" data-dismiss="modal">Close</button>

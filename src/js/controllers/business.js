@@ -12,8 +12,9 @@
 */
 Cloobster.Business = function($scope, $http, $routeParams, loginService, uploadService, Business, $log) {
 
-	/** Holds the Id of the active modal dialog. */
+		/** Holds the Id of the active modal dialog. */
 	var activeModalDialog = "",
+		/** Resource used for the currently edited image. */
 		imageResource;
 
 	/** Resource for CRUD on businesses. */	
@@ -78,7 +79,7 @@ Cloobster.Business = function($scope, $http, $routeParams, loginService, uploadS
 			imageResource =	Business.buildImageResource($scope.activeBusiness.id);
 			//if no images are included init with empty object
 			$scope.activeBusiness.images = $scope.activeBusiness.images || {};
-			
+
 			$scope.activeFileUpload = uploadService.getFileUploadObject('fileModal', imageResource);
 		});
 	};
@@ -134,6 +135,8 @@ Cloobster.Business = function($scope, $http, $routeParams, loginService, uploadS
 			'property' : property
 		};
 
+		activeModalDialog = "#fileModal";
+
 		jQuery('#fileModal').modal('toggle');
 	}
 
@@ -149,6 +152,21 @@ Cloobster.Business = function($scope, $http, $routeParams, loginService, uploadS
 			$(activeModalDialog).modal('hide');
 		}
 	};
+
+	/**
+	* Save last edited image in images property.
+	*/
+	$scope.saveImage = function() {
+		var property = $scope.activeProperty.property;
+		
+		$scope.activeBusiness.images[property] = {
+				url: imageResource.url,
+				blobKey: imageResource.blobkey
+		};
+
+		$scope.activeBusiness.$update();
+		$(activeModalDialog).modal('hide');
+	}
 
 	$scope.cancelProperty = function() {
 		$scope.activeProperty = null;

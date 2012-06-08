@@ -529,9 +529,11 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 		var uploadService = null,
 			fileUploadUrl;
 
-		(function init() {
-			requestFileUploadInformation();			
-		})();
+		$rootScope.$watch('loggedIn', function(newValue, oldValue) { 
+			if(newValue == true) {
+				requestFileUploadInformation();
+			}			
+		});
 
 		/**
 		* @private
@@ -557,10 +559,10 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 		* It needs a previously optained fileUpeloadUrl for setup.
 		*/
 		function initUploadPlugin(fileInput, resource, statusObject) {
-			if(!fileUploadUrl) {
-				$log.error('initUploadPlugin: No fileUploadUrl set!');
-				return;
-			}
+			// if(!fileUploadUrl) {
+			// 	$log.error('initUploadPlugin: No fileUploadUrl set!');
+			// 	return;
+			// }
 			//selector, upload url, imageresource
 			//set up filedupload for logo
 			jQuery('#'+fileInput).fileupload({
@@ -597,10 +599,11 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 		uploadService = {
 
 			/**
-			* Returns a file upload object.
+			* Initializes a fileupload.
 			* @param fileInput
-			*
+			*	The html file input that should be configured.
 			* @param resource
+			*	
 			*
 			*/
 			getFileUploadObject : function(fileInput, resource) {
