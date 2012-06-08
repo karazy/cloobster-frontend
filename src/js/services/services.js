@@ -516,3 +516,105 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 	}
 	return loginService;
 }]);
+
+/** 
+* 	@constructor
+* 	Factory function for the 'upload' service.
+* 	Returns the service.
+* 
+* 	@author Frederik Reifschneider
+*/
+Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log', 'config', 
+	function($window, $http, $q, $rootScope, $log, config) {
+		var uploadService = null,
+			fileUploadUrl;
+
+		(function init() {
+			requestFileUploadInformation();			
+		})();
+
+		/**
+		* @private
+		* Requests information from server needed to upload files.
+		*/
+		function requestFileUploadInformation() {
+			$log.log('requestFileUploadInformation');
+
+			if(!fileUploadUrl) {
+				$http.get('/uploads/imagesurl').success(function(data, status) {
+					$log.log('requestFileUploadInformation -> success');
+					fileUploadUrl = data;
+				})
+				.error(function(data, status) {
+					$log.error('Failed to request file upload information. Status: ' + status);
+				});
+			}
+		};
+
+		/**
+		* @private
+		* Initializes the upload plugin for a concrete file input element fields.
+		* It needs a previously optained fileUpeloadUrl for setup.
+		*/
+		function initUploadPlugin(fileInput, resource, statusObject) {
+			if(!fileUploadUrl) {
+				$log.error('initUploadPlugin: No fileUploadUrl set!');
+				return;
+			}
+			//selector, upload url, imageresource
+			//set up filedupload for logo
+			jQuery('#'+fileInput).fileupload({
+	    		dataType: 'json',
+	    		// acceptFileType: /(\.|\/)(gif|jpe?g|png)$/i,
+	    		url: fileUploadUrl,
+	    		fail: function(e, data) {
+	    			$log.error('Upload failed. Reason: '+data.errorThrown);
+	    			// $scope.$apply('logoUploadFinished = false');
+	    			
+	    			statusObject.status = false;
+
+	    			if(data.textStatus == 400) {
+	    				//token is invalid request new one
+	    				// requestFileUploadInformation();
+	    				// $scope.error = true;
+	    				// $scope.errorMessage = "Upload failed. Please retry."
+	    			}
+	    		},
+	    		done: function (e, data) {
+	    			//data properties: name, blobKey, url
+	    			var images = data.result;
+	    			//create logo resource object
+	    			resource.blobKey = images[0].blobKey;
+	    			resource.url = images[0].url;
+
+	    			statusObject.status = true;
+	    			// $scope.$apply('logoUploadFinished = true');
+	       		}
+			});
+
+		};
+
+		uploadService = {
+
+			/**
+			* Returns a file upload object.
+			* @param fileInput
+			*
+			* @param resource
+			*
+			*/
+			getFileUploadObject : function(fileInput, resource) {
+				var status = {
+					finished: false
+				};
+
+				initUploadPlugin(fileInput, resource, status);
+				return status;
+
+			}
+
+
+		};
+
+		return uploadService;
+}]);

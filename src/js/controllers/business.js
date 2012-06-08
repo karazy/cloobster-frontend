@@ -10,10 +10,11 @@
 * 	View and manage businesses such as restaurants.
 * 	@constructor
 */
-Cloobster.Business = function($scope, $http, $routeParams, loginService, Business, $log) {
+Cloobster.Business = function($scope, $http, $routeParams, loginService, uploadService, Business, $log) {
 
 	/** Holds the Id of the active modal dialog. */
-	var activeModalDialog = "";
+	var activeModalDialog = "",
+		imageResource;
 
 	/** Resource for CRUD on businesses. */	
 	$scope.businessResource = null;
@@ -24,6 +25,20 @@ Cloobster.Business = function($scope, $http, $routeParams, loginService, Busines
 	$scope.activeProperty = null;
 	/** When true user can edit the business profile. */
 	$scope.editMode = false;
+	$scope.activeFileUpload = null;
+
+	function checkNested(obj, properties) {
+		  var args = properties.split('.');
+	      // obj = args.shift();
+
+	  for (var i = 0; i < args.length; i++) {
+	    if (!obj.hasOwnProperty(args[i]) && obj[args[i]]) {
+	      return false;
+	    }
+	    obj = obj[args[i]];
+	  }
+	  return true;
+	}
 
 	/**
 	* Returns all businesses
@@ -59,7 +74,13 @@ Cloobster.Business = function($scope, $http, $routeParams, loginService, Busines
 	* 	business to load
 	*/
 	$scope.loadBusiness = function(id) {
-		$scope.activeBusiness = $scope.businessResource.get({'id' : id});
+		$scope.activeBusiness = $scope.businessResource.get({'id' : id}, function() {
+			imageResource =	Business.buildImageResource($scope.activeBusiness.id);
+			//if no images are included init with empty object
+			$scope.activeBusiness.images = $scope.activeBusiness.images || {};
+			
+			$scope.activeFileUpload = uploadService.getFileUploadObject('fileModal', imageResource);
+		});
 	};
 
 	/**
@@ -89,6 +110,7 @@ Cloobster.Business = function($scope, $http, $routeParams, loginService, Busines
 		switch(inputType) {
 			case 'text': modalDialog = '#textModal'; break;
 			case 'textarea': modalDialog = '#textareaModal'; break;
+			case 'file': modalDialog = '#fileModal'; break;
 			default: modalDialog = '#textModal'; break;
 		};
 
@@ -99,6 +121,20 @@ Cloobster.Business = function($scope, $http, $routeParams, loginService, Busines
 		});
 
 		jQuery(modalDialog).modal('toggle');
+	};
+
+	$scope.editImageData = function(title, value, property) {
+		if(!$scope.editMode) {
+			return;
+		}
+
+		$scope.activeProperty = {
+			'title' : title,
+			'value' : value,
+			'property' : property
+		};
+
+		jQuery('#fileModal').modal('toggle');
 	}
 
 	/**
@@ -106,11 +142,11 @@ Cloobster.Business = function($scope, $http, $routeParams, loginService, Busines
 	*/
 	$scope.saveProperty = function() {
 		var property = $scope.activeProperty.property;
-		if($scope.activeBusiness[property]) {
+		if(checkNested($scope.activeBusiness, property)) {
 			$scope.activeBusiness[property] = $scope.activeProperty.value;
 			$scope.activeBusiness.$update();
 
-			//$(activeModalDialog).modal('hide');
+			$(activeModalDialog).modal('hide');
 		}
 	};
 
@@ -129,18 +165,12 @@ Cloobster.Business = function($scope, $http, $routeParams, loginService, Busines
 			if($routeParams && $routeParams.id) {
 				$scope.loadBusiness($routeParams.id);
 			}
+
+
 		}
 	});
-
-	/**
-	*
-	*/
-	(function init() {
-
-
-	})();
 
 
 };
 
-Cloobster.Business.$inject = ['$scope', '$http','$routeParams', 'login', 'Business', '$log'];
+Cloobster.Business.$inject = ['$scope', '$http','$routeParams', 'login', 'upload', 'Business', '$log'];
