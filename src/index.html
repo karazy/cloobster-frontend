@@ -84,10 +84,10 @@
         <div class="nav-collapse">
           <ul class="nav">
             <!-- class="active" -->
-            <li><a href="#/" ng-class="getActive('/')">Home</a></li>
-            <li><a ng-show="loggedIn" href="#/businesses" ng-class="getActive('/businesses')">My Restaurants</a></li>
-            <li><a href="#/about" ng-class="getActive('/about')">About</a></li>
-            <li><a href="#/contact" ng-class="getActive('/contact')">Contact</a></li>
+            <li ng-class="getActive('/')"><a href="#/">Home</a></li>
+            <li ng-show="loggedIn" ng-class="getActive('/businesses')"><a href="#/businesses">My Restaurants</a></li>
+            <li ng-class="getActive('/about')"><a href="#/about">About</a></li>
+            <li ng-class="getActive('/contact')"><a href="#/contact">Contact</a></li>
             <li ng-hide="loggedIn" ng-class="getActive('/registration')"><a href="#/registration">Registration</a></li>
           </ul>
         </div><!--/.nav-collapse -->
