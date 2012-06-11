@@ -10,6 +10,7 @@ Cloobster.module = angular.module('Cloobster', ['Cloobster.services']).
     $routeProvider.when('/profile', {template: 'partials/profile.html', controller: Cloobster.Profile});
     $routeProvider.when('/account/confirm/:emailToken', {template: 'partials/confirmemail.html', controller: Cloobster.Registration});
     $routeProvider.when('/businesses', {template: 'partials/businesses.html', controller: Cloobster.Business});
+    $routeProvider.when('/businesses/new', {template: 'partials/businesses.html', controller: Cloobster.Business});
     $routeProvider.when('/businesses/:id', {template: 'partials/businessdetail.html', controller: Cloobster.Business});
     // $routeProvider.when('/', {template: 'partials/login.html', controller: Cloobster.Login});
     $routeProvider.otherwise({redirectTo: '/'});

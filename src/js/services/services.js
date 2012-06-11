@@ -21,19 +21,19 @@ Cloobster.services.factory('Account', function($resource) {
 	*	
 	*/
 	var Account = $resource('/b/accounts/:id',
-		//params
-		{
+			//params
+			{
 
-		},
-		//Custom actions can be called with $'methodname' on the Account.
-		{
-			/**
-			*	@name Cloobster.services.Account#$register
-			* 	Called to register a new business account for the Cloobster service.
-			*	@params {Object} Object containing all the properties of the Account and Company to be created.
-			*/
-			register: { method: 'POST' }
-		}
+			},
+			//Custom actions can be called with $'methodname' on the Account.
+			{
+				/**
+				*	@name Cloobster.services.Account#$register
+				* 	Called to register a new business account for the Cloobster service.
+				*	@params {Object} Object containing all the properties of the Account and Company to be created.
+				*/
+				register: { method: 'POST' }
+			}
 		);
 
 	return Account;

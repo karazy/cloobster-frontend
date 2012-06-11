@@ -17,7 +17,9 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		/** Template resource used to create concrete image resources. */
 		imageResource,
 		/** Active image resource. */
-		activeImage;
+		activeImage,
+		/** Id of business to delete. */
+		businessDeleteId;
 
 	/** Resource for CRUD on businesses. */	
 	$scope.businessResource = null;
@@ -55,12 +57,25 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	};
 
 	/**
+	* Display the delete business modal dialog.
+	* @param business
+	*	Business to show delete dialog for.
+	*/
+	$scope.showDeleteDialog = function(business) {
+		$scope.activeBusiness = business; 
+		jQuery("#deleteModal").modal('show');
+	};
+
+	/**
 	* Deletes a business.
 	* @param id
 	* 	business to delete
 	*/
 	$scope.deleteBusiness = function(id) {
 		$scope.businessResource.delete({'id' : id});
+
+		//hide delete dialog
+		jQuery("#deleteModal").modal('hide');
 	};
 
 	/**
@@ -82,7 +97,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	* Show/hide new business form.
 	*/
 	$scope.toggleNewBusiness = function() {
-		$scope.showNewBusinessForm = !$scope.showNewBusinessForm;
+		$location.url("/businesses/new");
+		// $scope.showNewBusinessForm = !$scope.showNewBusinessForm;
 	};
 
 	/**
@@ -91,24 +107,38 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	*	Name for the new business
 	*/
 	$scope.addNewBusiness = function() {
+		var fields = ['name', 'city', 'address', 'postcode', 'phone', 'description'],
+			isInvalid = false;
 
 		if($scope.newBusinessForm.$valid) {
 			$scope.newBusinessEntity = new $scope.businessResource({
-			'name' : $scope.newBusinessForm.name.$modelValue,
-			'city' : $scope.newBusinessForm.city.$modelValue,
-			'address' : $scope.newBusinessForm.address.$modelValue,
-			'postcode' : $scope.newBusinessForm.postcode.$modelValue,			
-			'phone' : $scope.newBusinessForm.phone.$modelValue,
-			'description' : $scope.newBusinessForm.description.$modelValue
-		});
+				'name' : $scope.newBusiness.name,
+				'city' : $scope.newBusiness.city,
+				'address' : $scope.newBusiness.address,
+				'postcode' : $scope.newBusiness.postcode,			
+				'phone' : $scope.newBusiness.phone,
+				'description' : $scope.newBusiness.description
+			});
 
-		$scope.newBusinessEntity.$save(function() {
-			//refresh business list upon success
-			$scope.loadBusinesses();
-		});
+			$scope.newBusinessEntity.$save(function() {
+				//refresh business list upon success
+				$scope.loadBusinesses();
+			});
 
-		$scope.closeNewBusinessForm();
-		
+			$scope.closeNewBusinessForm();			
+		} else {
+			//mark form as dirty to show validation errors
+			jQuery.each(fields, function(index, value) {
+				if($scope.newBusinessForm[value] && !$scope.newBusinessForm[value].invalid) {
+					//mark proeprty as dirty to display error messages
+					$scope.newBusinessForm[value].$dirty = true;
+					isInvalid = true;
+				}
+
+				if(isInvalid) {
+					$scope.newBusinessForm.$setDirty();
+				}
+			})			
 		}
 	};
 
@@ -118,6 +148,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.closeNewBusinessForm = function() {
 		$scope.toggleNewBusiness();
 		$scope.newBusiness = {};
+		// $scope.newBusinessForm.$setDirty(false);
+		$location.url("/businesses");
 	}
 
 	/**
@@ -285,6 +317,11 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			if($routeParams && $routeParams.id) {
 				$scope.loadBusiness($routeParams.id);
 			}
+
+			if($location.path() == "/businesses/new") {
+				$scope.showNewBusinessForm = true;
+			}
+
 		} else if(newValue == false) {
 			$location.url('/');
 		}

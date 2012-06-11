@@ -2,7 +2,7 @@
 'use strict';
 
 /**
-* 	@name Cloobster.PRofile 
+* 	@name Cloobster.Profile 
 *	@requires facebookApi
 *	@requires loginService
 *
