@@ -1,3 +1,13 @@
+ <div class="row-fluid">
+	<div class="span12">
+		<ul class="breadcrumb">
+			<li>
+				<a href="#">Home</a> <span class="divider">/</span>
+			</li>
+			<li class="active">My Restaurants</li>
+		</ul>
+	</div>
+</div>
 <h1>My Restaurants</h1>
 <div class="content_wrapper row-fluid">
 	<div class="span12">
@@ -71,7 +81,7 @@
 			</div>
 				<p>Fields marked with * are mandatory.</p>
 				<button type="button" ng-click="closeNewBusinessForm()" class="btn">Cancel</button>
-				<button type="submit" class="btn btn-primary">Add</button>
+				<button id="addBusinessButton" type="submit" class="btn btn-primary" data-loading-text="Saving...">Add</button>
 			</form> 
 		</div>
 	</div>

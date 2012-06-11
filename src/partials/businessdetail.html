@@ -1,6 +1,18 @@
+<div class="row-fluid">
+	<div class="span12">
+		<ul class="breadcrumb">
+			<li>
+				<a href="#">Home</a> <span class="divider">/</span>
+			</li>
+			<li>
+				<a href="#/businesses">My Restaurants</a> <span class="divider">/</span>
+			</li>
+			<li class="active">{{activeBusiness.name}}</li>
+		</ul>
+	</div>
+</div>
 <h1 ng-class="getEditModeClass()" ng-click="editSimpleData('Name',activeBusiness.name, 'name', 'text')">{{activeBusiness.name}}</h1>
-<div class="content_wrapper well row-fluid">	
-	<div  class="span12">
+<div class="content_wrapper well">
 		<div class="row-fluid">
 			<div class="span6" ng-hide="editMode">
 				<button type="button" ng-click="toggleEditMode()">Edit Profile</button> 				
@@ -43,10 +55,6 @@
 			<div class="key">Phone</div>
 			<div class="value">{{activeBusiness.phone}}</div>
 		</div>
-	</div>
-	<div class="span12">
-		
-	</div>
 </div>
 <!-- Property editing dialogs. -->
 <div class="modal hide" id="textModal">

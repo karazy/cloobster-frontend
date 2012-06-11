@@ -115,17 +115,18 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 				'name' : $scope.newBusiness.name,
 				'city' : $scope.newBusiness.city,
 				'address' : $scope.newBusiness.address,
-				'postcode' : $scope.newBusiness.postcode,			
+				'postcode' : $scope.newBusiness.postcode,
 				'phone' : $scope.newBusiness.phone,
 				'description' : $scope.newBusiness.description
 			});
 
-			$scope.newBusinessEntity.$save(function() {
-				//refresh business list upon success
-				$scope.loadBusinesses();
-			});
+			$("#addBusinessButton").button("loading");
 
-			$scope.closeNewBusinessForm();			
+			$scope.newBusinessEntity.$save(function() {
+				//close switches to another url so businesses will be refreshed automatically 
+				//and showing the new new business
+				$scope.closeNewBusinessForm();
+			});
 		} else {
 			//mark form as dirty to show validation errors
 			jQuery.each(fields, function(index, value) {
@@ -246,6 +247,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 		activeImage.$save(function() {
 			//success callback
+			//make sure that images exist!
+			$scope.activeBusiness.images = $scope.activeBusiness.images || {};
 			//set saved logo as new business logo
 			$scope.activeBusiness.images[property] = {
 				url: imageResource.url,
