@@ -58,7 +58,7 @@
     background-color: lightblue;
 }
 
-h1.edit:hover {
+h1.edit:hover, h2.edit:hover {
     background-color: lightblue;
 }
 

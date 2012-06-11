@@ -12,12 +12,17 @@
 */
 Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, $log) {
 	
-	var ImageResource;
+	var ImageResource,
+		/** Holds the Id of the active modal dialog. */
+		activeModalDialog;
 
 	//Company resource object.
 	$scope.company = {
 		images: {}
 	};
+
+	/** Logged in account */
+	$scope.account;
 
 	//Indicates if logo form is in view or edit mode.
 	$scope.logoFormMode = "view";
@@ -35,6 +40,13 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	$scope.error = false;
 	// error message
 	$scope.errorMessage = "";
+
+	$scope.activeModel = null;
+
+	/** True if company edit mode is active. */
+	$scope.editModeCompany = false;
+	/** True if account edit mode is active. */
+	$scope.editModeAccount = false;
 
 	/**
 	* Holds an array of fileUpload Information objects.
@@ -112,6 +124,105 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 		$scope.profileFormMode = "view";
 	};
 
+	/**
+	* Switches between view and edit mode.
+	* @param editMode
+	*	company or account to toggel corresponding edit mode
+	*/
+	$scope.toggleEditMode = function(editMode) {
+		if(editMode == "company") {
+			$scope.editModeCompany = !$scope.editModeCompany;	
+		}
+		if(editMode == "account") {
+			$scope.editModeAccount = !$scope.editModeAccount;	
+		}
+	}
+
+	/**
+	* Returns "edit" when edit mode is active.
+	* @param editMode
+	*	company or account to toggel corresponding edit mode
+	*/
+	$scope.getEditModeClass = function(editMode) {
+		if(editMode.toLowerCase() == "company") {
+			return ($scope.editModeCompany) ? "edit" : "";
+		}
+
+		if(editMode.toLowerCase() == "account") {
+			return ($scope.editModeAccount) ? "edit" : "";	
+		}
+		
+	}
+
+	$scope.editSimpleData = function(title, model, property, inputType, modelType) {
+		var modalDialog = "";
+
+		//no edit mode active, return
+		if(!$scope.editModeCompany && !$scope.editModeAccount) {
+			return;
+		}
+
+		if((modelType == "company" && $scope.editModeCompany) || (modelType == "account" && $scope.editModeAccount) ) {			
+
+			$scope.activeProperty = {
+				'title' : title,
+				'value' : model[property],
+				'property' : property
+			};
+
+			$scope.activeModel = model;
+
+			switch(inputType) {
+				case 'text': modalDialog = '#textModal'; break;
+				case 'textarea': modalDialog = '#textareaModal'; break;
+				case 'file': modalDialog = '#fileModal'; break;
+				default: modalDialog = '#textModal'; break;
+			};
+
+			activeModalDialog = modalDialog;
+
+			$(modalDialog).on('hide', function () {
+	  			$scope.cancelProperty();
+			});
+
+			jQuery(modalDialog).modal('toggle');
+		}
+	};
+
+	/**
+	* Save edited property.
+	*/
+	$scope.saveProperty = function() {		
+		var saveButton,
+			property;
+
+		if(!$scope.activeModel || !$scope.activeProperty) {
+			return;
+		}		
+
+		saveButton = $(activeModalDialog).find("button[type=submit]");
+
+		property = $scope.activeProperty.property;
+
+		if($scope.activeModel.hasOwnProperty(property)) {
+			saveButton.button("loading");
+			$scope.activeModel[property] = $scope.activeProperty.value;
+			
+			$scope.activeModel.$update(function() {				
+				$(activeModalDialog).modal('hide');
+				saveButton.button("reset");
+			});
+		}
+	};
+
+	/**
+	* Cancel editing property.
+	*/
+	$scope.cancelProperty = function() {
+		$scope.activeProperty = null;
+		$scope.activeModel = null;
+	};
+
 	//<-- end logo related actions -->
 
 
@@ -149,10 +260,10 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	* Loads profile data if user is logged in.
 	*/
 	function loadProfileData() {
-		var account = loginService.getAccount();
+		$scope.account = loginService.getAccount();
 
 		$scope.company = Company.buildResource().get({
-			id: account.companyId
+			id: $scope.account.companyId
 		},function() {
 			ImageResource = Company.buildImageResource($scope.company.id);
 			//if no images are included init with empty object

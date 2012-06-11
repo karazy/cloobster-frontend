@@ -160,6 +160,9 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		$scope.editMode = !$scope.editMode;
 	}
 
+	/**
+	* Returns "edit" when edit mode is active.
+	*/
 	$scope.getEditModeClass = function() {
 		return ($scope.editMode) ? "edit" : "";
 	}

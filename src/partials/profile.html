@@ -1,6 +1,59 @@
-<h1>Company Profile</h1>
+<h1>Profile page</h1>
 <div class="content_wrapper">
-	<div class="row-fluid">
+
+	<h2>{{account.login}}</h2>
+	<div class="well">
+		<!-- ng-class="getEditModeClass()" ng-click="editSimpleData('Name',account.name, 'name', 'text')" -->
+		<div class="data-element">
+		<div class="key">Name</div>
+			<div class="value">{{account.name}}</div>
+		</div>
+		<!-- ng-class="getEditModeClass()" ng-click="editSimpleData('Email',company.email, 'email', 'text')" -->
+			<div class="data-element">
+		<div class="key">Email</div>
+			<div class="value">{{account.email}}</div>
+		</div>
+	</div>
+
+	<h2 ng-class="getEditModeClass('company')" ng-click="editSimpleData('Name', company, 'name', 'text', 'company')">{{company.name}}</h2>
+	<div class="well">
+		<div class="row-fluid">
+			<div class="span6" ng-hide="editModeCompany">
+				<button type="button" class="btn btn-primary" ng-click="toggleEditMode('company')">Edit Company</button> 				
+			</div>
+			<div class="span6" ng-show="editModeCompany">
+				<button type="button" class="btn btn-primary" ng-click="toggleEditMode('company')">Done editing</button> 
+				<span>Click a company profile feature to edit.</span>
+			</div>
+		</div>
+		<div class="data-element" ng-class="getEditModeClass('company')" ng-click="editSimpleData('Address',company.address, 'address', 'text')">
+		<div class="key">Address</div>
+			<div class="value">{{company.address}}</div>
+		</div>
+		<div class="data-element" ng-class="getEditModeClass('company')" ng-click="editSimpleData('City',company.city, 'city', 'text')">
+		<div class="key">City</div>
+			<div class="value">{{company.city}}</div>
+		</div>
+		<div class="data-element" ng-class="getEditModeClass('company')" ng-click="editSimpleData('Postcode',company.postcode, 'postcode', 'text')">
+			<div class="key">Postcode</div>
+			<div class="value">{{company.postcode}}</div>
+		</div>
+		<div class="data-element" ng-class="getEditModeClass('company')" ng-click="editSimpleData('Business phone<',company.phone, 'phone', 'text')">
+			<div class="key">Business phone</div>
+			<div class="value">{{company.phone}}</div>
+		</div>
+		<div class="data-element" ng-class="getEditModeClass('company')" ng-click="editSimpleData('Website',company.url, 'url', 'text')">
+			<div class="key">Website</div>
+			<div class="value">{{company.url}}</div>
+		</div>
+		<div class="data-element" ng-class="getEditModeClass('company')" ng-click="editSimpleData('Country',company.country, 'country', 'text')">
+			<div class="key">Country</div>
+			<div class="value">{{company.country}}</div>
+		</div>
+	</div>
+
+
+<!-- 	<div class="row-fluid">
 		<div class="span6">
 			<h2>Logo</h2>
 			<div ng-show="logoFormMode == 'view'" >
@@ -45,7 +98,22 @@
 				</form>	 
 			</div>
 		</div>
-	</div>
+	</div> -->
 </div>
 
-
+<!-- Property editing dialogs. -->
+<div class="modal hide" id="textModal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>{{activeProperty.title}}</h3>
+  </div>
+  <form name="simplePropertyForm" novalidate ng-submit="saveProperty()">
+	  <div class="modal-body">
+	    <input type="text" name="simpleProperty" ng-model="activeProperty.value"></input>
+	  </div>
+	  <div class="modal-footer">
+	    <button type="button" class="btn" data-dismiss="modal">Close</button>
+	    <button type="submit" class="btn btn-primary" data-loading-text="Saving...">Save</button>
+	  </div>
+</form>
+</div>

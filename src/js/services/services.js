@@ -111,9 +111,18 @@ Cloobster.services.factory('Company', function($resource) {
 			*	Returns a company resource.
 			*/
 			buildResource: function() {
-				return $resource('/b/companies/:id', {
+				return $resource('/b/companies/:id', 
+					{
 					'id': '@id'
-				});	
+					},
+					{
+					/*
+					* @name Cloobster.services.Company#$update
+					* Like a save but uses PUT instead of POST.
+					*/
+					'update': { method: 'PUT'}
+					}
+				);	
 			},
 			/**
 			*	Returns a company image resource used to save, update images assigned to a company profile.
