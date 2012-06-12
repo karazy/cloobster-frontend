@@ -35,7 +35,8 @@ angular.module('Cloobster.directives', []).directive('simplePropertyEditor', fun
 		scope: {
 			editorTitle: 'bind',
 			editorOnSave: 'expression',
-			editorProperty: 'accessor'
+			editorProperty: 'accessor',
+			editorEnabled: 'accessor'
 			//editorOnCancel: 'expression',
 		},
 		link: function(scope, element, attrs) {
@@ -102,16 +103,19 @@ angular.module('Cloobster.directives', []).directive('simplePropertyEditor', fun
 		        post: function postLink(scope, iElement, iAttrs, controller) {
 		        	var dialog = iElement.find('div.modal');
 		        	//backup original value
+
 		        	scope.save = function () {
 		        		scope.editorProperty(scope.editorValue);
 		        		scope.editorOnSave();
 		        		dialog.modal('toggle');
 		        	}
 		        	
-		        	iElement.find('div.toggler').bind('click', function() {
-	        			scope.$apply('editorValue = editorProperty()');
+		        	iElement.find('div.toggler').bind('click', function() {		   
+		        		if(scope.editorEnabled() == true) {
+		        			scope.$apply('editorValue = editorProperty()');
 						
-						dialog.modal('toggle');
+							dialog.modal('toggle');	
+		        		}
 					});
 		        }
 		      }

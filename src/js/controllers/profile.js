@@ -214,6 +214,10 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 			});
 		}
 	};
+	
+	$scope.saveCompany = function() {
+		$scope.company.$update();
+	}
 
 	/**
 	* Cancel editing property.
