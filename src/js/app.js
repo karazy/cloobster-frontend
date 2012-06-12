@@ -4,7 +4,7 @@
 var Cloobster =  {};
 
 // Declare app level module which depends on filters, and services
-Cloobster.module = angular.module('Cloobster', ['Cloobster.services']).
+Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster.directives']).
   config(['$routeProvider', function($routeProvider) {
   	$routeProvider.when('/', {template: 'partials/home.html'});
   	$routeProvider.when('/about', {template: 'partials/impressum.html'});

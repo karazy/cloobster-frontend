@@ -162,7 +162,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 			return;
 		}
 
-		if((modelType == "company" && $scope.editModeCompany) || (modelType == "account" && $scope.editModeAccount) ) {			
+		if((modelType == "company" && $scope.editModeCompany) || (modelType == "account" && $scope.editModeAccount) ) {
 
 			$scope.activeProperty = {
 				'title' : title,
@@ -207,7 +207,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 		if($scope.activeModel.hasOwnProperty(property)) {
 			saveButton.button("loading");
 			$scope.activeModel[property] = $scope.activeProperty.value;
-			
+
 			$scope.activeModel.$update(function() {				
 				$(activeModalDialog).modal('hide');
 				saveButton.button("reset");

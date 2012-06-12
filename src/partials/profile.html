@@ -14,8 +14,11 @@
 			<div class="value">{{account.email}}</div>
 		</div>
 	</div>
-
-	<h2 ng-class="getEditModeClass('company')" ng-click="editSimpleData('Name', company, 'name', 'text', 'company')">{{company.name}}</h2>
+	<!-- ng-click="editSimpleData('Name', company, 'name', 'text', 'company')"-->
+	<div simple-property-editor editor-title="Name" editor-value="{{company.name}}" editor-on-save="saveProperty()" editor-required>
+		<h2 ng-class="getEditModeClass('company')">{{company.name}}</h2>
+	</div>
+	<!-- <simple-property-editor editor-title="Name" editor-value="{{company.name}}" editor-on-save="saveProperty()"></simple-property-editor> -->
 	<div class="well">
 		<div class="row-fluid">
 			<div class="span6" ng-hide="editModeCompany">
@@ -26,9 +29,11 @@
 				<span>Click a company profile feature to edit.</span>
 			</div>
 		</div>
-		<div class="data-element" ng-class="getEditModeClass('company')" ng-click="editSimpleData('Address',company.address, 'address', 'text')">
-		<div class="key">Address</div>
-			<div class="value">{{company.address}}</div>
+		<div simple-property-editor editor-title="Address" editor-value="{{company.address}}" editor-on-save="saveProperty()">
+			<div class="data-element" ng-class="getEditModeClass('company')">
+			<div class="key">Address</div>
+				<div class="value">{{company.address}}</div>
+			</div>
 		</div>
 		<div class="data-element" ng-class="getEditModeClass('company')" ng-click="editSimpleData('City',company.city, 'city', 'text')">
 		<div class="key">City</div>
