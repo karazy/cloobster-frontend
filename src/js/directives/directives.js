@@ -6,9 +6,10 @@
 *	Other modules can depend on this, and resolve service instances
 *	with angulars depency injection.
 */
-// Cloobster.directives = angular.module('Cloobster.directives', []);
+Cloobster.directives = angular.module('Cloobster.directives', []);
 
-angular.module('Cloobster.directives', []).directive('simplePropertyEditor', function() {
+// angular.module('Cloobster.directives', [])
+Cloobster.directives.directive('simplePropertyEditor', function() {
 	var inputType, //type of the input to generate in form
 		required, //if present marks a required field
 		//directive configuration
@@ -16,51 +17,15 @@ angular.module('Cloobster.directives', []).directive('simplePropertyEditor', fun
 		restrict: 'A',
 		replace: false,
 		transclude: true,
-		// template: 
-		// 	'<div class="modal hide">'+
-		// 	  '<div class="modal-header">'+
-		// 	   ' <button type="button" class="close" data-dismiss="modal">×</button>'+
-		// 	    '<h3>{{editorTitle}}</h3>'+
-		// 	 ' </div>'+
-		// 	'  <form name="simplePropertyForm" novalidate ng-submit="editorOnSave()">'+
-		// 		 ' <div class="modal-body">'+
-		// 		   ' <input type="text" name="simpleProperty" value="{{editorValue}}"></input>'+
-		// 		'  </div>'+
-		// 		 ' <div class="modal-footer">'+
-		// 		  '  <button type="button" class="btn" data-dismiss="modal">Close</button>'+
-		// 		'    <button type="submit" class="btn btn-primary" data-loading-text="Saving...">Save</button>'+
-		// 		'  </div>'+
-		// 		'</form>'+
-		// 	'</div>',
 		scope: {
 			editorTitle: 'bind',
 			editorOnSave: 'expression',
 			editorProperty: 'accessor',
 			editorEnabled: 'accessor'
-			//editorOnCancel: 'expression',
-		},
-		link: function(scope, element, attrs) {
-			var modal = jQuery(this).find('div.modal'),
-				clickFunction = null,
-				ele = element[0];
-				console.log('link');
-			clickFunction = function(evtObj) {
-				jQuery(this).find('div.modal').modal('toggle');
-				// jQuery(this).find('div.modal').on('hide', function() {
-				// 	jQuery(ele).one('click',clickFunction);
-				// 	console.log('on hide');
-				// });
-			};
-
-			jQuery('#test123').on('click',clickFunction);
-
-			
 		},
 		compile: function(element, attrs, transclude) {
-			var value = attrs.editorValue || "",
-				title = attrs.editorTitle || "",
-				onSave = attrs.editorOnSave,
-				required = attrs.hasOwnProperty('editorRequired') ? "required='required'" : "",
+			var required = attrs.hasOwnProperty('editorRequired') ? "required='required'" : "",
+				pattern = attrs.hasOwnProperty('editorPattern') ? "ng-pattern='"+attrs.editorPattern+"'" : "",
 				html = 
 				'<div class="toggler" ng-transclude></div>'+
 				'<div class="modal hide">'+
@@ -70,7 +35,15 @@ angular.module('Cloobster.directives', []).directive('simplePropertyEditor', fun
 				 ' </div>'+
 				'  <form name="simplePropertyForm" novalidate ng-submit="save()">'+
 					 ' <div class="modal-body">'+
-					   ' <input type="text" name="simpleProperty" ng-model="editorValue" '+required+'></input>'+
+					 	'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty.$invalid)">'+
+					 		'<div class="controls">'+
+								' <input type="'+getEditorType(attrs)+'" name="simpleProperty" ng-model="editorValue" '+required+' '+pattern+'></input>'+
+								'<div class="help-inline" ng-show="simplePropertyForm.simpleProperty.$dirty && simplePropertyForm.simpleProperty.$invalid">Invalid:'+
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.required">This field is required!</span>'+
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.pattern">No valid value.</span>'+
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.email">No valid email.</span>'+
+								'</div>'+
+							'</div>'+
 					'  </div>'+
 					 ' <div class="modal-footer">'+
 					  '  <button type="button" class="btn" data-dismiss="modal">Close</button>'+
@@ -78,27 +51,12 @@ angular.module('Cloobster.directives', []).directive('simplePropertyEditor', fun
 					'  </div>'+
 					'</form>'+
 				'</div>';
-
-			// jQuery(element).append("<span>{{editorValue}}</span>");
-
-			element.append(html);		
-
-			// jQuery(element).on('click', function() {
-			// 	jQuery('#modal').modal('toggle');
-			// });
 			
-			//TODO restore value on close
-		
-
-			// jQuery(element[0]).click(function(){
-			//   jQuery('#modal').modal('toggle');
-			// }).children().click(function(e) {
-			//   return false;
-			// });
+			element.append(html);
 
 			return {
 		        pre: function preLink(scope, iElement, iAttrs, controller) { 
-		        	console.log('preLink');
+		        	
 		        },
 		        post: function postLink(scope, iElement, iAttrs, controller) {
 		        	var dialog = iElement.find('div.modal');
@@ -117,41 +75,49 @@ angular.module('Cloobster.directives', []).directive('simplePropertyEditor', fun
 							dialog.modal('toggle');	
 		        		}
 					});
+
+		        	scope.getFieldInputClass = getFieldInputClass;
 		        }
 		      }
 		}
 	};
 
+	/**
+	* Checks if a type is defined in attributes object and returns it.
+	* If no type is defined return text;
+	* @param attr
+	*	Attributes object.
+	*/
+	function getEditorType(attrs) {
+		var type = "text";
 
-	return config;
+		if(attrs && attrs.hasOwnProperty('editorType')) {
+			type = attrs.editorType;
+			if(type != "email" && type != "password") {
+				type = "text";
+			}
+		}
 
-	function toggleDialog() {
-
+		return type;
 	}
 
+	/*
+	* Get css class for field highlighting.
+	* @returns error if invalid
+	*		  success if !invalid
+	*         empty string otherwise
+	*/
+	getFieldInputClass = function(invalid) {
+		if(invalid) {
+			return "error";
+		} else if (!invalid) {
+			return "success";
+		} else {
+			return "";
+		}
+	};
+
+	return config;
 });
-
-
-
-
-// angular.module('formComponents', [])
-//   .directive('formInput', function() {
-//     return {
-//         restrict: 'E',
-//         compile: function(element, attrs)
-//         {
-//             var type = attrs.type || 'text';
-//             var required = attrs.hasOwnProperty('required') ? "required='required'" : "";
-//             var htmlText = '<div class="control-group">' +
-//                 '<label class="control-label" for="' + attrs.formId + '">' + attrs.label + '</label>' +
-//                     '<div class="controls">' +
-//                     '<input type="' + type + '" class="input-xlarge" id="' + attrs.formId + '" name="' + attrs.formId + '" ' + required + '>' +
-//                     '</div>' +
-//                 '</div>';
-//             element.replaceWith(htmlText);
-//         }
-//     }
-// })
-
 
 

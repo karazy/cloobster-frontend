@@ -29,31 +29,41 @@
 				<span>Click a company profile feature to edit.</span>
 			</div>
 		</div>
-		<div simple-property-editor editor-title="Address" editor-property="company.address" editor-on-save="saveCompany()" editor-enabled="editModeCompany">
+		<div simple-property-editor editor-title="Address" editor-property="company.address" editor-pattern="/^(?=[!-~]{6,}$)(?=.*\d)(?=.*[^A-Za-z0-9]).*$/" editor-required editor-on-save="saveCompany()" editor-enabled="editModeCompany">
 			<div class="data-element" ng-class="getEditModeClass('company')">
 			<div class="key">Address</div>
 				<div class="value">{{company.address}}</div>
 			</div>
 		</div>
-		<div class="data-element" ng-class="getEditModeClass('company')" ng-click="editSimpleData('City',company.city, 'city', 'text')">
-		<div class="key">City</div>
-			<div class="value">{{company.city}}</div>
+		<div simple-property-editor editor-title="Name" editor-property="company.city" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
+			<div class="data-element" ng-class="getEditModeClass('company')">
+				<div class="key">City</div>
+				<div class="value">{{company.city}}</div>
+			</div>
 		</div>
-		<div class="data-element" ng-class="getEditModeClass('company')" ng-click="editSimpleData('Postcode',company.postcode, 'postcode', 'text')">
-			<div class="key">Postcode</div>
-			<div class="value">{{company.postcode}}</div>
+		<div simple-property-editor editor-title="Name" editor-property="company.postcode" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
+			<div class="data-element" ng-class="getEditModeClass('company')" >
+				<div class="key">Postcode</div>
+				<div class="value">{{company.postcode}}</div>
+			</div>
 		</div>
-		<div class="data-element" ng-class="getEditModeClass('company')" ng-click="editSimpleData('Business phone<',company.phone, 'phone', 'text')">
-			<div class="key">Business phone</div>
-			<div class="value">{{company.phone}}</div>
+		<div simple-property-editor editor-title="Name" editor-property="company.phone" editor-on-save="saveCompany()" editor-enabled="editModeCompany">
+			<div class="data-element" ng-class="getEditModeClass('company')" >
+				<div class="key">Business phone</div>
+				<div class="value">{{company.phone}}</div>
+			</div>
 		</div>
-		<div class="data-element" ng-class="getEditModeClass('company')" ng-click="editSimpleData('Website',company.url, 'url', 'text')">
-			<div class="key">Website</div>
-			<div class="value">{{company.url}}</div>
+		<div simple-property-editor editor-title="Name" editor-property="company.url" editor-on-save="saveCompany()" editor-enabled="editModeCompany">
+			<div class="data-element" ng-class="getEditModeClass('company')">
+				<div class="key">Website</div>
+				<div class="value">{{company.url}}</div>
+			</div>
 		</div>
-		<div class="data-element" ng-class="getEditModeClass('company')" ng-click="editSimpleData('Country',company.country, 'country', 'text')">
-			<div class="key">Country</div>
-			<div class="value">{{company.country}}</div>
+		<div simple-property-editor editor-title="Name" editor-property="company.country" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
+			<div class="data-element" ng-class="getEditModeClass('company')">
+				<div class="key">Country</div>
+				<div class="value">{{company.country}}</div>
+			</div>
 		</div>
 	</div>
 
