@@ -34,8 +34,8 @@ angular.module('Cloobster.directives', []).directive('simplePropertyEditor', fun
 		// 	'</div>',
 		scope: {
 			editorTitle: 'bind',
-			editorValue: 'bind',
-			editorOnSave: 'expression'			
+			editorOnSave: 'expression',
+			editorProperty: 'accessor'
 			//editorOnCancel: 'expression',
 		},
 		link: function(scope, element, attrs) {
@@ -67,9 +67,9 @@ angular.module('Cloobster.directives', []).directive('simplePropertyEditor', fun
 				   ' <button type="button" class="close" data-dismiss="modal">×</button>'+
 				    '<h3>{{editorTitle}}</h3>'+
 				 ' </div>'+
-				'  <form name="simplePropertyForm" novalidate ng-submit="editorOnSave()">'+
+				'  <form name="simplePropertyForm" novalidate ng-submit="save()">'+
 					 ' <div class="modal-body">'+
-					   ' <input type="text" name="simpleProperty" value="{{editorValue}}" ng-model="editorValue" '+required+'></input>'+
+					   ' <input type="text" name="simpleProperty" ng-model="editorValue" '+required+'></input>'+
 					'  </div>'+
 					 ' <div class="modal-footer">'+
 					  '  <button type="button" class="btn" data-dismiss="modal">Close</button>'+
@@ -80,7 +80,7 @@ angular.module('Cloobster.directives', []).directive('simplePropertyEditor', fun
 
 			// jQuery(element).append("<span>{{editorValue}}</span>");
 
-			jQuery(element).append(html);		
+			element.append(html);		
 
 			// jQuery(element).on('click', function() {
 			// 	jQuery('#modal').modal('toggle');
@@ -100,22 +100,19 @@ angular.module('Cloobster.directives', []).directive('simplePropertyEditor', fun
 		        	console.log('preLink');
 		        },
 		        post: function postLink(scope, iElement, iAttrs, controller) {
-		        	console.log('postLink');
+		        	var dialog = iElement.find('div.modal');
 		        	//backup original value
-		        	scope.originalVal = scope.editorValue;
-
+		        	scope.save = function () {
+		        		scope.editorProperty(scope.editorValue);
+		        		scope.editorOnSave();
+		        		dialog.modal('toggle');
+		        	}
 		        	
-	        		jQuery(iElement).find('div.toggler').on('click', function() {
-	        			var att = iAttrs,
-	        				scopeX = scope;
+		        	iElement.find('div.toggler').bind('click', function() {
+	        			scope.$apply('editorValue = editorProperty()');
 						
-						jQuery(iElement).find('div.modal').modal('toggle');
+						dialog.modal('toggle');
 					});
-
-					jQuery(iElement).find('div.modal').on('hide', function() {
-						scope.editorValue = scope.originalVal;
-					});
-
 		        }
 		      }
 		}

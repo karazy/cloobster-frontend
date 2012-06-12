@@ -15,7 +15,7 @@
 		</div>
 	</div>
 	<!-- ng-click="editSimpleData('Name', company, 'name', 'text', 'company')"-->
-	<div simple-property-editor editor-title="Name" editor-value="{{company.name}}" editor-on-save="saveProperty()" editor-required>
+	<div simple-property-editor editor-title="Name" editor-property="company.name" editor-on-save="saveProperty()" editor-required>
 		<h2 ng-class="getEditModeClass('company')">{{company.name}}</h2>
 	</div>
 	<!-- <simple-property-editor editor-title="Name" editor-value="{{company.name}}" editor-on-save="saveProperty()"></simple-property-editor> -->
@@ -29,7 +29,7 @@
 				<span>Click a company profile feature to edit.</span>
 			</div>
 		</div>
-		<div simple-property-editor editor-title="Address" editor-value="{{company.address}}" editor-on-save="saveProperty()">
+		<div simple-property-editor editor-title="Address" editor-property="company.address" editor-on-save="saveProperty()">
 			<div class="data-element" ng-class="getEditModeClass('company')">
 			<div class="key">Address</div>
 				<div class="value">{{company.address}}</div>
