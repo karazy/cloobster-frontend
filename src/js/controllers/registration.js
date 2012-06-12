@@ -15,7 +15,7 @@
 * 	@author Frederik Reifschneider
 * 	@author Nils Weiher
 */
-Cloobster.Registration = function($scope, $location, Account, facebookApi, $routeParams, loginService) {
+Cloobster.Registration = function($scope, $location, Account, facebookApi, $routeParams, loginService, $log) {
 	var emptyAccount = {
 			'name' : '',
 			'login' : '',
@@ -40,12 +40,12 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 	$scope.registered = false;
 	//error flag
 	$scope.error = false;
+	//error message 
+	$scope.errorMessage = "";
 	//true when connected to facebook
 	$scope.fbConnected = false;
 	//true if email is confirmed
-	$scope.emailConfirmed = false;
-	//error message 
-	$scope.errorMessage = "";
+	$scope.emailConfirmed = false;	
 
 	/**
 	* @inner
@@ -64,12 +64,17 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 	*/
 	$scope.save = function() {
 		account = new Account($scope.account);
-		account.$register(function (account) { 
-			$scope.registered = true;
-		}, function (result) { 
-			$scope.error = true;
-			$scope.errorValue = result.data;
-		});
+		if($scope.registrationForm.$valid) {
+				account.$register(function (account) { 
+				$scope.registered = true;
+			}, function (result) { 
+				$scope.error = true;
+				$scope.errorValue = result.data;
+			});			
+		} else {
+			$log.info("Can't submit form because it is not valid.");
+		}
+
 	};
 
 	/**
@@ -161,6 +166,13 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 	}
 
 	/**
+	* Set error false and hide the error box.
+	*/
+	$scope.hideError = function() {
+		$scope.error = false;
+	};
+
+	/**
 	*
 	* Set retrieved facebook data into registration form.
 	* @param user
@@ -195,4 +207,4 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 	//set default values on load
 	$scope.cancel();
 }
-Cloobster.Registration.$inject = ['$scope', '$location', 'Account', 'facebookApi', '$routeParams', 'login'];
+Cloobster.Registration.$inject = ['$scope', '$location', 'Account', 'facebookApi', '$routeParams', 'login', '$log'];

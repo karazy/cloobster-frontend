@@ -1,24 +1,25 @@
+<div class="alert alert-error alert-block" ng-show="error">
+	<button class="close" ng-click="hideError()">×</button>
+	<h4 class="alert-heading">Warning!</h4>
+	{{errorMessage}}
+</div>
 <h1>Profile page</h1>
 <div class="content_wrapper">
 
 	<h2>{{account.login}}</h2>
 	<div class="well">
-		<!-- ng-class="getEditModeClass()" ng-click="editSimpleData('Name',account.name, 'name', 'text')" -->
 		<div class="data-element">
 		<div class="key">Name</div>
 			<div class="value">{{account.name}}</div>
 		</div>
-		<!-- ng-class="getEditModeClass()" ng-click="editSimpleData('Email',company.email, 'email', 'text')" -->
 			<div class="data-element">
 		<div class="key">Email</div>
 			<div class="value">{{account.email}}</div>
 		</div>
 	</div>
-	<!-- ng-click="editSimpleData('Name', company, 'name', 'text', 'company')"-->
 	<div simple-property-editor editor-title="Name" editor-property="company.name" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
 		<h2 ng-class="getEditModeClass('company')">{{company.name}}</h2>
 	</div>
-	<!-- <simple-property-editor editor-title="Name" editor-value="{{company.name}}" editor-on-save="saveProperty()"></simple-property-editor> -->
 	<div class="well">
 		<div class="row-fluid">
 			<div class="span6" ng-hide="editModeCompany">
@@ -29,7 +30,7 @@
 				<span>Click a company profile feature to edit.</span>
 			</div>
 		</div>
-		<div simple-property-editor editor-title="Address" editor-property="company.address" editor-pattern="/^(?=[!-~]{6,}$)(?=.*\d)(?=.*[^A-Za-z0-9]).*$/" editor-required editor-on-save="saveCompany()" editor-enabled="editModeCompany">
+		<div simple-property-editor editor-title="Address" editor-property="company.address" editor-required editor-on-save="saveCompany()" editor-enabled="editModeCompany">
 			<div class="data-element" ng-class="getEditModeClass('company')">
 			<div class="key">Address</div>
 				<div class="value">{{company.address}}</div>
@@ -114,21 +115,4 @@
 			</div>
 		</div>
 	</div> -->
-</div>
-
-<!-- Property editing dialogs. -->
-<div class="modal hide" id="textModal">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">×</button>
-    <h3>{{activeProperty.title}}</h3>
-  </div>
-  <form name="simplePropertyForm" novalidate ng-submit="saveProperty()">
-	  <div class="modal-body">
-	    <input type="text" name="simpleProperty" ng-model="activeProperty.value"></input>
-	  </div>
-	  <div class="modal-footer">
-	    <button type="button" class="btn" data-dismiss="modal">Close</button>
-	    <button type="submit" class="btn btn-primary" data-loading-text="Saving...">Save</button>
-	  </div>
-</form>
 </div>

@@ -8,6 +8,11 @@
 		</ul>
 	</div>
 </div>
+ <div class="alert alert-error alert-block" ng-show="error">
+	<button class="close" ng-click="hideError()">×</button>
+	<h4 class="alert-heading">Warning!</h4>
+	{{errorMessage}}
+</div>
 <h1>My Restaurants</h1>
 <div class="content_wrapper row-fluid">
 	<div class="span12">

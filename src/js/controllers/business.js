@@ -36,6 +36,10 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.newBusiness = null;
 	/** When true shows the form for a new business. */
 	$scope.showNewBusinessForm = false;
+	/** Error flag. */
+	$scope.error = false;
+	/** Error message. */ 
+	$scope.errorMessage = "";
 
 	/**
 	* Returns all businesses
@@ -226,6 +230,13 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	};
 
 	/**
+	* Save active business.
+	*/
+	$scope.saveBusiness = function() {
+		$scope.activeBusiness.$update();
+	};
+
+	/**
 	* Cancel editing property.
 	*/
 	$scope.cancelProperty = function() {
@@ -297,7 +308,14 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		}
 	};
 
-
+	/**
+	* @name Cloobster.Login~hideError
+	*
+	* Set error false and hide the error box.
+	*/
+	$scope.hideError = function() {
+		$scope.error = false;
+	};
 
 	/**
 	* Creates an image resource. 

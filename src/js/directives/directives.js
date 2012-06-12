@@ -37,7 +37,7 @@ Cloobster.directives.directive('simplePropertyEditor', function() {
 					 ' <div class="modal-body">'+
 					 	'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty.$invalid)">'+
 					 		'<div class="controls">'+
-								' <input type="'+getEditorType(attrs)+'" name="simpleProperty" ng-model="editorValue" '+required+' '+pattern+'></input>'+
+					 			createFormInput(attrs)+
 								'<div class="help-inline" ng-show="simplePropertyForm.simpleProperty.$dirty && simplePropertyForm.simpleProperty.$invalid">Invalid:'+
 									'<span ng-show="simplePropertyForm.simpleProperty.$error.required">This field is required!</span>'+
 									'<span ng-show="simplePropertyForm.simpleProperty.$error.pattern">No valid value.</span>'+
@@ -63,9 +63,12 @@ Cloobster.directives.directive('simplePropertyEditor', function() {
 		        	//backup original value
 
 		        	scope.save = function () {
-		        		scope.editorProperty(scope.editorValue);
-		        		scope.editorOnSave();
-		        		dialog.modal('toggle');
+		        		//only save when form is valid
+		        		if(scope.simplePropertyForm.$valid) {
+		        			scope.editorProperty(scope.editorValue);
+			        		scope.editorOnSave();
+			        		dialog.modal('toggle');
+		        		}
 		        	}
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {		   
@@ -99,6 +102,30 @@ Cloobster.directives.directive('simplePropertyEditor', function() {
 		}
 
 		return type;
+	}
+
+	/**
+	* Creates an html input tag based on the given configuration.
+	* @param attrs
+	*	Attributes object containing configuration.
+	*/
+	function createFormInput(attrs) {
+		var required = attrs.hasOwnProperty('editorRequired') ? "required='required'" : "",
+			pattern = attrs.hasOwnProperty('editorPattern') ? "ng-pattern='"+attrs.editorPattern+"'" : "",
+			type = 	attrs.hasOwnProperty('editorType') ? attrs.editorType : "text",
+			inputHtml;
+
+		if(type == "textarea") {
+			inputHtml = '<textarea rows="4" cols="100" name="simpleProperty" ng-model="editorValue" '+required+'></textarea>';
+		} else {
+			if(type != "email" && type != "password") {
+				type = "text";
+			}
+
+			inputHtml = '<input type="'+type+'" name="simpleProperty" ng-model="editorValue" '+required+' '+pattern+'></input>';
+		}
+
+		return inputHtml;
 	}
 
 	/*

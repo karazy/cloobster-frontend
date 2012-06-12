@@ -55,6 +55,15 @@ Cloobster.Login = function($scope, facebookApi, loginService) {
 	}
 
 	/**
+	* @name Cloobster.Login~hideError
+	*
+	* Set error false and hide the error box.
+	*/
+	$scope.hideError = function() {
+		$scope.error = false;
+	};
+
+	/**
 	*	@name Cloobster.Login~doFbLogin
 	*	
 	*	Shortcut method to execute a Cloobster login with facebook.

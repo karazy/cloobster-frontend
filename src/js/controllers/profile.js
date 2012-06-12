@@ -25,10 +25,10 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	$scope.account;
 
 	//Indicates if logo form is in view or edit mode.
-	$scope.logoFormMode = "view";
+	// $scope.logoFormMode = "view";
 
 	//Indicates if company profile is in view or edit mode.
-	$scope.profileFormMode = "view";	
+	// $scope.profileFormMode = "view";	
 
 	//Indicates if logo upload is finished. And toggles the save button accordingly.
 	$scope.logoUploadFinished = false;
@@ -54,8 +54,6 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	*	 [ { "name": "thefilename", "url": "touseasimagesrc", "blobKey": "usedbytheservertoidentifythefile"}]
 	*/
 	$scope.fileUploadInformation = [];
-
-	//<-- start logo related actions -->
 
 	/**
 	* Returns an empty string if logo is defined "nologo" otherwise.
@@ -112,17 +110,20 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 		}
 	};
 
-	//<-- end logo related actions -->
-
-	//<-- start logo related actions -->
-
-	$scope.editProfile = function() {
-		$scope.profileFormMode = "edit";
+	/**
+	* Set error false and hide the error box.
+	*/
+	$scope.hideError = function() {
+		$scope.error = false;
 	};
 
-	$scope.cancelProfile = function() {
-		$scope.profileFormMode = "view";
-	};
+	// $scope.editProfile = function() {
+	// 	$scope.profileFormMode = "edit";
+	// };
+
+	// $scope.cancelProfile = function() {
+	// 	$scope.profileFormMode = "view";
+	// };
 
 	/**
 	* Switches between view and edit mode.
@@ -154,69 +155,78 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 		
 	}
 
-	$scope.editSimpleData = function(title, model, property, inputType, modelType) {
-		var modalDialog = "";
+	// $scope.editSimpleData = function(title, model, property, inputType, modelType) {
+	// 	var modalDialog = "";
 
-		//no edit mode active, return
-		if(!$scope.editModeCompany && !$scope.editModeAccount) {
-			return;
-		}
+	// 	//no edit mode active, return
+	// 	if(!$scope.editModeCompany && !$scope.editModeAccount) {
+	// 		return;
+	// 	}
 
-		if((modelType == "company" && $scope.editModeCompany) || (modelType == "account" && $scope.editModeAccount) ) {
+	// 	if((modelType == "company" && $scope.editModeCompany) || (modelType == "account" && $scope.editModeAccount) ) {
 
-			$scope.activeProperty = {
-				'title' : title,
-				'value' : model[property],
-				'property' : property
-			};
+	// 		$scope.activeProperty = {
+	// 			'title' : title,
+	// 			'value' : model[property],
+	// 			'property' : property
+	// 		};
 
-			$scope.activeModel = model;
+	// 		$scope.activeModel = model;
 
-			switch(inputType) {
-				case 'text': modalDialog = '#textModal'; break;
-				case 'textarea': modalDialog = '#textareaModal'; break;
-				case 'file': modalDialog = '#fileModal'; break;
-				default: modalDialog = '#textModal'; break;
-			};
+	// 		switch(inputType) {
+	// 			case 'text': modalDialog = '#textModal'; break;
+	// 			case 'textarea': modalDialog = '#textareaModal'; break;
+	// 			case 'file': modalDialog = '#fileModal'; break;
+	// 			default: modalDialog = '#textModal'; break;
+	// 		};
 
-			activeModalDialog = modalDialog;
+	// 		activeModalDialog = modalDialog;
 
-			$(modalDialog).on('hide', function () {
-	  			$scope.cancelProperty();
-			});
+	// 		$(modalDialog).on('hide', function () {
+	//   			$scope.cancelProperty();
+	// 		});
 
-			jQuery(modalDialog).modal('toggle');
-		}
-	};
+	// 		jQuery(modalDialog).modal('toggle');
+	// 	}
+	// };
 
 	/**
 	* Save edited property.
 	*/
-	$scope.saveProperty = function() {		
-		var saveButton,
-			property;
+	// $scope.saveProperty = function() {		
+	// 	var saveButton,
+	// 		property;
 
-		if(!$scope.activeModel || !$scope.activeProperty) {
-			return;
-		}		
+	// 	if(!$scope.activeModel || !$scope.activeProperty) {
+	// 		return;
+	// 	}		
 
-		saveButton = $(activeModalDialog).find("button[type=submit]");
+	// 	saveButton = $(activeModalDialog).find("button[type=submit]");
 
-		property = $scope.activeProperty.property;
+	// 	property = $scope.activeProperty.property;
 
-		if($scope.activeModel.hasOwnProperty(property)) {
-			saveButton.button("loading");
-			$scope.activeModel[property] = $scope.activeProperty.value;
+	// 	if($scope.activeModel.hasOwnProperty(property)) {
+	// 		saveButton.button("loading");
+	// 		$scope.activeModel[property] = $scope.activeProperty.value;
 
-			$scope.activeModel.$update(function() {				
-				$(activeModalDialog).modal('hide');
-				saveButton.button("reset");
-			});
-		}
-	};
+	// 		$scope.activeModel.$update(function() {				
+	// 			$(activeModalDialog).modal('hide');
+	// 			saveButton.button("reset");
+	// 		});
+	// 	}
+	// };
 	
+	/**
+	* Save company.
+	*/
 	$scope.saveCompany = function() {
-		$scope.company.$update();
+		$scope.company.$update(function() {
+			//success
+		}, function(data) {
+			//error
+			$scope.error = true;
+			$scope.errorMessage = data.status;
+		});
 	}
 
 	/**

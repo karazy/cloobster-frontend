@@ -11,7 +11,14 @@
 		</ul>
 	</div>
 </div>
-<h1 ng-class="getEditModeClass()" ng-click="editSimpleData('Name',activeBusiness.name, 'name', 'text')">{{activeBusiness.name}}</h1>
+<div class="alert alert-error alert-block" ng-show="error">
+	<button class="close" ng-click="hideError()">×</button>
+	<h4 class="alert-heading">Warning!</h4>
+	{{errorMessage}}
+</div>
+<div simple-property-editor editor-title="Name" editor-property="activeBusiness.name" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
+	<h1 ng-class="getEditModeClass()">{{activeBusiness.name}}</h1>
+</div>
 <div class="content_wrapper well">
 		<div class="row-fluid">
 			<div class="span6" ng-hide="editMode">
@@ -23,7 +30,7 @@
 			</div>
 		</div>
 		<div class="row-fluid">
-			<div class="image-box span6">
+			<div class="span6">
 				<div ng-show="activeBusiness.images.logo.url">
 					<img  ng-src="{{activeBusiness.images.logo.url}}" ng-click="editImageData('Logo',activeBusiness.images.logo.url, 'logo', 'file')" alt="click to edit" />
 					<p>Click image to edit</p>
@@ -31,64 +38,44 @@
 				<button ng-show="!activeBusiness.images.logo" ng-click="editImageData('Logo',activeBusiness.images.logo.url, 'logo')" class="btn">Add Logo</button>
 			</div>
 		</div>
-		<div class="data-element" ng-class="getEditModeClass()" ng-click="editSimpleData('Description',activeBusiness.description, 'description', 'textarea')">
-			<div class="key">Description</div>
-			<div class="value">{{activeBusiness.description}}</div>
+		<div simple-property-editor editor-title="Description" editor-property="activeBusiness.description" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-type="textarea" editor-required>
+			<div class="data-element" ng-class="getEditModeClass()">
+				<div class="key">Description</div>
+				<div class="value">{{activeBusiness.description}}</div>
+			</div>
 		</div>
-		<div class="data-element" ng-class="getEditModeClass()" ng-click="editSimpleData('Slogan',activeBusiness.slogan, 'slogan', 'text')">
-			<div class="key">Slogan</div>
-			<div class="value">{{activeBusiness.slogan}}</div>
+		<div simple-property-editor editor-title="Slogan" editor-property="activeBusiness.slogan" editor-on-save="saveBusiness()" editor-enabled="editMode">
+			<div class="data-element" ng-class="getEditModeClass()">
+				<div class="key">Slogan</div>
+				<div class="value">{{activeBusiness.slogan}}</div>
+			</div>
 		</div>
-		<div class="data-element" ng-class="getEditModeClass()" ng-click="editSimpleData('Address',activeBusiness.address, 'address', 'text')">
-			<div class="key">Address</div>
-			<div class="value">{{activeBusiness.address}}</div>
+		<div simple-property-editor editor-title="Address" editor-property="activeBusiness.address" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
+			<div class="data-element" ng-class="getEditModeClass()">
+				<div class="key">Address</div>
+				<div class="value">{{activeBusiness.address}}</div>
+			</div>
 		</div>
-		<div class="data-element" ng-class="getEditModeClass()" ng-click="editSimpleData('City',activeBusiness.city, 'city', 'text')">
-			<div class="key">City</div>
-			<div class="value">{{activeBusiness.city}}</div>
+		<div simple-property-editor editor-title="City" editor-property="activeBusiness.city" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
+			<div class="data-element" ng-class="getEditModeClass()">
+				<div class="key">City</div>
+				<div class="value">{{activeBusiness.city}}</div>
+			</div>
 		</div>
-		<div class="data-element" ng-class="getEditModeClass()" ng-click="editSimpleData('Postcode',activeBusiness.postcode, 'postcode', 'text')">
-			<div class="key">Postcode</div>
-			<div class="value">{{activeBusiness.postcode}}</div>
+		<div simple-property-editor editor-title="Postcode" editor-property="activeBusiness.postcode" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
+			<div class="data-element" ng-class="getEditModeClass()">
+				<div class="key">Postcode</div>
+				<div class="value">{{activeBusiness.postcode}}</div>
+			</div>
 		</div>
-		<div class="data-element" ng-class="getEditModeClass()" ng-click="editSimpleData('Phone',activeBusiness.phone, 'phone', 'text')">
-			<div class="key">Phone</div>
-			<div class="value">{{activeBusiness.phone}}</div>
+		<div simple-property-editor editor-title="Phone" editor-property="activeBusiness.phone" editor-on-save="saveBusiness()" editor-enabled="editMode">
+			<div class="data-element" ng-class="getEditModeClass()">
+				<div class="key">Phone</div>
+				<div class="value">{{activeBusiness.phone}}</div>
+			</div>
 		</div>
 </div>
 <!-- Property editing dialogs. -->
-<div class="modal hide" id="textModal">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">×</button>
-    <h3>{{activeProperty.title}}</h3>
-  </div>
-  <form novalidate ng-submit="saveProperty()">
-	  <div class="modal-body">
-	    <input type="text" ng-model="activeProperty.value"></input>
-	  </div>
-	  <div class="modal-footer">
-	    <button type="button" class="btn" data-dismiss="modal">Close</button>
-	    <button type="submit" class="btn btn-primary">Save</button>
-	  </div>
-</form>
-</div>
-
-<div class="modal hide" id="textareaModal">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">×</button>
-    <h3>{{activeProperty.title}}</h3>
-  </div>
-  <form novalidate ng-submit="saveProperty()">
-	  <div class="modal-body">
-	    	<textarea rows="4" cols="100" ng-model="activeProperty.value"></textarea>
-	  </div>
-	  <div class="modal-footer">
-	    <button type="button" class="btn" data-dismiss="modal">Close</button>
-	    <button type="submit" class="btn btn-primary">Save</button>
-	  </div>
-  </form>
-</div>
-
 <div class="modal hide" id="fileModal">
   <div class="modal-header">
     <button type="button" class="close" ng-click="cancelImage()" data-dismiss="modal">×</button>
