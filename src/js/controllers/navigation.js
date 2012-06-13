@@ -2,9 +2,9 @@
 'use strict';
 
 /**
-* 	@name Cloobster.Profile 
-*	@requires facebookApi
-*	@requires loginService
+* 	@name Cloobster.Navigation 
+*	@requires $location
+*	@requires Clooobster.Services.login
 *
 * 	Profile controller 
 * 	View and manage profiles.
