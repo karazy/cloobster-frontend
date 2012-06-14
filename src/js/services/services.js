@@ -15,7 +15,7 @@ Cloobster.services = angular.module('Cloobster.services', ['ngResource']);
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Account', function($resource) {
+Cloobster.services.factory('Account',['$resource', function($resource) {
 	/**
 	*	@name Cloobster.services.Account
 	*	
@@ -37,7 +37,7 @@ Cloobster.services.factory('Account', function($resource) {
 		);
 
 	return Account;
-});
+}]);
 
 /** 
 * 	@constructor
@@ -46,7 +46,7 @@ Cloobster.services.factory('Account', function($resource) {
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Business', function($resource) {
+Cloobster.services.factory('Business',['$resource', function($resource) {
 	/**
 	*	@name Cloobster.services.Business
 	*	
@@ -92,7 +92,7 @@ Cloobster.services.factory('Business', function($resource) {
 	}
 
 	return Business;
-});
+}]);
 
 /** 
 * 	@constructor
@@ -101,7 +101,7 @@ Cloobster.services.factory('Business', function($resource) {
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Company', function($resource) {
+Cloobster.services.factory('Company',['$resource', function($resource) {
 		/**
 		*	@name Cloobster.services.Company
 		*	
@@ -137,7 +137,7 @@ Cloobster.services.factory('Company', function($resource) {
 		}
 
 		return Company;
-});
+}]);
 
 /** 
 * 	@constructor
@@ -247,7 +247,7 @@ factory('facebookApi', ['$q','$rootScope', function($q, $rootScope) {
 		*	@returns {Object} promise which will be resolved with the login response or rejected with an errror message.
 		*/
 		login : function() {
-			loginDeferred = $q.defer();
+			var loginDeferred = $q.defer();
 			FB.login(function(response) {
 				$rootScope.$apply(function() {
 					if (response.authResponse) {
@@ -256,8 +256,7 @@ factory('facebookApi', ['$q','$rootScope', function($q, $rootScope) {
 						$rootScope.fbLoggedIn = true;
 						loginDeferred.resolve( response );
 					} else {
-						reason = (response.error ? response.error : 'user cancelled login');
-						loginDeferred.reject(reason);
+						loginDeferred.reject((response.error ? response.error : 'user cancelled login'));
 					}  
 				}); 
 			}, {scope: 'email'});
@@ -425,11 +424,12 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 			loginDeferred = $q.defer();
 
 			if($window.localStorage['login']) {
-				saveLogin = true;
-				storedLogin = {
+				var	storedLogin = {
+						
 					'login' : $window.localStorage['login'],
 					'passwordHash' : $window.localStorage['hash']
 				}
+				saveLogin = true;
 				
 				$http.get( configuration.serviceUrl + '/accounts/login',
 					{ headers: storedLogin }).
