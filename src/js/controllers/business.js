@@ -76,7 +76,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	* 	business to delete
 	*/
 	$scope.deleteBusiness = function(id) {
-		$scope.businessResource.delete({'id' : id});
+		$scope.businessResource['delete']({'id' : id});
 
 		//hide delete dialog
 		jQuery("#deleteModal").modal('hide');
@@ -282,7 +282,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 		//delete image from images bucket
 		if(activeImage && activeImage.blobKey) {
-			$http.delete('/uploads/images/' + activeImage.blobKey)
+			$http['delete']('/uploads/images/' + activeImage.blobKey)
 			.success(function() {
 				activeImage = null;
 			})

@@ -1,0 +1,1 @@
+var angular,jQuery,$,FB;

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="CloobsterFrontend" default="build-production" basedir=".">
+	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask"
+	           classpath="tools/closure-compiler/compiler.jar"/>
+	
+	<target name="build-production" depends="compile">
+	</target>
+	<target name="compile">
+		
+	    <jscomp compilationLevel="simple" warning="verbose" debug="false" output="build/app-all.min.js">
+	    	<!-- 
+	    	<externs dir="${basedir}/src">
+	        <file name="extern.js"/>
+	      </externs>!-->
+	    	<path id="sources">
+	    		<fileset dir="${basedir}/src/js/">
+	    			<include name="**/*.js"/>
+	    		</fileset>
+	    	</path>
+	    	<externs dir="src" >
+	    		<file name="extern.js"/>	
+	    	</externs>
+	    		
+	    </jscomp>
+	    
+	  </target>
+</project>

@@ -100,7 +100,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 
 		//delete image from images bucket
 		if($scope.logoResource && $scope.logoResource.blobKey) {
-			$http.delete('/uploads/images/' + $scope.logoResource.blobKey)
+			$http['delete']('/uploads/images/' + $scope.logoResource.blobKey)
 			.success(function() {
 				$scope.logoResource = null;
 			})
