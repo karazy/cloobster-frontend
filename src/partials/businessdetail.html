@@ -30,9 +30,10 @@
 			</div>
 		</div>
 		<div class="row-fluid">
-			<div class="span6">
+			<div class="span8"></div>
+			<div class="span4">
 				<div ng-show="activeBusiness.images.logo.url">
-					<img  ng-src="{{activeBusiness.images.logo.url}}" ng-click="editImageData('Logo',activeBusiness.images.logo.url, 'logo', 'file')" alt="click to edit" />
+					<img  ng-src="{{activeBusiness.images.logo.url}}=s128" ng-click="editImageData('Logo',activeBusiness.images.logo.url, 'logo', 'file')" alt="click to edit" />
 					<p>Click image to edit</p>
 				</div>
 				<button ng-show="!activeBusiness.images.logo" ng-click="editImageData('Logo',activeBusiness.images.logo.url, 'logo')" class="btn">Add Logo</button>

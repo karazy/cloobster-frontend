@@ -265,7 +265,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			$scope.activeBusiness.images = $scope.activeBusiness.images || {};
 			//set saved logo as new business logo
 			$scope.activeBusiness.images[property] = {
-				url: imageResource.url,
+				url: imageResource.url + '=s128',
 				blobKey: imageResource.blobKey
 			};
 		});

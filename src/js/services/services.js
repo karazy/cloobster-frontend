@@ -292,8 +292,8 @@ Cloobster.services.factory('config', ['$q','$rootScope', '$log', function($q, $r
 * 
 * 	@author Nils Weiher
 */
-Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log', 'config', 
-	function($window, $http, $q, $rootScope, $log, configuration) {
+Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$location', '$log', 'config', 
+	function($window, $http, $q, $rootScope, $location, $log, configuration) {
 		var loginService,
 			loggedIn = false,
 			account,
@@ -314,6 +314,7 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 		account = data;
 		loggedIn = true;
 		$rootScope.loggedIn = true;
+		$rootScope.username = account.login;		
 		if(saveLogin === true) {
 			$window.localStorage['login'] = account.login;
 			$window.localStorage['hash'] = account.passwordHash;
@@ -323,6 +324,9 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 		$http.defaults.headers.common.passwordHash = account.passwordHash;
 
 		loginDeferred.resolve(data);
+
+		//show businesses on successful login
+		$location.url("/businesses");	
 	}
 
 	/**
