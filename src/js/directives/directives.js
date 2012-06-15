@@ -130,11 +130,13 @@ Cloobster.directives.directive('simplePropertyEditor', function() {
 
 	/*
 	* Get css class for field highlighting.
+	* 
+	* @param {boolean}  
 	* @returns error if invalid
 	*		  success if !invalid
 	*         empty string otherwise
 	*/
-	getFieldInputClass = function(invalid) {
+	function getFieldInputClass(invalid) {
 		if(invalid) {
 			return "error";
 		} else if (!invalid) {
