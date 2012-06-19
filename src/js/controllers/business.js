@@ -12,7 +12,8 @@
 */
 Cloobster.Business = function($scope, $http, $routeParams, $location, loginService, uploadService, Business, $log) {
 
-		/** Holds the Id of the active modal dialog. */
+		/** Holds the Id of the active modal dialog.
+		@type {string} */
 	var activeModalDialog = "",
 		/** Template resource used to create concrete image resources. */
 		imageResource,

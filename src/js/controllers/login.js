@@ -46,7 +46,7 @@ Cloobster.Login = function($scope, facebookApi, loginService) {
 	*	@name Cloobster.Login~handleError
 	*	
 	*	Callback used after a failed login request.
-	*	@param {Object} result - Contains the error data send from the Cloobser service.
+	*	@param {Object} errorData - Contains the error data send from the Cloobser service.
 	*/
 	function handleError (errorData) {
 		$scope.loginProgress = false;
