@@ -2,7 +2,7 @@
 <html lang="en" ng-app="Cloobster">
 <head>
   <meta charset="utf-8">
-  <title>Cloobster</title>
+  <title l="product.title">Cloobster</title>
   <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -83,9 +83,9 @@
         <div class="nav-collapse">
           <ul class="nav">
             <!-- class="active" -->
-            <li ng-class="getActive('/')"><a href="#/">Home</a></li>            
-            <li ng-show="loggedIn" ng-class="getActive('/businesses')"><a href="#/businesses">My Restaurants</a></li>
-            <li ng-class="getActive('/about')"><a href="#/about">About</a></li>
+            <li ng-class="getActive('/')"><a href="#/">Home</a></li>
+            <li ng-show="loggedIn" ng-class="getActive('/businesses')"><a href="#/businesses" l="nav.restaurants">My Restaurants</a></li>
+            <li ng-class="getActive('/about')"><a href="#/about" l="nav.about">About</a></li>
             <li ng-hide="loggedIn" class="pull-right"><a href="#/login">Login</a></li>
             <li ng-hide="loggedIn" class="pull-right" ng-class="getActive('/registration')"><a href="#/registration">Registration</a></li>
           </ul>

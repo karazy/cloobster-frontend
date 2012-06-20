@@ -149,4 +149,29 @@ Cloobster.directives.directive('simplePropertyEditor', function() {
 	return config;
 });
 
+Cloobster.directives.directive('l', function() {
+	var map = {
+		"DE" : {
+			"product.title" : "bla",
+			"nav.restaurants" : "Restaurants",
+			"nav.about" : "Über"
+		}
+	}
+	//link function
+	return function (scope, iElement, iAttrs, controller) {
+		var key = iAttrs.l,
+			translation,
+			ele = iElement[0];
+
+		if(!key) {			
+			return;
+		}
+
+		translation = map["DE"][key] || key;
+		console.log("translate " + key + " to "+translation);
+		ele.text = translation;
+		ele.innerHtml = translation;
+	}
+});
+
 
