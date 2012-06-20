@@ -43,7 +43,7 @@
 				</div>
 			</div>
 			<div class="control-group" ng-class="getFieldInputClass(newBusinessForm.description.$dirty, newBusinessForm.description.$invalid)">
-				<label for="newBusinessDesc" class="control-label" l="businessesform.description">Description*</label>
+				<label for="newBusinessDesc" class="control-label" l="businesses.form.description">Description*</label>
 				<div class="controls">
 					<input type="text" id="newBusinessDesc" name="description" ng-model="newBusiness.description" required></input>
 						<div class="help-inline" ng-show="newBusinessForm.description.$dirty && newBusinessForm.description.$invalid">
@@ -96,10 +96,10 @@
 <div class="modal hide" id="deleteModal">
  	<div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal">×</button>
-    	<h3>Delete Restaurant {{activeBusiness.name}}</h3>
+    	<h3 l="businesses.dialog.delete">Delete Restaurant</h3>
 	</div>
 	<div class="modal-body alert-error">
-    	<p>{{activeBusiness.name}} and all associated data will be deleted!</p>
+    	<p>{{activeBusiness.name}} <span l="business.dialog.delete.text">and all associated data will be deleted!</span></p>
     </div>  
   	<div class="modal-footer">
   		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>

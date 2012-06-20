@@ -157,16 +157,22 @@ Cloobster.directives.directive('l', ['$locale', 'lang', function($locale, langSe
 	//link function
 	return function (scope, iElement, iAttrs, controller) {
 		var key = iAttrs.l,
-			translation;
+			translation,
+			replacements = iAttrs.replacements,
+			argsArr;
 
+		// console.log(replacements);
+		// if(replacements) {
+		// 	argsArr = scope.$eval('[' + replacements + ']');	
+		// }
+        
 		if(!key) {			
 			return;
 		}
 		//if no translation is found, don' replace html, this is useful to provide default values in html
 		translation = langService.translate(key) || iElement.html();
-		console.log("translate " + key + " to "+translation);
-		// ele.text = translation;
-		// ele.innerHtml = translation;
+		// console.log("translate " + key + " to "+translation);
+
 		iElement.html(translation);
 	}
 }]);
