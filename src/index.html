@@ -42,7 +42,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="#">Cloobster</a>
+        <a class="brand" href="#" l="product.brand">Cloobster</a>
         <!-- Login Drop Down -->
         <div ng-controller="Cloobster.Login">
           <div class="btn-group pull-right" ng-show="loggedIn">
@@ -51,9 +51,9 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="#/profile">Profile</a></li>
+              <li><a href="#/profile" l="nav.profile">Profile</a></li>
               <li class="divider"></li>
-              <li><a href="#" ng-click="logout()">Logout</a></li>
+              <li><a href="#" ng-click="logout()" l="nav.logout">Logout</a></li>
             </ul>
           </div>
  <!--          <div class="btn-group pull-right" ng-hide="loggedIn" id="loginForm">
@@ -86,7 +86,7 @@
             <li ng-class="getActive('/')"><a href="#/">Home</a></li>
             <li ng-show="loggedIn" ng-class="getActive('/businesses')"><a href="#/businesses" l="nav.restaurants">My Restaurants</a></li>
             <li ng-class="getActive('/about')"><a href="#/about" l="nav.about">About</a></li>
-            <li ng-hide="loggedIn" class="pull-right"><a href="#/login">Login</a></li>
+            <li ng-hide="loggedIn" class="pull-right"><a href="#/login" l="nav.login">Login</a></li>
             <li ng-hide="loggedIn" class="pull-right" ng-class="getActive('/registration')"><a href="#/registration" l="nav.registration">Registration</a></li>
           </ul>
         </div><!--/.nav-collapse -->

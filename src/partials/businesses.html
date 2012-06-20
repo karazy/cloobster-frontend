@@ -4,89 +4,89 @@
 			<li>
 				<a href="#">Home</a> <span class="divider">/</span>
 			</li>
-			<li class="active">My Restaurants</li>
+			<li class="active" l="businesses.title">My Restaurants</li>
 		</ul>
 	</div>
 </div>
  <div class="alert alert-error alert-block" ng-show="error">
 	<button class="close" ng-click="hideError()">×</button>
-	<h4 class="alert-heading">Warning!</h4>
+	<h4 class="alert-heading" l="common.warning.title">Warning!</h4>
 	{{errorMessage}}
 </div>
-<h1 l="business.title">My Restaurants</h1>
+<h1 l="businesses.title">My Restaurants</h1>
 <div class="content_wrapper row-fluid">
 	<div class="span12">
 	<div class="row-fluid">
 		<div class="span6">
 			<ul>
 				<li ng-repeat="b in businesses">
-					<span>{{b.name}}</span> <a href="#/businesses/{{b.id}}">show/edit</a> | <a href ng-click="showDeleteDialog(b)">delete</a>
+					<span>{{b.name}}</span> <a href="#/businesses/{{b.id}}" l="businesses.action.show">show/edit</a> | <a href ng-click="showDeleteDialog(b)" l="businesses.action.delete">delete</a>
 				</li>
 			</ul>
 		</div>
 	</div>
 	<div class="row-fluid" ng-hide="showNewBusinessForm">
 		<div class="span4">
-			<button type="button" ng-click="toggleNewBusiness()" class="btn btn-primary" l="business.add">Add new restaurant</button>
+			<button type="button" ng-click="toggleNewBusiness()" class="btn btn-primary" l="businesses.add">Add new restaurant</button>
 		</div>
 	</div>
 	<div ng-show="showNewBusinessForm" class="row-fluid">
 		<div class="span4">
 			<form ng-submit="addNewBusiness()" name="newBusinessForm" class="well form-vertical" novalidate>
 				<div class="control-group" ng-class="getFieldInputClass(newBusinessForm.name.$dirty, newBusinessForm.name.$invalid)">
-				<label for="newBusinessName" class="control-label">Name*</label>
+				<label for="newBusinessName" class="control-label" l="businesses.form.name">Name*</label>
 				<div class="controls">
 					<input type="text" id="newBusinessName" name="name" ng-model="newBusiness.name" required></input>
-					<div class="help-inline" ng-show="newBusinessForm.$dirty && newBusinessForm.name.$dirty && newBusinessForm.name.$invalid">Invalid:
-						<span ng-show="newBusinessForm.name.$error.required">Provide a name.</span>
+					<div class="help-inline" ng-show="newBusinessForm.$dirty && newBusinessForm.name.$dirty && newBusinessForm.name.$invalid">
+						<span ng-show="newBusinessForm.name.$error.required" l="businesses.form.error.required">Provide a name.</span>
 					</div>
 				</div>
 			</div>
 			<div class="control-group" ng-class="getFieldInputClass(newBusinessForm.description.$dirty, newBusinessForm.description.$invalid)">
-				<label for="newBusinessDesc" class="control-label">Description*</label>
+				<label for="newBusinessDesc" class="control-label" l="businessesform.description">Description*</label>
 				<div class="controls">
 					<input type="text" id="newBusinessDesc" name="description" ng-model="newBusiness.description" required></input>
-						<div class="help-inline" ng-show="newBusinessForm.description.$dirty && newBusinessForm.description.$invalid">Invalid:
-							<span ng-show="newBusinessForm.description.$error.required">Provide a description.</span>
+						<div class="help-inline" ng-show="newBusinessForm.description.$dirty && newBusinessForm.description.$invalid">
+							<span ng-show="newBusinessForm.description.$error.required" l="businesses.form.error.required">Provide a description.</span>
 						</div>
 					</div>
 				</div>
 			<div class="control-group" ng-class="getFieldInputClass(newBusinessForm.address.$dirty, newBusinessForm.address.$invalid)">
-				<label for="newBusinessAddress">Address*</label>
+				<label for="newBusinessAddress" l="businesses.form.address">Address*</label>
 				<div class="controls">
 					<input type="text" id="newBusinessAddress" name="address" ng-model="newBusiness.address" required></input>
-					<div class="help-inline" ng-show="newBusinessForm.address.$dirty && newBusinessForm.address.$invalid">Invalid:
-						<span ng-show="newBusinessForm.address.$error.required">Provide a address.</span>
+					<div class="help-inline" ng-show="newBusinessForm.address.$dirty && newBusinessForm.address.$invalid">
+						<span ng-show="newBusinessForm.address.$error.required" l="businesses.form.error.required">Provide a address.</span>
 					</div>
 				</div>
 			</div>
 			<div class="control-group" ng-class="getFieldInputClass(newBusinessForm.city.$dirty, newBusinessForm.city.$invalid)">
-				<label for="newBusinessCity" class="control-label">City*</label>
+				<label for="newBusinessCity" class="control-label" l="businesses.form.city">City*</label>
 				<div class="controls">
 					<input type="text" id="newBusinessCity" name="city" ng-model="newBusiness.city" required></input>
-						<div class="help-inline" ng-show="newBusinessForm.city.$dirty && newBusinessForm.city.$invalid">Invalid:
-							<span ng-show="newBusinessForm.city.$error.required">Provide a city.</span>
+						<div class="help-inline" ng-show="newBusinessForm.city.$dirty && newBusinessForm.city.$invalid">
+							<span ng-show="newBusinessForm.city.$error.required" l="businesses.form.error.required">Provide a city.</span>
 						</div>
 				</div>
 			</div>
 				<div class="control-group" ng-class="getFieldInputClass(newBusinessForm.postcode.$dirty, newBusinessForm.postcode.$invalid)">
-				<label for="newBusinessPostcode" class="control-label">Postcode*</label>
+				<label for="newBusinessPostcode" class="control-label" l="businesses.form.postcode">Postcode*</label>
 				<div class="controls">
 					<input type="text" id="newBusinessPostcode" name="postcode" ng-model="newBusiness.postcode" required></input>
-						<div class="help-inline" ng-show="newBusinessForm.postcode.$dirty && newBusinessForm.postcode.$invalid">Invalid:
-							<span ng-show="newBusinessForm.postcode.$error.required">Provide a postcode.</span>
+						<div class="help-inline" ng-show="newBusinessForm.postcode.$dirty && newBusinessForm.postcode.$invalid">
+							<span ng-show="newBusinessForm.postcode.$error.required" l="businesses.form.error.required">Provide a postcode.</span>
 						</div>
 				</div>
 			</div>
 				<div class="control-group" ng-class="getFieldInputClass(newBusinessForm.phone.$dirty, newBusinessForm.phone.$invalid)">
-				<label for="newBusinessPhone" class="control-label">Phone</label>
+				<label for="newBusinessPhone" class="control-label" l="businesses.form.phone">Phone</label>
 				<div class="controls">
 					<input type="text" id="newBusinessPhone" name="phone" ng-model="newBusiness.phone"></input>
 				</div>
 			</div>
-				<p>Fields marked with * are mandatory.</p>
-				<button type="button" ng-click="closeNewBusinessForm()" class="btn">Cancel</button>
-				<button id="addBusinessButton" type="submit" class="btn btn-primary" data-loading-text="Saving...">Add</button>
+				<p l="businesses.form.mandatory">Fields marked with * are mandatory.</p>
+				<button type="button" ng-click="closeNewBusinessForm()" class="btn" l="common.cancel">Cancel</button>
+				<button id="addBusinessButton" type="submit" class="btn btn-primary" data-loading-text="Saving..." l="common.add">Add</button>
 			</form> 
 		</div>
 	</div>
@@ -102,7 +102,7 @@
     	<p>{{activeBusiness.name}} and all associated data will be deleted!</p>
     </div>  
   	<div class="modal-footer">
-  		<button type="button" class="btn" data-dismiss="modal">Cancel</button>
-    	<button type="button" class="btn btn-danger" ng-click="deleteBusiness(activeBusiness.id)">Delete</button>
+  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
+    	<button type="button" class="btn btn-danger" ng-click="deleteBusiness(activeBusiness.id)" l="common.delete">Delete</button>
 	</div>
 </div>
