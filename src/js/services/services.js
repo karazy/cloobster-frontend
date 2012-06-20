@@ -9,18 +9,62 @@
 Cloobster.services = angular.module('Cloobster.services', ['ngResource']);
 
 /** 
+*	@constructor
+* 	Provider for the 'config' service.
+* 	Returns configuration object used in all services.
+* 
+* 	@author Nils Weiher
+*/
+Cloobster.services.provider('config', function() {
+	var self = this;
+	/**
+		Default config can be overridden with setConfig.
+		@private
+	*/
+	self.config_ = {
+		'serviceUrl' : ''
+	}
+
+	/**
+		Override the configuration paramters with the supplied map.
+
+		@param {Object.<string, string>} config Paramter object for configuration.
+			Only 'serviceUrl' is used at the moment.
+	*/
+	self.setConfig = function (config) {
+		self.config_['serviceUrl'] = config['serviceUrl'];
+	};
+
+	self.setServiceUrl = function(serviceUrl) {
+		self.config_['serviceUrl'] = serviceUrl;
+	};
+
+	self.$get = function() {
+		return self.config_;
+	};
+});
+
+Cloobster.services.factory('cloobsterResource',['$resource','config', function($resource, config) {
+	function ResourceFactory(url, paramDefaults, actions) {
+		return $resource(config['serviceUrl'] + url, paramDefaults, actions);
+	}
+
+	return ResourceFactory;
+}]);
+
+/** 
 * 	@constructor
 * 	Factory function that creates the 'Account' resource service.
 * 	See ngResource for further information on resource objects.
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Account',['$resource', function($resource) {
+Cloobster.services.factory('Account',['cloobsterResource', function(cloobsterResource) {
 	/**
 	*	@name Cloobster.services.Account
 	*	
 	*/
-	var Account = $resource('/b/accounts/:id',
+	var Account = cloobsterResource('/b/accounts/:id',
 			//params
 			{
 
@@ -46,7 +90,7 @@ Cloobster.services.factory('Account',['$resource', function($resource) {
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Business',['$resource', function($resource) {
+Cloobster.services.factory('Business',['cloobsterResource', function($resource) {
 	/**
 	*	@name Cloobster.services.Business
 	*	
@@ -101,7 +145,7 @@ Cloobster.services.factory('Business',['$resource', function($resource) {
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Company',['$resource', function($resource) {
+Cloobster.services.factory('Company',['cloobsterResource', function($resource) {
 		/**
 		*	@name Cloobster.services.Company
 		*	
@@ -148,8 +192,7 @@ Cloobster.services.factory('Company',['$resource', function($resource) {
 * 
 * 	@author Nils Weiher
 */
-Cloobster.services.
-factory('facebookApi', ['$q','$rootScope', function($q, $rootScope) {
+Cloobster.services.factory('facebookApi', ['$q','$rootScope', function($q, $rootScope) {
 	var fbApiService, 
 	loggedIn = false,
 	uid,
@@ -269,30 +312,14 @@ factory('facebookApi', ['$q','$rootScope', function($q, $rootScope) {
 }]);
 
 /** 
-*	@constructor
-* 	Factory function for the 'config' service.
-* 	Returns configuration object used in all services.
-* 
-* 	@author Nils Weiher
-*/
-Cloobster.services.factory('config', ['$q','$rootScope', '$log', function($q, $rootScope, $log) {
-	var config = { 
-		serviceUrl : '',
-		debug:  true
-	};
-
-	return config;
-}]);
-
-/** 
 * 	@constructor
 * 	Factory function for the 'login' service.
 * 	Returns the service.
 * 
 * 	@author Nils Weiher
 */
-Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$location', '$log', 'config', 
-	function($window, $http, $q, $rootScope, $location, $log, configuration) {
+Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log', 'config', 
+	function($window, $http, $q, $rootScope, $log, appConfig) {
 		var loginService,
 			loggedIn = false,
 			account,
@@ -313,7 +340,6 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$loca
 		account = data;
 		loggedIn = true;
 		$rootScope.loggedIn = true;
-		$rootScope.username = account.login;		
 		if(saveLogin === true) {
 			$window.localStorage['login'] = account.login;
 			$window.localStorage['hash'] = account.passwordHash;
@@ -323,9 +349,6 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$loca
 		$http.defaults.headers.common.passwordHash = account.passwordHash;
 
 		loginDeferred.resolve(data);
-
-		//show businesses on successful login
-		$location.url("/businesses");	
 	}
 
 	/**
@@ -380,7 +403,7 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$loca
 		confirmEmail: function (token) {
 			loginDeferred = $q.defer();
 			
-			$http.put( configuration.serviceUrl + '/b/accounts/emailconfirmation', {confirmationToken: token}).
+			$http.put( appConfig['serviceUrl'] + '/b/accounts/emailconfirmation', {confirmationToken: token}).
 			success(function (data) {
 				// resolve the promise with the JSON object returned by the server.
 				loginDeferred.resolve(data);
@@ -435,7 +458,7 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$loca
 				}
 				saveLogin = true;
 				
-				$http.get( configuration.serviceUrl + '/accounts/login',
+				$http.get( appConfig['serviceUrl'] + '/accounts/login',
 					{ headers: storedLogin }).
 					success(loginSuccess).error(loginError);
 				
@@ -451,9 +474,8 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$loca
 		*
 		*	Do a login with the given login parameters.
 		*
-		*	@params {Object} params Object with the following properties:
-		*		- **login** - {string} login name of the account
-		*		- **password** - {string} password for the account
+		*	@params {{login: string, password: string}} params Object containing login 
+		*		and password for the account.
 		*	@returns {Object} {@link angular.module.ng.$q promise} Object which	will
 		*		be resolved with the user account data, or rejected with an error message.
 		*/
@@ -471,7 +493,7 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$loca
 			}
 			saveLogin = params.save;
 			loginDeferred = $q.defer();
-			$http.get( configuration.serviceUrl + '/accounts/login',
+			$http.get( appConfig['serviceUrl'] + '/accounts/login',
 				{ headers: {'login' : params.login, 'password' : params.password } }).
 			success(loginSuccess).error(loginError);
 			return loginDeferred.promise;
@@ -501,7 +523,7 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$loca
 			}
 			saveLogin = params.save;
 			loginDeferred = $q.defer();
-			$http.get( configuration.serviceUrl + '/accounts/loginfb',
+			$http.get( appConfig['serviceUrl'] + '/accounts/loginfb',
 				{ params: {'uid' : params.uid, 'token' : params.token } }).
 			success(loginSuccess).error(loginError);
 			return loginDeferred.promise;
@@ -538,7 +560,7 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$loca
 * 	@author Frederik Reifschneider
 */
 Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log', 'config', 
-	function($window, $http, $q, $rootScope, $log, config) {
+	function($window, $http, $q, $rootScope, $log, appConfig) {
 		var uploadService = null,
 			fileUploadUrl;
 
@@ -556,7 +578,7 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 			$log.log('requestFileUploadInformation');
 
 			if(!fileUploadUrl) {
-				$http.get('/uploads/imagesurl').success(function(data, status) {
+				$http.get(appConfig['serviceUrl']+ '/uploads/imagesurl').success(function(data, status) {
 					$log.log('requestFileUploadInformation -> success');
 					fileUploadUrl = data;
 				})
