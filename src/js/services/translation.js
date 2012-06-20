@@ -32,7 +32,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"businesses.form.error.required" : "Bitte füllen Sie das Feld aus.",
 			"businesses.form.mandatory" : "Felder markiert mit * sind pflicht.",
 			"businesses.dialog.delete" : "Restaurant löschen",
-			"business.dialog.delete.text" : "und alle assozierten Daten werden gelöscht.",
+			"business.dialog.delete.text" : "{{activeBusiness.name}} und alle assozierten Daten werden gelöscht.",
 			//general
 			"common.warning.title" : "Warnung!",
 			"common.ok" : "Ok",
@@ -41,7 +41,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"common.delete" : "Löschen"
 		},
 		"EN" : {
-			"product.brand" : "Cloobster {{loggedIn}}"
+			"product.brand" : "Cloobster {{loggedIn}}",
+			"business.dialog.delete.text" : "{{activeBusiness.name}} will be eradicated!!!"
 		}
 	}
 

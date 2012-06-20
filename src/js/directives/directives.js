@@ -170,13 +170,17 @@ Cloobster.directives.directive('l', ['$locale', 'lang', '$interpolate', function
 		if(!key) {			
 			return;
 		}
-		//if no translation is found, don' replace html, this is useful to provide default values in html
+		//if no translation is found, don't replace html, this is useful to provide default values in html
 		translation = langService.translate(key) || iElement.html();
-		// console.log("translate " + key + " to "+translation);
 
+		// Interpolate the text to parse possible {{expressions}}
 		interpolation = $interpolate(translation);
 
+		// Register for changes to the interpolated translation.
+		// Ensure the translated value is updated if the binding changes.
 		scope.$watch(interpolation, function(newVal, oldVal) {
+			// Write the inner html text.
+			// newVal is the result of evaluating the interpolated expression against the scope.
 			iElement.html(newVal);
 		});
 	}
