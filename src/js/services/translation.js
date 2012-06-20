@@ -1,4 +1,4 @@
-/* @module Cloobster/Translations */
+/** @module Cloobster/Translations */
 
 /**
 *	@name Cloobster.Translations
@@ -41,7 +41,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"common.delete" : "Löschen"
 		},
 		"EN" : {
-
+			"product.brand" : "Cloobster {{loggedIn}}"
 		}
 	}
 

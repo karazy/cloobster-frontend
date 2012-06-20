@@ -671,7 +671,7 @@ Cloobster.services.factory('lang', ['$log', 'translation', function($log, transl
 	* Retrieve browser language.
 	*
 	*/
-	getBrowserLang = function() {
+	function getBrowserLang() {
 		var userLang = (navigator.language) ? navigator.language : navigator.userLanguage; 
 		$log.info('browser language: '+userLang);
 		if(userLang === 'undefined'|| userLang.length == 0) {
@@ -680,6 +680,8 @@ Cloobster.services.factory('lang', ['$log', 'translation', function($log, transl
 		}
 		return userLang.substring(0,2).toUpperCase();
 	}
+
+	var browserLang = getBrowserLang();
 
 	/**
 	*	@name Cloobser.services.lang
@@ -712,7 +714,7 @@ Cloobster.services.factory('lang', ['$log', 'translation', function($log, transl
 					return "";
 				}
 
-				return translation[getBrowserLang()][key] || "";
+				return translation[browserLang][key] || "";
 		}
 	}
 

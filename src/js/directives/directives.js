@@ -153,13 +153,14 @@ Cloobster.directives.directive('simplePropertyEditor', function() {
 * Used to translate ui texts.
 * Usage: l="languageKey"
 */
-Cloobster.directives.directive('l', ['$locale', 'lang', function($locale, langService) {
+Cloobster.directives.directive('l', ['$locale', 'lang', '$interpolate', function($locale, langService,$interpolate) {
 	//link function
 	return function (scope, iElement, iAttrs, controller) {
 		var key = iAttrs.l,
 			translation,
 			replacements = iAttrs.replacements,
-			argsArr;
+			argsArr,
+			interpolation;
 
 		// console.log(replacements);
 		// if(replacements) {
@@ -173,7 +174,11 @@ Cloobster.directives.directive('l', ['$locale', 'lang', function($locale, langSe
 		translation = langService.translate(key) || iElement.html();
 		// console.log("translate " + key + " to "+translation);
 
-		iElement.html(translation);
+		interpolation = $interpolate(translation);
+
+		scope.$watch(interpolation, function(newVal, oldVal) {
+			iElement.html(newVal);
+		});
 	}
 }]);
 
