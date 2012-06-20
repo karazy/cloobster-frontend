@@ -149,29 +149,26 @@ Cloobster.directives.directive('simplePropertyEditor', function() {
 	return config;
 });
 
-Cloobster.directives.directive('l', function() {
-	var map = {
-		"DE" : {
-			"product.title" : "bla",
-			"nav.restaurants" : "Restaurants",
-			"nav.about" : "Über"
-		}
-	}
+/**
+* Used to translate ui texts.
+* Usage: l="languageKey"
+*/
+Cloobster.directives.directive('l', ['$locale', 'lang', function($locale, langService) {
 	//link function
 	return function (scope, iElement, iAttrs, controller) {
 		var key = iAttrs.l,
-			translation,
-			ele = iElement[0];
+			translation;
 
 		if(!key) {			
 			return;
 		}
-
-		translation = map["DE"][key] || key;
+		//if no translation is found, don' replace html, this is useful to provide default values in html
+		translation = langService.translate(key) || iElement.html();
 		console.log("translate " + key + " to "+translation);
-		ele.text = translation;
-		ele.innerHtml = translation;
+		// ele.text = translation;
+		// ele.innerHtml = translation;
+		iElement.html(translation);
 	}
-});
+}]);
 
 

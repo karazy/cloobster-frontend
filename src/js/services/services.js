@@ -1,4 +1,4 @@
-/** @module Cloobster/Services */
+/* @module Cloobster/Services */
 
 /**
 *	@name Cloobster.Services
@@ -6,7 +6,7 @@
 *	Other modules can depend on this, and resolve service instances
 *	with angulars depency injection.
 */
-Cloobster.services = angular.module('Cloobster.services', ['ngResource']);
+Cloobster.services = angular.module('Cloobster.services', ['ngResource', "Cloobster.translations"]);
 
 /** 
 *	@constructor
@@ -655,4 +655,67 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 		};
 
 		return uploadService;
+}]);
+
+
+/** 
+* 	@constructor
+* 	Factory function for the 'lang' service.
+* 	Returns the service.
+* 
+* 	@author Frederik Reifschneider
+*/
+Cloobster.services.factory('lang', ['$log', 'translation', function($log, translation) {
+	/**
+	* @private
+	* Retrieve browser language.
+	*
+	*/
+	getBrowserLang = function() {
+		var userLang = (navigator.language) ? navigator.language : navigator.userLanguage; 
+		$log.info('browser language: '+userLang);
+		if(userLang === 'undefined'|| userLang.length == 0) {
+			//use default language
+			userLang = "DE";
+		}
+		return userLang.substring(0,2).toUpperCase();
+	}
+
+	/**
+	*	@name Cloobser.services.lang
+	*
+	*	Exposes methods for translation and language handling.
+	*
+	*	@author Frederik Reifschneider
+	*/
+	var langService = {
+		/**
+		* @name Cloobster.services.lang#get
+		* 
+		* Return Browser language.
+		*/
+		get: function() {
+					return getBrowserLang();
+		},
+		/**
+		* @name Cloobster.services.lang#translate
+		* 
+		* Get translation for given key.
+		* @param key
+		*		Key for string to translate
+		*	@return
+		*		Translated string.
+		*/
+		translate: function(key) {
+				
+				if(!key) {
+					return "";
+				}
+
+				return translation[getBrowserLang()][key] || "";
+		}
+	}
+
+	return langService;
+
 }]);
