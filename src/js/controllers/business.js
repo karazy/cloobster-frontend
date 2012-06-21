@@ -95,7 +95,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 			$scope.imageResource =	createImageResource($scope.activeBusiness.id);
 
-			$scope.activeFileUpload = uploadService.getFileUploadObject('.fileModal', $scope.imageResource);
+			// $scope.activeFileUpload = uploadService.getFileUploadObject('.fileModal', $scope.imageResource);
 		});
 	};
 

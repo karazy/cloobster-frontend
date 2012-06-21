@@ -593,7 +593,7 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 		* Initializes the upload plugin for a concrete file input element fields.
 		* It needs a previously optained fileUpeloadUrl for setup.
 		*/
-		function initUploadPlugin(fileInput, resource, statusObject) {
+		function initUploadPlugin(fileInput, resource, statusObject, callback) {
 			// if(!fileUploadUrl) {
 			// 	$log.error('initUploadPlugin: No fileUploadUrl set!');
 			// 	return;
@@ -606,9 +606,7 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 	    		url: fileUploadUrl,
 	    		fail: function(e, data) {
 	    			$log.error('Upload failed. Reason: '+data.errorThrown);
-	    			// $scope.$apply('logoUploadFinished = false');
-	    			
-	    			statusObject.status = false;
+	    		
 
 	    			if(data.textStatus == 400) {
 	    				//token is invalid request new one
@@ -616,6 +614,7 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 	    				// $scope.error = true;
 	    				// $scope.errorMessage = "Upload failed. Please retry."
 	    			}
+	    			callback();
 	    		},
 	    		done: function (e, data) {
 	    			//data properties: name, blobKey, url
@@ -624,9 +623,9 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 	    			resource.blobKey = images[0].blobKey;
 	    			resource.url = images[0].url;
 
-	    			statusObject.status = true;
-	    			// $scope.$apply('logoUploadFinished = true');
-	       		}
+	    			callback();
+
+	       	}
 			});
 
 		};
@@ -636,17 +635,15 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 			/**
 			* Initializes a fileupload.
 			* @param fileInput
-			*	The html file input that should be configured.
+			*		The html file input that should be configured.
 			* @param resource
-			*	
-			*
+			*		Imageresource used to set blobKey and url.
+			*	@param callback
+			*		Executed when upload has finished.
 			*/
-			getFileUploadObject : function(fileInput, resource) {
-				var status = {
-					finished: false
-				};
+			getFileUploadObject : function(fileInput, resource, callback) {
 
-				initUploadPlugin(fileInput, resource, status);
+				initUploadPlugin(fileInput, resource, status, callback);
 				return status;
 
 			}

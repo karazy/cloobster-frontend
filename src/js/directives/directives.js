@@ -174,10 +174,11 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 				 ' </div>'+
 				'  <form name="simpleImageForm" novalidate ng-submit="save()">'+
 					 '<div class="modal-body">'+
-					 	'<input type="file"></input>'+
+					 	'<img ng-src="{{editorImageResource.url}}=s128" style="width:128px; height:128px; margin-right: 10px;"></img>'+
+					 	'<input type="file" style="clear: both;"></input>'+
 					 ' <div class="modal-footer">'+
 					  '  <button type="button" class="btn" ng-click="cancel()" data-dismiss="modal" l="common.cancel">Close</button>'+
-					'    <button type="submit" class="btn btn-primary" data-loading-text="Saving..." l="common.save">Save</button>'+
+					'    <button type="submit" ng-disabled="!uploadFinished" class="btn btn-primary" data-loading-text="Saving..." l="common.save">Save</button>'+
 					'  </div>'+
 					'</form>'+
 				'</div>';
@@ -191,12 +192,19 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 		        post: function postLink(scope, iElement, iAttrs, controller) {
 		        	var dialog = iElement.find('div.modal'),
 		        		uploadInput = iElement.find('input[type=file]'),
-		        		uploadStatus;
+		        		uploadFinished = null;
 
+		        	scope.$apply('uploadFinished = false');
 
+		        	/** Gets localized title. */		        	
 		        	scope.getTitle = function() {
 		        		return langService.translate(scope.editorTitleKey);
-		        	}		        	
+		        	}
+
+		        	/** Called from upload service when upload is finished */
+		        	scope.setUploadFinished = function() {
+		        		scope.$apply('uploadFinished = true');
+		        	} 	
 
 
 		        	//backup original value
@@ -211,24 +219,28 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
     					});
 
 		        		activeImage.$save(function() {
-
+		        			scope.$apply('uploadFinished = false');
 							scope.editorOnSave({ "image" : activeImage});
 							dialog.modal('toggle');
 						});
 		        	}
 
 		        	scope.cancel = function() {
-		        		scope.editorOnCancel({ 
+		        		scope.uploadFinished = false;
+
+		        		if(scope.editorImageResource() && scope.editorImageResource().blobKey) {
+		        			scope.editorOnCancel({ 
 		        			"image" : {
 		        				"blobKey" : scope.editorImageResource().blobKey
 		        			}
 		        		});
+		        		}
 		        	}
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {		   
 		        		if(scope.editorEnabled() == true) {
 		        			//init file upload plugin for this dialog
-	        				uploadStatus = uploadService.getFileUploadObject(uploadInput, scope.editorImageResource());
+	        				uploadStatus = uploadService.getFileUploadObject(uploadInput, scope.editorImageResource(), scope.setUploadFinished);
 						
 							dialog.modal('toggle');	
 		        		}
