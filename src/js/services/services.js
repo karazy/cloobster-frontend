@@ -600,9 +600,9 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 			// }
 			//selector, upload url, imageresource
 			//set up filedupload for logo
-			jQuery('#'+fileInput).fileupload({
+			jQuery(fileInput).fileupload({
 	    		dataType: 'json',
-	    		// acceptFileType: /(\.|\/)(gif|jpe?g|png)$/i,
+	    		acceptFileType: /(\.|\/)(gif|jpe?g|png)$/i,
 	    		url: fileUploadUrl,
 	    		fail: function(e, data) {
 	    			$log.error('Upload failed. Reason: '+data.errorThrown);

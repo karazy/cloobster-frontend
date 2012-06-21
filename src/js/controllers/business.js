@@ -15,8 +15,6 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		/** Holds the Id of the active modal dialog.
 		@type {string} */
 	var activeModalDialog = "",
-		/** Template resource used to create concrete image resources. */
-		imageResource,
 		/** Active image resource. */
 		activeImage,
 		/** Id of business to delete. */
@@ -24,6 +22,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 	/** Resource for CRUD on businesses. */	
 	$scope.businessResource = null;
+	/** Template resource used to create concrete image resources. */
+	$scope.imageResource = null;
 	$scope.businesses = null;
 	/** The currently selected business. */
 	$scope.activeBusiness = null;
@@ -89,12 +89,13 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	* 	business to load
 	*/
 	$scope.loadBusiness = function(id) {
-		$scope.activeBusiness = $scope.businessResource.get({'id' : id}, function() {
-			imageResource =	createImageResource($scope.activeBusiness.id);
+		$scope.activeBusiness = $scope.businessResource.get({'id' : id}, function() {						
 			//if no images are included init with empty object
 			$scope.activeBusiness.images = $scope.activeBusiness.images || {};
 
-			$scope.activeFileUpload = uploadService.getFileUploadObject('fileModal', imageResource);
+			$scope.imageResource =	createImageResource($scope.activeBusiness.id);
+
+			$scope.activeFileUpload = uploadService.getFileUploadObject('.fileModal', $scope.imageResource);
 		});
 	};
 
@@ -172,34 +173,34 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		return ($scope.editMode) ? "edit" : "";
 	}
 
-	$scope.editSimpleData = function(title, value, property, inputType) {
-		var modalDialog = "";
+	// $scope.editSimpleData = function(title, value, property, inputType) {
+	// 	var modalDialog = "";
 
-		if(!$scope.editMode) {
-			return;
-		}
+	// 	if(!$scope.editMode) {
+	// 		return;
+	// 	}
 
-		$scope.activeProperty = {
-			'title' : title,
-			'value' : value,
-			'property' : property
-		};
+	// 	$scope.activeProperty = {
+	// 		'title' : title,
+	// 		'value' : value,
+	// 		'property' : property
+	// 	};
 
-		switch(inputType) {
-			case 'text': modalDialog = '#textModal'; break;
-			case 'textarea': modalDialog = '#textareaModal'; break;
-			case 'file': modalDialog = '#fileModal'; break;
-			default: modalDialog = '#textModal'; break;
-		};
+	// 	switch(inputType) {
+	// 		case 'text': modalDialog = '#textModal'; break;
+	// 		case 'textarea': modalDialog = '#textareaModal'; break;
+	// 		case 'file': modalDialog = '#fileModal'; break;
+	// 		default: modalDialog = '#textModal'; break;
+	// 	};
 
-		activeModalDialog = modalDialog;
+	// 	activeModalDialog = modalDialog;
 
-		$(modalDialog).on('hide', function () {
-  			$scope.cancelProperty();
-		});
+	// 	$(modalDialog).on('hide', function () {
+ //  			$scope.cancelProperty();
+	// 	});
 
-		jQuery(modalDialog).modal('toggle');
-	};
+	// 	jQuery(modalDialog).modal('toggle');
+	// };
 
 	$scope.editImageData = function(title, value, property) {
 		if(!$scope.editMode) {
@@ -248,7 +249,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	* Save last edited image in images property.
 	*/
 	$scope.saveImage = function() {
-		var property = $scope.activeProperty.property;
+		var property = $scope.activeProperty.property,
+			imageResource = $scope.imageResource;
 
 		
 		activeImage = new imageResource({
@@ -266,12 +268,32 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			$scope.activeBusiness.images = $scope.activeBusiness.images || {};
 			//set saved logo as new business logo
 			$scope.activeBusiness.images[property] = {
-				url: imageResource.url + '=s128',
+				url: imageResource.url,
 				blobKey: imageResource.blobKey
 			};
 		});
 
 		$(activeModalDialog).modal('hide');
+	}
+
+	$scope.setImage = function(image) {
+		$log.info("save image " + image);
+		//make sure that images exist!
+		$scope.activeBusiness.images = $scope.activeBusiness.images || {};
+		//set saved logo as new business logo
+		$scope.activeBusiness.images[image.id] = {
+			url: image.url,
+			blobKey: image.blobKey
+		};
+	}
+
+	$scope.discardImage = function(image) {
+		if(image && image.blobKey) {
+			$http['delete']('/uploads/images/' + image.blobKey)
+			.error(function() {
+				//handle error
+			});
+		}
 	}
 
 	/**

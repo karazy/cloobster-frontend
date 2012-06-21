@@ -8,7 +8,6 @@
 */
 Cloobster.directives = angular.module('Cloobster.directives', []);
 
-// angular.module('Cloobster.directives', [])
 Cloobster.directives.directive('simplePropertyEditor', function() {
 	var inputType, //type of the input to generate in form
 		required, //if present marks a required field
@@ -149,8 +148,101 @@ Cloobster.directives.directive('simplePropertyEditor', function() {
 	return config;
 });
 
+Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(uploadService, langService) {
+	var inputType, //type of the input to generate in form
+		required, //if present marks a required field
+		//directive configuration
+		config = {
+		restrict: 'A',
+		replace: false,
+		transclude: true,
+		scope: {
+			editorTitleKey: 'bind',
+			editorOnSave: 'expression',
+			editorOnCancel: 'expression',
+			editorImageResource: 'accessor',
+			editorImageId: 'bind',
+			editorEnabled: 'accessor'
+		},
+		compile: function(element, attrs, transclude) {
+			var html = 
+				'<div class="toggler" ng-transclude></div>'+
+				'<div class="modal hide">'+
+				  '<div class="modal-header">'+
+				   '<button type="button" class="close" ng-click="cancel()" data-dismiss="modal">×</button>'+
+				    '<h3>{{getTitle()}}</h3>'+
+				 ' </div>'+
+				'  <form name="simpleImageForm" novalidate ng-submit="save()">'+
+					 '<div class="modal-body">'+
+					 	'<input type="file"></input>'+
+					 ' <div class="modal-footer">'+
+					  '  <button type="button" class="btn" ng-click="cancel()" data-dismiss="modal" l="common.cancel">Close</button>'+
+					'    <button type="submit" class="btn btn-primary" data-loading-text="Saving..." l="common.save">Save</button>'+
+					'  </div>'+
+					'</form>'+
+				'</div>';
+			
+			element.append(html);
+
+			return {
+		        pre: function preLink(scope, iElement, iAttrs, controller) { 
+		        	
+		        },
+		        post: function postLink(scope, iElement, iAttrs, controller) {
+		        	var dialog = iElement.find('div.modal'),
+		        		uploadInput = iElement.find('input[type=file]'),
+		        		uploadStatus;
+
+
+		        	scope.getTitle = function() {
+		        		return langService.translate(scope.editorTitleKey);
+		        	}		        	
+
+
+		        	//backup original value
+		        	scope.save = function() {
+		        		var imageResource = scope.editorImageResource(),
+		        			activeImage = null;
+
+		        		activeImage = new imageResource({
+		    				id: scope.editorImageId,
+		    				blobKey: imageResource.blobKey,
+		    				url: imageResource.url
+    					});
+
+		        		activeImage.$save(function() {
+
+							scope.editorOnSave({ "image" : activeImage});
+							dialog.modal('toggle');
+						});
+		        	}
+
+		        	scope.cancel = function() {
+		        		scope.editorOnCancel({ 
+		        			"image" : {
+		        				"blobKey" : scope.editorImageResource().blobKey
+		        			}
+		        		});
+		        	}
+		        	
+		        	iElement.find('div.toggler').bind('click', function() {		   
+		        		if(scope.editorEnabled() == true) {
+		        			//init file upload plugin for this dialog
+	        				uploadStatus = uploadService.getFileUploadObject(uploadInput, scope.editorImageResource());
+						
+							dialog.modal('toggle');	
+		        		}
+					});
+
+		        }
+		      }
+		}
+	};
+	return config;
+}]);
+
 /**
-* Used to translate ui texts.
+* Used to translate UI texts.
 * Usage: l="languageKey"
 */
 Cloobster.directives.directive('l', ['$locale', 'lang', '$interpolate', function($locale, langService,$interpolate) {
@@ -167,7 +259,7 @@ Cloobster.directives.directive('l', ['$locale', 'lang', '$interpolate', function
 		// 	argsArr = scope.$eval('[' + replacements + ']');	
 		// }
         
-		if(!key) {			
+		if(!key) {
 			return;
 		}
 		//if no translation is found, don't replace html, this is useful to provide default values in html

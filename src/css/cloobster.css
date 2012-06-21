@@ -31,7 +31,7 @@
 
 /* Profile view */
 .content-wrapper {
-
+  position: relative;
 }
 
 .noLogo {
@@ -43,6 +43,12 @@
   text-align: center;
   top: 45%;
   position: relative;
+}
+
+.logo {
+  position: absolute;
+  top: -10px;
+  right: 10px;
 }
 
 .data-element {
@@ -81,7 +87,10 @@ h1.edit:hover, h2.edit:hover {
   display: inline-block;
 }
 
-.image-box {
+.imagebox {
+  position: relative;
   border: lightgray 1px solid;
-  height: 50px;
+  border-radius: 0.5em;
+  margin: 1em 0 1em 0;
+  padding: 0.5em;
 }

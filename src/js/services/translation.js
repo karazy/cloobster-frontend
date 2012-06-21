@@ -33,12 +33,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"businesses.form.mandatory" : "Felder markiert mit * sind pflicht.",
 			"businesses.dialog.delete" : "Restaurant löschen",
 			"business.dialog.delete.text" : "{{activeBusiness.name}} und alle assozierten Daten werden gelöscht.",
+			//business detail partial
+			"business.detail.logo.dialog.title" : "Logo",
+			"business.detail.picture1.dialog.title" : "Profilbild 1",
+			"business.detail.picture2.dialog.title" : "Profilbild 2",
+			"business.detail.picture3.dialog.title" : "Profilbild 3",
 			//general
 			"common.warning.title" : "Warnung!",
 			"common.ok" : "Ok",
 			"common.cancel" : "Abbrechen",
 			"common.add" : "Hinzufügen",
-			"common.delete" : "Löschen"
+			"common.delete" : "Löschen",
+			"common.save" : "Speichern"
 		},
 		"EN" : {
 			"product.brand" : "Cloobster {{loggedIn}}",
