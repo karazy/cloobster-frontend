@@ -94,3 +94,15 @@ h1.edit:hover, h2.edit:hover {
   margin: 1em 0 1em 0;
   padding: 0.5em;
 }
+
+.upload-image-placeholder {
+  width: 128px;
+  height: 128px;
+  background-color: gray;
+}
+
+.upload-image {
+  width:128px; 
+  height:128px; 
+  margin-left: 10px;
+  } 

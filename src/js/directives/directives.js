@@ -174,8 +174,10 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 				 ' </div>'+
 				'  <form name="simpleImageForm" novalidate ng-submit="save()">'+
 					 '<div class="modal-body">'+
-					 	'<img ng-src="{{editorImageResource.url}}=s128" style="width:128px; height:128px; margin-right: 10px;"></img>'+
-					 	'<input type="file" style="clear: both;"></input>'+
+					 	'<div style="height:128px;">'+
+					 		'<input type="file" style="top:40px; position: relative;"></input>'+
+				 		'</div>'+
+					 	'<img ng-src="{{tmpImageUrl}}" ng-show="tmpImageUrl" class="upload-image"></img>'+					 	
 					 ' <div class="modal-footer">'+
 					  '  <button type="button" class="btn" ng-click="cancel()" data-dismiss="modal" l="common.cancel">Close</button>'+
 					'    <button type="submit" ng-disabled="!uploadFinished" class="btn btn-primary" data-loading-text="Saving..." l="common.save">Save</button>'+
@@ -184,7 +186,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 				'</div>';
 			
 			element.append(html);
-
+			//'<div ng-hide="tmpImageUrl" class="upload-image-placeholder"></div>'+
 			return {
 		        pre: function preLink(scope, iElement, iAttrs, controller) { 
 		        	
@@ -192,19 +194,25 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 		        post: function postLink(scope, iElement, iAttrs, controller) {
 		        	var dialog = iElement.find('div.modal'),
 		        		uploadInput = iElement.find('input[type=file]'),
-		        		uploadFinished = null;
+		        		uploadFinished = null,
+		        		tmpImageUrl = "";
 
 		        	scope.$apply('uploadFinished = false');
+		        	scope.$apply('tmpImageUrl = ""');
 
-		        	/** Gets localized title. */		        	
+		        	/** Gets localized title. */
 		        	scope.getTitle = function() {
 		        		return langService.translate(scope.editorTitleKey);
 		        	}
 
 		        	/** Called from upload service when upload is finished */
 		        	scope.setUploadFinished = function() {
+		        		var imageResource = scope.editorImageResource(),
+		        			imageUrl = imageResource.url;
+
 		        		scope.$apply('uploadFinished = true');
-		        	} 	
+		        		scope.$apply('tmpImageUrl = "'+ imageResource.url + '=s128"');
+		        	}
 
 
 		        	//backup original value
@@ -218,15 +226,13 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 		    				url: imageResource.url
     					});
 
-		        		activeImage.$save(function() {
-		        			scope.$apply('uploadFinished = false');
+		        		activeImage.$save(function() {		        			
 							scope.editorOnSave({ "image" : activeImage});
 							dialog.modal('toggle');
 						});
 		        	}
 
 		        	scope.cancel = function() {
-		        		scope.uploadFinished = false;
 
 		        		if(scope.editorImageResource() && scope.editorImageResource().blobKey) {
 		        			scope.editorOnCancel({ 
@@ -236,6 +242,12 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 		        		});
 		        		}
 		        	}
+
+					/** Reset url and uploadFinished on hide. */
+					dialog.on("hide", function() {
+						scope.$apply('uploadFinished = false');		        		
+		        		scope.$apply('tmpImageUrl = ""');
+					});
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {		   
 		        		if(scope.editorEnabled() == true) {
