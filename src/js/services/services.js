@@ -562,7 +562,8 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log', 'config', 
 	function($window, $http, $q, $rootScope, $log, appConfig) {
 		var uploadService = null,
-			fileUploadUrl;
+			fileUploadUrl,
+			addedFile = null;
 
 		$rootScope.$watch('loggedIn', function(newValue, oldValue) { 
 			if(newValue == true) {
@@ -593,18 +594,44 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 		* Initializes the upload plugin for a concrete file input element fields.
 		* It needs a previously optained fileUpeloadUrl for setup.
 		*/
-		function initUploadPlugin(fileInput, resource, statusObject, callback) {
+		function initUploadPlugin(fileInput, resource, statusObject, fileAddCallback, fileUploadCallback) {
 			// if(!fileUploadUrl) {
 			// 	$log.error('initUploadPlugin: No fileUploadUrl set!');
 			// 	return;
 			// }
 			//selector, upload url, imageresource
 			//set up filedupload for logo
-			jQuery(fileInput).fileupload({
-	    		dataType: 'json',
-	    		acceptFileType: /(\.|\/)(gif|jpe?g|png)$/i,
-	    		url: fileUploadUrl,
-	    		fail: function(e, data) {
+			// jQuery(fileInput).fileupload({
+	  //   		dataType: 'json',
+	  //   		acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+	  //   		autoUpload: true,
+	  //   		url: fileUploadUrl,
+	  //   		fail: function(e, data) {
+	  //   			$log.error('Upload failed. Reason: '+data.errorThrown);
+	    		
+
+	  //   			if(data.textStatus == 400) {
+	  //   				//token is invalid request new one
+	  //   				// requestFileUploadInformation();
+	  //   				// $scope.error = true;
+	  //   				// $scope.errorMessage = "Upload failed. Please retry."
+	  //   			}
+	  //   			callback(false);
+	  //   		},
+	  //   		done: function (e, data) {
+	  //   			//data properties: name, blobKey, url
+	  //   			var images = data.result;
+	  //   			//create logo resource object
+	  //   			resource.blobKey = images[0].blobKey;
+	  //   			resource.url = images[0].url;
+
+	  //   			callback(true);
+
+	  //      	}
+			// });
+
+				jQuery(fileInput).fileupload({
+					fail: function(e, data) {
 	    			$log.error('Upload failed. Reason: '+data.errorThrown);
 	    		
 
@@ -614,7 +641,8 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 	    				// $scope.error = true;
 	    				// $scope.errorMessage = "Upload failed. Please retry."
 	    			}
-	    			callback();
+
+	    			fileUploadCallback(false);
 	    		},
 	    		done: function (e, data) {
 	    			//data properties: name, blobKey, url
@@ -623,10 +651,30 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 	    			resource.blobKey = images[0].blobKey;
 	    			resource.url = images[0].url;
 
-	    			callback();
+	    			addedFile = null;
 
+	    			fileUploadCallback(true);	    			    			
 	       	}
-			});
+				});
+
+        jQuery(fileInput).fileupload('option', {
+            url: fileUploadUrl,
+            maxFileSize: 10000000,
+            autoUpload: false,
+            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+            process: [
+                {
+                    action: 'load',
+                    fileTypes: /^image\/(gif|jpeg|png)$/,
+                    maxFileSize: 20000000 // 20MB
+                }
+            ]
+        });
+
+        jQuery(fileInput).bind('fileuploadadd', function (e, data) {
+        	addedFile = data;
+        	fileAddCallback(data.files[0].name);
+        });
 
 		};
 
@@ -638,13 +686,27 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 			*		The html file input that should be configured.
 			* @param resource
 			*		Imageresource used to set blobKey and url.
-			*	@param callback
-			*		Executed when upload has finished.
+			*	@param fileAddCallback
+			*		Called when a file has beed added for upload.
+			*	@param fileUploadCallback
+			*		Called when upload has finished.
 			*/
-			getFileUploadObject : function(fileInput, resource, callback) {
+			getFileUploadObject : function(fileInput, resource, fileAddCallback, fileUploadCallback) {
 
-				initUploadPlugin(fileInput, resource, status, callback);
-				return status;
+				initUploadPlugin(fileInput, resource, status, fileAddCallback, fileUploadCallback);
+
+				return {
+					/**
+					* Triggers file upload.
+					*/
+					upload: function() {
+						//if file has beed added to queue, upload it
+						if(addedFile) {
+							addedFile.submit();
+						};
+					}
+				}
+				;
 
 			}
 

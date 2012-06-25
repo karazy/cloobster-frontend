@@ -38,13 +38,17 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"business.detail.picture1.dialog.title" : "Profilbild 1",
 			"business.detail.picture2.dialog.title" : "Profilbild 2",
 			"business.detail.picture3.dialog.title" : "Profilbild 3",
+			"business.detail.picture.edit" : "Bild anklicken zum editieren",
 			//general
 			"common.warning.title" : "Warnung!",
 			"common.ok" : "Ok",
 			"common.cancel" : "Abbrechen",
 			"common.add" : "Hinzufügen",
 			"common.delete" : "Löschen",
-			"common.save" : "Speichern"
+			"common.save" : "Speichern",
+			//file upload
+			"fileupload.button.add" : "Bild auswählen ...",
+			"fileupload.image.label" : "Ausgewähltes Bild: "
 		},
 		"EN" : {
 			"product.brand" : "Cloobster {{loggedIn}}",

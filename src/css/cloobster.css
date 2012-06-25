@@ -95,6 +95,14 @@ h1.edit:hover, h2.edit:hover {
   padding: 0.5em;
 }
 
+.edit-property-form {
+  margin: 0;
+}
+
+.upload-image-form {
+  margin: 0;
+}
+
 .upload-image-placeholder {
   width: 128px;
   height: 128px;

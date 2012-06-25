@@ -34,7 +34,7 @@
 				<div simple-image-editor editor-title-key="business.detail.logo.dialog.title" editor-image-id="logo" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
 					<div ng-show="activeBusiness.images.logo.url" class="logo">
 						<img  ng-src="{{activeBusiness.images.logo.url}}=s128" alt="click to edit" />
-						<p>Click image to edit</p>
+						<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
 					</div>
 					<button ng-show="!activeBusiness.images.logo" ng-disabled="!editMode" class="btn logo">Add Logo</button>
 				</div>
@@ -43,7 +43,7 @@
 						<div simple-image-editor editor-title-key="business.detail.picture1.dialog.title" editor-image-id="picture1" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
 							<div ng-show="activeBusiness.images.picture1.url">
 								<img  ng-src="{{activeBusiness.images.picture1.url}}=s128" alt="click to edit" />
-								<p>Click image to edit</p>
+								<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
 							</div>
 							<button ng-show="!activeBusiness.images.picture1" ng-disabled="!editMode" class="btn">Add Profile Picture1</button>
 						</div>
@@ -52,7 +52,7 @@
 						<div simple-image-editor editor-title-key="business.detail.picture2.dialog.title" editor-image-id="picture2" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
 							<div ng-show="activeBusiness.images.picture2.url">
 								<img  ng-src="{{activeBusiness.images.picture2.url}}=s128" alt="click to edit" />
-								<p>Click image to edit</p>
+								<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
 							</div>
 							<button ng-show="!activeBusiness.images.picture2" ng-disabled="!editMode" class="btn">Add Profile Picture2</button>
 						</div>
@@ -61,7 +61,7 @@
 						<div simple-image-editor editor-title-key="business.detail.picture3.dialog.title" editor-image-id="picture3" editor-on-save="setImage(image)" editor-on-	cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
 							<div ng-show="activeBusiness.images.picture3.url">
 								<img  ng-src="{{activeBusiness.images.picture3.url}}=s128" alt="click to edit" />
-								<p>Click image to edit</p>
+								<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
 							</div>
 							<button ng-show="!activeBusiness.images.picture3" ng-disabled="!editMode" class="btn">Add Profile Picture3</button>
 						</div>

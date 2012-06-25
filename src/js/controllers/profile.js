@@ -297,32 +297,32 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 		}
 		//selector, upload url, imageresource
 		//set up filedupload for logo
-		jQuery('#logo').fileupload({
-    		dataType: 'json',
-    		// acceptFileType: /(\.|\/)(gif|jpe?g|png)$/i,
-    		url: $scope.fileUploadUrl,
-    		fail: function(e, data) {
-    			$log.error('Upload failed. Reason: '+data.errorThrown);
-    			$scope.$apply('logoUploadFinished = false');
-    			if(data.textStatus == 400) {
-    				//token is invalid request new one
-    				// requestFileUploadInformation();
-    				// $scope.error = true;
-    				// $scope.errorMessage = "Upload failed. Please retry."
-    			}
-    		},
-    		done: function (e, data) {
-    			//data properties: name, blobKey, url
-    			var images = data.result;
-    			//create logo resource object
-    			$scope.logoResource = new ImageResource({
-    				id: 'logo',
-    				blobKey: images[0].blobKey,
-    				url: images[0].url
-    			});
-    			$scope.$apply('logoUploadFinished = true');
-       		}
-		});
+		// jQuery('#logo').fileupload({
+  //   		dataType: 'json',
+  //   		// acceptFileType: /(\.|\/)(gif|jpe?g|png)$/i,
+  //   		url: $scope.fileUploadUrl,
+  //   		fail: function(e, data) {
+  //   			$log.error('Upload failed. Reason: '+data.errorThrown);
+  //   			$scope.$apply('logoUploadFinished = false');
+  //   			if(data.textStatus == 400) {
+  //   				//token is invalid request new one
+  //   				// requestFileUploadInformation();
+  //   				// $scope.error = true;
+  //   				// $scope.errorMessage = "Upload failed. Please retry."
+  //   			}
+  //   		},
+  //   		done: function (e, data) {
+  //   			//data properties: name, blobKey, url
+  //   			var images = data.result;
+  //   			//create logo resource object
+  //   			$scope.logoResource = new ImageResource({
+  //   				id: 'logo',
+  //   				blobKey: images[0].blobKey,
+  //   				url: images[0].url
+  //   			});
+  //   			$scope.$apply('logoUploadFinished = true');
+  //      		}
+		// });
 
 	};
 
