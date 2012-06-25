@@ -33,7 +33,7 @@
 			<div class="span12">
 				<div simple-image-editor editor-title-key="business.detail.logo.dialog.title" editor-image-id="logo" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
 					<div ng-show="activeBusiness.images.logo.url" class="logo">
-						<img  ng-src="{{activeBusiness.images.logo.url}}=s128" alt="click to edit" />
+						<img  ng-src="{{activeBusiness.images.logo.url}}=s96" alt="click to edit" />
 						<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
 					</div>
 					<button ng-show="!activeBusiness.images.logo" ng-disabled="!editMode" class="btn logo">Add Logo</button>
@@ -105,20 +105,4 @@
 				<div class="value">{{activeBusiness.phone}}</div>
 			</div>
 		</div>
-</div>
-<!-- Property editing dialogs. -->
-<div class="modal hide" class="fileModal">
-  <div class="modal-header">
-    <button type="button" class="close" ng-click="cancelImage()" data-dismiss="modal">×</button>
-    <h3>{{activeProperty.title}}</h3>
-  </div>
-  <form novalidate ng-submit="saveImage()">
-	  <div class="modal-body">
-	    	<input type="file" id="imageUpload"></input>
-	  </div>
-	  <div class="modal-footer">
-	    <button type="button" class="btn" ng-click="cancelImage()" data-dismiss="modal" l="common.cancel">Cancel</button>
-	    <button type="submit" class="btn btn-primary" l="common.save">Save</button>
-	  </div>
-  </form>
 </div>

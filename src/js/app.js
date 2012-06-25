@@ -14,7 +14,11 @@ Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster
   	$routeProvider.when('/about', {template: 'partials/impressum.html'});
   	$routeProvider.when('/registration', {template: 'partials/registration_form.html', controller: Cloobster.Registration});
     $routeProvider.when('/profile', {template: 'partials/profile.html', controller: Cloobster.Profile});
-    $routeProvider.when('/account/confirm/:emailToken', {template: 'partials/confirmemail.html', controller: Cloobster.Registration});
+    $routeProvider.when('/account/confirm/:emailToken', {template: 'partials/confirmemail.html', controller: Cloobster.Registration});    
+    $routeProvider.when('/menus', {template: 'partials/management.html', controller: Cloobster.Management});
+    $routeProvider.when('/menus/:id', {template: 'partials/management.html', controller: Cloobster.Management});
+    $routeProvider.when('/menus/:id/products', {template: 'partials/management.html', controller: Cloobster.Management});
+    $routeProvider.when('/menus/:id/products/:id', {template: 'partials/management.html', controller: Cloobster.Management});
     $routeProvider.when('/businesses', {template: 'partials/businesses.html', controller: Cloobster.Business});
     $routeProvider.when('/businesses/new', {template: 'partials/businesses.html', controller: Cloobster.Business});
     $routeProvider.when('/businesses/:id', {template: 'partials/businessdetail.html', controller: Cloobster.Business});

@@ -18,6 +18,7 @@ Cloobster.Navigation = function($scope, $location, loginService) {
 	*/
 	$scope.getActive = function(path) {
 		location = $location.path();		
+		//TODO matches benutzen um subpfade abzudecken
 		return (path == location) ? "active" : "";
 	}
 

@@ -15,6 +15,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"nav.logout" : "Logout",
 			"nav.login": "Login",
 			"nav.restaurants" : "Restaurants",
+			"nav.menus" : "Menüs",
 			"nav.about" : "Über",
 			"nav.profile" : "Profil",
 			"nav.registration" : "Registrieren",
@@ -48,7 +49,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"common.save" : "Speichern",
 			//file upload
 			"fileupload.button.add" : "Bild auswählen ...",
-			"fileupload.image.label" : "Ausgewähltes Bild: "
+			"fileupload.image.label" : "Ausgewähltes Bild: ",
+			"fileupload.button.submit.saving" : "Speichere ...",
+			"fileupload.submit.error" : "Beim Hochladen ist ein Fehler aufgetreten."
 		},
 		"EN" : {
 			"product.brand" : "Cloobster {{loggedIn}}",

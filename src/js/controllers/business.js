@@ -173,35 +173,6 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		return ($scope.editMode) ? "edit" : "";
 	}
 
-	// $scope.editSimpleData = function(title, value, property, inputType) {
-	// 	var modalDialog = "";
-
-	// 	if(!$scope.editMode) {
-	// 		return;
-	// 	}
-
-	// 	$scope.activeProperty = {
-	// 		'title' : title,
-	// 		'value' : value,
-	// 		'property' : property
-	// 	};
-
-	// 	switch(inputType) {
-	// 		case 'text': modalDialog = '#textModal'; break;
-	// 		case 'textarea': modalDialog = '#textareaModal'; break;
-	// 		case 'file': modalDialog = '#fileModal'; break;
-	// 		default: modalDialog = '#textModal'; break;
-	// 	};
-
-	// 	activeModalDialog = modalDialog;
-
-	// 	$(modalDialog).on('hide', function () {
- //  			$scope.cancelProperty();
-	// 	});
-
-	// 	jQuery(modalDialog).modal('toggle');
-	// };
-
 	$scope.editImageData = function(title, value, property) {
 		if(!$scope.editMode) {
 			return;
@@ -248,33 +219,33 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	/**
 	* Save last edited image in images property.
 	*/
-	$scope.saveImage = function() {
-		var property = $scope.activeProperty.property,
-			imageResource = $scope.imageResource;
+	// $scope.saveImage = function() {
+	// 	var property = $scope.activeProperty.property,
+	// 		imageResource = $scope.imageResource;
 
 		
-		activeImage = new imageResource({
-    				id: property,
-    				blobKey: imageResource.blobKey,
-    				url: imageResource.url
-    	});
+	// 	activeImage = new imageResource({
+ //    				id: property,
+ //    				blobKey: imageResource.blobKey,
+ //    				url: imageResource.url
+ //    	});
 
-		//save image under the given property. e. g. logo
-		imageResource.id = property;
+	// 	//save image under the given property. e. g. logo
+	// 	imageResource.id = property;
 
-		activeImage.$save(function() {
-			//success callback
-			//make sure that images exist!
-			$scope.activeBusiness.images = $scope.activeBusiness.images || {};
-			//set saved logo as new business logo
-			$scope.activeBusiness.images[property] = {
-				url: imageResource.url,
-				blobKey: imageResource.blobKey
-			};
-		});
+	// 	activeImage.$save(function() {
+	// 		//success callback
+	// 		//make sure that images exist!
+	// 		$scope.activeBusiness.images = $scope.activeBusiness.images || {};
+	// 		//set saved logo as new business logo
+	// 		$scope.activeBusiness.images[property] = {
+	// 			url: imageResource.url,
+	// 			blobKey: imageResource.blobKey
+	// 		};
+	// 	});
 
-		$(activeModalDialog).modal('hide');
-	}
+	// 	$(activeModalDialog).modal('hide');
+	// }
 
 	$scope.setImage = function(image) {
 		$log.info("save image " + image);
@@ -299,21 +270,21 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	/**
 	* Discards changes made to an image and leaves edit mode.
 	*/
-	$scope.cancelImage = function() {
-		// $scope.logoFormMode = "view";
-		// $scope.logoUploadFinished = false;
+	// $scope.cancelImage = function() {
+	// 	// $scope.logoFormMode = "view";
+	// 	// $scope.logoUploadFinished = false;
 
-		//delete image from images bucket
-		if(activeImage && activeImage.blobKey) {
-			$http['delete']('/uploads/images/' + activeImage.blobKey)
-			.success(function() {
-				activeImage = null;
-			})
-			.error(function() {
-				//handle error
-			});
-		}
-	};
+	// 	//delete image from images bucket
+	// 	if(activeImage && activeImage.blobKey) {
+	// 		$http['delete']('/uploads/images/' + activeImage.blobKey)
+	// 		.success(function() {
+	// 			activeImage = null;
+	// 		})
+	// 		.error(function() {
+	// 			//handle error
+	// 		});
+	// 	}
+	// };
 
 	/*
 	* Get css class for field highlighting.
