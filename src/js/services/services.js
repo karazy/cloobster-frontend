@@ -140,6 +140,54 @@ Cloobster.services.factory('Business',['cloobsterResource', function($resource) 
 
 /** 
 * 	@constructor
+* 	Factory function that creates the 'Menu' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Frederik Reifschneider
+*/
+Cloobster.services.factory('Menu', ['cloobsterResource', function($resource) {
+	/**
+	*	@name Cloobster.services.Menu
+	*	
+	*/
+	var Menu = {
+		/**
+		*
+		*/
+		buildResource: function(accountId, businessId) {
+			return $resource('/b/businesses/:bid/menus/:mid',
+				{
+					'mid' : '@id',
+				},
+				{
+						/**
+						* @name Cloobster.services.Menu#$query
+						* @override
+						* Overrides default query method by adding account as default parameter
+						*/
+						'query':  {method:'GET', params: {'account' : accountId, 'bid' : businessId}, isArray:true},
+						/**
+						*	@name Cloobster.services.Business#$clone
+						* 	Called to register a new business account for the Cloobster service.
+						*	@params {Object} Object containing all the properties of the Business to be created.
+						*/
+						'clone': { method: 'POST'},
+						/*
+						* @name Cloobster.services.Business#$update
+						* Like a save but uses PUT instead of POST. Feels more restful.
+						*/
+						'update': { method: 'PUT'}
+				}
+
+				)
+		}
+	}
+
+	return Menu;
+}]);
+
+/** 
+* 	@constructor
 * 	Factory function that creates the 'Company' resource service.
 * 	See ngResource for further information on resource objects.
 * 

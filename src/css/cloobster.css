@@ -114,4 +114,9 @@ h1.edit:hover, h2.edit:hover {
   width:128px; 
   height:128px; 
   margin-left: 10px;
-  } 
+}
+
+.menus-list {
+  width: 250px;
+  float: left;
+} 
