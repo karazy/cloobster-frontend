@@ -23,6 +23,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"businesses.title" : "Meine Restaurants",
 			"businesses.add" : "Restaurant hinzufügen",
 			"businesses.action.show" : "anzeigen/editieren",
+			"businesses.action.menus" : "menüs",
 			"businesses.action.delete" : "löschen",
 			"businesses.form.name" : "Name*",
 			"businesses.form.description" : "Beschreibung*",

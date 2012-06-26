@@ -20,7 +20,7 @@
 		<div class="span6">
 			<ul>
 				<li ng-repeat="b in businesses">
-					<span>{{b.name}}</span> <a href="#/businesses/{{b.id}}" l="businesses.action.show">show/edit</a> | <a href ng-click="showDeleteDialog(b)" l="businesses.action.delete">delete</a>
+					<span>{{b.name}}</span> <a href="#/businesses/{{b.id}}" l="businesses.action.show">show/edit</a> | <a href="#/businesses/{{b.id}}/menus" l="businesses.action.menus">menus</a> | <a href ng-click="showDeleteDialog(b)" l="businesses.action.delete">delete</a>
 				</li>
 			</ul>
 		</div>

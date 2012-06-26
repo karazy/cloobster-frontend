@@ -12,6 +12,8 @@
 */
 Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, Menu, $log) {
 
+	var activeBusinessId = null;
+
 	/** Menu Resource. */
 	$scope.menusResource = null;
 	/** */
@@ -27,9 +29,11 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	//Start Menu logic
 
-	$scope.loadMenus = function() {
+	$scope.loadMenus = function(businessId) {
 		$log.log("load menus");
 		var account;
+
+		activeBusinessId = businessId;
 
 		if(!$scope.loggedIn) {
 			$log.log('Not logged in! Failed to load menus.');
@@ -38,7 +42,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		account =  loginService.getAccount();
 		//TODO submit real business Id
-		$scope.menusResource = Menu.buildResource(account.id, 263);
+		$scope.menusResource = Menu.buildResource(account.id, activeBusinessId);
 		//load menus
 		$scope.menus = $scope.menusResource.query();
 	};
@@ -46,7 +50,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.loadMenu = function(menuId) {
 		$log.log("load menu " + menuId);
 		//TODO submit real business Id
-		$scope.currentMenu = $scope.menusResource.get({"bid" : 263, "mid" : menuId});
+		$scope.currentMenu = $scope.menusResource.get({"bid" : activeBusinessId, "mid" : menuId});
 	};
 
 	$scope.getActive = function(menuId) {
@@ -70,10 +74,11 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	}
 
 	$scope.$watch('loggedIn', function(newVal, oldVal) {
-		var menuId = $routeParams.menuId || "";
+		var menuId = $routeParams.menuId || "",
+			businessId = $routeParams.businessId || "";
 
 		//always load menus
-		$scope.loadMenus();
+		$scope.loadMenus(businessId);
 
 		//if menuId exists load specific menu with products and highlight in list
 		// if(menuId) {
