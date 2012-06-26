@@ -1,30 +1,70 @@
 <div ng-controller="Cloobster.Menu" class="menus-wrapper">
-	<h1 l="menus.title">Menus</h1>
-	<div class="row-fluid">
-		<div class="menus-list span2">
-		<ul class="nav nav-pills nav-stacked">
-	        <li ng-repeat="menu in menus" ng-class="getActive(menu.id)">
-	        	<a ng-click="loadMenu(menu.id)">{{menu.title}}</a>
-	        </li>
-	    </ul>
+<div class="row-fluid">
+	<div class="span12">
+		<ul class="breadcrumb">
+			<li>
+				<a href="#">Home</a> <span class="divider">/</span>
+			</li>
+			<li>
+				<a href="#/businesses">My Restaurants</a> <span class="divider">/</span>
+			</li>
+			<li>
+				<a href="#/businesses/{{activeBusiness.id}}">{{activeBusiness.name}}</a> <span class="divider">/</span>
+			</li>
+			<li class="active">Menus</li>
+		</ul>
 	</div>
+</div>
+	<h1 l="menus.title">Menus</h1>
+		<div class="row-fluid">
+			<div class="menus-list span2">
+			<ul class="nav nav-pills nav-stacked">
+				<li>
+					<a ng-click="createMenu()" l="menus.list.new"><i class="icon-plus icon-black"></i>New menu...</a>
+				</li>
+		        <li ng-repeat="menu in menus" ng-class="getActive(menu.id)">	        	
+		        	<a ng-click="loadMenu(menu)">{{menu.title}}</a>
+		        </li>
+		    </ul>
+		</div>
 
-	    <div class="span4" ng-show="currentMenu">
-	    	<div class="menus-detail">
-		    	<h3>{{currentMenu.title}}</h3>
-		    	<p>{{currentMenu.description}}</p>
+
+
+	    <div class="span4 menu-wrapper" ng-show="currentMenu">
+	    	<div class="menu-detail">
+		    	<div simple-property-editor editor-title="Title" editor-property="currentMenu.title" editor-on-save="saveMenu()" editor-required>
+					<h3 class="edit">{{currentMenu.title}} <i class="icon-edit icon-black"></i></h3>
+				</div>
+				<div simple-property-editor editor-title="Description" editor-property="currentMenu.description" editor-on-save="saveMenu()" editor-required>
+		    		<p class="edit">{{currentMenu.description}} <i class="icon-edit icon-black"></i></p>
+		    	</div>
 		    </div>
 
-	    	<div class="menus-products-list" ng-show="currentMenu">
+	    	<div class="menu-products-list" ng-show="currentMenu">
 	    		<h3 l="menus.products.title">Products</h3>
 	    		<ul class="nav nav-pills nav-stacked">
-		       	 	<li ng-repeat="product in currentMenu.products" class="menus-products-item">
-			        	<a ng-click="loadMenu(menu.id)">{{product.name}}</a>
+		       	 	<li ng-repeat="product in products" class="menu-products-item">
+			        	<a ng-click="loadProduct(product.id)">{{product.name}}</a>
+			        </li>
+	    		</ul>
+	    	</div>
+	    </div>
+
+	    <div class="span4 product-wrapper" ng-show="currentProduct">
+	    	<div class="product-detail">
+		    	<h3>{{currentProduct.name}}</h3>
+		    	<p>{{currentProduct.shortDesc}}</p>
+		    	<p>{{currentProduct.longDesc}}</p>
+		    </div>
+		    <div class="product-choices-list" ng-show="currentProduct">
+	    		<h3 l="menus.products.choices.title">Choices</h3>
+	    		<ul class="nav nav-pills nav-stacked">
+		       	 	<li ng-repeat="choice in currentProduct.choices" class="product-choice-item">
+			        	<a ng-click="loadChoice(choice.id)">{{choice.text}}</a>
 			        </li>
 	    		</ul>
 	    	</div>
 	    </div>
 
 	</div>
-
 </div>

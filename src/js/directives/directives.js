@@ -8,7 +8,7 @@
 */
 Cloobster.directives = angular.module('Cloobster.directives', []);
 
-Cloobster.directives.directive('simplePropertyEditor', function() {
+Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langService) {
 	var inputType, //type of the input to generate in form
 		required, //if present marks a required field
 		//directive configuration
@@ -30,7 +30,7 @@ Cloobster.directives.directive('simplePropertyEditor', function() {
 				'<div class="modal hide">'+
 				  '<div class="modal-header">'+
 				   ' <button type="button" class="close" data-dismiss="modal">×</button>'+
-				    '<h3>{{editorTitle}}</h3>'+
+				    '<h3>{{getTitle()}}</h3>'+
 				 ' </div>'+
 				'  <form name="simplePropertyForm" novalidate ng-submit="save()" class="edit-property-form">'+
 					 ' <div class="modal-body">'+
@@ -62,6 +62,11 @@ Cloobster.directives.directive('simplePropertyEditor', function() {
 		        	var dialog = iElement.find('div.modal');
 		        	//backup original value
 
+		        	/** Gets localized title. */
+		        	scope.getTitle = function() {
+		        		return langService.translate(scope.editorTitle) || scope.editorTitle;
+		        	}
+
 		        	scope.save = function () {
 		        		//only save when form is valid
 		        		if(scope.simplePropertyForm.$valid) {
@@ -72,7 +77,7 @@ Cloobster.directives.directive('simplePropertyEditor', function() {
 		        	}
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {		   
-		        		if(scope.editorEnabled() == true) {
+		        		if(scope.editorEnabled() == true || typeof scope.editorEnabled() == 'undefined') {
 		        			scope.$apply('editorValue = editorProperty()');
 						
 							dialog.modal('toggle');	
@@ -147,7 +152,7 @@ Cloobster.directives.directive('simplePropertyEditor', function() {
 	};
 
 	return config;
-});
+}]);
 
 Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(uploadService, langService) {
 	var inputType, //type of the input to generate in form

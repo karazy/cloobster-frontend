@@ -61,7 +61,7 @@
   text-align: left;
 }
 
-.data-element.edit:hover {
+.data-element.edit:hover, .edit:hover {
     background-color: lightblue;
 }
 
@@ -117,7 +117,7 @@ h1.edit:hover, h2.edit:hover {
 }
 
 .menus-wrapper {
-
+  
 }
 
 .menus-list {
@@ -125,15 +125,32 @@ h1.edit:hover, h2.edit:hover {
   /*float: left;*/
 } 
 
-.menus-detail {
+.menu-wrapper {
   border: 1px solid gray;
-  border-radius: 0.5em;
+  border-radius: 0.5em;  
+}
+
+.menu-detail {
   padding: 0.5em;
 }
 
-.menus-products-list {
+.menu-products-list { 
+  border-top: 1px solid gray; 
+  padding: 0.5em;
+  margin: 0.5em 0;
+}
+
+.product-wrapper {
   border: 1px solid gray;
-  border-radius: 0.5em;
+  border-radius: 0.5em;  
+}
+
+.product-detail {
+  padding: 0.5em; 
+}
+
+.product-choices-list {
+  border-top: 1px solid gray; 
   padding: 0.5em;
   margin: 0.5em 0;
 }

@@ -90,7 +90,7 @@ Cloobster.services.factory('Account',['cloobsterResource', function(cloobsterRes
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Business',['cloobsterResource', function($resource) {
+Cloobster.services.factory('Business',['cloobsterResource', function($resource) {	
 	/**
 	*	@name Cloobster.services.Business
 	*	
@@ -167,13 +167,13 @@ Cloobster.services.factory('Menu', ['cloobsterResource', function($resource) {
 						*/
 						'query':  {method:'GET', params: {'account' : accountId, 'bid' : businessId}, isArray:true},
 						/**
-						*	@name Cloobster.services.Business#$clone
+						*	@name Cloobster.services.Menu#$clone
 						* 	Called to register a new business account for the Cloobster service.
 						*	@params {Object} Object containing all the properties of the Business to be created.
 						*/
 						'clone': { method: 'POST'},
 						/*
-						* @name Cloobster.services.Business#$update
+						* @name Cloobster.services.Menu#$update
 						* Like a save but uses PUT instead of POST. Feels more restful.
 						*/
 						'update': { method: 'PUT'}
@@ -184,6 +184,54 @@ Cloobster.services.factory('Menu', ['cloobsterResource', function($resource) {
 	}
 
 	return Menu;
+}]);
+
+/** 
+* 	@constructor
+* 	Factory function that creates the 'Product' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Frederik Reifschneider
+*/
+Cloobster.services.factory('Product', ['cloobsterResource', function($resource) {
+	/**
+	*	@name Cloobster.services.Menu
+	*	
+	*/
+	var Product = {
+		/**
+		*
+		*/
+		buildResource: function(accountId, businessId) {
+			return $resource('/b/businesses/:bid/products/:pid',
+				{
+					'pid' : '@id',
+				},
+				{
+						/**
+						* @name Cloobster.services.Product#$query
+						* @override
+						* Overrides default query method by adding account as default parameter
+						*/
+						'query':  {method:'GET', params: {'account' : accountId, 'bid' : businessId}, isArray:true},
+						/**
+						*	@name Cloobster.services.Product#$clone
+						* 	Called to register a new business account for the Cloobster service.
+						*	@params {Object} Object containing all the properties of the Business to be created.
+						*/
+						'clone': { method: 'POST'},
+						/*
+						* @name Cloobster.services.Product#$update
+						* Like a save but uses PUT instead of POST. Feels more restful.
+						*/
+						'update': { method: 'PUT'}
+				}
+
+				)
+		}
+	}
+
+	return Product;
 }]);
 
 /** 
