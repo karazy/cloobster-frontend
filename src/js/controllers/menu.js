@@ -10,7 +10,7 @@
 * 	View and manage profiles.
 * 	@constructor
 */
-Cloobster.Menu = function($scope, $http, $routeParams, loginService, Menu, $log) {
+Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, Menu, $log) {
 
 	/** Menu Resource. */
 	$scope.menusResource = null;
@@ -33,12 +33,16 @@ Cloobster.Menu = function($scope, $http, $routeParams, loginService, Menu, $log)
 		$scope.menusResource = Menu.buildResource(account.id, 263);
 		//load menus
 		$scope.menus = $scope.menusResource.query();
-
 	};
 
 	$scope.loadMenu = function(menuId) {
 		$log.log("load menu " + menuId);
 	};
+
+	$scope.setLocationAndLoadMenu = function(menuId) {
+		$scope.loadMenu(menuId);
+		$location.path($location.path() + "/" + menuId);		
+	}
 
 	$scope.$watch('loggedIn', function(newVal, oldVal) {
 		var menuId = $routeParams.menuId || "";
@@ -54,4 +58,4 @@ Cloobster.Menu = function($scope, $http, $routeParams, loginService, Menu, $log)
 	});
 }
 
-Cloobster.Menu.$inject = ['$scope', '$http', '$routeParams', 'login', 'Menu', '$log'];
+Cloobster.Menu.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'Menu', '$log'];

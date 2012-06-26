@@ -23,5 +23,6 @@ Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster
     $routeProvider.when('/businesses/new', {template: 'partials/businesses.html', controller: Cloobster.Business});
     $routeProvider.when('/businesses/:id', {template: 'partials/businessdetail.html', controller: Cloobster.Business});
     // $routeProvider.when('/', {template: 'partials/login.html', controller: Cloobster.Login});
-    $routeProvider.otherwise({redirectTo: '/'});
+    
+    // $routeProvider.otherwise({redirectTo: '/'});
  }]);
