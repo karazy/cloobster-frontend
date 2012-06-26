@@ -83,15 +83,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.currentMenu.title = "My Menu Title";
 	}
 
-	$scope.getActive = function(menuId) {
-		$log.log("get active for " + menuId);
-		if($scope.currentMenu && $scope.currentMenu.id == menuId) {
-			return "active";
-		}
-
-		return "";
-	}
-
 	//End Menu logic
 
 	//Start Product logic

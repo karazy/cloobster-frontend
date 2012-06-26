@@ -22,7 +22,7 @@
 				<li>
 					<a ng-click="createMenu()" l="menus.list.new"><i class="icon-plus icon-black"></i>New menu...</a>
 				</li>
-		        <li ng-repeat="menu in menus" ng-class="getActive(menu.id)">	        	
+		        <li ng-repeat="menu in menus" ng-class="{active: currentMenu.id == menu.id}">	        	
 		        	<a ng-click="loadMenu(menu)">{{menu.title}}</a>
 		        </li>
 		    </ul>
