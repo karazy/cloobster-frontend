@@ -1,8 +1,30 @@
-<div ng-controller="Cloobster.Menu" class="menus-list">
+<div ng-controller="Cloobster.Menu" class="menus-wrapper">
 	<h1 l="menus.title">Menus</h1>
-	<ul>
-        <li ng-repeat="menu in menus" >
-        	<span ng-click="setLocationAndLoadMenu(menu.id)">{{menu.title}}</span>
-        </li>
-    </ul>
+	<div class="row-fluid">
+		<div class="menus-list span2">
+		<ul class="nav nav-pills nav-stacked">
+	        <li ng-repeat="menu in menus" ng-class="getActive(menu.id)">
+	        	<a ng-click="loadMenu(menu.id)">{{menu.title}}</a>
+	        </li>
+	    </ul>
+	</div>
+
+	    <div class="span4" ng-show="currentMenu">
+	    	<div class="menus-detail">
+		    	<h3>{{currentMenu.title}}</h3>
+		    	<p>{{currentMenu.description}}</p>
+		    </div>
+
+	    	<div class="menus-products-list" ng-show="currentMenu">
+	    		<h3 l="menus.products.title">Products</h3>
+	    		<ul class="nav nav-pills nav-stacked">
+		       	 	<li ng-repeat="product in currentMenu.products" class="menus-products-item">
+			        	<a ng-click="loadMenu(menu.id)">{{product.name}}</a>
+			        </li>
+	    		</ul>
+	    	</div>
+	    </div>
+
+	</div>
+
 </div>

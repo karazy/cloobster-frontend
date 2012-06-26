@@ -14,10 +14,18 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	/** Menu Resource. */
 	$scope.menusResource = null;
+	/** */
+	$scope.productsResource = null;
 	/** Contains menu data. */
 	$scope.menus = null;
 	/** Currently selected menu. */
 	$scope.currentMenu = null;
+	/** */
+	$scope.products = null;
+	/** */
+	$scope.currentProduct = null;
+
+	//Start Menu logic
 
 	$scope.loadMenus = function() {
 		$log.log("load menus");
@@ -37,7 +45,24 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	$scope.loadMenu = function(menuId) {
 		$log.log("load menu " + menuId);
+		//TODO submit real business Id
+		$scope.currentMenu = $scope.menusResource.get({"bid" : 263, "mid" : menuId});
 	};
+
+	$scope.getActive = function(menuId) {
+		$log.log("get active for " + menuId);
+		if($scope.currentMenu && $scope.currentMenu.id == menuId) {
+			return "active";
+		}
+
+		return "";
+	}
+
+	//End Menu logic
+
+	//Start Product logic
+
+	//End Product logic
 
 	$scope.setLocationAndLoadMenu = function(menuId) {
 		$scope.loadMenu(menuId);
@@ -51,9 +76,9 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.loadMenus();
 
 		//if menuId exists load specific menu with products and highlight in list
-		if(menuId) {
-			$scope.loadMenu(menuId);
-		}
+		// if(menuId) {
+		// 	$scope.loadMenu(menuId);
+		// }
 
 	});
 }
