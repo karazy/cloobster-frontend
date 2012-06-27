@@ -59,7 +59,7 @@
 		    <div class="product-choices-list" ng-show="currentProduct">
 	    		<h3 l="menus.products.choices.title">Choices</h3>
 	    		<ul class="nav nav-pills nav-stacked">
-		       	 	<li ng-repeat="choice in choices" class="product-choice-item">
+		       	 	<li ng-repeat="choice in choices" class="product-choice-item" ng-class="{active: currentChoice.id == choice.id}">
 			        	<a ng-click="loadChoice(choice)">{{choice.text}}</a>
 			        </li>
 	    		</ul>
