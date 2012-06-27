@@ -154,7 +154,7 @@ Cloobster.services.factory('Menu', ['cloobsterResource', function($resource) {
 		/**
 		*
 		*/
-		buildResource: function(accountId, businessId) {
+		buildResource: function(businessId) {
 			return $resource('/b/businesses/:bid/menus/:mid',
 				{
 					'mid' : '@id',
@@ -163,9 +163,9 @@ Cloobster.services.factory('Menu', ['cloobsterResource', function($resource) {
 						/**
 						* @name Cloobster.services.Menu#$query
 						* @override
-						* Overrides default query method by adding account as default parameter
+						* Overrides default query method by overriding businessId as default parameter
 						*/
-						'query':  {method:'GET', params: {'account' : accountId, 'bid' : businessId}, isArray:true},
+						'query':  {method:'GET', params: { 'bid' : businessId}, isArray:true},
 						/**
 						*	@name Cloobster.services.Menu#$clone
 						* 	Called to register a new business account for the Cloobster service.
@@ -188,6 +188,54 @@ Cloobster.services.factory('Menu', ['cloobsterResource', function($resource) {
 
 /** 
 * 	@constructor
+* 	Factory function that creates the 'Choice' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Frederik Reifschneider
+*/
+Cloobster.services.factory('Choice', ['cloobsterResource', function($resource) {
+	/**
+	*	@name Cloobster.services.Menu
+	*	
+	*/
+	var Choice = {
+		/**
+		*
+		*/
+		buildResource: function(businessId) {
+			return $resource('/b/businesses/:bid/choices/:id',
+				{
+					'id' : '@id',
+				},
+				{
+						/**
+						* @name Cloobster.services.Choice#$query
+						* @override
+						* Overrides default query method by adding account as default parameter
+						*/
+						'query':  {method:'GET', params: {'bid' : businessId}, isArray:true},
+						/**
+						*	@name Cloobster.services.Choice#$clone
+						* 	Called to register a new business account for the Cloobster service.
+						*	@params {Object} Object containing all the properties of the Business to be created.
+						*/
+						'clone': { method: 'POST'},
+						/*
+						* @name Cloobster.services.Choice#$update
+						* Like a save but uses PUT instead of POST. Feels more restful.
+						*/
+						'update': { method: 'PUT'}
+				}
+
+				)
+		}
+	}
+
+	return Choice;
+}]);
+
+/** 
+* 	@constructor
 * 	Factory function that creates the 'Product' resource service.
 * 	See ngResource for further information on resource objects.
 * 
@@ -202,7 +250,7 @@ Cloobster.services.factory('Product', ['cloobsterResource', function($resource) 
 		/**
 		*
 		*/
-		buildResource: function(accountId, businessId) {
+		buildResource: function(businessId) {
 			return $resource('/b/businesses/:bid/products/:pid',
 				{
 					'pid' : '@id',
@@ -213,7 +261,7 @@ Cloobster.services.factory('Product', ['cloobsterResource', function($resource) 
 						* @override
 						* Overrides default query method by adding account as default parameter
 						*/
-						'query':  {method:'GET', params: {'account' : accountId, 'bid' : businessId}, isArray:true},
+						'query':  {method:'GET', params: {'bid' : businessId}, isArray:true},
 						/**
 						*	@name Cloobster.services.Product#$clone
 						* 	Called to register a new business account for the Cloobster service.

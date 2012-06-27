@@ -10,9 +10,10 @@
 * 	View and manage profiles.
 * 	@constructor
 */
-Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, Business, Menu, Product, $log) {
+Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, Business, Menu, Product, Choice, $log) {
 
-	var activeBusinessId = null;
+	var activeBusinessId = null,
+		choicesResource = null;
 
 	/** Menu Resource. */
 	$scope.menusResource = null;
@@ -50,8 +51,9 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.activeBusiness = Business.buildResource(account.id).get({'id' : activeBusinessId});
 
 		//create menus and products resource
-		$scope.menusResource = Menu.buildResource(account.id, activeBusinessId);
-		$scope.productsResource = Product.buildResource(account.id, activeBusinessId);
+		$scope.menusResource = Menu.buildResource(activeBusinessId);
+		$scope.productsResource = Product.buildResource(activeBusinessId);
+		choicesResource = Choice.buildResource(activeBusinessId);
 
 		//load menus
 		$scope.menus = $scope.menusResource.query();
@@ -75,28 +77,35 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			$scope.menus.push($scope.currentMenu);
 		}
 		
-	}
+	};
 
 	$scope.createMenu = function() {
 		$scope.currentMenu = new $scope.menusResource();
 
 		$scope.currentMenu.title = "My Menu Title";
-	}
+	};
 
 	//End Menu logic
 
 	//Start Product logic
-	$scope.loadProduct = function(productId) {
-		$log.log("load product " + productId);
+	$scope.loadProduct = function(productItem) {
+		$log.log("load product " + productItem.id);
 		
-		$scope.currentProduct = $scope.productsResource.get({"bid" : activeBusinessId, "pid" : productId});
+		$scope.currentProduct = productItem;
+		$scope.choices = choicesResource.query({"productId": productItem.id});
 	};
 	//End Product logic
+
+	//Start Choice logic
+	$scope.loadChoice = function(choiceItem) {
+		$scope.currentChoice = choiceItem;
+	};	
+	//End Choice logic
 
 	$scope.setLocationAndLoadMenu = function(menuId) {
 		$scope.loadMenu(menuId);
 		$location.path($location.path() + "/" + menuId);		
-	}
+	};
 
 	$scope.$watch('loggedIn', function(newVal, oldVal) {
 		var menuId = $routeParams.menuId || "",
@@ -113,4 +122,4 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	});
 }
 
-Cloobster.Menu.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'Business', 'Menu', 'Product', '$log'];
+Cloobster.Menu.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'Business', 'Menu', 'Product', 'Choice', '$log'];

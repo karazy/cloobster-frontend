@@ -30,7 +30,7 @@
 
 
 
-	    <div class="span4 menu-wrapper" ng-show="currentMenu">
+	    <div class="span3 menu-wrapper" ng-show="currentMenu">
 	    	<div class="menu-detail">
 		    	<div simple-property-editor editor-title="Title" editor-property="currentMenu.title" editor-on-save="saveMenu()" editor-required>
 					<h3 class="edit">{{currentMenu.title}} <i class="icon-edit icon-black"></i></h3>
@@ -43,14 +43,14 @@
 	    	<div class="menu-products-list" ng-show="currentMenu">
 	    		<h3 l="menus.products.title">Products</h3>
 	    		<ul class="nav nav-pills nav-stacked">
-		       	 	<li ng-repeat="product in products" class="menu-products-item">
-			        	<a ng-click="loadProduct(product.id)">{{product.name}}</a>
+		       	 	<li ng-repeat="product in products" class="menu-products-item" ng-class="{active: currentProduct.id == product.id}">
+			        	<a ng-click="loadProduct(product)">{{product.name}}</a>
 			        </li>
 	    		</ul>
 	    	</div>
 	    </div>
 
-	    <div class="span4 product-wrapper" ng-show="currentProduct">
+	    <div class="span3 product-wrapper" ng-show="currentProduct">
 	    	<div class="product-detail">
 		    	<h3>{{currentProduct.name}}</h3>
 		    	<p>{{currentProduct.shortDesc}}</p>
@@ -59,8 +59,25 @@
 		    <div class="product-choices-list" ng-show="currentProduct">
 	    		<h3 l="menus.products.choices.title">Choices</h3>
 	    		<ul class="nav nav-pills nav-stacked">
-		       	 	<li ng-repeat="choice in currentProduct.choices" class="product-choice-item">
-			        	<a ng-click="loadChoice(choice.id)">{{choice.text}}</a>
+		       	 	<li ng-repeat="choice in choices" class="product-choice-item">
+			        	<a ng-click="loadChoice(choice)">{{choice.text}}</a>
+			        </li>
+	    		</ul>
+	    	</div>
+	    </div>
+
+	    <div class="span3 choice-wrapper" ng-show="currentChoice">
+	    	<div class="choice-detail">
+		    	<h4>{{currentChoice.text}}</h4>
+		    	<p>Max. selected: {{currentChoice.maxOccurence}}</p>
+		    	<p>Min. selected: {{currentChoice.minOccurence}}</p>
+		    	<p>Options included: {{currentChoice.included}}</p>
+		    </div>
+		    <div class="choice-options-list" ng-show="currentChoice">
+	    		<h3 l="menus.products.choices.options.title">Options</h3>
+	    		<ul class="nav nav-pills nav-stacked">
+		       	 	<li ng-repeat="option in currentChoice.options" class="choice-option-item">
+			        	<a>{{option.name}} - {{option.price}}</a>
 			        </li>
 	    		</ul>
 	    	</div>
