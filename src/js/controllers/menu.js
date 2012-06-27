@@ -99,7 +99,24 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	//Start Choice logic
 	$scope.loadChoice = function(choiceItem) {
 		$scope.currentChoice = choiceItem;
-	};	
+	};
+
+	$scope.saveChoice = function() {
+		if($scope.currentChoice && $scope.currentChoice.id) {
+			$scope.currentChoice.$update({"bid" : activeBusinessId});	
+		} else {
+			$scope.currentChoice.$save({"bid" : activeBusinessId});
+			$scope.choices.push($scope.currentChoice);
+		}
+
+	};
+	$scope.addOption = function() {
+		$scope.currentChoice.options.push({ name: "New Option", price: 0});
+	};
+	
+	$scope.removeOption = function(index) {
+		$scope.currentChoice.options.splice(index, 1);
+	};
 	//End Choice logic
 
 	$scope.setLocationAndLoadMenu = function(menuId) {

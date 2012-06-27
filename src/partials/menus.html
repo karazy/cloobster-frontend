@@ -74,10 +74,11 @@
 		    	<p>Options included: {{currentChoice.included}}</p>
 		    </div>
 		    <div class="choice-options-list" ng-show="currentChoice">
-	    		<h3 l="menus.products.choices.options.title">Options</h3>
-	    		<ul class="nav nav-pills nav-stacked">
+	    		<h4 l="menus.products.choices.options.title">Options</h4>
+	    		<button class="btn-small" ng-click="addOption()"><i class="icon-plus"></i> Add Option</button>
+	    		<ul>
 		       	 	<li ng-repeat="option in currentChoice.options" class="choice-option-item">
-			        	<a>{{option.name}} - {{option.price}}</a>
+		       	 		<div class="edit" simple-property-editor editor-title="Edit Option" editor-property="option.name" editor-on-save="saveChoice()" editor-required>{{option.name}} <i class="icon-edit icon-black"></i></div> - {{option.price}} <button class="btn btn-small" ng-click="removeOption($index)"><i class="icon-trash"></i></button>
 			        </li>
 	    		</ul>
 	    	</div>
