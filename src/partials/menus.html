@@ -92,7 +92,7 @@
 	    <div class="span3 choice-wrapper" ng-show="currentChoice">
 	    	<div class="choice-detail">
 	    		<div simple-property-editor editor-title="choice.editor.text" editor-property="currentChoice.text" editor-on-save="saveChoice()" editor-required>
-		    		<h4 class="edit">{{currentChoice.text}} <i class="icon-edit icon-black"></i></h4>
+		    		<h3 class="edit">{{currentChoice.text}} <i class="icon-edit icon-black"></i></h3>
 		    	</div>
 		    	<div simple-property-editor editor-title="choice.editor.maxOccurence" editor-property="currentChoice.maxOccurence" editor-on-save="saveChoice()" editor-required>
 		    		<p class="edit">Max. selected: {{currentChoice.maxOccurence}} <i class="icon-edit icon-black"></i></p>
@@ -118,20 +118,20 @@
 		    	</div>
 		    </div>
 		    <div class="choice-options-list" ng-show="currentChoice">
-	    		<h4 l="menus.options.title">Options</h4>
+	    		<h3 l="menus.options.title">Options</h3>
 	    		<!-- <button class="btn-small" ng-click="addOption()"><i class="icon-plus"></i> <span l="menus.options.list.new">Add Option</span></button> -->
-	    		<ul>
+	    		<ul class="options-list">
 	    			<li>
 						<a ng-click="addOption()"><i class="icon-plus icon-black"></i> <span l="menus.options.list.new">New option...</span></a>
 					</li>
 		       	 	<li ng-repeat="option in currentChoice.options" class="choice-option-item">
 		       	 		<div class="row-fluid">
 		       	 			<div class="span10">
-			       	 			<div class="edit" simple-property-editor editor-title="option.editor.title" editor-property="option.name" editor-on-save="saveChoice()" editor-required>
-			       	 			{{option.name}} <i class="icon-edit icon-black"></i>
+			       	 			<div simple-property-editor editor-title="option.editor.title" editor-property="option.name" editor-on-save="saveChoice()" editor-required>
+			       	 				<p class="edit">{{option.name}} <i class="icon-edit icon-black"></i></p>
 			       	 			</div> 
-								<div class="edit" style="float:left;" simple-property-editor editor-title="option.editor.price" editor-property="option.price" editor-on-save="	saveChoice()" editor-required>
-			       	 			{{option.price}} <i class="icon-edit icon-black"></i>
+								<div class="edit" simple-property-editor editor-title="option.editor.price" editor-property="option.price" editor-on-save="	saveChoice()" editor-required>
+			       	 				<p class="edit">{{option.price}} <i class="icon-edit icon-black"></i></p>
 			       	 			</div> 
 		       	 			</div>
 		       	 			<div class="span2">

@@ -175,3 +175,15 @@ h1.edit:hover, h2.edit:hover {
   margin-right: 0.5em
 }
 
+ul.options-list {
+  list-style: none;
+}
+
+ul.options-list li {
+  margin: 0.3em 0;
+}
+
+ul.options-list li:hover {
+  border-radius: 5px;
+  background-color: #eeeeee;
+}
