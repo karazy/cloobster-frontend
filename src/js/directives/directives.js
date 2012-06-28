@@ -31,13 +31,14 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 				  '<div class="modal-header">'+
 				   ' <button type="button" class="close" data-dismiss="modal">×</button>'+
 				    '<h3>{{getTitle()}}</h3>'+
-				 ' </div>'+
-				'  <form name="simplePropertyForm" novalidate ng-submit="save()" class="edit-property-form">'+
+				 '</div>'+
+				'<form name="simplePropertyForm" novalidate ng-submit="save()" class="edit-property-form">'+
 					 ' <div class="modal-body">'+
 					 	'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty.$invalid)">'+
 					 		'<div class="controls">'+
 					 			createFormInput(attrs)+
-								'<div class="help-inline" ng-show="simplePropertyForm.simpleProperty.$dirty && simplePropertyForm.simpleProperty.$invalid">Invalid:'+
+					 			' <i class="icon-remove icon-black" ng-click="clearInput()"></i>'+
+								'<div class="help-inline" ng-show="simplePropertyForm.simpleProperty.$dirty && simplePropertyForm.simpleProperty.$invalid">'+
 									'<span ng-show="simplePropertyForm.simpleProperty.$error.required">This field is required!</span>'+
 									'<span ng-show="simplePropertyForm.simpleProperty.$error.pattern">No valid value.</span>'+
 									'<span ng-show="simplePropertyForm.simpleProperty.$error.email">No valid email.</span>'+
@@ -59,7 +60,8 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 		        	
 		        },
 		        post: function postLink(scope, iElement, iAttrs, controller) {
-		        	var dialog = iElement.find('div.modal');
+		        	var dialog = iElement.find('div.modal'),
+		        		input = iElement.find('input, textarea');
 		        	//backup original value
 
 		        	/** Gets localized title. */
@@ -75,16 +77,26 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 			        		dialog.modal('toggle');
 		        		}
 		        	}
+
+		        	/**
+		        	* Convenience method to clear the input field.
+		        	*/
+		        	scope.clearInput = function() {
+		        		scope.editorValue = "";
+		        	}
+
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {		   
 		        		if(scope.editorEnabled() == true || typeof scope.editorEnabled() == 'undefined') {
 		        			scope.$apply('editorValue = editorProperty()');
 						
 							dialog.modal('toggle');	
+							input.trigger("focus");
 		        		}
 					});
 
 		        	scope.getFieldInputClass = getFieldInputClass;
+
 		        }
 		      }
 		}

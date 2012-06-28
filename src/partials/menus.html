@@ -35,14 +35,17 @@
 		    	<div simple-property-editor editor-title="Title" editor-property="currentMenu.title" editor-on-save="saveMenu()" editor-required>
 					<h3 class="edit">{{currentMenu.title}} <i class="icon-edit icon-black"></i></h3>
 				</div>
-				<div simple-property-editor editor-title="Description" editor-property="currentMenu.description" editor-on-save="saveMenu()" editor-required>
+				<div simple-property-editor editor-title="Description" editor-property="currentMenu.description" editor-type="textarea" editor-on-save="saveMenu()" editor-required>
 		    		<p class="edit">{{currentMenu.description}} <i class="icon-edit icon-black"></i></p>
 		    	</div>
 		    </div>
 
-	    	<div class="menu-products-list" ng-show="currentMenu">
+	    	<div class="menu-products-list" ng-show="currentMenu.id">
 	    		<h3 l="menus.products.title">Products</h3>
 	    		<ul class="nav nav-pills nav-stacked">
+	    			<li>
+						<a ng-click="createProduct()" l="menus.products.list.new"><i class="icon-plus icon-black"></i>New product...</a>
+					</li>
 		       	 	<li ng-repeat="product in products" class="menu-products-item" ng-class="{active: currentProduct.id == product.id}">
 			        	<a ng-click="loadProduct(product)">{{product.name}}</a>
 			        </li>
@@ -52,11 +55,20 @@
 
 	    <div class="span3 product-wrapper" ng-show="currentProduct">
 	    	<div class="product-detail">
-		    	<h3>{{currentProduct.name}}</h3>
-		    	<p>{{currentProduct.shortDesc}}</p>
-		    	<p>{{currentProduct.longDesc}}</p>
+	    		<div simple-property-editor editor-title="Name" editor-property="currentProduct.name" editor-on-save="saveProduct()" editor-required>
+		    		<h3 class="edit">{{currentProduct.name}}  <i class="icon-edit icon-black"></i></h3>
+		    	</div>
+		    	<div simple-property-editor editor-title="Short Descrioption" editor-property="currentProduct.shortDesc" editor-on-save="saveProduct()" editor-required>
+		    		<p class="edit">{{currentProduct.shortDesc}}  <i class="icon-edit icon-black"></i></p>
+		    	</div>
+		    	<div simple-property-editor editor-title="Long Description" editor-property="currentProduct.longDesc" editor-on-save="saveProduct()" editor-required>
+		    		<p class="edit">{{currentProduct.longDesc}}  <i class="icon-edit icon-black"></i></p>
+		    	</div>
+		    	<div simple-property-editor editor-title="Price" editor-property="currentProduct.price" editor-on-save="saveProduct()" editor-required>
+		    		<p class="edit">{{currentProduct.price}}  <i class="icon-edit icon-black"></i></p>
+		    	</div>
 		    </div>
-		    <div class="product-choices-list" ng-show="currentProduct">
+		    <div class="product-choices-list" ng-show="currentProduct.id">
 	    		<h3 l="menus.products.choices.title">Choices</h3>
 	    		<ul class="nav nav-pills nav-stacked">
 		       	 	<li ng-repeat="choice in choices" class="product-choice-item" ng-class="{active: currentChoice.id == choice.id}">

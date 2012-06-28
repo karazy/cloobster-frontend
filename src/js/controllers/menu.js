@@ -13,7 +13,32 @@
 Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, Business, Menu, Product, Choice, $log) {
 
 	var activeBusinessId = null,
-		choicesResource = null;
+		choicesResource = null,
+		/** Default values for new menus.*/
+		defaultMenu = {
+			title: "My new Menu"
+		},
+		/** Default values for new products. */
+		defaultProduct = {
+			name: "My new Product",
+			price: 1,
+			shortDesc: "",
+			longDesc: ""
+		},
+		/** Default values for new choices. */
+		defaultChoice = {
+			text: "My new Choice",
+			minOccurence: 0,
+			maxOccurence: 0,
+			price: 0,
+			included: 0,
+			overridePrice: "NONE"
+		},
+		/** Default values for new options. */
+		defaultOption = {
+			name: "My new Option",
+			price: 0
+		};
 
 	/** Menu Resource. */
 	$scope.menusResource = null;
@@ -25,6 +50,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.currentMenu = null;
 	/** */
 	$scope.products = null;
+	/** */
+	$scope.choices = null;
 	/** */
 	$scope.currentProduct = null;
 	/** Business to which these menus belong to. */
@@ -40,9 +67,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			$log.log('Not logged in! Failed to load menus.');
 			return;
 		}
-
-		//reset current product, so details get hidden when menu changes
-		$scope.currentProduct = null;
 
 		activeBusinessId = businessId;
 
@@ -61,6 +85,12 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	$scope.loadMenu = function(menuItem) {
 		$log.log("load menu " + menuItem.id);
+
+		//reset currentProduct, so details get hidden when menu changes
+		$scope.currentProduct = null;
+
+		//reset currentChoice, so details get hidden when menu changes
+		$scope.currentChoice = null;
 		
 		$scope.currentMenu = menuItem;
 
@@ -80,9 +110,10 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	};
 
 	$scope.createMenu = function() {
-		$scope.currentMenu = new $scope.menusResource();
+		$scope.currentMenu = new $scope.menusResource(defaultMenu);
 
-		$scope.currentMenu.title = "My Menu Title";
+		$scope.products = new Array();
+		$scope.choices = new Array();
 	};
 
 	//End Menu logic
@@ -91,9 +122,41 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.loadProduct = function(productItem) {
 		$log.log("load product " + productItem.id);
 		
+		//reset currentChoice, so details get hidden when product changes
+		$scope.currentChoice = null;
+
 		$scope.currentProduct = productItem;
 		$scope.choices = choicesResource.query({"productId": productItem.id});
 	};
+
+	$scope.createProduct = function() {
+		$log.log("create product");
+
+		var newProduct = new $scope.productsResource(defaultProduct);
+		//reset currentChoice, because we don't want them to be displayed along the new product
+		$scope.currentChoice = null;
+
+		$scope.currentProduct = newProduct;
+
+		$scope.choices = new Array();
+
+		newProduct.menuId = $scope.currentMenu.id;
+	}
+
+	$scope.saveProduct = function() {
+		$log.log("save product");
+
+		var product = $scope.currentProduct;
+
+		if(product && product.id) {
+			product.$update({"bid" : activeBusinessId});	
+		} else {
+			product.$save({"bid" : activeBusinessId});
+			$scope.products.push(product);
+		}
+
+	}
+
 	//End Product logic
 
 	//Start Choice logic
