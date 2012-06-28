@@ -40,8 +40,9 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 					 			' <i class="icon-remove icon-black" ng-click="clearInput()"></i>'+
 								'<div class="help-inline" ng-show="simplePropertyForm.simpleProperty.$dirty && simplePropertyForm.simpleProperty.$invalid">'+
 									'<span ng-show="simplePropertyForm.simpleProperty.$error.required">This field is required!</span>'+
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.number">No valid number.</span>'+
 									'<span ng-show="simplePropertyForm.simpleProperty.$error.pattern">No valid value.</span>'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.email">No valid email.</span>'+
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.email">No valid email.</span>'+									
 								'</div>'+
 							'</div>'+
 					'  </div>'+
@@ -83,6 +84,7 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 		        	*/
 		        	scope.clearInput = function() {
 		        		scope.editorValue = "";
+		        		input.trigger("focus");
 		        	}
 
 		        	
@@ -135,7 +137,7 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 		if(type == "textarea") {
 			inputHtml = '<textarea rows="4" cols="100" name="simpleProperty" ng-model="editorValue" '+required+'></textarea>';
 		} else {
-			if(type != "email" && type != "password") {
+			if(type != "email" && type != "password" && type != "number") {
 				type = "text";
 			}
 

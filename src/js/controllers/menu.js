@@ -10,33 +10,36 @@
 * 	View and manage profiles.
 * 	@constructor
 */
-Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, Business, Menu, Product, Choice, $log) {
+Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, Business, Menu, Product, Choice, langService, $log) {
 
 	var activeBusinessId = null,
 		choicesResource = null,
 		/** Default values for new menus.*/
 		defaultMenu = {
-			title: "My new Menu"
+			title: langService.translate("menu.new.default.title"),
+			active: false
 		},
 		/** Default values for new products. */
 		defaultProduct = {
-			name: "My new Product",
+			name: langService.translate("product.new.default.name"),
 			price: 1,
 			shortDesc: "",
-			longDesc: ""
+			longDesc: "",
+			active: false
 		},
 		/** Default values for new choices. */
 		defaultChoice = {
-			text: "My new Choice",
+			text: langService.translate("choice.new.default.text"),
 			minOccurence: 0,
 			maxOccurence: 0,
 			price: 0,
 			included: 0,
-			overridePrice: "NONE"
+			overridePrice: "NONE",
+			options: new Array()
 		},
 		/** Default values for new options. */
 		defaultOption = {
-			name: "My new Option",
+			name: langService.translate("option.new.default.name"),
 			price: 0
 		};
 
@@ -95,6 +98,25 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.currentMenu = menuItem;
 
 		$scope.products = $scope.productsResource.query({"bid" : activeBusinessId, "menuId" : menuItem.id});
+
+		//make products sortable via drag&drop
+		
+		jQuery( "#productList" ).sortable({
+			connectWith: ".connectedSortable",
+			items: 'li.sortable',
+			update: function(event, ui) { 
+				$scope.updateProductOrder(event, ui);
+			}
+		}).disableSelection();
+
+		jQuery( "#choicesList" ).sortable({
+			connectWith: ".connectedSortable",
+			items: 'li.sortable',
+			update: function(event, ui) { 
+				$scope.updateChoiceOrder(event, ui);
+			}
+		}).disableSelection();
+
 	};
 
 	$scope.saveMenu = function() {
@@ -111,6 +133,10 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	$scope.createMenu = function() {
 		$scope.currentMenu = new $scope.menusResource(defaultMenu);
+
+		$scope.currentChoice = null;
+
+		$scope.currentProduct = null;
 
 		$scope.products = new Array();
 		$scope.choices = new Array();
@@ -157,6 +183,11 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	}
 
+	$scope.updateProductOrder = function(event, ui) {
+		$log.log("updateProductOrder");
+		//handle index update, update old product and new product
+	};
+
 	//End Product logic
 
 	//Start Choice logic
@@ -173,12 +204,32 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		}
 
 	};
+
+	$scope.createChoice = function() {
+		$log.log("createChoice");
+
+		var newChoice = new choicesResource(defaultChoice);
+		//reset currentChoice, because we don't want them to be displayed along the new product
+		$scope.currentChoice = newChoice;
+
+		$scope.options = new Array();
+
+		$scope.addOption();
+
+		newChoice.productId = $scope.currentProduct.id;
+	}
+
 	$scope.addOption = function() {
-		$scope.currentChoice.options.push({ name: "New Option", price: 0});
+		$scope.currentChoice.options.push(angular.copy(defaultOption));
 	};
 	
 	$scope.removeOption = function(index) {
 		$scope.currentChoice.options.splice(index, 1);
+	};
+
+	$scope.updateChoiceOrder = function(event, ui) {
+		$log.log("updateChoiceOrder");
+		//handle index update, update old choice and new choice
 	};
 	//End Choice logic
 
@@ -202,4 +253,4 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	});
 }
 
-Cloobster.Menu.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'Business', 'Menu', 'Product', 'Choice', '$log'];
+Cloobster.Menu.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'Business', 'Menu', 'Product', 'Choice', 'lang', '$log'];

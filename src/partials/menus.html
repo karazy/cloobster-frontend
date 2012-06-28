@@ -20,7 +20,7 @@
 			<div class="menus-list span2">
 			<ul class="nav nav-pills nav-stacked">
 				<li>
-					<a ng-click="createMenu()" l="menus.list.new"><i class="icon-plus icon-black"></i>New menu...</a>
+					<a ng-click="createMenu()"><i class="icon-plus icon-black"></i> <span l="menus.list.new">New menu...</span></a>
 				</li>
 		        <li ng-repeat="menu in menus" ng-class="{active: currentMenu.id == menu.id}">	        	
 		        	<a ng-click="loadMenu(menu)">{{menu.title}}</a>
@@ -32,22 +32,26 @@
 
 	    <div class="span3 menu-wrapper" ng-show="currentMenu">
 	    	<div class="menu-detail">
-		    	<div simple-property-editor editor-title="Title" editor-property="currentMenu.title" editor-on-save="saveMenu()" editor-required>
+		    	<div simple-property-editor editor-title="menu.editor.title" editor-property="currentMenu.title" editor-on-save="saveMenu()" editor-required>
 					<h3 class="edit">{{currentMenu.title}} <i class="icon-edit icon-black"></i></h3>
 				</div>
-				<div simple-property-editor editor-title="Description" editor-property="currentMenu.description" editor-type="textarea" editor-on-save="saveMenu()" editor-required>
+				<div simple-property-editor editor-title="menu.editor.description" editor-property="currentMenu.description" editor-type="textarea" editor-on-save="saveMenu()" editor-required>
 		    		<p class="edit">{{currentMenu.description}} <i class="icon-edit icon-black"></i></p>
+		    	</div>
+		    	<div class="activation-checkbox">
+		    		<input type="checkbox" id="menuActiveCb" ng-model="currentMenu.active" ng-change="saveMenu()"></input>
+		    		<label l="menus.menu.field.active" for="productActiveCb">Active: Show menu for guest</label>
 		    	</div>
 		    </div>
 
 	    	<div class="menu-products-list" ng-show="currentMenu.id">
 	    		<h3 l="menus.products.title">Products</h3>
-	    		<ul class="nav nav-pills nav-stacked">
+	    		<ul class="nav nav-pills nav-stacked connectedSortable" id="productList">
 	    			<li>
-						<a ng-click="createProduct()" l="menus.products.list.new"><i class="icon-plus icon-black"></i>New product...</a>
+						<a ng-click="createProduct()"><i class="icon-plus icon-black"></i> <span l="menus.products.list.new">New product...</span></a>
 					</li>
-		       	 	<li ng-repeat="product in products" class="menu-products-item" ng-class="{active: currentProduct.id == product.id}">
-			        	<a ng-click="loadProduct(product)">{{product.name}}</a>
+		       	 	<li ng-repeat="product in products" class="menu-products-item sortable" ng-class="{active: currentProduct.id == product.id}">
+			        	<a ng-click="loadProduct(product)"><i class="icon-fullscreen icon-black"></i> {{product.name}}</a>
 			        </li>
 	    		</ul>
 	    	</div>
@@ -55,24 +59,31 @@
 
 	    <div class="span3 product-wrapper" ng-show="currentProduct">
 	    	<div class="product-detail">
-	    		<div simple-property-editor editor-title="Name" editor-property="currentProduct.name" editor-on-save="saveProduct()" editor-required>
+	    		<div simple-property-editor editor-title="product.editor.name" editor-property="currentProduct.name" editor-on-save="saveProduct()" editor-required>
 		    		<h3 class="edit">{{currentProduct.name}}  <i class="icon-edit icon-black"></i></h3>
 		    	</div>
-		    	<div simple-property-editor editor-title="Short Descrioption" editor-property="currentProduct.shortDesc" editor-on-save="saveProduct()" editor-required>
+		    	<div simple-property-editor editor-title="product.editor.shortDesc" editor-property="currentProduct.shortDesc" editor-on-save="saveProduct()" editor-required>
 		    		<p class="edit">{{currentProduct.shortDesc}}  <i class="icon-edit icon-black"></i></p>
 		    	</div>
-		    	<div simple-property-editor editor-title="Long Description" editor-property="currentProduct.longDesc" editor-on-save="saveProduct()" editor-required>
+		    	<div simple-property-editor editor-title="product.editor.longDesc" editor-property="currentProduct.longDesc" editor-on-save="saveProduct()" editor-required>
 		    		<p class="edit">{{currentProduct.longDesc}}  <i class="icon-edit icon-black"></i></p>
 		    	</div>
-		    	<div simple-property-editor editor-title="Price" editor-property="currentProduct.price" editor-on-save="saveProduct()" editor-required>
+		    	<div simple-property-editor editor-title="product.editor.price" editor-property="currentProduct.price" editor-type="text" editor-on-save="saveProduct()" editor-required>
 		    		<p class="edit">{{currentProduct.price}}  <i class="icon-edit icon-black"></i></p>
+		    	</div>
+		    	<div class="activation-checkbox">		    		
+		    		<input type="checkbox" id="productActiveCb" ng-model="currentProduct.active" ng-change="saveProduct()"></input>
+		    		<label l="menus.product.field.active" for="productActiveCb">Active: Show product for guest</label>
 		    	</div>
 		    </div>
 		    <div class="product-choices-list" ng-show="currentProduct.id">
-	    		<h3 l="menus.products.choices.title">Choices</h3>
-	    		<ul class="nav nav-pills nav-stacked">
-		       	 	<li ng-repeat="choice in choices" class="product-choice-item" ng-class="{active: currentChoice.id == choice.id}">
-			        	<a ng-click="loadChoice(choice)">{{choice.text}}</a>
+	    		<h3 l="menus.choices.title">Choices</h3>
+	    		<ul class="nav nav-pills nav-stacked connectedSortable" id="choicesList">
+	    			<li>
+						<a ng-click="createChoice()"><i class="icon-plus icon-black"></i> <span l="menus.choices.list.new">New choice...</span></a>
+					</li>
+		       	 	<li ng-repeat="choice in choices" class="product-choice-item sortable" ng-class="{active: currentChoice.id == choice.id}">
+			        	<a ng-click="loadChoice(choice)"><i class="icon-fullscreen icon-black"></i> {{choice.text}}</a>
 			        </li>
 	    		</ul>
 	    	</div>
@@ -80,14 +91,23 @@
 
 	    <div class="span3 choice-wrapper" ng-show="currentChoice">
 	    	<div class="choice-detail">
-		    	<h4>{{currentChoice.text}}</h4>
-		    	<p>Max. selected: {{currentChoice.maxOccurence}}</p>
-		    	<p>Min. selected: {{currentChoice.minOccurence}}</p>
-		    	<p>Options included: {{currentChoice.included}}</p>
+	    		<div simple-property-editor editor-title="choice.editor.text" editor-property="currentChoice.text" editor-on-save="saveChoice()" editor-required>
+		    		<h4 class="edit">{{currentChoice.text}} <i class="icon-edit icon-black"></i></h4>
+		    	</div>
+		    	<div simple-property-editor editor-title="choice.editor.maxOccurence" editor-property="currentChoice.maxOccurence" editor-on-save="saveChoice()" editor-required>
+		    		<p class="edit">Max. selected: {{currentChoice.maxOccurence}} <i class="icon-edit icon-black"></i></p>
+		    	</div>
+		    	<div simple-property-editor editor-title="choice.editor.minOccurence" editor-property="currentChoice.minOccurence" editor-on-save="saveChoice()" editor-required>
+		    		<p class="edit">Min. selected: {{currentChoice.minOccurence}} <i class="icon-edit icon-black"></i></p>
+		    	</div>
+		    	<div simple-property-editor editor-title="choice.editor.included" editor-property="currentChoice.included" editor-type="number" editor-on-save="saveChoice()" editor-required>
+		    		<p class="edit">Options included: {{currentChoice.included}} <i class="icon-edit icon-black"></i></p>
+		    	</div>
+
 		    </div>
 		    <div class="choice-options-list" ng-show="currentChoice">
-	    		<h4 l="menus.products.choices.options.title">Options</h4>
-	    		<button class="btn-small" ng-click="addOption()"><i class="icon-plus"></i> Add Option</button>
+	    		<h4 l="menus.options.title">Options</h4>
+	    		<button class="btn-small" ng-click="addOption()"><i class="icon-plus"></i> <span l="menus.options.list.new">Add Option</span></button>
 	    		<ul>
 		       	 	<li ng-repeat="option in currentChoice.options" class="choice-option-item">
 		       	 		<div class="edit" simple-property-editor editor-title="Edit Option" editor-property="option.name" editor-on-save="saveChoice()" editor-required>{{option.name}} <i class="icon-edit icon-black"></i></div> - {{option.price}} <button class="btn btn-small" ng-click="removeOption($index)"><i class="icon-trash"></i></button>

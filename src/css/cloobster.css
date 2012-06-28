@@ -170,3 +170,8 @@ h1.edit:hover, h2.edit:hover {
   margin: 0.5em 0;
 }
 
+.activation-checkbox input {
+  float: left;
+  margin-right: 0.5em
+}
+
