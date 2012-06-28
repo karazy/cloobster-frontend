@@ -103,14 +103,43 @@
 		    	<div simple-property-editor editor-title="choice.editor.included" editor-property="currentChoice.included" editor-type="number" editor-on-save="saveChoice()" editor-required>
 		    		<p class="edit">Options included: {{currentChoice.included}} <i class="icon-edit icon-black"></i></p>
 		    	</div>
-
+		    	<div>
+		    		<label for="choiceOverridePriceSelect" l="menus.choices.field.overridePrice.label">Price calculation:</label>
+		    		<select ng-model="currentChoice.overridePrice" id="choiceOverridePriceSelect" ng-change="saveChoice()">
+		    			<option value="NONE" l="menus.choices.field.overridePrice.none">nothing</option>
+		    			<option value="OVERRIDE_SINGLE_PRICE" l="menus.choices.field.overridePrice.overridesingleprice">price per product</option>
+		    			<option value="OVERRIDE_FIXED_SUM" l="menus.choices.field.overridePrice.overridefixedsum">Total price</option>
+		    		</select>
+		    	</div>
+		    	<div ng-show="currentChoice.overridePrice == 'OVERRIDE_SINGLE_PRICE' || currentChoice.overridePrice == 'OVERRIDE_FIXED_SUM'">
+			    	<div simple-property-editor editor-title="choice.editor.price" editor-property="currentChoice.price" editor-on-save="saveChoice()" editor-required>
+			    		<p class="edit">Price: {{currentChoice.price}} <i class="icon-edit icon-black"></i></p>
+			    	</div>
+		    	</div>
 		    </div>
 		    <div class="choice-options-list" ng-show="currentChoice">
 	    		<h4 l="menus.options.title">Options</h4>
-	    		<button class="btn-small" ng-click="addOption()"><i class="icon-plus"></i> <span l="menus.options.list.new">Add Option</span></button>
+	    		<!-- <button class="btn-small" ng-click="addOption()"><i class="icon-plus"></i> <span l="menus.options.list.new">Add Option</span></button> -->
 	    		<ul>
+	    			<li>
+						<a ng-click="addOption()"><i class="icon-plus icon-black"></i> <span l="menus.options.list.new">New option...</span></a>
+					</li>
 		       	 	<li ng-repeat="option in currentChoice.options" class="choice-option-item">
-		       	 		<div class="edit" simple-property-editor editor-title="Edit Option" editor-property="option.name" editor-on-save="saveChoice()" editor-required>{{option.name}} <i class="icon-edit icon-black"></i></div> - {{option.price}} <button class="btn btn-small" ng-click="removeOption($index)"><i class="icon-trash"></i></button>
+		       	 		<div class="row-fluid">
+		       	 			<div class="span10">
+			       	 			<div class="edit" simple-property-editor editor-title="option.editor.title" editor-property="option.name" editor-on-save="saveChoice()" editor-required>
+			       	 			{{option.name}} <i class="icon-edit icon-black"></i>
+			       	 			</div> 
+								<div class="edit" style="float:left;" simple-property-editor editor-title="option.editor.price" editor-property="option.price" editor-on-save="	saveChoice()" editor-required>
+			       	 			{{option.price}} <i class="icon-edit icon-black"></i>
+			       	 			</div> 
+		       	 			</div>
+		       	 			<div class="span2">
+		       	 			 	<button class="btn btn-small" ng-click="removeOption($index)"><i class="icon-trash"></i></button>
+		       	 			</span>
+		       	 		</div>
+		       	 		
+		       	 		
 			        </li>
 	    		</ul>
 	    	</div>
