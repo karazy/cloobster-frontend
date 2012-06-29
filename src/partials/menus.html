@@ -132,13 +132,16 @@
 			    	</div>
 		    	</div>
 		    	<div ng-hide="isParent(currentChoice.id)">
-		    	<span class="nullable">
-		    		<label for="choiceParentSelect" l="menus.choices.field.parentselect.label">Select Parent:</label>
-		    		<select ng-model="currentChoice.parent" ng-options="c.id as c.text for c in choices | filter:excludeChoice" ng-change="saveChoice()" id="choiceParentSelect">
-          				<option value="" l="menus.choices.field.parentselect.nullparent">-- chose parent --</option>
-        			</select>
-        		</span>
+			    	<span class="nullable">
+			    		<label for="choiceParentSelect" l="menus.choices.field.parentselect.label">Select Parent:</label>
+			    		<select ng-model="currentChoice.parent" ng-options="c.id as c.text for c in choices | filter:excludeChoice" ng-change="saveChoice()" id="choiceParentSelect">
+	          				<option value="" l="menus.choices.field.parentselect.nullparent">-- chose parent --</option>
+	        			</select>
+	        		</span>
 		    	</div>
+		    	<!-- <div ng-show="isParent(currentChoice.id)">
+		    		<a >Linked Choices<a>
+		    	</div> -->
 		    </div>
 		    <div class="choice-options-list" ng-show="currentChoice">
 	    		<h3 l="menus.options.title">Options</h3>

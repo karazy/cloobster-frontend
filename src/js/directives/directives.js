@@ -385,7 +385,7 @@ Cloobster.directives.directive('tooltip', ['$locale', 'lang', function($locale, 
 
 		if(translation) {
 			iElement.tooltip({
-				"title" : translation
+				"title" : translation || key
 			});
 		}
 
