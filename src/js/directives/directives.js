@@ -368,4 +368,28 @@ Cloobster.directives.directive('l', ['$locale', 'lang', '$interpolate', function
 	}
 }]);
 
+/**
+* Used to display a Bootstrap tooltip which gets localized.
+*/
+Cloobster.directives.directive('tooltip', ['$locale', 'lang', function($locale, langService) {
+	return function(scope, iElement, iAttrs, controller) {
+		var key = iAttrs.tooltip,
+		translation;
+
+		if(!key) {
+			return;
+		}
+
+		//if no translation is found, don't replace html, this is useful to provide default values in html
+		translation = langService.translate(key);
+
+		if(translation) {
+			iElement.tooltip({
+				"title" : translation
+			});
+		}
+
+	};
+}]);
+
 
