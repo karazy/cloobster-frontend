@@ -16,12 +16,12 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		choicesResource = null,
 		/** Default values for new menus.*/
 		defaultMenu = {
-			title: langService.translate("menu.new.default.title"),
+			title: langService.translate("menu.new.default.title") || "My new Menu",
 			active: false
 		},
 		/** Default values for new products. */
 		defaultProduct = {
-			name: langService.translate("product.new.default.name"),
+			name: langService.translate("product.new.default.name") || "My new Product",
 			price: 1,
 			shortDesc: "",
 			longDesc: "",
@@ -29,7 +29,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		},
 		/** Default values for new choices. */
 		defaultChoice = {
-			text: langService.translate("choice.new.default.text"),
+			text: langService.translate("choice.new.default.text") || "My new choice",
 			minOccurence: 0,
 			maxOccurence: 0,
 			price: 0,
@@ -39,7 +39,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		},
 		/** Default values for new options. */
 		defaultOption = {
-			name: langService.translate("option.new.default.name"),
+			name: langService.translate("option.new.default.name") || "My new option",
 			price: 0
 		};
 
@@ -268,19 +268,26 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.updateChoiceOrder = function(event, ui) {
 		$log.log("updateChoiceOrder");
 		var liElements = ui.item.parent().children(), //get all li elements
-			tmpChoice = null;
+			tmpChoice = null,
+			updateArray = new Array();
+
+		if(!currentProduct) {
+			$log.log("Can't update choice order because no current product exists.");
+			return;
+		}
 
 		liElements.each(function(index, ele) {
 			if(index > 0) {
 				//get corresponding choice resource by optaining the angular scope
 				tmpChoice = angular.element(ele).scope().choice;
-				$log.log("set choice " + tmpChoice.text + " index from " + tmpChoice.order + " to " + (index+1));
-				tmpChoice.order = index + 1;
-				tmpChoice.$update({"bid" : activeBusinessId});
+				// $log.log("set choice " + tmpChoice.text + " index from " + tmpChoice.order + " to " + (index+1));
+				// tmpChoice.order = index + 1;
+				updateArray.push({"id":tmpChoice.id});
+				currentProduct.choices = updateArray;
+				currentProduct.$update({"bid" : activeBusinessId});
+				// tmpChoice.$update({"bid" : activeBusinessId});
 			}	
 		});
-		
-		//handle index update, update old choice and new choice
 	};
 
 	/**
