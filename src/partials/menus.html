@@ -18,12 +18,12 @@
 	<h1 l="menus.title">Menus</h1>
 		<div class="row-fluid">
 			<div class="menus-list span2">
-			<ul class="nav nav-pills nav-stacked">
+			<ul class="nav nav-pills nav-stacked" id="menuList">
 				<li>
 					<a ng-click="createMenu()"><i class="icon-plus icon-black"></i> <span l="menus.list.new">New menu...</span></a>
 				</li>
-		        <li ng-repeat="menu in menus" ng-class="{active: currentMenu.id == menu.id}">	        	
-		        	<a ng-click="loadMenu(menu)">{{menu.title}}</a>
+		        <li ng-repeat="menu in menus | orderBy:['order', 'title'] " ng-class="{active: currentMenu.id == menu.id}" class="sortable">	        	
+		        	<a ng-click="loadMenu(menu)"><i class="icon-fullscreen icon-black"></i> {{menu.title}}</a>
 		        </li>
 		    </ul>
 		</div>
@@ -46,7 +46,7 @@
 
 	    	<div class="menu-products-list" ng-show="currentMenu.id">
 	    		<h3 l="menus.products.title">Products</h3>
-	    		<ul class="nav nav-pills nav-stacked connectedSortable" id="productList">
+	    		<ul class="nav nav-pills nav-stacked" id="productList">
 	    			<li>
 						<a ng-click="createProduct()"><i class="icon-plus icon-black"></i> <span l="menus.products.list.new">New product...</span></a>
 					</li>
@@ -78,11 +78,11 @@
 		    </div>
 		    <div class="product-choices-list" ng-show="currentProduct.id">
 	    		<h3 l="menus.choices.title">Choices</h3>
-	    		<ul class="nav nav-pills nav-stacked connectedSortable" id="choicesList">
+	    		<ul class="nav nav-pills nav-stacked" id="choicesList">
 	    			<li>
 						<a ng-click="createChoice()"><i class="icon-plus icon-black"></i> <span l="menus.choices.list.new">New choice...</span></a>
 					</li>
-		       	 	<li ng-repeat="choice in choices" class="product-choice-item sortable" ng-class="{active: currentChoice.id == choice.id}">
+		       	 	<li ng-repeat="choice in choices | orderBy:['order', 'text']" class="product-choice-item sortable" ng-class="{active: currentChoice.id == choice.id}">
 			        	<a ng-click="loadChoice(choice)"><i class="icon-fullscreen icon-black"></i> {{choice.text}}</a>
 			        </li>
 	    		</ul>
@@ -107,7 +107,7 @@
 		    		<label for="choiceOverridePriceSelect" l="menus.choices.field.overridePrice.label">Price calculation:</label>
 		    		<select ng-model="currentChoice.overridePrice" id="choiceOverridePriceSelect" ng-change="saveChoice()">
 		    			<option value="NONE" l="menus.choices.field.overridePrice.none">nothing</option>
-		    			<option value="OVERRIDE_SINGLE_PRICE" l="menus.choices.field.overridePrice.overridesingleprice">price per product</option>
+		    			<option value="OVERRIDE_SINGLE_PRICE" l="menus.choices.field.overridePrice.overridesingleprice">Price per product</option>
 		    			<option value="OVERRIDE_FIXED_SUM" l="menus.choices.field.overridePrice.overridefixedsum">Total price</option>
 		    		</select>
 		    	</div>

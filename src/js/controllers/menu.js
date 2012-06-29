@@ -60,7 +60,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	/** Business to which these menus belong to. */
 	$scope.activeBusiness = null;
 
-	$scope.productOrder = "order";
 
 	//Start Menu logic
 
@@ -101,18 +100,28 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		$scope.products = $scope.productsResource.query({"bid" : activeBusinessId, "menuId" : menuItem.id});
 
-		//make products sortable via drag&drop
+		//init sortable lists
+
+		jQuery( "#menuList" ).sortable({
+			// connectWith: ".connectedSortable",
+			items: 'li.sortable',
+			axis: "y",
+			update: function(event, ui) { 
+				$scope.updateMenuOrder(event, ui);
+			}
+		}).disableSelection();
 		
 		jQuery( "#productList" ).sortable({
-			connectWith: ".connectedSortable",
+			// connectWith: ".connectedSortable",
 			items: 'li.sortable',
+			axis: "y",
 			update: function(event, ui) { 
 				$scope.updateProductOrder(event, ui);
 			}
 		}).disableSelection();
 
 		jQuery( "#choicesList" ).sortable({
-			connectWith: ".connectedSortable",
+			// connectWith: ".connectedSortable",
 			items: "li.sortable",
 			axis: "y",
 			update: function(event, ui) { 
@@ -143,6 +152,21 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		$scope.products = new Array();
 		$scope.choices = new Array();
+	};
+
+	$scope.updateMenuOrder = function(event, ui) {
+		$log.log("updateMenuOrder");
+		var liElements = ui.item.parent().children(), //get all li elements
+			tmpMenu = null; //holds current menu in for each loop
+
+		liElements.each(function(index, ele) {
+			if(index > 0) {
+				//get corresponding choice resource by optaining the angular scope
+				tmpMenu = angular.element(ele).scope().menu;
+				tmpMenu.order = index;
+				tmpMenu.$update({"bid" : activeBusinessId});
+			}	
+		});
 	};
 
 	//End Menu logic
@@ -200,7 +224,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 				tmpProduct.$update({"bid" : activeBusinessId});
 			}	
 		});
-		//handle index update, update old product and new product
 	};
 
 	//End Product logic
@@ -253,11 +276,28 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 				tmpChoice = angular.element(ele).scope().choice;
 				$log.log("set choice " + tmpChoice.text + " index from " + tmpChoice.order + " to " + (index+1));
 				tmpChoice.order = index + 1;
+				tmpChoice.$update({"bid" : activeBusinessId});
 			}	
 		});
 		
 		//handle index update, update old choice and new choice
 	};
+
+	/**
+	* Checks if this choice is independent. A choice is independent when it
+	* is not assigned to any group or is the group parent.
+	* @param choice
+	*	Choice to check.
+	* @return
+	*	true if independent
+	*/
+	$scope.isIndependentChoice = function(choice) {
+		if(!choice.groupParent && choice.group) {
+			return false;
+		}
+
+		return true;
+	}
 
 	//End Choice logic
 

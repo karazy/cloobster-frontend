@@ -65,7 +65,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"menus.choices.field.overridePrice.label" : "Preisberechnung:",
 			"menus.choices.field.overridePrice.none" : "nichts",
 			"menus.choices.field.overridePrice.overridesingleprice" : "Einheitspreis",
-			"menus.choices.field.overridePrice.overridesingleprice" : "Gesamtsumme (Menü)",
+			"menus.choices.field.overridePrice.overridefixedsum" : "Gesamtsumme (Menü)",
 			//general
 			"common.warning.title" : "Warnung!",
 			"common.ok" : "Ok",
