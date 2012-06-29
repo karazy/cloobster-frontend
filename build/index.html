@@ -8,9 +8,10 @@
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
   </style>
-  <link rel="stylesheet" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/bootstrap.css"/>
+  <link rel="stylesheet" href="css/jquery.fileupload-ui.css"/>
   <link rel="stylesheet" href="css/cloobster.css"/>
-  <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+  <link href="css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 <body>
   <div id="fb-root"></div>
@@ -42,52 +43,52 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="#">Cloobster</a>
+        <a class="brand" href="#" l="product.brand">Asd</a>
         <!-- Login Drop Down -->
         <div ng-controller="Cloobster.Login">
-        <div class="btn-group pull-right" ng-show="loggedIn">
-           <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="icon-user"></i> {{account.login}}
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="#/profile">Profile</a></li>
-            <li class="divider"></li>
-            <li><a href="#" ng-click="logout()">Logout</a></li>
-          </ul>
-        </div>
-        <div class="btn-group pull-right" ng-hide="loggedIn" id="loginForm">
-           <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="icon-user"></i> Login
-            <span class="caret"></span>
-          </a>
-           <ul class="dropdown-menu">
-            <div class='alert alert-error fade in' ng-show='error'>
-              <strong>Error!</strong> {{errorMessage}}
-            </div>
-            <p >
-                <form ng-submit="fbLogin()" >
-                    <input class="btn btn-primary" type="submit" value="Login with Facebook">
-                </form>
-            </p>
-            <form class="form-inline" ng-submit="login()">
-              <input type="text" ng-model="loginData.login"  size="30" placeholder="login">
-              <input type="password" ng-model="loginData.password"  size="30" placeholder="password">
-                <label class="checkbox">
-                    <input type="checkbox" ng-model="loginData.save"> remember login
-                </label>
-              <input class="btn btn-primary" type="submit" value="login">
-            </form>
-         </ul>
-      </div>
-    </div>
+          <div class="btn-group pull-right" ng-show="loggedIn">
+             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-user"></i> {{account.login}}
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#/profile" l="nav.profile">Profile</a></li>
+              <li class="divider"></li>
+              <li><a href="#" ng-click="logout()" l="nav.logout">Logout</a></li>
+            </ul>
+          </div>
+ <!--          <div class="btn-group pull-right" ng-hide="loggedIn" id="loginForm">
+             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-user"></i> Login
+              <span class="caret"></span>
+            </a>
+             <div class="dropdown-menu">
+              <div class='alert alert-error fade in' ng-show='error'>
+                <strong>Error!</strong> {{errorMessage}}
+              </div>             
+              <form class="form" ng-submit="login()">
+                <input type="text" ng-model="loginData.login"  size="30" placeholder="login">
+                <input type="password" ng-model="loginData.password"  size="30" placeholder="password">
+                  <label class="checkbox">
+                      <input type="checkbox" ng-model="loginData.save"> remember login
+                  </label>
+                <input class="btn btn-primary" type="submit" value="login">
+              </form>
+              <div style="text-align:center;">or</div>
+              <form ng-submit="fbLogin()" >
+                  <input class="btn btn-primary" type="submit" value="Login with Facebook">
+              </form>
+           </div>
+          </div> -->
+        </div> 
         <div class="nav-collapse">
           <ul class="nav">
             <!-- class="active" -->
             <li ng-class="getActive('/')"><a href="#/">Home</a></li>
-            <li ng-show="loggedIn" ng-class="getActive('/businesses')"><a href="#/businesses">My Restaurants</a></li>
-            <li ng-class="getActive('/about')"><a href="#/about">About</a></li>
-            <li ng-hide="loggedIn" ng-class="getActive('/registration')"><a href="#/registration">Registration</a></li>
+            <li ng-show="loggedIn" ng-class="getActive('/businesses')"><a href="#/businesses" l="nav.restaurants">My Restaurants</a></li>
+            <li ng-class="getActive('/about')"><a href="#/about" l="nav.about">About</a></li>
+            <li ng-hide="loggedIn" class="pull-right"><a href="#/login" l="nav.login">Login</a></li>
+            <li ng-hide="loggedIn" class="pull-right" ng-class="getActive('/registration')"><a href="#/registration" l="nav.registration">Registration</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -99,10 +100,13 @@
   </div> <!-- /container -->
   
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="lib/jquery/jquery-ui-1.8.21.custom.min.js"></script>  
   <script src="lib/jquery/jquery.ui.widget.js"></script>
   <!-- Begin File Upload Plugin -->
   <script src="lib/jquery/jquery.iframe-transport.js"></script>  
-  <script src="lib/jquery/jquery.fileupload.js"></script>  
+  <script src="lib/jquery/jquery.fileupload.js"></script>
+  <script src="lib/jquery/jquery.fileupload-fp.js"></script>
+  <script src="lib/jquery/jquery.fileupload-ui.js"></script>  
   <!-- End File Upload Plugin -->
   <script src="lib/bootstrap/bootstrap.min.js"></script>
   <script src="lib/angular/angular-1.0.0rc9.min.js"></script>

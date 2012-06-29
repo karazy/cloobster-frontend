@@ -157,7 +157,7 @@ Cloobster.services.factory('Menu', ['cloobsterResource', function($resource) {
 		buildResource: function(businessId) {
 			return $resource('/b/businesses/:bid/menus/:mid',
 				{
-					'mid' : '@id',
+					'mid' : '@id'
 				},
 				{
 						/**
@@ -205,7 +205,7 @@ Cloobster.services.factory('Choice', ['cloobsterResource', function($resource) {
 		buildResource: function(businessId) {
 			return $resource('/b/businesses/:bid/choices/:id',
 				{
-					'id' : '@id',
+					'id' : '@id'
 				},
 				{
 						/**
@@ -253,7 +253,7 @@ Cloobster.services.factory('Product', ['cloobsterResource', function($resource) 
 		buildResource: function(businessId) {
 			return $resource('/b/businesses/:bid/products/:pid',
 				{
-					'pid' : '@id',
+					'pid' : '@id'
 				},
 				{
 						/**
@@ -738,7 +738,7 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 		* Initializes the upload plugin for a concrete file input element fields.
 		* It needs a previously optained fileUpeloadUrl for setup.
 		*/
-		function initUploadPlugin(fileInput, resource, statusObject, fileAddCallback, fileUploadCallback) {
+		function initUploadPlugin(fileInput, resource, fileAddCallback, fileUploadCallback) {
 			// if(!fileUploadUrl) {
 			// 	$log.error('initUploadPlugin: No fileUploadUrl set!');
 			// 	return;
@@ -837,7 +837,7 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 			*/
 			getFileUploadObject : function(fileInput, resource, fileAddCallback, fileUploadCallback) {
 
-				initUploadPlugin(fileInput, resource, status, fileAddCallback, fileUploadCallback);
+				initUploadPlugin(fileInput, resource, fileAddCallback, fileUploadCallback);
 
 				return {
 					/**

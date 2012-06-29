@@ -61,4 +61,4 @@ Cloobster.Management = function($scope, $http, $log, $location, $routeParams) {
 
 }
 
-Cloobster.Management.$inject = ['$scope', '$http', '$log', '$location', '$routeParams',];
+Cloobster.Management.$inject = ['$scope', '$http', '$log', '$location', '$routeParams'];
