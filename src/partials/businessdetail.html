@@ -18,6 +18,7 @@
 </div>
 <div simple-property-editor editor-title="Name" editor-property="activeBusiness.name" editor-on-save="saveBusiness" editor-enabled="editMode" editor-required>
 	<h1 ng-class="getEditModeClass()">{{activeBusiness.name}}</h1>
+	-&gt;<a href="#/businesses/{{activeBusiness.id}}/menus" l="businesses.action.menus">menus</a>
 </div>
 <div class="content-wrapper well">
 		<div class="row-fluid">
