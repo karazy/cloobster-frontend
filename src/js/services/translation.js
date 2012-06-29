@@ -57,6 +57,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"menus.choices.title" : "Auswahlmöglichkeiten",
 			"menus.choices.list.new" : "Neue Auswahl...",
 			"menus.choices.list.existing" : "Bestehende Auswahl...",
+			"menus.choices.list.linked" : "Abhängige Auswahl",
 			"menus.choices.link.description" : "Klicke auf eine bestehende Auswahlmöglichkeit, um diese mit dem aktuellen Produkt zu <strong>verknüpfen</strong> oder zu <strong>kopieren</strong>.",
 			"menus.choices.link.title" : "Alle Auswahlmöglichkeiten",
 			"menus.choices.link.search" : "Suchen:",
@@ -78,6 +79,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"menus.choices.field.overridePrice.none" : "nichts",
 			"menus.choices.field.overridePrice.overridesingleprice" : "Einheitspreis",
 			"menus.choices.field.overridePrice.overridefixedsum" : "Gesamtsumme (Menü)",
+			"menus.choices.field.parentselect.label" : "Übergeordnete Auswahl:",
+			"menus.choices.field.parentselect.nullparent" : "--- auswählen ---",
 			//general
 			"common.warning.title" : "Warnung!",
 			"common.ok" : "Ok",

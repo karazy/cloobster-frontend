@@ -338,18 +338,34 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	}
 
 	/**
-	* Checks if this choice is independent. A choice is independent when it
-	* is not assigned to any group or is the group parent.
+	* Checks if this choice is a parent choice. A choice is a parent
+	* when other choices have it assigned in their parent property.
 	* @param choice
 	*	Choice to check.
 	* @return
-	*	true if independent
+	*	true if parent
 	*/
-	$scope.isIndependentChoice = function(choice) {
-		if(!choice.groupParent && choice.group) {
+	$scope.isParent = function(choiceId) {
+		var status = false;
+
+		if(!choiceId) {
 			return false;
 		}
 
+		angular.forEach($scope.choices, function(element, key) {
+			if(element.parent == choiceId) {
+				status = true;
+				return;
+			}
+		});
+
+		return status;
+	}
+
+	$scope.excludeChoice = function(element) {
+		if($scope.currentChoice && element && $scope.currentChoice.id == element.id) {
+			return false;
+		}
 		return true;
 	}
 
