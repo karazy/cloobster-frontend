@@ -60,6 +60,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	/** Business to which these menus belong to. */
 	$scope.activeBusiness = null;
 
+	$scope.productOrder = "order";
+
 	//Start Menu logic
 
 	$scope.loadMenus = function(businessId) {
@@ -111,7 +113,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		jQuery( "#choicesList" ).sortable({
 			connectWith: ".connectedSortable",
-			items: 'li.sortable',
+			items: "li.sortable",
+			axis: "y",
 			update: function(event, ui) { 
 				$scope.updateChoiceOrder(event, ui);
 			}
@@ -185,6 +188,18 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	$scope.updateProductOrder = function(event, ui) {
 		$log.log("updateProductOrder");
+		var liElements = ui.item.parent().children(), //get all li elements
+			tmpProduct = null;
+
+		liElements.each(function(index, ele) {
+			if(index > 0) {
+				//get corresponding choice resource by optaining the angular scope
+				tmpProduct = angular.element(ele).scope().product;
+				$log.log("set product " + tmpProduct.name + " index from " + tmpProduct.order + " to " + (index));
+				tmpProduct.order = index;
+				tmpProduct.$update({"bid" : activeBusinessId});
+			}	
+		});
 		//handle index update, update old product and new product
 	};
 
@@ -229,8 +244,21 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	$scope.updateChoiceOrder = function(event, ui) {
 		$log.log("updateChoiceOrder");
+		var liElements = ui.item.parent().children(), //get all li elements
+			tmpChoice = null;
+
+		liElements.each(function(index, ele) {
+			if(index > 0) {
+				//get corresponding choice resource by optaining the angular scope
+				tmpChoice = angular.element(ele).scope().choice;
+				$log.log("set choice " + tmpChoice.text + " index from " + tmpChoice.order + " to " + (index+1));
+				tmpChoice.order = index + 1;
+			}	
+		});
+		
 		//handle index update, update old choice and new choice
 	};
+
 	//End Choice logic
 
 	$scope.setLocationAndLoadMenu = function(menuId) {
