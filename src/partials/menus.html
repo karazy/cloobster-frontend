@@ -139,9 +139,14 @@
 	        			</select>
 	        		</span>
 		    	</div>
-		    	<!-- <div ng-show="isParent(currentChoice.id)">
-		    		<a >Linked Choices<a>
-		    	</div> -->
+		    	<div ng-show="isParent(currentChoice.id)" class="btn-group">
+		    		<a class="btn dropdown-toggle"  data-toggle="dropdown" l="menus.choices.field.linkedchoices">Linked Choices<span class="caret"></span><a>
+		        	<ul class="dropdown-menu">
+		        		<a ng-repeat="choice in choices | filter:{parent : currentChoice.id}" ng-click="loadChoice(choice)">
+		        			{{choice.text}}
+		        		</a>
+    				</ul>
+		    	</div>
 		    </div>
 		    <div class="choice-options-list" ng-show="currentChoice">
 	    		<h3 l="menus.options.title">Options</h3>
