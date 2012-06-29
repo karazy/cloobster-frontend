@@ -330,7 +330,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		copiedChoice.id = "";
 		copiedChoice.productId = $scope.currentProduct.id;
-		copiedChoice.$update({"bid" : activeBusinessId});
+		copiedChoice.$save({"bid" : activeBusinessId});
 
 		$scope.choices.push(copiedChoice);
 
