@@ -94,8 +94,12 @@
 	    	<p l="menus.choices.link.description">Select an existing choice to add it to the current product.</p>
 	    	<span l="menus.choices.link.search">Search:</span><input ng-model="choiceLinkQuery.text">
     		<ul class="nav nav-pills nav-stacked">
-	       	 	<li ng-repeat="choice in allChoices | filter:choiceLinkQuery" class="product-choice-item">
-		        	<a ng-click="linkChoice(choice)">{{choice.text}}</a>
+	       	 	<li ng-repeat="choice in allChoices | filter:choiceLinkQuery" class="product-choice-item dropdown">
+		        	<a class="dropdown-toggle"  data-toggle="dropdown">{{choice.text}}<b class="caret"></b></a>
+		        	<ul class="dropdown-menu">
+		        		<a ng-click="copyChoice(choice)" l="menus.choices.link.action.copy">Copy</a>
+		        		<a ng-click="linkChoice(choice)" l="menus.choices.link.action.link">Link</a>
+    				</ul>
 		        </li>
     		</ul>
 	    </div>

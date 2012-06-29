@@ -320,6 +320,23 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.allChoices = null;
 	}
 
+	$scope.copyChoice = function(choiceToCopy) {
+		var copiedChoice = angular.copy(choiceToCopy);
+
+		if(!$scope.currentProduct) {
+			$log.log("Can't copy choice because no current product exists.");
+			return;
+		}
+
+		copiedChoice.id = "";
+		copiedChoice.productId = $scope.currentProduct.id;
+		copiedChoice.$update({"bid" : activeBusinessId});
+
+		$scope.choices.push(copiedChoice);
+
+		$scope.allChoices = null;
+	}
+
 	/**
 	* Checks if this choice is independent. A choice is independent when it
 	* is not assigned to any group or is the group parent.
