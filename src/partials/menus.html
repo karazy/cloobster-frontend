@@ -80,13 +80,23 @@
 	    		<h3 l="menus.choices.title">Choices</h3>
 	    		<ul class="nav nav-pills nav-stacked" id="choicesList">
 	    			<li>
-						<a ng-click="createChoice()"><i class="icon-plus icon-black"></i> <span l="menus.choices.list.new">New choice...</span></a>
+						<a ng-click="createChoice()"><i class="icon-plus icon-black"></i> <span l="menus.choices.list.new">New choice...</span></a><a ng-click="showAllChoices()"><i class="icon-plus icon-black"></i> <span l="menus.choices.list.existing">Existing choice...</span></a>
 					</li>
 		       	 	<li ng-repeat="choice in choices" class="product-choice-item sortable" ng-class="{active: currentChoice.id == choice.id}">
 			        	<a ng-click="loadChoice(choice)"><i class="icon-fullscreen icon-black"></i> {{choice.text}}</a>
 			        </li>
 	    		</ul>
 	    	</div>
+	    </div>
+
+	    <div class="span3 choice-wrapper choice-detail" ng-show="allChoices.length > 0">
+	    	<h3 l="menus.choices.link.title">All Choices</h3>
+	    	<p l="menus.choices.link.description">Select an existing choice to add it to the current product.</p>
+    		<ul class="nav nav-pills nav-stacked">
+	       	 	<li ng-repeat="choice in allChoices" class="product-choice-item">
+		        	<a ng-click="linkChoice(choice)">{{choice.text}}</a>
+		        </li>
+    		</ul>
 	    </div>
 
 	    <div class="span3 choice-wrapper" ng-show="currentChoice">

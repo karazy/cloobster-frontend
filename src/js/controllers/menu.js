@@ -51,11 +51,13 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.menus = null;
 	/** Currently selected menu. */
 	$scope.currentMenu = null;
-	/** */
+	/** Products of current menu. */
 	$scope.products = null;
-	/** */
+	/** Choices of current product. */
 	$scope.choices = null;
-	/** */
+	/** List of all existing choices. */
+	$scope.allChoices = null;
+	/** Selected product. */
 	$scope.currentProduct = null;
 	/** Business to which these menus belong to. */
 	$scope.activeBusiness = null;
@@ -95,6 +97,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		//reset currentChoice, so details get hidden when menu changes
 		$scope.currentChoice = null;
+
+		$scope.allChoices = null;
 		
 		$scope.currentMenu = menuItem;
 
@@ -147,7 +151,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.currentMenu = new $scope.menusResource(defaultMenu);
 
 		$scope.currentChoice = null;
-
+		$scope.allChoices = null;
 		$scope.currentProduct = null;
 
 		$scope.products = new Array();
@@ -177,6 +181,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		
 		//reset currentChoice, so details get hidden when product changes
 		$scope.currentChoice = null;
+		$scope.allChoices = null;
 
 		$scope.currentProduct = productItem;
 		$scope.choices = choicesResource.query({"productId": productItem.id});
@@ -188,6 +193,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		var newProduct = new $scope.productsResource(defaultProduct);
 		//reset currentChoice, because we don't want them to be displayed along the new product
 		$scope.currentChoice = null;
+		$scope.allChoices = null;
 
 		$scope.currentProduct = newProduct;
 
@@ -230,6 +236,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	//Start Choice logic
 	$scope.loadChoice = function(choiceItem) {
+		$scope.allChoices = null;
 		$scope.currentChoice = choiceItem;
 	};
 
@@ -245,6 +252,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	$scope.createChoice = function() {
 		$log.log("createChoice");
+		$scope.allChoices = null;
 
 		var newChoice = new choicesResource(defaultChoice);
 		//reset currentChoice, because we don't want them to be displayed along the new product
@@ -271,7 +279,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			tmpChoice = null,
 			updateArray = new Array();
 
-		if(!currentProduct) {
+		if(!$scope.currentProduct) {
 			$log.log("Can't update choice order because no current product exists.");
 			return;
 		}
@@ -283,12 +291,34 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 				// $log.log("set choice " + tmpChoice.text + " index from " + tmpChoice.order + " to " + (index+1));
 				// tmpChoice.order = index + 1;
 				updateArray.push({"id":tmpChoice.id});
-				currentProduct.choices = updateArray;
-				currentProduct.$update({"bid" : activeBusinessId});
+							
 				// tmpChoice.$update({"bid" : activeBusinessId});
 			}	
 		});
+
+		$scope.currentProduct.choices = updateArray;
+		$scope.currentProduct.$update({"bid" : activeBusinessId});
 	};
+
+	$scope.showAllChoices = function() {
+		$scope.allChoices = choicesResource.query();
+		$scope.currentChoice = null;
+	}
+
+	$scope.linkChoice = function(choiceToLink) {
+
+		if(!$scope.currentProduct) {
+			$log.log("Can't link choice because no current product exists.");
+			return;
+		}
+
+		choiceToLink.productId = $scope.currentProduct.id;
+		choiceToLink.$update({"bid" : activeBusinessId});
+
+		$scope.choices.push(choiceToLink);
+
+		$scope.allChoices = null;
+	}
 
 	/**
 	* Checks if this choice is independent. A choice is independent when it
