@@ -92,8 +92,9 @@
 	    <div class="span3 choice-wrapper choice-detail" ng-show="allChoices.length > 0">
 	    	<h3 l="menus.choices.link.title">All Choices</h3>
 	    	<p l="menus.choices.link.description">Select an existing choice to add it to the current product.</p>
+	    	<span l="menus.choices.link.search">Search:</span><input ng-model="choiceLinkQuery">
     		<ul class="nav nav-pills nav-stacked">
-	       	 	<li ng-repeat="choice in allChoices" class="product-choice-item">
+	       	 	<li ng-repeat="choice in allChoices | filter:choiceLinkQuery" class="product-choice-item">
 		        	<a ng-click="linkChoice(choice)">{{choice.text}}</a>
 		        </li>
     		</ul>

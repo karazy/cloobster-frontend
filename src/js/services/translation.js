@@ -59,6 +59,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"menus.choices.list.existing" : "Bestehende Auswahl...",
 			"menus.choices.link.description" : "Klicke auf eine bestehende Auswahlmöglichkeit, um diese dem aktuellen Produkt hinzuzufügen.",
 			"menus.choices.link.title" : "Alle Auswahlmöglichkeiten",
+			"menus.choices.link.search" : "Suchen:",
 			"menus.options.title" : "Optionen",
 			"menus.options.list.new" : "Neue Option...",
 			"menu.editor.title" : "Titel",
