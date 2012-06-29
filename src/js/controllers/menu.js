@@ -234,11 +234,41 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	//End Product logic
 
-	//Start Choice logic
+	// //Start Choice logic
 	$scope.loadChoice = function(choiceItem) {
 		$scope.allChoices = null;
 		$scope.currentChoice = choiceItem;
+
+
+		// if($scope.isParent(choiceItem.id)) {
+		// 	jQuery("#linkedChoicesPopover").popover({
+		// 		title: "Linked choices",
+		// 		placement: "left",
+		// 		content: getLinkedChoices()
+		// 	});
+		// }
 	};
+
+	// function getLinkedChoices(){
+	// 	var html = "";
+
+	// 	if(!$scope.choices) {
+	// 		return;
+	// 	}
+
+		// angular.forEach($scope.choices, function(choice) {
+		// 	if(choice.parent == $scope.currentChoice.id) {
+		// 		html += "<p>"+choice.text+"</p>";
+		// 	}
+
+		// });
+
+	// 	html = '<p ng-repeat="choice in choices">'+
+	// 		'{{choice.text}} test'+
+	// 		'</p>';
+
+	// 	return html;
+	// };
 
 	$scope.saveChoice = function() {
 		if($scope.currentChoice && $scope.currentChoice.id) {
@@ -383,10 +413,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		//always load menus
 		$scope.loadMenus(businessId);
 
-		//if menuId exists load specific menu with products and highlight in list
-		// if(menuId) {
-		// 	$scope.loadMenu(menuId);
-		// }
 
 	});
 }
