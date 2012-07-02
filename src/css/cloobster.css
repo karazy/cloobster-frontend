@@ -80,7 +80,7 @@ h1.edit:hover, h2.edit:hover {
   float: left;
 }
 
-.data-element .value {
+.data-element div.value {
   padding: 0 0 0 13px;
   width: 441px;
   vertical-align: top;

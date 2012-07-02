@@ -18,7 +18,10 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		/** Active image resource. */
 		activeImage,
 		/** Id of business to delete. */
-		businessDeleteId;
+		businessDeleteId,
+		defaultBusiness = {
+			currency : "EUR"
+		};
 
 	/** Resource for CRUD on businesses. */	
 	$scope.businessResource = null;
@@ -34,7 +37,9 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	/** True if file upload is active */
 	$scope.activeFileUpload = null;
 	/** Contains the information about a new business. */
-	$scope.newBusiness = null;
+	$scope.newBusiness = {
+			currency : "EUR"
+	};
 	/** When true shows the form for a new business. */
 	$scope.showNewBusinessForm = false;
 	/** Error flag. */
@@ -121,7 +126,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 				'address' : $scope.newBusiness.address,
 				'postcode' : $scope.newBusiness.postcode,
 				'phone' : $scope.newBusiness.phone,
-				'description' : $scope.newBusiness.description
+				'description' : $scope.newBusiness.description,
+				'currency' : $scope.newBusiness.currency
 			});
 
 			$("#addBusinessButton").button("loading");
@@ -130,6 +136,10 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 				//close switches to another url so businesses will be refreshed automatically 
 				//and showing the new new business
 				$scope.closeNewBusinessForm();
+			},
+			function() {
+				//Error handling
+				$("#addBusinessButton").button("reset");
 			});
 		} else {
 			//mark form as dirty to show validation errors
@@ -152,7 +162,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	*/
 	$scope.closeNewBusinessForm = function() {
 		$scope.toggleNewBusiness();
-		$scope.newBusiness = {};
+		$scope.newBusiness = new defaultBusiness();
 		// $scope.newBusinessForm.$setDirty(false);
 		$location.url("/businesses");
 	}
