@@ -2,10 +2,10 @@
 	<div class="span12">
 		<ul class="breadcrumb">
 			<li>
-				<a href="#">Home</a> <span class="divider">/</span>
+				<a href="#" l="breadcrumb.home">Home</a> <span class="divider">/</span>
 			</li>
 			<li>
-				<a href="#/businesses">My Restaurants</a> <span class="divider">/</span>
+				<a href="#/businesses" l="breadcrumb.businesses">My Restaurants</a> <span class="divider">/</span>
 			</li>
 			<li class="active">{{activeBusiness.name}}</li>
 		</ul>
@@ -13,7 +13,7 @@
 </div>
 <div class="alert alert-error alert-block" ng-show="error">
 	<button class="close" ng-click="hideError()">×</button>
-	<h4 class="alert-heading">Warning!</h4>
+	<h4 class="alert-heading" l="general.warning.title">Warning!</h4>
 	{{errorMessage}}
 </div>
 <div simple-property-editor editor-title="Name" editor-property="activeBusiness.name" editor-on-save="saveBusiness" editor-enabled="editMode" editor-required>
@@ -23,11 +23,11 @@
 <div class="content-wrapper well">
 		<div class="row-fluid">
 			<div class="span6" ng-hide="editMode">
-				<button type="button" class="btn btn-primary" ng-click="toggleEditMode()">Edit Profile</button> 				
+				<button type="button" class="btn btn-primary" ng-click="toggleEditMode()" l="business.action.edit.enable">Edit Profile</button> 				
 			</div>
 			<div class="span6" ng-show="editMode">
-				<button type="button" class="btn btn-primary" ng-click="toggleEditMode()">Done editing</button> 
-				<span>Click a profile feature to edit.</span>
+				<button type="button" class="btn btn-primary" ng-click="toggleEditMode()" l="business.action.edit.disable">Done editing</button> 
+				<span l="business.action.edit.disable.hint">Click a profile feature to edit.</span>
 			</div>
 		</div>
 		<div class="row-fluid imagebox">
@@ -37,7 +37,7 @@
 						<img  ng-src="{{activeBusiness.images.logo.url}}=s96" alt="click to edit" />
 						<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
 					</div>
-					<button ng-show="!activeBusiness.images.logo" ng-disabled="!editMode" class="btn logo">Add Logo</button>
+					<button ng-show="!activeBusiness.images.logo" ng-disabled="!editMode" class="btn logo" l="business.detail.logo.button">Add Logo</button>
 				</div>
 				<div class="row-fluid">
 					<div class="span4">
@@ -46,7 +46,7 @@
 								<img  ng-src="{{activeBusiness.images.picture1.url}}=s128" alt="click to edit" />
 								<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
 							</div>
-							<button ng-show="!activeBusiness.images.picture1" ng-disabled="!editMode" class="btn">Add Profile Picture1</button>
+							<button ng-show="!activeBusiness.images.picture1" ng-disabled="!editMode" class="btn" l="business.detail.picture1.button">Add Profile Picture1</button>
 						</div>
 					</div>
 					<div class="span4">
@@ -55,7 +55,7 @@
 								<img  ng-src="{{activeBusiness.images.picture2.url}}=s128" alt="click to edit" />
 								<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
 							</div>
-							<button ng-show="!activeBusiness.images.picture2" ng-disabled="!editMode" class="btn">Add Profile Picture2</button>
+							<button ng-show="!activeBusiness.images.picture2" ng-disabled="!editMode" class="btn" l="business.detail.picture2.button">Add Profile Picture2</button>
 						</div>
 					</div>
 					<div class="span4">
@@ -64,7 +64,7 @@
 								<img  ng-src="{{activeBusiness.images.picture3.url}}=s128" alt="click to edit" />
 								<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
 							</div>
-							<button ng-show="!activeBusiness.images.picture3" ng-disabled="!editMode" class="btn">Add Profile Picture3</button>
+							<button ng-show="!activeBusiness.images.picture3" ng-disabled="!editMode" class="btn" l="business.detail.picture3.button">Add Profile Picture3</button>
 						</div>
 					</div>
 				</div>
@@ -72,43 +72,43 @@
 		</div>
 		<div simple-property-editor editor-title="Description" editor-property="activeBusiness.description" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-type="textarea" editor-required>
 			<div class="data-element" ng-class="getEditModeClass()">
-				<div class="key">Description</div>
+				<div class="key" l="business.detail.description">Description</div>
 				<div class="value">{{activeBusiness.description}}</div>
 			</div>
 		</div>
 		<div simple-property-editor editor-title="Slogan" editor-property="activeBusiness.slogan" editor-on-save="saveBusiness()" editor-enabled="editMode">
 			<div class="data-element" ng-class="getEditModeClass()">
-				<div class="key">Slogan</div>
+				<div class="key" l="business.detail.slogan">Slogan</div>
 				<div class="value">{{activeBusiness.slogan}}</div>
 			</div>
 		</div>
 		<div simple-property-editor editor-title="Address" editor-property="activeBusiness.address" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
 			<div class="data-element" ng-class="getEditModeClass()">
-				<div class="key">Address</div>
+				<div class="key" l="business.detail.address">Address</div>
 				<div class="value">{{activeBusiness.address}}</div>
 			</div>
 		</div>
 		<div simple-property-editor editor-title="City" editor-property="activeBusiness.city" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
 			<div class="data-element" ng-class="getEditModeClass()">
-				<div class="key">City</div>
+				<div class="key" l="business.detail.city">City</div>
 				<div class="value">{{activeBusiness.city}}</div>
 			</div>
 		</div>
 		<div simple-property-editor editor-title="Postcode" editor-property="activeBusiness.postcode" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
 			<div class="data-element" ng-class="getEditModeClass()">
-				<div class="key">Postcode</div>
+				<div class="key" l="business.detail.postcode">Postcode</div>
 				<div class="value">{{activeBusiness.postcode}}</div>
 			</div>
 		</div>
 		<div simple-property-editor editor-title="Phone" editor-property="activeBusiness.phone" editor-on-save="saveBusiness()" editor-enabled="editMode">
 			<div class="data-element" ng-class="getEditModeClass()">
-				<div class="key">Phone</div>
+				<div class="key" l="business.detail.phone">Phone</div>
 				<div class="value">{{activeBusiness.phone}}</div>
 			</div>
 		</div>
 		<div >
 			<div class="data-element">
-				<div class="key">Currency</div>
+				<div class="key" l="business.detail.currency">Currency</div>
 				<select ng-model="activeBusiness.currency" class="value" ng-disabled="!editMode" ng-change="saveBusiness()" required>
 					<option selected="selected" value="EUR">Euro</option>
 					<option selected="selected" value="USD">US Dollar</option>
