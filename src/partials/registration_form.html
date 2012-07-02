@@ -25,7 +25,7 @@
 				<label for="fullname" class="control-label">Name*</label>
 				<div class="controls">
 					<input name="fullname" id="fullname" type='text' ng-model="account.name" required ng-minlength="3" placeholder="your name">	
-					 <div class="help-inline" ng-show="registrationForm.fullname.$dirty && registrationForm.fullname.$invalid">Invalid:
+					 <div class="help-inline" ng-show="registrationForm.fullname.$dirty && registrationForm.fullname.$invalid">
 		          		<span ng-show="registrationForm.fullname.$error.required">Tell us your name.</span>
 		          		<span ng-show="registrationForm.fullname.$error.minlength">Name must be a least 3 characters long.</span>
 		        	</div>
@@ -35,7 +35,7 @@
 	        	<label for="login" class="control-label">Login*</label>
 	        	<div class="controls">
 					<input name="login" id="login" type="text" ng-model="account.login" required ng-pattern="/^[a-z0-9_\.-]{4,30}$/" placeholder="login name">
-					<div class="help-inline" ng-show="registrationForm.login.$dirty && registrationForm.login.$invalid">Invalid:
+					<div class="help-inline" ng-show="registrationForm.login.$dirty && registrationForm.login.$invalid">
 		          		<span ng-show="registrationForm.login.$error.required">Provide a username.</span>
 		          		<span ng-show="registrationForm.login.$error.pattern">4 - 30 characters. Only lower case, digits, "_" "-" "." are allowed.</span>
 		        	</div>
@@ -45,7 +45,7 @@
 				<label class="control-label" for="email">Email*</label>
 				<div class="controls">
 					<input name='email' id="email" type='email' ng-model="account.email" required ng-change="matchMails()" placeholder="email">
-					 <div class="help-inline" ng-show="registrationForm.email.$dirty && registrationForm.email.$invalid">Invalid:
+					 <div class="help-inline" ng-show="registrationForm.email.$dirty && registrationForm.email.$invalid">
 		          		<span ng-show="registrationForm.email.$error.required">Tell us your email.</span>
 		          		<span ng-show="registrationForm.email.$error.email">Invalid email.</span>
 		        	</div>
@@ -55,7 +55,7 @@
 				<label class="control-label" for="emailRepeat">Repeat email*</label>
 				<div class="controls">
 					<input name='emailRepeat' id="emailRepeat" type='text' ng-model="emailRepeat" required ng-change="matchMails()" placeholder="enter your email again">
-					<div class="help-inline" ng-show="registrationForm.emailRepeat.$dirty && registrationForm.emailRepeat.$invalid">Invalid:
+					<div class="help-inline" ng-show="registrationForm.emailRepeat.$dirty && registrationForm.emailRepeat.$invalid">
 		          		<span ng-show="registrationForm.emailRepeat.$error.match">Emails don't match.</span>
 	        		</div>
 				</div>
@@ -64,7 +64,7 @@
 				<label for="password" class="control-label">Password*</label>
 				<div class="controls">
 					<input name="password" type="password" ng-model="account.password" required ng-pattern="/^(?=[!-~]{6,}$)(?=.*\d)(?=.*[^A-Za-z0-9]).*$/" ng-change="matchPasswords()" placeholder="your password">
-					<div class="help-inline" ng-show="registrationForm.password.$dirty && registrationForm.password.$invalid">Invalid:
+					<div class="help-inline" ng-show="registrationForm.password.$dirty && registrationForm.password.$invalid">
 		          		<span ng-show="registrationForm.password.$error.required">Provide a password.</span>
 		          		<span ng-show="registrationForm.password.$error.pattern">Min 6 characters. 1 number and one special character!</span>
 		        	</div>
@@ -74,7 +74,7 @@
 				<label class="control-label" for="passwordRepeat">Repeat password*</label>
 				<div class="controls">
 					<input name='passwordRepeat' type='password' ng-model="passwordRepeat" required ng-change="matchPasswords()" placeholder="repeat your password">
-					<div class="help-inline" ng-show="registrationForm.passwordRepeat.$dirty && registrationForm.passwordRepeat.$invalid">Invalid:
+					<div class="help-inline" ng-show="registrationForm.passwordRepeat.$dirty && registrationForm.passwordRepeat.$invalid">
 		          		<span ng-show="registrationForm.passwordRepeat.$error.match">Passwords don't match.</span>
 	        		</div>
 				</div>
@@ -88,7 +88,7 @@
 			<label class="control-label" for="companyName">Company*</label>
 			<div class="controls">
 				<input name='companyName' id="companyName" type='text' ng-model="account.company.name" required placeholder="company name">				
-				<div class="help-inline" ng-show="registrationForm.companyName.$dirty && registrationForm.companyName.$invalid">Invalid:
+				<div class="help-inline" ng-show="registrationForm.companyName.$dirty && registrationForm.companyName.$invalid">
 	          		<span ng-show="registrationForm.companyName.$error.required">Provide a company.</span>
         		</div>
 			</div>
@@ -97,7 +97,7 @@
 			<label class="control-label" for="companyAddress">Address*</label>
 			<div class="controls">
 				<input name='companyAddress' id="companyAddress" type='text' ng-model="account.company.address"  placeholder="company address" required>
-				<div class="help-inline" ng-show="registrationForm.companyAddress.$dirty && registrationForm.companyAddress.$invalid">Invalid:
+				<div class="help-inline" ng-show="registrationForm.companyAddress.$dirty && registrationForm.companyAddress.$invalid">
 	          		<span ng-show="registrationForm.companyAddress.$error.required">Provide an address.</span>
         		</div>
 			</div>
@@ -106,7 +106,7 @@
 			<label class="control-label" for="companyCity">City*</label>
 			<div class="controls">
 				<input name='companyCity' id="companyCity" type='text' ng-model="account.company.city" placeholder="city" required>
-				<div class="help-inline" ng-show="registrationForm.companyCity.$dirty && registrationForm.companyCity.$invalid">Invalid:
+				<div class="help-inline" ng-show="registrationForm.companyCity.$dirty && registrationForm.companyCity.$invalid">
 	          		<span ng-show="registrationForm.companyCity.$error.required">Provide a city.</span>
         		</div>
 			</div>
@@ -115,7 +115,7 @@
 			<label class="control-label" for="companyCity">Postcode*</label>
 			<div class="controls">
 				<input name='companyPostcode' id="companyPostcode" type='text' ng-model="account.company.postcode" placeholder="postcode" required >
-				<div class="help-inline" ng-show="registrationForm.companyPostcode.$dirty && registrationForm.companyPostcode.$invalid">Invalid:
+				<div class="help-inline" ng-show="registrationForm.companyPostcode.$dirty && registrationForm.companyPostcode.$invalid">
 	          		<span ng-show="registrationForm.companyPostcode.$error.required">Provide a postcode.</span>
         		</div>
 			</div>
@@ -126,10 +126,9 @@
 			<label for="companyCountry">Country*</label>
 			<div class="controls">
 				<select name='companyCountry' id="companyCountry" ng-model='account.company.country' required>
-					<option value=""></option>
-		            <option value="DE">Germany</option>
+		            <option value="DE">Deutschland</option>
 		        </select>
-	        	<div class="help-inline" ng-show="registrationForm.companyCountry.$dirty && registrationForm.companyCountry.$invalid">Invalid:
+	        	<div class="help-inline" ng-show="registrationForm.companyCountry.$dirty && registrationForm.companyCountry.$invalid">
 	          		<span ng-show="registrationForm.companyCountry.$error.required">Provide a country.</span>
         		</div>
 	    	</div>
