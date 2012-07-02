@@ -188,28 +188,28 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 			var html = 
 				'<div class="toggler" ng-transclude></div>'+
 				'<div class="modal hide">'+
-				  '<div class="modal-header">'+
-				   '<button type="button" class="close" ng-click="cancel()" data-dismiss="modal">×</button>'+
-				    '<h3>{{getTitle()}}</h3>'+
-				 ' </div>'+
-				'  <form name="simpleImageForm" novalidate ng-submit="save()" class="upload-image-form">'+
-					'<div class="alert alert-error alert-block" ng-show="error">'+
-						'<button  type="button" class="close" ng-click="hideError()">×</button>'+
-						'<h4 class="alert-heading">Warning!</h4>'+
-						'{{errorMessage}}'+
+					'<div class="modal-header">'+
+				  		'<button type="button" class="close" ng-click="cancel()" data-dismiss="modal">×</button>'+
+				   		'<h3>{{getTitle()}}</h3>'+
 					'</div>'+
-					'<div class="modal-body">'+
-					 	'<span class="btn btn-success fileinput-button">'+
-					 		'<i class="icon-plus icon-white"></i>'+
-                    		'<span l="fileupload.button.add">Add image...</span>'+
-					 		'<input type="file" name="files[]"></input>'+
-				 		'</span>'+
-				 		'<span l="fileupload.image.label">Selected file: </span><span class="selected-files"></span>'+
-					'</div>'+
-					'<div class="modal-footer" style="clear:both;">'+
-						'<button type="button" class="btn" ng-click="cancel()" data-dismiss="modal" l="common.cancel">Close</button>'+
-						'<button type="submit" ng-disabled="!fileAdded || fileUploading" class="btn btn-primary" data-loading-text="Saving..." l="common.save">Save</button>'+
-					'</div>'+
+					'<form name="simpleImageForm" novalidate ng-submit="save()" class="upload-image-form">'+
+						'<div class="alert alert-error alert-block" ng-show="error">'+
+							'<button  type="button" class="close" ng-click="hideError()">×</button>'+
+							'<h4 class="alert-heading">Warning!</h4>'+
+							'{{errorMessage}}'+
+						'</div>'+
+						'<div class="modal-body">'+
+						 	'<span class="btn btn-success fileinput-button">'+
+						 		'<i class="icon-plus icon-white"></i>'+
+	                    		'<span l="fileupload.button.add">Add image...</span>'+
+						 		'<input type="file" name="files[]"></input>'+
+					 		'</span>'+
+					 		'<span l="fileupload.image.label">Selected file: </span><span class="selected-files"></span>'+
+						'</div>'+
+						'<div class="modal-footer" style="clear:both;">'+
+							'<button type="button" class="btn" ng-click="cancel()" data-dismiss="modal" l="common.cancel">Close</button>'+
+							'<button type="submit" ng-disabled="!fileAdded || fileUploading" class="btn btn-primary" data-loading-text="Saving..." l="common.save">Save</button>'+
+						'</div>'+
 					'</form>'+
 				'</div>';
 			
@@ -223,11 +223,11 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 		        		fileList = iElement.find('.selected-files'),
 		        		submitButton = iElement.find("button[type=submit]"),
 		        		uploadInput = iElement.find('form[name=simpleImageForm]'),
-		        		fileAdded = null,
-		        		fileUploading = null,
-		        		uploadObject, //returned from file upload initialization
-		        		error = false,
-		        		errorMessage = "";
+		        		uploadObject; //returned from file upload initialization
+
+		        	// Initialize private scope variables.
+		        	scope.error = false,
+		        	scope.errorMessage = "";
 
 		        	scope.fileAdded = false;
 		        	scope.fileUploading = false;
@@ -254,12 +254,12 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 
 			        		activeImage.$save(function() {
 								scope.editorOnSave({ "image" : activeImage});
-								scope.$apply('fileUploading = false'); 
+								scope.fileUploading = false;
 								dialog.modal('hide');
 								submitButton.button('reset');
 							});
 						} else {
-							fileUploading = false;
+							scope.fileUploading = false;
 							scope.errorMessage = langService.translate("fileupload.submit.error") +'<br/>('+errorText+')';
 							scope.error = true;
 							scope.$digest();
@@ -308,10 +308,10 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 
 					/** Reset url and uploadFinished on show. */
 					dialog.on("show", function() {
-						fileAdded = false;
-						fileUploading = false;
-						error = false;
-						errorMessage = "";
+						scope.fileAdded = false;
+						scope.fileUploading = false;
+						scope.error = false;
+						scope.errorMessage = "";
 						scope.$digest();
 					});
 		        	
