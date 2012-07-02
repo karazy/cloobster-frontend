@@ -1,19 +1,19 @@
 <div class="alert alert-error alert-block" ng-show="error">
 	<button class="close" ng-click="hideError()">×</button>
-	<h4 class="alert-heading">Warning!</h4>
+	<h4 class="alert-heading" l="common.warning.title">Warning!</h4>
 	{{errorMessage}}
 </div>
-<h1>Profile page</h1>
+<h1 l="profile.title">Profile</h1>
 <div class="content_wrapper">
 
 	<h2>{{account.login}}</h2>
 	<div class="well">
-		<div class="data-element">
-		<div class="key">Name</div>
+		<div class="data-element" ng-class="getEditModeClass('account')">
+			<div class="key" l="profile.accounts.name">Name</div>
 			<div class="value">{{account.name}}</div>
 		</div>
-			<div class="data-element">
-		<div class="key">Email</div>
+		<div class="data-element" ng-class="getEditModeClass('account')">
+			<div class="key" l="profile.account.email">Email</div>
 			<div class="value">{{account.email}}</div>
 		</div>
 	</div>
@@ -23,48 +23,48 @@
 	<div class="well">
 		<div class="row-fluid">
 			<div class="span6" ng-hide="editModeCompany">
-				<button type="button" class="btn btn-primary" ng-click="toggleEditMode('company')">Edit Company</button> 				
+				<button type="button" class="btn btn-primary" ng-click="toggleEditMode('company')" l="profile.company.action.edit.enable">Edit Company</button> 				
 			</div>
 			<div class="span6" ng-show="editModeCompany">
-				<button type="button" class="btn btn-primary" ng-click="toggleEditMode('company')">Done editing</button> 
-				<span>Click a company profile feature to edit.</span>
+				<button type="button" class="btn btn-primary" ng-click="toggleEditMode('company')" l="profile.company.action.edit.disable">Done editing</button> 
+				<span l="profile.company.action.edit.disable.hint">Click a company profile feature to edit.</span>
 			</div>
 		</div>
-		<div simple-property-editor editor-title="Address" editor-property="company.address" editor-required editor-on-save="saveCompany()" editor-enabled="editModeCompany">
+		<div simple-property-editor editor-title="profile.company.address.editor.title" editor-property="company.address" editor-required editor-on-save="saveCompany()" editor-enabled="editModeCompany">
 			<div class="data-element" ng-class="getEditModeClass('company')">
-			<div class="key">Address</div>
+			<div class="key" l="profile.company.address">Address</div>
 				<div class="value">{{company.address}}</div>
 			</div>
 		</div>
-		<div simple-property-editor editor-title="Name" editor-property="company.city" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
+		<div simple-property-editor editor-title="profile.company.city.editor.title" editor-property="company.city" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
 			<div class="data-element" ng-class="getEditModeClass('company')">
-				<div class="key">City</div>
+				<div class="key" l="profile.company.city">City</div>
 				<div class="value">{{company.city}}</div>
 			</div>
 		</div>
-		<div simple-property-editor editor-title="Name" editor-property="company.postcode" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
+		<div simple-property-editor editor-title="profile.company.postcode.editor.title" editor-property="company.postcode" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
 			<div class="data-element" ng-class="getEditModeClass('company')" >
-				<div class="key">Postcode</div>
+				<div class="key" l="profile.company.postcode">Postcode</div>
 				<div class="value">{{company.postcode}}</div>
 			</div>
 		</div>
-		<div simple-property-editor editor-title="Name" editor-property="company.phone" editor-on-save="saveCompany()" editor-enabled="editModeCompany">
+		<div simple-property-editor editor-title="profile.company.phone.editor.title" editor-property="company.phone" editor-on-save="saveCompany()" editor-enabled="editModeCompany">
 			<div class="data-element" ng-class="getEditModeClass('company')" >
-				<div class="key">Business phone</div>
+				<div class="key" l="profile.company.phone">Business phone</div>
 				<div class="value">{{company.phone}}</div>
 			</div>
 		</div>
-		<div simple-property-editor editor-title="Name" editor-property="company.url" editor-on-save="saveCompany()" editor-enabled="editModeCompany">
+		<div simple-property-editor editor-title="profile.company.url.editor.title" editor-property="company.url" editor-on-save="saveCompany()" editor-enabled="editModeCompany">
 			<div class="data-element" ng-class="getEditModeClass('company')">
-				<div class="key">Website</div>
+				<div class="key" l="profile.company.url">Website</div>
 				<div class="value">{{company.url}}</div>
 			</div>
 		</div>
-		<div simple-property-editor editor-title="Name" editor-property="company.country" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
-			<div class="data-element" ng-class="getEditModeClass('company')">
-				<div class="key">Country</div>
-				<div class="value">{{company.country}}</div>
-			</div>
+		<div class="data-element">
+			<div class="key" l="profile.company.country">Country</div>
+			<select ng-model="company.country" class="value" ng-disabled="!editModeCompany" ng-change="saveCompany()" required>
+				<option selected="selected" value="DE">Germany</option>
+			</select>
 		</div>
 	</div>
 

@@ -142,7 +142,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	/**
 	* Returns "edit" when edit mode is active.
 	* @param editMode
-	*	company or account to toggel corresponding edit mode
+	*	company or account to toggle corresponding edit mode
 	*/
 	$scope.getEditModeClass = function(editMode) {
 		if(editMode.toLowerCase() == "company") {
