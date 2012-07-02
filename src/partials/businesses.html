@@ -31,7 +31,7 @@
 		</div>
 	</div>
 	<div ng-show="showNewBusinessForm" class="row-fluid">
-		<div class="span4">
+		<div class="span6">
 			<form ng-submit="addNewBusiness()" name="newBusinessForm" class="well form-vertical" novalidate>
 				<div class="control-group" ng-class="getFieldInputClass(newBusinessForm.name.$dirty, newBusinessForm.name.$invalid)">
 				<label for="newBusinessName" class="control-label" l="businesses.form.name">Name*</label>
@@ -88,7 +88,7 @@
 				<div class="control-group" ng-class="getFieldInputClass(newBusinessForm.currency.$dirty, newBusinessForm.currency.$invalid)">
 					<label for="newBusinessCurrency" l="businesses.form.currency">Currency*</label>
 					<div class="controls">
-						<select ng-model="newBusiness.currency" id="newBusinessCurrency" required>
+						<select ng-model="newBusiness.currency" id="newBusinessCurrency" name="currency" required>
 							<option value="EUR">Euro</option>
 							<option value="USD">US Dollar</option>
 						</select>

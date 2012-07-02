@@ -34,7 +34,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.activeProperty = null;
 	/** When true user can edit the business profile. */
 	$scope.editMode = false;
-	/** True if file upload is active */
+	/** True if file upload is active. */
 	$scope.activeFileUpload = null;
 	/** Contains the information about a new business. */
 	$scope.newBusiness = {
@@ -116,7 +116,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	*	Name for the new business
 	*/
 	$scope.addNewBusiness = function() {
-		var fields = ['name', 'city', 'address', 'postcode', 'phone', 'description'],
+		var fields = ['name', 'city', 'address', 'postcode', 'phone', 'description', 'currency'],
 			isInvalid = false;
 
 		if($scope.newBusinessForm.$valid) {
@@ -135,6 +135,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			$scope.newBusinessEntity.$save(function() {
 				//close switches to another url so businesses will be refreshed automatically 
 				//and showing the new new business
+				$("#addBusinessButton").button("reset");
 				$scope.closeNewBusinessForm();
 			},
 			function() {
@@ -145,7 +146,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			//mark form as dirty to show validation errors
 			jQuery.each(fields, function(index, value) {
 				if($scope.newBusinessForm[value] && !$scope.newBusinessForm[value].invalid) {
-					//mark proeprty as dirty to display error messages
+					//mark property as dirty to display error messages
 					$scope.newBusinessForm[value].$dirty = true;
 					isInvalid = true;
 				}
@@ -162,7 +163,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	*/
 	$scope.closeNewBusinessForm = function() {
 		$scope.toggleNewBusiness();
-		$scope.newBusiness = new defaultBusiness();
+		//restore def values
+		$scope.newBusiness = angular.copy(defaultBusiness);
 		// $scope.newBusinessForm.$setDirty(false);
 		$location.url("/businesses");
 	}
@@ -214,7 +216,10 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	* Save active business.
 	*/
 	$scope.saveBusiness = function() {
-		$scope.activeBusiness.$update();
+		if($scope.editMode) {
+			$log.log("saveBusiness " + $scope.activeBusiness.id);
+			$scope.activeBusiness.$update();	
+		}
 	};
 
 	/**
