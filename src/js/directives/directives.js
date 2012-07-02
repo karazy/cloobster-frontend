@@ -223,11 +223,11 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 		        		fileList = iElement.find('.selected-files'),
 		        		submitButton = iElement.find("button[type=submit]"),
 		        		uploadInput = iElement.find('form[name=simpleImageForm]'),
-		        		fileAdded = null,
-		        		fileUploading = null,
-		        		uploadObject, //returned from file upload initialization
-		        		error = false,
-		        		errorMessage = "";
+		        		uploadObject; //returned from file upload initialization
+		        	
+		        	// Initialize private scope variables.
+		        	scope.error = false,
+		        	scope.errorMessage = "";
 
 		        	scope.fileAdded = false;
 		        	scope.fileUploading = false;
@@ -254,12 +254,12 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 
 			        		activeImage.$save(function() {
 								scope.editorOnSave({ "image" : activeImage});
-								scope.$apply('fileUploading = false'); 
+								scope.fileUploading = false;
 								dialog.modal('hide');
 								submitButton.button('reset');
 							});
 						} else {
-							fileUploading = false;
+							scope.fileUploading = false;
 							scope.errorMessage = langService.translate("fileupload.submit.error") +'<br/>('+errorText+')';
 							scope.error = true;
 							scope.$digest();
@@ -308,10 +308,10 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 
 					/** Reset url and uploadFinished on show. */
 					dialog.on("show", function() {
-						fileAdded = false;
-						fileUploading = false;
-						error = false;
-						errorMessage = "";
+						scope.fileAdded = false;
+						scope.fileUploading = false;
+						scope.error = false;
+						scope.errorMessage = "";
 						scope.$digest();
 					});
 		        	
