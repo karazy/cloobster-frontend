@@ -238,7 +238,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 		        	}
 
 					/** Called from upload service when upload is finished and updates U */
-					scope.fileUploadedCallback = function(success, errorText) {
+					function fileUploadedCallback(success, errorText) {
 						var imageResource = scope.editorImageResource(),
 							imageUrl = imageResource.url,
 							activeImage = null;
@@ -260,7 +260,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 							});
 						} else {
 							fileUploading = false;
-							scope.errorMessage = langService.translate("fileupload.submit.error");
+							scope.errorMessage = langService.translate("fileupload.submit.error") +'<br/>('+errorText+')';
 							scope.error = true;
 							scope.$digest();
 							submitButton.button('reset');
@@ -272,7 +272,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 		        	* @param fileName
 		        	*	name of selected file
 		        	*/
-		        	scope.fileAddedCallback = function(fileName) {
+		        	function fileAddedCallback (fileName) {
 		        		scope.$apply('fileAdded = true');
 		        		fileList.html(fileName);
 		        	}
@@ -303,7 +303,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 					* Set error message to empty string and hide the error box.
 					*/
 					scope.hideError = function() {
-						scope.$apply("error = false");
+						scope.error = false;
 					};
 
 					/** Reset url and uploadFinished on show. */
@@ -318,7 +318,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 		        	iElement.find('div.toggler').bind('click', function() {		   
 		        		if(scope.editorEnabled() == true) {
 		        			//init file upload plugin for this dialog
-	        				uploadObject = uploadService.getFileUploadObject(uploadInput, scope.editorImageResource(), scope.fileAddedCallback, scope.fileUploadedCallback);
+	        				uploadObject = uploadService.getFileUploadObject(uploadInput, scope.editorImageResource(), fileAddedCallback, fileUploadedCallback);
 						
 							dialog.modal('show');	
 		        		}
