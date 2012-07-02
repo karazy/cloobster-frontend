@@ -27,8 +27,11 @@
 		<copy todir="build/lib">
 			<filelist id="libfiles" dir="src/lib" >
 				<file name="jquery/jquery.ui.widget.js" />
+				<file name="jquery/jquery-ui-1.8.21.custom.min.js" />
 				<file name="jquery/jquery.iframe-transport.js" />
 				<file name="jquery/jquery.fileupload.js" />
+				<file name="jquery/jquery.fileupload-fp.js" />
+				<file name="jquery/jquery.fileupload-ui.js" />
 				<file name="bootstrap/bootstrap.min.js" />
 				<file name="angular/angular-1.0.0rc9.min.js" />
 				<file name="angular/angular-resource-1.0.0rc9.min.js" />
@@ -47,6 +50,7 @@
 				<file name="css/bootstrap.min.css"/>
 				<file name="css/bootstrap-responsive.min.css"/>
 				<file name="css/cloobster.css"/>
+				<file name="css/jquery.fileupload-ui.css"/>
 			</filelist>
 		</copy>
 	</target>
