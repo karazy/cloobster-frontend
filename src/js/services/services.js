@@ -786,7 +786,7 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 	    				// $scope.errorMessage = "Upload failed. Please retry."
 	    			}
 
-	    			fileUploadCallback(false);
+	    			fileUploadCallback(false, data);
 	    		},
 	    		done: function (e, data) {
 	    			//data properties: name, blobKey, url
@@ -797,7 +797,7 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 
 	    			addedFile = null;
 
-	    			fileUploadCallback(true);	    			    			
+	    			fileUploadCallback(true, data);	    			    			
 	       	}
 				});
 

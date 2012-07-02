@@ -229,8 +229,8 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 		        		error = false,
 		        		errorMessage = "";
 
-		        	scope.$apply('fileAdded = false');
-		        	scope.$apply('fileUploading = false'); 
+		        	scope.fileAdded = false;
+		        	scope.fileUploading = false;
 
 		        	/** Gets localized title. */
 		        	scope.getTitle = function() {
@@ -260,8 +260,8 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 							});
 						} else {
 							fileUploading = false;
-							errorMessage = langService.translate("fileupload.submit.error");
-							error = true;
+							scope.errorMessage = langService.translate("fileupload.submit.error");
+							scope.error = true;
 							scope.$digest();
 							submitButton.button('reset');
 						}
@@ -283,7 +283,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 		        		//disable button and set saving text
 		        		submitButton.attr('data-loading-text', langService.translate("fileupload.button.submit.saving"));
 		        		submitButton.button('loading');
-		        		scope.$apply('fileUploading = true'); 
+		        		scope.fileUploading = true;
 
 		        		uploadObject.upload();
 		        	}		        	
