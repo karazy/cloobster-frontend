@@ -709,28 +709,30 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 			fileUploadUrl,
 			addedFile = null;
 
-		$rootScope.$watch('loggedIn', function(newValue, oldValue) { 
+		/* For the time being we request the url directly before the upload.
+		/* $rootScope.$watch('loggedIn', function(newValue, oldValue) { 
 			if(newValue == true) {
 				requestFileUploadInformation();
 			}			
 		});
+		*/
 
 		/**
 		* @private
 		* Requests information from server needed to upload files.
+		* @returns {Httppromise} 
 		*/
 		function requestFileUploadInformation() {
 			$log.log('requestFileUploadInformation');
 
-			if(!fileUploadUrl) {
-				$http.get(appConfig['serviceUrl']+ '/uploads/imagesurl').success(function(data, status) {
-					$log.log('requestFileUploadInformation -> success');
-					fileUploadUrl = data;
-				})
-				.error(function(data, status) {
-					$log.error('Failed to request file upload information. Status: ' + status);
-				});
-			}
+			return $http.get(appConfig['serviceUrl']+ '/uploads/imagesurl').success(function(data, status) {
+				$log.log('requestFileUploadInformation -> success');
+				fileUploadUrl = data;
+			})
+			.error(function(data, status) {
+				$log.error('Failed to request file upload information. Status: ' + status);
+				return data;
+			});
 		};
 
 		/**
@@ -846,7 +848,15 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 					upload: function() {
 						//if file has beed added to queue, upload it
 						if(addedFile) {
-							addedFile.submit();
+							requestFileUploadInformation().then(function() {
+								// We have the upload url, start the upload.
+								jQuery(fileInput).fileupload('option','url', fileUploadUrl);
+								addedFile.submit();
+							}, function(data) {
+								// Get upload url failed.
+								fileUploadCallback(false, data);
+							});
+							
 						};
 					}
 				}
