@@ -34,7 +34,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.activeProperty = null;
 	/** When true user can edit the business profile. */
 	$scope.editMode = false;
-	/** True if file upload is active */
+	/** True if file upload is active. */
 	$scope.activeFileUpload = null;
 	/** Contains the information about a new business. */
 	$scope.newBusiness = {
@@ -216,7 +216,10 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	* Save active business.
 	*/
 	$scope.saveBusiness = function() {
-		$scope.activeBusiness.$update();
+		if($scope.editMode) {
+			$log.log("saveBusiness " + $scope.activeBusiness.id);
+			$scope.activeBusiness.$update();	
+		}
 	};
 
 	/**

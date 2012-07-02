@@ -107,9 +107,9 @@
 			</div>
 		</div>
 		<div >
-			<div class="data-element" ng-class="getEditModeClass()">
+			<div class="data-element">
 				<div class="key">Currency</div>
-				<select ng-model="activeBusiness.currency" class="value" ng-disabled="!editMode" ng-change="saveBusiness()">
+				<select ng-model="activeBusiness.currency" class="value" ng-disabled="!editMode" ng-change="saveBusiness()" required>
 					<option selected="selected" value="EUR">Euro</option>
 					<option selected="selected" value="USD">US Dollar</option>
 				</select>

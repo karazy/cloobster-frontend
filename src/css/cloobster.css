@@ -88,6 +88,11 @@ h1.edit:hover, h2.edit:hover {
   display: inline-block;
 }
 
+.data-element select.value {
+  position: relative;;
+  left: 13px;
+}
+
 .imagebox {
   position: relative;
   border: lightgray 1px solid;
