@@ -329,6 +329,48 @@ Cloobster.services.factory('Company',['cloobsterResource', function($resource) {
 
 /** 
 * 	@constructor
+* 	Factory function that creates the 'Spot' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Frederik Reifschneider
+*/
+Cloobster.services.factory('Spot', ['cloobsterResource', function($resource) {
+	/**
+	*	@name Cloobster.services.Spot
+	*	
+	*/
+	var Spot = {
+		/**
+		*
+		*/
+		buildResource: function(businessId) {
+			return $resource('/b/businesses/:bid/spotsdata/:sid',
+				{
+					'sid' : '@id'
+				},
+				{
+						/**
+						* @name Cloobster.services.Spot#$query
+						* @override
+						* Overrides default query method by overriding businessId as default parameter
+						*/
+						'query':  {method:'GET', params: { 'bid' : businessId}, isArray:true},
+						/*
+						* @name Cloobster.services.Spot#$update
+						* Like a save but uses PUT instead of POST.
+						*/
+						'update': { method: 'PUT'}
+				}
+
+				)
+		}
+	}
+
+	return Spot;
+}]);
+
+/** 
+* 	@constructor
 * 	Factory function that returns the 'facebookApi' service and
 * 	adds listener for Facebook 'auth.statusChange' events.
 *

@@ -3,11 +3,10 @@
 
 /**
 * 	@name Cloobster.Menus 
-*	@requires facebookApi
 *	@requires loginService
 *
 * 	Menu controller 
-* 	View and manage profiles.
+* 	View and manage menus, products, choices per restaurant.
 * 	@constructor
 */
 Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, Business, Menu, Product, Choice, langService, $log) {
@@ -412,8 +411,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		//always load menus
 		$scope.loadMenus(businessId);
-
-
 	});
 }
 

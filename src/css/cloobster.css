@@ -192,3 +192,21 @@ ul.options-list li:hover {
   border-radius: 5px;
   background-color: #eeeeee;
 }
+
+.spots-wrapper {
+
+}
+
+.spots-list {
+  margin-left: 1em;
+  /*float: left;*/
+} 
+
+.spot-wrapper {
+  border: 1px solid gray;
+  border-radius: 0.5em;  
+}
+
+.spot-detail {
+  padding: 0.5em;
+}

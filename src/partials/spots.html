@@ -1,0 +1,41 @@
+<div class="spots-wrapper">
+	<div class="row-fluid">
+		<div class="span12">
+			<ul class="breadcrumb">
+				<li>
+					<a href="#" l="breadcrumb.home">Home</a> <span class="divider">/</span>
+				</li>
+				<li>
+					<a href="#/businesses" l="breadcrumb.businesses">My Restaurants</a> <span class="divider">/</span>
+				</li>
+				<li>
+					<a href="#/businesses/{{activeBusiness.id}}">{{activeBusiness.name}}</a> <span class="divider">/</span>
+				</li>
+				<li class="active" l="breadcrumb.tables">Tables</li>
+			</ul>
+		</div>
+	</div>
+	<h1 l="spots.title">Tables</h1>
+	<div class="row-fluid">
+		<div class="spots-list span2">
+		<ul class="nav nav-pills nav-stacked">
+			<li>
+				<a ng-click="createSpot()"><i class="icon-plus icon-black"></i> <span l="spots.list.new">New spot...</span></a>
+			</li>
+	        <li ng-repeat="spot in spots | orderBy:['name'] " ng-class="{active: currentSpot.id == spot.id}">	        	
+	        	<a ng-click="loadSpot(spot)">{{spot.name}}</a>
+	        </li>
+	    </ul>
+	</div>
+
+    <div class="span3 spot-wrapper" ng-show="currentSpot">
+    	<div class="spot-detail">
+	    	<div simple-property-editor editor-title="spots.editor.name" editor-property="currentSpot.name" editor-on-save="saveSpot()" editor-required>
+				<h3 class="edit" tooltip="spots.editor.name.tooltip">{{currentSpot.name}} <i class="icon-edit icon-black"></i></h3>
+			</div>
+			<div simple-property-editor editor-title="spots.editor.barcode" editor-property="currentSpot.barcode" editor-type="textarea" editor-on-save="saveSpot()" editor-required>
+	    		<p class="edit" tooltip="spots.editor.barcode.tooltip">{{currentSpot.barcode}} <i class="icon-edit icon-black"></i></p>
+	    	</div>
+		</div>
+	</div>
+</div>

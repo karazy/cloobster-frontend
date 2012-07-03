@@ -19,6 +19,7 @@ Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster
     $routeProvider.when('/menus/:menuId', {template: 'partials/management.html', controller: Cloobster.Management});
     $routeProvider.when('/menus/:menuId/products', {template: 'partials/management.html', controller: Cloobster.Management});
     $routeProvider.when('/menus/:menuId/products/:productId', {template: 'partials/management.html', controller: Cloobster.Management});
+    $routeProvider.when('/businesses/:businessId/spots', {template: 'partials/spots.html', controller: Cloobster.Spot});
     $routeProvider.when('/businesses', {template: 'partials/businesses.html', controller: Cloobster.Business});
     $routeProvider.when('/businesses/new', {template: 'partials/businesses.html', controller: Cloobster.Business});
     $routeProvider.when('/businesses/:id', {template: 'partials/businessdetail.html', controller: Cloobster.Business});

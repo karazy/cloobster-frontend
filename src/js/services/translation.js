@@ -115,6 +115,13 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"menus.choices.field.overridePrice.overridefixedsum" : "Gesamtsumme (Menü)",
 			"menus.choices.field.parentselect.label" : "Übergeordnete Auswahl:",
 			"menus.choices.field.parentselect.nullparent" : "--- auswählen ---",
+			//spots partial
+			"spots.title" : "Tische",
+			"spots.list.new" : "Neuer Tisch...",
+			"spots.editor.name" : "Name",
+			"spots.editor.barcode" : "Barcode",
+			"spots.editor.name.tooltip" : "Name editieren",
+			"spots.editor.barcode.tooltip" : "Barcode editieren",
 			//general
 			"common.warning.title" : "Warnung!",
 			"common.ok" : "Ok",
@@ -126,6 +133,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			//breadcrumb
 			"breadcrumb.home" : "Home",
 			"breadcrumb.businesses" : "Restaurants",
+			"breadcrumb.menus" : "Menüs",
+			"breadcrumb.tables" : "Tische",
 			//file upload
 			"fileupload.button.add" : "Bild auswählen ...",
 			"fileupload.image.label" : "Ausgewähltes Bild: ",
