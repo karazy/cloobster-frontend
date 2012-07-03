@@ -14,7 +14,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		//default information when adding a new barcode
 	var defaultSpot = {
 			name: langService.translate("barcode.new.default.name") || "New table",
-			barcode : generateDummyBarcode()
+			barcode : ""
 		},
 		//Id of active business
 		activeBusinessId = null;
@@ -34,7 +34,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 
 
 	$scope.loadSpot = function(spotItem) {
-		$log.log("load spot " + spot.id);
+		$log.log("load spot " + spotItem.id);
 		
 		$scope.currentSpot = spotItem;
 	};
@@ -108,6 +108,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	};
 
 	$scope.createSpot = function() {
+		defaultSpot.barcode = generateDummyBarcode();
+
 		$scope.currentSpot = new $scope.spotsResource(defaultSpot);
 	}
 
@@ -126,7 +128,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 				suffix = $scope.spots.length;
 			}
 			
-			return prefix + suffix;
+			return prefix + "-" + suffix;
 	}
 
 
