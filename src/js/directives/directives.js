@@ -384,11 +384,11 @@ Cloobster.directives.directive('tooltip', ['$locale', 'lang', function($locale, 
 		}
 
 		//if no translation is found, don't replace html, this is useful to provide default values in html
-		translation = langService.translate(key);
+		translation = langService.translate(key) || key;
 
 		if(translation) {
 			iElement.tooltip({
-				"title" : translation || key,
+				"title" : translation,
 				"placement" : position
 			});
 		}

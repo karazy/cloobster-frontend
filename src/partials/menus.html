@@ -104,16 +104,16 @@
 	    <div class="span3 choice-wrapper" ng-show="currentChoice">
 	    	<div class="choice-detail">
 	    		<div simple-property-editor editor-title="choice.editor.text" editor-property="currentChoice.text" editor-on-save="saveChoice()" editor-required>
-		    		<h3 class="edit" tooltip="choice.editor.text.tooltip">{{currentChoice.text}} <i class="icon-edit icon-black"></i></h3>
+		    		<h3 class="edit" tooltip="choice.editor.text.tooltip">{{currentChoice.text}}<i class="icon-edit icon-black"></i></h3>
 		    	</div>
 		    	<div simple-property-editor editor-title="choice.editor.maxOccurence" editor-property="currentChoice.maxOccurence" editor-on-save="saveChoice()" editor-required>
-		    		<p class="edit" tooltip="choice.editor.maxOccurence.tooltip">Max. selected: {{currentChoice.maxOccurence}} <i class="icon-edit icon-black"></i></p>
+		    		<p class="edit" tooltip="choice.editor.maxOccurence.tooltip"><span l="menus.choices.field.maxOccurence">Max. selected: {{currentChoice.maxOccurence}}</span> <i class="icon-edit icon-black"></i></p>
 		    	</div>
 		    	<div simple-property-editor editor-title="choice.editor.minOccurence" editor-property="currentChoice.minOccurence" editor-on-save="saveChoice()" editor-required>
-		    		<p class="edit" tooltip="choice.editor.minOccurence.tooltip">Min. selected: {{currentChoice.minOccurence}} <i class="icon-edit icon-black"></i></p>
+		    		<p class="edit" tooltip="choice.editor.minOccurence.tooltip"><span l="menus.choices.field.minOccurence">Min. selected: {{currentChoice.minOccurence}}</span> <i class="icon-edit icon-black"></i></p>
 		    	</div>
 		    	<div simple-property-editor editor-title="choice.editor.included" editor-property="currentChoice.included" editor-type="number" editor-on-save="saveChoice()" editor-required>
-		    		<p class="edit" tooltip="choice.editor.included.tooltip">Options included: {{currentChoice.included}} <i class="icon-edit icon-black"></i></p>
+		    		<p class="edit" tooltip="choice.editor.included.tooltip"><span l="menus.choices.field.included">Options included: {{currentChoice.included}}</span> <i class="icon-edit icon-black"></i></p>
 		    	</div>
 		    	<div>
 		    		<label for="choiceOverridePriceSelect" l="menus.choices.field.overridePrice.label">Price calculation:</label>
@@ -125,7 +125,7 @@
 		    	</div>
 		    	<div ng-show="currentChoice.overridePrice == 'OVERRIDE_SINGLE_PRICE' || currentChoice.overridePrice == 'OVERRIDE_FIXED_SUM'">
 			    	<div simple-property-editor editor-title="choice.editor.price" editor-property="currentChoice.price" editor-on-save="saveChoice()" editor-required>
-			    		<p class="edit">Price: {{currentChoice.price}} <i class="icon-edit icon-black"></i></p>
+			    		<p class="edit"><span l="menus.choices.field.price">Price: {{currentChoice.price}}</span> <i class="icon-edit icon-black"></i></p>
 			    	</div>
 		    	</div>
 		    	<div ng-hide="isParent(currentChoice.id)">
@@ -137,7 +137,7 @@
 	        		</span>
 		    	</div>
 		    	<div ng-show="isParent(currentChoice.id)" class="btn-group">
-		    		<a class="btn dropdown-toggle"  data-toggle="dropdown" l="menus.choices.field.linkedchoices">Linked Choices<span class="caret"></span><a>
+		    		<a class="btn dropdown-toggle"  data-toggle="dropdown" ><span l="menus.choices.field.linkedchoices">Linked Choices</span><span class="caret"></span><a>
 		        	<ul class="dropdown-menu">
 		        		<a ng-repeat="choice in choices | filter:{parent : currentChoice.id}" ng-click="loadChoice(choice)">
 		        			{{choice.text}}
