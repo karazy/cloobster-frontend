@@ -1,7 +1,7 @@
   
 Cloobster.filters = angular.module('Cloobster.filters', []);
 
-Cloobster.filters.filter('kcurrency', ['$locale', function($locale) {
+Cloobster.filters.filter('kcurrency', ['$locale', '$log', function($locale, $log) {
 	//angular style. formatNumber is private in angular lib
 	// var EUR = {
  //        DECIMAL_SEP: ',',
@@ -54,7 +54,7 @@ Cloobster.filters.filter('kcurrency', ['$locale', function($locale) {
 			fixedPrice = price.toFixed(2);
 			formattedPrice = fixedPrice.replace(priceRegExp, matcher);
 		} catch(e) {
-			console.log('price formatting failed reason:' + e);
+			$log.log('price formatting failed reason:' + e);
 		}
 
 
