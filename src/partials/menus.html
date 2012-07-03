@@ -66,7 +66,7 @@
 		    		<p class="edit" tooltip="product.editor.longDesc.tooltip">{{currentProduct.longDesc}} <i class="icon-edit icon-black"></i></p>
 		    	</div>
 		    	<div simple-property-editor editor-title="product.editor.price" editor-property="currentProduct.price" editor-type="text" editor-on-save="saveProduct()" editor-required>
-		    		<p class="edit"  tooltip="product.editor.price.tooltip">{{currentProduct.price}} <i class="icon-edit icon-black"></i></p>
+		    		<p class="edit"  tooltip="product.editor.price.tooltip">{{currentProduct.price | currency}} <i class="icon-edit icon-black"></i></p>
 		    	</div>
 		    	<div class="activation-checkbox">		    		
 		    		<input type="checkbox" id="productActiveCb" ng-model="currentProduct.active" ng-change="saveProduct()"></input>
@@ -125,7 +125,7 @@
 		    	</div>
 		    	<div ng-show="currentChoice.overridePrice == 'OVERRIDE_SINGLE_PRICE' || currentChoice.overridePrice == 'OVERRIDE_FIXED_SUM'">
 			    	<div simple-property-editor editor-title="choice.editor.price" editor-property="currentChoice.price" editor-on-save="saveChoice()" editor-required>
-			    		<p class="edit"><span l="menus.choices.field.price">Price: {{currentChoice.price}}</span> <i class="icon-edit icon-black"></i></p>
+			    		<p class="edit"><span l="menus.choices.field.price">Price: {{currentChoice.price | currency}}</span> <i class="icon-edit icon-black"></i></p>
 			    	</div>
 		    	</div>
 		    	<div ng-hide="isParent(currentChoice.id)">
@@ -156,10 +156,10 @@
 		       	 		<div class="row-fluid">
 		       	 			<div class="span10">
 			       	 			<div simple-property-editor editor-title="option.editor.title" editor-property="option.name" editor-on-save="saveChoice()" editor-required>
-			       	 				<p class="edit">{{option.name}} <i class="icon-edit icon-black"></i></p>
+			       	 				<p class="edit" tooltip="option.editor.name.tooltip">{{option.name}} <i class="icon-edit icon-black"></i></p>
 			       	 			</div> 
 								<div class="edit" simple-property-editor editor-title="option.editor.price" editor-property="option.price" editor-on-save="	saveChoice()" editor-required>
-			       	 				<p class="edit">{{option.price}} <i class="icon-edit icon-black"></i></p>
+			       	 				<p class="edit" tooltip="option.editor.price.tooltip">{{option.price | currency}} <i class="icon-edit icon-black"></i></p>
 			       	 			</div> 
 		       	 			</div>
 		       	 			<div class="span2">
