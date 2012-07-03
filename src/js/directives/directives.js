@@ -255,8 +255,8 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 			        		activeImage.$save(function() {
 								scope.editorOnSave({ "image" : activeImage});
 								scope.fileUploading = false;
-								dialog.modal('hide');
 								submitButton.button('reset');
+								dialog.modal('hide');								
 							});
 						} else {
 							scope.fileUploading = false;
