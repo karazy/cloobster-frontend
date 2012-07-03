@@ -41,7 +41,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			name: langService.translate("option.new.default.name") || "My new option",
 			price: 0
 		};
-
+	
 	/** Menu Resource. */
 	$scope.menusResource = null;
 	/** */
