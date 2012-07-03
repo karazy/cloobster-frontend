@@ -1,4 +1,4 @@
-/** @module Cloobster/Spot */
+	/** @module Cloobster/Spot */
 'use strict';
 
 /**
@@ -27,22 +27,16 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.currentSpot = null;
 	/** Business to which these spots belong to. */
 	$scope.activeBusiness = null;
+	/** error flag */
+	$scope.error = false;
+	/** error message */
+	$scope.errorMessage = "";
 
 
 	$scope.loadSpot = function(spotItem) {
 		$log.log("load spot " + spot.id);
 		
 		$scope.currentSpot = spotItem;
-
-		//init sortable lists
-		// jQuery( "#spotList" ).sortable({
-		// 	// connectWith: ".connectedSortable",
-		// 	items: 'li.sortable',
-		// 	axis: "y",
-		// 	update: function(event, ui) { 
-		// 		$scope.updateMenuOrder(event, ui);
-		// 	}
-		// }).disableSelection();
 	};
 
 	/**
@@ -67,24 +61,62 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.spotsResource = Spot.buildResource(activeBusinessId);
 
 		//load spots
-		$scope.spots = $scope.spotsResource.query();
+		$scope.spots = $scope.spotsResource.query(
+			function() { 
+				//success
+			},
+			function(request) {
+				//error			
+				if(request.status = 404) {
+					$scope.error = true;
+					$scope.errorMessage = "Could not lot spots.";
+				}
+			}
+		);
 	};
 
 
 	$scope.saveSpot = function() {		
 		if($scope.currentSpot && $scope.currentSpot.id) {
 			$log.log("update spot " + $scope.currentSpot.id);
-			$scope.currentSpot.$update({"bid" : activeBusinessId});	
+			$scope.currentSpot.$update(
+				{"bid" : activeBusinessId},
+				function() { 
+					//success
+				},
+				function(request) {
+					//error			
+					$scope.error = true;
+					$scope.errorMessage = "Could not update spot. Status " + request.status;
+				}
+			);	
 		} else {
 			$log.log("save new spot");
-			$scope.currentSpot.$save({"bid" : activeBusinessId});
-			$scope.mspots.push($scope.currentSpot);
+			$scope.currentSpot.$save(
+				{"bid" : activeBusinessId},
+				function() { 
+					//success
+				},
+				function(request) {
+					//error			
+					$scope.error = true;
+					$scope.errorMessage = "Could not save spot. Status " + request.status;
+				}
+			);
+			$scope.spots.push($scope.currentSpot);
 		}
 	};
 
 	$scope.createSpot = function() {
 		$scope.currentSpot = new $scope.spotsResource(defaultSpot);
 	}
+
+	/**
+	* Set error false and hide the error box.
+	*/
+	$scope.hideError = function() {
+		$scope.error = false;
+	};
 
 	function generateDummyBarcode() {
 		var prefix = activeBusinessId || "barcode",
