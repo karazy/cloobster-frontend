@@ -23,7 +23,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			currency : "EUR"
 		},
 		defaultPaymentMethod = {
-			name: langService.translate("paymentmethod.new.default.name") || "New payment method",
+			name: langService.translate("paymentmethod.new.default.name") || "New payment method"
 		};
 
 	/** Resource for CRUD on businesses. */	
@@ -255,6 +255,10 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	// start payment methods
 
 	$scope.addPaymentMethod = function() {
+		if(!$scope.activeBusiness.paymentMethods) {
+			$scope.activeBusiness.paymentMethods = new Array();
+		}
+		
 		$scope.activeBusiness.paymentMethods.push(angular.copy(defaultPaymentMethod));
 	}
 
