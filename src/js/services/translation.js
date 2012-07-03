@@ -57,6 +57,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"business.detail.postcode" : "Postleitzahl",
 			"business.detail.phone" : "Telefon",
 			"business.detail.currency" : "Währung",
+			"business.detail.paymentmethods" : "Bezahlarten",
+			"business.detail.paymentmethods.list.new" : "Neue Bezahlart",
 			//profile partial
 			"profile.title" : "Profil",
 			"profile.account.name" : "Name",

@@ -121,6 +121,15 @@ h1.edit:hover, h2.edit:hover {
   margin-left: 10px;
 }
 
+ul.payment-method-list {
+  list-style: none;
+}
+
+ul.payment-method-list li {
+  margin: 0.3em 0;
+}
+
+
 .menus-wrapper {
   
 }

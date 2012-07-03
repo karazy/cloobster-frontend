@@ -112,4 +112,31 @@
 				</select>
 			</div>
 		</div>
+		<div>
+			<div class="data-element">
+				<div class="key" l="business.detail.paymentmethods">
+					Paymentmethods
+				</div>
+				<div class="value">
+					<ul class="payment-method-list">
+						<li>
+							<button ng-click="addPaymentMethod()" ng-disabled="!editMode"><i class="icon-plus icon-black"></i> <span l="business.detail.paymentmethods.list.new"> New payment...</span></button>
+						</li>												
+						<li ng-repeat="method in activeBusiness.paymentMethods" ng-class="getEditModeClass()">
+							<div class="row-fluid">	
+								<div class="span10">
+									<div simple-property-editor editor-title="paymentmethods.editor.name" editor-property="method.name" editor-on-save="saveBusiness()" editor-required>
+										<span>{{method.name}}</span>
+									</div>
+								</div>
+								<div class="span2">
+									<button class="btn btn-small" ng-click="removePaymentMethod($index)" ng-disabled="!editMode"><i class="icon-trash"></i></button>
+								</div>
+							</div>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
 </div>

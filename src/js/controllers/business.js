@@ -10,7 +10,7 @@
 * 	View and manage businesses such as restaurants.
 * 	@constructor
 */
-Cloobster.Business = function($scope, $http, $routeParams, $location, loginService, uploadService, Business, $log) {
+Cloobster.Business = function($scope, $http, $routeParams, $location, loginService, uploadService, langService, Business, $log) {
 
 		/** Holds the Id of the active modal dialog.
 		@type {string} */
@@ -21,6 +21,9 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		businessDeleteId,
 		defaultBusiness = {
 			currency : "EUR"
+		},
+		defaultPaymentMethod = {
+			name: langService.translate("paymentmethod.new.default.name") || "New payment method",
 		};
 
 	/** Resource for CRUD on businesses. */	
@@ -249,6 +252,19 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		}
 	}
 
+	// start payment methods
+
+	$scope.addPaymentMethod = function() {
+		$scope.activeBusiness.paymentMethods.push(angular.copy(defaultPaymentMethod));
+	}
+
+	$scope.removePaymentMethod = function(index) {
+		$scope.activeBusiness.paymentMethods.splice(index, 1);
+		$scope.saveBusiness();
+	}
+
+	// end payment methods
+
 	/*
 	* Get css class for field highlighting.
 	* @returns error if dirty && invalid
@@ -311,4 +327,4 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 };
 
-Cloobster.Business.$inject = ['$scope', '$http','$routeParams', '$location', 'login', 'upload', 'Business', '$log'];
+Cloobster.Business.$inject = ['$scope', '$http','$routeParams', '$location', 'login', 'upload', 'lang', 'Business', '$log'];
