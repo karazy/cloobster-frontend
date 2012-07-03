@@ -20,10 +20,6 @@ Cloobster.Login = function($scope, facebookApi, loginService) {
 		password : "",
 		save : false
 	}
-
-	// Retrieve the account if we are already logged in.
-	// Returns empty account if not.
-	$scope.account = loginService.getAccount();
 	// error flag
 	$scope.error = false;
 	// error message
@@ -39,7 +35,6 @@ Cloobster.Login = function($scope, facebookApi, loginService) {
 	*/
 	function handleLogin ( result) {
 		$scope.loginProgress = false;
-		$scope.account = result;
 	}
 
 	/**
@@ -123,6 +118,14 @@ Cloobster.Login = function($scope, facebookApi, loginService) {
 	$scope.logout = function() {
 		loginService.logout();
 	}
+
+	/**
+	*	Getter for currently logged in account.
+	*	@returns {Object} - Account
+	*/
+	$scope.getAccount = function() {
+		return loginService.getAccount();
+	};
 
 	// Check for saved login data.
 	if(loginService.existsSavedLogin() && ($scope.loggedIn === false)) {
