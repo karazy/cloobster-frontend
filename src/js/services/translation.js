@@ -112,7 +112,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"menus.choices.field.maxOccurence" : "Max. Auswahl: {{currentChoice.maxOccurence}} ",
 			"menus.choices.field.minOccurence" : "Min. Auswahl: {{currentChoice.minOccurence}} ",
 			"menus.choices.field.included" : "Optionen Inklusive: {{currentChoice.included}} ",
-			"menus.choices.field.price" : "Preis: {{currentChoice.price | currency}}",
+			"menus.choices.field.price" : "Preis: {{currentChoice.price | kcurrency:activeBusiness.currency}}",
 			"menus.choices.field.linkedchoices" : "Untergeordnete Auswahlen",
 			"choice.editor.text.tooltip" : "Auswahltext editieren",
 			"choice.editor.price.tooltip" : "Preis editieren",
