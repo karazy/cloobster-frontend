@@ -370,11 +370,14 @@ Cloobster.directives.directive('l', ['$locale', 'lang', '$interpolate', function
 
 /**
 * Used to display a Bootstrap tooltip which gets localized.
+* http://twitter.github.com/bootstrap/javascript.html#tooltips
 */
 Cloobster.directives.directive('tooltip', ['$locale', 'lang', function($locale, langService) {
 	return function(scope, iElement, iAttrs, controller) {
 		var key = iAttrs.tooltip,
-		translation;
+			//position of the tooltip
+			position = iAttrs.tooltipPosition || "top",
+			translation;
 
 		if(!key) {
 			return;
@@ -385,7 +388,8 @@ Cloobster.directives.directive('tooltip', ['$locale', 'lang', function($locale, 
 
 		if(translation) {
 			iElement.tooltip({
-				"title" : translation || key
+				"title" : translation || key,
+				"placement" : position
 			});
 		}
 

@@ -23,7 +23,7 @@
 					<a ng-click="createMenu()"><i class="icon-plus icon-black"></i> <span l="menus.list.new">New menu...</span></a>
 				</li>
 		        <li ng-repeat="menu in menus | orderBy:['order', 'title'] " ng-class="{active: currentMenu.id == menu.id}" class="sortable">	        	
-		        	<a ng-click="loadMenu(menu)"><i class="icon-fullscreen icon-black" tooltip="general.sortable"></i> {{menu.title}}</a>
+		        	<a ng-click="loadMenu(menu)"><i class="icon-fullscreen icon-black" tooltip="general.sortable" tooltip-position="right"></i> {{menu.title}}</a>
 		        </li>
 		    </ul>
 		</div>
