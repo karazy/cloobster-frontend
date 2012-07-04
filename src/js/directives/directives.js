@@ -37,12 +37,12 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 					 	'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty.$invalid)">'+
 					 		'<div class="controls">'+
 					 			createFormInput(attrs)+
-					 			' <i class="icon-remove icon-black" ng-click="clearInput()"></i>'+
+					 			'<i class="icon-remove icon-black" ng-click="clearInput()"></i>'+
 								'<div class="help-inline" ng-show="simplePropertyForm.simpleProperty.$dirty && simplePropertyForm.simpleProperty.$invalid">'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.required">This field is required!</span>'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.number">No valid number.</span>'+
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.required" l="propertyeditor.error.required">This field is required!</span>'+
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.number" l="propertyeditor.error.number">No valid number.</span>'+
 									'<span ng-show="simplePropertyForm.simpleProperty.$error.pattern">No valid value.</span>'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.email">No valid email.</span>'+									
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.email" l="propertyeditor.error.email">No valid email.</span>'+									
 								'</div>'+
 							'</div>'+
 					'  </div>'+
@@ -336,35 +336,46 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 * Usage: l="languageKey"
 */
 Cloobster.directives.directive('l', ['$locale', 'lang', '$interpolate', function($locale, langService,$interpolate) {
+
+
 	//link function
 	return function (scope, iElement, iAttrs, controller) {
 		var key = iAttrs.l,
 			translation,
-			replacements = iAttrs.replacements,
-			argsArr,
-			interpolation;
+			interpolation,
+			oldWatch;
 
-		// console.log(replacements);
-		// if(replacements) {
-		// 	argsArr = scope.$eval('[' + replacements + ']');	
-		// }
+		function watchTranslation(value) {
+			//if no translation is found, don't replace html, this is useful to provide default values in html
+			translation = langService.translate(value) || iElement.html();
+
+			// Interpolate the text to parse possible {{expressions}}
+			interpolation = $interpolate(translation);
+
+			// Deregister a possible previous watcher.
+			(oldWatch || angular.noop)();
+
+			// Register for changes to the interpolated translation.
+			// Ensure the translated value is updated if the binding changes.
+			// The return value is a deregister function and will be saved for later.
+			oldWatch = scope.$watch(interpolation, function(newVal, oldVal) {
+				// Write the inner html text.
+				// newVal is the result of evaluating the interpolated expression against the scope.
+				iElement.html(newVal);
+			});
+		}
         
 		if(!key) {
 			return;
 		}
-		//if no translation is found, don't replace html, this is useful to provide default values in html
-		translation = langService.translate(key) || iElement.html();
 
-		// Interpolate the text to parse possible {{expressions}}
-		interpolation = $interpolate(translation);
-
-		// Register for changes to the interpolated translation.
-		// Ensure the translated value is updated if the binding changes.
-		scope.$watch(interpolation, function(newVal, oldVal) {
-			// Write the inner html text.
-			// newVal is the result of evaluating the interpolated expression against the scope.
-			iElement.html(newVal);
-		});
+		// test if we have an expression
+		if( $interpolate(key,true) != null ) {
+			iAttrs.$observe('l', watchTranslation);
+		}
+		else {
+			watchTranslation(key);
+		}
 	}
 }]);
 

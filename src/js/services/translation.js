@@ -157,7 +157,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"fileupload.button.add" : "Bild auswählen ...",
 			"fileupload.image.label" : "Ausgewähltes Bild: ",
 			"fileupload.button.submit.saving" : "Speichere ...",
-			"fileupload.submit.error" : "Beim Hochladen ist ein Fehler aufgetreten."
+			"fileupload.submit.error" : "Beim Hochladen ist ein Fehler aufgetreten.",
+			"propertyeditor.error.required" : "Bitte einen Text eingeben.",
+			"propertyeditor.error.number" : "Bitte eine Zahl eingeben.",
+			"propertyeditor.error.email" : "Bitte eine gültige E-Mail-Adresse eingeben."
 		},
 		"EN" : {
 		//index
@@ -240,7 +243,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"fileupload.button.add" : "Choose picture ...",
 			"fileupload.image.label" : "Selected picture: ",
 			"fileupload.button.submit.saving" : "Saving ...",
-			"fileupload.submit.error" : "An error occured during the upload."
+			"fileupload.submit.error" : "An error occured during the upload.",
+			"propertyeditor.error.required" : "Please input a text.",
+			"propertyeditor.error.number" : "Please input a number.",
+			"propertyeditor.error.email" : "Please input a valid e-mail adress."
 		}
 	}
 
