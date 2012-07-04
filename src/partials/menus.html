@@ -12,6 +12,13 @@
 		</ul>
 	</div>
 </div>
+<div class="row-fluid" ng-show="error">
+	<div class="alert alert-error alert-block span9" >
+		<button class="close" ng-click="hideError()">×</button>
+		<h4 class="alert-heading" l="common.warning.title">Error!</h4>
+		{{errorMessage}}
+	</div>
+</div>
 	<h1 l="menus.title">Menus</h1>
 		<div class="row-fluid">
 			<div class="menus-list span2">

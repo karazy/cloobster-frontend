@@ -41,7 +41,11 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			name: langService.translate("option.new.default.name") || "My new option",
 			price: 0
 		};
-	
+
+	/** error flag */
+	$scope.error = false;
+	/** error message */
+	$scope.errorMessage = "";
 	/** Menu Resource. */
 	$scope.menusResource = null;
 	/** */
@@ -61,6 +65,18 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	/** Business to which these menus belong to. */
 	$scope.activeBusiness = null;
 
+	/**
+	* Set error false and hide the error box.
+	*/
+	$scope.hideError = function() {
+		$scope.error = false;
+	};
+
+
+	function handleError(response) {
+		$scope.error = true;
+		$scope.errorMessage = (response.data.hasOwnProperty('message') ? response.data.message : response.data);
+	}
 
 	//Start Menu logic
 
@@ -85,7 +101,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		choicesResource = Choice.buildResource(activeBusinessId);
 
 		//load menus
-		$scope.menus = $scope.menusResource.query();
+		$scope.menus = $scope.menusResource.query(null, null, null, handleError);
 	};
 
 	$scope.loadMenu = function(menuItem) {
@@ -101,7 +117,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		
 		$scope.currentMenu = menuItem;
 
-		$scope.products = $scope.productsResource.query({"bid" : activeBusinessId, "menuId" : menuItem.id});
+		$scope.products = $scope.productsResource.query({"bid" : activeBusinessId, "menuId" : menuItem.id},null, null, handleError);
 
 		//init sortable lists
 
@@ -138,9 +154,9 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$log.log("save menu ");
 
 		if($scope.currentMenu && $scope.currentMenu.id) {
-			$scope.currentMenu.$update({"bid" : activeBusinessId});	
+			$scope.currentMenu.$update({"bid" : activeBusinessId}, null, handleError);	
 		} else {
-			$scope.currentMenu.$save({"bid" : activeBusinessId});
+			$scope.currentMenu.$save({"bid" : activeBusinessId}, null, handleError);
 			$scope.menus.push($scope.currentMenu);
 		}
 		
@@ -167,7 +183,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 				//get corresponding choice resource by optaining the angular scope
 				tmpMenu = angular.element(ele).scope().menu;
 				tmpMenu.order = index;
-				tmpMenu.$update({"bid" : activeBusinessId});
+				tmpMenu.$update({"bid" : activeBusinessId},null, handleError);
 			}	
 		});
 	};
