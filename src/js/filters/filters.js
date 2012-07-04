@@ -1,7 +1,7 @@
   
-Cloobster.filters = angular.module('Cloobster.filters', []);
+Cloobster.filters = angular.module('Cloobster.filters', ['Cloobster.services']);
 
-Cloobster.filters.filter('kcurrency', ['$locale', '$log', function($locale, $log) {
+Cloobster.filters.filter('kcurrency', ['$locale', '$log','config', function($locale, $log, config) {
 	//angular style. formatNumber is private in angular lib
 	// var EUR = {
  //        DECIMAL_SEP: ',',
@@ -30,10 +30,8 @@ Cloobster.filters.filter('kcurrency', ['$locale', '$log', function($locale, $log
  //  	};
 
  	//Define currency formats for supported cloobster currencies
-  	var currencyFormats = {
-			EUR: '$1,$2 €',
-			USD: '\$ $1.$2'
-		};
+  	var currencyFormats = config['currencyFormats'];
+	var priceRegExp = config['priceRegExp'];
 
 	/**
 	*	Takes a price and formats it in the configured currency
@@ -41,10 +39,9 @@ Cloobster.filters.filter('kcurrency', ['$locale', '$log', function($locale, $log
 	*		price to format
 	*/
 	function formatPrice(price, currency) {
-		var 	priceRegExp = /([0123456789]+)\.([0123456789]*)/,
-				fixedPrice,
-				matcher = currencyFormats[currency] || currencyFormats['EUR'],
-				formattedPrice = "";
+		var fixedPrice,
+			matcher = currencyFormats[currency] || currencyFormats['EUR'],
+			formattedPrice = "";
 
 		if(!price && price == null) {
 			return;

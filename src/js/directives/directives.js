@@ -18,6 +18,7 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 		transclude: true,
 		scope: {
 			editorTitle: 'bind',
+			editorPatternText: 'attribute',
 			editorOnSave: 'expression',
 			editorProperty: 'accessor',
 			editorEnabled: 'accessor'
@@ -30,7 +31,7 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 				'<div class="modal hide">'+
 				  '<div class="modal-header">'+
 				   ' <button type="button" class="close" data-dismiss="modal">×</button>'+
-				    '<h3>{{getTitle()}}</h3>'+
+				    '<h3 l="{{editorTitle}}">Edit property</h3>'+
 				 '</div>'+
 				'<form name="simplePropertyForm" novalidate ng-submit="save()" class="edit-property-form">'+
 					 ' <div class="modal-body">'+
@@ -39,17 +40,17 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 					 			createFormInput(attrs)+
 					 			'<i class="icon-remove icon-black" ng-click="clearInput()"></i>'+
 								'<div class="help-inline" ng-show="simplePropertyForm.simpleProperty.$dirty && simplePropertyForm.simpleProperty.$invalid">'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.required" l="propertyeditor.error.required">This field is required!</span>'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.number" l="propertyeditor.error.number">No valid number.</span>'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.pattern">No valid value.</span>'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.email" l="propertyeditor.error.email">No valid email.</span>'+									
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.required">'+ l('propertyeditor.error.required') +'</span>'+
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.number">'+ l('propertyeditor.error.number') +'</span>'+
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.pattern" l="{{editorPatternText}}">No valid value.</span>'+
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.email" >+'+ l('propertyeditor.error.email')+'</span>'+									
 								'</div>'+
 							'</div>'+
 					'  </div>'+
 					'</div>'+
 					'<div class="modal-footer">'+
-						'<button type="button" class="btn" data-dismiss="modal">Close</button>'+
-						'<button type="submit" class="btn btn-primary" data-loading-text="Saving...">Save</button>'+
+						'<button type="button" class="btn" data-dismiss="modal">'+l('common.cancel')+'</button>'+
+						'<button type="submit" class="btn btn-primary" ng-disabled="simplePropertyForm.$invalid">'+l('common.save')+'</button>'+
 					'</div>'+
 					'</form>'+
 				'</div>';
@@ -64,11 +65,6 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 		        	var dialog = iElement.find('div.modal'),
 		        		input = iElement.find('input, textarea');
 		        	//backup original value
-
-		        	/** Gets localized title. */
-		        	scope.getTitle = function() {
-		        		return langService.translate(scope.editorTitle) || scope.editorTitle;
-		        	}
 
 		        	scope.save = function () {
 		        		//only save when form is valid
@@ -104,23 +100,8 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 		}
 	};
 
-	/**
-	* Checks if a type is defined in attributes object and returns it.
-	* If no type is defined return text;
-	* @param attr
-	*	Attributes object.
-	*/
-	function getEditorType(attrs) {
-		var type = "text";
-
-		if(attrs && attrs.hasOwnProperty('editorType')) {
-			type = attrs.editorType;
-			if(type != "email" && type != "password") {
-				type = "text";
-			}
-		}
-
-		return type;
+	function l(key) {
+		return langService.translate(key) || key;
 	}
 
 	/**
@@ -135,7 +116,7 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 			inputHtml;
 
 		if(type == "textarea") {
-			inputHtml = '<textarea rows="4" cols="100" name="simpleProperty" ng-model="editorValue" '+required+'></textarea>';
+			inputHtml = '<textarea rows="4" cols="100" name="simpleProperty" ng-model="editorValue" '+required+' '+pattern+'></textarea>';
 		} else {
 			if(type != "email" && type != "password" && type != "number") {
 				type = "text";
@@ -185,8 +166,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 			editorEnabled: 'accessor'
 		},
 		compile: function(element, attrs, transclude) {
-			var html = 
-				'<div class="toggler" ng-transclude></div>'+
+			var html = '<div class="toggler" ng-transclude></div>'+
 				'<div class="modal hide">'+
 					'<div class="modal-header">'+
 				  		'<button type="button" class="close" ng-click="cancel()" data-dismiss="modal">×</button>'+
@@ -215,8 +195,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 			
 			element.append(html);
 			return {
-		        pre: function preLink(scope, iElement, iAttrs, controller) {
-		        	
+		        pre: function preLink(scope, iElement, iAttrs, controller) {	
 		        },
 		        post: function postLink(scope, iElement, iAttrs, controller) {
 		        	var dialog = iElement.find('div.modal'),
@@ -346,6 +325,10 @@ Cloobster.directives.directive('l', ['$locale', 'lang', '$interpolate', function
 			oldWatch;
 
 		function watchTranslation(value) {
+			if(!value) {
+				return;
+			}
+
 			//if no translation is found, don't replace html, this is useful to provide default values in html
 			translation = langService.translate(value) || iElement.html();
 
@@ -364,18 +347,9 @@ Cloobster.directives.directive('l', ['$locale', 'lang', '$interpolate', function
 				iElement.html(newVal);
 			});
 		}
-        
-		if(!key) {
-			return;
-		}
 
-		// test if we have an expression
-		if( $interpolate(key,true) != null ) {
-			iAttrs.$observe('l', watchTranslation);
-		}
-		else {
-			watchTranslation(key);
-		}
+		iAttrs.$observe('l', watchTranslation)
+		watchTranslation(key)
 	}
 }]);
 

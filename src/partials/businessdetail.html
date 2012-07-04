@@ -120,8 +120,8 @@
 				<div class="value">
 					<ul class="payment-method-list">
 						<li>
-							<button ng-click="addPaymentMethod()" ng-disabled="!editMode"><i class="icon-plus icon-black"></i> <span l="business.detail.paymentmethods.list.new"> New payment...</span></button>
-						</li>												
+							<button class="btn" ng-click="addPaymentMethod()" ng-disabled="!editMode"><i class="icon-plus icon-black"></i><span l="business.detail.paymentmethods.list.new"> New payment method...</span></button>
+						</li>
 						<li ng-repeat="method in activeBusiness.paymentMethods" ng-class="getEditModeClass()">
 							<div class="row-fluid">	
 								<div class="span10">
