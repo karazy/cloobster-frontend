@@ -161,7 +161,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"fileupload.submit.error" : "Beim Hochladen ist ein Fehler aufgetreten.",
 			"propertyeditor.error.required" : "Bitte einen Text eingeben.",
 			"propertyeditor.error.number" : "Bitte eine Zahl eingeben.",
-			"propertyeditor.error.email" : "Bitte eine gültige E-Mail-Adresse eingeben."
+			"propertyeditor.error.email" : "Bitte eine gültige E-Mail-Adresse eingeben.",
+			//common error messages
+			"common.error.404" : "Eine Ressource konnte nicht geladen werden.",
+			"common.error" : "Es gibt ein Problem mit der Verbindung zum Service."
 		},
 		"EN" : {
 		//index
@@ -248,7 +251,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"fileupload.submit.error" : "An error occured during the upload.",
 			"propertyeditor.error.required" : "Please input a text.",
 			"propertyeditor.error.number" : "Please input a number.",
-			"propertyeditor.error.email" : "Please input a valid e-mail adress."
+			"propertyeditor.error.email" : "Please input a valid e-mail adress.",
+			//general error messages
+			"common.error.404" : "A resource could not be found.",
+			"common.error" : "There is a problem with the connection to the service."
+
 		}
 	}
 

@@ -72,10 +72,24 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.error = false;
 	};
 
-
+	/**
+	*	Callback for errors during Resource methods.(get,save,query, etc.).
+	*	
+	*	@private
+	*	@param {Object} response Object containing response and request data of the failed HTTP request.
+	*/
 	function handleError(response) {
 		$scope.error = true;
-		$scope.errorMessage = (response.data.hasOwnProperty('message') ? response.data.message : response.data);
+		$scope.errorMessage = (response.data.hasOwnProperty('message') && response.data.message ?
+
+			response.data.message
+			: langService.translate('common.error.'+ response.status));
+		if(!$scope.errorMessage) {
+			// Translate a generic error message
+			$scope.errorMessage = langService.translate('common.error')|| "Error during communication with service.";
+		}
+		// Log the response.
+		$log.error("Error during resource method, response data: " + angular.toJSON(response));
 	}
 
 	//Start Menu logic
@@ -199,7 +213,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.allChoices = null;
 
 		$scope.currentProduct = productItem;
-		$scope.choices = choicesResource.query({"productId": productItem.id});
+		$scope.choices = choicesResource.query({"productId": productItem.id},null,null,handleError);
 	};
 
 	$scope.createProduct = function() {
@@ -223,9 +237,9 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		var product = $scope.currentProduct;
 
 		if(product && product.id) {
-			product.$update({"bid" : activeBusinessId});	
+			product.$update({"bid" : activeBusinessId}, null, handleError);	
 		} else {
-			product.$save({"bid" : activeBusinessId});
+			product.$save({"bid" : activeBusinessId}, null, handleError);
 			$scope.products.push(product);
 		}
 
@@ -242,7 +256,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 				tmpProduct = angular.element(ele).scope().product;
 				$log.log("set product " + tmpProduct.name + " index from " + tmpProduct.order + " to " + (index));
 				tmpProduct.order = index;
-				tmpProduct.$update({"bid" : activeBusinessId});
+				tmpProduct.$update({"bid" : activeBusinessId}, null, handleError);
 			}	
 		});
 	};
@@ -287,9 +301,9 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	$scope.saveChoice = function() {
 		if($scope.currentChoice && $scope.currentChoice.id) {
-			$scope.currentChoice.$update({"bid" : activeBusinessId});	
+			$scope.currentChoice.$update({"bid" : activeBusinessId}, null, handleError);	
 		} else {
-			$scope.currentChoice.$save({"bid" : activeBusinessId});
+			$scope.currentChoice.$save({"bid" : activeBusinessId}, null, handleError);
 			$scope.choices.push($scope.currentChoice);
 		}
 
@@ -343,11 +357,11 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		});
 
 		$scope.currentProduct.choices = updateArray;
-		$scope.currentProduct.$update({"bid" : activeBusinessId});
+		$scope.currentProduct.$update({"bid" : activeBusinessId}, null, handleError);
 	};
 
 	$scope.showAllChoices = function() {
-		$scope.allChoices = choicesResource.query();
+		$scope.allChoices = choicesResource.query(null, null, null, handleError);
 		$scope.currentChoice = null;
 	}
 
@@ -359,7 +373,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		}
 
 		choiceToLink.productId = $scope.currentProduct.id;
-		choiceToLink.$update({"bid" : activeBusinessId});
+		choiceToLink.$update({"bid" : activeBusinessId}, null, handleError);
 
 		$scope.choices.push(choiceToLink);
 
@@ -374,9 +388,9 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			return;
 		}
 
-		copiedChoice.id = "";
+		copiedChoice.id = null;
 		copiedChoice.productId = $scope.currentProduct.id;
-		copiedChoice.$save({"bid" : activeBusinessId});
+		copiedChoice.$save({"bid" : activeBusinessId}, null, handleError);
 
 		$scope.choices.push(copiedChoice);
 
