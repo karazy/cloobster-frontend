@@ -185,7 +185,8 @@ Cloobster.services.factory('Menu', ['cloobsterResource', function($resource) {
 		buildResource: function(businessId) {
 			return $resource('/b/businesses/:bid/menus/:mid',
 				{
-					'mid' : '@id'
+					'mid' : '@id',
+					'bid' : businessId
 				},
 				{
 						/**
@@ -233,7 +234,8 @@ Cloobster.services.factory('Choice', ['cloobsterResource', function($resource) {
 		buildResource: function(businessId) {
 			return $resource('/b/businesses/:bid/choices/:id',
 				{
-					'id' : '@id'
+					'id' : '@id',
+					'bid' : businessId
 				},
 				{
 						/**
@@ -281,7 +283,8 @@ Cloobster.services.factory('Product', ['cloobsterResource', function($resource) 
 		buildResource: function(businessId) {
 			return $resource('/b/businesses/:bid/products/:pid',
 				{
-					'pid' : '@id'
+					'pid' : '@id',
+					'bid' : businessId
 				},
 				{
 						/**
@@ -374,7 +377,8 @@ Cloobster.services.factory('Spot', ['cloobsterResource', function($resource) {
 		buildResource: function(businessId) {
 			return $resource('/b/businesses/:bid/spotsdata/:sid',
 				{
-					'sid' : '@id'
+					'sid' : '@id',
+					'bid' : businessId
 				},
 				{
 						/**

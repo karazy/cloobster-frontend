@@ -80,7 +80,6 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		if($scope.currentSpot && $scope.currentSpot.id) {
 			$log.log("update spot " + $scope.currentSpot.id);
 			$scope.currentSpot.$update(
-				{"bid" : activeBusinessId},
 				function() { 
 					//success
 				},
@@ -93,7 +92,6 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		} else {
 			$log.log("save new spot");
 			$scope.currentSpot.$save(
-				{"bid" : activeBusinessId},
 				function() { 
 					//success
 				},
