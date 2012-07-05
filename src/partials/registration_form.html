@@ -63,10 +63,10 @@
 			<div class="control-group" ng-class="getFieldInputClass(registrationForm.password.$dirty, registrationForm.password.$invalid)">
 				<label for="password" class="control-label">Password*</label>
 				<div class="controls">
-					<input name="password" type="password" ng-model="account.password" required ng-pattern="/^(?=[!-~]{6,}$)(?=.*\d)(?=.*[^A-Za-z0-9]).*$/" ng-change="matchPasswords()" placeholder="your password">
+					<input name="password" type="password" ng-model="account.password" required ng-pattern="/^(?=[!-~]*$)(?=.*([^A-Za-z0-9]|\d))(?=.*[a-zA-Z]).*$/" ng-change="matchPasswords()" placeholder="your password">
 					<div class="help-inline" ng-show="registrationForm.password.$dirty && registrationForm.password.$invalid">
 		          		<span ng-show="registrationForm.password.$error.required">Provide a password.</span>
-		          		<span ng-show="registrationForm.password.$error.pattern">Min 6 characters. 1 number and one special character!</span>
+		          		<span ng-show="registrationForm.password.$error.pattern">Min. 6 characters. Must contain a letter and a number or one special character.</span>
 		        	</div>
 				</div>
 			</div>
