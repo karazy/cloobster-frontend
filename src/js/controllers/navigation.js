@@ -11,15 +11,11 @@
 * 	@constructor
 */
 Cloobster.Navigation = function($scope, $location, loginService) {
-	var location;
-
 	/**
 	*
 	*/
 	$scope.getActive = function(path) {
-		location = $location.path();		
-		//TODO matches benutzen um subpfade abzudecken
-		return (path == location) ? "active" : "";
+		return ($location.path().indexOf(path) === 0) ? "active" : "";
 	}
 
 };

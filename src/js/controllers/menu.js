@@ -89,7 +89,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			$scope.errorMessage = langService.translate('common.error')|| "Error during communication with service.";
 		}
 		// Log the response.
-		$log.error("Error during resource method, response data: " + angular.toJSON(response));
+		$log.error("Error during resource method, response data: " + angular.toJson(response));
 	}
 
 	//Start Menu logic
@@ -164,14 +164,17 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	};
 
+	function saveMenuSuccess(menu) {
+		$scope.menus.push(menu);
+	}
+
 	$scope.saveMenu = function() {
 		$log.log("save menu ");
 
 		if($scope.currentMenu && $scope.currentMenu.id) {
 			$scope.currentMenu.$update({"bid" : activeBusinessId}, null, handleError);	
 		} else {
-			$scope.currentMenu.$save({"bid" : activeBusinessId}, null, handleError);
-			$scope.menus.push($scope.currentMenu);
+			$scope.currentMenu.$save({"bid" : activeBusinessId}, saveMenuSuccess, handleError);
 		}
 		
 	};
@@ -231,6 +234,10 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		newProduct.menuId = $scope.currentMenu.id;
 	}
 
+	function saveProductSuccess(product) {
+		$scope.products.push(product);
+	}
+
 	$scope.saveProduct = function() {
 		$log.log("save product");
 
@@ -239,8 +246,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		if(product && product.id) {
 			product.$update({"bid" : activeBusinessId}, null, handleError);	
 		} else {
-			product.$save({"bid" : activeBusinessId}, null, handleError);
-			$scope.products.push(product);
+			product.$save({"bid" : activeBusinessId}, saveProductSuccess, handleError);
 		}
 
 	}
@@ -299,12 +305,15 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	// 	return html;
 	// };
 
+	function saveChoiceSuccess(choice) {
+		$scope.choices.push(choice);
+	}
+
 	$scope.saveChoice = function() {
 		if($scope.currentChoice && $scope.currentChoice.id) {
 			$scope.currentChoice.$update({"bid" : activeBusinessId}, null, handleError);	
 		} else {
-			$scope.currentChoice.$save({"bid" : activeBusinessId}, null, handleError);
-			$scope.choices.push($scope.currentChoice);
+			$scope.currentChoice.$save({"bid" : activeBusinessId}, saveChoiceSuccess, handleError);
 		}
 
 	};

@@ -49,12 +49,13 @@ Cloobster.services.provider('config', function() {
 	self.setPriceRegExp = function(value) {
 		self.config_['priceRegExp'] = value;
 	};
+
 	/**
 	*	If called with one argument, override the currency formats with the specified map.
 	*	If called with two arguments, set the format string (specified by the second argument)
 	*	for currency specified by the first argument.
-	*	@param {(Object.<string, string>|string)} - Map or currency identifier if called with the second argument.
-	*	@param {=string} - format string for regex replacement for currency values.
+	*	@param {(Object.<string, string>|string)} a1 - Map or currency identifier if called with the second argument.
+	*	@param {=string} a2 - format string for regex replacement for currency values.
 	*/
 	self.setCurrencyFormats = function(a1, a2) {
 		if(arguments.length == 1) {
@@ -847,15 +848,7 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 
 				jQuery(fileInput).fileupload({
 					fail: function(e, data) {
-	    			$log.error('Upload failed. Reason: '+data.errorThrown);
-	    		
-
-	    			if(data.textStatus == 400) {
-	    				//token is invalid request new one
-	    				// requestFileUploadInformation();
-	    				// $scope.error = true;
-	    				// $scope.errorMessage = "Upload failed. Please retry."
-	    			}
+	    			$log.error('Upload failed. Error thrown: '+data.errorThrown + ', status: '+ data.textStatus);
 
 	    			fileUploadCallback(false, data);
 	    		},

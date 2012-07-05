@@ -149,7 +149,7 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 	return config;
 }]);
 
-Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(uploadService, langService) {
+Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', function(uploadService, langService, $log) {
 	var inputType, //type of the input to generate in form
 		required, //if present marks a required field
 		//directive configuration
@@ -182,7 +182,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 						 	'<span class="btn btn-success fileinput-button">'+
 						 		'<i class="icon-plus icon-white"></i>'+
 	                    		'<span l="fileupload.button.add">Add image...</span>'+
-						 		'<input type="file" name="files[]"></input>'+
+						 		'<input type="file" name="files[]" accept="image/jpeg,image/png,image/gif"></input>'+
 					 		'</span>'+
 					 		'<span l="fileupload.image.label">Selected file: </span><span class="selected-files"></span>'+
 						'</div>'+
@@ -239,10 +239,10 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang', function(u
 							});
 						} else {
 							scope.fileUploading = false;
-							scope.errorMessage = langService.translate("fileupload.submit.error") +'<br/>('+errorText+')';
+							submitButton.button('reset');
+							scope.errorMessage = langService.translate("fileupload.submit.error");
 							scope.error = true;
 							scope.$digest();
-							submitButton.button('reset');
 						}
 					}
 

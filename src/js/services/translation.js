@@ -193,10 +193,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"businesses.dialog.delete" : "Delete Restaurant",
 			"business.dialog.delete.text" : "{{activeBusiness.name}} and all data will be deleted!",
 			//business detail partial
-			"business.detail.logo.dialog.title" : "Logo",
-			"business.detail.picture1.dialog.title" : "Profile picture 1",
-			"business.detail.picture2.dialog.title" : "Profile picture 2",
-			"business.detail.picture3.dialog.title" : "Profile picture 3",
+			"business.detail.logo.editor.title" : "Logo",
+			"business.detail.picture1.editor.title" : "Profile picture 1",
+			"business.detail.picture2.editor.title" : "Profile picture 2",
+			"business.detail.picture3.editor.title" : "Profile picture 3",
 			"business.detail.picture.edit" : "Click the picture to edit.",
 			//menus partial
 			"menus.title" : "Menus",
@@ -255,7 +255,6 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			//general error messages
 			"common.error.404" : "A resource could not be found.",
 			"common.error" : "There is a problem with the connection to the service."
-
 		}
 	}
 
