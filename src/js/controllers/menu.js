@@ -56,6 +56,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.currentMenu = null;
 	/** Products of current menu. */
 	$scope.products = null;
+	/** List of all existing products. */
+	$scope.allProducts = null;
 	/** Choices of current product. */
 	$scope.choices = null;
 	/** List of all existing choices. */
@@ -116,22 +118,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		//load menus
 		$scope.menus = $scope.menusResource.query(null, null, null, handleError);
-	};
-
-	$scope.loadMenu = function(menuItem) {
-		$log.log("load menu " + menuItem.id);
-
-		//reset currentProduct, so details get hidden when menu changes
-		$scope.currentProduct = null;
-
-		//reset currentChoice, so details get hidden when menu changes
-		$scope.currentChoice = null;
-
-		$scope.allChoices = null;
-		
-		$scope.currentMenu = menuItem;
-
-		$scope.products = $scope.productsResource.query({"menuId" : menuItem.id},null, null, handleError);
 
 		//init sortable lists
 
@@ -161,6 +147,23 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 				$scope.updateChoiceOrder(event, ui);
 			}
 		}).disableSelection();
+	};
+
+	$scope.loadMenu = function(menuItem) {
+		$log.log("load menu " + menuItem.id);
+
+		//reset currentProduct, so details get hidden when menu changes
+		$scope.currentProduct = null;
+
+		//reset currentChoice, so details get hidden when menu changes
+		$scope.currentChoice = null;
+
+		$scope.allChoices = null;
+		$scope.allProducts = null;
+		
+		$scope.currentMenu = menuItem;
+
+		$scope.products = $scope.productsResource.query({"menuId" : menuItem.id},null, null, handleError);
 
 	};
 
@@ -184,6 +187,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		$scope.currentChoice = null;
 		$scope.allChoices = null;
+		$scope.allProducts = null;
 		$scope.currentProduct = null;
 
 		$scope.products = new Array();
@@ -214,6 +218,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		//reset currentChoice, so details get hidden when product changes
 		$scope.currentChoice = null;
 		$scope.allChoices = null;
+		$scope.allProducts = null;
 
 		$scope.currentProduct = productItem;
 		$scope.choices = choicesResource.query({"productId": productItem.id},null,null,handleError);
@@ -266,6 +271,79 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			}	
 		});
 	};
+
+	/**
+	*
+	* Lists all available products for current business.
+	*/
+	$scope.showAllProducts = function() {
+		$scope.allProducts = $scope.productsResource.query(null, null, null, handleError);
+		$scope.currentChoice = null;
+		$scope.currentProduct = null;
+	}
+
+	$scope.copyProduct = function(productToCopy, type) {
+		var copiedProduct = angular.copy(productToCopy);
+
+		if(!$scope.currentMenu) {
+			$log.log("Can't copy product because no current menu exists.");
+			return;
+		}
+
+		if(!productToCopy) {
+			$log.error("No product to copy provided!");
+			return;
+		}
+
+		$log.log("copying product " + productToCopy.id);
+
+		//set id null to indicate new status
+		copiedProduct.id = null;
+		//assign to active menu
+		copiedProduct.menuId = $scope.currentMenu.id;
+
+		if(type == "link") {
+			linkChoicesToProduct(copiedProduct, productToCopy.id, onSuccess);
+		} else if (type == "copy") {
+			copyChoicesForProduct(copiedProduct, productToCopy.id, onSuccess);
+		} else {
+			onSuccess();
+		}
+
+		function onSuccess() {
+			copiedProduct.$save(null, saveProductSuccess, handleError);
+			$scope.allProducts = null;
+		}
+
+	}
+
+	function linkChoicesToProduct(product, productId, callback) {
+		var choices = null;
+		$log.log("linking choices to product");
+		choices = choicesResource.query({"productId": productId},null,onSuccess,handleError);
+
+		function onSuccess() {
+			product.choices = choices;
+
+			callback();
+		}		
+	}
+
+	function copyChoicesForProduct(product, productId, callback) {
+		var choices = null;
+		$log.log("copying choices for product");
+		choices = choicesResource.query({"productId": productId},null,onSuccess,handleError);
+
+		function onSuccess() {
+			angular.forEach(choices, function(choice) {
+				choice.id = null;
+			});
+
+			product.choices = choices;
+
+			callback();
+		}		
+	}
 
 	//End Product logic
 
@@ -372,6 +450,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.showAllChoices = function() {
 		$scope.allChoices = choicesResource.query(null, null, null, handleError);
 		$scope.currentChoice = null;
+		$scope.allProducts = null;
 	}
 
 	$scope.linkChoice = function(choiceToLink) {

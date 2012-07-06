@@ -53,12 +53,29 @@
 	    		<ul class="nav nav-pills nav-stacked" id="productList">
 	    			<li>
 						<a ng-click="createProduct()"><i class="icon-plus icon-black"></i> <span l="menus.products.list.new">New product...</span></a>
+						<a ng-click="showAllProducts()"><i class="icon-plus icon-black"></i> <span l="menus.products.list.existing">Existing product...</span></a>
 					</li>
 		       	 	<li ng-repeat="product in products | orderBy:['order', 'name']" class="menu-products-item sortable" ng-class="{active: currentProduct.id == product.id}">
 			        	<a ng-click="loadProduct(product)"><i class="icon-fullscreen icon-black" tooltip="general.sortable"></i> {{product.name}}</a>
 			        </li>
 	    		</ul>
 	    	</div>
+	    </div>
+
+	    <div class="span3 product-wrapper product-detail" ng-show="allProducts.length > 0">
+	    	<h3 l="menus.products.link.title">All Products</h3>
+	    	<p l="menus.products.link.description">Select an existing product to copy it and assign to active menu.</p>
+	    	<span l="menus.products.link.search">Search:</span><input ng-model="productCopyQuery.name">
+    		<ul class="nav nav-pills nav-stacked">
+	       	 	<li ng-repeat="product in allProducts | filter:productCopyQuery" class="product-item dropdown">
+		        	<a class="dropdown-toggle" data-toggle="dropdown">{{product.name}}<b class="caret"></b></a>
+		        	<ul class="dropdown-menu">
+		        		<a ng-click="copyProduct(product)" l="menus.products.link.action.copy">Copy Product</a>
+		        		<a ng-click="copyProduct(product, 'link')" l="menus.products.link.action.copylink">Copy Product & Link Choices</a>
+		        		<a ng-click="copyProduct(product, 'copy')" l="menus.products.link.action.deepcopy">Copy Product & Copy Choices</a>
+    				</ul>
+		        </li>
+    		</ul>
 	    </div>
 
 	    <div class="span3 product-wrapper" ng-show="currentProduct">
