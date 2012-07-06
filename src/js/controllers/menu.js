@@ -62,6 +62,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.choices = null;
 	/** List of all existing choices. */
 	$scope.allChoices = null;
+	/** List of all products linked with current choice. Null if only one product is linked.*/
+	$scope.linkedProductsForChoice = null;
 	/** Selected product. */
 	$scope.currentProduct = null;
 	/** Business to which these menus belong to. */
@@ -351,37 +353,40 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.loadChoice = function(choiceItem) {
 		$scope.allChoices = null;
 		$scope.currentChoice = choiceItem;
+		$scope.linkedProductsForChoice = null;
+
+		//more then one product is assigned -> load a list
+		if($scope.currentChoice.productIds.length > 1) {
+			$scope.linkedProductsForChoice = new Array();
+			angular.forEach($scope.currentChoice.productIds, function(pid) {
+				angular.forEach($scope.products, function(product) {
+					if(product.id == pid) {
+						$scope.linkedProducts.push(product);
+						break;
+					}
+				});	
+			});			
+		}
 
 
-		// if($scope.isParent(choiceItem.id)) {
-		// 	jQuery("#linkedChoicesPopover").popover({
-		// 		title: "Linked choices",
-		// 		placement: "left",
-		// 		content: getLinkedChoices()
-		// 	});
-		// }
 	};
 
-	// function getLinkedChoices(){
-	// 	var html = "";
 
-	// 	if(!$scope.choices) {
-	// 		return;
-	// 	}
+	/**
+	* Load product by an id.
+	* @param
+	*	product Id
+	*/
+	$scope.loadProductById = function(id) {	
+		var found = null;
 
-		// angular.forEach($scope.choices, function(choice) {
-		// 	if(choice.parent == $scope.currentChoice.id) {
-		// 		html += "<p>"+choice.text+"</p>";
-		// 	}
 
-		// });
 
-	// 	html = '<p ng-repeat="choice in choices">'+
-	// 		'{{choice.text}} test'+
-	// 		'</p>';
-
-	// 	return html;
-	// };
+		if(found) {
+			$scope.loadProduct(found);	
+		}
+		
+	};
 
 	function saveChoiceSuccess(choice) {
 		$scope.choices.push(choice);

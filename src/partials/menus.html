@@ -104,8 +104,8 @@
 						<a ng-click="createChoice()"><i class="icon-plus icon-black"></i> <span l="menus.choices.list.new">New choice...</span></a><a ng-click="showAllChoices()"><i class="icon-plus icon-black"></i> <span l="menus.choices.list.existing">Existing choice...</span></a>
 					</li>
 		       	 	<li ng-repeat="choice in choices" class="product-choice-item sortable" ng-class="{active: currentChoice.id == choice.id}">
-			        	<a ng-click="loadChoice(choice)"><i class="icon-fullscreen icon-black" tooltip="general.sortable"></i> {{choice.text}}<i class="icon-bookmark icon-black" tooltip="menus.choices.list.linked" ng-show="choice.parent"></i></a>
-			        </li>
+			        	<a ng-click="loadChoice(choice)"><i class="icon-fullscreen icon-black" tooltip="general.sortable"></i> {{choice.text}} <i class="icon-bookmark icon-black" tooltip="menus.choices.list.linked" ng-show="choice.parent"></i> <i class="icon-bookmark icon-list-alt" tooltip="menus.choices.list.linked.products" ng-show="choice.productIds.length > 1"></i></a>
+			        </li> 
 	    		</ul>
 	    	</div>
 	    </div>
@@ -165,6 +165,14 @@
 		        	<ul class="dropdown-menu">
 		        		<a ng-repeat="choice in choices | filter:{parent : currentChoice.id}" ng-click="loadChoice(choice)">
 		        			{{choice.text}}
+		        		</a>
+    				</ul>
+		    	</div>
+		    	<div ng-show="linkedProductsForChoice">
+		    		<a class="btn dropdown-toggle"  data-toggle="dropdown" ><span l="menus.choices.field.linkedproducts">Linked Products</span><span class="caret"></span><a>
+		        	<ul class="dropdown-menu">
+		        		<a ng-repeat="product in linkedProductsForChoice}" ng-click="loadProduct(product)">
+		        			{{product.name}}
 		        		</a>
     				</ul>
 		    	</div>
