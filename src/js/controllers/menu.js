@@ -353,20 +353,24 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.loadChoice = function(choiceItem) {
 		$scope.allChoices = null;
 		$scope.currentChoice = choiceItem;
-		$scope.linkedProductsForChoice = null;
 
-		//more then one product is assigned -> load a list
-		if($scope.currentChoice.productIds.length > 1) {
-			$scope.linkedProductsForChoice = new Array();
-			angular.forEach($scope.currentChoice.productIds, function(pid) {
-				angular.forEach($scope.products, function(product) {
-					if(product.id == pid) {
-						$scope.linkedProducts.push(product);
-						break;
-					}
-				});	
-			});			
+		$scope.linkedProductsForChoice = $scope.productsResource.query({"choiceId" : $scope.currentChoice.id},callback,callback);
+
+		function callback(data) {
+			console.log('callback');
 		}
+		// //more then one product is assigned -> load a list
+		// if($scope.currentChoice.productIds.length > 1) {
+		// 	$scope.linkedProductsForChoice = new Array();
+		// 	angular.forEach($scope.currentChoice.productIds, function(pid) {
+		// 		angular.forEach($scope.products, function(product) {
+		// 			if(product.id == pid) {
+		// 				$scope.linkedProducts.push(product);
+		// 				break;
+		// 			}
+		// 		});	
+		// 	});			
+		// }
 
 
 	};
