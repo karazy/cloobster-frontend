@@ -355,6 +355,37 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		product.$delete(null, null, handleError);
 	}
 
+	$scope.removeChoice = function(index) {
+		var choiceToRemove = $scope.choices[index];
+
+		if(!choiceToRemove) {
+			$log.error("Removing choice failed. No choice exists at index " + index);
+			return;
+		}
+		$scope.choices.splice(index, 1);
+
+		//if choice is a parent choice remove linked choices
+		angular.forEach($scope.choices, function(element, index) {
+			if(element.parent == choiceToRemove.id) {
+				$scope.choices.splice(index, 1);
+			}
+		});
+
+		$scope.currentProduct.choices = $scope.choices;
+		$scope.currentProduct.$update(null, removeChoiceSuccess, handleError);
+
+		//if current selected choice is the removed on, hide it
+		if($scope.currentChoice && choiceToRemove.id == $scope.currentChoice.id) {
+			$scope.currentChoice = null;
+		}		
+	}
+
+	function removeChoiceSuccess() {
+		if(true) {
+			$scope.currentChoice = null;
+		}		
+	}
+
 	//End Product logic
 
 	// //Start Choice logic
@@ -363,20 +394,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.currentChoice = choiceItem;
 
 		$scope.linkedProductsForChoice = $scope.productsResource.query({"choiceId" : $scope.currentChoice.id},null,null);
-
-		// //more then one product is assigned -> load a list
-		// if($scope.currentChoice.productIds.length > 1) {
-		// 	$scope.linkedProductsForChoice = new Array();
-		// 	angular.forEach($scope.currentChoice.productIds, function(pid) {
-		// 		angular.forEach($scope.products, function(product) {
-		// 			if(product.id == pid) {
-		// 				$scope.linkedProducts.push(product);
-		// 				break;
-		// 			}
-		// 		});	
-		// 	});			
-		// }
-
 
 	};
 
@@ -458,45 +475,112 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		});
 
 		$scope.currentProduct.choices = updateArray;
-		$scope.currentProduct.$update(null, handleError);
+		$scope.currentProduct.$update(null, null, handleError);
 	};
 
 	$scope.showAllChoices = function() {
+
 		$scope.allChoices = choicesResource.query(null, null, null, handleError);
 		$scope.currentChoice = null;
 		$scope.allProducts = null;
 	}
 
+	$scope.filterOnlyChoiceParents = function(choiceToFilter) {
+		if(!choiceToFilter.parent) {
+			return true;
+		}
+		return false;
+	}
+
+	$scope.filterOnlyNotLinkedChoices = function(choiceToFilter) {
+		var include = true;
+
+		if(!choiceToFilter) {
+			return true;
+		}
+
+		angular.forEach($scope.choices, function(choice) {
+			if(choice.id == choiceToFilter.id) {
+				include = false;
+				return false;
+			}
+		});
+
+		return include;
+	}
+
 	$scope.linkChoice = function(choiceToLink) {
+		var productId = null;
 
 		if(!$scope.currentProduct) {
 			$log.log("Can't link choice because no current product exists.");
 			return;
 		}
 
-		choiceToLink.productId = $scope.currentProduct.id;
-		choiceToLink.$update(null, null, handleError);
+		productId = $scope.currentProduct.id;
+
+		choiceToLink.productId = productId;
+		// choiceToLink.$update(null, null, handleError);
 
 		$scope.choices.push(choiceToLink);
+
+		angular.forEach($scope.allChoices, function(element, key) {
+			if(element.parent == choiceToLink.id) {
+				element.productId = productId;
+				$scope.choices.push(element);
+				return;
+			}
+		});
+
+		$scope.currentProduct.choices = $scope.choices;
+
+		$scope.currentProduct.$update(null, null, handleError);
 
 		$scope.allChoices = null;
 	}
 
 	$scope.copyChoice = function(choiceToCopy) {
-		var copiedChoice = angular.copy(choiceToCopy);
+		var copiedChoice = angular.copy(choiceToCopy),
+			copiedSubChoice = null,
+			originalId;
 
 		if(!$scope.currentProduct) {
 			$log.log("Can't copy choice because no current product exists.");
 			return;
 		}
 
+		originalId = choiceToCopy.id;
 		copiedChoice.id = null;
-		copiedChoice.productId = $scope.currentProduct.id;
-		copiedChoice.$save(null, null, handleError);
+		copiedChoice.productId = null;
 
-		$scope.choices.push(copiedChoice);
+		copiedChoice.$save(null, successChoiceSaved, handleError);
 
-		$scope.allChoices = null;
+		function successChoiceSaved() {
+			$scope.choices.push(copiedChoice);
+
+			angular.forEach($scope.allChoices, function(element, key) {
+				if(element.parent == originalId) {
+					copiedSubChoice = angular.copy(element);
+					copiedSubChoice.id = null;
+					copiedSubChoice.productId = null;
+					$scope.choices.push(element);
+					return;
+				}
+			});
+
+			$scope.currentProduct.choices = $scope.choices;
+			$scope.currentProduct.$update(null, successProductSaved, handleError);
+
+		}
+
+		function successProductSaved() {
+			$scope.choices = choicesResource.query({"productId": $scope.currentProduct.id},null,null,handleError);
+
+			$scope.allChoices = null;
+		}
+
+		// $scope.currentProduct.$update(null, success, handleError);
+		
 	}
 
 	/**
@@ -525,7 +609,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	}
 
 	$scope.excludeChoice = function(element) {
-		if($scope.currentChoice && element && $scope.currentChoice.id == element.id) {
+		if(!$scope.currentChoice || !element || !$scope.currentChoice.id == element.id || element.parent) {
 			return false;
 		}
 		return true;
