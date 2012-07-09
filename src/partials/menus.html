@@ -160,21 +160,35 @@
 	        			</select>
 	        		</span>
 		    	</div>
+		    	<div>
 		    	<div ng-show="isParent(currentChoice.id)" class="btn-group">
-		    		<a class="btn dropdown-toggle"  data-toggle="dropdown" ><span l="menus.choices.field.linkedchoices">Linked Choices</span><span class="caret"></span></a>
+		    		<button class="btn dropdown-toggle"  data-toggle="dropdown">
+		    			<span l="menus.choices.field.linkedchoices">Linked Choices</span>
+		    			<span class="caret"></span>
+		    		</button>
 		        	<ul class="dropdown-menu">
-		        		<li><a ng-repeat="choice in choices | filter:{parent : currentChoice.id}" ng-click="loadChoice(choice)">
+		        		<li>
+		        			<a ng-repeat="choice in choices | filter:{parent : currentChoice.id}" ng-click="loadChoice(choice)">
 		        			{{choice.text}}
-		        		</a></li>
+		        			</a>
+		        		</li>
     				</ul>
 		    	</div>
+		    	</div>
+		    	<div>
 		    	<div ng-show="linkedProductsForChoice.length > 1" class="btn-group">
-		    		<a class="btn dropdown-toggle"  data-toggle="dropdown" ><span l="menus.choices.field.linkedproducts">Linked Products</span><span class="caret"></span></a>
+		    		<button class="btn dropdown-toggle"  data-toggle="dropdown">
+		    			<span l="menus.choices.field.linkedproducts">Linked Products</span>
+		    			<span class="caret"></span>
+		    		</button>
 		        	<ul class="dropdown-menu">
-		        		<li><a ng-repeat="product in linkedProductsForChoice" ng-click="loadProduct(product)">
+		        		<li>
+		        			<a ng-repeat="product in linkedProductsForChoice" ng-click="loadProduct(product)">
 		        			{{product.name}}
-		        		</a></li>
+		        			</a>
+		        		</li>
     				</ul>
+		    	</div>
 		    	</div>
 		    </div>
 		    <div class="choice-options-list" ng-show="currentChoice">

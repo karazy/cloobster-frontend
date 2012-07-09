@@ -354,11 +354,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.allChoices = null;
 		$scope.currentChoice = choiceItem;
 
-		$scope.linkedProductsForChoice = $scope.productsResource.query({"choiceId" : $scope.currentChoice.id},callback,callback);
+		$scope.linkedProductsForChoice = $scope.productsResource.query({"choiceId" : $scope.currentChoice.id},null,null);
 
-		function callback(data) {
-			console.log('callback');
-		}
 		// //more then one product is assigned -> load a list
 		// if($scope.currentChoice.productIds.length > 1) {
 		// 	$scope.linkedProductsForChoice = new Array();
