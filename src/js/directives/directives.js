@@ -313,6 +313,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 /**
 * Used to translate UI texts.
 * Usage: l="languageKey"
+* (optional) l-attribute: if specified translates an attribute instead of html content
 */
 Cloobster.directives.directive('l', ['$locale', 'lang', '$interpolate', function($locale, langService,$interpolate) {
 
@@ -320,6 +321,8 @@ Cloobster.directives.directive('l', ['$locale', 'lang', '$interpolate', function
 	//link function
 	return function (scope, iElement, iAttrs, controller) {
 		var key = iAttrs.l,
+			//attribute whos value to translate, if nothing provided html content is replaced
+			replaceAttr = iAttrs.lAttribute,
 			translation,
 			interpolation,
 			oldWatch;
@@ -344,7 +347,12 @@ Cloobster.directives.directive('l', ['$locale', 'lang', '$interpolate', function
 			oldWatch = scope.$watch(interpolation, function(newVal, oldVal) {
 				// Write the inner html text.
 				// newVal is the result of evaluating the interpolated expression against the scope.
-				iElement.html(newVal);
+				if(!replaceAttr) {
+					iElement.html(newVal);	
+				} else {
+					iElement.attr(replaceAttr, newVal);
+				}
+				
 			});
 		}
 

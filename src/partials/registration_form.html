@@ -1,9 +1,9 @@
 <div class="alert alert-error alert-block" ng-show="error">
 	<button class="close" ng-click="hideError()">×</button>
-	<h4 class="alert-heading">Warning!</h4>
+	<h4 class="alert-heading" l="common.warning.title">Warning!</h4>
 	{{errorMessage}}
 </div>
-<h1>Cloobster Registration</h1>
+<h1 l="registration.title">Cloobster Registration</h1>
 <div class='registration_wrapper' ng-hide='registered'>
 	<div class='alert alert-error' ng-show='error'>
 		<button class="close" data-dismiss="alert">×</button>
@@ -13,18 +13,18 @@
 		<div class='row'>
 		<div class='span12'>
 		<input class="btn btn-primary" type="button" value="Use my Facebook account for registration and connect Cloobster"
-			ng-click="connectFb()" ng-show='isLoggedInAndNotFbConnected()'>
+			ng-click="connectFb()" ng-show='isLoggedInAndNotFbConnected()' l="registration.action.fblogin">
 		<input class="btn btn-primary" type="button" value="Login with my Facebook account and connect Cloobster."
 			ng-click="loginAndConnectFb()" ng-hide="fbLoggedIn">
 		</div>
 		</div>
 		<div class='row'>
 		<fieldset class='span6'>
-			<span class="help-block">Your account data.</span>
+			<span class="help-block" l="registration.form.account.label">Your account data.</span>
 			<div class="control-group" ng-class="getFieldInputClass(registrationForm.fullname.$dirty, registrationForm.fullname.$invalid)">
-				<label for="fullname" class="control-label">Name*</label>
+				<label for="fullname" class="control-label" l="registration.form.fullname">Name*</label>
 				<div class="controls">
-					<input name="fullname" id="fullname" type='text' ng-model="account.name" required ng-minlength="3" placeholder="your name">	
+					<input name="fullname" id="fullname" type='text' ng-model="account.name" required ng-minlength="3" placeholder="your name" l-attribute="placeholder" l="registration.form.fullname.placeholder">	
 					 <div class="help-inline" ng-show="registrationForm.fullname.$dirty && registrationForm.fullname.$invalid">
 		          		<span ng-show="registrationForm.fullname.$error.required">Tell us your name.</span>
 		          		<span ng-show="registrationForm.fullname.$error.minlength">Name must be a least 3 characters long.</span>
@@ -32,9 +32,9 @@
 	        	</div>
         	</div>
         	<div class="control-group" ng-class="getFieldInputClass(registrationForm.login.$dirty, registrationForm.login.$invalid)">
-	        	<label for="login" class="control-label">Login*</label>
+	        	<label for="login" class="control-label" l="registration.form.login">Login*</label>
 	        	<div class="controls">
-					<input name="login" id="login" type="text" ng-model="account.login" required ng-pattern="/^[a-z0-9_\.-]{4,30}$/" placeholder="login name">
+					<input name="login" id="login" type="text" ng-model="account.login" required ng-pattern="/^[a-z0-9_\.-]{4,30}$/" placeholder="login name" l-attribute="placeholder" l="registration.form.login.placeholder">
 					<div class="help-inline" ng-show="registrationForm.login.$dirty && registrationForm.login.$invalid">
 		          		<span ng-show="registrationForm.login.$error.required">Provide a username.</span>
 		          		<span ng-show="registrationForm.login.$error.pattern">4 - 30 characters. Only lower case, digits, "_" "-" "." are allowed.</span>
@@ -42,9 +42,9 @@
 				</div>
 			</div>
 			<div class="control-group" ng-class="getFieldInputClass(registrationForm.email.$dirty, registrationForm.email.$invalid)">
-				<label class="control-label" for="email">Email*</label>
+				<label class="control-label" for="email" l="registration.form.email">Email*</label>
 				<div class="controls">
-					<input name='email' id="email" type='email' ng-model="account.email" required ng-change="matchMails()" placeholder="email">
+					<input name='email' id="email" type='email' ng-model="account.email" required ng-change="matchMails()" placeholder="email" l-attribute="placeholder" l="registration.form.email.placeholder">
 					 <div class="help-inline" ng-show="registrationForm.email.$dirty && registrationForm.email.$invalid">
 		          		<span ng-show="registrationForm.email.$error.required">Tell us your email.</span>
 		          		<span ng-show="registrationForm.email.$error.email">Invalid email.</span>
@@ -52,18 +52,18 @@
 		        </div>
         	</div>
         	<div class="control-group" ng-class="getFieldInputClass(registrationForm.emailRepeat.$dirty, registrationForm.emailRepeat.$invalid)">
-				<label class="control-label" for="emailRepeat">Repeat email*</label>
+				<label class="control-label" for="emailRepeat" l="registration.form.emailrepeat">Repeat email*</label>
 				<div class="controls">
-					<input name='emailRepeat' id="emailRepeat" type='text' ng-model="emailRepeat" required ng-change="matchMails()" placeholder="enter your email again">
+					<input name='emailRepeat' id="emailRepeat" type='text' ng-model="emailRepeat" required ng-change="matchMails()" placeholder="enter your email again" l-attribute="placeholder" l="registration.form.emailrepeat.placeholder">
 					<div class="help-inline" ng-show="registrationForm.emailRepeat.$dirty && registrationForm.emailRepeat.$invalid">
 		          		<span ng-show="registrationForm.emailRepeat.$error.match">Emails don't match.</span>
 	        		</div>
 				</div>
 			</div>
 			<div class="control-group" ng-class="getFieldInputClass(registrationForm.password.$dirty, registrationForm.password.$invalid)">
-				<label for="password" class="control-label">Password*</label>
+				<label for="password" class="control-label" l="registration.form.password">Password*</label>
 				<div class="controls">
-					<input name="password" type="password" ng-model="account.password" required ng-pattern="/^(?=[!-~]*$)(?=.*([^A-Za-z0-9]|\d))(?=.*[a-zA-Z]).*$/" ng-change="matchPasswords()" placeholder="your password">
+					<input name="password" type="password" ng-model="account.password" required ng-pattern="/^(?=[!-~]*$)(?=.*([^A-Za-z0-9]|\d))(?=.*[a-zA-Z]).*$/" ng-change="matchPasswords()" placeholder="your password" l-attribute="placeholder" l="registration.form.password.placeholder">
 					<div class="help-inline" ng-show="registrationForm.password.$dirty && registrationForm.password.$invalid">
 		          		<span ng-show="registrationForm.password.$error.required">Provide a password.</span>
 		          		<span ng-show="registrationForm.password.$error.pattern">Min. 6 characters. Must contain a letter and a number or one special character.</span>
@@ -71,59 +71,59 @@
 				</div>
 			</div>
 			<div class="control-group" ng-class="getFieldInputClass(registrationForm.passwordRepeat.$dirty, registrationForm.passwordRepeat.$invalid)">
-				<label class="control-label" for="passwordRepeat">Repeat password*</label>
+				<label class="control-label" for="passwordRepeat" l="registration.form.passwordrepeat">Repeat password*</label>
 				<div class="controls">
-					<input name='passwordRepeat' type='password' ng-model="passwordRepeat" required ng-change="matchPasswords()" placeholder="repeat your password">
+					<input name='passwordRepeat' type='password' ng-model="passwordRepeat" required ng-change="matchPasswords()" placeholder="repeat your password" l-attribute="placeholder" l="registration.form.passwordrepeat.placeholder">
 					<div class="help-inline" ng-show="registrationForm.passwordRepeat.$dirty && registrationForm.passwordRepeat.$invalid">
 		          		<span ng-show="registrationForm.passwordRepeat.$error.match">Passwords don't match.</span>
 	        		</div>
 				</div>
 			</div>
-			<label>Phone</label>
-			<input name='phone' type='text' ng-model="account.phone" placeholder="(optional) phone number">
+			<label l="registration.form.phone">Phone</label>
+			<input name='phone' type='text' ng-model="account.phone" placeholder="(optional) phone number" l-attribute="placeholder" l="registration.form.phone.placeholder">
 		</fieldset>
 		<fieldset class='span6'>
-		<span class="help-block">Your company data.</span>
+		<span class="help-block" l="registration.form.company.label">Your company data.</span>
 		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyName.$dirty, registrationForm.companyName.$invalid)">
-			<label class="control-label" for="companyName">Company*</label>
+			<label class="control-label" for="companyName" l="registration.form.company">Company*</label>
 			<div class="controls">
-				<input name='companyName' id="companyName" type='text' ng-model="account.company.name" required placeholder="company name">				
+				<input name='companyName' id="companyName" type='text' ng-model="account.company.name" required placeholder="company name" l-attribute="placeholder" l="registration.form.company.placeholder">				
 				<div class="help-inline" ng-show="registrationForm.companyName.$dirty && registrationForm.companyName.$invalid">
 	          		<span ng-show="registrationForm.companyName.$error.required">Provide a company.</span>
         		</div>
 			</div>
 		</div>
 		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyAddress.$dirty, registrationForm.companyAddress.$invalid)">
-			<label class="control-label" for="companyAddress">Address*</label>
+			<label class="control-label" for="companyAddress" l="registration.form.address">Address*</label>
 			<div class="controls">
-				<input name='companyAddress' id="companyAddress" type='text' ng-model="account.company.address"  placeholder="company address" required>
+				<input name='companyAddress' id="companyAddress" type='text' ng-model="account.company.address"  placeholder="company address" l-attribute="placeholder" l="registration.form.address.placeholder"required>
 				<div class="help-inline" ng-show="registrationForm.companyAddress.$dirty && registrationForm.companyAddress.$invalid">
 	          		<span ng-show="registrationForm.companyAddress.$error.required">Provide an address.</span>
         		</div>
 			</div>
 		</div>
 		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyCity.$dirty, registrationForm.companyCity.$invalid)">
-			<label class="control-label" for="companyCity">City*</label>
+			<label class="control-label" for="companyCity" l="registration.form.city">City*</label>
 			<div class="controls">
-				<input name='companyCity' id="companyCity" type='text' ng-model="account.company.city" placeholder="city" required>
+				<input name='companyCity' id="companyCity" type='text' ng-model="account.company.city" placeholder="city" l-attribute="placeholder" l="registration.form.city.placeholder" required>
 				<div class="help-inline" ng-show="registrationForm.companyCity.$dirty && registrationForm.companyCity.$invalid">
 	          		<span ng-show="registrationForm.companyCity.$error.required">Provide a city.</span>
         		</div>
 			</div>
 		</div>
 		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyPostcode.$dirty, registrationForm.companyPostcode.$invalid)">
-			<label class="control-label" for="companyCity">Postcode*</label>
+			<label class="control-label" for="companyCity" l="registration.form.postcode">Postcode*</label>
 			<div class="controls">
-				<input name='companyPostcode' id="companyPostcode" type='text' ng-model="account.company.postcode" placeholder="postcode" required >
+				<input name='companyPostcode' id="companyPostcode" type='text' ng-model="account.company.postcode" placeholder="postcode" l-attribute="placeholder" l="registration.form.postcode.placeholder" required >
 				<div class="help-inline" ng-show="registrationForm.companyPostcode.$dirty && registrationForm.companyPostcode.$invalid">
 	          		<span ng-show="registrationForm.companyPostcode.$error.required">Provide a postcode.</span>
         		</div>
 			</div>
 		</div>			
-		<label>Business phone</label>
-		<input name='company_phone' type='text' ng-model="account.company.phone" placeholder="(optional) phone">
+		<label l="registration.form.businessphone">Business phone</label>
+		<input name='company_phone' type='text' ng-model="account.company.phone" placeholder="(optional) phone" l-attribute="placeholder" l="registration.form.businessphone.placeholder">
 		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyCountry.$dirty, registrationForm.companyCountry.$invalid)">
-			<label for="companyCountry">Country*</label>
+			<label for="companyCountry" l="registration.form.country">Country*</label>
 			<div class="controls">
 				<select name='companyCountry' id="companyCountry" ng-model='account.company.country' required>
 		            <option value="DE">Deutschland</option>
@@ -137,8 +137,8 @@
         </div>
         <div class='row'>
         <div class='span12'>
-        <button type="button" ng-click="cancel()" class="btn">Reset</button>
-      	<button type="submit" ng-disabled="registrationForm.$invalid"  class="btn btn-primary">Register</button>
+        <button type="button" ng-click="cancel()" class="btn" l="registration.form.action.reset">Reset</button>
+      	<button type="submit" ng-disabled="registrationForm.$invalid"  class="btn btn-primary" l="registration.form.action.register">Register</button>
       </div>
       </div>
 
