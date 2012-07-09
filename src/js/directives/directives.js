@@ -319,7 +319,7 @@ Cloobster.directives.directive('l', ['$locale', 'lang', '$interpolate', function
 
 
 	//link function
-	return function (scope, iElement, iAttrs, controller) {
+			return function (scope, iElement, iAttrs, controller) {
 		var key = iAttrs.l,
 			//attribute whos value to translate, if nothing provided html content is replaced
 			replaceAttr = iAttrs.lAttribute,

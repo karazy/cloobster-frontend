@@ -26,7 +26,7 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 				'name' : '',
 				'address' : '',
 				'city' : '',
-				'country' : '',
+				'country' : 'DE',
 				'postcode' : '',
 				'phone' : ''
 			},
