@@ -169,6 +169,10 @@ ul.payment-method-list li {
   margin: 0.5em 0;
 }
 
+.product-choice-item {
+  margin: 0 0 0.3em 0;
+}
+
 .choice-wrapper {
   border: 1px solid gray;
   border-radius: 0.5em;  

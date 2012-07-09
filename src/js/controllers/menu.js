@@ -34,6 +34,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			price: 0,
 			included: 0,
 			overridePrice: "NONE",
+			parent : null,
 			options: new Array()
 		},
 		/** Default values for new options. */
@@ -58,6 +59,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.products = null;
 	/** List of all existing products. */
 	$scope.allProducts = null;
+	/** List of products not assigned to any menu.*/
+	$scope.orphanedProducts = null;
 	/** Choices of current product. */
 	$scope.choices = null;
 	/** List of all existing choices. */
@@ -162,6 +165,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		$scope.allChoices = null;
 		$scope.allProducts = null;
+		$scope.orphanedProducts = null;
 		
 		$scope.currentMenu = menuItem;
 
@@ -211,8 +215,26 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		});
 	};
 
-	$scope.deleteMenu =  function(menu) {
-		menu.$delete(null, null, handleError);
+	$scope.deleteMenu =  function(menuToDelete) {
+		menuToDelete.$delete(emptyFn, handleError);
+
+		angular.forEach($scope.menus, function(menu, index) {
+			if(menuToDelete.id == menu.id) {
+				$scope.menus.splice(index, 1);
+				//exit loop
+				return false;
+			}
+		});
+
+		$scope.currentMenu = null;
+		$scope.products = null;
+	}
+
+	$scope.loadOrphanedProducts = function() {
+		$scope.currentMenu = null;
+		$scope.allProducts = null;
+
+		$scope.orphanedProducts = $scope.productsResource.query({"noMenu" : true},null, null, handleError);
 	}
 
 	//End Menu logic
@@ -237,6 +259,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		//reset currentChoice, because we don't want them to be displayed along the new product
 		$scope.currentChoice = null;
 		$scope.allChoices = null;
+		$scope.allProducts = null;
 
 		$scope.currentProduct = newProduct;
 
@@ -351,37 +374,48 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		}		
 	}
 
-	$scope.deleteProduct =  function(product) {
-		product.$delete(null, null, handleError);
+	$scope.deleteProduct =  function(productToDelete) { 
+		productToDelete.$delete(emptyFn, handleError);
+
+		angular.forEach($scope.products, function(product, index) {
+			if(productToDelete.id == product.id) {
+				$scope.products.splice(index, 1);
+				//exit loop
+				return false;
+			}
+		});
+
+		$scope.currentProduct = null;
+		$scope.choices = null;
+		$scope.allProducts = null;
+		$scope.allChoices = null;
 	}
 
 	$scope.removeChoice = function(index) {
-		var choiceToRemove = $scope.choices[index];
+		var choiceToRemove = $scope.choices[index],
+			tmpChoiceArray = new Array();
 
 		if(!choiceToRemove) {
 			$log.error("Removing choice failed. No choice exists at index " + index);
 			return;
 		}
+		//remove the choice
 		$scope.choices.splice(index, 1);
 
-		//if choice is a parent choice remove linked choices
+		//add all choices to tmpArray that are not linked to removed choice
 		angular.forEach($scope.choices, function(element, index) {
-			if(element.parent == choiceToRemove.id) {
-				$scope.choices.splice(index, 1);
+			if(element.parent != choiceToRemove.id) {
+				tmpChoiceArray.push(element);
 			}
 		});
 
-		$scope.currentProduct.choices = $scope.choices;
-		$scope.currentProduct.$update(null, removeChoiceSuccess, handleError);
+		$scope.currentProduct.choices = tmpChoiceArray;
+		$scope.currentProduct.$update(null, null, handleError);
+
+		$scope.choices = tmpChoiceArray;
 
 		//if current selected choice is the removed on, hide it
 		if($scope.currentChoice && choiceToRemove.id == $scope.currentChoice.id) {
-			$scope.currentChoice = null;
-		}		
-	}
-
-	function removeChoiceSuccess() {
-		if(true) {
 			$scope.currentChoice = null;
 		}		
 	}
@@ -609,13 +643,21 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	}
 
 	$scope.excludeChoice = function(element) {
-		if(!$scope.currentChoice || !element || !$scope.currentChoice.id == element.id || element.parent) {
+		if(!$scope.currentChoice || !element || $scope.currentChoice.id == element.id || element.parent) {
 			return false;
 		}
 		return true;
 	}
 
 	//End Choice logic
+
+	//start utility
+
+	function emptyFn() {
+
+	}
+
+	//end utility
 
 	$scope.setLocationAndLoadMenu = function(menuId) {
 		$scope.loadMenu(menuId);

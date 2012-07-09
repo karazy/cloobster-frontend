@@ -80,6 +80,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			//menus partial
 			"menus.title" : "Menüs",
 			"menus.list.new" : "Neues Menü...",
+			"menus.list.orphaned" : "Verwaiste Produkte",
+			"menus.list.orphaned.tooltip" : "Nicht zugewiesene Produkte anzeigen",
 			"menus.menu.field.active" : "Menü dem Gast anzeigen",
 			"menus.menu.delete" : "Menü löschen",
 			"menus.menu.dialog.delete.title" : "Menü {{currentMenu.title}} löschen",
@@ -92,6 +94,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"menus.products.link.action.copylink" : "Kopieren und Auswahlmöglichkeiten verknüpfen",
 			"menus.products.link.action.deepcopy" : "Kopieren inklusive Auswahlmöglichkeiten",
 			"menus.products.link.description" : "Klicke auf eine bestehendes Produkt, um dieses zu kopieren und dem aktuellen Menü hinzuzufügen. Wahlweise können zusätzlich <strong>Auswahlmöglichkeiten verknüpft</strong> oder <strong>kopiert werden</strong>.",
+			"menus.products.orphaned.title" : "Verwaiste Produkte",
+			"menus.products.orphaned.description" : "Liste aller Produkte die keinem Menü zugeordnet sind.",
 			"menus.editor.title.tooltip" : "Titel editieren",
 			"menus.editor.description.tooltip" : "Beschreibung editieren",
 			"product.editor.name.tooltip" : "Name editieren",
