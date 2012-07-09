@@ -66,6 +66,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"registration.form.action.reset" : "Zurücksetzen",
 			"registration.form.action.register" : "Registrieren",
 			"registration.form.company.label" : "Meine Firmendaten",
+			"registration.form.submit.message" : "Vielen dank für die Registrierung {{account.name}},<br/>"+
+					"eine E-mail mit Bestätigungslink wurde an {{account.email}} gesendet.",
 			//businesses partial
 			"businesses.title" : "Meine Restaurants",
 			"businesses.add" : "Restaurant hinzufügen",
