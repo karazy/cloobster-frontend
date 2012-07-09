@@ -211,6 +211,10 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		});
 	};
 
+	$scope.deleteMenu =  function(menu) {
+		menu.$delete(null, null, handleError);
+	}
+
 	//End Menu logic
 
 	//Start Product logic
@@ -345,6 +349,10 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 			callback();
 		}		
+	}
+
+	$scope.deleteProduct =  function(product) {
+		product.$delete(null, null, handleError);
 	}
 
 	//End Product logic
