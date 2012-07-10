@@ -35,7 +35,7 @@
 	    	<div simple-property-editor editor-title="spots.editor.name" editor-property="currentSpot.name" editor-on-save="saveSpot()" editor-required>
 				<h3 class="edit" tooltip="spots.editor.name.tooltip">{{currentSpot.name}} <i class="icon-edit icon-black"></i></h3>
 			</div>
-    		<a ng-href="{{currentSpot.qrImageUrl}}"><img ng-src="{{currentSpot.qrImageUrl}}" alt="Spot Barcode"/>
+    		<a ng-href="{{currentSpot.qrImageUrl}}" ng-show="currentSpot.qrImageUrl"><img ng-src="{{currentSpot.qrImageUrl}}" alt="Spot Barcode"/>
     			<p tooltip="spots.editor.barcode.tooltip">{{currentSpot.barcode}}</p>
     		</a>
 		</div>
