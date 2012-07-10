@@ -243,7 +243,7 @@
 		        </li>
     		</ul>
 	    </div>
-
+	    <!-- Choice detail -->
 	    <div class="span3 choice-wrapper" ng-show="currentChoice">
 	    	<div class="choice-detail">
 	    		<div simple-property-editor editor-title="choice.editor.text" editor-property="currentChoice.text" editor-on-save="saveChoice()" editor-required>
@@ -274,14 +274,14 @@
 		    	<div ng-hide="isParent(currentChoice.id)">
 			    	<span class="nullable">
 			    		<label for="choiceParentSelect" l="menus.choices.field.parentselect.label">Select Parent:</label>
-			    		<select ng-model="currentChoice.parent" ng-options="c.id as c.text for c in choices | filter:excludeChoice" ng-change="saveChoice()" id="choiceParentSelect">
+			    		<select ng-model="currentChoice.parent" ng-options="c.id as c.text for c in choices | filter:excludeChoice" ng-change="saveChoice()" id="choiceParentSelect" tooltip="menus.choices.parentselect.tooltip">
 	          				<option value="" l="menus.choices.field.parentselect.nullparent">-- chose parent --</option>
 	        			</select>
 	        		</span>
 		    	</div>
 		    	<div>
 			    	<div ng-show="isParent(currentChoice.id)" class="btn-group" style="margin: 0 0 0.5em 0;">
-			    		<button class="btn dropdown-toggle"  data-toggle="dropdown">
+			    		<button class="btn dropdown-toggle"  data-toggle="dropdown" tooltip="menus.choices.linkedchoices.tooltip">
 			    			<span l="menus.choices.field.linkedchoices">Linked Choices</span>
 			    			<span class="caret"></span>
 			    		</button>

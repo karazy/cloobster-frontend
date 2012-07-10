@@ -408,6 +408,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		//set id null to indicate new status
 		copiedProduct.id = null;
+		copiedProduct.name += langService.translate("menus.product.copy.name");
 		//assign to active menu
 		copiedProduct.menuId = $scope.currentMenu.id;
 
@@ -446,6 +447,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		function onSuccess() {
 			angular.forEach(choices, function(choice) {
 				choice.id = null;
+				//TODO workaround because keeping the parent choice is not trivial
+				choice.parent = null;
 			});
 
 			product.choices = choices;
@@ -492,15 +495,19 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		// $scope.currentProduct.choices = tmpChoiceArray;
 		// $scope.currentProduct.$update(null, null, handleError);
 
-		currentChoice.$delete({'productId':$scope.currentProduct.id,'id':currentChoice.id}, emptyFn, handleError);
+		currentChoice.$delete({'productId':$scope.currentProduct.id,'id':currentChoice.id}, success, handleError);
  
 
 		$scope.choices = tmpChoiceArray;
 
-		//if current selected choice is the removed on, hide it
-		if($scope.currentChoice && choiceToRemove.id == $scope.currentChoice.id) {
+		function success() {
 			$scope.currentChoice = null;
-		}		
+		}
+
+		//if current selected choice is the removed on, hide it
+		// if($scope.currentChoice && choiceToRemove.id == $scope.currentChoice.id) {
+			
+		// }		
 	}
 
 	/**
