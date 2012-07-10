@@ -160,6 +160,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			// items: "li.sortable",
 			connectWith: ".organizable-product-list",
 			dropOnEmpty: true,
+			forcePlaceholderSize: true,
+			placeholder: "sortable-placeholder",
 			receive: function(event, ui) { 
 				$scope.moveProduct(event, ui);
 			}
@@ -178,13 +180,17 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	};
 
-	$scope.fillOrganizeList = function(menuItem, list) {
+	$scope.fillOrganizeList = function(menuItem, list) {		
 		if(list == 1) {
-			$scope.organizeMenusContext.menu1 = menuItem;
-			$scope.organizeMenusContext.productOrganizeList1 = $scope.productsResource.query({"menuId" : menuItem.id},null, null, handleError);	
+			if(!$scope.organizeMenusContext.menu2 || $scope.organizeMenusContext.menu2.id != menuItem.id) {
+				$scope.organizeMenusContext.menu1 = menuItem;
+				$scope.organizeMenusContext.productOrganizeList1 = $scope.productsResource.query({"menuId" : menuItem.id},null, null, handleError);	
+			}
 		} else if(list == 2) {
-			$scope.organizeMenusContext.menu2 = menuItem;
-			$scope.organizeMenusContext.productOrganizeList2 = $scope.productsResource.query({"menuId" : menuItem.id},null, null, handleError);
+			if(!$scope.organizeMenusContext.menu1 || $scope.organizeMenusContext.menu1.id != menuItem.id) {
+				$scope.organizeMenusContext.menu2 = menuItem;
+				$scope.organizeMenusContext.productOrganizeList2 = $scope.productsResource.query({"menuId" : menuItem.id},null, null, handleError);
+			}
 		}		
 	}
 
@@ -326,11 +332,11 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			tmpProduct = null,
 			destinationMenu = ui.sender.attr("id") == "organizeList1" ? $scope.organizeMenusContext.menu2 : $scope.organizeMenusContext.menu1;
 
-		if(!$scope.organizeMenusContext.menu1 || $scope.organizeMenusContext.menu2) {
-			$log.warn("To menus must be selected to assign products.");
+		if(!$scope.organizeMenusContext.menu1 || !$scope.organizeMenusContext.menu2) {
+			$log.warn("Two menus must be selected to assign products.");
 			return false;
 		}
-		
+
 		liElements.each(function(index, ele) {
 			// if(index > 0) {
 				//get corresponding choice resource by optaining the angular scope

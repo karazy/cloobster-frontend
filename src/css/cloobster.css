@@ -224,7 +224,16 @@ ul.options-list li:hover {
   padding: 0.5em;
 }
 
+.sortable-placeholder {
+  border: 1px dashed gray;
+}
+
+.organizable-product-list {
+  min-height: 50px;
+}
+
 .common-wrapper {
   border: 1px solid gray;
-  border-radius: 0.5em;  
+  border-radius: 0.5em; 
+  padding: 0.3em;
 }
