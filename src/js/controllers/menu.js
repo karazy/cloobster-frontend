@@ -656,31 +656,31 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		switch (state) {
 			case "menus":
 				$scope.currentMenu = null;
-				$scope.currentProduct = null;
-				$scope.currentChoice = null;
-				$scope.allChoices = null;
-				$scope.allProducts = null;
-				$scope.orphanedProducts = null;
-				break;
+				// $scope.currentProduct = null;
+				// $scope.currentChoice = null;
+				// $scope.allChoices = null;
+				// $scope.allProducts = null;
+				// $scope.orphanedProducts = null;
+				// break;
 			case "menu":
 				$scope.currentProduct = null;
-				$scope.currentChoice = null;
-				$scope.allChoices = null;
-				$scope.allProducts = null;
+				// $scope.currentChoice = null;
+				// $scope.allChoices = null;
+				// $scope.allProducts = null;
 				$scope.orphanedProducts = null;
-				break;
+				// break;
 			case "product":
 				$scope.currentChoice = null;
-				$scope.allChoices = null;
+				// $scope.allChoices = null;
 				$scope.allProducts = null;
-				break;
+				// break;
 			case "choice":
 				$scope.allChoices = null;
-				$scope.allProducts = null;
+				// $scope.allProducts = null;
 				break;
 			case "all-choices":
 				$scope.currentChoice = null;
-				$scope.allProducts = null;
+				// $scope.allProducts = null;
 				break;
 			case "orphaned-products":
 				$scope.currentMenu = null;
