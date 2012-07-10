@@ -223,3 +223,8 @@ ul.options-list li:hover {
 .spot-detail {
   padding: 0.5em;
 }
+
+.common-wrapper {
+  border: 1px solid gray;
+  border-radius: 0.5em;  
+}

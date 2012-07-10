@@ -51,33 +51,52 @@
 	    </div>
 
 	    <!-- Organize menu lists -->
-	    <!-- Currently just an idea -->
-<!-- 	    <div class="span6">
+	    <div class="span6 common-wrapper" ng-show="organizeMenusContext">
+	    	<h3 l="menus.products.organize.title">Organize Menus</h3>
+	    	<p l="menus.organizable-product-list.organize.description">Choose menus from both lists.<br/>Drag & Drop products to assign them to another menu.</p>
 	    	<div class="row-fluid">
-	    		<div class="span3">
-	    			<div ng-show="isParent(currentChoice.id)" class="btn-group">
+	    		<div class="span6">
+	    			<div class="btn-group">
 			    		<button class="btn dropdown-toggle"  data-toggle="dropdown">
-			    			<span l="menus.choices.field.linkedchoices">Choose menu</span>
+			    			<span l="menus.organize.choose">Choose menu</span>
 			    			<span class="caret"></span>
-			    		</button>
+			    		</button> {{organizeMenusContext.menu1.title}}
 			        	<ul class="dropdown-menu">
 			        		<li>
-			        			<a ng-repeat="menu in menus1" ng-click="loadMenus(choice)">
-			        			{{choice.text}}
+			        			<a ng-repeat="menu in menus" ng-click="fillOrganizeList(menu, 1)">
+			        			{{menu.title}}
 			        			</a>
 			        		</li>
 	    				</ul>
 		    		</div>
-	    			<ul class="nav nav-pills nav-stacked" id="organizeList1">
-				        <li ng-repeat="product in products | orderBy:['order', 'name'] " ng-class="{active: currentMenu.id == menu.id}" class="sortable">	        	
+	    			<ul class="nav nav-pills nav-stacked organizable-product-list" id="organizeList1">
+				        <li ng-repeat="product in organizeMenusContext.productOrganizeList1 | orderBy:['order', 'name'] ">	        	
 				        	<a><i class="icon-move icon-black" tooltip="menus.organize.list.tooltip"></i> {{product.name}}</a>
 				        </li>
 				    </ul>
 	    		</div>
-	    		<div class="span3">
+	    		<div class="span6">
+	    				<div class="btn-group">
+			    		<button class="btn dropdown-toggle"  data-toggle="dropdown">
+			    			<span l="menus.organize.choose">Choose menu</span>
+			    			<span class="caret"></span>
+			    		</button> {{organizeMenusContext.menu2.title}}
+			        	<ul class="dropdown-menu">
+			        		<li>
+			        			<a ng-repeat="menu in menus" ng-click="fillOrganizeList(menu, 2)">
+			        			{{menu.title}}
+			        			</a>
+			        		</li>
+	    				</ul>
+		    		</div>
+	    			<ul class="nav nav-pills nav-stacked organizable-product-list" id="organizeList2">
+				        <li ng-repeat="product in organizeMenusContext.productOrganizeList2 | orderBy:['order', 'name'] ">	        	
+				        	<a><i class="icon-move icon-black" tooltip="menus.organize.list.tooltip"></i> {{product.name}}</a>
+				        </li>
+				    </ul>
 	    		</div>
 	    	</div>
-	    </div> -->
+	    </div>
 
 	    <!-- Menu detail -->
 	    <div class="span3 menu-wrapper" ng-show="currentMenu">

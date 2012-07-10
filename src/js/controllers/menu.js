@@ -71,6 +71,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.allChoices = null;
 	/** List of all products linked with current choice. Null if only one product is linked.*/
 	$scope.linkedProductsForChoice = null;
+	/** Holds all necessary innformation during menu organization. */
+	$scope.organizeMenusContext = false;
 
 	/**
 	* Set error false and hide the error box.
@@ -152,6 +154,17 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 				$scope.updateChoiceOrder(event, ui);
 			}
 		}).disableSelection();
+
+		jQuery( "#organizeList1, #organizeList2" ).sortable({
+			// connectWith: ".connectedSortable",
+			// items: "li.sortable",
+			connectWith: ".organizable-product-list",
+			dropOnEmpty: true,
+			receive: function(event, ui) { 
+				$scope.moveProduct(event, ui);
+			}
+		}).disableSelection();
+
 	};
 
 	$scope.loadMenu = function(menuItem) {
@@ -164,6 +177,16 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.products = $scope.productsResource.query({"menuId" : menuItem.id},null, null, handleError);
 
 	};
+
+	$scope.fillOrganizeList = function(menuItem, list) {
+		if(list == 1) {
+			$scope.organizeMenusContext.menu1 = menuItem;
+			$scope.organizeMenusContext.productOrganizeList1 = $scope.productsResource.query({"menuId" : menuItem.id},null, null, handleError);	
+		} else if(list == 2) {
+			$scope.organizeMenusContext.menu2 = menuItem;
+			$scope.organizeMenusContext.productOrganizeList2 = $scope.productsResource.query({"menuId" : menuItem.id},null, null, handleError);
+		}		
+	}
 
 
 	$scope.saveMenu = function() {
@@ -232,6 +255,11 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.orphanedProducts = $scope.productsResource.query({"noMenu" : true},null, null, handleError);
 	}
 
+	$scope.organizeMenus = function() {
+		$log.log("organizeMenus");
+		manageViewHiearchy("organize-menus");
+	}
+
 	//End Menu logic
 
 	//Start Product logic
@@ -289,6 +317,31 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 				tmpProduct.order = index;
 				tmpProduct.$update(null, null, handleError);
 			}	
+		});
+	};
+
+	$scope.moveProduct = function(event, ui) {
+		$log.log("moveProduct");
+		var liElements = ui.item.parent().children(), //get all li elements
+			tmpProduct = null,
+			destinationMenu = ui.sender.attr("id") == "organizeList1" ? $scope.organizeMenusContext.menu2 : $scope.organizeMenusContext.menu1;
+
+		if(!$scope.organizeMenusContext.menu1 || $scope.organizeMenusContext.menu2) {
+			$log.warn("To menus must be selected to assign products.");
+			return false;
+		}
+		
+		liElements.each(function(index, ele) {
+			// if(index > 0) {
+				//get corresponding choice resource by optaining the angular scope
+				tmpProduct = angular.element(ele).scope().product;
+				if(tmpProduct.menuId != destinationMenu.id) {
+					$log.log("move product " + tmpProduct.name +"("+tmpProduct.id+") to menu " + destinationMenu.title + "(" + destinationMenu.id + ")");	
+					tmpProduct.menuId = destinationMenu.id;
+				}				
+				tmpProduct.order = index;
+				tmpProduct.$update(null, null, handleError);
+			// }	
 		});
 	};
 
@@ -385,7 +438,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 
 		if(!choiceToRemove) {
-			$log.error("Removing choice failed. No choice exists at index " + index);
+			$log.error("Removing choice failed. No choice given.");
 			return;
 		}
 		//remove the choice
@@ -670,6 +723,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 				// $scope.allChoices = null;
 				// $scope.allProducts = null;
 				$scope.orphanedProducts = null;
+				$scope.organizeMenusContext = null;
 				// break;
 			case "product":
 				$scope.currentChoice = null;
@@ -691,6 +745,14 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 				$scope.currentChoice = null;
 				break;
 			case "all-products":
+				$scope.currentProduct = null;
+				$scope.currentChoice = null;
+				$scope.orphanedProducts = null;
+				break;
+			case "organize-menus":
+				$scope.organizeMenusContext = {};
+				$scope.currentMenu = null;
+				$scope.allProducts = null;
 				$scope.currentProduct = null;
 				$scope.currentChoice = null;
 				$scope.orphanedProducts = null;
