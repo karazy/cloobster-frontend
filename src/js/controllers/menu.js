@@ -191,7 +191,14 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 				$scope.organizeMenusContext.menu2 = menuItem;
 				$scope.organizeMenusContext.productOrganizeList2 = $scope.productsResource.query({"menuId" : menuItem.id},null, null, handleError);
 			}
-		}		
+		} else if(list == 3) {
+			//fill list 1 with orphaned products
+			$scope.organizeMenusContext.menu1 = {
+				id: "none",
+				title : langService.translate("menus.products.orphaned.title")
+			};
+			$scope.organizeMenusContext.productOrganizeList1 = $scope.productsResource.query({"noMenu" : true},null, null, handleError);
+		}	
 	}
 
 
@@ -749,11 +756,13 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 				$scope.allProducts = null;
 				$scope.currentProduct = null;
 				$scope.currentChoice = null;
+				#$scope.organizeMenusContext = null;
 				break;
 			case "all-products":
 				$scope.currentProduct = null;
 				$scope.currentChoice = null;
 				$scope.orphanedProducts = null;
+				$scope.organizeMenusContext = null;
 				break;
 			case "organize-menus":
 				$scope.organizeMenusContext = {};
