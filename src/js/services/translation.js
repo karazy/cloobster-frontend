@@ -153,6 +153,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"product.editor.price.tooltip" : "Preis editieren",
 			"menus.product.field.active" : "Produkt dem Gast anzeigen",
 			"menus.product.delete" : "Produkt löschen",
+			"menus.product.action.move" : "Verschieben nach ...",
+			"menus.product.action.move.tooltip" : "Verschiebt das aktuelle Produkt<br/>in ausgewähltes Menü.",
 			"menus.product.dialog.delete.title" : "Produkt {{currentProduct.name}} löschen",
 			"menus.product.dialog.delete.text" : "<strong>{{currentProduct.name}}</strong> löschen? Dies kann nicht rückgängig gemacht werden!",
 			"menus.choices.title" : "Auswahlmöglichkeiten",

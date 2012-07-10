@@ -274,7 +274,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	}
 
 	$scope.excludeMenu = function(element) {
-		if(!$scope.currentMenu || !element || $scope.currentMenu.id == element.id) {
+		if($scope.currentMenu && element && $scope.currentMenu.id == element.id) {
 			return false;
 		}
 		return true;
@@ -364,18 +364,20 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	};
 
 	$scope.moveProductToMenu = function(menuItem) {
-		var productToMove = $scope.currentProduct;
-		productToMove.menuId = menuItem.id;		
-
-		angular.forEach($scope.products, function(product, index) {
+		var productToMove = $scope.currentProduct,
+			products = $scope.products || $scope.orphanedProducts;
+		
+		productToMove.menuId = menuItem.id,
+	
+		angular.forEach(products, function(product, index) {
 			if(product.id == productToMove.id) {
-				$scope.products.splice(index, 1);
+				products.splice(index, 1);
 				//exist loop
 				return false;
 			}
 		});
 		productToMove.$update(angular.noop, handleError);
-		manageViewHiearchy("menu");
+		manageViewHiearchy("moved-product");
 	
 	};
 
@@ -453,17 +455,19 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	}
 
 	$scope.deleteProduct =  function(productToDelete) { 
+		var products = $scope.products || $scope.orphanedProducts;
+
 		productToDelete.$delete(emptyFn, handleError);
 
-		angular.forEach($scope.products, function(product, index) {
+		angular.forEach(products, function(product, index) {
 			if(productToDelete.id == product.id) {
-				$scope.products.splice(index, 1);
+				products.splice(index, 1);
 				//exit loop
 				return false;
 			}
 		});
 
-		manageViewHiearchy("menu");
+		manageViewHiearchy("moved-product");
 	}
 
 	$scope.removeChoice = function(currentChoice) {
@@ -488,7 +492,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		// $scope.currentProduct.choices = tmpChoiceArray;
 		// $scope.currentProduct.$update(null, null, handleError);
 
-		currentChoice.$delete(emptyFn, handleError);
+		currentChoice.$delete({'productId':$scope.currentProduct.id,'id':currentChoice.id}, emptyFn, handleError);
+ 
 
 		$scope.choices = tmpChoiceArray;
 
@@ -745,6 +750,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		switch (state) {
 			case "menus":
 				$scope.currentMenu = null;
+				$scope.products = null;
 				// $scope.currentProduct = null;
 				// $scope.currentChoice = null;
 				// $scope.allChoices = null;
@@ -774,6 +780,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 				break;
 			case "orphaned-products":
 				$scope.currentMenu = null;
+				$scope.products = null;
 				$scope.allProducts = null;
 				$scope.currentProduct = null;
 				$scope.currentChoice = null;
@@ -784,6 +791,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 				$scope.currentChoice = null;
 				$scope.orphanedProducts = null;
 				$scope.organizeMenusContext = null;
+				$scope.allChoices = null;
 				break;
 			case "organize-menus":
 				$scope.organizeMenusContext = {};
@@ -792,6 +800,13 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 				$scope.currentProduct = null;
 				$scope.currentChoice = null;
 				$scope.orphanedProducts = null;
+				$scope.allChoices = null;
+			break;
+			case "moved-product": 
+				$scope.allProducts = null;
+				$scope.currentProduct = null;
+				$scope.currentChoice = null;
+				$scope.allChoices = null;
 			break;
 		}
 	}
