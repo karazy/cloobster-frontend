@@ -398,8 +398,10 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			}
 		});
 
-		$scope.currentProduct.choices = tmpChoiceArray;
-		$scope.currentProduct.$update(null, null, handleError);
+		// $scope.currentProduct.choices = tmpChoiceArray;
+		// $scope.currentProduct.$update(null, null, handleError);
+
+		currentChoice.$delete(emptyFn, handleError);
 
 		$scope.choices = tmpChoiceArray;
 

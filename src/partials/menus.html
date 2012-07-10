@@ -26,9 +26,9 @@
 				<li>
 					<a ng-click="createMenu()"><i class="icon-plus icon-black"></i> <span l="menus.list.new">New menu...</span></a>
 				</li>
-			<!-- 	<li>
+				<li>
 					<a ng-click="organizeMenus()"><i class="icon-th-large icon-black"></i> <span l="menus.list.organize">Organize menus</span></a>
-				</li> -->
+				</li>
 		        <li ng-repeat="menu in menus | orderBy:['order', 'title'] " ng-class="{active: currentMenu.id == menu.id}" class="sortable">	        	
 		        	<a ng-click="loadMenu(menu)"><i class="icon-move icon-black" tooltip="general.sortable" tooltip-position="right"></i> {{menu.title}}</a>
 		        </li>

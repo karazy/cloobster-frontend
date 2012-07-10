@@ -217,6 +217,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"common.add" : "Hinzufügen",
 			"common.delete" : "Löschen",
 			"common.save" : "Speichern",
+			"common.search" : "Suchen",
 			"general.sortable" : "Ziehen um zu sortieren",
 			//breadcrumb
 			"breadcrumb.home" : "Home",
@@ -312,7 +313,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"common.add" : "Add",
 			"common.delete" : "Delete",
 			"common.save" : "Save",
-			"common.search" : "Suchen",
+			"common.search" : "Search",
 			"general.sortable" : "Drag to sort elements",
 			//file upload
 			"fileupload.button.add" : "Choose picture ...",
