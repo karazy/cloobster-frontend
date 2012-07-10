@@ -33,7 +33,7 @@
 		        	<a ng-click="loadMenu(menu)"><i class="icon-move icon-black" tooltip="general.sortable" tooltip-position="right"></i> {{menu.title}}</a>
 		        </li>
 		        <li ng-class="{active: orphanedProducts.length > 0 && !currentMenu}">
-		        	<a ng-click="loadOrphanedProducts()"><i class="icon-exclamation-sign icon-black" tooltip="menus.list.orphaned.tooltip" tooltip-position="right"></i><span l="menus.list.orphaned"> Unassigned products</span></a>
+		        	<a ng-click="loadOrphanedProducts()"><i class="icon-exclamation-sign icon-black" tooltip="menus.list.orphaned.tooltip" tooltip-position="right"></i> <span l="menus.list.orphaned">Unassigned products</span></a>
 		        </li>
 		    </ul>
 		</div>
@@ -42,9 +42,9 @@
 		<div class="span3 product-wrapper product-detail" ng-show="orphanedProducts.length > 0">
 	    	<h3 l="menus.products.orphaned.title">Orphaned Products</h3>
 	    	<p l="menus.products.orphaned.description">List of products not assigned to any menu.</p>
-	    	<span l="menus.products.link.search">Search:</span><input ng-model="productOrphanedQuery.name">
+	    	<span l="common.search">Search</span>: <input ng-model="productOrphanedQuery.name">
     		<ul class="nav nav-pills nav-stacked">
-	       	 	<li ng-repeat="product in orphanedProducts | filter:productOrphanedQuery | orderBy:['order', 'name']" class="product-item">
+	       	 	<li ng-repeat="product in orphanedProducts | filter:productOrphanedQuery | orderBy:['order', 'name']" class="product-item" ng-class="{active: currentProduct.id == product.id}">
 		        	<a ng-click="loadProduct(product)">{{product.name}}</a>
 		        </li>
     		</ul>
@@ -126,7 +126,7 @@
 	    </div>
 
 	     <!-- All products list -->
-	    <div class="span3 product-wrapper product-detail" ng-show="currentMenu && allProducts.length > 0">
+	    <div class="span3 product-wrapper product-detail" ng-show="allProducts.length > 0">
 	    	<h3 l="menus.products.link.title">All Products</h3>
 	    	<p l="menus.products.link.description">Select an existing product to copy it and assign to active menu.</p>
 	    	<span l="menus.products.link.search">Search:</span><input ng-model="productCopyQuery.name">
@@ -143,7 +143,7 @@
 	    </div>
 
 	     <!-- Product detail -->
-	    <div class="span3 product-wrapper" ng-show="(currentMenu || orphanedProducts.length > 0) && currentProduct">
+	    <div class="span3 product-wrapper" ng-show="currentProduct">
 	    	<div class="product-detail">
 	    		<div simple-property-editor editor-title="product.editor.name" editor-property="currentProduct.name" editor-on-save="saveProduct()" editor-required>
 		    		<h3 class="edit" tooltip="product.editor.name.tooltip">{{currentProduct.name}} <i class="icon-edit icon-black"></i></h3>
@@ -162,7 +162,7 @@
 		    		<label l="menus.product.field.active" for="productActiveCb">Active: Show product for guest</label>
 		    	</div>
 		    	<div>
-		    		<button class="btn btn-small" data-toggle="modal" data-target="#deleteProductModal"><i class="icon-trash"></i> <span l="menus.product.delete">Delete product</span></button>
+		    		<button class="btn btn-small" data-toggle="modal" data-target="#deleteProductModal" ng-show="currentMenu"><i class="icon-trash"></i> <span l="menus.product.delete">Delete product</span></button>
 		    		<!-- Modal delete dialog. -->
 		    		<div class="modal hide" id="deleteProductModal">
 					 	<div class="modal-header">
@@ -186,20 +186,13 @@
 						<a ng-click="createChoice()"><i class="icon-plus icon-black"></i> <span l="menus.choices.list.new">New choice...</span></a><a ng-click="showAllChoices()"><i class="icon-plus icon-black"></i> <span l="menus.choices.list.existing">Existing choice...</span></a>
 					</li>
 		       	 	<li ng-repeat="choice in choices" class="product-choice-item sortable" ng-class="{active: currentChoice.id == choice.id}">
-		       	 		<div class="row-fluid">
-		    				<div class="span10">
-				        		<a ng-click="loadChoice(choice)" ng-class="{active: currentChoice.id == choice.id}"><i class="icon-move icon-black" tooltip="general.sortable"></i> {{choice.text}} <i class="icon-bookmark icon-black" tooltip="menus.choices.list.linked" ng-show="choice.parent"></i></a>
-				        	</div>
-				        	<div class="span2">
-			       	 			 <button class="btn btn-small" ng-click="removeChoice($index)"><i class="icon-trash"></i></button>
-			       	 		</div>
-		       			</div>
+			        		<a ng-click="loadChoice(choice)" ng-class="{active: currentChoice.id == choice.id}"><i class="icon-move icon-black" tooltip="general.sortable"></i> {{choice.text}} <i class="icon-bookmark icon-black" tooltip="menus.choices.list.linked" ng-show="choice.parent"></i></a>
 			        </li>
 	    		</ul>
 	    	</div>
 	    </div>
 
-	    <div class="span3 choice-wrapper choice-detail" ng-show="currentMenu && currentProduct && allChoices.length > 0">
+	    <div class="span3 choice-wrapper choice-detail" ng-show="allChoices.length > 0">
 	    	<h3 l="menus.choices.link.title">All Choices</h3>
 	    	<p l="menus.choices.link.description">Select an existing choice to add it to the current product.</p>
 	    	<span l="menus.choices.link.search">Search:</span><input ng-model="choiceLinkQuery.text">
@@ -214,7 +207,7 @@
     		</ul>
 	    </div>
 
-	    <div class="span3 choice-wrapper" ng-show="currentMenu && currentProduct && currentChoice">
+	    <div class="span3 choice-wrapper" ng-show="currentChoice">
 	    	<div class="choice-detail">
 	    		<div simple-property-editor editor-title="choice.editor.text" editor-property="currentChoice.text" editor-on-save="saveChoice()" editor-required>
 		    		<h3 class="edit" tooltip="choice.editor.text.tooltip">{{currentChoice.text}}<i class="icon-edit icon-black"></i></h3>
@@ -250,34 +243,38 @@
 	        		</span>
 		    	</div>
 		    	<div>
-		    	<div ng-show="isParent(currentChoice.id)" class="btn-group">
-		    		<button class="btn dropdown-toggle"  data-toggle="dropdown">
-		    			<span l="menus.choices.field.linkedchoices">Linked Choices</span>
-		    			<span class="caret"></span>
-		    		</button>
-		        	<ul class="dropdown-menu">
-		        		<li>
-		        			<a ng-repeat="choice in choices | filter:{parent : currentChoice.id}" ng-click="loadChoice(choice)">
-		        			{{choice.text}}
-		        			</a>
-		        		</li>
-    				</ul>
-		    	</div>
+			    	<div ng-show="isParent(currentChoice.id)" class="btn-group" style="margin: 0 0 0.5em 0;">
+			    		<button class="btn dropdown-toggle"  data-toggle="dropdown">
+			    			<span l="menus.choices.field.linkedchoices">Linked Choices</span>
+			    			<span class="caret"></span>
+			    		</button>
+			        	<ul class="dropdown-menu">
+			        		<li>
+			        			<a ng-repeat="choice in choices | filter:{parent : currentChoice.id}" ng-click="loadChoice(choice)">{{choice.text}}
+			        			</a>
+			        		</li>
+	    				</ul>
+			    	</div>
 		    	</div>
 		    	<div>
-		    	<div ng-show="linkedProductsForChoice.length > 1" class="btn-group">
-		    		<button class="btn dropdown-toggle"  data-toggle="dropdown" tooltip="menus.choices.field.linkedproducts.help">
-		    			<span l="menus.choices.field.linkedproducts">Linked Products</span>
-		    			<span class="caret"></span>
-		    		</button>
-		        	<ul class="dropdown-menu">
-		        		<li>
-		        			<a ng-repeat="product in linkedProductsForChoice" ng-click="loadProduct(product)">
-		        			{{product.name}}
-		        			</a>
-		        		</li>
-    				</ul>
+			    	<div ng-show="linkedProductsForChoice.length > 1" class="btn-group" style="margin: 0 0 0.5em 0;">
+			    		<button class="btn dropdown-toggle"  data-toggle="dropdown" tooltip="menus.choices.field.linkedproducts.help">
+			    			<span l="menus.choices.field.linkedproducts">Linked Products</span>
+			    			<span class="caret"></span>
+			    		</button>
+			        	<ul class="dropdown-menu">
+			        		<li>
+			        			<a ng-repeat="product in linkedProductsForChoice" ng-click="loadProduct(product)">
+			        			{{product.name}}
+			        			</a>
+			        		</li>
+	    				</ul>
+			    	</div>
 		    	</div>
+		    	<div>
+		    		<button class="btn" ng-click="removeChoice(currentChoice)">
+		    			<i class="icon-trash"></i> <span l ="menus.choices.action.remove">Remove choice from product</span>
+		    		</button>
 		    	</div>
 		    </div>
 		    <div class="choice-options-list" ng-show="currentChoice">

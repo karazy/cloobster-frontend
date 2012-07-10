@@ -51,12 +51,16 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.menusResource = null;
 	/** */
 	$scope.productsResource = null;
+	/** Business to which these menus belong to. */
+	$scope.activeBusiness = null;
 	/** Contains menu data. */
 	$scope.menus = null;
 	/** Currently selected menu. */
 	$scope.currentMenu = null;
 	/** Products of current menu. */
 	$scope.products = null;
+	/** Selected product. */
+	$scope.currentProduct = null;
 	/** List of all existing products. */
 	$scope.allProducts = null;
 	/** List of products not assigned to any menu.*/
@@ -67,10 +71,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.allChoices = null;
 	/** List of all products linked with current choice. Null if only one product is linked.*/
 	$scope.linkedProductsForChoice = null;
-	/** Selected product. */
-	$scope.currentProduct = null;
-	/** Business to which these menus belong to. */
-	$scope.activeBusiness = null;
 
 	/**
 	* Set error false and hide the error box.
@@ -156,26 +156,15 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	$scope.loadMenu = function(menuItem) {
 		$log.log("load menu " + menuItem.id);
-
-		//reset currentProduct, so details get hidden when menu changes
-		$scope.currentProduct = null;
-
-		//reset currentChoice, so details get hidden when menu changes
-		$scope.currentChoice = null;
-
-		$scope.allChoices = null;
-		$scope.allProducts = null;
-		$scope.orphanedProducts = null;
 		
+		manageViewHiearchy("menu");
+
 		$scope.currentMenu = menuItem;
 
 		$scope.products = $scope.productsResource.query({"menuId" : menuItem.id},null, null, handleError);
 
 	};
 
-	function saveMenuSuccess(menu) {
-		$scope.menus.push(menu);
-	}
 
 	$scope.saveMenu = function() {
 		$log.log("save menu ");
@@ -185,16 +174,21 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		} else {
 			$scope.currentMenu.$save(saveMenuSuccess, handleError);
 		}
+
+		function saveMenuSuccess(menu) {
+			$scope.menus.push(menu);
+		}
 		
 	};
 
 	$scope.createMenu = function() {
 		$scope.currentMenu = new $scope.menusResource(defaultMenu);
 
-		$scope.currentChoice = null;
-		$scope.allChoices = null;
-		$scope.allProducts = null;
-		$scope.currentProduct = null;
+		// $scope.currentChoice = null;
+		// $scope.allChoices = null;
+		// $scope.allProducts = null;
+		// $scope.currentProduct = null;
+		manageViewHiearchy("menu");
 
 		$scope.products = new Array();
 		$scope.choices = new Array();
@@ -226,14 +220,15 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			}
 		});
 
-		$scope.currentMenu = null;
-		$scope.products = null;
+		manageViewHiearchy("menus");
+
+		// $scope.currentMenu = null;
+		// $scope.products = null;
 	}
 
 	$scope.loadOrphanedProducts = function() {
-		$scope.currentMenu = null;
-		$scope.allProducts = null;
-
+		manageViewHiearchy("orphaned-products");
+	
 		$scope.orphanedProducts = $scope.productsResource.query({"noMenu" : true},null, null, handleError);
 	}
 
@@ -242,11 +237,9 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	//Start Product logic
 	$scope.loadProduct = function(productItem) {
 		$log.log("load product " + productItem.id);
+
+		manageViewHiearchy("product");
 		
-		//reset currentChoice, so details get hidden when product changes
-		$scope.currentChoice = null;
-		$scope.allChoices = null;
-		$scope.allProducts = null;
 
 		$scope.currentProduct = productItem;
 		$scope.choices = choicesResource.query({"productId": productItem.id},null,null,handleError);
@@ -256,10 +249,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$log.log("create product");
 
 		var newProduct = new $scope.productsResource(defaultProduct);
-		//reset currentChoice, because we don't want them to be displayed along the new product
-		$scope.currentChoice = null;
-		$scope.allChoices = null;
-		$scope.allProducts = null;
+		
+		manageViewHiearchy("product");
 
 		$scope.currentProduct = newProduct;
 
@@ -307,8 +298,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	*/
 	$scope.showAllProducts = function() {
 		$scope.allProducts = $scope.productsResource.query(null, null, null, handleError);
-		$scope.currentChoice = null;
-		$scope.currentProduct = null;
+
+		manageViewHiearchy("all-products");
 	}
 
 	$scope.copyProduct = function(productToCopy, type) {
@@ -385,26 +376,24 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			}
 		});
 
-		$scope.currentProduct = null;
-		$scope.choices = null;
-		$scope.allProducts = null;
-		$scope.allChoices = null;
+		manageViewHiearchy("menu");
 	}
 
-	$scope.removeChoice = function(index) {
-		var choiceToRemove = $scope.choices[index],
+	$scope.removeChoice = function(currentChoice) {
+		var choiceToRemove = currentChoice, //$scope.choices[index],
 			tmpChoiceArray = new Array();
+
 
 		if(!choiceToRemove) {
 			$log.error("Removing choice failed. No choice exists at index " + index);
 			return;
 		}
 		//remove the choice
-		$scope.choices.splice(index, 1);
+		// $scope.choices.splice(index, 1);
 
 		//add all choices to tmpArray that are not linked to removed choice
 		angular.forEach($scope.choices, function(element, index) {
-			if(element.parent != choiceToRemove.id) {
+			if(choiceToRemove.id != element.id && element.parent != choiceToRemove.id) {
 				tmpChoiceArray.push(element);
 			}
 		});
@@ -420,18 +409,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		}		
 	}
 
-	//End Product logic
-
-	// //Start Choice logic
-	$scope.loadChoice = function(choiceItem) {
-		$scope.allChoices = null;
-		$scope.currentChoice = choiceItem;
-
-		$scope.linkedProductsForChoice = $scope.productsResource.query({"choiceId" : $scope.currentChoice.id},null,null);
-
-	};
-
-
 	/**
 	* Load product by an id.
 	* @param
@@ -439,14 +416,23 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	*/
 	$scope.loadProductById = function(id) {	
 		var found = null;
-
-
-
 		if(found) {
 			$scope.loadProduct(found);	
 		}
 		
 	};
+
+	//End Product logic
+
+	// //Start Choice logic
+	$scope.loadChoice = function(choiceItem) {
+		manageViewHiearchy("choice");
+		$scope.currentChoice = choiceItem;
+
+		$scope.linkedProductsForChoice = $scope.productsResource.query({"choiceId" : $scope.currentChoice.id},null,null);
+
+	};
+
 
 	function saveChoiceSuccess(choice) {
 		$scope.choices.push(choice);
@@ -463,7 +449,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	$scope.createChoice = function() {
 		$log.log("createChoice");
-		$scope.allChoices = null;
+		
+		manageViewHiearchy("choice");
 
 		var newChoice = new choicesResource(defaultChoice);
 		//reset currentChoice, because we don't want them to be displayed along the new product
@@ -515,8 +502,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.showAllChoices = function() {
 
 		$scope.allChoices = choicesResource.query(null, null, null, handleError);
-		$scope.currentChoice = null;
-		$scope.allProducts = null;
+
+		manageViewHiearchy("all-choices");
 	}
 
 	$scope.filterOnlyChoiceParents = function(choiceToFilter) {
@@ -570,7 +557,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		$scope.currentProduct.$update(null, null, handleError);
 
-		$scope.allChoices = null;
+		manageViewHiearchy("product");
 	}
 
 	$scope.copyChoice = function(choiceToCopy) {
@@ -610,7 +597,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		function successProductSaved() {
 			$scope.choices = choicesResource.query({"productId": $scope.currentProduct.id},null,null,handleError);
 
-			$scope.allChoices = null;
+			manageViewHiearchy("product");
 		}
 
 		// $scope.currentProduct.$update(null, success, handleError);
@@ -655,6 +642,58 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	function emptyFn() {
 
+	}
+
+
+	/**
+	* @private
+	* Show products and hides all other sub views.
+	*/
+	function manageViewHiearchy(state) {
+		//ui binds to state of sub elements, to hide them simply set them null
+		//but keep parents intact
+
+		switch (state) {
+			case "menus":
+				$scope.currentMenu = null;
+				$scope.currentProduct = null;
+				$scope.currentChoice = null;
+				$scope.allChoices = null;
+				$scope.allProducts = null;
+				$scope.orphanedProducts = null;
+				break;
+			case "menu":
+				$scope.currentProduct = null;
+				$scope.currentChoice = null;
+				$scope.allChoices = null;
+				$scope.allProducts = null;
+				$scope.orphanedProducts = null;
+				break;
+			case "product":
+				$scope.currentChoice = null;
+				$scope.allChoices = null;
+				$scope.allProducts = null;
+				break;
+			case "choice":
+				$scope.allChoices = null;
+				$scope.allProducts = null;
+				break;
+			case "all-choices":
+				$scope.currentChoice = null;
+				$scope.allProducts = null;
+				break;
+			case "orphaned-products":
+				$scope.currentMenu = null;
+				$scope.allProducts = null;
+				$scope.currentProduct = null;
+				$scope.currentChoice = null;
+				break;
+			case "all-products":
+				$scope.currentProduct = null;
+				$scope.currentChoice = null;
+				$scope.orphanedProducts = null;
+			break;
+		}
 	}
 
 	//end utility
