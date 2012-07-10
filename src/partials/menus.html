@@ -185,8 +185,8 @@
 		    		<input type="checkbox" id="productActiveCb" ng-model="currentProduct.active" ng-change="saveProduct()"></input>
 		    		<label l="menus.product.field.active" for="productActiveCb">Active: Show product for guest</label>
 		    	</div>
-		    	<div>
-		    		<button class="btn btn-small" data-toggle="modal" data-target="#deleteProductModal" ng-show="currentMenu"><i class="icon-trash"></i> <span l="menus.product.delete">Delete product</span></button>
+		    	<div style="margin: 0 0 0.5em 0;">
+		    		<button class="btn" data-toggle="modal" data-target="#deleteProductModal" ng-show="currentMenu"><i class="icon-trash"></i> <span l="menus.product.delete">Delete product</span></button>
 		    		<!-- Modal delete dialog. -->
 		    		<div class="modal hide" id="deleteProductModal">
 					 	<div class="modal-header">
@@ -201,6 +201,19 @@
 					    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteProduct(currentProduct)" l="common.delete">Delete</button>
 						</div>
 					</div>
+		    	</div>
+		    	<div class="btn-group">
+		    		<button class="btn dropdown-toggle"  data-toggle="dropdown">
+		    			<span l="menus.product.action.move">Move to ...</span>
+		    			<span class="caret"></span>
+		    		</button>			    		
+		        	<ul class="dropdown-menu">
+		        		<li ng-repeat="menu in menus | filter:excludeMenu">
+		        			<a ng-click="moveProductToMenu(menu)">
+		        			{{menu.title}}
+		        			</a>
+		        		</li>
+    				</ul>
 		    	</div>
 		    </div>
 		    <div class="product-choices-list" ng-show="currentProduct.id">

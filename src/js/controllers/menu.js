@@ -273,6 +273,13 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		manageViewHiearchy("organize-menus");
 	}
 
+	$scope.excludeMenu = function(element) {
+		if(!$scope.currentMenu || !element || $scope.currentMenu.id == element.id) {
+			return false;
+		}
+		return true;
+	}
+
 	//End Menu logic
 
 	//Start Product logic
@@ -345,7 +352,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		}
 
 		liElements.each(function(index, ele) {
-			// if(index > 0) {
 				//get corresponding choice resource by optaining the angular scope
 				tmpProduct = angular.element(ele).scope().product;
 				if(tmpProduct.menuId != destinationMenu.id) {
@@ -353,9 +359,24 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 					tmpProduct.menuId = destinationMenu.id;
 				}				
 				tmpProduct.order = index;
-				tmpProduct.$update(null, null, handleError);
-			// }	
+				// tmpProduct.$update(null, null, handleError);
 		});
+	};
+
+	$scope.moveProductToMenu = function(menuItem) {
+		var productToMove = $scope.currentProduct;
+		productToMove.menuId = menuItem.id;		
+
+		angular.forEach($scope.products, function(product, index) {
+			if(product.id == productToMove.id) {
+				$scope.products.splice(index, 1);
+				//exist loop
+				return false;
+			}
+		});
+		productToMove.$update(angular.noop, handleError);
+		manageViewHiearchy("menu");
+	
 	};
 
 	/**
