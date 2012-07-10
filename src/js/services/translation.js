@@ -142,6 +142,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"menus.products.link.action.copy" : "Kopieren",
 			"menus.products.link.action.copylink" : "Kopieren und Auswahlmöglichkeiten verknüpfen",
 			"menus.products.link.action.deepcopy" : "Kopieren inklusive Auswahlmöglichkeiten",
+			"menus.product.copy.name" : "-Kopie",
 			"menus.products.link.description" : "Klicke auf eine bestehendes Produkt, um dieses zu kopieren und dem aktuellen Menü hinzuzufügen. Wahlweise können zusätzlich <strong>Auswahlmöglichkeiten verknüpft</strong> oder <strong>kopiert werden</strong>.",
 			"menus.products.orphaned.title" : "Verwaiste Produkte",
 			"menus.products.orphaned.description" : "Liste aller Produkte die keinem Menü zugeordnet sind.",
@@ -205,6 +206,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"menus.choices.field.overridePrice.overridefixedsum" : "Gesamtsumme (z. B. Menü)",
 			"menus.choices.field.parentselect.label" : "Übergeordnete Auswahl:",
 			"menus.choices.field.parentselect.nullparent" : "--- auswählen ---",
+			"menus.choices.parentselect.tooltip" : "Ein hier ausgewähltes Element führt dazu, dass diese Auswahlmöglichkeit nur aktiv wird, "+
+				"wenn der Kunde im übergeordneten Element eine Auswahl trifft.",
+			"menus.choices.linkedchoices.tooltip" : "Auflistung aller Auswahlmöglichkeiten die von dieser abhängen.",
 			//spots partial
 			"spots.title" : "Tische",
 			"spots.list.new" : "Neuer Tisch...",

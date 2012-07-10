@@ -13,7 +13,9 @@
 Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, Business, Spot, langService, $log) {
 		//default information when adding a new barcode
 	var defaultSpot = {
-			name: langService.translate("barcode.new.default.name") || "New table"
+			name: langService.translate("barcode.new.default.name") || "New table",
+			barcode : "",
+			qrImageUrl: null
 		},
 		//Id of active business
 		activeBusinessId = null;
@@ -68,7 +70,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 				//error			
 				if(request.status = 404) {
 					$scope.error = true;
-					$scope.errorMessage = "Could load spots.";
+					$scope.errorMessage = "Could not lot spots.";
 				}
 			}
 		);
@@ -105,6 +107,10 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	};
 
 	$scope.createSpot = function() {
+		var newSpot = angular.copy(defaultSpot);
+		
+		// defaultSpot.barcode = generateDummyBarcode();
+
 		$scope.currentSpot = new $scope.spotsResource(defaultSpot);
 	}
 
@@ -114,6 +120,18 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.hideError = function() {
 		$scope.error = false;
 	};
+
+	function generateDummyBarcode() {
+		var prefix = activeBusinessId || "barcode",
+			suffix = "1";
+
+			if($scope.spots) {
+				suffix = $scope.spots.length;
+			}
+			
+			return prefix + "-" + suffix;
+	}
+
 
 	$scope.$watch('loggedIn', function(newVal, oldVal) {
 		var spotId = $routeParams.spotId || "",
