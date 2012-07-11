@@ -74,7 +74,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"businesses.action.show" : "anzeigen/editieren",
 			"businesses.action.spots" : "tische",
 			"businesses.action.menus" : "menüs",
-			"businesses.action.delete" : "löschen",
+			"businesses.action.delete" : "Restaurant löschen",
 			"businesses.form.name" : "Name*",
 			"businesses.form.description" : "Beschreibung*",
 			"businesses.form.address" : "Addresse*",
@@ -108,6 +108,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"business.detail.currency" : "Währung",
 			"business.detail.paymentmethods" : "Bezahlarten",
 			"business.detail.paymentmethods.list.new" : "Neue Bezahlart",
+			"business.action.delete.invalid" : "Passwort inkorrekt!",
 			//profile partial
 			"profile.title" : "Profil",
 			"profile.account.name" : "Name",

@@ -33,6 +33,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.businesses = null;
 	/** The currently selected business. */
 	$scope.activeBusiness = null;
+	/** In case of delete attempt, the business to delete. */
+	$scope.businessToDelete = null;
 	/** Property which is currently edited. */
 	$scope.activeProperty = null;
 	/** When true user can edit the business profile. */
@@ -75,7 +77,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	*	Business to show delete dialog for.
 	*/
 	$scope.showDeleteDialog = function(business) {
-		$scope.activeBusiness = business; 
+		$scope.businessToDelete = business; 
 		jQuery("#deleteModal").modal('show');
 	};
 
@@ -84,11 +86,39 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	* @param id
 	* 	business to delete
 	*/
-	$scope.deleteBusiness = function(id) {
-		$scope.businessResource['delete']({'id' : id});
+	$scope.deleteBusiness = function() {
+		var errorMessageInvalid = langService.translate("business.action.delete.invalid"),
+			pwHashSaved = $http.defaults.headers.common.passwordHash;
 
-		//hide delete dialog
-		jQuery("#deleteModal").modal('hide');
+		$http.defaults.headers.common.password = $scope.deletePassword;
+		//temporary solution
+		$http.defaults.headers.common.passwordHash = null;
+
+		$scope.businessToDelete.$delete(success, error);
+		$http.defaults.headers.common.password = null;
+		
+		//temporary solution
+		$http.defaults.headers.common.passwordHash = pwHashSaved;
+
+		$scope.deletePassword = null;
+
+		function success() {
+			$scope.businessToDelete = null;
+			$scope.deleteError = null;
+
+			//hide delete dialog
+			jQuery("#deleteModal").modal('hide');
+			//navigate to business overview
+			$location.url('/businesses');
+		}
+
+		function error(response) {
+			if(response.status == 403) {
+				$scope.deleteError = errorMessageInvalid;
+			} else {
+
+			}
+		}
 	};
 
 	/**

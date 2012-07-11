@@ -26,9 +26,9 @@
 				<li>
 					<a ng-click="createMenu()"><i class="icon-plus icon-black"></i> <span l="menus.list.new">New menu...</span></a>
 				</li>
-				<li ng-class="{active: organizeMenusContext}">
+<!-- 				<li ng-class="{active: organizeMenusContext}">
 					<a ng-click="organizeMenus()"><i class="icon-th-large icon-black"></i> <span l="menus.list.organize">Organize menus</span></a>
-				</li>
+				</li> -->
 		        <li ng-repeat="menu in menus | orderBy:['order', 'title'] " ng-class="{active: currentMenu.id == menu.id}" class="sortable">	        	
 		        	<a ng-click="loadMenu(menu)"><i class="icon-move icon-black" tooltip="general.sortable" tooltip-position="right"></i> {{menu.title}}</a>
 		        </li>
@@ -51,7 +51,7 @@
 	    </div>
 
 	    <!-- Organize menu lists -->
-	    <div class="span6 common-wrapper" ng-show="organizeMenusContext">
+<!-- 	    <div class="span6 common-wrapper" ng-show="organizeMenusContext">
 	    	<h3 l="menus.products.organize.title">Organize Menus</h3>
 	    	<p l="menus.organizable-product-list.organize.description">Choose menus from both lists.<br/>Drag & Drop products to assign them to another menu.</p>
 	    	<div class="row-fluid">
@@ -101,7 +101,7 @@
 				    </ul>
 	    		</div>
 	    	</div>
-	    </div>
+	    </div> -->
 
 	    <!-- Menu detail -->
 	    <div class="span3 menu-wrapper" ng-show="currentMenu">

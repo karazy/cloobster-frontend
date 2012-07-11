@@ -10,7 +10,10 @@
 		<div class="span6">
 			<ul>
 				<li ng-repeat="b in businesses">
-					<span>{{b.name}}</span> <a href="#/businesses/{{b.id}}" l="businesses.action.show">show/edit</a> | <a href="#/businesses/{{b.id}}/menus" l="businesses.action.menus">menus</a> | <a href="#/businesses/{{b.id}}/spots" l="businesses.action.spots">tables</a> | <a href ng-click="showDeleteDialog(b)" l="businesses.action.delete">delete</a>
+					<span ng-show="b.trash">{{b.name}} (deleted)</span>
+					<span ng-hide="b.trash">
+						<span>{{b.name}}</span> <a href="#/businesses/{{b.id}}" l="businesses.action.show">show/edit</a> | <a href="#/businesses/{{b.id}}/menus" l="businesses.action.menus">menus</a> | <a href="#/businesses/{{b.id}}/spots" l="businesses.action.spots">tables</a>
+					</span>
 				</li>
 			</ul>
 		</div>
@@ -94,19 +97,5 @@
 			</form> 
 		</div>
 	</div>
-	</div>
-</div>
-
-<div class="modal hide" id="deleteModal">
- 	<div class="modal-header">
-    	<button type="button" class="close" data-dismiss="modal">×</button>
-    	<h3 l="businesses.dialog.delete">Delete Restaurant</h3>
-	</div>
-	<div class="modal-body alert-error">
-    	<p><span l="business.dialog.delete.text">{{activeBusiness.name}} and all associated data will be deleted!</span></p>
-    </div>  
-  	<div class="modal-footer">
-  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
-    	<button type="button" class="btn btn-danger" ng-click="deleteBusiness(activeBusiness.id)" l="common.delete">Delete</button>
 	</div>
 </div>
