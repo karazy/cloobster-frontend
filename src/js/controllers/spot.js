@@ -15,7 +15,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	var defaultSpot = {
 			name: langService.translate("barcode.new.default.name") || "New table",
 			barcode : "",
-			qrImageUrl: null
+			qrImageUrl: null,
+			active: true
 		},
 		//Id of active business
 		activeBusinessId = null;
@@ -32,6 +33,33 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.error = false;
 	/** error message */
 	$scope.errorMessage = "";
+
+	/**
+	* Set error false and hide the error box.
+	*/
+	$scope.hideError = function() {
+		$scope.error = false;
+	};
+
+	/**
+	*	Callback for errors during Resource methods.(get,save,query, etc.).
+	*	
+	*	@private
+	*	@param {Object} response Object containing response and request data of the failed HTTP request.
+	*/
+	function handleError(response) {
+		$scope.error = true;
+		$scope.errorMessage = (response.data.hasOwnProperty('message') && response.data.message ?
+
+			response.data.message
+			: langService.translate('common.error.'+ response.status));
+		if(!$scope.errorMessage) {
+			// Translate a generic error message
+			$scope.errorMessage = langService.translate('common.error')|| "Error during communication with service.";
+		}
+		// Log the response.
+		$log.error("Error during resource method, response data: " + angular.toJson(response));
+	};
 
 
 	$scope.loadSpot = function(spotItem) {
@@ -108,18 +136,17 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 
 	$scope.createSpot = function() {
 		var newSpot = angular.copy(defaultSpot);
-		
+
 		// defaultSpot.barcode = generateDummyBarcode();
 
 		$scope.currentSpot = new $scope.spotsResource(defaultSpot);
 	}
 
-	/**
-	* Set error false and hide the error box.
-	*/
-	$scope.hideError = function() {
-		$scope.error = false;
-	};
+	$scope.deleteSpot = function(spotToDelete) {
+		spotToDelete.$delete(angular.noop, handleError);
+		$scope.currentSpot = null;
+	}
+
 
 	function generateDummyBarcode() {
 		var prefix = activeBusinessId || "barcode",
