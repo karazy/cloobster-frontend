@@ -414,12 +414,10 @@ Cloobster.services.factory('facebookApi', ['$q','$rootScope', function($q, $root
 	var fbApiService, 
 	loggedIn = false,
 	uid,
-	accessToken;
-	// Set the fbLoggedin variable for binding, so that templates can
-	// react on status changes.
-	$rootScope.fbLoggedIn = false;
-	// listen for and handle auth.statusChange events
-	$rootScope.$on('fbInit', function (event) {
+	accessToken,
+	fbInitReceived = false;
+
+	function subscribeFb () {
 		FB.Event.subscribe('auth.statusChange', function(response) {
 			if (response.authResponse) {
 				// 'apply' the fbLoggedIn status so that every watcher
@@ -430,12 +428,28 @@ Cloobster.services.factory('facebookApi', ['$q','$rootScope', function($q, $root
 				uid = response.authResponse.userID;
 				// save the accessToken returned by facebook to be used
 				// for further calls to the API on behalf of the logged in user
-					accessToken = response.authResponse.accessToken;
+				accessToken = response.authResponse.accessToken;
 			} else {
 				$rootScope.$apply('fbLoggedIn = false');
 			}
 		});
+	}
+	// Set the fbLoggedin variable for binding, so that templates can
+	// react on status changes.
+	$rootScope.fbLoggedIn = false;
+	// listen for and handle auth.statusChange events
+	$rootScope.$on('fbInit', function (event) {
+		if(!fbInitReceived) {
+			subscribeFb();
+			fbInitReceived = true;
+		}
 	});
+	if(FB) {
+		if(!fbInitReceived) {
+			subscribeFb();
+			fbInitReceived = true;
+		}
+	}
 
 	/**
 	*	@name Cloobser.services.facebookApi
