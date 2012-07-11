@@ -444,7 +444,8 @@ Cloobster.services.factory('facebookApi', ['$q','$rootScope', function($q, $root
 			fbInitReceived = true;
 		}
 	});
-	if(FB) {
+
+	if(window['FB']) {
 		if(!fbInitReceived) {
 			subscribeFb();
 			fbInitReceived = true;
