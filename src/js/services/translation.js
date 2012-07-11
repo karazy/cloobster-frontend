@@ -85,7 +85,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"businesses.form.error.required" : "Bitte füllen Sie das Feld aus.",
 			"businesses.form.mandatory" : "Felder markiert mit * sind pflicht.",
 			"businesses.dialog.delete" : "Restaurant löschen",
-			"business.dialog.delete.text" : "{{activeBusiness.name}} und alle assozierten Daten werden gelöscht.",
+			"busineses.business.deleted.tooltip" : "Dieses Restaurant wurde gelöscht.",
 			//business detail partial
 			"business.action.edit.enable" : "Editiermodus aktivieren",
 			"business.action.edit.disabled" : "Editiermodus beenden",
@@ -109,6 +109,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"business.detail.paymentmethods" : "Bezahlarten",
 			"business.detail.paymentmethods.list.new" : "Neue Bezahlart",
 			"business.action.delete.invalid" : "Passwort inkorrekt!",
+			"business.dialog.delete.text" : "Du bist dabei <strong>{{activeBusiness.name}}</strong> zu löschen! Das Restaurant wird deaktiviert und in einen read-only modus versetzt. "+
+				"Aktuell eingeloggte Servicekräfte und Gäste können noch Bestellungen einsehen aber keine weitere Aktionen tätigen. Das Restaurant "+
+				" wird nach einer Weile permanent gelöscht!",
+			"business.dialog.delete.confirm" : "Bitte gib dein Passwort ein um die Löschaktion zu bestätigen.",
 			//profile partial
 			"profile.title" : "Profil",
 			"profile.account.name" : "Name",
@@ -228,6 +232,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"common.delete" : "Löschen",
 			"common.save" : "Speichern",
 			"common.search" : "Suchen",
+			"common.password" : "Passwort",
 			"general.sortable" : "Ziehen um zu sortieren",
 			//breadcrumb
 			"breadcrumb.home" : "Home",
