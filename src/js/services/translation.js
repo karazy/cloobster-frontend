@@ -216,6 +216,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"spots.editor.barcode" : "Barcode",
 			"spots.editor.name.tooltip" : "Name editieren",
 			"spots.editor.barcode.tooltip" : "Barcode editieren",
+			"spots.field.active" : "Aktiv: Gäste können einchecken",
+			"spot.action.delete" : "Tisch löschen",
+			"spot.action.delete.text" : "{{currentSpot.name}} wird gelöscht!<br/>Bereits ausgedruckte Barcodes können nicht wiederverwendet werden!",
 			//general
 			"common.warning.title" : "Warnung!",
 			"common.ok" : "Ok",

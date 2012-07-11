@@ -35,9 +35,29 @@
 	    	<div simple-property-editor editor-title="spots.editor.name" editor-property="currentSpot.name" editor-on-save="saveSpot()" editor-required>
 				<h3 class="edit" tooltip="spots.editor.name.tooltip">{{currentSpot.name}} <i class="icon-edit icon-black"></i></h3>
 			</div>
-    		<a ng-href="{{currentSpot.qrImageUrl}}" ng-show="currentSpot.qrImageUrl"><img ng-src="{{currentSpot.qrImageUrl}}" alt="Spot Barcode"/>
-    			<p>{{currentSpot.barcode}}</p>
-    		</a>
+    		<img ng-show="currentSpot.qrImageUrl" ng-src="{{currentSpot.qrImageUrl}}" alt="Spot Barcode"/>
+    		<div class="activation-checkbox">
+				<input type="checkbox" id="spotActiveCb" ng-model="currentSpot.active" ng-change="saveSpot()"></input>
+		    	<label l="spots.field.active" for="spotActiveCb">Active: Guests can check-in</label>
+			</div>
+    		<p>Code: {{currentSpot.barcode}}</p>    		
+    		<div>
+	    		<button class="btn" data-toggle="modal" data-target="#deleteSpotModal"><i class="icon-trash"></i> <span l="spot.action.delete">Delete table</span></button>
+	    		<!-- Modal delete dialog. -->
+	    		<div class="modal hide" id="deleteSpotModal">
+				 	<div class="modal-header">
+				    	<button type="button" class="close" data-dismiss="modal">×</button>
+				    	<h3 l="spot.action.delete">Delete Spot</h3>
+					</div>
+					<div class="modal-body alert-error">
+				    	<p><span l="spot.action.delete.text">{{currentSpot.name}} will be deleted!<br/>Already printed barcodes can't be reused afterwards!</span></p>
+				    </div>  
+				  	<div class="modal-footer">
+				  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
+				    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteSpot(currentSpot)" l="common.delete">Delete</button>
+					</div>
+				</div>
+	    	</div>
 		</div>
 	</div>
 </div>
