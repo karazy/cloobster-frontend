@@ -195,6 +195,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"menus.choices.field.linkedproducts" : "Wird verwendet in ...",
 			"menus.choices.field.linkedproducts.help" : "Listet alle Produkte auf<br/> die diese Auswahlmöglichkeit verwenden.",
 			"menus.choices.action.remove" : "Auswahl von Produkt entfernen",
+			"menus.choice.dialog.delete.text" : "<strong>{{currentChoice.text}}</strong> wird von diesem Produkt entfernt.",
 			"choice.editor.text.tooltip" : "Auswahltext editieren",
 			"choice.editor.price.tooltip" : "Preis editieren",
 			"choice.editor.maxOccurence.tooltip" : "Maximale Optionsauswahl editieren",
