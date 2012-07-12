@@ -13,7 +13,7 @@
 	<h4 class="alert-heading" l="common.warning.title">Warning!</h4>
 	{{errorMessage}}
 </div>
-<div simple-property-editor editor-title="Name" editor-property="activeBusiness.name" editor-on-save="saveBusiness" editor-enabled="editMode" editor-required>
+<div simple-property-editor editor-title="business.detail.name" editor-property="activeBusiness.name" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
 	<h1 ng-class="getEditModeClass()">{{activeBusiness.name}}</h1>
 	<a href="#/businesses/{{activeBusiness.id}}/menus" l="businesses.action.menus">menus</a> | <a href="#/businesses/{{activeBusiness.id}}/spots" l="businesses.action.spots">tables</a>
 </div>
@@ -70,37 +70,37 @@
 				</div>
 			</div>
 		</div>
-		<div simple-property-editor editor-title="Description" editor-property="activeBusiness.description" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-type="textarea" editor-required>
+		<div simple-property-editor editor-title="business.detail.description" editor-property="activeBusiness.description" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-type="textarea" editor-required>
 			<div class="data-element" ng-class="getEditModeClass()">
 				<div class="key" l="business.detail.description">Description</div>
 				<div class="value">{{activeBusiness.description}}</div>
 			</div>
 		</div>
-		<div simple-property-editor editor-title="Slogan" editor-property="activeBusiness.slogan" editor-on-save="saveBusiness()" editor-enabled="editMode">
+		<div simple-property-editor editor-title="business.detail.slogan" editor-property="activeBusiness.slogan" editor-on-save="saveBusiness()" editor-enabled="editMode">
 			<div class="data-element" ng-class="getEditModeClass()">
 				<div class="key" l="business.detail.slogan">Slogan</div>
 				<div class="value">{{activeBusiness.slogan}}</div>
 			</div>
 		</div>
-		<div simple-property-editor editor-title="Address" editor-property="activeBusiness.address" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
+		<div simple-property-editor editor-title="business.detail.address" editor-property="activeBusiness.address" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
 			<div class="data-element" ng-class="getEditModeClass()">
 				<div class="key" l="business.detail.address">Address</div>
 				<div class="value">{{activeBusiness.address}}</div>
 			</div>
 		</div>
-		<div simple-property-editor editor-title="City" editor-property="activeBusiness.city" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
+		<div simple-property-editor editor-title="business.detail.city" editor-property="activeBusiness.city" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
 			<div class="data-element" ng-class="getEditModeClass()">
 				<div class="key" l="business.detail.city">City</div>
 				<div class="value">{{activeBusiness.city}}</div>
 			</div>
 		</div>
-		<div simple-property-editor editor-title="Postcode" editor-property="activeBusiness.postcode" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
+		<div simple-property-editor editor-title="business.detail.postcode" editor-property="activeBusiness.postcode" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
 			<div class="data-element" ng-class="getEditModeClass()">
 				<div class="key" l="business.detail.postcode">Postcode</div>
 				<div class="value">{{activeBusiness.postcode}}</div>
 			</div>
 		</div>
-		<div simple-property-editor editor-title="Phone" editor-property="activeBusiness.phone" editor-on-save="saveBusiness()" editor-enabled="editMode">
+		<div simple-property-editor editor-title="business.detail.phone" editor-property="activeBusiness.phone" editor-on-save="saveBusiness()" editor-enabled="editMode">
 			<div class="data-element" ng-class="getEditModeClass()">
 				<div class="key" l="business.detail.phone">Phone</div>
 				<div class="value">{{activeBusiness.phone}}</div>
@@ -128,7 +128,7 @@
 						<li ng-repeat="method in activeBusiness.paymentMethods" ng-class="getEditModeClass()">
 							<div class="row-fluid">	
 								<div class="span10">
-									<div simple-property-editor editor-title="paymentmethods.editor.name" editor-property="method.name" editor-on-save="saveBusiness()" editor-required>
+									<div simple-property-editor editor-title="business.detail.paymentmethod" editor-property="method.name" editor-on-save="saveBusiness()" editor-required>
 										<span>{{method.name}}</span>
 									</div>
 								</div>
