@@ -204,10 +204,19 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	$scope.saveMenu = function() {
 		$log.log("save menu ");
+		var order = 0;
 
 		if($scope.currentMenu && $scope.currentMenu.id) {
 			$scope.currentMenu.$update(null, null, handleError);	
 		} else {
+			//set menu order
+			angular.forEach($scope.menus, function(menu) {
+				if(menu.order > order) {
+					order = menu.order;
+				}
+			});
+			order = order * 10 || 1;
+			$scope.currentMenu.order = order;
 			$scope.currentMenu.$save(saveMenuSuccess, handleError);
 		}
 
@@ -234,7 +243,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$log.log("updateMenuOrder");
 		var liElements = ui.item.parent().children(), //get all li elements
 			tmpMenu = null; //holds current menu in for each loop
-
+		//TODO optimize sort mechanism to issue less requests
 		liElements.each(function(index, ele) {
 			if(index > 0) {
 				//get corresponding choice resource by optaining the angular scope

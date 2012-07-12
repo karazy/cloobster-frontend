@@ -91,13 +91,13 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			pwHashSaved = $http.defaults.headers.common.passwordHash;
 
 		$http.defaults.headers.common.password = $scope.deletePassword;
-		//temporary solution
+		//TODO temporary solution
 		$http.defaults.headers.common.passwordHash = null;
 
 		$scope.businessToDelete.$delete(success, error);
 		$http.defaults.headers.common.password = null;
 		
-		//temporary solution
+		//TODO temporary solution
 		$http.defaults.headers.common.passwordHash = pwHashSaved;
 
 		$scope.deletePassword = null;

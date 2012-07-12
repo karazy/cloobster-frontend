@@ -65,6 +65,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"registration.form.account.label" : "Meine Benutzerkontodaten",
 			"registration.form.action.reset" : "Zurücksetzen",
 			"registration.form.action.register" : "Registrieren",
+			"registration.form.action.register.tooltip" : "Für die Registrierung bitte alle Pflichtfelder ausfüllen.",
 			"registration.form.company.label" : "Meine Firmendaten",
 			"registration.form.submit.message" : "Vielen dank für die Registrierung {{account.name}},<br/>"+
 					"eine E-mail mit Bestätigungslink wurde an {{account.email}} gesendet.",
