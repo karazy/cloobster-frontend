@@ -72,6 +72,43 @@ Cloobster.services.provider('config', function() {
 	};
 });
 
+Cloobster.services.factory('errorHandler',['$rootScope','$location','$log','lang','config', function($rootScope,$location,$log,langService,config) {
+	/**
+	*	Service to handle callback for errors during Resource methods.(get,save,query, etc.).
+	*	
+	*	@param {Object} response Object containing response and request data of the failed HTTP request.
+	*/
+	function handleError(response) {
+		var errorKey = response.data['errorKey'],
+			responseMessage = response.data['message'];
+
+		$rootScope.error = true;
+		// Set the error message to the first valid message out of the following:
+		// - translation from the specified error key
+		// - trasnlation from the http status code
+		// - untranslated message from the response
+		// - translated generic error text
+		// - placeholder text
+
+		$rootScope.errorMessage = errorKey ?
+			langService.translate('common.error.'+ errorKey)
+			: langService.translate('common.error.'+ response.status)
+			|| responseMessage || langService.translate('common.error') || "Error during communication with service.";
+
+		// Log the response.
+		$log.error("Error during resource method, response object: " + angular.toJson(response));
+
+		if(response.status == 405) {
+			// User tried to modify locked business resource.
+			// Return to businesses view.
+			$location.path('businesses');
+		}
+	}
+
+	return handleError;
+}]);
+
+
 Cloobster.services.factory('cloobsterResource',['$resource','config', function($resource, config) {
 	function ResourceFactory(url, paramDefaults, actions) {
 		return $resource(config['serviceUrl'] + url, paramDefaults, actions);

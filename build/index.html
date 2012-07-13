@@ -95,7 +95,15 @@
     </div>
   </div>
 
-  <div class="container-fluid">    
+  <div class="container-fluid">
+    <!-- Error alert -->
+    <div class="row-fluid" ng-show="error" ng-cloak>
+      <div class="alert alert-error alert-block span6" >
+        <button class="close" ng-click="error=false;">×</button>
+        <h4 class="alert-heading" l="common.warning.title">Error!</h4>
+        <p ng-bind="errorMessage"></p>
+      </div>
+    </div>    
     <div ng-view></div>
   </div> <!-- /container -->
   

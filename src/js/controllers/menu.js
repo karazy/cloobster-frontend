@@ -9,7 +9,7 @@
 * 	View and manage menus, products, choices per restaurant.
 * 	@constructor
 */
-Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, Business, Menu, Product, Choice, langService, $log) {
+Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, Business, Menu, Product, Choice, langService, $log, handleError) {
 
 	var activeBusinessId = null,
 		choicesResource = null,
@@ -43,10 +43,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			price: 0
 		};
 
-	/** error flag */
-	$scope.error = false;
-	/** error message */
-	$scope.errorMessage = "";
 	/** Menu Resource. */
 	$scope.menusResource = null;
 	/** */
@@ -73,33 +69,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.linkedProductsForChoice = null;
 	/** Holds all necessary innformation during menu organization. */
 	$scope.organizeMenusContext = false;
-
-	/**
-	* Set error false and hide the error box.
-	*/
-	$scope.hideError = function() {
-		$scope.error = false;
-	};
-
-	/**
-	*	Callback for errors during Resource methods.(get,save,query, etc.).
-	*	
-	*	@private
-	*	@param {Object} response Object containing response and request data of the failed HTTP request.
-	*/
-	function handleError(response) {
-		$scope.error = true;
-		$scope.errorMessage = (response.data.hasOwnProperty('message') && response.data.message ?
-
-			response.data.message
-			: langService.translate('common.error.'+ response.status));
-		if(!$scope.errorMessage) {
-			// Translate a generic error message
-			$scope.errorMessage = langService.translate('common.error')|| "Error during communication with service.";
-		}
-		// Log the response.
-		$log.error("Error during resource method, response data: " + angular.toJson(response));
-	}
 
 	//Start Menu logic
 
@@ -843,4 +812,4 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	});
 }
 
-Cloobster.Menu.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'Business', 'Menu', 'Product', 'Choice', 'lang', '$log'];
+Cloobster.Menu.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'Business', 'Menu', 'Product', 'Choice', 'lang', '$log', 'errorHandler'];

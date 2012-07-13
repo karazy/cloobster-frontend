@@ -8,11 +8,6 @@
 		</ul>
 	</div>
 </div>
-<div class="alert alert-error alert-block" ng-show="error">
-	<button class="close" ng-click="hideError()">×</button>
-	<h4 class="alert-heading" l="common.warning.title">Warning!</h4>
-	{{errorMessage}}
-</div>
 <div simple-property-editor editor-title="business.detail.name" editor-property="activeBusiness.name" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
 	<h1 ng-class="getEditModeClass()">{{activeBusiness.name}}</h1>
 	<a href="#/businesses/{{activeBusiness.id}}/menus" l="businesses.action.menus">menus</a> | <a href="#/businesses/{{activeBusiness.id}}/spots" l="businesses.action.spots">tables</a>
