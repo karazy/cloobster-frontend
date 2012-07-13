@@ -10,7 +10,7 @@
 * 	@constructor
 */
 
-Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, Business, Spot, langService, $log) {
+Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, Business, Spot, langService, $log, handleError) {
 		//default information when adding a new barcode
 	var defaultSpot = {
 			name: langService.translate("barcode.new.default.name") || "New table",
@@ -29,38 +29,6 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.currentSpot = null;
 	/** Business to which these spots belong to. */
 	$scope.activeBusiness = null;
-	/** error flag */
-	$scope.error = false;
-	/** error message */
-	$scope.errorMessage = "";
-
-	/**
-	* Set error false and hide the error box.
-	*/
-	$scope.hideError = function() {
-		$scope.error = false;
-	};
-
-	/**
-	*	Callback for errors during Resource methods.(get,save,query, etc.).
-	*	
-	*	@private
-	*	@param {Object} response Object containing response and request data of the failed HTTP request.
-	*/
-	function handleError(response) {
-		$scope.error = true;
-		$scope.errorMessage = (response.data.hasOwnProperty('message') && response.data.message ?
-
-			response.data.message
-			: langService.translate('common.error.'+ response.status));
-		if(!$scope.errorMessage) {
-			// Translate a generic error message
-			$scope.errorMessage = langService.translate('common.error')|| "Error during communication with service.";
-		}
-		// Log the response.
-		$log.error("Error during resource method, response data: " + angular.toJson(response));
-	};
-
 
 	$scope.loadSpot = function(spotItem) {
 		$log.log("load spot " + spotItem.id);
@@ -108,29 +76,16 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.saveSpot = function() {		
 		if($scope.currentSpot && $scope.currentSpot.id) {
 			$log.log("update spot " + $scope.currentSpot.id);
-			$scope.currentSpot.$update(
-				function() { 
-					//success
-				},
-				function(request) {
-					//error			
-					$scope.error = true;
-					$scope.errorMessage = "Could not update spot. Status " + request.status;
-				}
-			);	
+			$scope.currentSpot.$update(angular.noop, handleError);
 		} else {
 			$log.log("save new spot");
 			$scope.currentSpot.$save(
 				function() { 
-					//success
+					$scope.spots.push($scope.currentSpot);
 				},
-				function(request) {
-					//error			
-					$scope.error = true;
-					$scope.errorMessage = "Could not save spot. Status " + request.status;
-				}
+				// Error callback
+				handleError
 			);
-			$scope.spots.push($scope.currentSpot);
 		}
 	};
 
@@ -183,4 +138,4 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 
 }
 
-Cloobster.Spot.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'Business', 'Spot', 'lang', '$log'];
+Cloobster.Spot.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'Business', 'Spot', 'lang', '$log', 'errorHandler'];
