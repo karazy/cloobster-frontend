@@ -389,7 +389,6 @@ Cloobster.services.factory('Company',['cloobsterResource', function($resource) {
 					'id': '@id'
 				});
 			}
-			
 		}
 
 		return Company;
@@ -436,6 +435,54 @@ Cloobster.services.factory('Spot', ['cloobsterResource', function($resource) {
 	}
 
 	return Spot;
+}]);
+
+/** 
+* 	@constructor
+* 	Factory function that creates the 'CompanyAccount' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Frederik Reifschneider
+*/
+Cloobster.services.factory('CompanyAccount', ['cloobsterResource', function($resource) {
+	/**
+	*	@name Cloobster.services.CompanyAccount
+	*	
+	*/
+	var CompanyAccount = {
+		/**
+		*
+		*/
+		buildResource: function(companyId) {
+			return $resource('/b/companies/:cid/accounts/:accountId',
+				{
+					'accountId' : '@id',
+					'cid' : companyId
+				},
+				{
+						/**
+						* @name Cloobster.services.CompanyAccount#$query
+						* @override
+						* Overrides default query method by adding account as default parameter
+						*/
+						'query':  {method:'GET', params: {'cid' : companyId}, isArray:true},
+						/**
+						*	@name Cloobster.services.CompanyAccount#$clone
+						* 	Called to register a new company account for the Cloobster service.
+						*	@params {Object} Object containing all the properties of the Business to be created.
+						*/
+						'clone': { method: 'POST'},
+						/*
+						* @name Cloobster.services.CompanyAccount#$update
+						* Like a save but uses PUT instead of POST. Feels more restful.
+						*/
+						'update': { method: 'PUT'}
+				}
+				)
+		}
+	}
+
+	return CompanyAccount;
 }]);
 
 /** 

@@ -19,6 +19,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"nav.about" : "Über",
 			"nav.profile" : "Profil",
 			"nav.registration" : "Registrieren",
+			"nav.accounts" : "Benutzerkonten",
 			//registration partial
 			"registration.title" : "Cloobster Registration",
 			"registration.form.fullname" : "Name*",

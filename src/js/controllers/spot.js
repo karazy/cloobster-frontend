@@ -1,4 +1,4 @@
-	/** @module Cloobster/Spot */
+/** @module Cloobster/Spot */
 'use strict';
 
 /**

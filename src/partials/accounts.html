@@ -1,0 +1,59 @@
+<h1 l="accounts.title">Account Management</h1>
+<ul class="nav nav-tabs">
+  <li ng-class="{active: tab =='admin'}">
+    <a ng-click="showAdminTab()" l="accounts.tab.admin">Admin</a>
+  </li>
+  <li ng-class="{active: tab=='cockpit'}">
+  	<a ng-click="showCockpitTab()" l="accounts.tab.cockpit">Cockpit</a>
+  </li>
+</ul>
+<div class="row-fluid">
+	<!-- Tab for admin accounts. -->
+	<div ng-show="tab == 'admin'">
+		<div class="common-wrapper span2">
+			<ul class="nav nav-pills nav-stacked">
+				<li>
+					<a ng-click="createAdminAccount()"><i class="icon-plus icon-black"></i> <span l="accounts.admin.list.new">New account...</span></a>
+				</li>
+		        <li ng-repeat="account in admins | orderBy:['name'] " ng-class="{active: currentAdmin.id == account.id}">	        	
+		        	<a ng-click="loadAccount(account)">{{account.name}}</a>
+		        </li>
+		    </ul>
+		</div>
+		<!-- Account details -->
+		<div class="common-wrapper span4 form-vertical" ng-show="currentAdmin">
+			<label for="adminEmail" l="accounts.admin.mail">Email: </label>
+			<input type="email" ng-model="currentAdmin.email" id="adminEmail"/>
+			<button class="btn btn-primary" ng-click="checkAdminAccountEmail()" l="accounts.admin.mail.check" ng-disabled="!currentAdmin.email">Check email</button>
+			
+			<div ng-show="emailValid || currentAdmin.id">
+				<label for="adminName" l="accounts.admin.name">Name: </label>
+				<input type="text" id="adminName" ng-model="currentAdmin.name"/>
+				<button class="btn btn-primary" ng-click="saveAdminAccount()" l="accounts.admin.mail.check">Save</button>
+			</div>
+			<!-- List of assigned businesses. -->
+			<div class="account-businesses-list" ng-show="currentAdmin.id">
+	    		<h3 l="accounts.admin.businesses.list.title">Assigned businesses</h3>
+	    		<ul class="nav nav-pills nav-stacked">
+		       	 	<li ng-repeat="business in adminBusinesses">
+			        	<a class="dropdown-toggle">{{business.name}}</a>
+			        </li>
+    			</ul>
+	    	</div>
+		</div>
+		<!-- Holds the list of businesses assigned to this company. For easy drag&drop assignement to selected admin account. -->
+		<div class="common-wrapper" ng-show="currentAdmin.id">
+			<h3 l="accounts.all.businesses.list.title">Available businesses</h3>
+			<p l="accounts.all.businesses.list.description">Description</p>
+			<ul class="nav nav-pills nav-stacked">
+	       	 	<li ng-repeat="business in business">
+		        	<a class="dropdown-toggle">{{business.name}}</a>
+		        </li>
+    		</ul>
+		</div>
+	</div>
+	<!-- Tab for cockpit accounts. -->
+	<div ng-show="tab == 'cockpit'">
+
+	</div>
+</div>

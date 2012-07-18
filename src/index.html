@@ -86,6 +86,7 @@
             <!-- class="active" -->
             <li ng-class="getActive('/home')"><a href="#/home">Home</a></li>
             <li ng-show="loggedIn" ng-class="getActive('/businesses')"><a href="#/businesses" l="nav.restaurants">My Restaurants</a></li>
+            <li ng-show="loggedIn" ng-class="getActive('/accounts')"><a href="#/accounts" l="nav.accounts">Account</a></li>
             <li ng-class="getActive('/about')"><a href="#/about" l="nav.about">About</a></li>
             <li ng-hide="loggedIn" class="pull-right" ng-class="getActive('/login')"><a href="#/login" l="nav.login">Login</a></li>
             <li ng-hide="loggedIn" class="pull-right" ng-class="getActive('/registration')"><a href="#/registration" l="nav.registration">Registration</a></li>
@@ -130,6 +131,7 @@
   <script src="js/controllers/spot.js"></script>
   <script src="js/controllers/navigation.js"></script>
   <script src="js/controllers/profile.js"></script>
+  <script src="js/controllers/accounts.js"></script>
   <script src="js/filters/filters.js"></script>
   <script src="js/services/translation.js"></script>
   <script src="js/services/services.js"></script>
