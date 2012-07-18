@@ -24,30 +24,30 @@
 		<div class="common-wrapper span4 form-vertical" ng-show="currentAdmin">
 			<label for="adminEmail" l="accounts.admin.mail">Email: </label>
 			<input type="email" ng-model="currentAdmin.email" id="adminEmail"/>
-			<button class="btn btn-primary" ng-click="checkAdminAccountEmail()" l="accounts.admin.mail.check" ng-disabled="!currentAdmin.email">Check email</button>
+			<button class="btn btn-primary" ng-click="checkAdminAccountEmail()" l="accounts.admin.mail.check" ng-disabled="!currentAdmin.email" ng-hide="currentAdmin.id">Check email</button>
 			
 			<div ng-show="emailValid || currentAdmin.id">
 				<label for="adminName" l="accounts.admin.name">Name: </label>
 				<input type="text" id="adminName" ng-model="currentAdmin.name"/>
-				<button class="btn btn-primary" ng-click="saveAdminAccount()" l="accounts.admin.mail.check">Save</button>
+				<button class="btn btn-primary" ng-click="saveAdminAccount()" ng-disabled="!currentAdmin.name" l="accounts.admin.save">Save</button>
 			</div>
 			<!-- List of assigned businesses. -->
 			<div class="account-businesses-list" ng-show="currentAdmin.id">
 	    		<h3 l="accounts.admin.businesses.list.title">Assigned businesses</h3>
 	    		<ul class="nav nav-pills nav-stacked">
 		       	 	<li ng-repeat="business in adminBusinesses">
-			        	<a class="dropdown-toggle">{{business.name}}</a>
+			        	<a><i class="icon-move icon-black"></i> {{business.name}}</a>
 			        </li>
     			</ul>
 	    	</div>
 		</div>
 		<!-- Holds the list of businesses assigned to this company. For easy drag&drop assignement to selected admin account. -->
-		<div class="common-wrapper" ng-show="currentAdmin.id">
+		<div class="common-wrapper span4" ng-show="currentAdmin.id">
 			<h3 l="accounts.all.businesses.list.title">Available businesses</h3>
-			<p l="accounts.all.businesses.list.description">Description</p>
+			<p l="accounts.all.businesses.list.description">Drag & Drop to the list of assigned businesses for which the user shall have access.</p>
 			<ul class="nav nav-pills nav-stacked">
-	       	 	<li ng-repeat="business in business">
-		        	<a class="dropdown-toggle">{{business.name}}</a>
+	       	 	<li ng-repeat="business in allBusinesses">
+		        	<a><i class="icon-move icon-black"></i> {{business.name}}</a>
 		        </li>
     		</ul>
 		</div>

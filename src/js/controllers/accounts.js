@@ -10,13 +10,19 @@
 * 	
 * 	@constructor
 */
-Cloobster.Accounts = function($scope, $http, $routeParams, $location, loginService, CompanyAccount, langService, $log, handleError) {
+Cloobster.Accounts = function($scope, $http, $routeParams, $location, loginService, CompanyAccount, Business, langService, $log, handleError) {
 	/** Logged in account. */
-	var account;
+	var account,
+		defaultAdmin = {
+			"role" : "businessadmin"
+		};
 
 	/** Switches between admin and cockpit user tab. Possible values are 'admin' and 'cockpit' */
 	$scope.tab = "admin";
-	$scope.accountsResource;
+
+	$scope.accountsResource = null;
+
+	$scope.businessResource = null;
 	//list of all admin accounts assigned to the current company
 	$scope.admins;
 	/** Selected admin. Can be new or existing. */
@@ -30,11 +36,11 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, loginServi
 
 	//admin account tab start	
 	$scope.showAdminTab = function() {
-		$scope.tab = "admin";
+		$scope.tab = "admin";		
 	};
 
 	$scope.createAdminAccount = function() {
-		$scope.currentAdmin = {};
+		$scope.currentAdmin = new $scope.accountsResource(defaultAdmin);
 	}
 
 	$scope.loadAdminAccounts = function() {
@@ -45,14 +51,36 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, loginServi
 
 	$scope.checkAdminAccountEmail = function() {
 		var retrievedAccount = $http.get("/b/accounts/?email="+$scope.currentAdmin.email).success(function(data, status){
-			if(!data || !data.companyId) {
+			if(!data || data.length == 0) {
 				$scope.emailValid = true;
+			} else if(!data.companyId){
+				//an account with this email already exist. but is not assigned to a company. admin role can be granted
+
+			} else {
+				//this account is already assigned to another business
 			}
 		});
 	};
 
 	$scope.saveAdminAccount = function() {
+		if($scope.currentAdmin && $scope.currentAdmin.id) {
+			$scope.currentAdmin.$update(null, null, handleError);	
+		} else {
+			$scope.currentAdmin.$save(success, handleError);	
+		}
 
+		function success(account) {
+			$scope.admins.push(account);
+		}
+	};
+
+	$scope.loadAccount = function(adminItem) {
+		$scope.currentAdmin = adminItem;
+	}
+
+	$scope.loadAllBusinesses = function() {
+		$scope.businessResource = Business.buildResource(account.id);
+		$scope.allBusinesses = $scope.businessResource.query();
 	};
 
 	//admin account tab end
@@ -73,9 +101,10 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, loginServi
 			// $scope.loadSpots(businessId);	
 			account = loginService.getAccount();
 			$scope.loadAdminAccounts();
+			$scope.loadAllBusinesses();
 		}
 
 	});	
 }
 
-Cloobster.Accounts.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'CompanyAccount', 'lang', '$log', 'errorHandler'];
+Cloobster.Accounts.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'CompanyAccount', 'Business', 'lang', '$log', 'errorHandler'];
