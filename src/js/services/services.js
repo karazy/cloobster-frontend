@@ -90,9 +90,7 @@ Cloobster.services.factory('errorHandler',['$rootScope','$location','$log','lang
 		// - translated generic error text
 		// - placeholder text
 
-		$rootScope.errorMessage = errorKey ?
-			langService.translate('common.error.'+ errorKey)
-			: langService.translate('common.error.'+ response.status)
+		$rootScope.errorMessage = langService.translate('common.error.'+ errorKey) || langService.translate('common.error.'+ response.status)
 			|| responseMessage || langService.translate('common.error') || "Error during communication with service.";
 
 		// Log the response.

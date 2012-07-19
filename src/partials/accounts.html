@@ -1,22 +1,26 @@
-<h1 l="accounts.title">Account Management</h1>
-<ul class="nav nav-tabs">
-  <li ng-class="{active: tab =='admin'}">
-    <a ng-click="showAdminTab()" l="accounts.tab.admin">Admin</a>
-  </li>
-  <li ng-class="{active: tab=='cockpit'}">
-  	<a ng-click="showCockpitTab()" l="accounts.tab.cockpit">Cockpit</a>
-  </li>
-</ul>
+<div class="row-fluid">
+	<div class="span12">
+		<h1 l="accounts.title">Account Management</h1>
+		<ul class="nav nav-tabs">
+			<li ng-class="{active: tab =='admin'}">
+				<a ng-click="showAdminTab()" l="accounts.tab.admin">Admin</a>
+			</li>
+			<li ng-class="{active: tab=='cockpit'}">
+				<a ng-click="showCockpitTab()" l="accounts.tab.cockpit">Cockpit</a>
+			</li>
+		</ul>
+	</div>
+</div>
 <div class="row-fluid">
 	<!-- Tab for admin accounts. -->
 	<div ng-show="tab == 'admin'">
-		<div class="common-wrapper span2">
+		<div class="span2">
 			<ul class="nav nav-pills nav-stacked">
 				<li>
 					<a ng-click="createAdminAccount()"><i class="icon-plus icon-black"></i> <span l="accounts.admin.list.new">New account...</span></a>
 				</li>
 		        <li ng-repeat="account in admins | orderBy:['name'] " ng-class="{active: currentAdmin.id == account.id}">	        	
-		        	<a ng-click="loadAccount(account)">{{account.name}}</a>
+		        	<a ng-click="loadAdminAccount(account)">{{account.name}}</a>
 		        </li>
 		    </ul>
 		</div>
@@ -54,6 +58,35 @@
 	</div>
 	<!-- Tab for cockpit accounts. -->
 	<div ng-show="tab == 'cockpit'">
-
+		<div class="span2">
+			<ul class="nav nav-pills nav-stacked">
+				<li>
+					<a ng-click="createCockpitAccount()"><i class="icon-plus icon-black"></i> <span l="accounts.cockpit.list.new">New user account...</span></a>
+				</li>
+		        <li ng-repeat="account in users | orderBy:['login'] " ng-class="{active: currentAdmin.id == account.id}">	        	
+		        	<a ng-click="loadCockpitAccount(account)">{{account.login}}</a>
+		        </li>
+		    </ul>
+		</div>
+		<div class="common-wrapper span4" ng-show="currentUser">
+			<h3 ng-show="currentUser.id">Edit User Account</h4>
+			<h3 ng-hide="currentUser.id">New User Account</h4>
+			<form name="userForm" class="form-vertical" ng-submit="saveCockpitAccount()">
+				<label for="userName" l="accounts.name">Name: </label>
+				<input type="text" id="userName" ng-model="currentUser.name"/>
+	        	<div class="control-group" ng-class="getFieldInputClass(userForm.login.$dirty, userForm.login.$invalid)">
+		        	<label for="userLogin" class="control-label" l="registration.form.login">Login *:</label>
+		        	<div class="controls">
+						<input name="login" id="userLogin" type="text" ng-model="currentUser.login" required ng-pattern="/^[a-z0-9_\.-]{4,30}$/" placeholder="login name" >
+						<div class="help-inline" ng-show="userForm.login.$dirty && userForm.login.$invalid">
+			          		<span ng-show="userForm.login.$error.required" l="registration.form.login.error.required">Provide a username.</span>
+			          		<span ng-show="userForm.login.$error.pattern" l="registration.form.login.error.pattern">4 - 30 characters. Only lower case, digits, "_" "-" "." are allowed.</span>
+			        	</div>
+					</div>
+				</div>
+				<button class="btn" l="common.close" ng-click="currentUser=null;">Cancel</button>
+				<button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" l="common.save">Save</button>
+			</form>
+		</div>
 	</div>
 </div>

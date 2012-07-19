@@ -89,6 +89,7 @@
             <li ng-class="getActive('/about')"><a href="#/about" l="nav.about">About</a></li>
             <li ng-hide="loggedIn" class="pull-right" ng-class="getActive('/login')"><a href="#/login" l="nav.login">Login</a></li>
             <li ng-hide="loggedIn" class="pull-right" ng-class="getActive('/registration')"><a href="#/registration" l="nav.registration">Registration</a></li>
+            <li ng-show="loggedIn" ng-class="getActive('/accounts')"><a href="#/accounts" l="nav.accounts">Account</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
