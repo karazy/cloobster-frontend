@@ -69,9 +69,9 @@
 		    </ul>
 		</div>
 		<div class="common-wrapper span4" ng-show="currentUser">
-			<h3 ng-show="currentUser.id">Edit User Account</h4>
-			<h3 ng-hide="currentUser.id">New User Account</h4>
-			<form name="userForm" class="form-vertical" ng-submit="saveCockpitAccount()">
+			<div ng-show="currentUser.id">
+				<h3>Edit User Account</h3>
+				<form name="userForm" class="form-vertical" ng-submit="saveCockpitAccount()">
 				<label for="userName" l="accounts.name">Name: </label>
 				<input type="text" id="userName" ng-model="currentUser.name"/>
 	        	<div class="control-group" ng-class="getFieldInputClass(userForm.login.$dirty, userForm.login.$invalid)">
@@ -84,9 +84,67 @@
 			        	</div>
 					</div>
 				</div>
+				<div class="control-group" ng-class="getFieldInputClass(userForm.password.$dirty, userForm.password.$invalid)">
+					<label for="password" class="control-label" l="registration.form.password">Password:</label>
+					<div class="controls">
+						<input name="password" type="password" ng-model="currentUser.password" ng-pattern="/^(?=[!-~]{6,}$)(?=.*([^A-Za-z0-9]|\d))(?=.*[a-zA-Z]).*$/" ng-change="matchPasswords()" placeholder="your password" l-attribute="placeholder" l="registration.form.password.placeholder">
+						<div class="help-inline" ng-show="userForm.password.$dirty && userForm.password.$invalid">
+			          		<span ng-show="userForm.password.$error.pattern" l="registration.form.password.error.pattern">Min. 6 characters. Must contain a letter and a number or one special character.</span>
+			        	</div>
+					</div>
+				</div>
+				<div class="control-group" ng-class="getFieldInputClass(userForm.passwordRepeat.$dirty, userForm.passwordRepeat.$invalid)">
+					<label class="control-label" for="passwordRepeat" l="registration.form.passwordrepeat">Repeat password *:</label>
+					<div class="controls">
+						<input name='passwordRepeat' type='password' ng-model="passwordRepeat" ng-change="matchPasswords()" placeholder="repeat your password" l-attribute="placeholder" l="registration.form.passwordrepeat.placeholder">
+						<div class="help-inline" ng-show="userForm.passwordRepeat.$dirty && userForm.passwordRepeat.$invalid">
+			          		<span ng-show="userForm.passwordRepeat.$error.match" l="registration.form.passwordrepeat.error.match">Passwords don't match.</span>
+		        		</div>
+					</div>
+				</div>
 				<button class="btn" l="common.close" ng-click="currentUser=null;">Cancel</button>
 				<button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" l="common.save">Save</button>
 			</form>
+
+			</div>
+			<div ng-hide="currentUser.id">
+				<h3>New User Account</h3>
+				<form name="userForm" class="form-vertical" ng-submit="saveCockpitAccount()">
+					<label for="userName" l="accounts.name">Name: </label>
+					<input type="text" id="userName" ng-model="currentUser.name"/>
+		        	<div class="control-group" ng-class="getFieldInputClass(userForm.login.$dirty, userForm.login.$invalid)">
+			        	<label for="userLogin" class="control-label" l="registration.form.login">Login *:</label>
+			        	<div class="controls">
+							<input name="login" id="userLogin" type="text" ng-model="currentUser.login" required ng-pattern="/^[a-z0-9_\.-]{4,30}$/" placeholder="login name" >
+							<div class="help-inline" ng-show="userForm.login.$dirty && userForm.login.$invalid">
+				          		<span ng-show="userForm.login.$error.required" l="registration.form.login.error.required">Provide a username.</span>
+				          		<span ng-show="userForm.login.$error.pattern" l="registration.form.login.error.pattern">4 - 30 characters. Only lower case, digits, "_" "-" "." are allowed.</span>
+				        	</div>
+						</div>
+					</div>
+					<div class="control-group" ng-class="getFieldInputClass(userForm.password.$dirty, userForm.password.$invalid)">
+						<label for="password" class="control-label" l="registration.form.password">Password *:</label>
+						<div class="controls">
+							<input name="password" type="password" ng-model="currentUser.password" required ng-pattern="/^(?=[!-~]{6,}$)(?=.*([^A-Za-z0-9]|\d))(?=.*[a-zA-Z]).*$/" ng-change="matchPasswords()" placeholder="your password" l-attribute="placeholder" l="registration.form.password.placeholder">
+							<div class="help-inline" ng-show="userForm.password.$dirty && userForm.password.$invalid">
+				          		<span ng-show="userForm.password.$error.required" l="registration.form.password.error.required">Provide a password.</span>
+				          		<span ng-show="userForm.password.$error.pattern" l="registration.form.password.error.pattern">Min. 6 characters. Must contain a letter and a number or one special character.</span>
+				        	</div>
+						</div>
+					</div>
+					<div class="control-group" ng-class="getFieldInputClass(userForm.passwordRepeat.$dirty, userForm.passwordRepeat.$invalid)">
+						<label class="control-label" for="passwordRepeat" l="registration.form.passwordrepeat">Repeat password *:</label>
+						<div class="controls">
+							<input name='passwordRepeat' type='password' ng-model="passwordRepeat" required ng-change="matchPasswords()" placeholder="repeat your password" l-attribute="placeholder" l="registration.form.passwordrepeat.placeholder">
+							<div class="help-inline" ng-show="userForm.passwordRepeat.$dirty && userForm.passwordRepeat.$invalid">
+				          		<span ng-show="userForm.passwordRepeat.$error.match" l="registration.form.passwordrepeat.error.match">Passwords don't match.</span>
+			        		</div>
+						</div>
+					</div>
+					<button class="btn" l="common.close" ng-click="currentUser=null;">Cancel</button>
+					<button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" l="common.save">Save</button>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>

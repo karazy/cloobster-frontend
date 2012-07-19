@@ -133,6 +133,7 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, loginServi
 		}
 
 		function success(newAccount) {
+			$scope.passwordRepeat = "";
 			$scope.users.push(newAccount);
 		}
 	};
@@ -154,6 +155,18 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, loginServi
 			return "";
 		}
 	};
+
+	/**
+	* Checks if in registration form controller password and password repeat field match.
+	* If they don't match sets the password repeat field as invalid.
+	*/
+	$scope.matchPasswords = function() {
+		if($scope.userForm.password.$viewValue !== $scope.userForm.passwordRepeat.$viewValue) {
+			$scope.userForm.passwordRepeat.$setValidity("match", false);
+		} else {
+			$scope.userForm.passwordRepeat.$setValidity("match", true);
+		}
+	}
 
 	$scope.$watch('loggedIn', function(newVal, oldVal) {
 		if(newVal == true) {
