@@ -26,14 +26,14 @@
 		</div>
 		<!-- Account details -->
 		<div class="common-wrapper span4 form-vertical" ng-show="currentAdmin">
-			<label for="adminEmail" l="accounts.admin.mail">Email: </label>
-			<input type="email" ng-model="currentAdmin.email" id="adminEmail"/>
-			<button class="btn btn-primary" ng-click="checkAdminAccountEmail()" l="accounts.admin.mail.check" ng-disabled="!currentAdmin.email" ng-hide="currentAdmin.id">Check email</button>
-			
-			<div ng-show="emailValid || currentAdmin.id">
-				<label for="adminName" l="accounts.admin.name">Name: </label>
-				<input type="text" id="adminName" ng-model="currentAdmin.name"/>
-				<button class="btn btn-primary" ng-click="saveAdminAccount()" ng-disabled="!currentAdmin.name" l="accounts.admin.save">Save</button>
+			<div ng-hide="currentAdmin.id">
+				<label for="adminEmail" l="accounts.admin.mail">Email: </label>
+				<input type="email" ng-model="currentAdmin.email" id="adminEmail"/>
+				<button class="btn btn-primary" ng-click="checkAdminAccountEmail()" l="accounts.admin.mail.check" ng-disabled="!currentAdmin.email" >Check email</button>
+				<div ng-show="emailValid">
+					<label for="adminName" l="accounts.admin.name">Name: </label>
+					<input type="text" id="adminName" ng-model="currentAdmin.name"/>
+				</div>
 			</div>
 			<!-- List of assigned businesses. -->
 			<div class="account-businesses-list" ng-show="currentAdmin.id">
@@ -44,6 +44,7 @@
 			        </li>
     			</ul>
 	    	</div>
+			<button class="btn btn-primary" ng-click="saveAdminAccount()" ng-disabled="!currentAdmin.name" l="accounts.admin.save">Save</button>
 		</div>
 		<!-- Holds the list of businesses assigned to this company. For easy drag&drop assignement to selected admin account. -->
 		<div class="common-wrapper span4" ng-show="currentAdmin.id">
