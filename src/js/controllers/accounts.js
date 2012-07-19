@@ -160,11 +160,11 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, loginServi
 	* Checks if in registration form controller password and password repeat field match.
 	* If they don't match sets the password repeat field as invalid.
 	*/
-	$scope.matchPasswords = function() {
-		if($scope.userForm.password.$viewValue !== $scope.userForm.passwordRepeat.$viewValue) {
-			$scope.userForm.passwordRepeat.$setValidity("match", false);
+	$scope.matchPasswords = function(form) {
+		if(form.password.$viewValue !== form.passwordRepeat.$viewValue) {
+			form.passwordRepeat.$setValidity("match", false);
 		} else {
-			$scope.userForm.passwordRepeat.$setValidity("match", true);
+			form.passwordRepeat.$setValidity("match", true);
 		}
 	}
 
