@@ -10,7 +10,7 @@
 * 	
 * 	@constructor
 */
-Cloobster.Accounts = function($scope, $http, $routeParams, $location, loginService, CompanyAccount, Business, langService, $log, handleError, Company) {
+Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, loginService, CompanyAccount, Business, langService, $log, handleError, Company) {
 	/** Logged in account. */
 	var account,
 		defaultAdmin = {
@@ -61,9 +61,9 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, loginServi
 		dropOnEmpty: true,
 		forcePlaceholderSize: true,
 		placeholder: "sortable-placeholder",
-		// update: function(event, ui) { 
-		// 	$scope.moveBusiness(event, ui);
-		// }
+		receive: function(event, ui) { 
+			$scope.moveBusiness(event, ui);
+		}
 	}).disableSelection();
 
 
@@ -124,11 +124,84 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, loginServi
 
 	$scope.loadAdminAccount = function(adminItem) {
 		$scope.currentAdmin = adminItem;
+		if(!$scope.currentAdmin.businessIds) {
+			$scope.currentAdmin.businessIds = new Array();
+		}
 	}
 
 	$scope.loadAllBusinesses = function() {
 		$scope.businessResource = Business.buildResource(account.id);
 		$scope.allBusinesses = $scope.businessResource.query(null, null, null, handleError);
+	};
+
+	$scope.filterAssignedBusinesses = function(businessToFilter) {
+		var result = true;
+
+		if(!$scope.currentAdmin) {
+			return true;
+		};
+
+		angular.forEach($scope.currentAdmin.businessIds, function(element, key) {
+			if(element == businessToFilter.id) {
+				result = false;
+				return false;
+			}
+		});
+		return result;
+	}
+
+	$scope.filterNotAssignedBusinesses = function(businessToFilter) {
+		var result = false;
+
+		if(!$scope.currentAdmin) {
+			return true;
+		};
+
+		angular.forEach($scope.currentAdmin.businessIds, function(element, key) {
+			if(element == businessToFilter.id) {
+				result = true;
+				return false;
+			}
+		});
+		return result;
+	}
+
+
+	$scope.moveBusiness = function(event, ui) {
+		$log.log("moveProduct");
+		var business = angular.element(ui.item).scope().business,
+			destinationList = ui.sender.attr("id") == "assignedBusinessesList" ? $scope.allBusinesses : $scope.adminBusinesses;
+
+		//remove business from user
+		if(ui.sender.attr("id") == "assignedBusinessesList") {
+			angular.forEach($scope.currentAdmin.businessIds, function(element, index) {
+				if(element == business.id) {
+					$scope.currentAdmin.businessIds.splice(index, 1);
+					$scope.saveAdminAccount();
+					return false;
+				};
+			});
+		} else {
+			//add business to list
+			$scope.currentAdmin.businessIds.push(business.id);
+			$scope.saveAdminAccount();
+		}
+
+		// if(!$scope.organizeMenusContext.menu1 || !$scope.organizeMenusContext.menu2) {
+		// 	$log.warn("Two menus must be selected to assign products.");
+		// 	return false;
+		// }
+
+		// liElements.each(function(index, ele) {
+		// 		//get corresponding choice resource by optaining the angular scope
+		// 		tmpProduct = angular.element(ele).scope().product;
+		// 		if(tmpProduct.menuId != destinationMenu.id) {
+		// 			$log.log("move product " + tmpProduct.name +"("+tmpProduct.id+") to menu " + destinationMenu.title + "(" + destinationMenu.id + ")");	
+		// 			tmpProduct.menuId = destinationMenu.id;
+		// 		}				
+		// 		tmpProduct.order = index;
+		// 		// tmpProduct.$update(null, null, handleError);
+		// });
 	};
 
 	//admin account tab end
@@ -212,4 +285,4 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, loginServi
 	}});	
 }
 
-Cloobster.Accounts.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'CompanyAccount', 'Business', 'lang', '$log', 'errorHandler', 'Company'];
+Cloobster.Accounts.$inject = ['$scope', '$http', '$routeParams', '$location', '$filter', 'login', 'CompanyAccount', 'Business', 'lang', '$log', 'errorHandler', 'Company'];

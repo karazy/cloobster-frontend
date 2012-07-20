@@ -70,7 +70,7 @@
 			<div class="common-wrapper-detail-list" ng-show="currentAdmin.id">
 		    	<h3 l="accounts.admin.businesses.list.title">Assigned businesses</h3>
 		    	<ul class="nav nav-pills nav-stacked organizable-list" id="assignedBusinessesList">
-			      	 	<li ng-repeat="business in adminBusinesses">
+			      	 	<li ng-repeat="business in allBusinesses | filter:filterNotAssignedBusinesses">
 			        	<a><i class="icon-move icon-black"></i> {{business.name}}</a>
 			        </li>
 	    		</ul>
@@ -83,7 +83,7 @@
 				<h3 l="accounts.all.businesses.list.title">Available businesses</h3>
 				<p l="accounts.all.businesses.list.description">Drag & Drop to the list of assigned businesses for which the user shall have access.</p>
 				<ul class="nav nav-pills nav-stacked organizable-list" id="allBusinessesList">
-		       	 	<li ng-repeat="business in allBusinesses">
+		       	 	<li ng-repeat="business in allBusinesses | filter:filterAssignedBusinesses">
 			        	<a><i class="icon-move icon-black"></i> {{business.name}}</a>
 			        </li>
 	    		</ul>
