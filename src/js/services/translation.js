@@ -229,8 +229,13 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"spots.field.active" : "Aktiv: Gäste können einchecken",
 			"spot.action.delete" : "Tisch löschen",
 			"spot.action.delete.text" : "{{currentSpot.name}} wird gelöscht!<br/>Bereits ausgedruckte Barcodes können nicht wiederverwendet werden!",
+			//accounts partial
+			"accounts.admin.exists.company" : "Dieser Benutzer ist mit einem anderen Firmenkonto verknüpft!",
+			"accounts.admin.exists.user" : "Dieser Benutzer existiert. Möchten Sie ihm Adminrechte für Ihre Firma gewähren?",
+			"accounts.admin.exists.assigned" : "Dieser Benutzer ist bereits Administrator.",
 			//general
-			"common.warning.title" : "Warnung!",
+			"common.warning.title" : "Achtung!",
+			"common.hint.title" : "Hinweis!",
 			"common.ok" : "Ok",
 			"common.cancel" : "Abbrechen",
 			"common.add" : "Hinzufügen",

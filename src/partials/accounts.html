@@ -25,36 +25,69 @@
 		    </ul>
 		</div>
 		<!-- Account details -->
-		<div class="common-wrapper span4 form-vertical" ng-show="currentAdmin">
-			<div ng-hide="currentAdmin.id">
-				<label for="adminEmail" l="accounts.admin.mail">Email: </label>
-				<input type="email" ng-model="currentAdmin.email" id="adminEmail"/>
-				<button class="btn btn-primary" ng-click="checkAdminAccountEmail()" l="accounts.admin.mail.check" ng-disabled="!currentAdmin.email" >Check email</button>
-				<div ng-show="emailValid">
-					<label for="adminName" l="accounts.admin.name">Name: </label>
-					<input type="text" id="adminName" ng-model="currentAdmin.name"/>
-				</div>
+		<!-- New Admin Account -->
+		<div class="common-wrapper span4 form-vertical" ng-show="currentAdmin && !currentAdmin.id">
+			<div class="common-detail">
+			<h3><i class="icon-user icon-black"></i> <span l="accounts.admin.new.title">New Admin Account</span></h3>
+			<div class="control-group">
+				<div class="controls">
+					<div class="input-append">
+	                	<input type="email" ng-model="currentAdmin.email" id="adminEmail" placeholder="users mail" l="accounts.admin.new.email" l-attr="placeholder"/>
+	                	<button class="btn" type="button" ng-click="checkAdminAccountEmail()" l="accounts.admin.mail.check" ng-disabled="!currentAdmin.email">Check email</button>
+	                	<!-- <input class="span2" id="prependedInput" size="16" type="text"> -->
+	              	</div>
+              	</div>
+            </div>
+            <!-- Messages after email check -->
+            <div class="alert" ng-show="adminInvalid">
+  				<strong l="common.warning.title">Warning!</strong> <span l="accounts.admin.exists.company">This account is assigned to another company.</span>
 			</div>
-			<!-- List of assigned businesses. -->
-			<div class="account-businesses-list" ng-show="currentAdmin.id">
-	    		<h3 l="accounts.admin.businesses.list.title">Assigned businesses</h3>
-	    		<ul class="nav nav-pills nav-stacked">
-		       	 	<li ng-repeat="business in adminBusinesses">
+
+			<div class="alert alert-info" ng-show="adminExists">
+  				<strong l="common.hint.title">Hint!</strong> <span l="accounts.admin.exists.user">This account exists. To you want grant it admin privileges for your company?</span>
+			</div>
+
+			<div class="alert alert-success" ng-show="adminAssigned">
+  				<strong l="common.hint.title">Hint!</strong> <span l="accounts.admin.exists.assigned">This account is already assigned to your company.</span>
+			</div>
+
+				<!-- <span for="adminEmail" l="accounts.admin.email">Email: </span> -->
+				
+			<div ng-show="emailValid">
+				<input type="text" id="adminName" ng-model="currentAdmin.name" placeholder="users name" l="accounts.admin.new.email" l-attr="placeholder"/>
+			</div>
+	    	<div ng-show="emailValid">
+	    		<button class="btn btn-primary" ng-click="saveAdminAccount()" ng-disabled="!currentAdmin.name" l="accounts.admin.create">Create</button>
+	    	</div>						
+	    	</div>
+		</div>
+		<!-- Existing Admin Account -->
+		<div class="common-wrapper span4" ng-show="currentAdmin.id">
+			<div class="common-detail">
+				<h3><i class="icon-user icon-black"></i> {{currentAdmin.name}}</h3>
+				<p><i class="icon-envelope icon-black"></i> {{currentAdmin.email}}</p>
+				<!-- List of assigned businesses. -->
+			</div>
+			<div class="common-wrapper-detail-list" ng-show="currentAdmin.id">
+		    	<h3 l="accounts.admin.businesses.list.title">Assigned businesses</h3>
+		    	<ul class="nav nav-pills nav-stacked">
+			      	 	<li ng-repeat="business in adminBusinesses">
 			        	<a><i class="icon-move icon-black"></i> {{business.name}}</a>
 			        </li>
-    			</ul>
-	    	</div>
-			<button class="btn btn-primary" ng-click="saveAdminAccount()" ng-disabled="!currentAdmin.name" l="accounts.admin.save">Save</button>
+	    		</ul>
+		    </div>
 		</div>
 		<!-- Holds the list of businesses assigned to this company. For easy drag&drop assignement to selected admin account. -->
 		<div class="common-wrapper span4" ng-show="currentAdmin.id">
-			<h3 l="accounts.all.businesses.list.title">Available businesses</h3>
-			<p l="accounts.all.businesses.list.description">Drag & Drop to the list of assigned businesses for which the user shall have access.</p>
-			<ul class="nav nav-pills nav-stacked">
-	       	 	<li ng-repeat="business in allBusinesses">
-		        	<a><i class="icon-move icon-black"></i> {{business.name}}</a>
-		        </li>
-    		</ul>
+			<div class="common-detail">
+				<h3 l="accounts.all.businesses.list.title">Available businesses</h3>
+				<p l="accounts.all.businesses.list.description">Drag & Drop to the list of assigned businesses for which the user shall have access.</p>
+				<ul class="nav nav-pills nav-stacked">
+		       	 	<li ng-repeat="business in allBusinesses">
+			        	<a><i class="icon-move icon-black"></i> {{business.name}}</a>
+			        </li>
+	    		</ul>
+    		</div>
 		</div>
 	</div>
 	<!-- Tab for cockpit accounts. -->

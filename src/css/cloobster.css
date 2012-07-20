@@ -240,5 +240,14 @@ ul.options-list li:hover {
 .common-wrapper {
   border: 1px solid gray;
   border-radius: 0.5em; 
-  padding: 0.3em;
+}
+
+.common-detail {
+  padding: 0.5em;
+}
+
+.common-wrapper-detail-list { 
+  border-top: 1px solid gray; 
+  padding: 0.5em;
+  margin: 0.5em 0;
 }

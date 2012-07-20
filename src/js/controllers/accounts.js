@@ -47,6 +47,12 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, loginServi
 
 	$scope.emailValid = false;
 
+	$scope.adminInvalid = null;
+
+	$scope.adminExists = null;
+
+	$scope.adminAssigned = null;
+
 	$scope.company = {};
 
 	//admin account tab start	
@@ -68,11 +74,25 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, loginServi
 		var retrievedAccount = $http.get("/b/accounts/?email="+$scope.currentAdmin.email).success(function(data, status){
 			if(!data || data.length == 0) {
 				$scope.emailValid = true;
-			} else if(!data.companyId){
+				$scope.adminInvalid = null;
+				$scope.adminExsistsMessage = null;
+				$scope.adminAssigned = null;
+			} else if(!data[0].companyId){
 				//an account with this email already exist. but is not assigned to a company. admin role can be granted
-
+				$scope.adminInvalid = null;
+				$scope.adminAssigned = null;
+				$scope.adminExists = true;
+				$scope.emailValid = true;
+			} else if(data[0].companyId == account.companyId){
+				//this account is already assigned to this company				
+				$scope.adminExists = null;
+				$scope.adminAssigned = true;
+				$scope.adminInvalid = null;				
 			} else {
 				//this account is already assigned to another business
+				$scope.adminExists = null;
+				$scope.adminAssigned = null;
+				$scope.adminInvalid = true;								
 			}
 		});
 	};
