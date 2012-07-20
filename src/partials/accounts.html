@@ -50,7 +50,6 @@
 			<div class="alert alert-success" ng-show="adminAssigned">
   				<strong l="common.hint.title">Hint!</strong> <span l="accounts.admin.exists.assigned">This account is already assigned to your company.</span>
 			</div>
-
 				<!-- <span for="adminEmail" l="accounts.admin.email">Email: </span> -->
 				
 			<div ng-show="emailValid">
@@ -70,19 +69,20 @@
 			</div>
 			<div class="common-wrapper-detail-list" ng-show="currentAdmin.id">
 		    	<h3 l="accounts.admin.businesses.list.title">Assigned businesses</h3>
-		    	<ul class="nav nav-pills nav-stacked">
+		    	<ul class="nav nav-pills nav-stacked organizable-list" id="assignedBusinessesList">
 			      	 	<li ng-repeat="business in adminBusinesses">
 			        	<a><i class="icon-move icon-black"></i> {{business.name}}</a>
 			        </li>
 	    		</ul>
 		    </div>
 		</div>
+
 		<!-- Holds the list of businesses assigned to this company. For easy drag&drop assignement to selected admin account. -->
 		<div class="common-wrapper span4" ng-show="currentAdmin.id">
 			<div class="common-detail">
 				<h3 l="accounts.all.businesses.list.title">Available businesses</h3>
 				<p l="accounts.all.businesses.list.description">Drag & Drop to the list of assigned businesses for which the user shall have access.</p>
-				<ul class="nav nav-pills nav-stacked">
+				<ul class="nav nav-pills nav-stacked organizable-list" id="allBusinessesList">
 		       	 	<li ng-repeat="business in allBusinesses">
 			        	<a><i class="icon-move icon-black"></i> {{business.name}}</a>
 			        </li>

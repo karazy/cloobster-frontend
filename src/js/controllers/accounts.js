@@ -55,6 +55,19 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, loginServi
 
 	$scope.company = {};
 
+	jQuery( "#assignedBusinessesList, #allBusinessesList" ).sortable({
+		// items: 'li.sortable',
+		connectWith: ".organizable-list",
+		dropOnEmpty: true,
+		forcePlaceholderSize: true,
+		placeholder: "sortable-placeholder",
+		// update: function(event, ui) { 
+		// 	$scope.moveBusiness(event, ui);
+		// }
+	}).disableSelection();
+
+
+
 	//admin account tab start	
 	$scope.showAdminTab = function() {
 		$scope.tab = "admin";		
