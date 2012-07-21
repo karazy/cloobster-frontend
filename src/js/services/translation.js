@@ -250,6 +250,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"accounts.businesses.moveable.tooltip" : "Ziehen um zuzuweisen.",
 			"accounts.cockpit.new.title" : "Neuer Servicebenuzer",
 			"accounts.cockpit.edit.title" : "Servicebenuzer editieren",
+			"accounts.cockpit.businesses.list.description" : "Für hier aufgelistete Betriebe hat der Benutzer Zugriffsrechte auf das Service Cockpit.",
 			//general
 			"common.warning.title" : "Achtung!",
 			"common.hint.title" : "Hinweis!",

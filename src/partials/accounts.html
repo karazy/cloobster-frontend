@@ -141,11 +141,27 @@
 				</div>
 				<button class="btn" l="common.cancel" ng-click="currentUser=null;">Cancel</button>
 				<button type="submit" class="btn btn-primary" ng-disabled="editUserForm.$invalid" l="common.save">Save</button>
+				<button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#modalCockpitDelete" ><i class="icon-trash icon-black"></i> <span l="common.delete">Delete</span></button>
+				<!-- Delete dialog cockpit user -->
+	    		<div class="modal hide" id="modalCockpitDelete">
+				 	<div class="modal-header">
+				    	<button type="button" class="close" data-dismiss="modal">×</button>
+				    	<h3 l="accounts.cockpit.dialog.delete.title">Delete service user</h3>
+					</div>
+					<div class="modal-body alert-error">
+				    	<p><span l="accounts.cockpit.dialog.delete.text">{{currentUser.login}} will be deleted!</span></p>
+				    </div>  
+				  	<div class="modal-footer">
+				  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
+				    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteCockpitAccount(currentUser)" l="common.delete">Delete</button>
+					</div>
+				</div>
 			</form>
 			</div>
 			<!-- List of assigned businesses. -->
 			<div class="common-wrapper-detail-list" ng-show="currentUser.id">
 		    	<h3 l="accounts.admin.businesses.list.title">Assigned businesses</h3>
+		    	<p l="accounts.cockpit.businesses.list.description">User has service panel privileges for the here listed businesses.</p>
 		    	<ul class="nav nav-pills nav-stacked organizable-list" id="assignedCockpitBusinessesList">
 			      	 	<li ng-repeat="business in allBusinesses | filter:filterNotAssignedCockpitBusinesses | orderBy:'name'">
 			        	<a><i class="icon-move icon-black" tooltip="accounts.businesses.moveable.tooltip"></i> {{business.name}}</a>

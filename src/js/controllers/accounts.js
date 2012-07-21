@@ -241,6 +241,8 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 			$scope.passwordRepeat = "";
 			$scope.users.push(newAccount);
 		}
+		
+		$scope.currentUser = null;
 	};
 
 	$scope.filterAssignedCockpitBusinesses = function(businessToFilter) {
@@ -292,6 +294,20 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 			$scope.currentUser.businessIds.push(business.id);
 			$scope.saveCockpitAccount();
 		}
+	};
+
+	$scope.deleteCockpitAccount = function(cockpitUserToDelete) {
+		cockpitUserToDelete.$delete(angular.noop, handleError);
+
+		angular.forEach($scope.users, function(user, index) {
+			if(user.id == cockpitUserToDelete.id) {
+				$scope.users.splice(index, 1);
+				return false;
+			}
+		});
+
+		$scope.currentUser = null;
+
 	};
 
 	//cockpit account tab end
