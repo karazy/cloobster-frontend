@@ -55,14 +55,25 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 
 	$scope.company = {};
 
+	//Drag&Drop for admin business assignment
 	jQuery( "#assignedBusinessesList, #allBusinessesList" ).sortable({
-		// items: 'li.sortable',
 		connectWith: ".organizable-list",
 		dropOnEmpty: true,
 		forcePlaceholderSize: true,
 		placeholder: "sortable-placeholder",
 		receive: function(event, ui) { 
 			$scope.moveBusiness(event, ui);
+		}
+	}).disableSelection();
+
+	//Drag&Drop for cockpit business assignment
+	jQuery( "#assignedCockpitBusinessesList, #allCockpitBusinessesList" ).sortable({
+		connectWith: ".organizable-list",
+		dropOnEmpty: true,
+		forcePlaceholderSize: true,
+		placeholder: "sortable-placeholder",
+		receive: function(event, ui) { 
+			$scope.moveCockpitBusiness(event, ui);
 		}
 	}).disableSelection();
 
@@ -186,22 +197,6 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 			$scope.currentAdmin.businessIds.push(business.id);
 			$scope.saveAdminAccount();
 		}
-
-		// if(!$scope.organizeMenusContext.menu1 || !$scope.organizeMenusContext.menu2) {
-		// 	$log.warn("Two menus must be selected to assign products.");
-		// 	return false;
-		// }
-
-		// liElements.each(function(index, ele) {
-		// 		//get corresponding choice resource by optaining the angular scope
-		// 		tmpProduct = angular.element(ele).scope().product;
-		// 		if(tmpProduct.menuId != destinationMenu.id) {
-		// 			$log.log("move product " + tmpProduct.name +"("+tmpProduct.id+") to menu " + destinationMenu.title + "(" + destinationMenu.id + ")");	
-		// 			tmpProduct.menuId = destinationMenu.id;
-		// 		}				
-		// 		tmpProduct.order = index;
-		// 		// tmpProduct.$update(null, null, handleError);
-		// });
 	};
 
 	//admin account tab end
@@ -219,6 +214,9 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 
 	$scope.loadCockpitAccount = function(account) {
 		$scope.currentUser = account;
+		if(!$scope.currentUser.businessIds) {
+			$scope.currentUser.businessIds = new Array();
+		}
 	}
 
 	$scope.createCockpitAccount = function() {
@@ -241,6 +239,57 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 		function success(newAccount) {
 			$scope.passwordRepeat = "";
 			$scope.users.push(newAccount);
+		}
+	};
+
+	$scope.filterAssignedCockpitBusinesses = function(businessToFilter) {
+		var result = true;
+
+		if(!$scope.currentUser) {
+			return true;
+		};
+
+		angular.forEach($scope.currentUser.businessIds, function(element, key) {
+			if(element == businessToFilter.id) {
+				result = false;
+				return false;
+			}
+		});
+		return result;
+	}
+
+	$scope.filterNotAssignedCockpitBusinesses = function(businessToFilter) {
+		var result = false;
+
+		if(!$scope.currentUser) {
+			return true;
+		};
+
+		angular.forEach($scope.currentUser.businessIds, function(element, key) {
+			if(element == businessToFilter.id) {
+				result = true;
+				return false;
+			}
+		});
+		return result;
+	}
+
+	$scope.moveCockpitBusiness = function(event, ui) {
+		var business = angular.element(ui.item).scope().business;
+
+		//remove business from user
+		if(ui.sender.attr("id") == "assignedCockpitBusinessesList") {
+			angular.forEach($scope.currentUser.businessIds, function(element, index) {
+				if(element == business.id) {
+					$scope.currentUser.businessIds.splice(index, 1);
+					$scope.saveCockpitAccount();
+					return false;
+				};
+			});
+		} else {
+			//add business to list
+			$scope.currentUser.businessIds.push(business.id);
+			$scope.saveCockpitAccount();
 		}
 	};
 
