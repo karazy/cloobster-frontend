@@ -86,6 +86,7 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 
 	$scope.createAdminAccount = function() {
 		$scope.currentAdmin = new $scope.accountsResource(defaultAdmin);
+		$scope.emailValid = false;
 	}
 
 	$scope.loadAdminAccounts = function() {
