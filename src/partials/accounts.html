@@ -107,7 +107,7 @@
 		</div>
 		<div class="common-wrapper span4" ng-show="currentUser.id">
 			<div class="common-detail">
-				<h3><i class="icon-user icon-black"></i> <span l="accounts.cockpit.new.title">New Service Account</span></h3>
+				<h3><i class="icon-user icon-black"></i> <span l="accounts.cockpit.edit.title">Edit Service Account</span></h3>
 				<form name="editUserForm" class="form-vertical" ng-submit="saveCockpitAccount()">
 				<label for="userName" l="accounts.name">Name: </label>
 				<input type="text" id="userName" ng-model="currentUser.name"/>
@@ -153,9 +153,9 @@
 	    		</ul>
 		    </div>
 		</div>
-		<div class="common-wrapper span4" ng-hide="currentUser.id">
+		<div class="common-wrapper span4" ng-show="currentUser && !currentUser.id">
 			<div class="common-detail">
-				<h3>New User Account</h3>
+				<h3><i class="icon-user icon-black"></i> <span l="accounts.cockpit.new.title">New Service Account</span></h3>
 				<form name="userForm" class="form-vertical" ng-submit="saveCockpitAccount()">
 					<label for="newUserName" l="accounts.name">Name: </label>
 					<input type="text" id="newUserName" ng-model="currentUser.name"/>

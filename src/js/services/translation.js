@@ -249,6 +249,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"accounts.all.businesses.list.description" : "Drag&Drop in die Liste der zugewiesenen Betriebe um dem Benutzer entsprechende Rechte zu gewähren.",
 			"accounts.businesses.moveable.tooltip" : "Ziehen um zuzuweisen.",
 			"accounts.cockpit.new.title" : "Neuer Servicebenuzer",
+			"accounts.cockpit.edit.title" : "Servicebenuzer editieren",
 			//general
 			"common.warning.title" : "Achtung!",
 			"common.hint.title" : "Hinweis!",
