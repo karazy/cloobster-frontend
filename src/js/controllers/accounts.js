@@ -215,6 +215,7 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 
 	$scope.loadCockpitAccount = function(account) {
 		$scope.currentUser = account;
+		$scope.passwordRepeat = "";
 		if(!$scope.currentUser.businessIds) {
 			$scope.currentUser.businessIds = new Array();
 		}
@@ -232,17 +233,20 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 	$scope.saveCockpitAccount = function() {
 		var account = $scope.currentUser;
 		if(account && account.id) {
-			account.$update(null, null, handleError);	
+			account.$update(updateSuccess, handleError);	
 		} else {
-			account.$save(success, handleError);	
+			account.$save(createSuccess, handleError);	
 		}
 
-		function success(newAccount) {
+		function updateSuccess(newAccount) {
+			$scope.passwordRepeat = "";
+		}
+
+		function createSuccess(newAccount) {
 			$scope.passwordRepeat = "";
 			$scope.users.push(newAccount);
+			$scope.currentUser = null;
 		}
-		
-		$scope.currentUser = null;
 	};
 
 	$scope.filterAssignedCockpitBusinesses = function(businessToFilter) {
