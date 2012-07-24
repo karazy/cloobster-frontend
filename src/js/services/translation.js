@@ -916,6 +916,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Für hier aufgelistete Betriebe hat der Benutzer Administrationsrechte.<br/>Dies beinhaltet auch das Servicecockpit.",
 			"EN" : "User has administrative rights for here listed businesses.<br/>This includes service cockpit."
 		},
+		"accounts.admin.dialog.remove.title" : {
+			"DE" : "Admin user entfernen",
+			"EN" : "Remove admin user"
+		},
+		"accounts.admin.dialog.remove.text" : {
+			"DE" : "{{currentAdmin.name}} wird entfernt!",
+			"EN" : "{{currentAdmin.name}} will be removed!"
+		},
 		"accounts.all.businesses.list.title" : {
 			"DE" : "Verfügbare Betriebe",
 			"EN" : "Available businesses"
@@ -989,6 +997,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.password" : {
 			"DE" : "Passwort",
 			"EN" : "Password"
+		},
+		"common.remove" : {
+			"DE" : "Entfernen",
+			"EN" : "Remove"
 		},
 		"general.sortable" : {
 			"DE" : "Ziehen um zu sortieren",

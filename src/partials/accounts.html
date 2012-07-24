@@ -65,7 +65,22 @@
 		<div class="common-wrapper span4" ng-show="currentAdmin.id">
 			<div class="common-detail">
 				<h3><i class="icon-user icon-black"></i> {{currentAdmin.name}}</h3>
-				<p><i class="icon-envelope icon-black"></i> {{currentAdmin.email}}</p>				
+				<p><i class="icon-envelope icon-black"></i> {{currentAdmin.email}}</p>
+				<button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#modalAdminDelete" ><i class="icon-trash icon-black"></i> <span l="common.remove">Remove</span></button>
+				<!-- Remove dialog admin user -->
+	    		<div class="modal hide" id="modalAdminDelete">
+				 	<div class="modal-header">
+				    	<button type="button" class="close" data-dismiss="modal">×</button>
+				    	<h3 l="accounts.admin.dialog.remove.title">Remove admin user</h3>
+					</div>
+					<div class="modal-body alert-error">
+				    	<p><span l="accounts.admin.dialog.remove.text">{{currentAdmin.name}} will be removed!</span></p>
+				    </div>  
+				  	<div class="modal-footer">
+				  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
+				    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteAdminAccount(currentAdmin)" l="common.remove">Remove</button>
+					</div>
+				</div>		
 			</div>
 			<!-- List of assigned businesses. -->
 			<div class="common-wrapper-detail-list" ng-show="currentAdmin.id">

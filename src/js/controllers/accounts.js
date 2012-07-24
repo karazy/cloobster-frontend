@@ -206,6 +206,20 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 		}
 	};
 
+	$scope.deleteAdminAccount = function(adminUserToDelete) {
+		adminUserToDelete.$delete(angular.noop, handleError);
+
+		angular.forEach($scope.admins, function(admin, index) {
+			if(admin.id == adminUserToDelete.id) {
+				$scope.admins.splice(index, 1);
+				return false;
+			}
+		});
+
+		$scope.currentAdmin = null;
+
+	};
+
 	//admin account tab end
 
 	//cockpit account tab start
