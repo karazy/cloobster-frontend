@@ -133,6 +133,11 @@ Cloobster.Login = function($scope, facebookApi, loginService) {
 		$scope.loginProgress = true;
 		// Authenticate the user with the saved data.
 		loginService.loginResume().then( handleLogin, handleError);
+	} else {
+		if(loginService.getPresetLogin()) {
+			//if a preset value was found, prefill login field
+			$scope.loginData.login = loginService.getPresetLogin();
+		}
 	}
 		
 }

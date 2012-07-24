@@ -346,6 +346,9 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 		}).success(function(data, status) {
 			$scope.adminActivationPassword = null;
 			adminActivationToken = null;
+			
+			//set login name and show login form
+			loginService.setPresetLogin(data.email);
 			$location.url("/login");
 		}).error(function(data, status, headers, config) {
 			//refactor handleError message to be compatible with $http response?

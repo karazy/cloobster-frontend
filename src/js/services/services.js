@@ -639,7 +639,9 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 			loggedIn = false,
 			account,
 			loginDeferred,
-			saveLogin = false;
+			saveLogin = false,
+			//used to prefill login form
+			presetLogin = "";
 
 		// Set variable in the $rootScope so that its available for data binding.
 		$rootScope.loggedIn = false;
@@ -862,6 +864,22 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 				$window.localStorage.removeItem('login');
 				$window.localStorage.removeItem('hash');
 			}
+		},
+
+		/**
+		* @name Cloobster.services.login#setPresetLogin
+		* Set the presetLogin.
+		*/
+		setPresetLogin : function(value) {
+			presetLogin = value;
+		},
+
+		/**
+		* @name Cloobster.services.login#setPresetLogin
+		* Set the presetLogin.
+		*/
+		getPresetLogin : function() {
+			return presetLogin;
 		}
 	}
 	return loginService;
