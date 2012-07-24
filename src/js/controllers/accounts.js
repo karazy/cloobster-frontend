@@ -21,7 +21,10 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 			"name" : "Cockpit User",
 			"login" : "user"
 		},
-		company;
+		company,
+		adminActivationUrlHash = /\/?accounts\/setup\/.*/,
+		//temp token used for admin account activation
+		adminActivationToken = null;
 
 	/** Switches between admin and cockpit user tab. Possible values are 'admin' and 'cockpit' */
 	$scope.tab = "admin";
@@ -54,6 +57,9 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 	$scope.adminAssigned = null;
 
 	$scope.company = {};
+
+	/** Password set during admin activation. */
+	$scope.adminActivationPassword = null;
 
 	//Drag&Drop for admin business assignment
 	jQuery( "#assignedBusinessesList, #allBusinessesList" ).sortable({
@@ -316,6 +322,41 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 
 	//cockpit account tab end
 
+	//admin account activation start
+
+	$scope.completeAdminActivation = function() {
+
+		if(!adminActivationToken) {
+			$log.warn("No admin activation token!");
+			return;
+		};
+
+		if(!$scope.adminActivationPassword) {
+			$log.warn("No password set.");
+			return;
+		}
+
+		if($scope.accountActivationForm.$invalid) {
+			$log.warn("Activation form is invalid.");
+			return;
+		}
+
+		$http.put("/accounts/setup/" + adminActivationToken, {
+			"password" : $scope.adminActivationPassword
+		}).success(function(data, status) {
+			$scope.adminActivationPassword = null;
+			adminActivationToken = null;
+			$location.url("/login");
+		}).error(function(data, status, headers, config) {
+			//refactor handleError message to be compatible with $http response?
+			//handleError(data);
+		});
+	};
+
+	//admin account activation end
+
+	//utility methods start
+
 	/*
 	* Get css class for field highlighting.
 	* @returns error if dirty && invalid
@@ -344,6 +385,8 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 		}
 	}
 
+	//utility methods end
+
 	$scope.$watch('loggedIn', function(newVal, oldVal) {
 		if(newVal == true) {
 			account = loginService.getAccount();
@@ -352,7 +395,18 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 			$scope.loadCockpitAccounts();
 			// Load company data for account info
 			company = Company.buildResource().get({id: account.companyId}, null, null, handleError);
-	}});	
+	}});
+
+	//Check if URL is an account activation
+	if($location.url().match(adminActivationUrlHash) || $location.hash().match(adminActivationUrlHash)) {
+		adminActivationToken = $routeParams.token;
+		if(adminActivationToken) {
+			$log.log("extract activation token " + adminActivationToken);	
+		} else {
+			$location.url("/home");
+		}
+		
+	}
 }
 
 Cloobster.Accounts.$inject = ['$scope', '$http', '$routeParams', '$location', '$filter', 'login', 'CompanyAccount', 'Business', 'lang', '$log', 'errorHandler', 'Company'];
