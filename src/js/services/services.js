@@ -1086,11 +1086,11 @@ Cloobster.services.factory('lang', ['$log', 'translation', function($log, transl
 		*/
 		translate: function(key) {
 				
-				if(!key) {
+				if(!key || !translation[key]) {
 					return "";
 				}
 
-				return translation[browserLang][key] || "";
+				return translation[key][browserLang] || "";
 		}
 	}
 
