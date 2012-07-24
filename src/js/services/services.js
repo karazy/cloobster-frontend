@@ -641,7 +641,8 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 			loginDeferred,
 			saveLogin = false,
 			//used to prefill login form
-			presetLogin = "";
+			presetLogin = "",
+			accessToken = null;
 
 		// Set variable in the $rootScope so that its available for data binding.
 		$rootScope.loggedIn = false;
@@ -657,13 +658,21 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 		account = data;
 		loggedIn = true;
 		$rootScope.loggedIn = true;
-		if(saveLogin === true) {
-			$window.localStorage['login'] = account.login;
-			$window.localStorage['hash'] = account.passwordHash;
+		if(account.accessToken) {
+			accessToken = account.accessToken;
 		}
+		if(saveLogin === true) {
+			$window.localStorage['accessToken'] = accessToken;
+
+			//$window.localStorage['login'] = account.login;
+			//$window.localStorage['hash'] = account.passwordHash;
+		}
+		// Save access token as default header.
+
+		$http.defaults.headers.common['X-Auth'] = accessToken;
 		//set http default headers
-		$http.defaults.headers.common.login = account.login;
-		$http.defaults.headers.common.passwordHash = account.passwordHash;
+		//$http.defaults.headers.common.login = account.login;
+		//$http.defaults.headers.common.passwordHash = account.passwordHash;
 
 		loginDeferred.resolve(data);
 	}
@@ -680,11 +689,9 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 		if(status == 401 || status == 403) {
 			loginDeferred.reject({message: 'invalid login data'});
 			
-			if($window.localStorage['login']) {
+			if(existsSavedLogin()) {
 				saveLogin = false;
-
-				$window.localStorage.removeItem('login');
-				$window.localStorage.removeItem('hash');
+				$window.localStorage.removeItem('accessToken');
 			}
 		}
 		// server error during login
@@ -695,6 +702,14 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 		else {
 			loginDeferred.reject({message: 'error during login request'}); 
 		}
+	}
+
+	function existsSavedLogin() {
+		if($window.localStorage['accessToken']) {
+			return true;
+		}
+		else
+			return false;
 	}
 
 	/**
@@ -749,13 +764,7 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 		*	@returns {boolean} true if login and hash is saved in the local storage,
 		*		false if no saved login exists.
 		*/
-		existsSavedLogin: function() {
-			if($window.localStorage['login'] && $window.localStorage['hash']) {
-				return true;
-			}
-			else
-				return false;
-		},
+		existsSavedLogin: existsSavedLogin,
 		/**
 		*	@name Cloobster.services.login#loginResume
 		*
@@ -767,16 +776,15 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 		loginResume : function () {
 			loginDeferred = $q.defer();
 
-			if($window.localStorage['login']) {
-				var	storedLogin = {
-						
-					'login' : $window.localStorage['login'],
-					'passwordHash' : $window.localStorage['hash']
-				}
-				saveLogin = true;
-				
+			if( existsSavedLogin() ) {
+				accessToken = $window.localStorage['accessToken'];
+
+				saveLogin = false;
+
 				$http.get( appConfig['serviceUrl'] + '/accounts/login',
-					{ headers: storedLogin }).
+					{ headers: {	
+						'X-Auth' : accessToken
+					} }).
 					success(loginSuccess).error(loginError);
 				
 			}
@@ -810,7 +818,7 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 			}
 			saveLogin = params.save;
 			loginDeferred = $q.defer();
-			$http.get( appConfig['serviceUrl'] + '/accounts/login',
+			$http.post( appConfig['serviceUrl'] + '/accounts/tokens', null,
 				{ headers: {'login' : params.login, 'password' : params.password } }).
 			success(loginSuccess).error(loginError);
 			return loginDeferred.promise;
@@ -856,13 +864,12 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 			loggedIn = false;
 			$rootScope.loggedIn = false;
 			account = null;
+			presetLogin = "";
 
-			delete $http.defaults.headers.common.login;
-			delete $http.defaults.headers.common.passwordHash;
+			delete $http.defaults.headers.common['X-Auth'];
 
-			if($window.localStorage['login']) {
-				$window.localStorage.removeItem('login');
-				$window.localStorage.removeItem('hash');
+			if(existsSavedLogin()) {
+				$window.localStorage.removeItem('accessToken');
 			}
 		},
 
