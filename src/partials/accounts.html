@@ -54,7 +54,7 @@
 				<!-- <span for="adminEmail" l="accounts.admin.email">Email: </span> -->
 				
 			<div ng-show="emailValid">
-				<input type="text" id="adminName" ng-model="currentAdmin.name" placeholder="forename and surename" l="accounts.admin.new.name.placeholder" l-attribute="placeholder"/>
+				<input type="text" ng-disabled="adminExists" id="adminName" ng-model="currentAdmin.name" placeholder="forename and surename" l="accounts.admin.new.name.placeholder" l-attribute="placeholder"/>
 			</div>
 	    	<div ng-show="emailValid">
 	    		<button class="btn btn-primary" ng-click="saveAdminAccount()" ng-disabled="!currentAdmin.name" l="accounts.create">Create</button>

@@ -108,12 +108,15 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 				$scope.adminInvalid = null;
 				$scope.adminExsistsMessage = null;
 				$scope.adminAssigned = null;
+				$scope.adminExists = null;
+				$scope.currentAdmin.name = null;
 			} else if(!data[0].companyId){
 				//an account with this email already exist. but is not assigned to a company. admin role can be granted
 				$scope.adminInvalid = null;
 				$scope.adminAssigned = null;
 				$scope.adminExists = true;
 				$scope.emailValid = true;
+				$scope.currentAdmin.name = data[0].name;
 			} else if(data[0].companyId == account.companyId){
 				//this account is already assigned to this company				
 				$scope.adminExists = null;
@@ -123,7 +126,8 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 				//this account is already assigned to another business
 				$scope.adminExists = null;
 				$scope.adminAssigned = null;
-				$scope.adminInvalid = true;								
+				$scope.adminInvalid = true;
+				$scope.currentAdmin.name = null;								
 			}
 		});
 	};
