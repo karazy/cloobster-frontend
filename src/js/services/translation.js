@@ -23,8 +23,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN": "Login"
 		},
 		"nav.restaurants" : {
-			"DE" : "Hotels",
-			"EN" : "Hotels"
+			"DE" : "Betriebe",
+			"EN" : "Businesses"
 		},
 		"nav.menus" : {
 			"DE" : "Produkte",
@@ -256,8 +256,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "show/edit"
 		},
 		"businesses.action.spots" : {
-			"DE" : "bestellpunkte (Barcodes)",
-			"EN" : "order points (barcodes)"
+			"DE" : "spots",
+			"EN" : "spots"
 		},
 		"businesses.action.menus" : {
 			"DE" : "produkte",
@@ -425,615 +425,616 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"profile.account.name" : {
 			"DE" : "Name",
-			"EN" : ""
+			"EN" : "Name"
 		},
 		"profile.account.email" : {
 			"DE" : "E-Mail",
-			"EN" : ""
+			"EN" : "Email"
 		},
 		"profile.company.action.edit.enable" : {
 			"DE" : "Editiermodus aktivieren",
-			"EN" : ""
+			"EN" : "Activate edit mode"
 		},
 		"profile.company.action.edit.disable" : {
 			"DE" : "Editiermodus beenden",
-			"EN" : ""
+			"EN" : "Disable edit mode"
 		},
 		"profile.company.action.edit.disable.hint" : {
 			"DE" : "Profileigenschaft anklicken um zu editieren.",
-			"EN" : ""
+			"EN" : "Click property to edit."
 		},
 		"profile.company.address" : {
 			"DE" : "Adresse",
-			"EN" : ""
+			"EN" : "Address"
 		},
 		"profile.company.city" : {
 			"DE" : "Stadt",
-			"EN" : ""
+			"EN" : "City"
 		},
 		"profile.company.postcode" : {
 			"DE" : "Postleitzahl",
-			"EN" : ""
+			"EN" : "Zipcode"
 		},
 		"profile.company.phone" : {
 			"DE" : "Telefon",
-			"EN" : ""
+			"EN" : "Phone"
 		},
 		"profile.company.url" : {
 			"DE" : "Homepage",
-			"EN" : ""
+			"EN" : "Website"
 		},
 		"profile.company.country" : {
 			"DE" : "Land",
-			"EN" : ""
+			"EN" : "Country"
 		},
 		"profile.company.address.editor.title" : {
 			"DE" : "Adresse",
-			"EN" : ""
+			"EN" : "Address"
 		},
 		"profile.company.city.editor.title" : {
 			"DE" : "Stadt",
-			"EN" : ""
+			"EN" : "City"
 		},
 		"profile.company.postcode.editor.title" : {
 			"DE" : "Postleitzahl",
-			"EN" : ""
+			"EN" : "Zipcode"
 		},
 		"profile.company.phone.editor.title" : {
 			"DE" : "Telefon",
-			"EN" : ""
+			"EN" : "Phone"
 		},
 		"profile.company.url.editor.title" : {
 			"DE" : "Homepage",
-			"EN" : ""
+			"EN" : "Website"
 		},
 		//menus partial
 		"menus.title" : {
-			"DE" : "Menüs",
-			"EN" : ""
+			"DE" : "Kategorien",
+			"EN" : "Categories"
 		},
 		"menus.list.new" : {
-			"DE" : "Neues Menü...",
-			"EN" : ""
+			"DE" : "Neue Kategorie...",
+			"EN" : "New category..."
 		},
 		"menus.list.orphaned" : {
 			"DE" : "Verwaiste Produkte",
-			"EN" : ""
+			"EN" : "Orphaned products"
 		},
 		"menus.list.orphaned.tooltip" : {
 			"DE" : "Nicht zugewiesene Produkte anzeigen",
-			"EN" : ""
+			"EN" : "Show not assigned products."
 		},
 		"menus.menu.field.active" : {
-			"DE" : "Menü dem Gast anzeigen",
-			"EN" : ""
+			"DE" : "Kategorie dem Gast anzeigen",
+			"EN" : "Show category to guest."
 		},
 		"menus.menu.delete" : {
-			"DE" : "Menü löschen",
-			"EN" : ""
+			"DE" : "Kategorie löschen",
+			"EN" : "Delete category"
 		},
 		"menus.menu.dialog.delete.title" : {
-			"DE" : "Menü {{currentMenu.title}} löschen",
-			"EN" : ""
+			"DE" : "Kategorie {{currentMenu.title}} löschen",
+			"EN" : "Delete {{currentMenu.title}} category"
 		},
 		"menus.menu.dialog.delete.text" : {
 			"DE" : "<strong>{{currentMenu.title}}</strong> löschen? Dies kann nicht rückgängig gemacht werden!<br/>Produkte werden nicht gelöscht.",
-			"EN" : ""
+			"EN" : "Delete <strong>{{currentMenu.title}}</strong>? This can't be undone.!<br/>Products won't be deleted."
 		},
 		"menus.products.title" : {
 			"DE" : "Produkte",
-			"EN" : ""
+			"EN" : "Products"
 		},
 		"menus.products.list.new" : {
 			"DE" : "Neues Produkt...",
-			"EN" : ""
+			"EN" : "New product..."
 		},
 		"menus.products.list.existing" : {
 			"DE" : "Bestehendes Produkt...",
-			"EN" : ""
+			"EN" : "Existing product"
 		},
 		"menus.products.link.title" : {
 			"DE" : "Alle Produkte",
-			"EN" : ""
+			"EN" : "All products"
 		},
 		"menus.products.link.action.copy" : {
 			"DE" : "Kopieren",
-			"EN" : ""
+			"EN" : "Copy"
 		},
 		"menus.products.link.action.copylink" : {
-			"DE" : "Kopieren und Auswahlmöglichkeiten verknüpfen",
-			"EN" : ""
+			"DE" : "Kopieren und Auswahlmöglichkeiten verknüpfen.",
+			"EN" : "Copy and link choices."
 		},
 		"menus.products.link.action.deepcopy" : {
-			"DE" : "Kopieren inklusive Auswahlmöglichkeiten",
-			"EN" : ""
+			"DE" : "Kopieren inklusive Auswahlmöglichkeiten.",
+			"EN" : "Copy including choices."
 		},
 		"menus.product.copy.name" : {
 			"DE" : "-Kopie",
-			"EN" : ""
+			"EN" : "-copy"
 		},
 		"menus.products.link.description" : {
-			"DE" : "Klicke auf eine bestehendes Produkt, um dieses zu kopieren und dem aktuellen Menü hinzuzufügen. Wahlweise können zusätzlich <strong>Auswahlmöglichkeiten verknüpft</strong> oder <strong>kopiert werden</strong>.",
-			"EN" : ""
+			"DE" : "Klicke auf eine bestehendes Produkt, um dieses zu kopieren und der aktuellen Kategory hinzuzufügen. Wahlweise können zusätzlich <strong>Auswahlmöglichkeiten verknüpft</strong> oder <strong>kopiert werden</strong>.",
+			"EN" : "Click on existing product to copy it and add to current category."+
+				"Optionally link or copy choices."
 		},
 		"menus.products.orphaned.title" : {
 			"DE" : "Verwaiste Produkte",
-			"EN" : ""
+			"EN" : "Orphaned products"
 		},
 		"menus.products.orphaned.description" : {
-			"DE" : "Liste aller Produkte die keinem Menü zugeordnet sind.",
-			"EN" : ""
+			"DE" : "Liste aller Produkte die keiner Kategorie zugeordnet sind.",
+			"EN" : "List of all products not assigned to a category."
 		},
 		"menus.editor.title.tooltip" : {
 			"DE" : "Titel editieren",
-			"EN" : ""
+			"EN" : "Edit title"
 		},
 		"menus.editor.description.tooltip" : {
 			"DE" : "Beschreibung editieren",
-			"EN" : ""
+			"EN" : "Edit description"
 		},
 		"product.editor.name.tooltip" : {
 			"DE" : "Name editieren",
-			"EN" : ""
+			"EN" : "Edit name"
 		},
 		"product.editor.shortDesc.tooltip" : {
 			"DE" : "Kurzbeschreibung editieren",
-			"EN" : ""
+			"EN" : "Edit short description"
 		},
 		"product.editor.longDesc.tooltip" : {
 			"DE" : "Beschreibung editieren",
-			"EN" : ""
+			"EN" : "Edit description"
 		},
 		"product.editor.price.tooltip" : {
 			"DE" : "Preis editieren",
-			"EN" : ""
+			"EN" : "Edit price"
 		},
 		"menus.product.field.active" : {
 			"DE" : "Produkt dem Gast anzeigen",
-			"EN" : ""
+			"EN" : "Show product to guest"
 		},
 		"menus.product.delete" : {
 			"DE" : "Produkt löschen",
-			"EN" : ""
+			"EN" : "Delete product"
 		},
 		"menus.product.action.move" : {
 			"DE" : "Verschieben nach ...",
-			"EN" : ""
+			"EN" : "Move to..."
 		},
 		"menus.product.action.move.tooltip" : {
-			"DE" : "Verschiebt das aktuelle Produkt<br/>in ausgewähltes Menü.",
-			"EN" : ""
+			"DE" : "Verschiebt das aktuelle Produkt<br/>in ausgewähltes Kategorie.",
+			"EN" : "Moves current current to selected category."
 		},
 		"menus.product.dialog.delete.title" : {
 			"DE" : "Produkt {{currentProduct.name}} löschen",
-			"EN" : ""
+			"EN" : "Delete {{currentProduct.name}} product"
 		},
 		"menus.product.dialog.delete.text" : {
 			"DE" : "<strong>{{currentProduct.name}}</strong> löschen? Dies kann nicht rückgängig gemacht werden!",
-			"EN" : ""
+			"EN" : "Delete <strong>{{currentProduct.name}}</strong>? This can't be undone!"
 		},
 		"menus.choices.title" : {
 			"DE" : "Auswahlmöglichkeiten",
-			"EN" : ""
+			"EN" : "Choices"
 		},
 		"menus.choices.list.new" : {
 			"DE" : "Neue Auswahl...",
-			"EN" : ""
+			"EN" : "New choice..."
 		},
 		"menus.choices.list.existing" : {
 			"DE" : "Bestehende Auswahl...",
-			"EN" : ""
+			"EN" : "Existing choice..."
 		},
 		"menus.choices.list.linked" : {
 			"DE" : "Abhängige Auswahl",
-			"EN" : ""
+			"EN" : "Dependent choice"
 		},
 		"menus.choices.list.remove.tooltip" : {
 			"DE" : "Auswahl von diesem Produkt entfernen.",
-			"EN" : ""
+			"EN" : "Remove choice from this product."
 		}, 
 		"menus.choices.link.description" : {
 			"DE" : "Klicke auf eine bestehende Auswahlmöglichkeit, um diese mit dem aktuellen Produkt zu <strong>verknüpfen</strong> oder zu <strong>kopieren</strong>.<br/>Es werden keine abhängigen Auswahlen angezeigt.",
-			"EN" : ""
+			"EN" : "Click on existing choice to link (or copy to) it with current product."
 		},
 		"menus.choices.link.title" : {
 			"DE" : "Alle Auswahlmöglichkeiten",
-			"EN" : ""
+			"EN" : "All choices"
 		},
 		"menus.choices.link.search" : {
 			"DE" : "Suchen: ",
-			"EN" : ""
+			"EN" : "Search: "
 		},
 		"menus.choices.link.action.copy" : {
 			"DE" : "Kopieren",
-			"EN" : ""
+			"EN" : "Copy"
 		},
 		"menus.choices.link.action.link" : {
 			"DE" : "Verknüpfen",
-			"EN" : ""
+			"EN" : "Link"
 		},
 		"menus.options.title" : {
 			"DE" : "Optionen",
-			"EN" : ""
+			"EN" : "Options"
 		},
 		"menus.options.list.new" : {
 			"DE" : "Neue Option...",
-			"EN" : ""
+			"EN" : "New option..."
 		},
 		"menu.editor.title" : {
 			"DE" : "Titel",
-			"EN" : ""
+			"EN" : "Title"
 		},
 		"menu.editor.description" : {
 			"DE" : "Beschreibung",
-			"EN" : ""
+			"EN" : "Description"
 		},
 		"product.editor.name" : {
 			"DE" : "Name",
-			"EN" : ""
+			"EN" : "Name"
 		},
 		"product.editor.price" : {
 			"DE" : "Preis",
-			"EN" : ""
+			"EN" : "Price"
 		},
 		"product.editor.price.validation" : {
 			"DE" : "Muss ein gültiger Preis sein (z.B. 9.95, oder 5).",
-			"EN" : ""
+			"EN" : "Must be a valid price (e. g. 9.95, or 5)."
 		},
 		"product.editor.shortDesc" : {
 			"DE" : "Kurz Beschreibung",
-			"EN" : ""
+			"EN" : "Short description"
 		},
 		"product.editor.longDesc" : {
 			"DE" : "Lange Beschreibung",
-			"EN" : ""
+			"EN" : "Long description"
 		},
 		"choice.editor.text" : {
 			"DE" : "Auswahltext",
-			"EN" : ""
+			"EN" : "Choice text"
 		},
 		"choice.editor.maxOccurence" : {
 			"DE" : "Maximale Auswahl von Optionen",
-			"EN" : ""
+			"EN" : "Maximum selected options"
 		},
 		"choice.editor.minOccurence" : {
 			"DE" : "Minimale Auswahl von Optionen",
-			"EN" : ""
+			"EN" : "Minimum selected options"
 		},
 		"choice.editor.included" : {
 			"DE" : "Anzahl von Inklusivoptionen",
-			"EN" : ""
+			"EN" : "Amount of options inclusive"
 		},
 		"menus.choices.field.maxOccurence" : {
-			"DE" : "Max. Auswahl: {{currentChoice.maxOccurence}} ",
-			"EN" : ""
+			"DE" : "Max. Auswahl: {{currentChoice.maxOccurence}}",
+			"EN" : "Max. selections: {{currentChoice.maxOccurence}}"
 		},
 		"menus.choices.field.minOccurence" : {
-			"DE" : "Min. Auswahl: {{currentChoice.minOccurence}} ",
-			"EN" : ""
+			"DE" : "Min. Auswahl: {{currentChoice.minOccurence}}",
+			"EN" : "Min. selections: {{currentChoice.minOccurence}}"
 		},
 		"menus.choices.field.included" : {
-			"DE" : "Optionen Inklusive: {{currentChoice.included}} ",
-			"EN" : ""
+			"DE" : "Optionen Inklusive: {{currentChoice.included}}",
+			"EN" : "Options inclusive: {{currentChoice.included}}"
 		},
 		"menus.choices.field.price" : {
 			"DE" : "Preis: {{currentChoice.price | kcurrency:activeBusiness.currency}}",
-			"EN" : ""
+			"EN" : "Price: {{currentChoice.price | kcurrency:activeBusiness.currency}}"
 		},
 		"menus.choices.field.linkedchoices" : {
 			"DE" : "Untergeordnete Auswahlen",
-			"EN" : ""
+			"EN" : "Subordinate choices"
 		},
 		"menus.choices.field.linkedproducts" : {
 			"DE" : "Wird verwendet in ...",
-			"EN" : ""
+			"EN" : "Used in ..."
 		},
 		"menus.choices.field.linkedproducts.help" : {
 			"DE" : "Listet alle Produkte auf<br/> die diese Auswahlmöglichkeit verwenden.",
-			"EN" : ""
+			"EN" : "Lists all products<br/> using this choice."
 		},
 		"menus.choices.action.remove" : {
-			"DE" : "Auswahl von Produkt entfernen",
-			"EN" : ""
+			"DE" : "Auswahl von Produkt entfernen.",
+			"EN" : "Remove choice from product."
 		},
 		"menus.choice.dialog.delete.text" : {
 			"DE" : "<strong>{{currentChoice.text}}</strong> wird von diesem Produkt entfernt.",
-			"EN" : ""
+			"EN" : "<strong>{{currentChoice.text}}</strong>  will be removed from this product."
 		},
 		"choice.editor.text.tooltip" : {
 			"DE" : "Auswahltext editieren",
-			"EN" : ""
+			"EN" : "Edit choice text"
 		},
 		"choice.editor.price.tooltip" : {
 			"DE" : "Preis editieren",
-			"EN" : ""
+			"EN" : "Edit price"
 		},
 		"choice.editor.maxOccurence.tooltip" : {
 			"DE" : "Maximale Optionsauswahl editieren",
-			"EN" : ""
+			"EN" : "Edit maximum choice selection"
 		},
 		"choice.editor.minOccurence.tooltip" : {
 			"DE" : "Minimale Optionsauswahl editieren",
-			"EN" : ""
+			"EN" : "Edit minimum choice selection"
 		},
 		"choice.editor.included.tooltip" : {
 			"DE" : "Anzahl inklusiv<br/>Optionen editieren",
-			"EN" : ""
+			"EN" : "Edit amount of inclusive options"
 		},
 		"option.editor.name.tooltip" : {
 			"DE" : "Name für Option editieren",
-			"EN" : ""
+			"EN" : "Edit option name"
 		},
 		"option.editor.price.tooltip" : {
 			"DE" : "Preis für Option editieren",
-			"EN" : ""
+			"EN" : "Edit option price"
 		},
 		"menu.new.default.title" : {
-			"DE" : "Mein Menü",
-			"EN" : ""
+			"DE" : "Meine Kategorie",
+			"EN" : "My category"
 		},
 		"product.new.default.name" : {
 			"DE" : "Mein Produkt",
-			"EN" : ""
+			"EN" : "My product"
 		},
 		"choice.new.default.text" : {
 			"DE" : "Meine Auswahlmöglichkeit",
-			"EN" : ""
+			"EN" : "My choice"
 		},
 		"option.new.default.name" : {
 			"DE" : "Meine Option",
-			"EN" : ""
+			"EN" : "My option"
 		},
 		"menus.choices.field.overridePrice.label" : {
 			"DE" : "Preisberechnung:",
-			"EN" : ""
+			"EN" : "Price calculation"
 		},
 		"menus.choices.field.overridePrice.none" : {
 			"DE" : "nichts",
-			"EN" : ""
+			"EN" : "none"
 		},
 		"menus.choices.field.overridePrice.overridesingleprice" : {
 			"DE" : "Einheitspreis pro Produkt",
-			"EN" : ""
+			"EN" : "One price for all"
 		},
 		"menus.choices.field.overridePrice.overridefixedsum" : {
 			"DE" : "Gesamtsumme (z. B. Menü)",
-			"EN" : ""
+			"EN" : "All options included (e.g. Menu)"
 		},
 		"menus.choices.field.parentselect.label" : {
 			"DE" : "Übergeordnete Auswahl:",
-			"EN" : ""
+			"EN" : "Superior choice"
 		},
 		"menus.choices.field.parentselect.nullparent" : {
 			"DE" : "--- auswählen ---",
-			"EN" : ""
+			"EN" : "--- select ---"
 		},
 		"menus.choices.parentselect.tooltip" : {
-			"DE" : "Ein hier ausgewähltes Element führt dazu, dass diese Auswahlmöglichkeit nur aktiv wird, ",
-			"EN" : ""+
-			"wenn der Kunde im übergeordneten Element eine Auswahl trifft."
+			"DE" : "Ein hier ausgewähltes Element führt dazu, dass diese Auswahlmöglichkeit nur aktiv wird, "+
+			"wenn der Kunde im übergeordneten Element eine Auswahl trifft.",
+			"EN" : "Select a superior choice to only enable current choice when the superior gets selected."
 		},
 		"menus.choices.linkedchoices.tooltip" : {
 			"DE" : "Auflistung aller Auswahlmöglichkeiten die von dieser abhängen.",
-			"EN" : ""
+			"EN" : "Listing of all choices depending on this one."
 		},
 		//spots partial
 		"spots.title" : {
-			"DE" : "Tische",
-			"EN" : ""
+			"DE" : "Spots",
+			"EN" : "Spots"
 		},
 		"spots.list.new" : {
-			"DE" : "Neuer Tisch...",
-			"EN" : ""
+			"DE" : "Neuer Spot...",
+			"EN" : "New spot..."
 		},
 		"spots.editor.name" : {
 			"DE" : "Name",
-			"EN" : ""
+			"EN" : "Name"
 		},
 		"spots.editor.barcode" : {
 		"DE" : "Barcode",
-			"EN" : ""
+			"EN" : "Barcode"
 		},
 		"spots.editor.name.tooltip" : {
 			"DE" : "Name editieren",
-			"EN" : ""
+			"EN" : "Edit name"
 		},
 		"spots.editor.barcode.tooltip" : {
 			"DE" : "Barcode editieren",
-			"EN" : ""
+			"EN" : "Edit barcode"
 		},
 		"spots.field.active" : {
 			"DE" : "Aktiv: Gäste können einchecken",
-			"EN" : ""
+			"EN" : "Activ: Guests can check-in"
 		},
 		"spot.action.delete" : {
-			"DE" : "Tisch löschen",
-			"EN" : ""
+			"DE" : "Spot löschen",
+			"EN" : "Delete spot"
 		},
 		"spot.action.delete.text" : {
 			"DE" : "{{currentSpot.name}} wird gelöscht!<br/>Bereits ausgedruckte Barcodes können nicht wiederverwendet werden!",
-			"EN" : ""
+			"EN" : "{{currentSpot.name}} will be deleted!<br/>Barcode can't be reused!"
 		},
 		//accounts partial
 		"accounts.title" : {
 			"DE" : "Benutzerverwaltung",
-			"EN" : ""
+			"EN" : "Account management"
 		},
 		"accounts.admin.exists.company" : {
 			"DE" : "Dieser Benutzer ist mit einem anderen Firmenkonto verknüpft!",
-			"EN" : ""
+			"EN" : "This user is assigned to another company account."
 		},
 		"accounts.admin.exists.user" : {
 			"DE" : "Dieser Benutzer existiert. Möchten Sie ihm Adminrechte für Ihre Firma gewähren?",
-			"EN" : ""
+			"EN" : "This user exists. Do you want to grant him administrative rights."  
 		},
 		"accounts.admin.exists.assigned" : {
 			"DE" : "Dieser Benutzer ist bereits Administrator.",
-			"EN" : ""
+			"EN" : "This user is already an administrator."
 		},
 		"accounts.tab.admin" : {
 			"DE" : "Admin",
-			"EN" : ""
+			"EN" : "Admin"
 		},
 		"accounts.tab.cockpit" : {
 			"DE" : "Service",
-			"EN" : ""
+			"EN" : "service"
 		},
 		"accounts.list.title" : {
 			"DE" : "Benutzer",
-			"EN" : ""
+			"EN" : "User"
 		},
 		"accounts.list.new" : {
 			"DE" : "Neuer Benutzer ...",
-			"EN" : ""
+			"EN" : "New user..."
 		},
 		"accounts.admin.new.title" : {
 			"DE" : "Neuer Administrator",
-			"EN" : ""
+			"EN" : "New administrator"
 		},
 		"accounts.admin.mail.check" : {
 			"DE" : "E-Mail prüfen",
-			"EN" : ""
+			"EN" : "Check email"
 		},
 		"accounts.create" : {
 			"DE" : "Anlegen",
-			"EN" : ""
+			"EN" : "Create"
 		},
 		"accounts.admin.new.email.placeholder" : {
 			"DE" : "Account E-Mail",
-			"EN" : ""
+			"EN" : "Account email"
 		},
 		"accounts.admin.new.name.placeholder" : {
 			"DE" : "Vor- und Nachname",
-			"EN" : ""
+			"EN" : "Fore- and lastname"
 		},
 		"accounts.admin.businesses.list.title" : {
 			"DE" : "Zugewiesene Betriebe",
-			"EN" : ""
+			"EN" : "Assigned businesses"
 		},
 		"accounts.admin.businesses.list.description" : {
 			"DE" : "Für hier aufgelistete Betriebe hat der Benutzer Administrationsrechte.<br/>Dies beinhaltet auch das Servicecockpit.",
-			"EN" : ""
+			"EN" : "User has administrative rights for here listed businesses.<br/>This includes service cockpit."
 		},
 		"accounts.all.businesses.list.title" : {
 			"DE" : "Verfügbare Betriebe",
-			"EN" : ""
+			"EN" : "Available businesses"
 		},
 		"accounts.all.businesses.list.description" : {
 			"DE" : "Drag&Drop in die Liste der zugewiesenen Betriebe um dem Benutzer entsprechende Rechte zu gewähren.",
-			"EN" : ""
+			"EN" : "Drag&Drop to list of assigned businesses to grant coressponding rights."
 		},
 		"accounts.businesses.moveable.tooltip" : {
 			"DE" : "Ziehen um zuzuweisen.",
-			"EN" : ""
+			"EN" : "Drag to assign."
 		},
 		"accounts.cockpit.new.title" : {
 			"DE" : "Neuer Servicebenuzer",
-			"EN" : ""
+			"EN" : "New service user"
 		},
 		"accounts.cockpit.edit.title" : {
 			"DE" : "Servicebenuzer editieren",
-			"EN" : ""
+			"EN" : "Edit service user"
 		},
 		"accounts.cockpit.businesses.list.description" : {
-		"DE" : "Für hier aufgelistete Betriebe hat der Benutzer Zugriffsrechte auf das Service Cockpit.",
-			"EN" : ""
+			"DE" : "Für hier aufgelistete Betriebe hat der Benutzer Zugriffsrechte auf das Service Cockpit.",
+			"EN" : "User has service cockpit access for here listed businesses"
 		},
 		//general
 		"common.warning.title" : {
 			"DE" : "Achtung!",
-			"EN" : ""
+			"EN" : "Warning!"
 		},
 		"common.hint.title" : {
 			"DE" : "Hinweis!",
-			"EN" : ""
+			"EN" : "Hint!"
 		},
 		"common.ok" : {
 			"DE" : "Ok",
-			"EN" : ""
+			"EN" : "Ok"
 		},
 		"common.cancel" : {
 			"DE" : "Abbrechen",
-			"EN" : ""
+			"EN" : "Cancel"
 		},
 		"common.add" : {
 			"DE" : "Hinzufügen",
-			"EN" : ""
+			"EN" : "Add"
 		},
 		"common.delete" : {
 			"DE" : "Löschen",
-			"EN" : ""
+			"EN" : "Delete"
 		},
 		"common.save" : {
 			"DE" : "Speichern",
-			"EN" : ""
+			"EN" : "Save"
 		},
 		"common.search" : {
 			"DE" : "Suchen",
-			"EN" : ""
+			"EN" : "Search"
 		},
 		"common.password" : {
 			"DE" : "Passwort",
-			"EN" : ""
+			"EN" : "Password"
 		},
 		"general.sortable" : {
 			"DE" : "Ziehen um zu sortieren",
-			"EN" : ""
+			"EN" : "Drag to sort"
 		},
 		//breadcrumb
 		"breadcrumb.home" : {
 			"DE" : "Home",
-			"EN" : ""
+			"EN" : "Home"
 		},
 		"breadcrumb.businesses" : {
-			"DE" : "Restaurants",
-			"EN" : ""
+			"DE" : "Betriebe",
+			"EN" : "businesses"
 		},
 		"breadcrumb.menus" : {
-			"DE" : "Menüs",
-			"EN" : ""
+			"DE" : "Kategorien",
+			"EN" : "Categories"
 		},
 		"breadcrumb.tables" : {
-			"DE" : "Tische",
-			"EN" : ""
+			"DE" : "Spots",
+			"EN" : "Spots"
 		},
 		//file upload
 		"fileupload.button.add" : {
 			"DE" : "Bild auswählen ...",
-			"EN" : ""
+			"EN" : "Select image"
 		},
 		"fileupload.image.label" : {
 			"DE" : "Ausgewähltes Bild: ",
-			"EN" : ""
+			"EN" : "Seelcted image: "
 		},
 		"fileupload.button.submit.saving" : {
 			"DE" : "Speichere ...",
-			"EN" : ""
+			"EN" : "Save..."
 		},
 		"fileupload.submit.error" : {
 			"DE" : "Beim Hochladen ist ein Fehler aufgetreten.",
-			"EN" : ""
+			"EN" : "An error occurred during upload."
 		},
 		"propertyeditor.error.required" : {
 			"DE" : "Bitte einen Text eingeben.",
-			"EN" : ""
+			"EN" : "Please enter a text."
 		},
 		"propertyeditor.error.number" : {
 			"DE" : "Bitte eine Zahl eingeben.",
-			"EN" : ""
+			"EN" : "Please enter a number."
 		},
 		"propertyeditor.error.email" : {
 			"DE" : "Bitte eine gültige E-Mail-Adresse eingeben.",
-			"EN" : ""
+			"EN" : "Please enter a valid email."
 		},
 		//common error messages
 		"common.error.404" : {
 			"DE" : "Eine Ressource konnte nicht geladen werden.",
-			"EN" : ""
+			"EN" : "Resource not available."
 		},
 		"common.error" : {
 			"DE" : "Es gibt ein Problem mit der Verbindung zum Service.",
-			"EN" : ""
+			"EN" : "A connection problem to the service exists."
 		}
 	};
 	// var map = {
