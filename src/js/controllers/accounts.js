@@ -341,7 +341,7 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 			return;
 		}
 
-		$http.put("/accounts/setup/" + adminActivationToken, {
+		$http.put("/b/accounts/setup/" + adminActivationToken, {
 			"password" : $scope.adminActivationPassword
 		}).success(function(data, status) {
 			$scope.adminActivationPassword = null;
