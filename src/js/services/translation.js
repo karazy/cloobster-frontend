@@ -940,6 +940,19 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Für hier aufgelistete Betriebe hat der Benutzer Zugriffsrechte auf das Service Cockpit.",
 			"EN" : "User has service cockpit access for here listed businesses"
 		},
+		//activate account partial
+		"account.activation.admin.title" : {
+			"DE" : "Account aktivieren",
+			"EN" : "Activate account"
+		},
+		"account.activation.admin.submit" : {
+			"DE" : "Aktivieren",
+			"EN" : "Activate"
+		},
+		"account.activation.admin.description" : {
+			"DE" : "Um die Aktivierung abzuschliessen, füllen Sie bitte die fehlenden Felder aus.",
+			"EN" : "To complete your account activation, please enter the missing details below!"
+		},
 		//general
 		"common.warning.title" : {
 			"DE" : "Achtung!",
