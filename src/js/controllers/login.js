@@ -127,6 +127,10 @@ Cloobster.Login = function($scope, facebookApi, loginService) {
 		return loginService.getAccount();
 	};
 
+	$scope.getDisplayName = function() {
+		return loginService.getAccount().login || loginService.getAccount().email;
+	};
+
 	// Check for saved login data.
 	if(loginService.existsSavedLogin() && ($scope.loggedIn === false)) {
 		// Set so that we can bind views and display e.g. a progress bar.
