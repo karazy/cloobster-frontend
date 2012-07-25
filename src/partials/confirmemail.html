@@ -3,12 +3,12 @@
     <div ng-show='emailConfirmed'>
     	<h2>Your E-Mail was confirmed</h2>
         <p>
-            You can start using the Cloobster service after your account was activated.<br>
-            You will retrieve an e-mail as soon as your account is activated.
+            You can start using the Cloobster service immediately.
         </p>
+        <p><a href="#/login" class="btn btn-primary">Login</a></p>
     </div>
     <div class='alert alert-error fade in' ng-show='error'>
-        <h2>We're are sorry an error occured.</h2>
+        <h2>Sorry, an error occured.</h2>
         <strong>Error!</strong> {{errorMessage}}
     </div>
 </div>

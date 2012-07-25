@@ -735,7 +735,7 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 		confirmEmail: function (token) {
 			loginDeferred = $q.defer();
 			
-			$http.put( appConfig['serviceUrl'] + '/b/accounts/emailconfirmation', {confirmationToken: token}).
+			$http.put( appConfig['serviceUrl'] + '/b/accounts/confirmation/' + token, null).
 			success(function (data) {
 				// resolve the promise with the JSON object returned by the server.
 				loginDeferred.resolve(data);
@@ -876,6 +876,7 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 		/**
 		* @name Cloobster.services.login#setPresetLogin
 		* Set the presetLogin.
+		* @param {string} value for presetLogin
 		*/
 		setPresetLogin : function(value) {
 			presetLogin = value;
@@ -883,7 +884,8 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 
 		/**
 		* @name Cloobster.services.login#setPresetLogin
-		* Set the presetLogin.
+		* Get the presetLogin.
+		* @return {string} presetLogin
 		*/
 		getPresetLogin : function() {
 			return presetLogin;

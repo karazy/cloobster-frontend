@@ -151,7 +151,8 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 	function confirmEmail() {
 		loginService.confirmEmail($routeParams.emailToken).then(
 			function(result) {
-				$scope.emailConfirmed = result.emailConfirmed;
+				$scope.emailConfirmed = true;
+				loginService.setPresetLogin(result['login']);
 			},
 			handleError);
 	}

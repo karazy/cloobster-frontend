@@ -17,54 +17,56 @@
 			<div class="value">{{account.email}}</div>
 		</div>
 	</div>
-	<div simple-property-editor editor-title="Name" editor-property="company.name" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
-		<h2 ng-class="getEditModeClass('company')">{{company.name}}</h2>
-	</div>
-	<div class="well">
-		<div class="row-fluid">
-			<div class="span6" ng-hide="editModeCompany">
-				<button type="button" class="btn btn-primary" ng-click="toggleEditMode('company')" l="profile.company.action.edit.enable">Edit Company</button> 				
-			</div>
-			<div class="span6" ng-show="editModeCompany">
-				<button type="button" class="btn btn-primary" ng-click="toggleEditMode('company')" l="profile.company.action.edit.disable">Done editing</button> 
-				<span l="profile.company.action.edit.disable.hint">Click a company profile feature to edit.</span>
-			</div>
+	<div show-role="companyowner">
+		<div simple-property-editor editor-title="Name" editor-property="company.name" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
+			<h2 ng-class="getEditModeClass('company')">{{company.name}}</h2>
 		</div>
-		<div simple-property-editor editor-title="profile.company.address.editor.title" editor-property="company.address" editor-required editor-on-save="saveCompany()" editor-enabled="editModeCompany">
-			<div class="data-element" ng-class="getEditModeClass('company')">
-			<div class="key" l="profile.company.address">Address</div>
-				<div class="value">{{company.address}}</div>
+		<div class="well">
+			<div class="row-fluid">
+				<div class="span6" ng-hide="editModeCompany">
+					<button type="button" class="btn btn-primary" ng-click="toggleEditMode('company')" l="profile.company.action.edit.enable">Edit Company</button> 				
+				</div>
+				<div class="span6" ng-show="editModeCompany">
+					<button type="button" class="btn btn-primary" ng-click="toggleEditMode('company')" l="profile.company.action.edit.disable">Done editing</button> 
+					<span l="profile.company.action.edit.disable.hint">Click a company profile feature to edit.</span>
+				</div>
 			</div>
-		</div>
-		<div simple-property-editor editor-title="profile.company.city.editor.title" editor-property="company.city" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
-			<div class="data-element" ng-class="getEditModeClass('company')">
-				<div class="key" l="profile.company.city">City</div>
-				<div class="value">{{company.city}}</div>
+			<div simple-property-editor editor-title="profile.company.address.editor.title" editor-property="company.address" editor-required editor-on-save="saveCompany()" editor-enabled="editModeCompany">
+				<div class="data-element" ng-class="getEditModeClass('company')">
+				<div class="key" l="profile.company.address">Address</div>
+					<div class="value">{{company.address}}</div>
+				</div>
 			</div>
-		</div>
-		<div simple-property-editor editor-title="profile.company.postcode.editor.title" editor-property="company.postcode" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
-			<div class="data-element" ng-class="getEditModeClass('company')" >
-				<div class="key" l="profile.company.postcode">Postcode</div>
-				<div class="value">{{company.postcode}}</div>
+			<div simple-property-editor editor-title="profile.company.city.editor.title" editor-property="company.city" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
+				<div class="data-element" ng-class="getEditModeClass('company')">
+					<div class="key" l="profile.company.city">City</div>
+					<div class="value">{{company.city}}</div>
+				</div>
 			</div>
-		</div>
-		<div simple-property-editor editor-title="profile.company.phone.editor.title" editor-property="company.phone" editor-on-save="saveCompany()" editor-enabled="editModeCompany">
-			<div class="data-element" ng-class="getEditModeClass('company')" >
-				<div class="key" l="profile.company.phone">Business phone</div>
-				<div class="value">{{company.phone}}</div>
+			<div simple-property-editor editor-title="profile.company.postcode.editor.title" editor-property="company.postcode" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
+				<div class="data-element" ng-class="getEditModeClass('company')" >
+					<div class="key" l="profile.company.postcode">Postcode</div>
+					<div class="value">{{company.postcode}}</div>
+				</div>
 			</div>
-		</div>
-		<div simple-property-editor editor-title="profile.company.url.editor.title" editor-property="company.url" editor-on-save="saveCompany()" editor-enabled="editModeCompany">
-			<div class="data-element" ng-class="getEditModeClass('company')">
-				<div class="key" l="profile.company.url">Website</div>
-				<div class="value">{{company.url}}</div>
+			<div simple-property-editor editor-title="profile.company.phone.editor.title" editor-property="company.phone" editor-on-save="saveCompany()" editor-enabled="editModeCompany">
+				<div class="data-element" ng-class="getEditModeClass('company')" >
+					<div class="key" l="profile.company.phone">Business phone</div>
+					<div class="value">{{company.phone}}</div>
+				</div>
 			</div>
-		</div>
-		<div class="data-element">
-			<div class="key" l="profile.company.country">Country</div>
-			<select ng-model="company.country" class="value" ng-disabled="!editModeCompany" ng-change="saveCompany()" required>
-				<option selected="selected" value="DE">Germany</option>
-			</select>
+			<div simple-property-editor editor-title="profile.company.url.editor.title" editor-property="company.url" editor-on-save="saveCompany()" editor-enabled="editModeCompany">
+				<div class="data-element" ng-class="getEditModeClass('company')">
+					<div class="key" l="profile.company.url">Website</div>
+					<div class="value">{{company.url}}</div>
+				</div>
+			</div>
+			<div class="data-element">
+				<div class="key" l="profile.company.country">Country</div>
+				<select ng-model="company.country" class="value" ng-disabled="!editModeCompany" ng-change="saveCompany()" required>
+					<option selected="selected" value="DE">Germany</option>
+				</select>
+			</div>
 		</div>
 	</div>
 
