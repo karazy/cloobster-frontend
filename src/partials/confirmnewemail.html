@@ -1,0 +1,13 @@
+<div class="confirmed-message">
+    <h1>E-Mail Confirmation</h1>
+    <div ng-show='emailConfirmed'>
+    	<h2>Your E-Mail was confirmed</h2>
+        <p>
+            All new messages will be send to the new address.
+        </p>
+    </div>
+    <div class='alert alert-error fade in' ng-show='error'>
+        <h2>Sorry, an error occured.</h2>
+        <strong>Error!</strong> {{errorMessage}}
+    </div>
+</div>

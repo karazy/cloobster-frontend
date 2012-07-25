@@ -130,7 +130,7 @@ Cloobster.services.factory('Account',['cloobsterResource', function(cloobsterRes
 	var Account = cloobsterResource('/b/accounts/:id',
 			//params
 			{
-
+				'id': '@id'
 			},
 			//Custom actions can be called with $'methodname' on the Account.
 			{
@@ -139,7 +139,12 @@ Cloobster.services.factory('Account',['cloobsterResource', function(cloobsterRes
 				* 	Called to register a new business account for the Cloobster service.
 				*	@params {Object} Object containing all the properties of the Account and Company to be created.
 				*/
-				register: { method: 'POST' }
+				'register': { method: 'POST' },
+				/*
+				* @name Cloobster.services.Account#$update
+				* Like a save but uses PUT instead of POST. Feels more restful.
+				*/
+				'update': { method: 'PUT'}
 			}
 		);
 
@@ -163,7 +168,7 @@ Cloobster.services.factory('Business',['cloobsterResource', function($resource) 
 			return $resource('/b/businesses/:id',
 					//params
 					{
-							'id': '@id'
+						'id': '@id'
 					},
 					//Custom actions can be called with $'methodname' on the Business.
 					{
@@ -736,6 +741,28 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 			loginDeferred = $q.defer();
 			
 			$http.put( appConfig['serviceUrl'] + '/b/accounts/confirmation/' + token, null).
+			success(function (data) {
+				// resolve the promise with the JSON object returned by the server.
+				loginDeferred.resolve(data);
+			}).error(loginError);
+
+			return loginDeferred.promise;
+		},
+		/**
+		*	@name Cloobster.services.login#confirmEmailUpdate
+		*
+		*	Confirm the new email adress of a user account with a token
+		*	recieved from a confirmation mail.
+		*
+		*	@params {string} token, unique id created during account creation.
+		*	@returns {Object} {@link angular.module.ng.$q promise} with the standard 'then' method,
+		*		will be resolved with the confirmation data from the Server
+		*		or rejected with a reason for the failure.
+		*/
+		confirmEmailUpdate: function (token) {
+			loginDeferred = $q.defer();
+			
+			$http.put( appConfig['serviceUrl'] + '/b/accounts/email-confirmation/' + token, null).
 			success(function (data) {
 				// resolve the promise with the JSON object returned by the server.
 				loginDeferred.resolve(data);

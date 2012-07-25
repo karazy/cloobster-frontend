@@ -1040,6 +1040,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Beim Hochladen ist ein Fehler aufgetreten.",
 			"EN" : "An error occurred during upload."
 		},
+		"propertyeditor.repeat.placeholder" : {
+			"DE" : "Hier die Eingabe wiederholen",
+			"EN" : "Repeat the input here"
+		},
 		"propertyeditor.error.required" : {
 			"DE" : "Bitte einen Text eingeben.",
 			"EN" : "Please enter a text."

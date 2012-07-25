@@ -15,7 +15,7 @@
 * 	@author Frederik Reifschneider
 * 	@author Nils Weiher
 */
-Cloobster.Registration = function($scope, $location, Account, facebookApi, $routeParams, loginService, $log) {
+Cloobster.Registration = function($scope, $location, Account, facebookApi, $routeParams, loginService, $log, $http) {
 	var emptyAccount = {
 			'name' : '',
 			'login' : '',
@@ -33,7 +33,8 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 			'facebookUID' : null
 		},
 		account,
-		registrationUrlHash = /\/?account\/confirm\/.*/,
+		registrationUrlHash = /\/?accounts\/confirm\/.*/,
+		newEmailUrlHash = /\/?accounts\/confirm-email\/.*/,
 		passwordRegex= /^(?=[!-~]{6,}$)(?=.*\\d)(?=.*[^A-Za-z0-9]).*$/;
 
 	//indicates in a session if user already registered
@@ -148,6 +149,19 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 	* Token is read from URL.
 	* @private
 	*/
+	function confirmEmailUpdate() {
+		loginService.confirmEmailUpdate($routeParams.emailToken).then(
+			function(result) {
+				$scope.emailConfirmed = true;
+			},
+			handleError);
+	}
+
+	/**
+	* Activates and account by sending an email token to the server.
+	* Token is read from URL.
+	* @private
+	*/
 	function confirmEmail() {
 		loginService.confirmEmail($routeParams.emailToken).then(
 			function(result) {
@@ -205,7 +219,11 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 		confirmEmail();
 	}
 
+	if($location.url().match(newEmailUrlHash) || $location.hash().match(newEmailUrlHash)) {
+		confirmEmailUpdate();
+	}
+
 	//set default values on load
 	$scope.cancel();
 }
-Cloobster.Registration.$inject = ['$scope', '$location', 'Account', 'facebookApi', '$routeParams', 'login', '$log'];
+Cloobster.Registration.$inject = ['$scope', '$location', 'Account', 'facebookApi', '$routeParams', 'login', '$log', '$http'];

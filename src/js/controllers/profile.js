@@ -10,7 +10,7 @@
 * 	View and manage profiles.
 * 	@constructor
 */
-Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, $log) {
+Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, $log, Account, handleError) {
 	
 	var ImageResource,
 		/** Holds the Id of the active modal dialog. */
@@ -22,24 +22,13 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	};
 
 	/** Logged in account */
-	$scope.account;
-
-	//Indicates if logo form is in view or edit mode.
-	// $scope.logoFormMode = "view";
-
-	//Indicates if company profile is in view or edit mode.
-	// $scope.profileFormMode = "view";	
+	$scope.account = null;
 
 	//Indicates if logo upload is finished. And toggles the save button accordingly.
 	$scope.logoUploadFinished = false;
 
 	//resource to handle CRUD for logo
 	$scope.logoResource = null;
-
-	// error flag
-	$scope.error = false;
-	// error message
-	$scope.errorMessage = "";
 
 	$scope.activeModel = null;
 
@@ -117,14 +106,6 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 		$scope.error = false;
 	};
 
-	// $scope.editProfile = function() {
-	// 	$scope.profileFormMode = "edit";
-	// };
-
-	// $scope.cancelProfile = function() {
-	// 	$scope.profileFormMode = "view";
-	// };
-
 	/**
 	* Switches between view and edit mode.
 	* @param editMode
@@ -154,67 +135,6 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 		}
 		
 	}
-
-	// $scope.editSimpleData = function(title, model, property, inputType, modelType) {
-	// 	var modalDialog = "";
-
-	// 	//no edit mode active, return
-	// 	if(!$scope.editModeCompany && !$scope.editModeAccount) {
-	// 		return;
-	// 	}
-
-	// 	if((modelType == "company" && $scope.editModeCompany) || (modelType == "account" && $scope.editModeAccount) ) {
-
-	// 		$scope.activeProperty = {
-	// 			'title' : title,
-	// 			'value' : model[property],
-	// 			'property' : property
-	// 		};
-
-	// 		$scope.activeModel = model;
-
-	// 		switch(inputType) {
-	// 			case 'text': modalDialog = '#textModal'; break;
-	// 			case 'textarea': modalDialog = '#textareaModal'; break;
-	// 			case 'file': modalDialog = '#fileModal'; break;
-	// 			default: modalDialog = '#textModal'; break;
-	// 		};
-
-	// 		activeModalDialog = modalDialog;
-
-	// 		$(modalDialog).on('hide', function () {
-	//   			$scope.cancelProperty();
-	// 		});
-
-	// 		jQuery(modalDialog).modal('toggle');
-	// 	}
-	// };
-
-	/**
-	* Save edited property.
-	*/
-	// $scope.saveProperty = function() {		
-	// 	var saveButton,
-	// 		property;
-
-	// 	if(!$scope.activeModel || !$scope.activeProperty) {
-	// 		return;
-	// 	}		
-
-	// 	saveButton = $(activeModalDialog).find("button[type=submit]");
-
-	// 	property = $scope.activeProperty.property;
-
-	// 	if($scope.activeModel.hasOwnProperty(property)) {
-	// 		saveButton.button("loading");
-	// 		$scope.activeModel[property] = $scope.activeProperty.value;
-
-	// 		$scope.activeModel.$update(function() {				
-	// 			$(activeModalDialog).modal('hide');
-	// 			saveButton.button("reset");
-	// 		});
-	// 	}
-	// };
 	
 	/**
 	* Save company.
@@ -222,11 +142,16 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	$scope.saveCompany = function() {
 		$scope.company.$update(function() {
 			//success
-		}, function(data) {
-			//error
-			$scope.error = true;
-			$scope.errorMessage = data.status;
-		});
+		}, handleError);
+	}
+
+	/**
+	* Save company.
+	*/
+	$scope.saveAccount = function() {
+		$scope.account.$update(function() {
+			//success
+		}, handleError);
 	}
 
 	/**
@@ -274,7 +199,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	* Loads profile data if user is logged in.
 	*/
 	function loadProfileData() {
-		$scope.account = loginService.getAccount();
+		$scope.account = new Account(loginService.getAccount());
 
 		$scope.company = Company.buildResource().get({
 			id: $scope.account.companyId
@@ -327,4 +252,4 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	};
 
 };
-Cloobster.Profile.$inject = ['$scope', '$http', 'facebookApi', 'login', 'Company', '$log'];
+Cloobster.Profile.$inject = ['$scope', '$http', 'facebookApi', 'login', 'Company', '$log', 'Account', 'errorHandler'];

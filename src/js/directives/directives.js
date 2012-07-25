@@ -34,7 +34,7 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 				    '<h3 l="{{editorTitle}}">Edit property</h3>'+
 				 '</div>'+
 				'<form name="simplePropertyForm" novalidate ng-submit="save()" class="edit-property-form">'+
-					 ' <div class="modal-body">'+
+					'<div class="modal-body">'+
 					 	'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty.$invalid)">'+
 					 		'<div class="controls">'+
 					 			createFormInput(attrs)+
@@ -46,7 +46,8 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 									'<span ng-show="simplePropertyForm.simpleProperty.$error.email" >+'+ l('propertyeditor.error.email')+'</span>'+									
 								'</div>'+
 							'</div>'+
-					'  </div>'+
+						'</div>'+
+						createRepeatInput(attrs)+
 					'</div>'+
 					'<div class="modal-footer">'+
 						'<button type="button" class="btn" data-dismiss="modal">'+l('common.cancel')+'</button>'+
@@ -64,7 +65,6 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 		        post: function postLink(scope, iElement, iAttrs, controller) {
 		        	var dialog = iElement.find('div.modal'),
 		        		input = iElement.find('input, textarea');
-		        	//backup original value
 
 		        	scope.save = function () {
 		        		//only save when form is valid
@@ -83,10 +83,17 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 		        		input.trigger("focus");
 		        	}
 
+		        	scope.matchInput = function() {
+						if(scope.simplePropertyForm.simpleProperty.$viewValue !== scope.simplePropertyForm.repeatProperty.$viewValue) {
+							scope.simplePropertyForm.repeatProperty.$setValidity("match", false);
+						} else {
+							scope.simplePropertyForm.repeatProperty.$setValidity("match", true);
+						}
+					}
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {		   
 		        		if(scope.editorEnabled() == true || typeof scope.editorEnabled() == 'undefined') {
-		        			scope.$apply('editorValue = editorProperty()');
+		        			scope.$apply('editorValue = editorProperty();editorRepeat=""');
 						
 							dialog.modal('toggle');	
 							input.trigger("focus");
@@ -105,6 +112,43 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 	}
 
 	/**
+	* Creates a form input control group for repeated input.
+	* @param attrs
+	*	Attributes object containing configuration.
+	*/
+	function createRepeatInput(attrs) {
+		var required = attrs.hasOwnProperty('editorRequired') ? "required='required'" : "",
+			repeat = attrs.hasOwnProperty('editorRepeat'),
+			pattern = attrs.hasOwnProperty('editorPattern') ? "ng-pattern='"+attrs.editorPattern+"'" : "",
+			type = 	attrs.hasOwnProperty('editorType') ? attrs.editorType : "text",
+			inputHtml;
+		
+		if(!repeat)
+			return '';
+
+		if(type == "textarea") {
+			inputHtml = '';
+		} else {
+			if(type != "email" && type != "password" && type != "number") {
+				type = "text";
+			}
+
+			inputHtml = '<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.repeatProperty.$invalid)">'+
+		 		'<div class="controls">'+
+		 			'<input type="'+type+'" name="repeatProperty" ng-model="editorRepeat" l-attribute="placeholder" l="propertyeditor.repeat.placeholder" required ng-change="matchInput()"></input>'+
+		 			'<i class="icon-remove icon-black" ng-click="clearInput()"></i>'+
+					'<div class="help-inline" ng-show="simplePropertyForm.repeatProperty.$dirty && simplePropertyForm.repeatProperty.$invalid">'+
+						'<span ng-show="simplePropertyForm.repeatProperty.$error.required">'+ l('propertyeditor.error.required') +'</span>'+
+						'<span ng-show="simplePropertyForm.repeatProperty.$error.match">'+ l('propertyeditor.error.match') +'</span>'+
+					'</div>'+
+				'</div>'+
+			'</div>';
+		}
+
+		return inputHtml;
+	}
+
+	/**
 	* Creates an html input tag based on the given configuration.
 	* @param attrs
 	*	Attributes object containing configuration.
@@ -112,6 +156,7 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 	function createFormInput(attrs) {
 		var required = attrs.hasOwnProperty('editorRequired') ? "required='required'" : "",
 			pattern = attrs.hasOwnProperty('editorPattern') ? "ng-pattern='"+attrs.editorPattern+"'" : "",
+			repeat = attrs.hasOwnProperty('editorRepeat') ? "ng-change='matchInput()'" : "",
 			type = 	attrs.hasOwnProperty('editorType') ? attrs.editorType : "text",
 			inputHtml;
 
@@ -122,7 +167,7 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 				type = "text";
 			}
 
-			inputHtml = '<input type="'+type+'" name="simpleProperty" ng-model="editorValue" '+required+' '+pattern+'></input>';
+			inputHtml = '<input type="'+type+'" name="simpleProperty" ng-model="editorValue" '+required+' '+pattern+' '+repeat+'></input>';
 		}
 
 		return inputHtml;
@@ -319,7 +364,7 @@ Cloobster.directives.directive('l', ['$locale', 'lang', '$interpolate', function
 
 
 	//link function
-			return function (scope, iElement, iAttrs, controller) {
+	return function (scope, iElement, iAttrs, controller) {
 		var key = iAttrs.l,
 			//attribute whos value to translate, if nothing provided html content is replaced
 			replaceAttr = iAttrs.lAttribute,
@@ -356,8 +401,8 @@ Cloobster.directives.directive('l', ['$locale', 'lang', '$interpolate', function
 			});
 		}
 
-		iAttrs.$observe('l', watchTranslation)
-		watchTranslation(key)
+		iAttrs.$observe('l', watchTranslation);
+		watchTranslation(key);
 	}
 }]);
 
