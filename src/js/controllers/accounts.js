@@ -411,6 +411,9 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 	$scope.$watch('loggedIn', function(newVal, oldVal) {
 		if(newVal == true) {
 			account = loginService.getAccount();
+			if(account['role'] == "businessadmin") {
+				$scope.tab = 'cockpit';
+			}
 			$scope.loadAdminAccounts();
 			$scope.loadAllBusinesses();
 			$scope.loadCockpitAccounts();
