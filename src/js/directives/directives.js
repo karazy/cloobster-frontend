@@ -64,7 +64,7 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 		        },
 		        post: function postLink(scope, iElement, iAttrs, controller) {
 		        	var dialog = iElement.find('div.modal'),
-		        		input = iElement.find('input, textarea');
+		        		input = iElement.find('input.property-input, textarea.property-input');
 
 		        	scope.save = function () {
 		        		//only save when form is valid
@@ -80,6 +80,9 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 		        	*/
 		        	scope.clearInput = function() {
 		        		scope.editorValue = "";
+		        		if(scope['editorRepeat']) {
+		        			scope['editorRepeat'] = "";
+		        		}
 		        		input.trigger("focus");
 		        	}
 
@@ -136,7 +139,6 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 			inputHtml = '<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.repeatProperty.$invalid)">'+
 		 		'<div class="controls">'+
 		 			'<input type="'+type+'" name="repeatProperty" ng-model="editorRepeat" l-attribute="placeholder" l="propertyeditor.repeat.placeholder" required ng-change="matchInput()"></input>'+
-		 			'<i class="icon-remove icon-black" ng-click="clearInput()"></i>'+
 					'<div class="help-inline" ng-show="simplePropertyForm.repeatProperty.$dirty && simplePropertyForm.repeatProperty.$invalid">'+
 						'<span ng-show="simplePropertyForm.repeatProperty.$error.required">'+ l('propertyeditor.error.required') +'</span>'+
 						'<span ng-show="simplePropertyForm.repeatProperty.$error.match">'+ l('propertyeditor.error.match') +'</span>'+
@@ -161,13 +163,13 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 			inputHtml;
 
 		if(type == "textarea") {
-			inputHtml = '<textarea rows="4" cols="100" name="simpleProperty" ng-model="editorValue" '+required+' '+pattern+'></textarea>';
+			inputHtml = '<textarea class="property-input" rows="4" cols="100" name="simpleProperty" ng-model="editorValue" '+required+' '+pattern+'></textarea>';
 		} else {
 			if(type != "email" && type != "password" && type != "number") {
 				type = "text";
 			}
 
-			inputHtml = '<input type="'+type+'" name="simpleProperty" ng-model="editorValue" '+required+' '+pattern+' '+repeat+'></input>';
+			inputHtml = '<input class="property-input" type="'+type+'" name="simpleProperty" ng-model="editorValue" '+required+' '+pattern+' '+repeat+'></input>';
 		}
 
 		return inputHtml;
