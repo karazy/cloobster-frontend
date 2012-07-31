@@ -15,7 +15,7 @@
 * 	@author Frederik Reifschneider
 * 	@author Nils Weiher
 */
-Cloobster.Registration = function($scope, $location, Account, facebookApi, $routeParams, loginService, $log, $http) {
+Cloobster.Registration = function($scope, $location, Account, facebookApi, $routeParams, loginService, $log, $http, handleError) {
 	var emptyAccount = {
 			'name' : '',
 			'login' : '',
@@ -68,10 +68,7 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 		if($scope.registrationForm.$valid) {
 				account.$register(function (account) { 
 				$scope.registered = true;
-			}, function (result) { 
-				$scope.error = true;
-				$scope.errorValue = result.data;
-			});			
+			}, handleError);			
 		} else {
 			$log.info("Can't submit form because it is not valid.");
 		}
@@ -150,11 +147,9 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 	* @private
 	*/
 	function confirmEmailUpdate() {
-		loginService.confirmEmailUpdate($routeParams.emailToken).then(
-			function(result) {
+		loginService.confirmEmailUpdate($routeParams.emailToken).success(function(result) {
 				$scope.emailConfirmed = true;
-			},
-			handleError);
+			}).error(handleError);
 	}
 
 	/**
@@ -163,29 +158,11 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 	* @private
 	*/
 	function confirmEmail() {
-		loginService.confirmEmail($routeParams.emailToken).then(
-			function(result) {
+		loginService.confirmEmail($routeParams.emailToken).success(function(result) {
 				$scope.emailConfirmed = true;
 				loginService.setPresetLogin(result['login']);
-			},
-			handleError);
+			}).error(handleError);
 	}
-
-	/**
-	* @private
-	* 
-	*/
-	function handleError (errorData) {
-		$scope.error = true;
-		$scope.errorMessage = errorData.message;
-	}
-
-	/**
-	* Set error false and hide the error box.
-	*/
-	$scope.hideError = function() {
-		$scope.error = false;
-	};
 
 	/**
 	*
@@ -226,4 +203,4 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 	//set default values on load
 	$scope.cancel();
 }
-Cloobster.Registration.$inject = ['$scope', '$location', 'Account', 'facebookApi', '$routeParams', 'login', '$log', '$http'];
+Cloobster.Registration.$inject = ['$scope', '$location', 'Account', 'facebookApi', '$routeParams', 'login', '$log', '$http', 'errorHandler'];

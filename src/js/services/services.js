@@ -78,7 +78,18 @@ Cloobster.services.factory('errorHandler',['$rootScope','$location','$log','lang
 	*	
 	*	@param {Object} response Object containing response and request data of the failed HTTP request.
 	*/
-	function handleError(response) {
+	function handleError(_response, _status, _headers, _config) {
+		var response = {};
+		if(arguments.length == 4) {
+			response.data = _response;
+			response.status = _status;
+			response.headers = _headers;
+			response.config = _config;
+		}
+		else {
+			response = _response;
+		}
+
 		var errorKey = response.data['errorKey'],
 			responseMessage = response.data['message'];
 
@@ -94,7 +105,7 @@ Cloobster.services.factory('errorHandler',['$rootScope','$location','$log','lang
 			|| responseMessage || langService.translate('common.error') || "Error during communication with service.";
 
 		// Log the response.
-		$log.error("Error during resource method, response object: " + angular.toJson(response));
+		$log.error("Error during http method, response object: " + angular.toJSON(response));
 
 		if(response.status == 405) {
 			// User tried to modify locked business resource.
@@ -726,27 +737,32 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 	*	@author Nils Weiher
 	*/
 	loginService = {
+		authenticatedRequest: function(login, password, doRequest) {
+			delete $http.defaults.headers.common['X-Auth'];
+			$http.defaults.headers.common['login'] = login;
+			$http.defaults.headers.common['password'] = password;
+
+			doRequest();
+
+			delete $http.defaults.headers.common['login'];
+			delete $http.defaults.headers.common['password'];
+
+			// Set auth header with access token again.
+			$http.defaults.headers.common['X-Auth'] = accessToken;
+		},
 		/**
 		*	@name Cloobster.services.login#confirmEmail
 		*
 		*	Confirm the email adress of a user account with a token
 		*	recieved from the registration confirmation mail.
 		*
-		*	@params {string} token, unique id created during account creation.
-		*	@returns {Object} {@link angular.module.ng.$q promise} with the standard 'then' method,
+		*	@param {string} token, unique id created during account creation.
+		*	@returns {HttpPromise} {@link angular.module.ng.$q promise} with the standard 'then' method,
 		*		will be resolved with the confirmation data from the Server
 		*		or rejected with a reason for the failure.
 		*/
 		confirmEmail: function (token) {
-			loginDeferred = $q.defer();
-			
-			$http.put( appConfig['serviceUrl'] + '/b/accounts/confirmation/' + token, null).
-			success(function (data) {
-				// resolve the promise with the JSON object returned by the server.
-				loginDeferred.resolve(data);
-			}).error(loginError);
-
-			return loginDeferred.promise;
+			return $http.put( appConfig['serviceUrl'] + '/b/accounts/confirmation/' + token, null);
 		},
 		/**
 		*	@name Cloobster.services.login#confirmEmailUpdate
@@ -754,21 +770,11 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 		*	Confirm the new email adress of a user account with a token
 		*	recieved from a confirmation mail.
 		*
-		*	@params {string} token, unique id created during account creation.
-		*	@returns {Object} {@link angular.module.ng.$q promise} with the standard 'then' method,
-		*		will be resolved with the confirmation data from the Server
-		*		or rejected with a reason for the failure.
+		*	@param {string} token, unique id created during account update.
+		*	@returns {HttpPromise} {@link angular.module.ng.$q promise}
 		*/
 		confirmEmailUpdate: function (token) {
-			loginDeferred = $q.defer();
-			
-			$http.put( appConfig['serviceUrl'] + '/b/accounts/email-confirmation/' + token, null).
-			success(function (data) {
-				// resolve the promise with the JSON object returned by the server.
-				loginDeferred.resolve(data);
-			}).error(loginError);
-
-			return loginDeferred.promise;
+			return $http.put( appConfig['serviceUrl'] + '/b/accounts/email-confirmation/' + token, null);
 		},
 		/**
 		*	@name Cloobster.services.login#getAccount
