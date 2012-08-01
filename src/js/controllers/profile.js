@@ -14,7 +14,8 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	
 	var ImageResource,
 		/** Holds the Id of the active modal dialog. */
-		activeModalDialog;
+		activeModalDialog,
+		passwordDialog = jQuery("#changePasswordModal");
 
 	//Company resource object.
 	$scope.company = {
@@ -155,7 +156,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	};
 
 	$scope.showChangePasswordModal = function() {
-		jQuery("#changePasswordModal").modal('show');
+		passwordDialog.modal('show');
 	};
 
 	/**
@@ -167,8 +168,9 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 		loginService.authenticatedRequest($scope.password, function() {
 			// Do a request here. Login and password headers
 			// will be set before this function will be called, and reset after.
-			$scope.account.$update(angular.noop, handleError);	
+			$scope.account.$update(angular.noop, handleError);
 		});
+		passwordDialog.modal('hide');
 	};
 
 	$scope.matchPasswords = function() {

@@ -8,6 +8,7 @@
 			<div class="modal-body">
 			   	<p class="help-block" l="profile.dialog.changepassword.text">Please enter the current and new password.</p>
 			   	<div class="control-group" ng-class="getFieldInputClass(changePasswordForm.password)">
+			   		<label for="password" class="control-label" l="common.password">Password</label>
 		    		<div class="controls">
 		    			<input type="password" id="password" name="password" ng-model="password" required l-attribute="placeholder" placeholder="CurrentPassword" l="common.password" />
 		    			<div class="help-inline" ng-show="changePasswordForm.password.$dirty">
@@ -16,6 +17,7 @@
 		    		</div>
 		    	</div>
 	    		<div class="control-group" ng-class="getFieldInputClass(changePasswordForm.newPassword)">
+	    			<label for="password" class="control-label" l="profile.account.newpassword">New password</label>
 		    		<div class="controls">
 		    			<input type="password" id="newPassword" name="newPassword" ng-model="newPassword" required l-attribute="placeholder" placeholder="New Password" l="profile.account.newpassword.placeholder" ng-pattern="/^(?=[!-~]*$)(?=.*([^A-Za-z0-9]|\d))(?=.*[a-zA-Z]).*$/" ng-change="matchPasswords()" />
 						<div class="help-inline" ng-show="changePasswordForm.newPassword.$dirty">
@@ -25,6 +27,7 @@
 		        	</div>
 	        	</div>
 	        	<div class="control-group" ng-class="getFieldInputClass(changePasswordForm.newPasswordRepeat)">
+	        		<label for="password" class="control-label" l="profile.account.newpasswordrepeat">Repeat new password</label>
 		        	<div class="controls">
 			    		<input type="password" id="newPasswordRepeat" name="newPasswordRepeat" ng-model="newPasswordRepeat" ng-change="matchPasswords()" required placeholder="repeat your new password" l-attribute="placeholder" l="profile.account.newpasswordrepeat.placeholder" />
 						<div class="help-inline" ng-show="registrationForm.newPasswordRepeat.$dirty">
