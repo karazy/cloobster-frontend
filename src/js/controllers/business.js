@@ -271,7 +271,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			url: image.url,
 			blobKey: image.blobKey
 		};
-	}
+	};
 
 	$scope.discardImage = function(image) {
 		if(image && image.blobKey) {
@@ -280,7 +280,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 				//handle error
 			});
 		}
-	}
+	};
 
 	// start payment methods
 
@@ -290,14 +290,41 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		}
 		
 		$scope.activeBusiness.paymentMethods.push(angular.copy(defaultPaymentMethod));
-	}
+	};
 
 	$scope.removePaymentMethod = function(index) {
 		$scope.activeBusiness.paymentMethods.splice(index, 1);
 		$scope.saveBusiness();
-	}
+	};
 
 	// end payment methods
+
+	//start theme methods
+
+	/**
+	* @name Cloobster.Business.activateTheme
+	* @description
+	*	Sets the given theme as active theme and saves the business.
+	* @param {themeId}
+	*	Id of theme to set as active.
+	*/
+	$scope.activateTheme = function(themeId) {
+		
+		if (!$scope.editMode) {
+			return;
+		};
+
+		if(!themeId) {
+			$log.warn('No theme given.');
+		};
+
+		if($scope.activeBusiness.theme != themeId) {
+			$scope.activeBusiness.theme = themeId;
+			$scope.saveBusiness();
+		}
+	};
+
+	//end theme methods
 
 	/*
 	* Get css class for field highlighting.

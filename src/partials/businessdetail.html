@@ -137,6 +137,21 @@
 				</div>
 			</div>
 		</div>
+		<div>
+			<div class="data-element">				
+				<div class="key" l="business.detail.themes">
+					Themes
+				</div>
+				<div class="value">
+					<div class="business-theme-preview" ng-class="{active: activeBusiness.theme == 'default'}" ng-click="activateTheme('default')">
+						<img  src="img/themes/default-theme.png" alt="click to activate"/>
+					</div>
+					<div class="business-theme-preview" ng-class="{active: activeBusiness.theme == 'dark'}" ng-click="activateTheme('dark')">
+						<img  src="img/themes/dark-theme.png" alt="click to activate"/>
+					</div>
+				</div>
+			</div>
+		</div>
 </div>
 
 <div class="modal hide" id="deleteModal">

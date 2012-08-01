@@ -87,7 +87,6 @@ h1.edit:hover, h2.edit:hover {
 
 .data-element div.value {
   padding: 0 0 0 13px;
-  width: 441px;
   vertical-align: top;
   line-height: 1.39em;
   display: inline-block;
@@ -250,4 +249,20 @@ ul.options-list li:hover {
   border-top: 1px solid gray; 
   padding: 0.5em;
   margin: 0.5em 0;
+}
+
+.business-theme-preview {
+  width: 200px;
+  float: left;
+  min-height: 50px;
+  padding: 0.5em;
+  margin: 1em;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 0.3em 1em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 0.3em 1em;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 0.3em 1em;
+}
+
+.business-theme-preview.active {
+  border: 1px solid red;
+  border-radius: 0.5em;  
 }
