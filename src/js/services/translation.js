@@ -432,12 +432,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Email"
 		},
 		"profile.company.action.edit.enable" : {
-			"DE" : "Editiermodus aktivieren",
-			"EN" : "Activate edit mode"
+			"DE" : "Firmenprofil bearbeiten",
+			"EN" : "Edit Company Profile"
 		},
 		"profile.company.action.edit.disable" : {
-			"DE" : "Editiermodus beenden",
-			"EN" : "Disable edit mode"
+			"DE" : "Bearbeiten beenden",
+			"EN" : "Done editing"
 		},
 		"profile.company.action.edit.disable.hint" : {
 			"DE" : "Profileigenschaft anklicken um zu editieren.",

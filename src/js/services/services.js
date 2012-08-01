@@ -105,7 +105,7 @@ Cloobster.services.factory('errorHandler',['$rootScope','$location','$log','lang
 			|| responseMessage || langService.translate('common.error') || "Error during communication with service.";
 
 		// Log the response.
-		$log.error("Error during http method, response object: " + angular.toJSON(response));
+		$log.error("Error during http method, response object: " + angular.toJson(response));
 
 		if(response.status == 405) {
 			// User tried to modify locked business resource.
@@ -737,9 +737,9 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 	*	@author Nils Weiher
 	*/
 	loginService = {
-		authenticatedRequest: function(login, password, doRequest) {
+		authenticatedRequest: function(password, doRequest) {
 			delete $http.defaults.headers.common['X-Auth'];
-			$http.defaults.headers.common['login'] = login;
+			$http.defaults.headers.common['login'] = account.login;
 			$http.defaults.headers.common['password'] = password;
 
 			doRequest();

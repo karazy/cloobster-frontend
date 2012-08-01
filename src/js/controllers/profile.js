@@ -143,7 +143,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 		$scope.company.$update(function() {
 			//success
 		}, handleError);
-	}
+	};
 
 	/**
 	* Save company.
@@ -152,17 +152,49 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 		$scope.account.$update(function() {
 			//success
 		}, handleError);
-	}
-
-	/**
-	* Cancel editing property.
-	*/
-	$scope.cancelProperty = function() {
-		$scope.activeProperty = null;
-		$scope.activeModel = null;
 	};
 
-	//<-- end logo related actions -->
+	$scope.showChangePasswordModal = function() {
+		jQuery("#changePasswordModal").modal('show');
+	};
+
+	/**
+	* Save new password, with a special type of request.
+	* We can only change the password on the server side, if we reauthenticate with login and password headers.
+	*/
+	$scope.savePassword = function() {
+		$scope.account.password = $scope.newPassword;
+		loginService.authenticatedRequest($scope.password, function() {
+			// Do a request here. Login and password headers
+			// will be set before this function will be called, and reset after.
+			$scope.account.$update(angular.noop, handleError);	
+		});
+	};
+
+	$scope.matchPasswords = function() {
+		if($scope.changePasswordForm.newPassword.$viewValue !== $scope.changePasswordForm.newPasswordRepeat.$viewValue) {
+			$scope.changePasswordForm.newPasswordRepeat.$setValidity("match", false);
+		} else {
+			$scope.changePasswordForm.newPasswordRepeat.$setValidity("match", true);
+		}
+	};
+
+	/*
+	* Get css class for field highlighting.
+	* @param {NgModelController} input ng-model controller for the input to check.
+	* @returns error if dirty && invalid
+	*		  sucess if dirty && !invalid
+	*         empty string otherwise
+	*/
+	$scope.getFieldInputClass = function(input) {
+		if(input.$dirty && input.$invalid) {
+			return "error";
+		} else if (input.$dirty && !input.$invalid) {
+			return "success";
+		} else {
+			return "";
+		}
+	};
 
 
 	/** Watches loggedIn status and initializes controller when status changes to true.
@@ -170,7 +202,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	 */
 	$scope.$watch('loggedIn', function(newValue, oldValue) {
 		if(newValue == true) {
-			requestFileUploadInformation();
+			//requestFileUploadInformation();
 			loadProfileData();
 		}
 	});
