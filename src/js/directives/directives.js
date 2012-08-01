@@ -380,7 +380,7 @@ Cloobster.directives.directive('l', ['$locale', 'lang', '$interpolate', function
 			}
 
 			//if no translation is found, don't replace html, this is useful to provide default values in html
-			translation = langService.translate(value) || iElement.html();
+			translation = langService.translate(value) || (replaceAttr ? iAttrs[replaceAttr]  :iElement.html());
 
 			// Interpolate the text to parse possible {{expressions}}
 			interpolation = $interpolate(translation);
