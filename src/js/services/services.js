@@ -737,6 +737,9 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 	*	@author Nils Weiher
 	*/
 	loginService = {
+		requestPasswordReset: function(email) {
+			return $http.post( appConfig['serviceUrl'] + '/accounts/password-reset', { 'email' : email});
+		},
 		authenticatedRequest: function(password, doRequest) {
 			delete $http.defaults.headers.common['X-Auth'];
 			$http.defaults.headers.common['login'] = account.login;

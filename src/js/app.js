@@ -11,6 +11,7 @@ Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster
 
   	$routeProvider.when('/home', {template: 'partials/home.html'});
     $routeProvider.when('/login', {template: 'partials/login.html', controller: Cloobster.Login});
+    $routeProvider.when('/login/forgot', {template: 'partials/passwordforgot.html', controller: Cloobster.Login});
   	$routeProvider.when('/about', {template: 'partials/impressum.html'});
   	$routeProvider.when('/registration', {template: 'partials/registration_form.html', controller: Cloobster.Registration});
     $routeProvider.when('/profile', {template: 'partials/profile.html', controller: Cloobster.Profile});
