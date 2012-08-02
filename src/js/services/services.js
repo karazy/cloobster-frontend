@@ -737,6 +737,9 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 	*	@author Nils Weiher
 	*/
 	loginService = {
+		passwordReset: function(token, password) {
+			return $http.put( appConfig['serviceUrl'] + '/accounts/password-reset/'+token, { 'password' : password});
+		},
 		requestPasswordReset: function(email) {
 			return $http.post( appConfig['serviceUrl'] + '/accounts/password-reset', { 'email' : email});
 		},

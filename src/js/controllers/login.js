@@ -14,7 +14,7 @@ jQuery('.dropdown-menu').find('form').click(function (e) {
 * 	Manages submitting of login data, retrieving facebook login data and resume of a saved login.
 * 	@constructor
 */
-Cloobster.Login = function($scope, facebookApi, loginService,globalHandleError) {
+Cloobster.Login = function($scope, facebookApi, loginService,globalHandleError,$routeParams) {
 	$scope.loginData = {
 		login : "",
 		password : "",
@@ -155,4 +155,4 @@ Cloobster.Login = function($scope, facebookApi, loginService,globalHandleError) 
 	}
 		
 }
-Cloobster.Login.$inject = ['$scope', 'facebookApi', 'login','errorHandler'];
+Cloobster.Login.$inject = ['$scope', 'facebookApi', 'login','errorHandler','$routeParams'];

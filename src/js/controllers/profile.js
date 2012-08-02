@@ -10,7 +10,7 @@
 * 	View and manage profiles.
 * 	@constructor
 */
-Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, $log, Account, handleError) {
+Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, $log, Account, handleError, $routeParams) {
 	
 	var ImageResource,
 		/** Holds the Id of the active modal dialog. */
@@ -198,6 +198,23 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 		}
 	};
 
+	$scope.matchPasswords = function() {
+		if($scope.resetPasswordForm.newPassword.$viewValue !== $scope.resetPasswordForm.newPasswordRepeat.$viewValue) {
+			$scope.resetPasswordForm.newPasswordRepeat.$setValidity("match", false);
+		} else {
+			$scope.resetPasswordForm.newPasswordRepeat.$setValidity("match", true);
+		}
+	}
+
+	$scope.passwordReset = function() {
+		$scope.passwordResetProgress = true;
+		loginService.passwordReset($routeParams['emailToken'],$scope.newPassword).success(function() {
+			$scope.passwordResetComplete = true;
+		}).error(function(data,status,config,headers) {
+			$scope.passwordResetProgress = false;
+			handleError(data,status,config,headers);
+		});
+	};
 
 	/** Watches loggedIn status and initializes controller when status changes to true.
 	 *
@@ -286,4 +303,4 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	};
 
 };
-Cloobster.Profile.$inject = ['$scope', '$http', 'facebookApi', 'login', 'Company', '$log', 'Account', 'errorHandler'];
+Cloobster.Profile.$inject = ['$scope', '$http', 'facebookApi', 'login', 'Company', '$log', 'Account', 'errorHandler','$routeParams'];
