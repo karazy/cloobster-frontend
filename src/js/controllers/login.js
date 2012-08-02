@@ -14,7 +14,7 @@ jQuery('.dropdown-menu').find('form').click(function (e) {
 * 	Manages submitting of login data, retrieving facebook login data and resume of a saved login.
 * 	@constructor
 */
-Cloobster.Login = function($scope, facebookApi, loginService) {
+Cloobster.Login = function($scope, facebookApi, loginService,globalHandleError) {
 	$scope.loginData = {
 		login : "",
 		password : "",
@@ -89,7 +89,6 @@ Cloobster.Login = function($scope, facebookApi, loginService) {
 		$scope.loginProgress = true;
 		$scope.error = false;
 		if(!$scope.fbLoggedIn) {
-
 			facebookApi.login().then( function (response) {
 				//Call helper method to do the Cloobster login
 				doCloobsterFbLogin(response.authResponse.userID, response.authResponse.accessToken);
@@ -98,7 +97,6 @@ Cloobster.Login = function($scope, facebookApi, loginService) {
 		else {
 			doCloobsterFbLogin(facebookApi.getUid(), facebookApi.getAccessToken());
 		}
-		
 	};
 
 	/** 
@@ -131,6 +129,18 @@ Cloobster.Login = function($scope, facebookApi, loginService) {
 		return loginService.getAccount().login || loginService.getAccount().email;
 	};
 
+	$scope.requestReset = function() {
+		$scope.resetRequestProgress = true;
+		loginService.requestPasswordReset($scope.email).success(function() {
+			$scope.resetRequestComplete = true;
+		})
+		.error(function(data,status,headers,config) {
+			$scope.resetRequestProgress = false;
+			globalHandleError(data,status,headers,config);
+		});
+
+	};
+
 	// Check for saved login data.
 	if(loginService.existsSavedLogin() && ($scope.loggedIn === false)) {
 		// Set so that we can bind views and display e.g. a progress bar.
@@ -145,4 +155,4 @@ Cloobster.Login = function($scope, facebookApi, loginService) {
 	}
 		
 }
-Cloobster.Login.$inject = ['$scope', 'facebookApi', 'login'];
+Cloobster.Login.$inject = ['$scope', 'facebookApi', 'login','errorHandler'];
