@@ -143,14 +143,18 @@
 					Themes
 				</div>
 				<div class="value">
-					<div class="business-theme-preview" ng-class="{active: activeBusiness.theme == 'default'}" ng-click="activateTheme('default')">
+					<p l="business.detail.themes.description">Choose a theme which fits your CI best.</p>
+					<div class="business-theme-preview" ng-class="{active: activeBusiness.theme == 'default'}" ng-click="activateTheme('default')" tooltip="business.detail.themes.tooltip">
 						<img  src="img/themes/default-theme.png" alt="click to activate"/>
+						<p>Default cloobster theme</p>
 					</div>
-					<div class="business-theme-preview" ng-class="{active: activeBusiness.theme == 'dark'}" ng-click="activateTheme('dark')">
+					<div class="business-theme-preview" ng-class="{active: activeBusiness.theme == 'dark'}" ng-click="activateTheme('dark')" tooltip="business.detail.themes.tooltip">
 						<img  src="img/themes/dark-theme.png" alt="click to activate"/>
+						<p>A dark and elegant theme</p>
 					</div>
-					<div class="business-theme-preview" ng-class="{active: activeBusiness.theme == 'light'}" ng-click="activateTheme('light')">
+					<div class="business-theme-preview" ng-class="{active: activeBusiness.theme == 'light'}" ng-click="activateTheme('light')" tooltip="business.detail.themes.tooltip">
 						<img  src="img/themes/light-theme.png" alt="click to activate"/>
+						<p>A light and friendly theme</p>
 					</div>
 				</div>
 			</div>

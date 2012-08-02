@@ -404,6 +404,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Neue Bezahlart",
 			"EN" : "New payment"
 		},
+		"business.detail.themes" : {
+			"DE" : "Themes",
+			"EN" : "Themes"
+		},
+		"business.detail.themes.description" : {
+			"DE" : "Wähle ein Theme was am besten zu deiner CI passt.",
+			"EN" : "Choose a theme which fits your CI best."
+		},
+		"business.detail.themes.tooltip" : {
+			"DE" : "Klicken um Theme zu aktivieren.",
+			"EN" : "Click to activate theme."
+		},
 		"business.action.delete.invalid" : {
 			"DE" : "Passwort inkorrekt!",
 			"EN" : "Password invalid!"
@@ -832,7 +844,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Name"
 		},
 		"spots.editor.barcode" : {
-		"DE" : "Barcode",
+			"DE" : "Barcode",
 			"EN" : "Barcode"
 		},
 		"spots.editor.name.tooltip" : {

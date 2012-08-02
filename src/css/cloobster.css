@@ -257,9 +257,17 @@ ul.options-list li:hover {
   min-height: 50px;
   padding: 0.5em;
   margin: 1em;
+}
+
+.business-theme-preview img {
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 0.3em 1em;
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 0.3em 1em;
   box-shadow: rgba(0, 0, 0, 0.8) 0 0.3em 1em;
+}
+
+.business-theme-preview p {
+  text-align: center;
+  margin: 0.3em 0;
 }
 
 .business-theme-preview.active {
