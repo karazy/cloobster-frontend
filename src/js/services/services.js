@@ -797,6 +797,15 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 			}
 		},
 		/**
+		*
+		*	@param {Object} _account Update the currenty logged in account.
+		*/
+		setAccount: function(_account) {
+			if(loggedIn === true) {
+				account = _account;
+			}
+		},
+		/**
 		*	@name Cloobster.services.login#existsSavedLogin
 		*	Check if there exists saved login data.
 		*

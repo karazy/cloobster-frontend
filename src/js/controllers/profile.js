@@ -10,7 +10,7 @@
 * 	View and manage profiles.
 * 	@constructor
 */
-Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, $log, Account, handleError, $routeParams) {
+Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, $log, Account, handleError, $routeParams, lang) {
 	
 	var ImageResource,
 		/** Holds the Id of the active modal dialog. */
@@ -150,12 +150,19 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	* Save company.
 	*/
 	$scope.saveAccount = function() {
-		$scope.account.$update(function() {
-			//success
-		}, handleError);
+		$scope.account.$update(function() {//success
+			loginService.setAccount($scope.account);
+		}, function(response) {//error
+			$scope.account.$get(angular.noop, handleError);
+			handleError(response);
+		});
 	};
 
 	$scope.showChangePasswordModal = function() {
+		$scope.changePasswordError = false;
+		$scope.password = "";
+		$scope.newPassword = "";
+		$scope.newPasswordRepeat = "";
 		passwordDialog.modal('show');
 	};
 
@@ -168,16 +175,25 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 		loginService.authenticatedRequest($scope.password, function() {
 			// Do a request here. Login and password headers
 			// will be set before this function will be called, and reset after.
-			$scope.account.$update(angular.noop, handleError);
+			$scope.account.$update(function() { // success
+				passwordDialog.modal('hide');
+			}, function(data,status) {//error during save
+				$scope.changePasswordError = true;
+				if(status == 403) {
+					$scope.changePasswordErrorMessage = lang.translate('profile.account.wrongpassword') || 'Incorrect password.'
+				}
+				if(status == 400) {
+					$scope.changePasswordErrorMessage = lang.translate('profile.account.newpassword.invalid') || 'New password invalid';
+				}
+			});
 		});
-		passwordDialog.modal('hide');
 	};
 
-	$scope.matchPasswords = function() {
-		if($scope.changePasswordForm.newPassword.$viewValue !== $scope.changePasswordForm.newPasswordRepeat.$viewValue) {
-			$scope.changePasswordForm.newPasswordRepeat.$setValidity("match", false);
+	$scope.matchPasswords = function(form) {
+		if(form.newPassword.$viewValue !== form.newPasswordRepeat.$viewValue) {
+			form.newPasswordRepeat.$setValidity("match", false);
 		} else {
-			$scope.changePasswordForm.newPasswordRepeat.$setValidity("match", true);
+			form.newPasswordRepeat.$setValidity("match", true);
 		}
 	};
 
@@ -197,14 +213,6 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 			return "";
 		}
 	};
-
-	$scope.matchPasswords = function() {
-		if($scope.resetPasswordForm.newPassword.$viewValue !== $scope.resetPasswordForm.newPasswordRepeat.$viewValue) {
-			$scope.resetPasswordForm.newPasswordRepeat.$setValidity("match", false);
-		} else {
-			$scope.resetPasswordForm.newPasswordRepeat.$setValidity("match", true);
-		}
-	}
 
 	$scope.passwordReset = function() {
 		$scope.passwordResetProgress = true;
@@ -251,6 +259,7 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	*/
 	function loadProfileData() {
 		$scope.account = new Account(loginService.getAccount());
+		$scope.account.$get(angular.noop,handleError);
 
 		$scope.company = Company.buildResource().get({
 			id: $scope.account.companyId
@@ -303,4 +312,4 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	};
 
 };
-Cloobster.Profile.$inject = ['$scope', '$http', 'facebookApi', 'login', 'Company', '$log', 'Account', 'errorHandler','$routeParams'];
+Cloobster.Profile.$inject = ['$scope', '$http', 'facebookApi', 'login', 'Company', '$log', 'Account', 'errorHandler','$routeParams','lang'];
