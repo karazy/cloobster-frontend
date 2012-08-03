@@ -737,12 +737,28 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 	*	@author Nils Weiher
 	*/
 	loginService = {
+		/*
+		*
+		* @param {string} token Token supplied via a link from an email message.
+		* @param {string} password new password for this account.(already validated)
+		*/
 		passwordReset: function(token, password) {
 			return $http.put( appConfig['serviceUrl'] + '/accounts/password-reset/'+token, { 'password' : password});
 		},
+		/*
+		*
+		* @param {string} email Request password reset for an account with that e-mail address.
+		*/
 		requestPasswordReset: function(email) {
 			return $http.post( appConfig['serviceUrl'] + '/accounts/password-reset', { 'email' : email});
 		},
+		/*
+		* Execute a HTTP request with authentication via login and password instead of accessToken.
+		* Used to make sure, that the session was not used.
+		*
+		* @param {string} password Plain-text password of the logged in user.
+		* @param {function} doRequest Function to call to make a http request with the account credentials.
+		*/
 		authenticatedRequest: function(password, doRequest) {
 			delete $http.defaults.headers.common['X-Auth'];
 			$http.defaults.headers.common['login'] = account.login;
@@ -797,6 +813,7 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 			}
 		},
 		/**
+		*	Set the account information of the logged in account.
 		*
 		*	@param {Object} _account Update the currenty logged in account.
 		*/
