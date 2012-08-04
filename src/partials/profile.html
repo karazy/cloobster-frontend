@@ -24,7 +24,7 @@
 	    		<div class="control-group" ng-class="getFieldInputClass(changePasswordForm.newPassword)">
 	    			<label for="password" class="control-label" l="profile.account.newpassword">New password</label>
 		    		<div class="controls">
-		    			<input type="password" id="newPassword" name="newPassword" ng-model="newPassword" required l-attribute="placeholder" placeholder="New Password" l="profile.account.newpassword.placeholder" ng-pattern="/^(?=[!-~]*$)(?=.*([^A-Za-z0-9]|\d))(?=.*[a-zA-Z]).*$/" ng-change="matchPasswords(changePasswordForm)" />
+		    			<input type="password" id="newPassword" name="newPassword" ng-model="newPassword" required l-attribute="placeholder"  l="profile.account.newpassword" ng-pattern="/^(?=[!-~]*$)(?=.*([^A-Za-z0-9]|\d))(?=.*[a-zA-Z]).*$/" ng-change="matchPasswords(changePasswordForm)" />
 						<div class="help-inline" ng-show="changePasswordForm.newPassword.$dirty">
 		          			<span ng-show="changePasswordForm.newPassword.$error.required" l="profile.account.newpassword.error.required">Provide a new password.</span>
 		          			<span ng-show="changePasswordForm.newPassword.$error.pattern" l="registration.form.password.error.pattern">Min. 6 characters. Must contain a letter and a number or one special character.</span>
@@ -34,7 +34,7 @@
 	        	<div class="control-group" ng-class="getFieldInputClass(changePasswordForm.newPasswordRepeat)">
 	        		<label for="password" class="control-label" l="profile.account.newpasswordrepeat">Repeat new password</label>
 		        	<div class="controls">
-			    		<input type="password" id="newPasswordRepeat" name="newPasswordRepeat" ng-model="newPasswordRepeat" ng-change="matchPasswords(changePasswordForm)" required placeholder="repeat your new password" l-attribute="placeholder" l="profile.account.newpasswordrepeat.placeholder" />
+			    		<input type="password" id="newPasswordRepeat" name="newPasswordRepeat" ng-model="newPasswordRepeat" ng-change="matchPasswords(changePasswordForm)" required placeholder="repeat your new password" l-attribute="placeholder" l="profile.account.newpasswordrepeat" />
 						<div class="help-inline" ng-show="registrationForm.newPasswordRepeat.$dirty">
 			          		<span ng-show="registrationForm.newPasswordRepeat.$error.match" l="profile.account.newpassword.error.match">Passwords don't match.</span>
 			    		</div>
@@ -55,7 +55,7 @@
 	<div class="row-fluid">
 		<div class="span12">
 			<p>
-				<button class="btn" l="profile.account.changepassword" ng-click="showChangePasswordModal()">Change password</button>
+				<button class="btn" ng-click="showChangePasswordModal()" l="profile.account.action.changepassword">Change password</button>
 				<button type="button" class="btn btn-primary" ng-click="toggleEditMode('account')" data-toggle="button">
 					<span l="profile.account.action.edit.enable" ng-hide="editModeAccount">Edit Account Profile</span><span ng-show="editModeAccount" l="profile.account.action.edit.disable">Done editing</span>
 				</button> <span ng-show="editModeAccount" l="profile.account.action.edit.disable.hint">Click a account profile feature to edit.</span>
