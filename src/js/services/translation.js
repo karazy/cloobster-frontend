@@ -1122,7 +1122,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "password"
 		},
 		//passwordforgot partial
-		"login.password.reset.titel" : {
+		"login.password.reset.title" : {
 			"DE" :  "Passwort zurücksetzen",
 			"EN" : "Password reset"
 		},
@@ -1134,6 +1134,15 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Eine Nachricht mit Resetlink wurde an deinen E-Mail Account geschickt.",
 			"EN" : "Watch your e-mail account for a message with the password reset link."
 		},
+		//passwordreset partial
+		"passwordreset.complete" : {
+			"DE" :  "Neues Passwort erfolgreich gespeichert.",
+			"EN" : "The new password was saved."
+		},
+		"passwordreset.description" : {
+			"DE" :  "Gib ein neues Passwort ein.",
+			"EN" : "Enter the new password."
+		},
 		//common error messages
 		"common.error.404" : {
 			"DE" : "Eine Ressource konnte nicht geladen werden.",
@@ -1142,7 +1151,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.error" : {
 			"DE" : "Es gibt ein Problem mit der Verbindung zum Service.",
 			"EN" : "A connection problem to the service exists."
-		}
+		},
 		"common.sending" : {
 			"DE" :  "Sende...",
 			"EN" : "Sending..."
