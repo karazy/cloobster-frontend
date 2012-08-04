@@ -1100,6 +1100,40 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Bitte eine gültige E-Mail-Adresse eingeben.",
 			"EN" : "Please enter a valid email."
 		},
+		//login_form partial
+		"login.password.forgot" : {
+			"DE" :  "Passwort vergessen?",
+			"EN" : "Forgot password?"
+		},
+		"login.facebook" : {
+			"DE" :  "Login mit Facebook",
+			"EN" : "Login with Facebook"
+		},
+		"login.remember" : {
+			"DE" :  "eingeloggt bleiben",
+			"EN" : "remember login"
+		},
+		"login.input.login" : {
+			"DE" :  "Login",
+			"EN" : "login"
+		},
+		"login.input.password" : {
+			"DE" :  "Passwort",
+			"EN" : "password"
+		},
+		//passwordforgot partial
+		"login.password.reset.titel" : {
+			"DE" :  "Passwort zurücksetzen",
+			"EN" : "Password reset"
+		},
+		"login.password.reset.description" : {
+			"DE" :  "Bitte gebe die E-Mail Adresse deines Accounts an.",
+			"EN" : "Enter the e-mail you registered with the account."
+		},
+		"login.password.reset.complete.description" : {
+			"DE" :  "Eine Nachricht mit Resetlink wurde an deinen E-Mail Account geschickt.",
+			"EN" : "Watch your e-mail account for a message with the password reset link."
+		},
 		//common error messages
 		"common.error.404" : {
 			"DE" : "Eine Ressource konnte nicht geladen werden.",
@@ -1109,6 +1143,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Es gibt ein Problem mit der Verbindung zum Service.",
 			"EN" : "A connection problem to the service exists."
 		}
+		"common.sending" : {
+			"DE" :  "Sende...",
+			"EN" : "Sending..."
+		},
+		"common.send" : {
+			"DE" :  "Sende",
+			"EN" : "Send"
+		},
 	};
 
 	$provide.value("translation", map);
