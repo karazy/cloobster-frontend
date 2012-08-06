@@ -649,8 +649,8 @@ Cloobster.services.factory('facebookApi', ['$q','$rootScope', function($q, $root
 * 
 * 	@author Nils Weiher
 */
-Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log', 'config', '$location',
-	function($window, $http, $q, $rootScope, $log, appConfig, $location) {
+Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log', 'config', '$location','lang',
+	function($window, $http, $q, $rootScope, $log, appConfig, $location,lang) {
 		var loginService,
 			loggedIn = false,
 			account,
@@ -672,6 +672,12 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 	function loginSuccess (data, status, headers, config) {
 		//data should contain the account object for the login
 		account = data;
+		// Cockpit users currently cant use any frontend functions.
+		if(account.role === 'cockpituser') {
+			//TODO: add translation for error message.
+			loginDeferred.reject({'message': lang.translate('login.error.cockpituser')});
+			return;
+		}
 		loggedIn = true;
 		$rootScope.loggedIn = true;
 		if(account.accessToken) {

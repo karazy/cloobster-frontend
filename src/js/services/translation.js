@@ -1121,6 +1121,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Passwort",
 			"EN" : "password"
 		},
+		//loginService errors
+		"login.error.cockpituser" : {
+			"DE" :  "Cockpit-Benutzerkonten haben auf die Verwaltung keinen Zugriff.",
+			"EN" : "Cockpit user accounts can't access the management options."
+		},
 		//passwordforgot partial
 		"login.password.reset.title" : {
 			"DE" :  "Passwort zurücksetzen",
