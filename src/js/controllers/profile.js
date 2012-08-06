@@ -176,6 +176,8 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 			// Do a request here. Login and password headers
 			// will be set before this function will be called, and reset after.
 			$scope.account.$update(function() { // success
+				// Logout and redirect to login page.
+				loginService.logout('/login');
 				passwordDialog.modal('hide');
 			}, function(data,status) {//error during save
 				$scope.changePasswordError = true;

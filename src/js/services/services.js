@@ -649,8 +649,8 @@ Cloobster.services.factory('facebookApi', ['$q','$rootScope', function($q, $root
 * 
 * 	@author Nils Weiher
 */
-Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log', 'config', 
-	function($window, $http, $q, $rootScope, $log, appConfig) {
+Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log', 'config', '$location',
+	function($window, $http, $q, $rootScope, $log, appConfig, $location) {
 		var loginService,
 			loggedIn = false,
 			account,
@@ -924,7 +924,7 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 		*	Logout the user from the application.
 		*	Reset all status variables and remove saved login data from the local storage.
 		*/
-		logout : function() {
+		logout : function(redirectPath) {
 			saveLogin = false;
 			loggedIn = false;
 			$rootScope.loggedIn = false;
@@ -935,6 +935,10 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 
 			if(existsSavedLogin()) {
 				$window.localStorage.removeItem('accessToken');
+			}
+
+			if(redirectPath) {
+				$location.path(redirectPath);
 			}
 		},
 
