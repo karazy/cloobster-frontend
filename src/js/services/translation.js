@@ -871,9 +871,49 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Aktiv: Gäste können einchecken",
 			"EN" : "Active: Guests can check-in"
 		},
-		"spots.title" : {
-			"DE" : "Spots",
+		"areas.editor.name" : {
+			"DE" :  "Name des Servicebereichs",
+			"EN" : "Name of service area"
+		},
+		"areas.editor.name.tooltip" : {
+			"DE" :  "Name editieren",
+			"EN" : "Edit name"
+		},
+		"areas.editor.description" : {
+			"DE" :  "Beschreibung des Servicebereichs",
+			"EN" : "Description of service area"
+		},
+		"areas.editor.description.tooltip" : {
+			"DE" :  "Beschreibung editieren",
+			"EN" : "Edit description"
+		},
+		"areas.spots.list.title" : {
+			"DE" :  "Spots",
 			"EN" : "Spots"
+		},
+		"areas.spots.list.description" : {
+			"DE" :  "Spots (z. B. Tische oder Zimmer) die diesem Servicebereich zugeordnet sind.",
+			"EN" : "List of spots assigned to this area."
+		},
+		"areas.categories.list.title" : {
+			"DE" :  "Zugewiesenen Kategorien",
+			"EN" : "Assigned categories"
+		},
+		"areas.categories.list.description" : {
+			"DE" :  "Liste der Produktkategorien (z. B. Getränke) auf die der Gast zugriff hat, wenn er in diesem Bereich eingecheckt ist.",
+			"EN" : "List of product categories (e. .g beverages) available to customers checked in in this service area."
+		},
+		"areas.allcategories.list.title" : {
+			"DE" :  "Verfügbare Kategorien",
+			"EN" : "Available categories"
+		},
+		"areas.allcategories.list.description" : {
+			"DE" :  "Hier aufgelistete Produktkategorien können (mittels Drag&Drop) dem aktuellen Servicebereich zugewiesen werden um diese für eingecheckte Gäste verfügbar zu machen.",
+			"EN" : "Here listed product categories can be assigned (via drag&drop) to current service area to make them available for checked in guests."
+		},
+		"areas.categories.moveable.tooltip" : {
+			"DE" :  "Ziehen und loslassen um zuzuweisen oder die Reihenfolge zu ändern.",
+			"EN" : "Drag&Drop to assign and order."
 		},
 		"spots.list.new" : {
 			"DE" : "Neuer Spot...",

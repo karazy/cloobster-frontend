@@ -29,17 +29,21 @@
 			<div simple-property-editor editor-title="areas.editor.name" editor-property="currentArea.name" editor-on-save="saveArea()" editor-required>
 				<h3 class="edit" tooltip="areas.editor.name.tooltip">{{currentArea.name}} <i class="icon-edit icon-black"></i></h3>
 			</div>
-			<div simple-property-editor editor-title="areas.editor.name" editor-property="currentArea.description" editor-on-save="saveArea()" editor-required>
+			<div simple-property-editor editor-title="areas.editor.description" editor-property="currentArea.description" editor-on-save="saveArea()" editor-required>
 				<p class="edit" tooltip="areas.editor.description.tooltip">{{currentArea.description}} <i class="icon-edit icon-black"></i></p>
 			</div>
 			<div class="activation-checkbox">
 				<input type="checkbox" id="areaActiveCb" ng-model="currentArea.active" ng-change="saveArea()"></input>
 		    	<label l="areas.field.active" for="areaActiveCb">Active: Guests can check-in</label>
 			</div>
+			<div ng-show="currentArea.id">
+				<button class="btn btn-danger" data-toggle="modal" data-target="#deleteAreaModal" ng-disabled="true"><i class="icon-trash"></i> <span l="areas.action.delete">Delete area</span></button>
+			</div>
 		</div>
 		<!-- area spots -->
     	<div class="common-wrapper-detail-list" ng-show="currentArea.id">
-    		<h3 l="spots.title">Spots</h3>
+    		<h3 l="areas.spots.list.title">Spots</h3>
+    		<p l="areas.spots.list.description">List of spots assigned to this area.</p>
     		<ul class="nav nav-pills nav-stacked" id="spotsList">
     			<li>
 					<a ng-click="createSpot()"><i class="icon-plus icon-black"></i> <span l="spots.list.new">New spot...</span></a>
@@ -51,17 +55,17 @@
     	</div>
     	<!-- area menus -->
     	<div class="common-wrapper-detail-list" ng-show="currentArea.id">
-    		<h3 l="areas.menus.title">Assigned Menus</h3>
-    		<p l="areas.menus.list.description">Description...</p>
+    		<h3 l="areas.categories.list.title">Assigned categories</h3>
+    		<p l="areas.categories.list.description">List of product categories (e. .g beverages) available to customers checked in in this service area.</p>
     		<ul class="nav nav-pills nav-stacked organizable-list" id="assignedMenusList">
-		        <li ng-repeat="menu in menus | orderBy:['title']"> <!-- filter:filterNotAssignedCockpitBusinesses -->
-		        	<a><i class="icon-move icon-black" tooltip="areas.menus.moveable.tooltip"></i> {{menu.title}}</a>
+		        <li ng-repeat="menu in menus | filter:filterNotAssignedMenus  | orderBy:['order', 'title']"> <!-- filter:filterNotAssignedCockpitBusinesses -->
+		        	<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{menu.title}}</a>
 	        	</li>
     		</ul>
     	</div>
-	</div> 
+	</div>
 
-    <div class="span3 spot-wrapper" ng-show="currentSpot">
+    <div class="span3 common-wrapper" ng-show="currentSpot">
     	<div class="spot-detail">
 	    	<div simple-property-editor editor-title="spots.editor.name" editor-property="currentSpot.name" editor-on-save="saveSpot()" editor-required>
 				<h3 class="edit" tooltip="spots.editor.name.tooltip">{{currentSpot.name}} <i class="icon-edit icon-black"></i></h3>
@@ -89,6 +93,17 @@
 					</div>
 				</div>
 	    	</div>
+		</div>
+	</div>
+	<div class="span3 common-wrapper" ng-show="currentArea.id">
+		<div class="common-detail">
+			<h3 l="areas.allcategories.list.title">All categories</h3>
+			<p l="areas.allcategories.list.description">Drag & Drop to assign category to current service area.</p>
+			<ul class="nav nav-pills nav-stacked organizable-list" id="allMenusList">
+				<li ng-repeat="cat in menus | filter:filterAssignedMenus | orderBy:['order', 'title']">
+					<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{cat.title}}</a>
+				</li>
+			</ul>
 		</div>
 	</div>
 </div>

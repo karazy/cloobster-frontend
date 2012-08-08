@@ -10,7 +10,7 @@
 * 	@constructor
 */
 
-Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, Business, Area, Spot, langService, $log, handleError) {
+Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, Business, Area, Spot, Menu, langService, $log, handleError) {
 		//default information when adding a new barcode
 	var defaultSpot = {
 			name: langService.translate("barcode.new.default.name") || "New Spot",
@@ -27,8 +27,10 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 
 	/** Area resource. */
 	$scope.areasResource = null;
-	/** Spot Resource. */
+	/** Spot resource. */
 	$scope.spotsResource = null;
+	/** Menu resource.*/
+	$scope.menusResource = null;
 	/** Spots assigned to current area. */
 	$scope.spots = null;
 	/** Areas assigned*/
@@ -39,6 +41,18 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.currentSpot = null;
 	/** Business to which these spots belong to. */
 	$scope.activeBusiness = null;
+
+	//Drag&Drop for menus assignment
+	jQuery( "#assignedMenusList, #allMenusList" ).sortable({
+		connectWith: ".organizable-list",
+		dropOnEmpty: true,
+		forcePlaceholderSize: true,
+		placeholder: "sortable-placeholder",
+		receive: function(event, ui) { 
+			$scope.moveMenu(event, ui);
+		}
+	}).disableSelection();
+
 
 	// areas start
 	$scope.loadAreas = function(businessId) {
@@ -59,6 +73,10 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.areasResource = Area.buildResource(activeBusinessId);
 		//create spots resource
 		$scope.spotsResource = Spot.buildResource(activeBusinessId);
+		//create menu resource
+		$scope.menusResource = Menu.buildResource(activeBusinessId);
+		//only load menus once
+		$scope.menus = $scope.menusResource.query(angular.noop, handleError);	
 
 		//load spots
 		$scope.areas = $scope.areasResource.query(
@@ -80,12 +98,16 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.loadArea = function(areaItem) {
 		manageViewHiearchy("area");
 		$scope.currentArea = areaItem;
-		$scope.spots = $scope.spotsResource.query({"areaId" : areaItem.id}, null, null, handleError);
+		$scope.spots = $scope.spotsResource.query({"areaId" : areaItem.id}, null, null, handleError);		
+		if(!$scope.currentArea.menuIds) {
+			$scope.currentArea.menuIds = new Array();
+		}		
 	};
 
 	$scope.createArea = function() {
 		var newArea = angular.copy(defaultArea);
 		$scope.currentArea = new $scope.areasResource(newArea);
+		$scope.spots = new Array();
 		manageViewHiearchy("area");
 	};
 
@@ -209,6 +231,64 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 
 	//end spots
 
+	//start menus
+
+	$scope.filterAssignedMenus = function(menuToFilter) {
+		var result = true;
+		if(!$scope.currentArea) {
+			return true;
+		};
+
+		angular.forEach($scope.currentArea.menuIds, function(element, index) {
+			if(element == menuToFilter.id) {
+				result = false;
+				return false;
+			}
+		});
+
+		return result;
+	}
+
+	$scope.filterNotAssignedMenus = function(menuToFilter) {
+		var result = false;
+		if(!$scope.currentArea) {
+			return true;
+		};
+
+		angular.forEach($scope.currentArea.menuIds, function(element, index) {
+			if(element == menuToFilter.id) {
+				result = true;
+				return false;
+			}
+		});
+
+		return result;
+	}
+
+	/**
+	* Event handler for drag&drop menu assignment.
+	*/
+	$scope.moveMenu = function(event, ui) {
+		var menu = angular.element(ui.item).scope().menu;
+
+		//remove menu from user
+		if(ui.sender.attr("id") == "assignedMenusList") {
+			angular.forEach($scope.currentArea.menuIds, function(element, index) {
+				if(element == menu.id) {
+					$scope.currentArea.menuIds.splice(index, 1);
+					$scope.saveArea();
+					return false;
+				};
+			});
+		} else {
+			//add menu to list
+			$scope.currentArea.menuIds.push(menu.id);
+			$scope.saveArea();
+		}
+	};
+
+	//end menus
+
 	/**
 	* @private
 	* Manages which elements can be seen on partial.
@@ -247,4 +327,4 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 
 }
 
-Cloobster.Spot.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'Business', 'Area', 'Spot', 'lang', '$log', 'errorHandler'];
+Cloobster.Spot.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'Business', 'Area', 'Spot', 'Menu', 'lang', '$log', 'errorHandler'];
