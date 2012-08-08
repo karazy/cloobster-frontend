@@ -257,7 +257,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	* Event handler for drag&drop category assignment.
 	*/
 	$scope.moveCategory = function(event, ui) {
-		var category = angular.element(ui.item).scope().category;
+		var category = angular.element(ui.item).scope().category,
+			index;
 
 		//remove category from user
 		if(ui.sender.attr("id") == "assignedMenusList") {
@@ -270,10 +271,16 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 				};
 			});
 		} else {
-			//add category to list
-			$scope.currentArea.menuIds.push(category.id);
+			index = ui.item.index();
+			//add category to list at index
+			$scope.currentArea.menuIds.splice(index, 0, category.id);
+
+			//$scope.currentArea.menuIds.push(category.id);
 			//add at correct index
-			$scope.currentAreaCategories.push(category);
+			//$scope.currentAreaCategories.push(category);
+			$scope.currentAreaCategories.splice(index, 0, category);
+
+
 			$scope.saveArea();
 		};
 		//prevent updateCategoryOrder from execution
