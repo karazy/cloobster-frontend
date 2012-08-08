@@ -92,18 +92,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.menus = $scope.menusResource.query(angular.noop, handleError);	
 
 		//load spots
-		$scope.areas = $scope.areasResource.query(
-			function() { 
-				//success
-			},
-			function(request) {
-				//error			
-				if(request.status = 404) {
-					$scope.error = true;
-					$scope.errorMessage = "Could not lot areas.";
-				}
-			}
-		);
+		$scope.areas = $scope.areasResource.query(angular.noop,	handleError);
 
 		manageViewHiearchy("areas");
 	};
@@ -131,6 +120,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		var newArea = angular.copy(defaultArea);
 		$scope.currentArea = new $scope.areasResource(newArea);
 		$scope.spots = new Array();
+		$scope.currentAreaCategories = [];
 		manageViewHiearchy("area");
 	};
 
@@ -151,7 +141,26 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	};
 
 	$scope.deleteArea = function(areaToDelete) {
-		manageViewHiearchy("areas");
+		loginService.authenticatedRequest($scope.deletePassword, function() {
+			// Do a request here. Login and password headers
+			// will be set before this function will be called, and reset after.
+			areaToDelete.$delete(function() { // success
+				manageViewHiearchy("areas");
+				jQuery("#deleteAreaModal").modal('hide');
+				// Delete area from list.
+				angular.forEach($scope.areas, function(area, index) {
+					if(areaToDelete.id == area.id) {
+						$scope.areas.splice(index, 1);
+						//exit loop
+						return false;
+					}
+				});
+			}, function(data,status) {//error during save
+				if(status == 403) {
+					$scope.deleteError = lang.translate('profile.account.wrongpassword') || 'Incorrect password.'
+				}
+			});
+		});
 
 		// spotToDelete.$delete(angular.noop, handleError);
 

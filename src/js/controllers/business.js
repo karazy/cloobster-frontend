@@ -88,19 +88,10 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	*/
 	$scope.deleteBusiness = function() {
 		var errorMessageInvalid = langService.translate("business.action.delete.invalid"),
-			pwHashSaved = $http.defaults.headers.common.passwordHash;
-
-		$http.defaults.headers.common.password = $scope.deletePassword;
-		//TODO temporary solution
-		$http.defaults.headers.common.passwordHash = null;
-
-		$scope.businessToDelete.$delete(success, error);
-		$http.defaults.headers.common.password = null;
-		
-		//TODO temporary solution
-		$http.defaults.headers.common.passwordHash = pwHashSaved;
-
 		$scope.deletePassword = null;
+		loginService.authenticatedRequest($scope.deletePassword, function() {
+			$scope.businessToDelete.$delete(success, error);
+		});
 
 		function success() {
 			$scope.businessToDelete = null;
@@ -116,7 +107,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			if(response.status == 403) {
 				$scope.deleteError = errorMessageInvalid;
 			} else {
-
+				$scope.deleteError = langService.translate("common.error");
 			}
 		}
 	};

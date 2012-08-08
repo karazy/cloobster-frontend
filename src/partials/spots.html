@@ -37,7 +37,26 @@
 		    	<label l="areas.field.active" for="areaActiveCb">Active: Guests can check-in</label>
 			</div>
 			<div ng-show="currentArea.id">
-				<button class="btn btn-danger" data-toggle="modal" data-target="#deleteAreaModal" ng-disabled="true"><i class="icon-trash"></i> <span l="areas.action.delete">Delete area</span></button>
+				<button class="btn btn-danger" data-toggle="modal" data-target="#deleteAreaModal"><i class="icon-trash"></i> <span l="areas.action.delete">Delete area</span></button>
+			</div>
+			<div class="modal hide" id="deleteAreaModal">
+			 	<div class="modal-header">
+			    	<button type="button" class="close" data-dismiss="modal">×</button>
+			    	<h3 l="areas.action.delete">Delete Area</h3>
+				</div>
+				<form name="areaDeleteForm" ng-submit="deleteArea(currentArea)" novalidate>
+					<div class="modal-body alert-error">
+				    	<p l="areas.dialog.delete.text">Attention! You're about to delete {{currentArea.name}}. The area and all spots will be deactivated for, all current checkins, will keep working, but now new checkins can be made at the correspoding spots. Data will be kept for a while until its will be deleted permanently.</p>
+				    	<p l="areas.dialog.delete.confirm">Please confirm your delete attempt by entering your password.</p>
+			    		<label for="deletePassword" l="common.password">Password</label>
+			    		<input type="password" id="deletePassword" name="deletePassword" ng-model="deletePassword" required></input>
+			    		<span>{{deleteError}}</span>
+				    </div>
+				  	<div class="modal-footer">
+				  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
+				    	<button type="submit" class="btn btn-danger" ng-disabled="!deletePassword" l="common.delete">Delete</button>
+					</div>
+				</form>
 			</div>
 		</div>
 		<!-- area spots -->
