@@ -23,7 +23,9 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 			active: true
 		},
 		//Id of active business
-		activeBusinessId = null;
+		activeBusinessId = null,
+		movedCategory = false;
+		
 
 	/** Area resource. */
 	$scope.areasResource = null;
@@ -41,6 +43,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.currentSpot = null;
 	/** Business to which these spots belong to. */
 	$scope.activeBusiness = null;
+	/** A temporary order list of menus assigned to current area. */
+	$scope.currentAreaCategories = null;
 
 	//Drag&Drop for menus assignment
 	jQuery( "#assignedMenusList, #allMenusList" ).sortable({
@@ -49,7 +53,16 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		forcePlaceholderSize: true,
 		placeholder: "sortable-placeholder",
 		receive: function(event, ui) { 
-			$scope.moveMenu(event, ui);
+			$scope.moveCategory(event, ui);
+		}
+	}).disableSelection();
+
+	jQuery( "#assignedMenusList" ).sortable({
+		dropOnEmpty: true,
+		forcePlaceholderSize: true,
+		placeholder: "sortable-placeholder",
+		stop: function(event, ui) { 
+			$scope.updateCategoryOrder(event, ui);
 		}
 	}).disableSelection();
 
@@ -101,7 +114,17 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.spots = $scope.spotsResource.query({"areaId" : areaItem.id}, null, null, handleError);		
 		if(!$scope.currentArea.menuIds) {
 			$scope.currentArea.menuIds = new Array();
-		}		
+		} else {
+			//create a temporary order list of menu items based on menuIds
+			$scope.currentAreaCategories = new Array();
+			angular.forEach($scope.currentArea.menuIds, function(mId) {
+				angular.forEach($scope.menus, function(menu) {				
+					if(mId == menu.id) {
+						$scope.currentAreaCategories.push(menu);
+					}
+				});
+			});
+		}
 	};
 
 	$scope.createArea = function() {
@@ -146,41 +169,6 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 
 	//areas end
 
-	/**
-	* 
-	*/
-	// $scope.loadSpots = function(businessId) {
-	// 	$log.log("load spots for business " + businessId);
-	// 	var account;
-
-	// 	if(!$scope.loggedIn) {
-	// 		$log.log('Not logged in! Failed to load spots.');
-	// 		return;
-	// 	}
-
-	// 	activeBusinessId = businessId;
-
-	// 	account =  loginService.getAccount();
-
-	// 	$scope.activeBusiness = Business.buildResource(account.id).get({'id' : activeBusinessId});
-
-	// 	//create spots resource
-	// 	$scope.spotsResource = Spot.buildResource(activeBusinessId);
-
-	// 	//load spots
-	// 	$scope.spots = $scope.spotsResource.query(
-	// 		function() { 
-	// 			//success
-	// 		},
-	// 		function(request) {
-	// 			//error			
-	// 			if(request.status = 404) {
-	// 				$scope.error = true;
-	// 				$scope.errorMessage = "Could not lot spots.";
-	// 			}
-	// 		}
-	// 	);
-	// };
 
 	//start spots
 
@@ -266,25 +254,57 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	}
 
 	/**
-	* Event handler for drag&drop menu assignment.
+	* Event handler for drag&drop category assignment.
 	*/
-	$scope.moveMenu = function(event, ui) {
-		var menu = angular.element(ui.item).scope().menu;
+	$scope.moveCategory = function(event, ui) {
+		var category = angular.element(ui.item).scope().category;
 
-		//remove menu from user
+		//remove category from user
 		if(ui.sender.attr("id") == "assignedMenusList") {
 			angular.forEach($scope.currentArea.menuIds, function(element, index) {
-				if(element == menu.id) {
+				if(element == category.id) {
 					$scope.currentArea.menuIds.splice(index, 1);
+					$scope.currentAreaCategories.splice(index, 1);
 					$scope.saveArea();
 					return false;
 				};
 			});
 		} else {
-			//add menu to list
-			$scope.currentArea.menuIds.push(menu.id);
+			//add category to list
+			$scope.currentArea.menuIds.push(category.id);
+			//add at correct index
+			$scope.currentAreaCategories.push(category);
 			$scope.saveArea();
+		};
+		//prevent updateCategoryOrder from execution
+		movedCategory = true;
+	};
+
+	$scope.updateCategoryOrder = function(event, ui) {
+		var liElements = ui.item.parent().children(), //get all li elements
+			tmpCategory = null,
+			//contains elements in new order
+			updateArray = new Array();
+
+		if(movedCategory) {
+			movedCategory = false;
+			//return because this is handled by moveCategory
+			return;
 		}
+
+		if(!$scope.currentArea) {
+			$log.log("Can't update menu order because no current area exists.");
+			return;
+		}
+
+		liElements.each(function(index, ele) {
+			//get corresponding choice resource by optaining the angular scope
+			tmpCategory = angular.element(ele).scope().category;
+			updateArray.push(tmpCategory.id);
+		});
+		//not named categoryIds because of legacy
+		$scope.currentArea.menuIds = updateArray;
+		$scope.currentArea.$update(null, null, handleError);
 	};
 
 	//end menus
@@ -310,8 +330,6 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 				break;
 		}
 	};
-
-
 
 	$scope.$watch('loggedIn', function(newVal, oldVal) {
 		var spotId = $routeParams.spotId || "",

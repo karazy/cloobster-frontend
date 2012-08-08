@@ -58,8 +58,8 @@
     		<h3 l="areas.categories.list.title">Assigned categories</h3>
     		<p l="areas.categories.list.description">List of product categories (e. .g beverages) available to customers checked in in this service area.</p>
     		<ul class="nav nav-pills nav-stacked organizable-list" id="assignedMenusList">
-		        <li ng-repeat="menu in menus | filter:filterNotAssignedMenus  | orderBy:['order', 'title']"> <!-- filter:filterNotAssignedCockpitBusinesses -->
-		        	<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{menu.title}}</a>
+		        <li ng-repeat="category in currentAreaCategories"> <!-- filter:filterNotAssignedCockpitBusinesses -->
+		        	<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{category.title}}</a>
 	        	</li>
     		</ul>
     	</div>
@@ -99,9 +99,10 @@
 		<div class="common-detail">
 			<h3 l="areas.allcategories.list.title">All categories</h3>
 			<p l="areas.allcategories.list.description">Drag & Drop to assign category to current service area.</p>
+			<span l="common.search">Search</span>: <input ng-model="allMenusListSearch.title">
 			<ul class="nav nav-pills nav-stacked organizable-list" id="allMenusList">
-				<li ng-repeat="cat in menus | filter:filterAssignedMenus | orderBy:['order', 'title']">
-					<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{cat.title}}</a>
+				<li ng-repeat="category in menus | filter:filterAssignedMenus | filter:allMenusListSearch | orderBy:['title']">
+					<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{category.title}}</a>
 				</li>
 			</ul>
 		</div>
