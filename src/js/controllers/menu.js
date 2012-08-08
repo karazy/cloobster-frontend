@@ -794,7 +794,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 				$scope.allChoices = null;
 			break;
 		}
-	}
+	};
 
 	//end utility
 

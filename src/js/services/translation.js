@@ -256,8 +256,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "show/edit"
 		},
 		"businesses.action.spots" : {
-			"DE" : "spots",
-			"EN" : "spots"
+			"DE" : "servicebereiche",
+			"EN" : "service areas"
 		},
 		"businesses.action.menus" : {
 			"DE" : "produkte",
@@ -863,6 +863,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Listing of all choices depending on this one."
 		},
 		//spots partial
+		"area.new.default.name" : {
+			"DE" :  "Mein Servicebereich",
+			"EN" : "My Service Area"
+		},
+		"areas.field.active" : {
+			"DE" :  "Aktiv: Gäste können einchecken",
+			"EN" : "Active: Guests can check-in"
+		},
 		"spots.title" : {
 			"DE" : "Spots",
 			"EN" : "Spots"
@@ -1063,9 +1071,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Kategorien",
 			"EN" : "Categories"
 		},
-		"breadcrumb.tables" : {
-			"DE" : "Spots",
-			"EN" : "Spots"
+		"breadcrumb.areas" : {
+			"DE" : "Servicebereiche",
+			"EN" : "Service areas"
 		},
 		//file upload
 		"fileupload.button.add" : {

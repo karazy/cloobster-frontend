@@ -453,6 +453,49 @@ Cloobster.services.factory('Spot', ['cloobsterResource', function($resource) {
 
 /** 
 * 	@constructor
+* 	Factory function that creates the 'Area' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Frederik Reifschneider
+*/
+Cloobster.services.factory('Area', ['cloobsterResource', function($resource) {
+	/**
+	*	@name Cloobster.services.Area
+	*	
+	*/
+	var Area = {
+		/**
+		*
+		*/
+		buildResource: function(businessId) {
+			return $resource('/b/businesses/:bid/areas/:id',
+				{
+					'id' : '@id',
+					'bid' : businessId
+				},
+				{
+						/**
+						* @name Cloobster.services.Area#$query
+						* @override
+						* Overrides default query method by overriding businessId as default parameter
+						*/
+						'query':  {method:'GET', params: { 'bid' : businessId}, isArray:true},
+						/*
+						* @name Cloobster.services.Area#$update
+						* Like a save but uses PUT instead of POST.
+						*/
+						'update': { method: 'PUT'}
+				}
+
+				)
+		}
+	}
+
+	return Area;
+}]);
+
+/** 
+* 	@constructor
 * 	Factory function that creates the 'CompanyAccount' resource service.
 * 	See ngResource for further information on resource objects.
 * 

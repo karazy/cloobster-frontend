@@ -3,27 +3,63 @@
 		<div class="span12">
 			<ul class="breadcrumb">
 				<li>
-					<a href="#/businesses" l="breadcrumb.businesses">My Restaurants</a> <span class="divider">/</span>
+					<a href="#/businesses" l="breadcrumb.businesses">Businesses</a> <span class="divider">/</span>
 				</li>
 				<li>
 					<a href="#/businesses/{{activeBusiness.id}}">{{activeBusiness.name}}</a> <span class="divider">/</span>
 				</li>
-				<li class="active" l="breadcrumb.tables">Tables</li>
+				<li class="active" l="breadcrumb.areas">Service Areas</li>
 			</ul>
 		</div>
 	</div>
-	<h1 l="spots.title">Tables</h1>
+	<h1 l="areas.title">Service Areas</h1>
 	<div class="row-fluid">
 	<div class="spots-list span2">
 		<ul class="nav nav-pills nav-stacked">
 			<li>
-				<a ng-click="createSpot()"><i class="icon-plus icon-black"></i> <span l="spots.list.new">New spot...</span></a>
+				<a ng-click="createArea()"><i class="icon-plus icon-black"></i> <span l="areas.list.new">New service area...</span></a>
 			</li>
-	        <li ng-repeat="spot in spots | orderBy:['name'] " ng-class="{active: currentSpot.id == spot.id}">	        	
-	        	<a ng-click="loadSpot(spot)">{{spot.name}}</a>
+	        <li ng-repeat="area in areas | orderBy:['name'] " ng-class="{active: currentArea.id == area.id}">	        	
+	        	<a ng-click="loadArea(area)">{{area.name}}</a>
 	        </li>
 	    </ul>
 	</div>
+	<div class="span3 common-wrapper" ng-show="currentArea">
+		<div class="common-detail">
+			<div simple-property-editor editor-title="areas.editor.name" editor-property="currentArea.name" editor-on-save="saveArea()" editor-required>
+				<h3 class="edit" tooltip="areas.editor.name.tooltip">{{currentArea.name}} <i class="icon-edit icon-black"></i></h3>
+			</div>
+			<div simple-property-editor editor-title="areas.editor.name" editor-property="currentArea.description" editor-on-save="saveArea()" editor-required>
+				<p class="edit" tooltip="areas.editor.description.tooltip">{{currentArea.description}} <i class="icon-edit icon-black"></i></p>
+			</div>
+			<div class="activation-checkbox">
+				<input type="checkbox" id="areaActiveCb" ng-model="currentArea.active" ng-change="saveArea()"></input>
+		    	<label l="areas.field.active" for="areaActiveCb">Active: Guests can check-in</label>
+			</div>
+		</div>
+		<!-- area spots -->
+    	<div class="common-wrapper-detail-list" ng-show="currentArea.id">
+    		<h3 l="spots.title">Spots</h3>
+    		<ul class="nav nav-pills nav-stacked" id="spotsList">
+    			<li>
+					<a ng-click="createSpot()"><i class="icon-plus icon-black"></i> <span l="spots.list.new">New spot...</span></a>
+				</li>
+		        <li ng-repeat="spot in spots | orderBy:['name'] " ng-class="{active: currentSpot.id == spot.id}">	        	
+	        		<a ng-click="loadSpot(spot)">{{spot.name}}</a>
+	        	</li>
+    		</ul>
+    	</div>
+    	<!-- area menus -->
+    	<div class="common-wrapper-detail-list" ng-show="currentArea.id">
+    		<h3 l="areas.menus.title">Assigned Menus</h3>
+    		<p l="areas.menus.list.description">Description...</p>
+    		<ul class="nav nav-pills nav-stacked organizable-list" id="assignedMenusList">
+		        <li ng-repeat="menu in menus | orderBy:['title']"> <!-- filter:filterNotAssignedCockpitBusinesses -->
+		        	<a><i class="icon-move icon-black" tooltip="areas.menus.moveable.tooltip"></i> {{menu.title}}</a>
+	        	</li>
+    		</ul>
+    	</div>
+	</div> 
 
     <div class="span3 spot-wrapper" ng-show="currentSpot">
     	<div class="spot-detail">
