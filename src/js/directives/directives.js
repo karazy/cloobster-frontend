@@ -69,7 +69,6 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 		        	scope.save = function () {
 		        		//only save when form is valid
 		        		if(scope.simplePropertyForm.$valid) {
-		        			
 		        			scope.editorProperty = scope.editorValue;
 		        			// Wrap this in a timeout, because the model change is not immediate.
 			        		$timeout(scope.editorOnSave);
