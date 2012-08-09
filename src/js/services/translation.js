@@ -1213,7 +1213,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.send" : {
 			"DE" :  "Sende",
 			"EN" : "Send"
-		},
+		}
 	};
 
 	$provide.value("translation", map);

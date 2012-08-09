@@ -158,7 +158,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 				});
 			}, function(data,status) {//error during save
 				if(status == 403) {
-					$scope.deleteError = lang.translate('profile.account.wrongpassword') || 'Incorrect password.'
+					$scope.deleteError = langService.translate('profile.account.wrongpassword') || 'Incorrect password.'
 				}
 			});
 		});

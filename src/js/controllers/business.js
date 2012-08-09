@@ -87,8 +87,10 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	* 	business to delete
 	*/
 	$scope.deleteBusiness = function() {
-		var errorMessageInvalid = langService.translate("business.action.delete.invalid"),
+		var errorMessageInvalid = langService.translate("business.action.delete.invalid");
+
 		$scope.deletePassword = null;
+		
 		loginService.authenticatedRequest($scope.deletePassword, function() {
 			$scope.businessToDelete.$delete(success, error);
 		});
