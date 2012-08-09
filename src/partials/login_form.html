@@ -6,11 +6,11 @@
             </form>
             <a href="#/login/forgot" l="login.password.forgot">Forgot password?</a>
         </p>
-        <form class="form-inline" ng-submit="login()">
-        	<input type="text" ng-model="loginData.login"  size="30" placeholder="login" l="login.input.login" l-attribute="placeholder">
-        	<input type="password" ng-model="loginData.password"  size="30" placeholder="password" l="login.input.password" l-attribute="placeholder">
+        <form name="loginForm" class="form-inline" ng-submit="login()">
+        	<input name="login" type="text" ng-model="loginData.login"  size="30" placeholder="login" l="login.input.login" l-attribute="placeholder" required>
+        	<input name="password" type="password" ng-model="loginData.password"  size="30" placeholder="password" l="login.input.password" l-attribute="placeholder" required>
             <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.save"> <span l="login.remember">remember login</span></input>
+                <input name="rememberLogin" type="checkbox" ng-model="loginData.save"> <span l="login.remember">remember login</span></input>
             </label>
         	<button type="submit" class="btn btn-primary" type="submit">Login</button>
       	</form>

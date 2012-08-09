@@ -162,6 +162,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 				}
 			});
 		});
+		
+		$scope.deletePassword = null;
 
 		// spotToDelete.$delete(angular.noop, handleError);
 

@@ -52,7 +52,7 @@
 	<div class="page-header">
 		<h1 l="profile.title">Profile</h1>
 	</div>
-	<div class="row-fluid">
+	<div class="row-fluid account-profile-wrapper">
 		<div class="span12">
 			<p>
 				<button class="btn" ng-click="showChangePasswordModal()" l="profile.account.action.changepassword">Change password</button>
@@ -85,7 +85,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row-fluid">
+	<div class="row-fluid company-profile-wrapper">
 		<div class="span12">
 			<div show-role="companyowner">
 				<div simple-property-editor editor-title="Name" editor-property="company.name" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
