@@ -20,7 +20,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		},
 		defaultArea = {
 			name: langService.translate("area.new.default.name") || "My Service Area",
-			active: true
+			active: true,
+			menuIds: []
 		},
 		//Id of active business
 		activeBusinessId = null,
@@ -101,11 +102,11 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		manageViewHiearchy("area");
 		$scope.currentArea = areaItem;
 		$scope.spots = $scope.spotsResource.query({"areaId" : areaItem.id}, null, null, handleError);		
+		$scope.currentAreaCategories = new Array();
 		if(!$scope.currentArea.menuIds) {
 			$scope.currentArea.menuIds = new Array();
 		} else {
 			//create a temporary order list of menu items based on menuIds
-			$scope.currentAreaCategories = new Array();
 			angular.forEach($scope.currentArea.menuIds, function(mId) {
 				angular.forEach($scope.menus, function(menu) {				
 					if(mId == menu.id) {
