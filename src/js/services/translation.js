@@ -426,7 +426,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			" wird nach einer Weile permanent gelöscht!",
 		"EN" : ""
 		},
-		"business.dialog.delete.confirm" : {
+		"dialog.delete.confirm" : {
 			"DE" : "Bitte gib dein Passwort ein um die Löschaktion zu bestätigen.",
 			"EN" : "Please enter your password to confirm delete action."
 		},
@@ -915,6 +915,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"areas.categories.moveable.tooltip" : {
 			"DE" :  "Ziehen und loslassen um zuzuweisen oder die Reihenfolge zu ändern.",
 			"EN" : "Drag&Drop to assign and order."
+		},
+		"areas.action.delete" : {
+			"DE" : "Servicebereich löschen",
+			"EN" : "Delete service area"
+		},
+		"areas.dialog.delete.text" : {
+			"DE" : "{{currentArea.name}} wird gelöscht! Der Servicebereich, alle Spots und ihre Barcode können dann nicht mehr verwendet werden."+
+					" Aktuell eingeloggte Servicekräfte und Gäste können den Bereich noch nutzen.<br/>"+
+					"Der Bereich und alle Spots werden nach einer Weile permanent gelöscht",
+			"EN" : "You're about to delete {{currentArea.name}}. The area, all spots and their barcodes won't be usable."+
+					"All current customer checkins at the specific spots, will keep working.<br/>"+
+					"Data will be kept for a while until it will be deleted permanently."
 		},
 		"spots.list.new" : {
 			"DE" : "Neuer Spot...",

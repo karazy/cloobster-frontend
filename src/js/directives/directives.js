@@ -8,7 +8,7 @@
 */
 Cloobster.directives = angular.module('Cloobster.directives', []);
 
-Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langService) {
+Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', function(langService,$timeout) {
 	var inputType, //type of the input to generate in form
 		required, //if present marks a required field
 		//directive configuration
@@ -17,11 +17,11 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 		replace: false,
 		transclude: true,
 		scope: {
-			editorTitle: 'bind',
-			editorPatternText: 'attribute',
-			editorOnSave: 'expression',
-			editorProperty: 'accessor',
-			editorEnabled: 'accessor'
+			editorTitle: '@',
+			editorPatternText: '@',
+			editorOnSave: '&',
+			editorProperty: '=',
+			editorEnabled: '='
 		},
 		compile: function(element, attrs, transclude) {
 			var required = attrs.hasOwnProperty('editorRequired') ? "required='required'" : "",
@@ -69,8 +69,10 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 		        	scope.save = function () {
 		        		//only save when form is valid
 		        		if(scope.simplePropertyForm.$valid) {
-		        			scope.editorProperty(scope.editorValue);
-			        		scope.editorOnSave();
+		        			
+		        			scope.editorProperty = scope.editorValue;
+		        			// Wrap this in a timeout, because the model change is not immediate.
+			        		$timeout(scope.editorOnSave);
 			        		dialog.modal('toggle');
 		        		}
 		        	}
@@ -95,8 +97,8 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', function(langSer
 					}
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {		   
-		        		if(scope.editorEnabled() == true || typeof scope.editorEnabled() == 'undefined') {
-		        			scope.$apply('editorValue = editorProperty();editorRepeat=""');
+		        		if(scope.editorEnabled == true || typeof scope.editorEnabled == 'undefined') {
+		        			scope.$apply('editorValue = editorProperty;editorRepeat=""');
 						
 							dialog.modal('toggle');	
 							input.trigger("focus");
@@ -205,12 +207,12 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		replace: false,
 		transclude: true,
 		scope: {
-			editorTitleKey: 'bind',
-			editorOnSave: 'expression',
-			editorOnCancel: 'expression',
-			editorImageResource: 'accessor',
-			editorImageId: 'bind',
-			editorEnabled: 'accessor'
+			editorTitleKey: '@',
+			editorOnSave: '&',
+			editorOnCancel: '&',
+			editorImageResource: '=',
+			editorImageId: '@',
+			editorEnabled: '='
 		},
 		compile: function(element, attrs, transclude) {
 			var html = '<div class="toggler" ng-transclude></div>'+
@@ -265,7 +267,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 
 					/** Called from upload service when upload is finished and updates U */
 					function fileUploadedCallback(success, errorText) {
-						var imageResource = scope.editorImageResource(),
+						var imageResource = scope.editorImageResource,
 							imageUrl = imageResource.url,
 							activeImage = null;
 
@@ -342,9 +344,9 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 					});
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {		   
-		        		if(scope.editorEnabled() == true) {
+		        		if(scope.editorEnabled == true) {
 		        			//init file upload plugin for this dialog
-	        				uploadObject = uploadService.getFileUploadObject(uploadInput, scope.editorImageResource(), fileAddedCallback, fileUploadedCallback);
+	        				uploadObject = uploadService.getFileUploadObject(uploadInput, scope.editorImageResource, fileAddedCallback, fileUploadedCallback);
 						
 							dialog.modal('show');	
 		        		}
