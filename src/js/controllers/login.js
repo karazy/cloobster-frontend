@@ -20,10 +20,6 @@ Cloobster.Login = function($scope, facebookApi, loginService,globalHandleError,$
 		password : "",
 		save : false
 	}
-	// error flag
-	$scope.error = false;
-	// error message
-	$scope.errorMessage = "";
 	// true if there is a login in progress, so that views can change accordingly.
 	$scope.loginProgress = false;
 
@@ -41,22 +37,12 @@ Cloobster.Login = function($scope, facebookApi, loginService,globalHandleError,$
 	*	@name Cloobster.Login~handleError
 	*	
 	*	Callback used after a failed login request.
-	*	@param {Object} errorData - Contains the error data send from the Cloobser service.
+	*	@param {Object} errorData - Contains the response object send from the Cloobser service.
 	*/
-	function handleError (errorData) {
+	function handleError (responseData) {
 		$scope.loginProgress = false;
-		$scope.error = true;
-		$scope.errorMessage = errorData.message;
+		globalHandleError(responseData);
 	}
-
-	/**
-	* @name Cloobster.Login~hideError
-	*
-	* Set error false and hide the error box.
-	*/
-	$scope.hideError = function() {
-		$scope.error = false;
-	};
 
 	/**
 	*	@name Cloobster.Login~doFbLogin

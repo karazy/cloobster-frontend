@@ -8,7 +8,7 @@
 			<li>
 				<a href="#/businesses/{{activeBusiness.id}}">{{activeBusiness.name}}</a> <span class="divider">/</span>
 			</li>
-			<li class="active">Menus</li>
+			<li class="active" l="breadcrumb.menus">Menus</li>
 		</ul>
 	</div>
 </div>
@@ -110,7 +110,7 @@
 		    		<label l="menus.menu.field.active" for="menuActiveCb">Active: Show menu for guest</label>
 		    	</div>
 		    	<div>
-		    		<button class="btn btn-small" data-toggle="modal" data-target="#deleteMenuModal"><i class="icon-trash"></i> <span l="menus.menu.delete">Delete menu</span></button>
+		    		<button class="btn btn-small" data-toggle="modal" data-target="#deleteMenuModal" ng-show="currentMenu.id"><i class="icon-trash"></i> <span l="menus.menu.delete">Delete menu</span></button>
 		    		<!-- Modal delete dialog. -->
 		    		<div class="modal hide" id="deleteMenuModal">
 					 	<div class="modal-header">
@@ -179,7 +179,7 @@
 		    		<label l="menus.product.field.active" for="productActiveCb">Active: Show product for guest</label>
 		    	</div>
 		    	<div style="margin: 0 0 0.5em 0;">
-		    		<button class="btn" data-toggle="modal" data-target="#deleteProductModal"><i class="icon-trash"></i> <span l="menus.product.delete">Delete product</span></button>
+		    		<button class="btn" data-toggle="modal" data-target="#deleteProductModal" ng-show="currentProduct.id"><i class="icon-trash"></i> <span l="menus.product.delete">Delete product</span></button>
 		    		<!-- Modal delete dialog. -->
 		    		<div class="modal hide" id="deleteProductModal">
 					 	<div class="modal-header">
@@ -195,8 +195,8 @@
 						</div>
 					</div>
 		    	</div>
-		    	<div class="btn-group">
-		    		<button class="btn dropdown-toggle"  data-toggle="dropdown">
+		    	<div class="btn-group" >
+		    		<button class="btn dropdown-toggle"  data-toggle="dropdown" ng-show="currentProduct.id">
 		    			<span l="menus.product.action.move" tooltip="menus.product.action.move.tooltip">Move to ...</span>
 		    			<span class="caret"></span>
 		    		</button>			    		

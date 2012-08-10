@@ -18,10 +18,7 @@ Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster
     $routeProvider.when('/accounts/confirm/:emailToken', {templateUrl: 'partials/confirmemail.html', controller: Cloobster.Registration});
     $routeProvider.when('/accounts/confirm-email/:emailToken', {templateUrl: 'partials/confirmnewemail.html', controller: Cloobster.Registration});
     $routeProvider.when('/accounts/reset-password/:emailToken', {templateUrl: 'partials/passwordreset.html', controller: Cloobster.Profile});
-    $routeProvider.when('/businesses/:businessId/menus', {templateUrl: 'partials/management.html', controller: Cloobster.Management});
-    $routeProvider.when('/menus/:menuId', {templateUrl: 'partials/management.html', controller: Cloobster.Management});
-    $routeProvider.when('/menus/:menuId/products', {templateUrl: 'partials/management.html', controller: Cloobster.Management});
-    $routeProvider.when('/menus/:menuId/products/:productId', {templateUrl: 'partials/management.html', controller: Cloobster.Management});
+    $routeProvider.when('/businesses/:businessId/menus', {templateUrl: 'partials/menus.html', controller: Cloobster.Menu});
     $routeProvider.when('/businesses/:businessId/spots', {templateUrl: 'partials/spots.html', controller: Cloobster.Spot});
     $routeProvider.when('/businesses', {templateUrl: 'partials/businesses.html', controller: Cloobster.Business});
     $routeProvider.when('/businesses/new', {templateUrl: 'partials/businesses.html', controller: Cloobster.Business});

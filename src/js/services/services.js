@@ -749,24 +749,19 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 	*	@private
 	*/
 	function loginError (data, status, headers, config) {
+		var response = {'data': data, 'status':status, 'headers':headers, 'config': config };
+		
 		$rootScope.loggedIn = false;
+		
 		// login data was not correct
 		if(status == 401 || status == 403) {
-			loginDeferred.reject({message: 'invalid login data'});
-			
 			if(existsSavedLogin()) {
 				saveLogin = false;
 				$window.localStorage.removeItem('accessToken');
 			}
 		}
-		// server error during login
-		else if (status == 500) {
-			// Server returns error object in body
-			loginDeferred.reject(data);
-		}
-		else {
-			loginDeferred.reject({message: 'error during login request'}); 
-		}
+
+		loginDeferred.reject( response );
 	}
 
 	function existsSavedLogin() {

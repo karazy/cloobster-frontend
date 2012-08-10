@@ -1214,6 +1214,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Eine Ressource konnte nicht geladen werden.",
 			"EN" : "Resource not available."
 		},
+		"common.error.403" : {
+			"DE" : "Ungültige Zugangsdaten oder keine Zugriffsrechte.",
+			"EN" : "Invalid credentials, or insufficient rights."
+		},
 		"common.error" : {
 			"DE" : "Es gibt ein Problem mit der Verbindung zum Service.",
 			"EN" : "A connection problem to the service exists."
