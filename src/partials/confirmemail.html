@@ -1,14 +1,11 @@
+<div class="page-header">
+    <h1 l="registration.confirmemail.title">E-Mail Confirmation</h1>
+</div>
 <div class="confirmed-message">
-    <h1>E-Mail Confirmation</h1>
     <div ng-show='emailConfirmed'>
-    	<h2>Your E-Mail was confirmed</h2>
-        <p>
+        <p l="registration.confirmemail.message">
             You can start using the Cloobster service immediately.
         </p>
-        <p><a href="#/login" class="btn btn-primary">Login</a></p>
-    </div>
-    <div class='alert alert-error fade in' ng-show='error'>
-        <h2>Sorry, an error occured.</h2>
-        <strong>Error!</strong> {{errorMessage}}
+        <p><a href="#/login" class="btn btn-primary" l="nav.login">Login</a></p>
     </div>
 </div>

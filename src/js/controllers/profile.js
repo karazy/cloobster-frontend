@@ -3,14 +3,13 @@
 
 /**
 * 	@name Cloobster.Profile 
-*	@requires facebookApi
 *	@requires loginService
 *
 * 	Profile controller 
 * 	View and manage profiles.
 * 	@constructor
 */
-Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, $log, Account, handleError, $routeParams, lang) {
+Cloobster.Profile = function($scope, $http, loginService, Company, $log, Account, handleError, $routeParams, lang,$location) {
 	
 	var ImageResource,
 		/** Holds the Id of the active modal dialog. */
@@ -222,6 +221,9 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 			$scope.passwordResetComplete = true;
 		}).error(function(data,status,config,headers) {
 			$scope.passwordResetProgress = false;
+			if(status == 404) {
+				$location.path('/');
+			}
 			handleError(data,status,config,headers);
 		});
 	};
@@ -314,4 +316,4 @@ Cloobster.Profile = function($scope, $http, facebookApi, loginService, Company, 
 	};
 
 };
-Cloobster.Profile.$inject = ['$scope', '$http', 'facebookApi', 'login', 'Company', '$log', 'Account', 'errorHandler','$routeParams','lang'];
+Cloobster.Profile.$inject = ['$scope', '$http', 'login', 'Company', '$log', 'Account', 'errorHandler','$routeParams','lang','$location'];

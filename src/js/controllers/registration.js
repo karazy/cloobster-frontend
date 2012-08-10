@@ -141,6 +141,14 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 		facebookApi.login().then( facebookApi.getUser ).then( setFbUserData );
 	};
 
+	function handleConfirmationError(data,status, headers,config) {
+		if(status == 404) {
+			// acccess token no longer exists
+			$location.path('/');
+			handleError(data,status,headers,config);
+		}		
+	}
+
 	/**
 	* Activates and account by sending an email token to the server.
 	* Token is read from URL.
@@ -149,7 +157,7 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 	function confirmEmailUpdate() {
 		loginService.confirmEmailUpdate($routeParams.emailToken).success(function(result) {
 				$scope.emailConfirmed = true;
-			}).error(handleError);
+			}).error(handleConfirmationError);
 	}
 
 	/**
@@ -159,9 +167,9 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 	*/
 	function confirmEmail() {
 		loginService.confirmEmail($routeParams.emailToken).success(function(result) {
-				$scope.emailConfirmed = true;
-				loginService.setPresetLogin(result['login']);
-			}).error(handleError);
+			$scope.emailConfirmed = true;
+			loginService.setPresetLogin(result['login']);
+		}).error(handleConfirmationError);
 	}
 
 	/**

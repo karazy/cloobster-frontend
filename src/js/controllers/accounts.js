@@ -368,7 +368,14 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 			//set login name and show login form
 			loginService.setPresetLogin(data.email);
 			$location.url("/login");
-		}).error(handleError);
+		}).error(function(data,status,config,headers) {
+			handleError(data,status,config,headers);
+			
+			if(status == 404) {
+				// acccess token no longer exists
+				$location.path('/');
+			}
+		});
 	};
 
 	//admin account activation end

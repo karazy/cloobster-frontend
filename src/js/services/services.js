@@ -79,8 +79,9 @@ Cloobster.services.factory('errorHandler',['$rootScope','$location','$log','lang
 	*	@param {Object} response Object containing response and request data of the failed HTTP request.
 	*/
 	function handleError(_response, _status, _headers, _config) {
-		var response = {};
-		if(arguments.length == 4) {
+		var response;
+		if(arguments.length > 1) {
+			response = {};
 			response.data = _response;
 			response.status = _status;
 			response.headers = _headers;
@@ -101,14 +102,15 @@ Cloobster.services.factory('errorHandler',['$rootScope','$location','$log','lang
 		// - translated generic error text
 		// - placeholder text
 
-		$rootScope.errorMessage = langService.translate('common.error.'+ errorKey) || langService.translate('common.error.'+ response.status)
-			|| responseMessage || langService.translate('common.error') || "Error during communication with service.";
+		$rootScope.errorMessage = langService.translate(errorKey) || langService.translate('error.'+ response.status)
+			|| responseMessage || langService.translate('error.general') || "Error during communication with service.";
 
 		// Log the response.
 		$log.error("Error during http method, response object: " + angular.toJson(response));
 
 		if(response.status == 405) {
-			// User tried to modify locked business resource.
+			// User tried to modify read-only resource.
+			// Should only happen if a user deletes a resource, while another user edits.
 			// Return to businesses view.
 			$location.path('businesses');
 		}
@@ -750,7 +752,7 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 	*/
 	function loginError (data, status, headers, config) {
 		var response = {'data': data, 'status':status, 'headers':headers, 'config': config };
-		
+
 		$rootScope.loggedIn = false;
 		
 		// login data was not correct

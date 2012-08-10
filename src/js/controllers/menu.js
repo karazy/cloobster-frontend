@@ -224,7 +224,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	};
 
 	$scope.deleteMenu =  function(menuToDelete) {
-		menuToDelete.$delete(emptyFn, handleError);
+		menuToDelete.$delete(angular.noop, handleError);
 
 		angular.forEach($scope.menus, function(menu, index) {
 			if(menuToDelete.id == menu.id) {
@@ -438,7 +438,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.deleteProduct =  function(productToDelete) { 
 		var products = $scope.products || $scope.orphanedProducts;
 
-		productToDelete.$delete(emptyFn, handleError);
+		productToDelete.$delete(angular.noop, handleError);
 
 		angular.forEach(products, function(product, index) {
 			if(productToDelete.id == product.id) {
@@ -508,7 +508,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		manageViewHiearchy("choice");
 		$scope.currentChoice = choiceItem;
 
-		$scope.linkedProductsForChoice = $scope.productsResource.query({"choiceId" : $scope.currentChoice.id},null,null);
+		$scope.linkedProductsForChoice = $scope.productsResource.query({"choiceId" : $scope.currentChoice.id},null,null, handleError);
 
 	};
 
@@ -716,13 +716,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	}
 
 	//End Choice logic
-
-	//start utility
-
-	function emptyFn() {
-
-	}
-
 
 	/**
 	* @private

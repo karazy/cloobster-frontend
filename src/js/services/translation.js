@@ -242,6 +242,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Thank you for your registration {{account.name}}.<br/>"+
 				"An email with activation link will be send to {{account.name}}."
 		},
+		"registration.confirmemail.title" : {
+			"DE" : "E-Mail Bestätigung",
+			"EN" : "E-Mail Confirmation"
+		},
+		"registration.confirmemail.message" : {
+			"DE" : "Vielen dank, die E-Mail Adresse wurde bestätigt und das Konto kann ab sofort genutzt werden.",
+			"EN" : "Thank you, the e-mail address was confirmed and the account can be used immediately."
+		},
 		//businesses partial
 		"businesses.title" : {
 			"DE" : "Meine Betriebe",
@@ -530,6 +538,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"profile.account.newpassword" : {
 			"DE" :  "Neues Passwort",
 			"EN" : "New password"
+		},
+		"profile.confirmemailupdate.message" : {
+			"DE" : "Vielen Dank, die neue E-Mail Adresse wurde bestätigt.<br/>Alle neuen Nachrichten werden an diese Adresse gesendet.",
+			"EN" : "Thank you, the new e-mail address was confirmed.<br/>All new messages will be send to this address."
 		},
 		//menus partial
 		"menus.title" : {
@@ -1209,16 +1221,29 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Gib ein neues Passwort ein.",
 			"EN" : "Enter the new password."
 		},
+		//specific error messages
+		"error.account.login.exists" : {
+			"DE" : "Der Benutzername existiert bereits.",
+			"EN" : "The login already exists."
+		},
+		"error.account.email.exists" : {
+			"DE" : "Die E-Mail-Adresse wird bereits benutzt.",
+			"EN" : "The e-mail address is already in use."
+		},
+		"error.accesstoken.invalid" : {
+			"DE" : "Dieser Link ist nicht mehr gültig.",
+			"EN" : "The link is no longer valid."
+		},
 		//common error messages
-		"common.error.404" : {
+		"error.404" : {
 			"DE" : "Eine Ressource konnte nicht geladen werden.",
 			"EN" : "Resource not available."
 		},
-		"common.error.403" : {
+		"error.403" : {
 			"DE" : "Ungültige Zugangsdaten oder keine Zugriffsrechte.",
 			"EN" : "Invalid credentials, or insufficient rights."
 		},
-		"common.error" : {
+		"error.general" : {
 			"DE" : "Es gibt ein Problem mit der Verbindung zum Service.",
 			"EN" : "A connection problem to the service exists."
 		},
