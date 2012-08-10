@@ -10,7 +10,7 @@
 * 	View and manage businesses such as restaurants.
 * 	@constructor
 */
-Cloobster.Business = function($scope, $http, $routeParams, $location, loginService, uploadService, langService, Business, $log) {
+Cloobster.Business = function($scope, $http, $routeParams, $location, loginService, uploadService, langService, Business, $log, handleError) {
 
 		/** Holds the Id of the active modal dialog.
 		@type {string} */
@@ -68,7 +68,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		$log.log('loadBusinesses for ' + account.id);
 		$scope.businessResource = Business.buildResource(account.id);
 		//load businesses
-		$scope.businesses = $scope.businessResource.query();
+		$scope.businesses = $scope.businessResource.query(null, null, null, handleError);
 	};
 
 	/**
@@ -125,7 +125,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			$scope.activeBusiness.images = $scope.activeBusiness.images || {};
 
 			$scope.imageResource =	createImageResource($scope.activeBusiness.id);
-		});
+		}, handleError);
 	};
 
 	/**
@@ -164,9 +164,10 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 				$("#addBusinessButton").button("reset");
 				$scope.closeNewBusinessForm();
 			},
-			function() {
+			function(data,status,headers,config) {
 				//Error handling
 				$("#addBusinessButton").button("reset");
+				handleError(data, status, headers, config);
 			});
 		} else {
 			//mark form as dirty to show validation errors
@@ -244,7 +245,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.saveBusiness = function() {
 		if($scope.editMode) {
 			$log.log("saveBusiness " + $scope.activeBusiness.id);
-			$scope.activeBusiness.$update();	
+			$scope.activeBusiness.$update(null, null, handleError);	
 		}
 	};
 
@@ -269,9 +270,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.discardImage = function(image) {
 		if(image && image.blobKey) {
 			$http['delete']('/uploads/images/' + image.blobKey)
-			.error(function() {
-				//handle error
-			});
+			.error(handleError);
 		}
 	};
 
@@ -381,4 +380,4 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 };
 
-Cloobster.Business.$inject = ['$scope', '$http','$routeParams', '$location', 'login', 'upload', 'lang', 'Business', '$log'];
+Cloobster.Business.$inject = ['$scope', '$http','$routeParams', '$location', 'login', 'upload', 'lang', 'Business', '$log','errorHandler'];

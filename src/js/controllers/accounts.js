@@ -129,7 +129,7 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 				$scope.adminInvalid = true;
 				$scope.currentAdmin.name = null;								
 			}
-		});
+		}).error(handleError);
 	};
 
 	$scope.saveAdminAccount = function() {
@@ -257,9 +257,9 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 	$scope.saveCockpitAccount = function() {
 		var account = $scope.currentUser;
 		if(account && account.id) {
-			account.$update(updateSuccess, handleError);	
+			account.$update(updateSuccess, handleError);
 		} else {
-			account.$save(createSuccess, handleError);	
+			account.$save(createSuccess, handleError);
 		}
 
 		function updateSuccess(newAccount) {
@@ -368,10 +368,7 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 			//set login name and show login form
 			loginService.setPresetLogin(data.email);
 			$location.url("/login");
-		}).error(function(data, status, headers, config) {
-			//refactor handleError message to be compatible with $http response?
-			//handleError(data);
-		});
+		}).error(handleError);
 	};
 
 	//admin account activation end

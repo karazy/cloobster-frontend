@@ -26,7 +26,7 @@
 	</div>
 	<div class="span3 common-wrapper" ng-show="currentArea">
 		<div class="common-detail">
-			<div simple-property-editor editor-title="areas.editor.name" editor-property="currentArea.name" editor-on-save="saveArea()" editor-required>
+			<div simple-property-editor editor-title="areas.editor.name" editor-property="currentArea.name" editor-on-save="saveArea()" editor-max-length="20" editor-required>
 				<h3 class="edit" tooltip="areas.editor.name.tooltip">{{currentArea.name}} <i class="icon-edit icon-black"></i></h3>
 			</div>
 			<div simple-property-editor editor-title="areas.editor.description" editor-property="currentArea.description" editor-on-save="saveArea()" editor-required>
@@ -86,7 +86,7 @@
 
     <div class="span3 common-wrapper" ng-show="currentSpot">
     	<div class="spot-detail">
-	    	<div simple-property-editor editor-title="spots.editor.name" editor-property="currentSpot.name" editor-on-save="saveSpot()" editor-required>
+	    	<div simple-property-editor editor-title="spots.editor.name" editor-property="currentSpot.name" editor-on-save="saveSpot()" editor-required editor-max-length="20">
 				<h3 class="edit" tooltip="spots.editor.name.tooltip">{{currentSpot.name}} <i class="icon-edit icon-black"></i></h3>
 			</div>
     		<img ng-show="currentSpot.qrImageUrl" ng-src="{{currentSpot.qrImageUrl}}" alt="Spot Barcode"/>

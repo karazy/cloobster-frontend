@@ -160,17 +160,18 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 		var required = attrs.hasOwnProperty('editorRequired') ? "required='required'" : "",
 			pattern = attrs.hasOwnProperty('editorPattern') ? "ng-pattern='"+attrs.editorPattern+"'" : "",
 			repeat = attrs.hasOwnProperty('editorRepeat') ? "ng-change='matchInput()'" : "",
+			maxLength = attrs.hasOwnProperty('editorMaxLength') ? "maxlength='"+attrs.editorMaxLength+"'" : "",
 			type = 	attrs.hasOwnProperty('editorType') ? attrs.editorType : "text",
 			inputHtml;
 
 		if(type == "textarea") {
-			inputHtml = '<textarea class="property-input" rows="4" cols="100" name="simpleProperty" ng-model="editorValue" '+required+' '+pattern+'></textarea>';
+			inputHtml = '<textarea class="property-input" rows="4" cols="100" name="simpleProperty" ng-model="editorValue"' + maxLength +' '+required+' '+pattern+'></textarea>';
 		} else {
 			if(type != "email" && type != "password" && type != "number") {
 				type = "text";
 			}
 
-			inputHtml = '<input class="property-input" type="'+type+'" name="simpleProperty" ng-model="editorValue" '+required+' '+pattern+' '+repeat+'></input>';
+			inputHtml = '<input class="property-input" type="'+type+'" name="simpleProperty" ng-model="editorValue"' + maxLength +' '+required+' '+pattern+' '+repeat+'></input>';
 		}
 
 		return inputHtml;
