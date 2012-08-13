@@ -6,11 +6,11 @@
 			</li>
 			<li class="active">{{activeBusiness.name}}</li>
 		</ul>
+		<p><a href="#/businesses/{{activeBusiness.id}}/menus" l="businesses.action.menus">menus</a> | <a href="#/businesses/{{activeBusiness.id}}/spots" l="businesses.action.spots">service areas</a></p>
 	</div>
 </div>
 <div simple-property-editor editor-title="business.detail.name" editor-property="activeBusiness.name" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
 	<h1 ng-class="getEditModeClass()">{{activeBusiness.name}}</h1>
-	<a href="#/businesses/{{activeBusiness.id}}/menus" l="businesses.action.menus">menus</a> | <a href="#/businesses/{{activeBusiness.id}}/spots" l="businesses.action.spots">service areas</a>
 </div>
 <div class="content-wrapper well">
 		<div class="row-fluid">
