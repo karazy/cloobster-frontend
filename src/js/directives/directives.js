@@ -21,7 +21,9 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 			editorPatternText: '@',
 			editorOnSave: '&',
 			editorProperty: '=',
-			editorEnabled: '='
+			editorEnabled: '=',
+			editorValidate: '&',
+			editorValidateText: '@'
 		},
 		compile: function(element, attrs, transclude) {
 			var required = attrs.hasOwnProperty('editorRequired') ? "required='required'" : "",
@@ -43,6 +45,7 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 									'<span ng-show="simplePropertyForm.simpleProperty.$error.required">'+ l('propertyeditor.error.required') +'</span>'+
 									'<span ng-show="simplePropertyForm.simpleProperty.$error.number">'+ l('propertyeditor.error.number') +'</span>'+
 									'<span ng-show="simplePropertyForm.simpleProperty.$error.pattern" l="{{editorPatternText}}">No valid value.</span>'+
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.custom" l="{{editorValidateText}}">No valid value.</span>'+
 									'<span ng-show="simplePropertyForm.simpleProperty.$error.email" >+'+ l('propertyeditor.error.email')+'</span>'+									
 								'</div>'+
 							'</div>'+
@@ -64,8 +67,22 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 		        },
 		        post: function postLink(scope, iElement, iAttrs, controller) {
 		        	var dialog = iElement.find('div.modal'),
-		        		input = iElement.find('input.property-input, textarea.property-input');
+		        		input = iElement.find('input.property-input, textarea.property-input'),
+		        		ctrl = scope.simplePropertyForm.simpleProperty;
 
+		        	if(iAttrs.hasOwnProperty('editorValidate')) {
+		        		ctrl.$parsers.push(function(value) {
+			        		if(scope.editorValidate) {
+			        			if(scope.editorValidate({'value' : value})) {
+			        				ctrl.$setValidity('custom', true);
+			        			}
+			        			else {
+			        				ctrl.$setValidity('custom', false);
+			        			}	
+			        		}
+			        	});	
+		        	}
+		        	
 		        	scope.save = function () {
 		        		//only save when form is valid
 		        		if(scope.simplePropertyForm.$valid) {
