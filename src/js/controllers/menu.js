@@ -97,14 +97,14 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		//init sortable lists
 
-		jQuery( "#menuList" ).sortable({
-			// connectWith: ".connectedSortable",
-			items: 'li.sortable',
-			axis: "y",
-			update: function(event, ui) { 
-				$scope.updateMenuOrder(event, ui);
-			}
-		}).disableSelection();
+		// jQuery( "#menuList" ).sortable({
+		// 	// connectWith: ".connectedSortable",
+		// 	items: 'li.sortable',
+		// 	axis: "y",
+		// 	update: function(event, ui) { 
+		// 		$scope.updateMenuOrder(event, ui);
+		// 	}
+		// }).disableSelection();
 		
 		jQuery( "#productList" ).sortable({
 			// connectWith: ".connectedSortable",
