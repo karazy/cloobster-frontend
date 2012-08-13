@@ -424,6 +424,26 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Klicken um Theme zu aktivieren.",
 			"EN" : "Click to activate theme."
 		},
+		"business.detail.themes.default.description" : {
+			"DE" :  "Der Standard Cloobster Theme",
+			"EN" : "Default cloobster theme"
+		},
+		"business.detail.themes.red.description" : {
+			"DE" :  "Ein roter und eleganter Theme",
+			"EN" : "A red and elegant theme"
+		},
+		"business.detail.themes.green.description" : {
+			"DE" :  "Ein grüner und freundlicher Theme",
+			"EN" : "A green and friendly theme"
+		},
+		"business.detail.themes.blue.description" : {
+			"DE" :  "Ein blauer und luftiger Theme",
+			"EN" : "A blue and airy theme"
+		},
+		"business.detail.themes.orange.description" : {
+			"DE" :  "Ein orangener und gemütlicher Theme",
+			"EN" : "An orange and cosy theme"
+		},
 		"business.action.delete.invalid" : {
 			"DE" : "Passwort inkorrekt!",
 			"EN" : "Password invalid!"
