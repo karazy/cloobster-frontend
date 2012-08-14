@@ -145,10 +145,39 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		$scope.currentMenu = menuItem;
 
-		$scope.products = $scope.productsResource.query({"menuId" : menuItem.id},null, null, handleError);
+		$scope.products = $scope.productsResource.query({"menuId" : menuItem.id} ,function() {
+				/** Maps products by id */
+				var productsMap = {};
+
+				if($scope.currentMenu.productIds.length == 0)
+					return;
+
+				// Build temporary map for quick access to products by id.
+				angular.forEach($scope.products, function (product, index) {
+					productsMap[product.id] = product;
+				});
+				
+				// clear products array
+				$scope.products = [];
+
+				// Rearrange products array according to order array.
+				angular.forEach($scope.currentMenu.productIds, function(productId, index) {
+					$scope.products.push(productsMap[productId]);
+					delete productsMap[productId];
+				});
+
+				// add all remaining products (for backwards comabtibility)
+				angular.forEach(productsMap, function(product) {
+					$scope.products.push(product);
+				});
+			}
+			, handleError);
 
 	};
-
+	
+	/**
+	* @deprecated
+	*/
 	$scope.fillOrganizeList = function(menuItem, list) {		
 		if(list == 1) {
 			if(!$scope.organizeMenusContext.menu2 || $scope.organizeMenusContext.menu2.id != menuItem.id) {
@@ -287,6 +316,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	function saveProductSuccess(product) {
 		$scope.products.push(product);
+		$scope.currentMenu.productIds.push(product.id);
 	}
 
 	$scope.saveProduct = function() {
@@ -299,23 +329,27 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		} else {
 			product.$save(saveProductSuccess, handleError);
 		}
-
 	}
 
 	$scope.updateProductOrder = function(event, ui) {
 		$log.log("updateProductOrder");
 		var liElements = ui.item.parent().children(), //get all li elements
-			tmpProduct = null;
+			tmpProduct;
+
+		// Clear product sort array.
+		$scope.currentMenu.productIds = [];
 
 		liElements.each(function(index, ele) {
+			//get corresponding product
 			if(index > 0) {
-				//get corresponding choice resource by optaining the angular scope
 				tmpProduct = angular.element(ele).scope().product;
-				$log.log("set product " + tmpProduct.name + " index from " + tmpProduct.order + " to " + (index));
-				tmpProduct.order = index;
-				tmpProduct.$update(null, null, handleError);
-			}	
+				$scope.currentMenu.productIds.push(tmpProduct.id);
+
+				$log.log("set product " + tmpProduct.name + " index to " + (index));	
+			}
 		});
+
+		$scope.saveMenu();
 	};
 
 	$scope.moveProduct = function(event, ui) {
@@ -346,15 +380,20 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			products = $scope.products || $scope.orphanedProducts;
 		
 		productToMove.menuId = menuItem.id,
-	
+		menuItem.productIds.push(productToMove.id);
+		// Save new product order.
+		menuItem.$update(angular.noop, handleError);
+
 		angular.forEach(products, function(product, index) {
 			if(product.id == productToMove.id) {
+				$scope.currentMenu.productIds.splice(index,1);
 				products.splice(index, 1);
 				//exist loop
 				return false;
 			}
 		});
 		productToMove.$update(angular.noop, handleError);
+
 		manageViewHiearchy("moved-product");
 	
 	};
@@ -442,11 +481,14 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		angular.forEach(products, function(product, index) {
 			if(productToDelete.id == product.id) {
+				$scope.currentMenu.productIds.splice(index, 	1);
 				products.splice(index, 1);
 				//exit loop
 				return false;
 			}
 		});
+
+		$scope.saveMenu();
 
 		manageViewHiearchy("moved-product");
 	}

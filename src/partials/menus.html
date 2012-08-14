@@ -137,7 +137,7 @@
 						<a ng-click="createProduct()"><i class="icon-plus icon-black"></i> <span l="menus.products.list.new">New product...</span></a>
 						<a ng-click="showAllProducts()"><i class="icon-plus icon-black"></i> <span l="menus.products.list.existing">Existing product...</span></a>
 					</li>
-		       	 	<li ng-repeat="product in products | orderBy:['order', 'name']" class="menu-products-item sortable" ng-class="{active: currentProduct.id == product.id}">
+		       	 	<li ng-repeat="product in products" class="menu-products-item sortable" ng-class="{active: currentProduct.id == product.id}">
 			        	<a ng-click="loadProduct(product)"><i class="icon-move icon-black" tooltip="general.sortable"></i> {{product.name}}</a>
 			        </li>
 	    		</ul>
