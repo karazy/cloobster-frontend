@@ -75,9 +75,11 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 			        		if(scope.editorValidate) {
 			        			if(scope.editorValidate({'value' : value})) {
 			        				ctrl.$setValidity('custom', true);
+			        				return value;
 			        			}
 			        			else {
 			        				ctrl.$setValidity('custom', false);
+			        				return undefined;
 			        			}	
 			        		}
 			        	});	
