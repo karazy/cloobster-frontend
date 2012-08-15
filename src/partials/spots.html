@@ -74,18 +74,8 @@
 	        	</li>
     		</ul>
     	</div>
-    	<!-- area menus -->
-    	<div class="common-wrapper-detail-list" ng-show="currentArea.id">
-    		<h3 l="areas.categories.list.title">Assigned categories</h3>
-    		<p l="areas.categories.list.description">List of product categories (e. .g beverages) available to customers checked in in this service area.</p>
-    		<ul class="nav nav-pills nav-stacked organizable-list" id="assignedMenusList">
-		        <li ng-repeat="category in currentAreaCategories"> <!-- filter:filterNotAssignedCockpitBusinesses -->
-		        	<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{category.title}}</a>
-	        	</li>
-    		</ul>
-    	</div>
 	</div>
-
+	<div class="span3" ng-hide="currentSpot"></div>
     <div class="span3 common-wrapper" ng-show="currentSpot">
     	<div class="spot-detail">
 	    	<div simple-property-editor editor-title="spots.editor.name" editor-property="currentSpot.name" editor-on-save="saveSpot()" editor-required editor-max-length="20">
@@ -127,5 +117,15 @@
 				</li>
 			</ul>
 		</div>
+		<!-- area menus -->
+    	<div class="common-wrapper-detail-list" ng-show="currentArea.id">
+    		<h3 l="areas.categories.list.title">Assigned categories</h3>
+    		<p l="areas.categories.list.description">List of product categories (e. .g beverages) available to customers checked in in this service area.</p>
+    		<ul class="nav nav-pills nav-stacked organizable-list" id="assignedMenusList">
+		        <li ng-repeat="category in currentAreaCategories"> <!-- filter:filterNotAssignedCockpitBusinesses -->
+		        	<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{category.title}}</a>
+	        	</li>
+    		</ul>
+    	</div>
 	</div>
 </div>
