@@ -210,14 +210,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		if($scope.currentMenu && $scope.currentMenu.id) {
 			$scope.currentMenu.$update(null, null, handleError);	
 		} else {
-			//set menu order
-			angular.forEach($scope.menus, function(menu) {
-				if(menu.order > order) {
-					order = menu.order;
-				}
-			});
-			order = order * 10 || 1;
-			$scope.currentMenu.order = order;
 			$scope.currentMenu.$save(saveMenuSuccess, handleError);
 		}
 
