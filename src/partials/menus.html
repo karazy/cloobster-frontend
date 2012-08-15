@@ -244,7 +244,7 @@
 	    		<div simple-property-editor editor-title="choice.editor.text" editor-property="currentChoice.text" editor-on-save="saveChoice()" editor-required>
 		    		<h3 class="edit" tooltip="choice.editor.text.tooltip">{{currentChoice.text}}<i class="icon-edit icon-black"></i></h3>
 		    	</div>
-		    	<div simple-property-editor editor-type="number" editor-title="choice.editor.maxOccurence" editor-property="currentChoice.maxOccurence" editor-on-save="saveChoice()" editor-required editor-validate="value >= currentChoice.minOccurence" editor-validate-text="choice.editor.maxOccurence.error">
+		    	<div simple-property-editor editor-type="number" editor-title="choice.editor.maxOccurence" editor-property="currentChoice.maxOccurence" editor-on-save="saveChoice()" editor-required editor-validate="value >= currentChoice.minOccurence || value == 0" editor-validate-text="choice.editor.maxOccurence.error">
 		    		<p class="edit" tooltip="choice.editor.maxOccurence.tooltip"><span l="menus.choices.field.maxOccurence">Max. selected: {{currentChoice.maxOccurence}}</span> <i class="icon-edit icon-black"></i></p>
 		    	</div>
 		    	<div simple-property-editor editor-type="number" editor-title="choice.editor.minOccurence" editor-property="currentChoice.minOccurence" editor-on-save="saveChoice()" editor-required editor-validate="(currentChoice.maxOccurence == 0) || (value <= currentChoice.maxOccurence)" editor-validate-text="choice.editor.minOccurence.error">

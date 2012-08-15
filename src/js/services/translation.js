@@ -778,8 +778,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Minimum selected options"
 		},
 		"choice.editor.maxOccurence.error" : {
-			"DE" : "Maximale Auswahl muss größer als minimale Auswahl sein.",
-			"EN" : "Maximum selected options must be greater than minimum selected options."
+			"DE" : "Maximale Auswahl muss größer als minimale Auswahl sein oder 0 für keine Beschränking.",
+			"EN" : "Maximum selected options must be greater than minimum selected options or 0 for no limit."
 		},
 		"choice.editor.minOccurence.error" : {
 			"DE" : "Minimale Auswahl muss kleiner als maximale Auswahl sein, falls diese nicht 0 ist.",

@@ -162,8 +162,11 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 				// Rearrange products array according to order array.
 				angular.forEach($scope.currentMenu.productIds, function(productId, index) {
-					$scope.products.push(productsMap[productId]);
-					delete productsMap[productId];
+					if(productsMap[productId]) {
+						// Only add if this 
+						$scope.products.push(productsMap[productId]);
+						delete productsMap[productId];
+					}
 				});
 
 				// add all remaining products (for backwards comabtibility)
@@ -343,9 +346,10 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			//get corresponding product
 			if(index > 0) {
 				tmpProduct = angular.element(ele).scope().product;
-				$scope.currentMenu.productIds.push(tmpProduct.id);
-
-				$log.log("set product " + tmpProduct.name + " index to " + (index));	
+				if(tmpProduct) {
+					$scope.currentMenu.productIds.push(tmpProduct.id);
+					$log.log("set product " + tmpProduct.name + " index to " + (index));
+				}
 			}
 		});
 
@@ -475,18 +479,26 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	}
 
 	$scope.deleteProduct =  function(productToDelete) { 
-		var products = $scope.products || $scope.orphanedProducts;
+		var products = $scope.products || $scope.orphanedProducts,
+			indexToDelete;
 
 		productToDelete.$delete(angular.noop, handleError);
 
 		angular.forEach(products, function(product, index) {
 			if(productToDelete.id == product.id) {
-				$scope.currentMenu.productIds.splice(index, 	1);
 				products.splice(index, 1);
 				//exit loop
 				return false;
 			}
 		});
+
+		angular.forEach($scope.currentMenu.productIds, function(productId, index) {
+			if(productId == productToDelete.id) {
+				indexToDelete = index;
+			}
+		});
+
+		$scope.currentMenu.productIds.splice(indexToDelete,1);
 
 		$scope.saveMenu();
 
