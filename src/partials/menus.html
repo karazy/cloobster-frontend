@@ -24,7 +24,7 @@
 <!-- 				<li ng-class="{active: organizeMenusContext}">
 					<a ng-click="organizeMenus()"><i class="icon-th-large icon-black"></i> <span l="menus.list.organize">Organize menus</span></a>
 				</li> -->
-		        <li ng-repeat="menu in menus | orderBy:['title'] " ng-class="{active: currentMenu.id == menu.id}" class="sortable">	        	
+		        <li ng-repeat="menu in menus | orderBy:['title'] " ng-class="{active: currentMenu.id == menu.id}">	        	
 		        	<a ng-click="loadMenu(menu)">{{menu.title}}</a>
 		        </li>
 		        <li ng-class="{active: orphanedProducts.length > 0 && !currentMenu}">
@@ -104,7 +104,7 @@
 		    	<div simple-property-editor editor-title="menu.editor.title" editor-property="currentMenu.title" editor-on-save="saveMenu()" editor-required>
 					<h3 class="edit" tooltip="menus.editor.title.tooltip">{{currentMenu.title}} <i class="icon-edit icon-black"></i></h3>
 				</div>
-				<div simple-property-editor editor-title="menu.editor.description" editor-property="currentMenu.description" editor-type="textarea" editor-on-save="saveMenu()" editor-required>
+				<div simple-property-editor editor-title="menu.editor.description" editor-property="currentMenu.description" editor-type="textarea" editor-on-save="saveMenu()">
 		    		<p class="edit" tooltip="menus.editor.description.tooltip">{{currentMenu.description}} <i class="icon-edit icon-black"></i></p>
 		    	</div>
 		    	<div class="activation-checkbox">
