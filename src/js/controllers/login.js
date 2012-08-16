@@ -31,6 +31,7 @@ Cloobster.Login = function($scope, facebookApi, loginService,globalHandleError,$
 	*/
 	function handleLogin ( result) {
 		$scope.loginProgress = false;
+		globalHandleError.reset();
 	}
 
 	/**

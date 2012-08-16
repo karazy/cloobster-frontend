@@ -115,6 +115,10 @@ Cloobster.services.factory('errorHandler',['$rootScope','$location','$log','lang
 			$location.path('businesses');
 		}
 	}
+	
+	handleError.reset = function() {
+		$rootScope.error = false;
+	};
 
 	return handleError;
 }]);
