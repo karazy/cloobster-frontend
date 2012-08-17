@@ -34,7 +34,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			price: 0,
 			included: 0,
 			overridePrice: "NONE",
-			parent : null,
 			options: new Array()
 		},
 		/** Default values for new options. */
