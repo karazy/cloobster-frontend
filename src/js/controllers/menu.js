@@ -459,8 +459,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		function onSuccess() {
 			angular.forEach(choices, function(choice) {
 				choice.id = null;
-				//TODO workaround because keeping the parent choice is not trivial
-				choice.parent = null;
 			});
 
 			product.choices = choices;
