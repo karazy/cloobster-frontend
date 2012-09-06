@@ -377,17 +377,50 @@ Cloobster.services.factory('Product', ['cloobsterResource', function($resource) 
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Company',['cloobsterResource', function($resource) {
-		/**
-		*	@name Cloobster.services.Company
-		*	
-		*/
-		var Company = {
+Cloobster.services.factory('Company',['cloobsterResource','login','errorHandler', function($resource,loginService,handleError) {
+		var companyResource,
+			activeCompany,
+			/**
+			*	@name Cloobster.services.Company
+			*	
+			*/
+			Company = {
+			getActiveCompany: function(refresh) {
+				var companyId = loginService.getAccount()['companyId'];
+				if(companyId) {
+					if(!activeCompany || (refresh === true)) {
+						createResource();
+						activeCompany = companyResource.get({'id':companyId}, angular.noop, handleError);
+					}
+					else {
+						return activeCompany;
+					}
+				}
+				else {
+					return {};
+				}
+			},
 			/**
 			*	Returns a company resource.
 			*/
 			buildResource: function() {
-				return $resource('/b/companies/:id', 
+				createResource();
+				return companyResource;
+			},
+			/**
+			*	Returns a company image resource used to save, update images assigned to a company profile.
+			*/
+			buildImageResource: function(companyId) {
+				return $resource('/b/companies/:companyId/images/:id', {
+					'companyId': companyId,
+					'id': '@id'
+				});
+			}
+		}
+
+		function createResource() {
+			if(!companyResource) {
+				companyResource = $resource('/b/companies/:id', 
 					{
 					'id': '@id'
 					},
@@ -398,16 +431,7 @@ Cloobster.services.factory('Company',['cloobsterResource', function($resource) {
 					*/
 					'update': { method: 'PUT'}
 					}
-				);	
-			},
-			/**
-			*	Returns a company image resource used to save, update images assigned to a company profile.
-			*/
-			buildImageResource: function(companyId) {
-				return $resource('/b/companies/:companyId/images/:id', {
-					'companyId': companyId,
-					'id': '@id'
-				});
+				);
 			}
 		}
 
@@ -699,7 +723,7 @@ Cloobster.services.factory('facebookApi', ['$q','$rootScope', function($q, $root
 * 	@author Nils Weiher
 */
 Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log', 'config', '$location','lang',
-	function($window, $http, $q, $rootScope, $log, appConfig, $location,lang) {
+	function($window, $http, $q, $rootScope, $log, appConfig, $location,lang, Company, handleError) {
 		var loginService,
 			loggedIn = false,
 			account,

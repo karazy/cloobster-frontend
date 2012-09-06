@@ -1,20 +1,12 @@
+<div ng-include="'partials/businesses_header.html'">
+</div>
 <div class="menus-wrapper">
-	<div class="row-fluid">
-		<div class="span12">
-			<ul class="breadcrumb">
-				<li>
-					<a href="#/businesses" l="breadcrumb.businesses">My Restaurants</a> <span class="divider">/</span>
-				</li>
-				<li>
-					<a href="#/businesses/{{activeBusiness.id}}">{{activeBusiness.name}}</a> <span class="divider">/</span>
-				</li>
-				<li class="active" l="breadcrumb.menus">Menus</li>
-			</ul>
-		</div>
-	</div>
-	<div class="page-header">
-    	<h1 l="menus.title">Menus</h1>
-	</div>
+		<div class="row-fluid">
+			<div class="span12"><h1 l="menus.title">Products</h1>
+				<p l="menus.description">Here you can manage your catalog of products and services.<br>
+					All categories can be associated with several service areas to save time and avoid duplicate entries.</p>
+			</div>
+    	</div>
 		<div class="row-fluid">
 			<div class="menus-list span2">
 			<ul class="nav nav-pills nav-stacked" id="menuList">
