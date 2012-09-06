@@ -10,7 +10,7 @@
 * 	View and manage businesses such as restaurants.
 * 	@constructor
 */
-Cloobster.Business = function($scope, $http, $routeParams, $location, loginService, uploadService, langService, Business, $log, handleError) {
+Cloobster.Business = function($scope, $http, $routeParams, $location, loginService, uploadService, langService, Business, $log, handleError, Company) {
 
 		/** Holds the Id of the active modal dialog.
 		@type {string} */
@@ -362,6 +362,9 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.$watch('loggedIn', function(newValue, oldValue) {
 		if(newValue == true) {
 			$scope.loadBusinesses();
+			$scope.company = Company.buildResource().get({
+				'id': loginService.getAccount()['companyId']
+			},angular.noop, handleError);
 
 			//load business details
 			if($routeParams && $routeParams.id) {
@@ -380,4 +383,4 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 };
 
-Cloobster.Business.$inject = ['$scope', '$http','$routeParams', '$location', 'login', 'upload', 'lang', 'Business', '$log','errorHandler'];
+Cloobster.Business.$inject = ['$scope', '$http','$routeParams', '$location', 'login', 'upload', 'lang', 'Business', '$log','errorHandler','Company'];

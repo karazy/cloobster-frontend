@@ -252,16 +252,16 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		//businesses partial
 		"businesses.title" : {
-			"DE" : "Meine Betriebe",
-			"EN" : "My businesses"
+			"DE" : "Meine Locations",
+			"EN" : "My Locations"
 		},
 		"businesses.add" : {
-			"DE" : "Betrieb hinzufügen",
-			"EN" : "Add business"
+			"DE" : "Location hinzufügen",
+			"EN" : "Add location"
 		},
 		"businesses.action.show" : {
-			"DE" : "anzeigen/editieren",
-			"EN" : "show/edit"
+			"DE" : "editieren",
+			"EN" : "edit"
 		},
 		"businesses.action.spots" : {
 			"DE" : "servicebereiche",

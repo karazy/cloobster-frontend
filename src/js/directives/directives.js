@@ -470,12 +470,11 @@ Cloobster.directives.directive('showRole', ['login', function(login) {
 			return;
 		}
 
-		function checkForRole() {
-			iElement.css('display', ( login.getAccount()['role'] === role ) ? '' : 'none');
-		}
-
 		scope.$watch('loggedIn', function(newVal, oldVal) {
-			checkForRole();
+			
+			if(!(login.getAccount()['role'] === role)) {
+				iElement.css('display', 'none');
+			}
 		});
 	};
 }]);

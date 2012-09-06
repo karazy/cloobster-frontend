@@ -97,7 +97,7 @@ Cloobster.services.factory('errorHandler',['$rootScope','$location','$log','lang
 		$rootScope.error = true;
 		// Set the error message to the first valid message out of the following:
 		// - translation from the specified error key
-		// - trasnlation from the http status code
+		// - translation from the http status code
 		// - untranslated message from the response
 		// - translated generic error text
 		// - placeholder text
