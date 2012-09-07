@@ -237,7 +237,8 @@ ul.options-list li:hover {
 }
 
 .common-wrapper {
-  border: 1px solid gray;
+  border: 1px solid silver;
+  /* Testing square edges */
   border-radius: 0.5em; 
 }
 
@@ -245,8 +246,12 @@ ul.options-list li:hover {
   padding: 0.5em;
 }
 
+.common-scrollable {
+  height: 400px; overflow: auto;
+}
+
 .common-wrapper-detail-list { 
-  border-top: 1px solid gray; 
+  border-top: 1px solid silver; 
   padding: 0.5em;
   margin: 0.5em 0;
 }

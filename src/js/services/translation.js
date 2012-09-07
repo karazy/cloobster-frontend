@@ -928,12 +928,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Edit description"
 		},
 		"areas.spots.list.title" : {
-			"DE" :  "Spots",
-			"EN" : "Spots"
+			"DE" : "Spots hinzufügen/editieren",
+			"EN" : "Edit/Add Spots"
 		},
 		"areas.spots.list.description" : {
-			"DE" :  "Spots (z. B. Tische oder Zimmer) die diesem Servicebereich zugeordnet sind.",
-			"EN" : "List of spots assigned to this area."
+			"DE" : "Spots (z. B. Tische oder Zimmer), die diesem Servicebereich zugeordnet sind.",
+			"EN" : "Spots assigned to this area."
 		},
 		"areas.categories.list.title" : {
 			"DE" :  "Zugewiesenen Kategorien",
@@ -969,8 +969,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 					"Data will be kept for a while until it will be deleted permanently."
 		},
 		"spots.list.new" : {
-			"DE" : "Neuer Spot...",
-			"EN" : "New spot..."
+			"DE" : "Neu",
+			"EN" : "New"
 		},
 		"spots.editor.name" : {
 			"DE" : "Name",
