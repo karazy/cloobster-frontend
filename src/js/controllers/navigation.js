@@ -15,8 +15,18 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	/**
 	*
 	*/
-	$scope.getActive = function(path) {
-		return ($location.path().indexOf(path) === 0) ? "active" : "";
+	$scope.getActive = function(path, suffix) {
+		var location = $location.path(),
+			active = $location.path().indexOf(path) === 0;
+		if(suffix) {
+			if(suffix === true) {
+				active = (location == path);
+			}
+			else {
+				active = active && location.indexOf(suffix, location.length - suffix.length) !== -1;	
+			}
+		}
+		return active ? "active" : "";
 	}
 	$scope.activeBusinessId = null;
 	if($routeParams['businessId']) {

@@ -12,9 +12,9 @@
 	<div class="span12">
 		<ul class="nav nav-tabs">
 			<li ng-class="getActive('/profile')"><a href="#/profile" >Profile</a></li>
-			<li ng-class="getActive('/businesses')"><a href="#/businesses" >Locations</a></li>
-			<li><a href="#/businesses/{{activeBusinessId}}/spots">Service Areas and Spots</a></li>
-			<li><a href="#/businesses/{{activeBusinessId}}/menus">Products</a></li>
+			<li ng-class="getActive('/businesses',true)" ><a href="#/businesses" >Locations</a></li>
+			<li ng-class="getActive('/businesses','spots')" ><a href="#/businesses/{{activeBusinessId}}/spots">Service Areas and Spots</a></li>
+			<li ng-class="getActive('/businesses','menus')" ><a href="#/businesses/{{activeBusinessId}}/menus">Products</a></li>
 			<li ng-class="getActive('/accounts')"><a href="#/accounts" >Accounts</a></li>
 		</ul>
 	</div>
