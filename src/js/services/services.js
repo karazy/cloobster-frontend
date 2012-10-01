@@ -733,8 +733,17 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 			presetLogin = "",
 			accessToken = null;
 
-		// Set variable in the $rootScope so that its available for data binding.
-		$rootScope.loggedIn = false;
+	// Set variable in the $rootScope so that its available for data binding.
+	$rootScope.loggedIn = false;
+	$rootScope.customer = false;
+
+	$rootScope.$on('$routeChangeSuccess',function(event, current, previous) {
+		if(current.$route.hasOwnProperty('customer')) {
+			$rootScope.customer = true;
+		}
+	});
+	
+
 
 	/**
 	*	Callback to handle $http request success.

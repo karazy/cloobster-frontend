@@ -10,8 +10,9 @@
 * 	View and manage profiles.
 * 	@constructor
 */
-Cloobster.Navigation = function($scope, $location, loginService, Company,$routeParams,handleError,Business) {
+Cloobster.Navigation = function($scope, $location, loginService, Company,$routeParams,handleError,Business,$route,$log) {
 	var businessResource = null;
+
 	/**
 	*
 	*/
@@ -60,4 +61,4 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	});
 
 };
-Cloobster.Navigation.$inject = ['$scope', '$location', 'login', 'Company','$routeParams','errorHandler','Business'];
+Cloobster.Navigation.$inject = ['$scope', '$location', 'login', 'Company','$routeParams','errorHandler','Business','$route','$log'];

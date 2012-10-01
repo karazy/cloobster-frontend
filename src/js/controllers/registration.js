@@ -144,7 +144,6 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 	function handleConfirmationError(data,status, headers,config) {
 		if(status == 404) {
 			// acccess token no longer exists
-			$location.path('/');
 			handleError(data,status,headers,config);
 		}		
 	}

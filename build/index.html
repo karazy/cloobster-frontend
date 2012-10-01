@@ -81,7 +81,7 @@
            </div>
           </div> -->
         </div> 
-        <div class="nav-collapse">
+        <div class="nav-collapse" ng-hide="customer">
           <ul class="nav">
             <!-- class="active" -->
             <li ng-class="getActive('/home')"><a href="#/home">Home</a></li>
@@ -92,6 +92,13 @@
             <li ng-show="loggedIn" ng-class="getActive('/accounts')"><a href="#/accounts" l="nav.accounts">Account</a></li>
           </ul>
         </div><!--/.nav-collapse -->
+        <div class="nav-collapse ng-cloak" ng-show="customer">
+          <ul class="nav">
+            <!-- class="active" -->
+            <li ng-class="getActive('/about')"><a href="#/about" l="nav.about">About</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
       </div>
     </div>
   </div>
