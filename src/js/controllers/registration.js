@@ -141,16 +141,6 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 		facebookApi.login().then( facebookApi.getUser ).then( setFbUserData );
 	};
 
-	
-	/**
-	*
-	*/
-	function confirmEmailUpdate() {
-		loginService.confirmEmailUpdate($routeParams.emailToken).success(function(result) {
-				$scope.emailConfirmed = true;
-			}).error(handleConfirmationError);
-	}
-
 	/**
 	*
 	* Set retrieved facebook data into registration form.
