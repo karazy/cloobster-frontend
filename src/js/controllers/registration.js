@@ -141,34 +141,14 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 		facebookApi.login().then( facebookApi.getUser ).then( setFbUserData );
 	};
 
-	function handleConfirmationError(data,status, headers,config) {
-		if(status == 404) {
-			// acccess token no longer exists
-			handleError(data,status,headers,config);
-		}		
-	}
-
+	
 	/**
-	* Activates and account by sending an email token to the server.
-	* Token is read from URL.
-	* @private
+	*
 	*/
 	function confirmEmailUpdate() {
 		loginService.confirmEmailUpdate($routeParams.emailToken).success(function(result) {
 				$scope.emailConfirmed = true;
 			}).error(handleConfirmationError);
-	}
-
-	/**
-	* Activates and account by sending an email token to the server.
-	* Token is read from URL.
-	* @private
-	*/
-	function confirmEmail() {
-		loginService.confirmEmail($routeParams.emailToken).success(function(result) {
-			$scope.emailConfirmed = true;
-			loginService.setPresetLogin(result['login']);
-		}).error(handleConfirmationError);
 	}
 
 	/**
@@ -198,16 +178,84 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 		facebookApi.logout();
 	};
 
-	//Check if URL is an account activation
-	if($location.url().match(registrationUrlHash) || $location.hash().match(registrationUrlHash)) {
-		confirmEmail();
-	}
-
-	if($location.url().match(newEmailUrlHash) || $location.hash().match(newEmailUrlHash)) {
-		confirmEmailUpdate();
-	}
-
 	//set default values on load
 	$scope.cancel();
 }
 Cloobster.Registration.$inject = ['$scope', '$location', 'Account', 'facebookApi', '$routeParams', 'login', '$log', '$http', 'errorHandler'];
+
+/**
+* Activates an account by sending an email token to the server.
+* Token is read from URL.
+* 
+*/
+Cloobster.ConfirmAccount = function($scope, loginService, $routeParams, handleError) {
+	// Send confirmation token to server via the login service.
+	loginService.confirmEmail($routeParams['emailToken']).success(function(result) {
+		$scope.emailConfirmed = true;
+		loginService.setPresetLogin(result['login']);
+	}).error(handleError);
+
+}
+Cloobster.ConfirmAccount.$inject = ['$scope', 'login', '$routeParams', 'errorHandler'];
+
+/**
+* Activates a new e-mail address by sending an email token to the server.
+* Token is read from URL.
+* 
+*/
+Cloobster.ConfirmEmail = function($scope, loginService, $routeParams, handleError) {
+	// Send confirmation token to server via the login service.
+	loginService.confirmEmailUpdate($routeParams['emailToken']).success(function(result) {
+		$scope.emailConfirmed = true;
+	}).error(handleError);
+}
+
+Cloobster.ConfirmEmail.$inject = ['$scope', 'login', '$routeParams', 'errorHandler'];
+
+/**
+* Handles user password reset links send via e-mail.
+* 
+*/
+Cloobster.PasswordReset = function($scope, loginService, $routeParams, handleError, $location) {
+
+	$scope.passwordReset = function() {
+		$scope.passwordResetProgress = true;
+		loginService.passwordReset($routeParams['emailToken'],$scope.newPassword).success(function() {
+			$scope.passwordResetComplete = true;
+		}).error(function(data,status,config,headers) {
+			$scope.passwordResetProgress = false;
+			if(status == 404) {
+				$location.path('/');
+			}
+			handleError(data,status,config,headers);
+		});
+	};
+
+	$scope.matchPasswords = function(form) {
+		if(form.newPassword.$viewValue !== form.newPasswordRepeat.$viewValue) {
+			form.newPasswordRepeat.$setValidity("match", false);
+		} else {
+			form.newPasswordRepeat.$setValidity("match", true);
+		}
+	};
+
+	/*
+	* Get css class for field highlighting.
+	* @param {NgModelController} input ng-model controller for the input to check.
+	* @returns error if dirty && invalid
+	*		  sucess if dirty && !invalid
+	*         empty string otherwise
+	*/
+	$scope.getFieldInputClass = function(input) {
+		if(input.$dirty && input.$invalid) {
+			return "error";
+		} else if (input.$dirty && !input.$invalid) {
+			return "success";
+		} else {
+			return "";
+		}
+	};
+}
+
+Cloobster.PasswordReset.$inject = ['$scope', 'login', '$routeParams', 'errorHandler', '$location'];
+

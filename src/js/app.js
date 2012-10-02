@@ -15,12 +15,11 @@ Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster
   	$routeProvider.when('/about', {templateUrl: 'partials/impressum.html'});
   	$routeProvider.when('/registration', {templateUrl: 'partials/registration_form.html', controller: Cloobster.Registration});
     $routeProvider.when('/profile', {templateUrl: 'partials/profile.html', controller: Cloobster.Profile});
-    $routeProvider.when('/accounts/customer/confirm/:emailToken', {templateUrl: 'partials/confirmemail.html', controller: Cloobster.Registration, customer: true});
-    $routeProvider.when('/accounts/customer/confirm-email/:emailToken', {templateUrl: 'partials/confirmnewemail.html', controller: Cloobster.Registration, customer: true});
-    $routeProvider.when('/accounts/reset-password/:emailToken', {templateUrl: 'partials/passwordreset.html', controller: Cloobster.Profile});
-    $routeProvider.when('/accounts/confirm/:emailToken', {templateUrl: 'partials/confirmemail.html', controller: Cloobster.Registration});
-    $routeProvider.when('/accounts/confirm-email/:emailToken', {templateUrl: 'partials/confirmnewemail.html', controller: Cloobster.Registration});
-    $routeProvider.when('/accounts/reset-password/:emailToken', {templateUrl: 'partials/passwordreset.html', controller: Cloobster.Profile});
+    $routeProvider.when('/accounts/customer/confirm/:emailToken', {templateUrl: 'partials/confirmemail.html', controller: Cloobster.ConfirmAccount, customer: true});
+    $routeProvider.when('/accounts/customer/confirm-email/:emailToken', {templateUrl: 'partials/confirmnewemail.html', controller: Cloobster.ConfirmEmail, customer: true});
+    $routeProvider.when('/accounts/confirm/:emailToken', {templateUrl: 'partials/confirmemail.html', controller: Cloobster.ConfirmAccount});
+    $routeProvider.when('/accounts/confirm-email/:emailToken', {templateUrl: 'partials/confirmnewemail.html', controller: Cloobster.ConfirmEmail});
+    $routeProvider.when('/accounts/reset-password/:emailToken', {templateUrl: 'partials/passwordreset.html', controller: Cloobster.PasswordReset});
     $routeProvider.when('/businesses/:businessId/menus', {templateUrl: 'partials/menus.html', controller: Cloobster.Menu});
     $routeProvider.when('/businesses/:businessId/spots', {templateUrl: 'partials/spots.html', controller: Cloobster.Spot});
     $routeProvider.when('/businesses', {templateUrl: 'partials/businesses.html', controller: Cloobster.Business});

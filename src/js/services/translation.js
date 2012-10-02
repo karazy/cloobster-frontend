@@ -240,7 +240,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Vielen dank für die Registrierung {{account.name}},<br/>"+
 				"eine E-mail mit Bestätigungslink wurde an {{account.email}} gesendet.",
 			"EN" : "Thank you for your registration {{account.name}}.<br/>"+
-				"An email with activation link will be send to {{account.name}}."
+				"An email with activation link will be send to {{account.email}}."
 		},
 		"registration.confirmemail.title" : {
 			"DE" : "E-Mail Bestätigung",
