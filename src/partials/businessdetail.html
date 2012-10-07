@@ -1,12 +1,7 @@
+<div ng-include="'partials/businesses_header.html'"></div>
 <div class="row-fluid">
-	<div class="span12">
-		<ul class="breadcrumb">
-			<li>
-				<a href="#/businesses" l="breadcrumb.businesses">My Restaurants</a> <span class="divider">/</span>
-			</li>
-			<li class="active">{{activeBusiness.name}}</li>
-		</ul>
-		<p><a href="#/businesses/{{activeBusiness.id}}/menus" l="businesses.action.menus">menus</a> | <a href="#/businesses/{{activeBusiness.id}}/spots" l="businesses.action.spots">service areas</a></p>
+		<p l="business.detail.help">Here you can manage the profil information for your selected business.<br>
+			You also can customize the CI which affects how your business is presented in the app.</p>
 	</div>
 </div>
 <div simple-property-editor editor-title="business.detail.name" editor-property="activeBusiness.name" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>

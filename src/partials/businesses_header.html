@@ -11,10 +11,10 @@
 <div class="row-fluid">
 	<div class="span12">
 		<ul class="nav nav-tabs">
-			<li ng-class="getActive('/profile')"><a href="#/profile" >Profile</a></li>
 			<li ng-class="getActive('/businesses',true)" ><a href="#/businesses" >Locations</a></li>
-			<li ng-class="getActive('/businesses','spots')" ><a href="#/businesses/{{activeBusinessId}}/spots">Service Areas and Spots</a></li>
-			<li ng-class="getActive('/businesses','menus')" ><a href="#/businesses/{{activeBusinessId}}/menus">Products</a></li>
+			<li ng-class="getActive('/businesses/' + activeBusinessId, true)", true><a href="#/businesses/{{activeBusinessId}}">Location Settings</a></li>
+			<li ng-class="getActive('/businesses/' + activeBusinessId+'/spots', true)" ><a href="#/businesses/{{activeBusinessId}}/spots">Service Areas and Spots</a></li>
+			<li ng-class="getActive('/businesses/' + activeBusinessId+'/menus', true)" ><a href="#/businesses/{{activeBusinessId}}/menus">Products</a></li>
 			<li ng-class="getActive('/accounts')"><a href="#/accounts" >Accounts</a></li>
 		</ul>
 	</div>

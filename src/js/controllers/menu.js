@@ -21,7 +21,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		/** Default values for new products. */
 		defaultProduct = {
 			name: langService.translate("product.new.default.name") || "My new Product",
-			price: 1,
+			price: 0,
 			shortDesc: "",
 			longDesc: "",
 			active: false

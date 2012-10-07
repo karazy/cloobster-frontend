@@ -14,11 +14,21 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	var businessResource = null;
 
 	/**
-	*
+	* Checks if given path is the active path.
+	* @param path
+	*	Path to check
+	* @param suffix
+	*	Check for appended suffix.
+	* @return
+	*	true if path is active, false otherwise
 	*/
 	$scope.getActive = function(path, suffix) {
 		var location = $location.path(),
-			active = $location.path().indexOf(path) === 0;
+			active;
+		$log.info('Cloobster.Navigation.getActive');
+		//check if given path is part of real path
+		active = $location.path().indexOf(path) === 0;
+
 		if(suffix) {
 			if(suffix === true) {
 				active = (location == path);
@@ -29,6 +39,7 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 		}
 		return active ? "active" : "";
 	}
+
 	$scope.activeBusinessId = null;
 	if($routeParams['businessId']) {
 		$scope.activeBusinessId = parseInt($routeParams['businessId']);
