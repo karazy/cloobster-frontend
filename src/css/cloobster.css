@@ -144,18 +144,47 @@ ul.payment-method-list li {
 } 
 
 .menu-wrapper {
-  border: 1px solid gray;
-  border-radius: 0.5em;  
+  
 }
 
 .menu-detail {
   padding: 0.5em;
+  border: 1px solid gray;
+  border-radius: 0.5em;
 }
 
 .menu-products-list { 
-  border-top: 1px solid gray; 
+  border: 1px solid gray; 
+  border-radius: 0.5em;
   padding: 0.5em;
-  margin: 0.5em 0;
+  margin: 1.5em 0;
+}
+
+.data-container-with-title { 
+  border: 1px solid gray; 
+  border-radius: 0.5em;
+  margin: 15px 0 0 0;
+  position: relative;
+  padding-top: 15px;
+}
+
+
+.data-container-title {
+  display: inline-block;
+  top: -15px;
+  left: 10px;
+  position: absolute;
+  background-color: white;
+  padding: 0 5px 0 5px;
+  /*margin-bottom: 10px;*/
+}
+
+.data-container-block {
+  padding: 0.5em; 
+}
+
+.data-container-seperator {
+  border-bottom: 1px solid gray;
 }
 
 .product-wrapper {
@@ -279,3 +308,6 @@ ul.options-list li:hover {
   border: 1px solid red;
   border-radius: 0.5em;  
 }
+
+/* General classes */
+

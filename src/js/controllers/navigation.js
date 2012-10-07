@@ -18,7 +18,8 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	* @param path
 	*	Path to check
 	* @param suffix
-	*	Check for appended suffix.
+	*	Check for appended suffix. If true tries to exactly match location and path.
+	*   If a string than just looks if the suffix is contained in url.
 	* @return
 	*	true if path is active, false otherwise
 	*/
