@@ -893,9 +893,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "<b>Individueller Preis</b> - Alle Selektionen haben eigenen Preis<br/>"+
 					"<b>Standardpreis</b> - Alle Selektionen haben den selben Preis<br/>"+
 					"<b>Bündelpreis</b> - Alle Selektionen zusammen haben einen Preis<br/>",
-			"EN" : "Individueller Preis - Alle Selektionen haben eigenen Preis<br/>"+
-					"Standardpreis - Alle Selektionen haben den selben Preis<br/>"+
-					"Bündelpreis - Alle Selektionen zusammen haben einen Preis<br/>"
+			"EN" : "<b>Individual Price</b> - Alle Selektionen haben eigenen Preis<br/>"+
+					"<b>Standard price</b> - Alle Selektionen haben den selben Preis<br/>"+
+					"<b>Bundle price</b> - Alle Selektionen zusammen haben einen Preis<br/>"
 		},
 		"menus.choices.field.parentselect.label" : {
 			"DE" : "Übergeordnete Auswahl:",

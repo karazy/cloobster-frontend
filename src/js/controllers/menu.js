@@ -776,7 +776,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	}
 
 	//initialize price selection popover
-	jQuery('#choiceOverridePriceSelect').popover({
+	jQuery('#choiceOverridePriceLabel').popover({
 		placement: 'left',
 		title: langService.translate("common.help"),
 		trigger: 'hover',

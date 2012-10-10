@@ -146,8 +146,8 @@
 
 			    		<button class="btn btn-danger span6" style="margin-left: 0px !important;" type="button" ng-click="toggleProductActive()" ng-model="currentProduct.active" ng-show="!currentProduct.active && currentProduct.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
 
-			    		<div class="btn-group span3" >
-				    		<button class="btn btn-primary dropdown-toggle"  data-toggle="dropdown" ng-show="currentProduct.id" tooltip="menus.product.action.move.tooltip">
+			    		<div class="btn-group span3">
+				    		<button class="btn btn-primary dropdown-toggle" style="width:100%;"  data-toggle="dropdown" ng-show="currentProduct.id" tooltip="menus.product.action.move.tooltip">
 				    			<!-- <span l="menus.product.action.move" tooltip="menus.product.action.move.tooltip">Move to ...</span> -->
 				    			<span class="icon-move icon-white"></span>
 				    		</button>			    		
@@ -159,7 +159,7 @@
 				        		</li>
 		    				</ul>
 				    	</div>
-			    		<button class="btn btn-primary span3" data-toggle="modal" data-target="#deleteProductModal" ng-show="currentProduct.id"><i class="icon-trash icon-white"></i><!--  <span l="menus.product.delete">Delete</span> --></button>
+			    		<button class="btn btn-primary span3" data-toggle="modal" data-target="#deleteProductModal" ng-show="currentProduct.id"><i class="icon-trash icon-white"></i></button>
 			    		<!-- Modal delete dialog. -->
 			    		<div class="modal hide" id="deleteProductModal">
 						 	<div class="modal-header">
@@ -182,7 +182,7 @@
 		    	<h4 class="data-container-title" l="product.choices.container.title">Choices</h4>
 		    	<div class="data-container-block data-container-seperator">
 		    		<div class="row-fluid">
-		    			<button class="btn btn-primary span6" ng-click="createChoice()"><i class="icon-plus-sign icon-white"></i> <span l="common-new">New</span></button>
+		    			<button class="btn btn-primary span6" ng-click="createChoice()"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
 		    			<button class="btn btn-primary span6" ng-click="showAllChoices()"><i class="icon-folder-open icon-white"></i> <span l="common.copy">Copy</span></button>
 	    			</div>
 	    		</div>
@@ -233,7 +233,7 @@
 			    		<p class="edit" tooltip="choice.editor.included.tooltip"><span l="menus.choices.field.included">Options included: {{currentChoice.included}}</span> <i class="icon-edit icon-black"></i></p>
 			    	</div>
 			    	<div>
-			    		<label for="choiceOverridePriceSelect" id="choiceOverridePriceSelect"><span l="menus.choices.field.overridePrice.label">Price per selection</span> <i class="icon-question-sign"></i></label>
+			    		<label for="choiceOverridePriceSelect" id="choiceOverridePriceLabel"><span l="menus.choices.field.overridePrice.label">Price per selection</span> <i class="icon-question-sign"></i></label>
 			    		<select ng-model="currentChoice.overridePrice" id="choiceOverridePriceSelect" ng-change="saveChoice()">
 			    			<option value="NONE" l="menus.choices.field.overridePrice.none">nothing</option>
 			    			<option value="OVERRIDE_SINGLE_PRICE" l="menus.choices.field.overridePrice.overridesingleprice">Price per product</option>
@@ -312,10 +312,10 @@
 	    				<button class="btn btn-primary span6" ng-click="addOption()" type="button" ><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
 	    			</div>
 	    		</div>
-	    		<ul class="data-container-block data-container-small data-container-scrollable options-list">
+	    		<ul class="data-container-block data-container-small data-container-scrollable options-list" style="margin:0px">
 		       	 	<li ng-repeat="option in currentChoice.options" class="choice-option-item">
 		       	 		<div class="row-fluid">
-		       	 			<div class="span10">
+		       	 			<div class="span8">
 			       	 			<div simple-property-editor editor-title="option.editor.title" editor-property="option.name" editor-on-save="saveChoice()" editor-required>
 			       	 				<p class="edit" tooltip="option.editor.name.tooltip">{{option.name}} <i class="icon-edit icon-black"></i></p>
 			       	 			</div> 
