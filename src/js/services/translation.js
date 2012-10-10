@@ -889,6 +889,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Bündelpreis",
 			"EN" : "Bundle price"
 		},
+		"menus.choices.field.overridePrice.description" : {
+			"DE" : "<b>Individueller Preis</b> - Alle Selektionen haben eigenen Preis<br/>"+
+					"<b>Standardpreis</b> - Alle Selektionen haben den selben Preis<br/>"+
+					"<b>Bündelpreis</b> - Alle Selektionen zusammen haben einen Preis<br/>",
+			"EN" : "Individueller Preis - Alle Selektionen haben eigenen Preis<br/>"+
+					"Standardpreis - Alle Selektionen haben den selben Preis<br/>"+
+					"Bündelpreis - Alle Selektionen zusammen haben einen Preis<br/>"
+		},
 		"menus.choices.field.parentselect.label" : {
 			"DE" : "Übergeordnete Auswahl:",
 			"EN" : "Superior choice"
@@ -1166,6 +1174,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.copy" : {
 			"DE" : "Kopie",
 			"EN" : "Copy"
+		},
+		"common.help" : {
+			"DE" : "Hilfe",
+			"EN" : "Help"
 		},
 		"general.sortable" : {
 			"DE" : "Ziehen um zu sortieren",

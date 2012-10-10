@@ -233,7 +233,7 @@
 			    		<p class="edit" tooltip="choice.editor.included.tooltip"><span l="menus.choices.field.included">Options included: {{currentChoice.included}}</span> <i class="icon-edit icon-black"></i></p>
 			    	</div>
 			    	<div>
-			    		<label for="choiceOverridePriceSelect" l="menus.choices.field.overridePrice.label">Price calculation:</label>
+			    		<label for="choiceOverridePriceSelect" id="choiceOverridePriceSelect"><span l="menus.choices.field.overridePrice.label">Price per selection</span> <i class="icon-question-sign"></i></label>
 			    		<select ng-model="currentChoice.overridePrice" id="choiceOverridePriceSelect" ng-change="saveChoice()">
 			    			<option value="NONE" l="menus.choices.field.overridePrice.none">nothing</option>
 			    			<option value="OVERRIDE_SINGLE_PRICE" l="menus.choices.field.overridePrice.overridesingleprice">Price per product</option>

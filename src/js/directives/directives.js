@@ -458,8 +458,7 @@ Cloobster.directives.directive('tooltip', ['$locale', 'lang', function($locale, 
 }]);
 
 /**
-* Used to display a Bootstrap tooltip which gets localized.
-* http://twitter.github.com/bootstrap/javascript.html#tooltips
+*
 */
 Cloobster.directives.directive('showRole', ['login', function(login) {
 	return function(scope, iElement, iAttrs, controller) {
