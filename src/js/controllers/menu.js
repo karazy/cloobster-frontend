@@ -280,6 +280,14 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		}
 		return true;
 	}
+	/**
+	* Toggle active state of menu.
+	* Executes a save afterwards.
+	*/
+	$scope.toggleMenuActive = function() {
+		$scope.currentMenu.active = !$scope.currentMenu.active;
+		$scope.saveMenu();
+	}
 
 	//End Menu logic
 
@@ -543,6 +551,15 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		}
 		
 	};
+
+	/**
+	* Toggle active state of menu.
+	* Executes a save afterwards.
+	*/
+	$scope.toggleProductActive = function() {
+		$scope.currentProduct.active = !$scope.currentProduct.active;
+		$scope.saveProduct();
+	}
 
 	//End Product logic
 

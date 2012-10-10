@@ -580,9 +580,17 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Nicht zugewiesene Produkte anzeigen",
 			"EN" : "Show not assigned products."
 		},
-		"menus.menu.field.active" : {
-			"DE" : "Kategorie dem Gast anzeigen",
-			"EN" : "Show category to guest."
+		// "menus.menu.field.active" : {
+		// 	"DE" : "Kategorie dem Gast anzeigen",
+		// 	"EN" : "Show category to guest."
+		// },
+		"menus.menu.field.activate" : {
+			"DE" : "Aktiv",
+			"EN" : "Active"
+		},
+		"menus.menu.field.deactivate" : {
+			"DE" : "Inaktiv",
+			"EN" : "Inactive"
 		},
 		"menus.menu.delete" : {
 			"DE" : "Löschen",
@@ -603,10 +611,6 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"menus.products.list.new" : {
 			"DE" : "Neu",
 			"EN" : "New"
-		},
-		"menus.products.list.existing" : {
-			"DE" : "Bestehend",
-			"EN" : "Existing"
 		},
 		"menus.products.link.title" : {
 			"DE" : "Alle Produkte",
@@ -670,11 +674,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Show product to guest"
 		},
 		"menus.product.delete" : {
-			"DE" : "Produkt löschen",
+			"DE" : "Löschen",
 			"EN" : "Delete product"
 		},
 		"menus.product.action.move" : {
-			"DE" : "Verschieben nach ...",
+			"DE" : "Verschieben...",
 			"EN" : "Move to..."
 		},
 		"menus.product.action.move.tooltip" : {
@@ -694,11 +698,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Choices"
 		},
 		"menus.choices.list.new" : {
-			"DE" : "Neue Auswahl...",
+			"DE" : "Neu.",
 			"EN" : "New choice..."
 		},
 		"menus.choices.list.existing" : {
-			"DE" : "Bestehende Auswahl...",
+			"DE" : "Bestehend",
 			"EN" : "Existing choice..."
 		},
 		"menus.choices.list.linked" : {
@@ -714,7 +718,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Click on existing choice to link (or copy to) it with current product."
 		},
 		"menus.choices.link.title" : {
-			"DE" : "Alle Auswahlmöglichkeiten",
+			"DE" : "Auswahlmöglichkeiten",
 			"EN" : "All choices"
 		},
 		"menus.choices.link.search" : {
@@ -790,16 +794,16 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Amount of options inclusive"
 		},
 		"menus.choices.field.maxOccurence" : {
-			"DE" : "Max. Auswahl: {{currentChoice.maxOccurence}}",
-			"EN" : "Max. selections: {{currentChoice.maxOccurence}}"
+			"DE" : "Gast muss max auswählen {{currentChoice.maxOccurence}}",
+			"EN" : "Guest has to chose max {{currentChoice.maxOccurence}}"
 		},
 		"menus.choices.field.minOccurence" : {
-			"DE" : "Min. Auswahl: {{currentChoice.minOccurence}}",
-			"EN" : "Min. selections: {{currentChoice.minOccurence}}"
+			"DE" : "Gast muss min auswählen {{currentChoice.minOccurence}}",
+			"EN" : "Guest has to chose min {{currentChoice.minOccurence}}"
 		},
 		"menus.choices.field.included" : {
 			"DE" : "Optionen Inklusive: {{currentChoice.included}}",
-			"EN" : "Options inclusive: {{currentChoice.included}}"
+			"EN" : "Options free of charge {{currentChoice.included}}"
 		},
 		"menus.choices.field.price" : {
 			"DE" : "Preis: {{currentChoice.price | kcurrency:activeBusiness.currency}}",
@@ -818,7 +822,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Lists all products<br/> using this choice."
 		},
 		"menus.choices.action.remove" : {
-			"DE" : "Auswahl von Produkt entfernen.",
+			"DE" : "Entfernen",
 			"EN" : "Remove choice from product."
 		},
 		"menus.choice.dialog.delete.text" : {
@@ -870,20 +874,20 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "My option"
 		},
 		"menus.choices.field.overridePrice.label" : {
-			"DE" : "Preisberechnung:",
-			"EN" : "Price calculation"
+			"DE" : "Preis pro Selektion",
+			"EN" : "Price per selection"
 		},
 		"menus.choices.field.overridePrice.none" : {
-			"DE" : "nichts",
-			"EN" : "none"
+			"DE" : "Individueller Preis",
+			"EN" : "Individual Price"
 		},
 		"menus.choices.field.overridePrice.overridesingleprice" : {
-			"DE" : "Einheitspreis pro Produkt",
-			"EN" : "One price for all"
+			"DE" : "Standardpreis",
+			"EN" : "Standard price"
 		},
 		"menus.choices.field.overridePrice.overridefixedsum" : {
-			"DE" : "Gesamtsumme (z. B. Menü)",
-			"EN" : "All options included (e.g. Menu)"
+			"DE" : "Bündelpreis",
+			"EN" : "Bundle price"
 		},
 		"menus.choices.field.parentselect.label" : {
 			"DE" : "Übergeordnete Auswahl:",
@@ -1119,6 +1123,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Ok",
 			"EN" : "Ok"
 		},
+		"common.new" : {
+			"DE" : "Neu",
+			"EN" : "New"
+		},
 		"common.cancel" : {
 			"DE" : "Abbrechen",
 			"EN" : "Cancel"
@@ -1146,6 +1154,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.remove" : {
 			"DE" : "Entfernen",
 			"EN" : "Remove"
+		},
+		"common.active" : {
+			"DE" : "Aktiv",
+			"EN" : "Active"
+		},
+		"common.inactive" : {
+			"DE" : "Inaktiv",
+			"EN" : "Inactive"
+		},
+		"common.copy" : {
+			"DE" : "Kopie",
+			"EN" : "Copy"
 		},
 		"general.sortable" : {
 			"DE" : "Ziehen um zu sortieren",

@@ -168,10 +168,18 @@ ul.payment-method-list li {
   padding-top: 15px;
 }
 
+.data-container-large {
+  height: 400px;
+}
+
+.data-container-small {
+  height: 200px;
+}
+
 
 .data-container-title {
   display: inline-block;
-  top: -15px;
+  top: -20px;
   left: 10px;
   position: absolute;
   background-color: white;
@@ -181,6 +189,11 @@ ul.payment-method-list li {
 
 .data-container-block {
   padding: 0.5em; 
+}
+
+.data-container-scrollable {
+  overflow: scroll;
+  /*height: 100%;*/
 }
 
 .data-container-seperator {
@@ -276,7 +289,8 @@ ul.options-list li:hover {
 }
 
 .common-scrollable {
-  height: 400px; overflow: auto;
+  height: 400px; 
+  overflow: auto;
 }
 
 .common-wrapper-detail-list { 
