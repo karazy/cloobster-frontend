@@ -756,8 +756,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Link"
 		},
 		"menu.container.empty.description" : {
-			"DE" : "",
-			"EN" : "Shows the selected category details. Select a category from the list."
+			"DE" : "Um die Details zu einer Kategorie anzuzeigen, wählen Sie bitte eine Kategorie aus der Liste links oder legen eine neue an.",
+			"EN" : "To view category details please select a category from the list or add a new category."
 		},
 		"choice.container.title" :{
 			"DE" : "Option editieren",
@@ -804,9 +804,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Long description"
 		},
 		"product.container.empty.description" : {
-			"DE" : "",
-			"EN" : "Shows the selected product details. "+
-					" Select a product from product list of an active menu or add a new product to active menu."
+			"DE" : "Um die Details zu einem Produkt anzuzeigen, wählen Sie bitte ein Produkt aus der Liste links oder legen ein neues an.",
+			"EN" : "To view product details please select a product from the list or add a new product."
 		},		
 		"choice.editor.text" : {
 			"DE" : "Auswahltext",
@@ -954,9 +953,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Listing of all choices depending on this one."
 		},
 		"choice.container.empty.description" : {
-			"DE" : "",
-			"EN" : "Shows the selected option details. "+
-					"Select an option from the options list of an active product or add a new option to the product."
+			"DE" : "Um die Details zu einer Option anzuzeigen, wählen Sie bitte eine Option aus der Liste links oder legen eine neue an.",
+			"EN" : "To view option details please select a option from the list or add a new option."
 		},
 		//spots partial
 		"area.new.default.name" : {
