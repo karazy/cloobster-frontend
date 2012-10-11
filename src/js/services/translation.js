@@ -565,13 +565,27 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		//menus partial
 		"menus.title" : {
+			"DE" : "Kategorien und Services/Produkte",
+			"EN" : "Categories and Services/Products"
+		},
+		"menus.description" : {
+			"DE" : "Hier können Sir ihre Produkte und Services anlegen und diesen einer Kategorie zuweisen.<br/>"+
+					"Alle Kategorien können verschiedenen \"Service Bereichen\" zugewiesen werden um Zeit zu sparen (im Service Area Tab).",
+			"EN" : "Here you can manage your catalog of products and services.<br/>"+
+					"All categories can be associated with several service areas to save time and avoid duplicate entries."
+		},
+		"menus.list.title" : {
 			"DE" : "Kategorien",
 			"EN" : "Categories"
 		},
-		"menus.list.new" : {
-			"DE" : "Neue Kategorie...",
-			"EN" : "New category..."
-		},
+		// "menus.list.new" : {
+		// 	"DE" : "Neue Kategorie...",
+		// 	"EN" : "New category..."
+		// },
+		"menu.container.title" : {
+			"DE" : "Kategorie editieren",
+			"EN" : "Category edit"
+		},		
 		"menus.list.orphaned" : {
 			"DE" : "Verwaiste Produkte",
 			"EN" : "Orphaned products"
@@ -604,15 +618,19 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "<strong>{{currentMenu.title}}</strong> löschen? Dies kann nicht rückgängig gemacht werden!<br/>Produkte werden nicht gelöscht.",
 			"EN" : "Delete <strong>{{currentMenu.title}}</strong>? This can't be undone.!<br/>Products won't be deleted."
 		},
-		"menus.products.title" : {
-			"DE" : "Produkte",
-			"EN" : "Products"
+		"menu.products.container.title" : {
+			"DE" : "Produkte zur Kategorie",
+			"EN" : "Products of categorie"
+		},
+		"products.list.title" : {
+			"DE" : "Kategorien",
+			"EN" : "Categories"
 		},
 		"menus.products.list.new" : {
 			"DE" : "Neu",
 			"EN" : "New"
 		},
-		"menus.products.link.title" : {
+		"menus.products.container.link.title" : {
 			"DE" : "Alle Produkte",
 			"EN" : "All products"
 		},
@@ -644,6 +662,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"menus.products.orphaned.description" : {
 			"DE" : "Liste aller Produkte die keiner Kategorie zugeordnet sind.",
 			"EN" : "List of all products not assigned to a category."
+		},
+		"product.container.title" : {
+			"DE" : "Produkt editieren",
+			"EN" : "Product edit"
 		},
 		"menus.editor.title.tooltip" : {
 			"DE" : "Titel editieren",
@@ -693,9 +715,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "<strong>{{currentProduct.name}}</strong> löschen? Dies kann nicht rückgängig gemacht werden!",
 			"EN" : "Delete <strong>{{currentProduct.name}}</strong>? This can't be undone!"
 		},
-		"menus.choices.title" : {
-			"DE" : "Auswahlmöglichkeiten",
-			"EN" : "Choices"
+		"product.choices.container.title" : {
+			"DE" : "Optionen zum Produkt",
+			"EN" : "Options of product"
 		},
 		"menus.choices.list.new" : {
 			"DE" : "Neu.",
@@ -717,7 +739,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Klicke auf eine bestehende Auswahlmöglichkeit, um diese mit dem aktuellen Produkt zu <strong>verknüpfen</strong> oder zu <strong>kopieren</strong>.<br/>Es werden keine abhängigen Auswahlen angezeigt.",
 			"EN" : "Click on existing choice to link (or copy to) it with current product."
 		},
-		"menus.choices.link.title" : {
+		"choices.container.link.title" : {
 			"DE" : "Auswahlmöglichkeiten",
 			"EN" : "All choices"
 		},
@@ -733,9 +755,21 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Verknüpfen",
 			"EN" : "Link"
 		},
+		"menu.container.empty.description" : {
+			"DE" : "",
+			"EN" : "Shows the selected category details. Select a category from the list."
+		},
+		"choice.container.title" :{
+			"DE" : "Option editieren",
+			"EN" : "Option edit"
+		},
 		"menus.options.title" : {
 			"DE" : "Optionen",
 			"EN" : "Options"
+		},
+		"option.configuration.container.title" : {
+			"DE" : "Konfigurationen zur Option",
+			"EN" : "Configurations of option"
 		},
 		"menus.options.list.new" : {
 			"DE" : "Neue Option...",
@@ -769,6 +803,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Lange Beschreibung",
 			"EN" : "Long description"
 		},
+		"product.container.empty.description" : {
+			"DE" : "",
+			"EN" : "Shows the selected product details. "+
+					" Select a product from product list of an active menu or add a new product to active menu."
+		},		
 		"choice.editor.text" : {
 			"DE" : "Auswahltext",
 			"EN" : "Choice text"
@@ -913,6 +952,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"menus.choices.linkedchoices.tooltip" : {
 			"DE" : "Auflistung aller Auswahlmöglichkeiten die von dieser abhängen.",
 			"EN" : "Listing of all choices depending on this one."
+		},
+		"choice.container.empty.description" : {
+			"DE" : "",
+			"EN" : "Shows the selected option details. "+
+					"Select an option from the options list of an active product or add a new option to the product."
 		},
 		//spots partial
 		"area.new.default.name" : {

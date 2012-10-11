@@ -200,6 +200,11 @@ ul.payment-method-list li {
   border-bottom: 1px solid gray;
 }
 
+.data-container-inactive {
+  color: gray;
+  border-color: #C3C3C3 !important;
+}
+
 .product-wrapper {
   border: 1px solid gray;
   border-radius: 0.5em;  
