@@ -429,11 +429,10 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 	if($location.url().match(adminActivationUrlHash) || $location.hash().match(adminActivationUrlHash)) {
 		adminActivationToken = $routeParams.token;
 		if(adminActivationToken) {
-			$log.log("extract activation token " + adminActivationToken);	
+			$log.log("extract activation token " + adminActivationToken);
 		} else {
 			$location.url("/home");
 		}
-		
 	}
 }
 

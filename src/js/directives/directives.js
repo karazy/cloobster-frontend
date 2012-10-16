@@ -253,6 +253,8 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 						 		'<input type="file" name="files[]" accept="image/jpeg,image/png,image/gif"></input>'+
 					 		'</span>'+
 					 		'<span l="fileupload.image.label">Selected file: </span><span class="selected-files"></span>'+
+					 		'<img class="active-image" ng-src="{{activeImage.url}}"></img>'+
+					 		'<p ng-show="imgSelection">Selected: {{imgSelection.width}} x {{imgSelection.height}}</p>'+
 						'</div>'+
 						'<div class="modal-footer" style="clear:both;">'+
 							'<button type="button" class="btn" ng-click="cancel()" data-dismiss="modal" l="common.cancel">Close</button>'+
@@ -270,6 +272,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        		fileList = iElement.find('.selected-files'),
 		        		submitButton = iElement.find("button[type=submit]"),
 		        		uploadInput = iElement.find('form[name=simpleImageForm]'),
+		        		imageElement = iElement.find('img.active-image'),
 		        		uploadObject; //returned from file upload initialization
 
 		        	// Initialize private scope variables.
@@ -282,6 +285,12 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        	/** Gets localized title. */
 		        	scope.getTitle = function() {
 		        		return langService.translate(scope.editorTitleKey);
+		        	}
+
+		        	function selectionEnd(img, selection) {
+		        		$log.info('width: ' + selection.width + '; height: ' + selection.height);
+		        		scope.imgSelection = selection;
+		        		scope.$digest();
 		        	}
 
 					/** Called from upload service when upload is finished and updates U */
@@ -298,13 +307,19 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 			    				blobKey: imageResource.blobKey,
 			    				url: imageResource.url
 	    					});
+	    					scope.activeImage = activeImage;
+	    					scope.$digest();
+	    					imageElement.imgAreaSelect({
+	    						handles:true,
+	    						onSelectEnd: selectionEnd
+	    					});
 
-			        		activeImage.$save(function() {
-								scope.editorOnSave({ "image" : activeImage});
-								scope.fileUploading = false;
-								submitButton.button('reset');
-								dialog.modal('hide');								
-							});
+			    //     		activeImage.$save(function() {
+							// 	scope.editorOnSave({ "image" : activeImage});
+							// 	scope.fileUploading = false;
+							// 	submitButton.button('reset');
+							// 	dialog.modal('hide');								
+							// });
 						} else {
 							scope.fileUploading = false;
 							submitButton.button('reset');

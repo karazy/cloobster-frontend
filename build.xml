@@ -32,6 +32,8 @@
 				<file name="jquery/jquery.fileupload.js" />
 				<file name="jquery/jquery.fileupload-fp.js" />
 				<file name="jquery/jquery.fileupload-ui.js" />
+				<file name="jquery/jquery.imgareaselect.pack.js" />
+
 				<file name="bootstrap/bootstrap.min.js" />
 				<file name="angular/angular-resource-1.0.1.min.js" />
 			</filelist>
@@ -50,6 +52,9 @@
 				<file name="css/bootstrap-responsive.min.css"/>
 				<file name="css/cloobster.css"/>
 				<file name="css/jquery.fileupload-ui.css"/>
+				<file name="css/imgareaselect-default.css"/>
+				<file name="css/border-h.gif"/>
+				<file name="css/border-v.gif"/>
 			</filelist>
 		</copy>
 	</target>
