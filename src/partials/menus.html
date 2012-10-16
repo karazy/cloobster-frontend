@@ -208,7 +208,7 @@
 		    </div>
 		</div>
 		<!-- Empty product placeholder -->
-		<div ng-hide="currentProduct" class="span3">
+		<div ng-hide="currentProduct || allProducts.length > 0" class="span3">
 	    	<div class="data-container-with-title data-container-small data-container-inactive">
 	    		<h4 class="data-container-title" l="product.container.title">Product edit</h4>
 	    		<div class="data-container-block">
@@ -216,7 +216,7 @@
 	    		</div>
 	    	</div>
 	    </div>
-
+	    <!-- All choices list -->
 	    <div class="span3 data-container-with-title" ng-show="allChoices.length > 0">
 	    	<h4 class="data-container-title" l="choices.container.link.title">All Choices</h4>
 	    	<div class="data-container-block data-container-seperator">
@@ -352,7 +352,7 @@
 	    	</div>
 	    </div>
 	    <!-- Empty choice placeholder -->
-		<div ng-hide="currentChoice" class="span3">
+		<div ng-hide="currentChoice || allChoices.length > 0" class="span3">
 	    	<div class="data-container-with-title data-container-small data-container-inactive">
 	    		<h4 class="data-container-title" l="choice.container.title">Option edit</h4>
 	    		<div class="data-container-block">
