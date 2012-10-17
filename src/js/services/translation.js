@@ -320,6 +320,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "This business has been deleted."
 		},
 		//business detail partial
+		"business.detail.help" : {
+			"DE" :  "Hier können Sie das Profil der aktiven Location pflegen.<br/>Außerdem können Sie die CI für die App konfigurieren.",
+			"EN" : "Here you can manage the profil information for your selected business.<br/>"+
+			"You also can customize the CI which affects how your business is presented in the app."
+		},
 		"business.action.edit.enable" : {
 			"DE" : "Editiermodus aktivieren",
 			"EN" : "Activate edit mode"
@@ -331,6 +336,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"business.action.edit.disable.hint" : {
 			"DE" : "Profileigenschaft anklicken um zu editieren.",
 			"EN" : "Click profile property to edit"
+		},
+		"business.detail.section.profile" : {
+			"DE" :  "Location Profil",
+			"EN" : "Location Profile"
+		},
+		"business.detail.add.image.button" : {
+			"DE" :  "Bild hinzufügen",
+			"EN" : "Add image"
 		},
 		"business.detail.logo.editor.title" : {
 			"DE" : "Logo",
@@ -416,6 +429,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Neue Bezahlart",
 			"EN" : "New payment"
 		},
+		"business.detail.section.app" : {
+			"DE" :  "App Konfiguration",
+			"EN" : "App Configuration"
+		},
+		"business.detail.section.app.description" : {
+			"DE" :  "Konfigurieren Sie das Aussehen der cloobster App um es an Ihre CI anzupassen.",
+			"EN" : "Configure the look of the cloobster App to best fit your CI."
+		},
+		"business.detail.app.header" : {
+			"DE" :  "App Header Bild ",
+			"EN" : "App Header Image"
+		},
 		"business.detail.themes" : {
 			"DE" : "Themes",
 			"EN" : "Themes"
@@ -447,6 +472,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"business.detail.themes.orange.description" : {
 			"DE" :  "Ein orangener und gemütlicher Theme",
 			"EN" : "An orange and cosy theme"
+		},
+		"business.detail.section.facebook" : {
+			"DE" :  "Facebook Konfiguration",
+			"EN" : "Facebook Configuration"
+		},
+		"business.detail.section.facebook.description" : {
+			"DE" :  "Hier können Sie konfigurieren wie Posts in Facebook dargestellt werden.",
+			"EN" : "Here you can configure how Facebook posts will look like."
+		},
+		"business.detail.facebook.wallpost.image" : {
+			"DE" :  "Pinwand Bild",
+			"EN" : "Wallpost Image"
 		},
 		"business.action.delete.invalid" : {
 			"DE" : "Passwort inkorrekt!",
