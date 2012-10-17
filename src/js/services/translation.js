@@ -380,6 +380,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Slogan",
 			"EN" : "Slogan"
 		},
+		"business.detail.url" : {
+			"DE" : "Webseite",
+			"EN" : "Website"
+		},
 		"business.detail.address" : {
 			"DE" : "Adresse",
 			"EN" : "Address"

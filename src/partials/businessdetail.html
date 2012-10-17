@@ -72,6 +72,12 @@
 				<div class="value">{{activeBusiness.slogan}}</div>
 			</div>
 		</div>
+		<div simple-property-editor editor-title="business.detail.url" editor-property="activeBusiness.url" editor-on-save="saveBusiness()" editor-enabled="editMode">
+			<div class="data-element" ng-class="getEditModeClass()">
+				<div class="key" l="business.detail.url">Website</div>
+				<div class="value">{{activeBusiness.url}}</div>
+			</div>
+		</div>
 		<div simple-property-editor editor-title="business.detail.address" editor-property="activeBusiness.address" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
 			<div class="data-element" ng-class="getEditModeClass()">
 				<div class="key" l="business.detail.address">Address</div>
