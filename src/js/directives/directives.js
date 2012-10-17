@@ -252,8 +252,11 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 	                    		'<span l="fileupload.button.add">Add image...</span>'+
 						 		'<input type="file" name="files[]" accept="image/jpeg,image/png,image/gif"></input>'+
 					 		'</span>'+
-					 		'<span l="fileupload.image.label">Selected file: </span><span class="selected-files"></span>'+
-					 		'<img class="active-image" ng-src="{{activeImage.url}}"></img>'+
+					 		'<span l="fileupload.image.label">Selected file: </span><span class="selected-files"></span><br>'+
+					 		'<img class="active-image" ng-src="../images/logo_cloobster_big.png"></img><br>'+
+					 		'<label class="radio inline" ng-repeat="ratio in cropRatios">'+
+  								'<input type="radio" name="ratio" value="{{ratio}}" ng-model="areaSelect.aspectRatio" ng-change="ratioChange()"> {{ratio}}'+
+							'</label>'+
 					 		'<p ng-show="imgSelection">Selected: {{imgSelection.width}} x {{imgSelection.height}}</p>'+
 						'</div>'+
 						'<div class="modal-footer" style="clear:both;">'+
@@ -273,8 +276,11 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        		submitButton = iElement.find("button[type=submit]"),
 		        		uploadInput = iElement.find('form[name=simpleImageForm]'),
 		        		imageElement = iElement.find('img.active-image'),
-		        		uploadObject; //returned from file upload initialization
+		        		uploadObject, //returned from file upload initialization
+		        		imgAreaSelect; // holds instance of image cropping tool
 
+		        	// get the preset ratios for image selection from the "editor-ratios" attribute.
+		        	scope.cropRatios = iAttrs.editorRatios.split(',');
 		        	// Initialize private scope variables.
 		        	scope.error = false,
 		        	scope.errorMessage = "";
@@ -282,6 +288,10 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        	scope.fileAdded = false;
 		        	scope.fileUploading = false;
 
+		        	if(scope.cropRatios) {
+		        		scope.areaSelect = { aspectRatio: scope.cropRatios[0] };
+		        	}
+		        	
 		        	/** Gets localized title. */
 		        	scope.getTitle = function() {
 		        		return langService.translate(scope.editorTitleKey);
@@ -292,6 +302,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        		scope.imgSelection = selection;
 		        		scope.$digest();
 		        	}
+
 
 					/** Called from upload service when upload is finished and updates U */
 					function fileUploadedCallback(success, errorText) {
@@ -308,11 +319,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 			    				url: imageResource.url
 	    					});
 	    					scope.activeImage = activeImage;
-	    					scope.$digest();
-	    					imageElement.imgAreaSelect({
-	    						handles:true,
-	    						onSelectEnd: selectionEnd
-	    					});
+	    					scope.$digest();	    					
 
 			    //     		activeImage.$save(function() {
 							// 	scope.editorOnSave({ "image" : activeImage});
@@ -346,6 +353,15 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        		submitButton.attr('data-loading-text', langService.translate("fileupload.button.submit.saving"));
 		        		submitButton.button('loading');
 		        		scope.fileUploading = true;
+		        		
+		        		imgAreaSelect = imageElement.imgAreaSelect({
+	    						handles:true,
+	    						enable:true,
+	    						show:true,
+	    						onSelectEnd: selectionEnd,
+	    						parent: iElement,
+	    						instance: true
+	    					});
 
 		        		uploadObject.upload();
 		        	}		        	
@@ -361,6 +377,12 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        		// }
 		        	}
 
+		        	scope.ratioChange = function() {
+		        		imgAreaSelect.setOptions({aspectRatio: scope.areaSelect.aspectRatio});
+		        		imgAreaSelect.setSelection(0,0,100,100);
+		        		imgAreaSelect.update();
+		        	};
+
 		        	/**
 					* Set error message to empty string and hide the error box.
 					*/
@@ -375,6 +397,10 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 						scope.error = false;
 						scope.errorMessage = "";
 						scope.$digest();
+					});
+
+					dialog.on("hide", function() {
+						imgAreaSelect.setOptions({disable: true, hide:true});
 					});
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {		   
