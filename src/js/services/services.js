@@ -1204,9 +1204,11 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 				}
 				;
 
+			},
+			requestImageCrop : function(blobKey, leftX, topY, rightX, bottomY) {
+				return $http.put(appConfig['serviceUrl'] + '/uploads/images/'+ blobKey,
+					{'leftX': leftX, 'topY': topY, 'rightX': rightX, 'bottomY': bottomY});
 			}
-
-
 		};
 
 		return uploadService;

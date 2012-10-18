@@ -253,10 +253,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 						 		'<input type="file" name="files[]" accept="image/jpeg,image/png,image/gif"></input>'+
 					 		'</span>'+
 					 		'<span l="fileupload.image.label">Selected file: </span><span class="selected-files"></span><br>'+
-					 		'<img class="active-image" ng-src="../images/logo_cloobster_big.png"></img><br>'+
-					 		'<label class="radio inline" ng-repeat="ratio in cropRatios">'+
-  								'<input type="radio" name="ratio" value="{{ratio}}" ng-model="areaSelect.aspectRatio" ng-change="ratioChange()"> {{ratio}}'+
-							'</label>'+
+					 		'<img class="active-image" ng-src="{{activeImage.url}}"></img><br>'+
 					 		'<p ng-show="imgSelection">Selected: {{imgSelection.width}} x {{imgSelection.height}}</p>'+
 						'</div>'+
 						'<div class="modal-footer" style="clear:both;">'+
@@ -277,21 +274,18 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        		uploadInput = iElement.find('form[name=simpleImageForm]'),
 		        		imageElement = iElement.find('img.active-image'),
 		        		uploadObject, //returned from file upload initialization
-		        		imgAreaSelect; // holds instance of image cropping tool
-
-		        	// get the preset ratios for image selection from the "editor-ratios" attribute.
-		        	scope.cropRatios = iAttrs.editorRatios.split(',');
-		        	// Initialize private scope variables.
+		        		imgAreaSelect, // holds instance of image cropping tool
+		        		aspectRatio = iAttrs.editorRatio; // get the preset ratios for image selection from the "editor-ratios" attribute.
+		        	
+		        	// Initialize private scope variable
 		        	scope.error = false,
 		        	scope.errorMessage = "";
 
 		        	scope.fileAdded = false;
 		        	scope.fileUploading = false;
+		        	scope.selectionActive = false;
+		        	scope.fileCropping = false;
 
-		        	if(scope.cropRatios) {
-		        		scope.areaSelect = { aspectRatio: scope.cropRatios[0] };
-		        	}
-		        	
 		        	/** Gets localized title. */
 		        	scope.getTitle = function() {
 		        		return langService.translate(scope.editorTitleKey);
@@ -318,8 +312,31 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 			    				blobKey: imageResource.blobKey,
 			    				url: imageResource.url
 	    					});
+
 	    					scope.activeImage = activeImage;
-	    					scope.$digest();	    					
+	    					scope.$digest();
+
+	    					imageElement.load(function() {
+	    						imgAreaSelect = imageElement.imgAreaSelect({
+		    						handles:true,
+		    						enable:true,
+		    						show:true,
+		    						onSelectEnd: selectionEnd,
+		    						parent: iElement,
+		    						instance: true,
+		    						aspectRatio: aspectRatio,
+		    						persistent: true,
+		    						x1: 0,
+		    						y1: 0,
+		    						x2: 128,
+		    						y2: 128
+		    					});
+	    					});
+
+	    					scope.fileUploading = false;
+	    					scope.selectionActive = true;
+
+
 
 			    //     		activeImage.$save(function() {
 							// 	scope.editorOnSave({ "image" : activeImage});
@@ -327,6 +344,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 							// 	submitButton.button('reset');
 							// 	dialog.modal('hide');								
 							// });
+
 						} else {
 							scope.fileUploading = false;
 							submitButton.button('reset');
@@ -349,21 +367,31 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 
 		        	//backup original value
 		        	scope.save = function() {		        		
-		        		//disable button and set saving text
-		        		submitButton.attr('data-loading-text', langService.translate("fileupload.button.submit.saving"));
-		        		submitButton.button('loading');
-		        		scope.fileUploading = true;
-		        		
-		        		imgAreaSelect = imageElement.imgAreaSelect({
-	    						handles:true,
-	    						enable:true,
-	    						show:true,
-	    						onSelectEnd: selectionEnd,
-	    						parent: iElement,
-	    						instance: true
-	    					});
+		        		//disable button and set saving text		        	
+		        		if(scope.selectionActive) {
+		        			var selection = imgAreaSelect.getSelection(),
+		        				imgWidth = imageElement.width(),
+		        				imgHeight = imageElement.height();
 
-		        		uploadObject.upload();
+		        			scope.fileCropping = true;
+		        			submitButton.attr('data-loading-text', langService.translate("fileupload.button.submit.saving"));
+		        			submitButton.button('loading');
+		        			uploadService.requestImageCrop(scope.activeImage.blobKey,
+		        				selection.x1 / imgWidth,
+		        				selection.y1 / imgHeight,
+		        				selection.x2 / imgWidth,
+		        				selection.y2 / imgHeight).success(function(imageData) {
+		        					scope.activeImage.url = imageData.url;
+		        					scope.activeImage.blobKey = imageData.blobKey;
+		        				});		     
+		        		}
+		        		else {
+			        		submitButton.attr('data-loading-text', langService.translate("fileupload.button.submit.saving"));
+			        		submitButton.button('loading');
+			        		scope.fileUploading = true;
+			        		scope.selectionActive = true;
+			        		uploadObject.upload();
+		        		}
 		        	}		        	
 
 		        	scope.cancel = function() {
@@ -376,12 +404,6 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        		// });
 		        		// }
 		        	}
-
-		        	scope.ratioChange = function() {
-		        		imgAreaSelect.setOptions({aspectRatio: scope.areaSelect.aspectRatio});
-		        		imgAreaSelect.setSelection(0,0,100,100);
-		        		imgAreaSelect.update();
-		        	};
 
 		        	/**
 					* Set error message to empty string and hide the error box.
@@ -400,7 +422,9 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 					});
 
 					dialog.on("hide", function() {
-						imgAreaSelect.setOptions({disable: true, hide:true});
+						if(imgAreaSelect) {
+							imgAreaSelect.setOptions({disable: true, hide:true});	
+						}
 					});
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {		   
