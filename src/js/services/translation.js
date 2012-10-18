@@ -481,6 +481,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Hier können Sie konfigurieren wie Posts in Facebook dargestellt werden.",
 			"EN" : "Here you can configure how Facebook posts will look like."
 		},
+		"business.detail.facebook.url" : {
+			"DE" :  "Facebook Link",
+			"EN" : "Facebook URL"
+		},
 		"business.detail.facebook.wallpost.image" : {
 			"DE" :  "Pinwand Bild",
 			"EN" : "Wallpost Image"

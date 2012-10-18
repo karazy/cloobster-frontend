@@ -186,6 +186,12 @@
 		<div class="data-section data-section-seperator">
 			<h3 l="business.detail.section.facebook">Facebook Configuration</h3>
 			<p l="business.detail.section.facebook.description">Configure how post in Facebook will appear.</p>
+			<div simple-property-editor editor-title="business.detail.facebook.url" editor-property="activeBusiness.fbUrl" editor-on-save="saveBusiness()" editor-enabled="editMode">
+				<div class="data-element" ng-class="getEditModeClass()">
+					<div class="key" l="business.detail.facebook.url">Facebook URL</div>
+					<div class="value">{{activeBusiness.fbUrl}}</div>
+				</div>
+			</div>
 			<div class="data-element">
 				<div class="key" l="business.detail.facebook.wallpost.image">
 					Wall post Image
