@@ -335,16 +335,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 
 	    					scope.fileUploading = false;
 	    					scope.selectionActive = true;
-
-
-
-			    //     		activeImage.$save(function() {
-							// 	scope.editorOnSave({ "image" : activeImage});
-							// 	scope.fileUploading = false;
-							// 	submitButton.button('reset');
-							// 	dialog.modal('hide');								
-							// });
-
+		    
 						} else {
 							scope.fileUploading = false;
 							submitButton.button('reset');
@@ -372,7 +363,8 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        			var selection = imgAreaSelect.getSelection(),
 		        				imgWidth = imageElement.width(),
 		        				imgHeight = imageElement.height();
-
+		        				
+							scope.selectionActive = false;		        				
 		        			scope.fileCropping = true;
 		        			submitButton.attr('data-loading-text', langService.translate("fileupload.button.submit.saving"));
 		        			submitButton.button('loading');
@@ -383,6 +375,14 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        				selection.y2 / imgHeight).success(function(imageData) {
 		        					scope.activeImage.url = imageData.url;
 		        					scope.activeImage.blobKey = imageData.blobKey;
+			        				
+			        				scope.activeImage.$save(function() {
+										scope.editorOnSave({ "image" : scope.activeImage});
+										
+										submitButton.button('reset');
+										dialog.modal('hide');								
+									});
+
 		        				});		     
 		        		}
 		        		else {
@@ -416,6 +416,9 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 					dialog.on("show", function() {
 						scope.fileAdded = false;
 						scope.fileUploading = false;
+						scope.fileCropping = false;
+						scope.selectionActive = false;
+						scope.activeImage = null;
 						scope.error = false;
 						scope.errorMessage = "";
 						scope.$digest();
