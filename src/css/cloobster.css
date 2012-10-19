@@ -57,6 +57,14 @@
   right: 10px;
 }
 
+.data-section {
+
+}
+
+.data-section-seperator {
+  border-top: 2px solid #C3C3C3;
+}
+
 .data-element {
   color: 
   #333;
@@ -81,7 +89,7 @@ h1.edit:hover, h2.edit:hover {
   margin-bottom: 0;
   text-align: right;
   vertical-align: top;
-  width: 110px;
+  width: 130px;
   float: left;
 }
 
