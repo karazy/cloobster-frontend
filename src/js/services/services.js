@@ -1166,7 +1166,7 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 			},
 			deleteUpload: function(blobKey) {
 				return $http['delete'](appConfig['serviceUrl'] + '/uploads/images/'+ blobKey);
-			};
+			}
 		};
 
 		return uploadService;

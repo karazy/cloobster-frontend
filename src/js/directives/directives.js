@@ -247,7 +247,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 							'{{errorMessage}}'+
 						'</div>'+
 						'<div class="modal-body">'+
-							'<div class="upload-area" ng-hide="selectionActive">'
+							'<div class="upload-area" ng-hide="selectionActive">'+
 							 	'<span class="btn btn-success fileinput-button">'+
 							 		'<i class="icon-plus icon-white"></i>'+
 		                    		'<span l="fileupload.button.add">Add image...</span>'+
@@ -263,7 +263,8 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 						'</div>'+
 						'<div class="modal-footer" style="clear:both;">'+
 							'<button type="button" class="btn" ng-click="cancel()" data-dismiss="modal" l="common.cancel">Close</button>'+
-							'<button type="submit" ng-disabled="!fileAdded || fileUploading" class="btn btn-primary" data-loading-text="Saving..." l="common.save">Save</button>'+
+							'<button type="submit" ng-hide="selectionActive" ng-disabled="!fileAdded || fileUploading" class="btn btn-primary" data-loading-text="Saving..." l="common.save">Save</button>'+
+							'<button type="button" class="btn btn-primary" ng-click="crop()" ng-show="selectionActive" ng-disabled="fileCropping" l="fileupload.button.crop">Crop image</button>'
 						'</div>'+
 					'</form>'+
 				'</div>';
@@ -334,7 +335,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 							
 							submitButton.button('reset');
 							scope.errorMessage = langService.translate("fileupload.submit.error");
-							scope.error = true;							
+							scope.error = true;
 						}
 
 						scope.fileUploading = false;
@@ -343,21 +344,36 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 
 					function setupCropping () {
 						imageElement.load(function() {
-	    						imgAreaSelect = imageElement.imgAreaSelect({
-		    						handles:true,
-		    						enable:true,
-		    						show:true,
-		    						onSelectEnd: selectionEnd,
-		    						parent: iElement,
-		    						instance: true,
-		    						aspectRatio: aspectRatio,
-		    						persistent: true,
-		    						x1: 0,
-		    						y1: 0,
-		    						x2: 128,
-		    						y2: 128
-		    					});
+							var ratio = null,
+								d,
+								width = imageElement.width(),
+								height = imageElement.height();
+							if(aspectRatio) {
+								ratio = (d = aspectRatio.split(/:/))[0] / d[1];
+
+								if((height * ratio) > width) {
+									height = width / ratio;						
+								}
+								else {
+									width = height * ratio;
+								}
+							}
+
+    						imgAreaSelect = imageElement.imgAreaSelect({
+	    						handles:true,
+	    						enable:true,
+	    						show:true,
+	    						onSelectEnd: selectionEnd,
+	    						parent: dialog,
+	    						instance: true,
+	    						aspectRatio: aspectRatio,
+	    						persistent: true,
+	    						x1: 0,
+	    						y1: 0,
+	    						x2: width,
+	    						y2: height
 	    					});
+    					});
 
 						scope.selectionActive = true;
 					}
@@ -372,45 +388,48 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        	}
 
 		        	function saveImageAndClose() {
-		        		activeImage.$save(function() {
+		        		scope.activeImage.$save(function() {
 		        				scope.editorOnSave({ "image" : scope.activeImage});
 								submitButton.button('reset');
 								dialog.modal('hide');								
 							});	        		
 		        	};
 
-
 		        	/*
 		        	* Send crop request to server and save image after success.
 		        	*/
 		        	scope.crop = function() {
-								        			var selection = imgAreaSelect.getSelection(),
+						var selection = imgAreaSelect.getSelection(),
 	        				imgWidth = imageElement.width(),
 	        				imgHeight = imageElement.height();
 	        				
-						scope.selectionActive = false;
+						
 	        			scope.fileCropping = true;
-	        			submitButton.attr('data-loading-text', langService.translate("fileupload.button.submit.saving"));
-	        			submitButton.button('loading');
 
 	        			uploadService.requestImageCrop(scope.activeImage.blobKey,
 	        				selection.x1 / imgWidth,
 	        				selection.y1 / imgHeight,
 	        				selection.x2 / imgWidth,
 	        				selection.y2 / imgHeight).success(function(imageData) {
+	        					scope.selectionActive = false;
+	        					scope.fileCropping = false;
 	        					scope.activeImage.url = imageData.url;
 	        					scope.activeImage.blobKey = imageData.blobKey;
 
 	        					saveImageAndClose();
+		        			}).error(function() {
+		        				scope.selectionActive = false;
+		        				scope.fileCropping = false;
+		        				scope.errorMessage = langService.translate("fileupload.submit.error");
+		        				scope.error = true;
+		        				scope.$digest();
 		        			});
 		        	};
 
 		        	//backup original value
 		        	scope.save = function() {		        		
 		        		//disable button and set saving text		        	
-		        		if(scope.selectionActive) {
-		        		}
-		        		else {
+		        		if(!scope.selectionActive) {
 			        		submitButton.attr('data-loading-text', langService.translate("fileupload.button.submit.saving"));
 			        		submitButton.button('loading');
 			        		scope.fileUploading = true;

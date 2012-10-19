@@ -441,6 +441,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "App Header Bild ",
 			"EN" : "App Header Image"
 		},
+		"business.detail.app.header.description" : {
+			"DE" : "Für ein optimales Aussehen wird das Bild zugeschnitten<br>Wählen sie mit dem Rahmen einen Ausschnitt.",
+			"EN" : "For the best looks in the app, the image will be cut.<br>Change the selection for cutting below."
+		},
 		"business.detail.themes" : {
 			"DE" : "Themes",
 			"EN" : "Themes"
@@ -1292,6 +1296,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Bild auswählen ...",
 			"EN" : "Select image"
 		},
+		"fileupload.button.crop" : {
+			"DE" : "Zuschneiden",
+			"EN" : "Crop image"
+		},	
 		"fileupload.image.label" : {
 			"DE" : "Ausgewähltes Bild: ",
 			"EN" : "Seelcted image: "
