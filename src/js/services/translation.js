@@ -1259,6 +1259,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Beim Hochladen ist ein Fehler aufgetreten.",
 			"EN" : "An error occurred during upload."
 		},
+		"fileupload.error.size" : {
+			"DE" : "Maximal erlaubte Dateigröße beträgt 3Mb.",
+			"EN" : "Maximum allowed file size is 3Mb."
+		},
+		"fileupload.error.type" : {
+			"DE" : "Bild muss vom Typ JPEG, GIF oder PNG sein.",
+			"EN" : "Image type must be JPEG, GIF or PNG."
+		},
 		"propertyeditor.repeat.placeholder" : {
 			"DE" : "Hier die Eingabe wiederholen",
 			"EN" : "Repeat the input here"
