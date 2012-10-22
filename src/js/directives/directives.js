@@ -254,16 +254,16 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 							 		'<input type="file" name="files[]" accept="image/jpeg,image/png,image/gif"></input>'+
 							 		'<input type="hidden" value="{{editorImageId}}">'+
 						 		'</span>'+
-						 		'<span l="fileupload.image.label">Selected file: </span><span class="selected-files"></span>'+
-						 		'<div class="progress progress-success">'+
-  									'<div class="bar" ng-style="barStyle"></div>'+
-								'</div>'+
+						 		'<p ng-show="selectedFiles"><span l="fileupload.image.label">Selected file: </span><span ng-bind="selectedFiles"></span></p>'+
 					 		'</div>'+
 					 		'<div class="crop-area" ng-show="selectionActive">'+
 					 			'<p>'+langService.translate(attrs.editorCropText)+'</p>'+
 					 			'<img class="active-image" ng-src="{{activeImage.url}}"></img><br>'+
 					 			'<p ng-show="imgSelection"><span l="fileupload.crop.area">Selected area:</span> {{imgSelection.width}} x {{imgSelection.height}}</p>'+
 					 		'</div>'+
+					 		'<div class="progress progress-success" ng-show="fileUploading || fileCropping">'+
+								'<div class="bar" ng-style="barStyle"></div>'+
+							'</div>'+
 						'</div>'+
 						'<div class="modal-footer" style="clear:both;">'+
 							'<button type="button" class="btn" ng-click="cancel()" data-dismiss="modal" l="common.cancel">Close</button>'+
@@ -279,6 +279,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        },
 		        post: function postLink(scope, iElement, iAttrs, controller) {
 		        	var dialog = iElement.find('div.modal'),
+		        		dialogBody = dialog.find('div.modal-body'),
 		        		fileList = iElement.find('.selected-files'),
 		        		submitButton = iElement.find("button[type=submit]"),
 		        		uploadInput = iElement.find('form[name=simpleImageForm]'),
@@ -311,7 +312,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 
 		        	/** Called from upload service during upload progress. */
 		        	function fileUploadProgressCallback(data) {
-		        		barStyle.width = parseInt(data.loaded / data.total * 100, 10) + '%';
+		        		scope.barStyle.width = parseInt(data.loaded / data.total * 100, 10) + '%';
 		        	};
 
 					/** Called from upload service when upload is finished and updates U */
@@ -401,16 +402,18 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        	*	name of selected file
 		        	*/
 		        	function fileAddedCallback (fileName) {
-		        		scope.$apply('fileAdded = true');
-		        		fileList.html(fileName);
+		        		scope.selectedFiles = fileName;
+		        		scope.fileAdded = true;		        
+		        		scope.$digest();
+		        		
 		        	}
 
 		        	function saveImageAndClose() {
 		        		scope.activeImage.$save(function() {
-		        				scope.editorOnSave({ "image" : scope.activeImage});
-								submitButton.button('reset');
-								dialog.modal('hide');								
-							});	        		
+		        				scope.barStyle.width = '100%';
+		        				scope.editorOnSave({ "image" : scope.activeImage});								
+								dialog.modal('hide');
+							});
 		        	};
 
 		        	/*
@@ -421,7 +424,9 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 	        				imgWidth = imageElement.width(),
 	        				imgHeight = imageElement.height();
 	        				
-						
+						disableCropping();
+
+						scope.barStyle.width = '0%';
 	        			scope.fileCropping = true;
 
 	        			uploadService.requestImageCrop(scope.activeImage.blobKey,
@@ -429,32 +434,29 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 	        				selection.y1 / imgHeight,
 	        				selection.x2 / imgWidth,
 	        				selection.y2 / imgHeight).success(function(imageData) {
-	        					scope.selectionActive = false;
+	        					scope.barStyle.width = '50%';
+
 	        					scope.fileCropping = false;
 	        					scope.activeImage.url = imageData.url;
 	        					scope.activeImage.blobKey = imageData.blobKey;
-
 	        					saveImageAndClose();
 		        			}).error(function() {
-		        				scope.selectionActive = false;
 		        				scope.fileCropping = false;
 		        				scope.errorMessage = langService.translate("fileupload.submit.error");
 		        				scope.error = true;
-		        				scope.$digest();
 		        			});
 		        	};
 
 		        	//backup original value
 		        	scope.save = function() {		        		
 		        		//disable button and set saving text		        	
-		        		if(!scope.selectionActive) {
+		        		if(!scope.selectionActive || scope.fileUploading) {
 			        		submitButton.attr('data-loading-text', langService.translate("fileupload.button.submit.saving"));
 			        		submitButton.button('loading');
 			        		scope.fileUploading = true;
-			        		scope.selectionActive = true;
 			        		uploadObject.upload();
 		        		}
-		        	}		        	
+		        	}
 
 		        	scope.cancel = function() {
 
@@ -469,38 +471,51 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 
 					/** Reset url and uploadFinished on show. */
 					dialog.on("show", function() {
+						submitButton.button('reset');
 						scope.fileAdded = false;
 						scope.fileUploading = false;
 						scope.fileCropping = false;
 						scope.selectionActive = false;
 						scope.activeImage = null;
+						scope.barStyle.width= '0%';
 						scope.error = false;
 						scope.errorMessage = "";
 						scope.$digest();
 					});
 
 					dialog.on("hide", function() {
-						if(imgAreaSelect) {
-							imgAreaSelect.setOptions({disable: true, hide:true});	
-						}
-						if(scope.activeImage && scope.selectionActive) {
+						disableCropping();
+
+						if(scope.activeImage && scope.selectionActive && !scope.fileCropping) {
 		        			uploadService.deleteUpload(scope.activeImage.blobKey);
 		        		}
 					});
 		        	
-		        	iElement.find('div.toggler').bind('click', function() {		   
+		        	iElement.find('div.toggler').bind('click', function() {
 		        		if(scope.editorEnabled == true) {
 		        			//init file upload plugin for this dialog
-	        				uploadObject = uploadService.getFileUploadObject(uploadInput, scope.editorImageResource, fileAddedCallback, fileUploadedCallback);
+	        				uploadObject = uploadService.getFileUploadObject(uploadInput, scope.editorImageResource, fileAddedCallback, fileUploadedCallback, fileUploadProgressCallback);
+
 							if(editorCropText) {
+								dialogBody.css('height',function () { 
+								    	return ($(window).height() * .8) + 'px';
+								    });
+								dialogBody.css('max-height', function() { return $(this).height()});
+								// Expand the dialog to 90% width and 80% height of window.								
+
 								dialog.css({
-						    		'width': function () { 
-								    	return ($(document).width() * .9) + 'px';  
-								    },
+						    		'width': '80%',
+								    // 'height': function () { 
+								    // 	return ($(window).height() * .8) + 'px';
+								    // },								    
 								    'margin-left': function () { 
 								    	return -($(this).width() / 2); 
+								   	},
+								   	'margin-top': function () { 
+								    	return -($(this).height() / 2); 
 								   	}
 								});
+								
 							}
 							dialog.modal('show');
 		        		}

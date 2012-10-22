@@ -26,7 +26,7 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	$scope.getActive = function(path, suffix) {
 		var location = $location.path(),
 			active;
-		$log.info('Cloobster.Navigation.getActive');
+			
 		//check if given path is part of real path
 		active = $location.path().indexOf(path) === 0;
 

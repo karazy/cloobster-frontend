@@ -442,7 +442,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "App Header Image"
 		},
 		"business.detail.app.header.description" : {
-			"DE" : "Für ein optimales Aussehen wird das Bild zugeschnitten<br>Wählen sie mit dem Rahmen einen Ausschnitt.",
+			"DE" : "Für ein optimales Aussehen wird das Bild auf ein festes Seitenverhältnis zugeschnitten.<br>Wählen sie mit dem Rahmen einen Ausschnitt.",
 			"EN" : "For the best looks in the app, the image will be cut.<br>Change the selection for cutting below."
 		},
 		"business.detail.themes" : {

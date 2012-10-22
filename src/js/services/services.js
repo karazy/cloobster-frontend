@@ -924,6 +924,8 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 		loginResume : function () {
 			loginDeferred = $q.defer();
 
+			if(loginDeferred)
+
 			if( existsSavedLogin() ) {
 				accessToken = $window.localStorage['accessToken'];
 
@@ -1102,7 +1104,7 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 		       	},
 		       	progress: function(e, data) {
 		       		(fileUploadProgressCallback || angular.noop)(data);
-		       	};
+		       	}
 			});
 
 	        jQuery(fileInput).fileupload('option', {
