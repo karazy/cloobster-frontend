@@ -1082,7 +1082,7 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 		* Initializes the upload plugin for a concrete file input element fields.
 		* It needs a previously optained fileUpeloadUrl for setup.
 		*/
-		function initUploadPlugin(fileInput, resource, fileAddCallback, fileUploadCallback) {
+		function initUploadPlugin(fileInput, resource, fileAddCallback, fileUploadCallback, fileUploadProgressCallback) {
 			jQuery(fileInput).fileupload({
 				fail: function(e, data) {
 	    			$log.error('Upload failed. Error thrown: '+data.errorThrown + ', status: '+ data.textStatus);
@@ -1098,8 +1098,11 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 
 	    			addedFile = null;
 
-	    			fileUploadCallback(true, data);	    			    			
-		       	}
+	    			fileUploadCallback(true, data);
+		       	},
+		       	progress: function(e, data) {
+		       		(fileUploadProgressCallback || angular.noop)(data);
+		       	};
 			});
 
 	        jQuery(fileInput).fileupload('option', {
@@ -1135,9 +1138,9 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 			*	@param fileUploadCallback
 			*		Called when upload has finished.
 			*/
-			getFileUploadObject : function(fileInput, resource, fileAddCallback, fileUploadCallback) {
+			getFileUploadObject : function(fileInput, resource, fileAddCallback, fileUploadCallback, fileUploadProgressCallback) {
 
-				initUploadPlugin(fileInput, resource, fileAddCallback, fileUploadCallback);
+				initUploadPlugin(fileInput, resource, fileAddCallback, fileUploadCallback, fileUploadProgressCallback);
 
 				return {
 					/**
