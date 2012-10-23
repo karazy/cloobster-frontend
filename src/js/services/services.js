@@ -1089,7 +1089,7 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 				fail: function(e, data) {
 	    			$log.error('Upload failed. Error thrown: '+data.errorThrown + ', status: '+ data.textStatus);
 
-	    			fileUploadCallback(false, data);
+	    			fileUploadCallback(false, data);	    			
 	    		},
 	    		done: function (e, data) {
 	    			//data properties: name, blobKey, url
