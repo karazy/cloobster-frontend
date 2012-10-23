@@ -175,14 +175,16 @@ Cloobster.services.factory('Account',['cloobsterResource', function(cloobsterRes
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Business',['cloobsterResource', function($resource) {	
+Cloobster.services.factory('Business',['cloobsterResource','login','errorHandler', function($resource,loginService,handleError) {	
 	/**
 	*	@name Cloobster.services.Business
 	*	
 	*/
-	var Business = {
-		buildResource: function(accountId) {
-			return $resource('/b/businesses/:id',
+	var resource,
+		activeBusinesses;
+
+	function createResource(accountId) {
+		return (resource = $resource('/b/businesses/:id',
 					//params
 					{
 						'id': '@id'
@@ -207,7 +209,29 @@ Cloobster.services.factory('Business',['cloobsterResource', function($resource) 
 						*/
 						'update': { method: 'PUT'}
 					}
-			)
+			));
+	}
+
+	return {
+		buildResource: function(accountId) {
+			return createResource(accountId);
+		},
+		getActiveBusinesses: function(refresh) {
+			accountId = loginService.getAccount()['id'];
+			if(accountId) {
+				if(!activeBusinesses || (refresh === true)) {
+					if(!resource) {
+						createResource(accountId);
+					}
+					activeBusinesses = resource.query({'account':accountId}, angular.noop, handleError);
+				}
+				else {
+					return activeBusinesses;
+				}
+			}
+			else {
+				return [];
+			}
 		},
 		/**
 		*	Returns a business image resource used to save, update images assigned to a business.
@@ -218,9 +242,7 @@ Cloobster.services.factory('Business',['cloobsterResource', function($resource) 
 				'id': '@id'
 			});
 		}
-	}
-
-	return Business;
+	};
 }]);
 
 /** 

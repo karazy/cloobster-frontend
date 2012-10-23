@@ -42,8 +42,11 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	}
 
 	$scope.activeBusinessId = null;
+	$scope.canSwitchBusiness = false;
+
 	if($routeParams['businessId']) {
 		$scope.activeBusinessId = parseInt($routeParams['businessId']);
+		$scope.canSwitchBusiness = true;
 	}
 
 	$scope.switchBusiness = function() {
@@ -53,24 +56,20 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 		if($location.url().match(/^\/businesses\/.+\/spots.*/) ) {
 			$location.path('/businesses/'+$scope.activeBusinessId+'/spots');
 		}
+		if($location.url().match(/^\/businesses\/\d+$/) ) {
+			$location.path('/businesses/'+$scope.activeBusinessId);	
+		}
 	};
 	
 
 	$scope.$watch('loggedIn', function(newValue, oldValue) {
 		if(newValue === true) {
-			var account = loginService.getAccount();
-
-			$scope.company = Company.getActiveCompany();	
-
-			businessResource = Business.buildResource(account.id);
-			$scope.businesses = businessResource.query(null, null, function() {
-				if(!$scope.activeBusinessId) {
-					$scope.activeBusinessId = $scope.businesses[0].id;	
-				}
-			}, handleError);
-
+			$scope.company = Company.getActiveCompany();
+			$scope.businesses = Business.getActiveBusinesses();
+			if($scope.businesses.length > 0 && !$scope.activeBusinessId) {
+				$scope.activeBusinessId = $scope.businesses[0].id;
+			}
 		}
 	});
-
 };
 Cloobster.Navigation.$inject = ['$scope', '$location', 'login', 'Company','$routeParams','errorHandler','Business','$route','$log'];

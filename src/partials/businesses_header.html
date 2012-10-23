@@ -3,7 +3,7 @@
 	<div class="span4">
 		<h1  ng-bind="company.name">Your company name</h1>
 	</div>
-	<div class="span8">
+	<div class="span8" ng-show="canSwitchBusiness">
 		<span L="navigation.selectbusiness"> Choose location: </span><select ng-model="activeBusinessId" ng-options="b.id as b.name for b in businesses" ng-change="switchBusiness()"></select>
 		<p></p>
 	</div>
