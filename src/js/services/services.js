@@ -756,8 +756,11 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 		account = data;
 		// Cockpit users currently cant use any frontend functions.
 		if(account.role === 'cockpituser') {
-			//TODO: add translation for error message.
 			loginDeferred.reject({'message': lang.translate('login.error.cockpituser')});
+			return;
+		}
+		if(account.role === 'user') {
+			loginDeferred.reject({'message': lang.translate('error.403')});
 			return;
 		}
 		loggedIn = true;
@@ -928,6 +931,11 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 
 			if( existsSavedLogin() ) {
 				accessToken = $window.localStorage['accessToken'];
+
+				if($window.localStorage['accessTokenTransient']) {
+					$window.localStorage.removeItem('accessToken');
+					$window.localStorage.removeItem('accessTokenTransient');
+				}
 
 				saveLogin = false;
 
