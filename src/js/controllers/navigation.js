@@ -42,6 +42,11 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	}
 
 	$scope.activeBusinessId = null;
+
+	if(loginService.getAccount()['businessIds']) {
+		$scope.activeBusinessId = loginService.getAccount()['businessIds'][0];
+	}
+
 	$scope.canSwitchBusiness = false;
 
 	if($routeParams['businessId']) {
@@ -64,11 +69,11 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 
 	$scope.$watch('loggedIn', function(newValue, oldValue) {
 		if(newValue === true) {
+			if(loginService.getAccount()['businessIds'].length > 0 && !$scope.activeBusinessId) {
+				$scope.activeBusinessId = loginService.getAccount()['businessIds'][0];	
+			}
 			$scope.company = Company.getActiveCompany();
 			$scope.businesses = Business.getActiveBusinesses();
-			if($scope.businesses.length > 0 && !$scope.activeBusinessId) {
-				$scope.activeBusinessId = $scope.businesses[0].id;
-			}
 		}
 	});
 };

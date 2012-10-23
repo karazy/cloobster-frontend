@@ -792,16 +792,10 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 		}
 		if(saveLogin === true) {
 			$window.localStorage['accessToken'] = accessToken;
-
-			//$window.localStorage['login'] = account.login;
-			//$window.localStorage['hash'] = account.passwordHash;
 		}
 		// Save access token as default header.
 
 		$http.defaults.headers.common['X-Auth'] = accessToken;
-		//set http default headers
-		//$http.defaults.headers.common.login = account.login;
-		//$http.defaults.headers.common.passwordHash = account.passwordHash;
 
 		loginDeferred.resolve(data);
 	}

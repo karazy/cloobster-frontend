@@ -367,8 +367,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			},angular.noop, handleError);
 
 			//load business details
-			if($routeParams && $routeParams.id) {
-				$scope.loadBusiness($routeParams.id);
+			if($routeParams['businessId']) {
+				$scope.loadBusiness($routeParams['businessId']);
 			}
 
 			if($location.path() == "/businesses/new") {
