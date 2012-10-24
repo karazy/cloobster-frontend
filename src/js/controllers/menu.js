@@ -343,12 +343,10 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		liElements.each(function(index, ele) {
 			//get corresponding product
-			if(index > 0) {
-				tmpProduct = angular.element(ele).scope().product;
-				if(tmpProduct) {
-					$scope.currentMenu.productIds.push(tmpProduct.id);
-					$log.log("set product " + tmpProduct.name + " index to " + (index));
-				}
+			tmpProduct = angular.element(ele).scope().product;
+			if(tmpProduct) {
+				$scope.currentMenu.productIds.push(tmpProduct.id);
+				$log.log("set product " + tmpProduct.name + " index to " + (index));
 			}
 		});
 

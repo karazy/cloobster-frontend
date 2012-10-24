@@ -276,6 +276,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Produkte",
 			"EN" : "Products"
 		},
+		"businesses.action.accounts" : {
+			"DE" : "Benutzerverwaltung",
+			"EN" : "User Management"
+		},
 		"businesses.action.delete" : {
 			"DE" : "Betrieb löschen",
 			"EN" : "Delete business"
