@@ -117,36 +117,41 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Passwords don't match."
 		},
 		"registration.form.phone" : {
-			"DE" : "Telefon",
-			"EN" : "Phone"
+			"DE" : "Telefon*",
+			"EN" : "Phone*"
+		},
+		"registration.form.phone.error.required" : {
+			"DE" : "Bitte gib eine Telefonnummer für Rückfragen an.",
+			"EN" : "Please enter a phone number, where we can call you back."
 		},
 		"registration.form.company" : {
 			"DE" : "Firmenname*",
 			"EN" : "Company name*"
 		},
+
 		"registration.form.company.error.required" : {
 			"DE" : "Bitte gib deine Firma an.",
 			"EN" : "Please enter your company's name."
 		},
 		"registration.form.address" : {
-			"DE" : "Adresse*",
-			"EN" : "Address*"
+			"DE" : "Adresse",
+			"EN" : "Address"
 		},
 		"registration.form.address.error.required" : {
 			"DE" : "Bitte gib deine Adresse an.",
 			"EN" : "Please enter your address."
 		},
 		"registration.form.city" : {
-			"DE" : "Stadt*",
-			"EN" : "City*"
+			"DE" : "Stadt",
+			"EN" : "City"
 		},
 		"registration.form.city.error.required" : {
 			"DE" : "Bitte gib deine Stadt an.",
 			"EN" : "Please enter your city."
 		},
 		"registration.form.postcode" : {
-			"DE" : "Postleitzahl*",
-			"EN" : "Zipcode*"
+			"DE" : "Postleitzahl",
+			"EN" : "Zipcode"
 		},
 		"registration.form.postcode.error.required" : {
 			"DE" : "Bitte gib deine Postleitzahl an.",
@@ -157,8 +162,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Phone (business)"
 		},
 		"registration.form.country" : {
-			"DE" : "Land*",
-			"EN" : "Country*"
+			"DE" : "Land",
+			"EN" : "Country"
 		},
 		"registration.form.country.error.required" : {
 			"DE" : "Bitte gib dein Land an an.",
@@ -189,8 +194,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "repeat password"
 		},
 		"registration.form.phone.placeholder" : {
-			"DE" : "(optional) Meine Telefonnummer",
-			"EN" : "(optional) my phone"
+			"DE" : "Meine Telefonnummer",
+			"EN" : "my phone"
 		},
 		"registration.form.company.placeholder" : {
 			"DE" : "Meine Firma",
