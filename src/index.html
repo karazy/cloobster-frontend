@@ -46,7 +46,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="#" style="padding: 0px 5px"><img src="img/cloobster-brand.png" l="product.brand" l-attribute="alt"  style="max-height: 44px;"></img></a>
+        <a class="brand" href="#" style="padding: 0px 5px"><img src="img/Logo_cloobster_weiss.png" l="product.brand" l-attribute="alt"  style="max-height: 44px;"></img></a>
         <!-- Login Drop Down -->
         <div ng-controller="Cloobster.Login">
           <div class="btn-group pull-right" ng-show="loggedIn">
@@ -88,11 +88,9 @@
           <ul class="nav">
             <!-- class="active" -->
             <li ng-class="getActive('/home')"><a href="#/home">Home</a></li>
-            <li ng-show="loggedIn" ng-class="getActive('/businesses')"><a href="#/businesses" l="nav.restaurants">My Restaurants</a></li>
-            <li ng-show="loggedIn" ng-class="getActive('/accounts')"><a href="#/accounts" l="nav.accounts">Account</a></li>
+            <li ng-show="loggedIn" ng-class="getActive('/businesses')"><a href="#/businesses" l="nav.restaurants">Management</a></li>
+            <li><a href="../cockpit" target="_blank">Cockpit</a></li>
             <li ng-class="getActive('/about')"><a href="#/about" l="nav.about">About</a></li>
-            <li ng-hide="loggedIn" class="pull-right" ng-class="getActive('/login')"><a href="#/login" l="nav.login">Login</a></li>
-            <li ng-hide="loggedIn" class="pull-right" ng-class="getActive('/registration')"><a href="#/registration" l="nav.registration">Registration</a></li>
           </ul>
         </div><!--/.nav-collapse -->
         <div class="nav-collapse ng-cloak" ng-show="customer">

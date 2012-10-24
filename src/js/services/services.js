@@ -217,7 +217,7 @@ Cloobster.services.factory('Business',['cloobsterResource','login','errorHandler
 			return createResource(accountId);
 		},
 		getActiveBusinesses: function(refresh) {
-			accountId = loginService.getAccount()['id'];
+			var accountId = loginService.getAccount()['id'];
 			if(accountId) {
 				if(!activeBusinesses || (refresh === true)) {
 					if(!resource) {

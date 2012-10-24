@@ -23,8 +23,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN": "Login"
 		},
 		"nav.restaurants" : {
-			"DE" : "Betriebe",
-			"EN" : "Businesses"
+			"DE" : "Administration",
+			"EN" : "Administration"
 		},
 		"nav.menus" : {
 			"DE" : "Produkte",
