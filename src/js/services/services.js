@@ -88,7 +88,15 @@ Cloobster.services.factory('errorHandler',['$rootScope','$location','$log','lang
 			response.config = _config;
 		}
 		else {
-			response = _response;
+			if(_response.hasOwnProperty('data')) {
+				response = _response;	
+			}
+			else {
+				response = {
+					'data': _response
+				}
+			}
+			
 		}
 
 		var errorKey = response.data['errorKey'],
@@ -778,11 +786,11 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 		account = data;
 		// Cockpit users currently cant use any frontend functions.
 		if(account.role === 'cockpituser') {
-			loginDeferred.reject({'message': lang.translate('login.error.cockpituser')});
+			loginDeferred.reject({'errorKey': 'login.error.cockpituser'});
 			return;
 		}
 		if(account.role === 'user') {
-			loginDeferred.reject({'message': lang.translate('error.403')});
+			loginDeferred.reject({'errorKey': 'error.403'});
 			return;
 		}
 		loggedIn = true;
