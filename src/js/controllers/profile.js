@@ -35,7 +35,9 @@ Cloobster.Profile = function($scope, $http, loginService, Company, $log, Account
 	/** True if company edit mode is active. */
 	$scope.editModeCompany = false;
 	/** True if account edit mode is active. */
-	$scope.editModeAccount = false;
+	$scope.editModeAccount = false;	
+	/** True if password change is in progress. */
+	$scope.changePasswordProgress = false;
 
 	/**
 	* Holds an array of fileUpload Information objects.
@@ -159,6 +161,7 @@ Cloobster.Profile = function($scope, $http, loginService, Company, $log, Account
 
 	$scope.showChangePasswordModal = function() {
 		$scope.changePasswordError = false;
+		$scope.changePasswordProgress = false;
 		$scope.password = "";
 		$scope.newPassword = "";
 		$scope.newPasswordRepeat = "";
@@ -170,6 +173,11 @@ Cloobster.Profile = function($scope, $http, loginService, Company, $log, Account
 	* We can only change the password on the server side, if we reauthenticate with login and password headers.
 	*/
 	$scope.savePassword = function() {
+		if($scope.changePasswordProgress) {
+			// Prevent double tab of enter key.
+			return;
+		}
+		$scope.changePasswordProgress = true;
 		$scope.account.password = $scope.newPassword;
 		loginService.authenticatedRequest($scope.password, function() {
 			// Do a request here. Login and password headers
