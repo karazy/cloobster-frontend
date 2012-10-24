@@ -605,8 +605,10 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	};
 	
 	$scope.removeOption = function(index) {
-		$scope.currentChoice.options.splice(index, 1);
-		$scope.saveChoice();
+		if($scope.currentChoice.options.length > 1) {
+			$scope.currentChoice.options.splice(index, 1);
+			$scope.saveChoice();	
+		}		
 	};
 
 	$scope.updateChoiceOrder = function(event, ui) {

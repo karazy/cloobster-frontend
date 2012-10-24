@@ -344,7 +344,7 @@
 			       	 			</div> 
 		       	 			</div>
 		       	 			<div class="span2" style="margin-left:0px;">
-		       	 			 	<button class="btn" ng-click="removeOption($index)"><i class="icon-trash"></i></button>
+		       	 			 	<button class="btn" ng-click="removeOption($index)" ng-disabled="currentChoice.options.length == 1"><i class="icon-trash"></i></button>
 		       	 			</div>
 		       	 		</div>		       	 				       	 		
 			        </li>
