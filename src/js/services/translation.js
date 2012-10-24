@@ -260,16 +260,16 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Add location"
 		},
 		"businesses.action.show" : {
-			"DE" : "editieren",
-			"EN" : "edit"
+			"DE" : "Einstellungen",
+			"EN" : "Settings"
 		},
 		"businesses.action.spots" : {
-			"DE" : "servicebereiche",
-			"EN" : "service areas"
+			"DE" : "Servicebereiche und Spots",
+			"EN" : "Service Areas and Spots"
 		},
 		"businesses.action.menus" : {
-			"DE" : "produkte",
-			"EN" : "products"
+			"DE" : "Produkte",
+			"EN" : "Products"
 		},
 		"businesses.action.delete" : {
 			"DE" : "Betrieb löschen",

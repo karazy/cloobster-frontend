@@ -87,7 +87,8 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 		        	
 		        	scope.save = function () {
 		        		//only save when form is valid
-		        		if(scope.simplePropertyForm.$valid) {
+		        		if(scope.simplePropertyForm.$valid && !scope.saved) {
+		        			scope.saved = true;
 		        			scope.editorProperty = scope.editorValue;
 		        			// Wrap this in a timeout, because the model change is not immediate.
 			        		$timeout(scope.editorOnSave);
@@ -116,7 +117,7 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {		   
 		        		if(scope.editorEnabled == true || typeof scope.editorEnabled == 'undefined') {
-		        			scope.$apply('editorValue = editorProperty;editorRepeat=""');
+		        			scope.$apply('editorValue = editorProperty;editorRepeat="";saved=false');
 						
 							dialog.modal('toggle');	
 							input.trigger("focus");
