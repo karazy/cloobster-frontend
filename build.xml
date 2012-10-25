@@ -5,6 +5,10 @@
 	
 	<target name="build-production" depends="compile, copylibs, copyresources, setversion">
 	</target>
+	<property name="frontenddir" value="frontend"/>
+	<target name="clean-frontend">
+		<delete dir="build/${frontenddir}"></delete>
+	</target>
 	<target name="setversion">
 		<echo message="Setting version number" />
 		<exec executable="${git.cmd}" dir="${basedir}" outputproperty="build.commit" vmlauncher="${git.vmlauncher}">
@@ -12,31 +16,29 @@
 		    <arg value="--always"/>
 		</exec>
 		<echo message="Commit version: ${build.commit}" />
-		<replaceregexp file="${basedir}/build/partials/about.html" match="\{VERSIONINFO\}" replace="${build.commit}" byline="true">
+		<replaceregexp file="${basedir}/build/${frontenddir}/partials/about.html" match="\{VERSIONINFO\}" replace="${build.commit}" byline="true">
 		</replaceregexp>
 
 	</target>
 	<target name="compile">
-		
-	    <jscomp compilationLevel="simple" warning="verbose" debug="false" output="build/app-all.min.js">
+	    <jscomp compilationLevel="simple" warning="verbose" debug="false" output="build/${frontenddir}/app-all.min.js">
 	    	<!-- 
 	    	<externs dir="${basedir}/src">
 	        <file name="extern.js"/>
 	      </externs>!-->
 	    	<path id="sources">
-	    		<fileset dir="${basedir}/src/js/">
+	    		<fileset dir="${basedir}/src/${frontenddir}/js/">
 	    			<include name="**/*.js"/>
 	    		</fileset>
 	    	</path>
 	    	<externs dir="src" >
 	    		<file name="extern.js"/>	
 	    	</externs>
-	    		
 	    </jscomp>
 	  </target>
 	<target name="copylibs">
-		<copy todir="build/lib">
-			<filelist id="libfiles" dir="src/lib" >
+		<copy todir="build/${frontenddir}/lib">
+			<filelist id="libfiles" dir="src/${frontenddir}/lib" >
 				<file name="jquery/jquery.ui.widget.js" />
 				<file name="jquery/jquery-ui-1.8.21.custom.min.js" />
 				<file name="jquery/jquery.iframe-transport.js" />
@@ -51,14 +53,17 @@
 		</copy>
 	</target>
 	<target name="copyresources">
-		<copy todir="build">
-			<fileset id="partialfiles" dir="src/" >
+		<copy todir="build/${frontenddir}">
+			<fileset id="indexfiles" dir="src/${frontenddir}/" >
+				<include name="index.prod.html"/>
+			</fileset>
+			<fileset id="partialfiles" dir="src/${frontenddir}/" >
 				<include name="partials/**/*"/>
 			</fileset>
-			<fileset id="imgfiles" dir="src/" >
+			<fileset id="imgfiles" dir="src/${frontenddir}/" >
 				<include name="img/**/*"/>
 			</fileset>
-			<filelist id="cssfiles" dir="src/">
+			<filelist id="cssfiles" dir="src/${frontenddir}/">
 				<file name="css/bootstrap.min.css"/>
 				<file name="css/bootstrap-responsive.min.css"/>
 				<file name="css/cloobster.css"/>
@@ -68,5 +73,6 @@
 				<file name="css/border-v.gif"/>
 			</filelist>
 		</copy>
+		<move file="build/${frontenddir}/index.prod.html" tofile="build/${frontenddir}/index.html" />
 	</target>
 </project>
