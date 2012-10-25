@@ -7,7 +7,7 @@
 	</target>
 	<target name="setversion">
 		<echo message="Setting version number" />
-		<exec executable="${git.cmd}" dir="${basedir}" outputproperty="build.commit" vmlauncher="false">
+		<exec executable="${git.cmd}" dir="${basedir}" outputproperty="build.commit" vmlauncher="${git.vmlauncher}">
 		    <arg value="describe"/>
 		    <arg value="--always"/>
 		</exec>
