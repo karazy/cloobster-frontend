@@ -1,3 +1,4 @@
+var Cloobster = Cloobster || {};
   
 Cloobster.filters = angular.module('Cloobster.filters', ['Cloobster.services']);
 

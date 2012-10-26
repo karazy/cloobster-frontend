@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" ng-app="CloobsterHome">
+<head>
+  <meta charset="utf-8">
+  <title>cloobster - home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
+  <link rel="stylesheet" type="text/css" href="cloobster.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Logo header -->
+    <div class="row">
+      <div class="span12">
+        <a href="http://www.cloobster.com/"><img src="img/Logo_cloobster_gross.png" alt="cloobster"></a>
+      </div>
+    </div>
+    <!-- Error alert -->
+    <div class="row" ng-show="error" ng-cloak>
+      <div class="alert alert-error alert-block span6" >
+        <button class="close" ng-click="error=false;">×</button>
+        <h4 class="alert-heading" l="common.warning.title">Error!</h4>
+        <p ng-bind="errorMessage"></p>
+      </div>
+    </div>
+    <div ng-view></div>
+    <!-- Footer links -->
+    <div class="row">
+      <div class="span12">
+        <small><a href="http://www.cloobster.com/">cloobster</a> by Karazy GmbH - <a href="mailto:info@cloobster.com">info@cloobster.com</a></small>
+      </div>
+    </div>
+  </div> <!-- /container -->
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="lib/bootstrap/bootstrap.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+  <script src="lib/angular/angular-resource-1.0.1.min.js"></script>
+  <script src="app-all.min.js"></script>  
+</body>
+</html>

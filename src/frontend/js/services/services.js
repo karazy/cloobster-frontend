@@ -1,4 +1,5 @@
-/* @module Cloobster/Services */
+var Cloobster = Cloobster || {};
+/** @module Cloobster/Services */
 
 /**
 *	@name Cloobster.Services

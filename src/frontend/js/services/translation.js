@@ -1,3 +1,4 @@
+var Cloobster = Cloobster || {};
 /** @module Cloobster/Translations */
 
 /**

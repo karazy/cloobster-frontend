@@ -1,7 +1,7 @@
 'use strict';
 
 /* Cloobster namespace. Create if not exists.*/
-var Cloobster =  {};
+var Cloobster = Cloobster || {};
 
 // Declare app level module which depends on filters, and services
 Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster.directives', 'Cloobster.filters']).
@@ -31,3 +31,80 @@ Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster
     
     $routeProvider.otherwise({redirectTo: '/home'});
  }]);
+
+
+/**
+* Activates an account by sending an email token to the server.
+* Token is read from URL.
+* 
+*/
+Cloobster.ConfirmAccount = function($scope, loginService, $routeParams, handleError) {
+    // Send confirmation token to server via the login service.
+    loginService.confirmEmail($routeParams['emailToken']).success(function(result) {
+        $scope.emailConfirmed = true;
+        loginService.setPresetLogin(result['login']);
+    }).error(handleError);
+
+}
+Cloobster.ConfirmAccount.$inject = ['$scope', 'login', '$routeParams', 'errorHandler'];
+
+/**
+* Activates a new e-mail address by sending an email token to the server.
+* Token is read from URL.
+* 
+*/
+Cloobster.ConfirmEmail = function($scope, loginService, $routeParams, handleError) {
+    // Send confirmation token to server via the login service.
+    loginService.confirmEmailUpdate($routeParams['emailToken']).success(function(result) {
+        $scope.emailConfirmed = true;
+    }).error(handleError);
+}
+
+Cloobster.ConfirmEmail.$inject = ['$scope', 'login', '$routeParams', 'errorHandler'];
+
+/**
+* Handles user password reset links send via e-mail.
+* 
+*/
+Cloobster.PasswordReset = function($scope, loginService, $routeParams, handleError, $location) {
+
+    $scope.passwordReset = function() {
+        $scope.passwordResetProgress = true;
+        loginService.passwordReset($routeParams['emailToken'],$scope.newPassword).success(function() {
+            $scope.passwordResetComplete = true;
+        }).error(function(data,status,config,headers) {
+            $scope.passwordResetProgress = false;
+            if(status == 404) {
+                $location.path('/');
+            }
+            handleError(data,status,config,headers);
+        });
+    };
+
+    $scope.matchPasswords = function(form) {
+        if(form.newPassword.$viewValue !== form.newPasswordRepeat.$viewValue) {
+            form.newPasswordRepeat.$setValidity("match", false);
+        } else {
+            form.newPasswordRepeat.$setValidity("match", true);
+        }
+    };
+
+    /*
+    * Get css class for field highlighting.
+    * @param {NgModelController} input ng-model controller for the input to check.
+    * @returns error if dirty && invalid
+    *         sucess if dirty && !invalid
+    *         empty string otherwise
+    */
+    $scope.getFieldInputClass = function(input) {
+        if(input.$dirty && input.$invalid) {
+            return "error";
+        } else if (input.$dirty && !input.$invalid) {
+            return "success";
+        } else {
+            return "";
+        }
+    };
+}
+
+Cloobster.PasswordReset.$inject = ['$scope', 'login', '$routeParams', 'errorHandler', '$location'];
