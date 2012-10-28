@@ -73,8 +73,21 @@
 				</div>
 			</div>
 		</div><!-- end first column -->
+<!-- 		<div class="row-fluid"> -->
+			<div class="span8" ng-show="currentArea">
+			<ul class="nav nav-tabs">
+			  <li ng-class="{active: show=='spots'}">
+			    <a ng-click="show='spots'">Spots</a>
+			  </li>
+			  <li ng-class="{active: show=='categories'}">
+			  	<a ng-click="show='categories'">Categories</a>
+			  </li>
+			</ul>
+			</div>
+		<!-- </div> -->
+
 		<!-- 2. column -->
-		<div class="span4" ng-show="currentArea.id">
+		<div class="span4" ng-show="currentArea.id && show=='spots'">
 			<!-- area spots list -->
 	    	<div class="row-fluid">
 				<div class="span9">
@@ -127,7 +140,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="span4" ng-show="currentArea.id">
+		<div class="span4" ng-show="currentArea.id && show=='categories'">
 			<div class="row-fluid">
 				<div class="span12">
 					<h3 l="areas.categories.title">Assign Product Categories</h3>

@@ -101,6 +101,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.loadArea = function(areaItem) {
 		manageViewHiearchy("area");
 		$scope.currentArea = areaItem;
+		//initially show content of spots tab
+		$scope.show = 'spots';
 		$scope.spots = $scope.spotsResource.query({"areaId" : areaItem.id}, null, null, handleError);		
 		$scope.currentAreaCategories = new Array();
 		if(!$scope.currentArea.menuIds) {
