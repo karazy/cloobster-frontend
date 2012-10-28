@@ -9,46 +9,48 @@
 	</div>
 	<div class="row-fluid">
 		<!-- first column -->
-		<div class="span4">
-			<div class="row-fluid">
-				<div class="span9">
-					<h3 l="areas.list.title">Your service areas</h3>
-				</div>
-				<div class="span3">
-					<button class="btn btn-primary pull-right" ng-click="createArea()"><i class="icon-plus icon-white"></i> <span l="areas.list.new">New</span></button>
+		<div class="data-container-with-title span4">
+			<h4 class="data-container-title" l="areas.list.title">Your service areas</h4>
+			<div class="data-container-block data-container-seperator">
+				<div class="row-fluid">
+					<button class="btn btn-primary span6" ng-click="createArea()"><i class="icon-plus icon-white"></i> <span l="areas.list.new">New</span></button>
 				</div>
 			</div>
-			<div class="row-fluid">
-				<div class="common-wrapper common-wrapper-detail-list span12 common-scrollable">
-					<ul class="nav nav-pills nav-stacked">
+			<!-- <div class="row-fluid"> -->
+				<!-- <div class="common-wrapper common-wrapper-detail-list  common-scrollable"> -->
+					<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable">
 				        <li ng-repeat="area in areas | orderBy:['name'] " ng-class="{active: currentArea.id == area.id}">	        	
 				        	<a ng-click="loadArea(area)">{{area.name}}</a>
 				        </li>
 				    </ul>
-				</div>
-			</div>
-			<div class="row-fluid" ng-show="currentArea">
-			<!-- area detail -->
-				<div class="row-fluid">
-				<div class="span12">
-					<h3 l="areas.detail.title">Edit Service Area</h3>
-				</div>		
-				</div>
-				<div class="row-fluid">
-					<div class="span12 common-wrapper common-wrapper-detail-list" >
+				<!-- </div> -->
+			<!-- </div> -->
+	
+		</div><!-- end first column -->
+
+		<!-- 2. column -->
+		<div class="span4" ng-show="currentArea">
+			<div class="data-container-with-title">
+				<h4 class="data-container-title" l="areas.detail.title">Edit Service Area</h4>
+				<div class="data-container-block">
+					<!-- <div class=" common-wrapper common-wrapper-detail-list" > -->
 
 						<div simple-property-editor editor-title="areas.editor.name" editor-property="currentArea.name" editor-on-save="saveArea()" editor-max-length="20" editor-required>
-							<h3 class="edit" tooltip="areas.editor.name.tooltip">{{currentArea.name}} <i class="icon-edit icon-black"></i></h3>
+							<h5 class="edit" tooltip="areas.editor.name.tooltip">{{currentArea.name}} <i class="icon-edit icon-black"></i></h5>
 						</div>
 						<div simple-property-editor editor-title="areas.editor.description" editor-property="currentArea.description" editor-on-save="saveArea()" editor-type="textarea">
 							<p class="edit" tooltip="areas.editor.description.tooltip">{{currentArea.description}} <i class="icon-edit icon-black"></i></p>
 						</div>
-						<div class="activation-checkbox">
+						<!-- <div class="activation-checkbox">
 							<input type="checkbox" id="areaActiveCb" ng-model="currentArea.active" ng-change="saveArea()"></input>
 					    	<label l="areas.field.active" for="areaActiveCb">Active: Guests can check-in</label>
-						</div>
-						<div ng-show="currentArea.id">
-							<button class="btn btn-danger" data-toggle="modal" data-target="#deleteAreaModal"><i class="icon-trash"></i> <span l="areas.action.delete">Delete area</span></button>
+						</div> -->
+						<div class="row-fluid" ng-show="currentArea.id">
+							<button class="btn btn-success span6" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="currentArea.active && currentArea.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
+
+			    			<button class="btn btn-danger span6" style="margin-left: 0px !important;" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="!currentArea.active && currentArea.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
+
+							<button class="btn btn-danger span6" data-toggle="modal" data-target="#deleteAreaModal"><i class="icon-trash"></i></button>
 						</div>
 						<div class="modal hide" id="deleteAreaModal">
 						 	<div class="modal-header">
@@ -69,49 +71,34 @@
 								</div>
 							</form>
 						</div>
+					<!-- </div> -->
+				</div>
+			</div>
+			<!-- area spots list -->
+			<div class="data-container-with-title" ng-show="currentArea.id">
+				<h4 class="data-container-title" l="areas.spots.list.title">Spots</h4>
+				<div class="data-container-block">
+					<p l="areas.spots.list.description">List of spots assigned to this area. </p>
+				</div>	
+				<div class="data-container-block data-container-seperator">
+					<div class="row-fluid">
+						<button  class="btn btn-primary span6" ng-click="createSpot()"><i class="icon-plus icon-white"></i> <span l="spots.list.new">New</span></button>
 					</div>
 				</div>
+				<ul class="nav nav-pills nav-stacked data-container-block data-container-small data-container-scrollable" id="spotsList">
+				        <li ng-repeat="spot in spots | orderBy:['name'] " ng-class="{active: currentSpot.id == spot.id}">	        	
+			        		<a ng-click="loadSpot(spot)">{{spot.name}}</a>
+			        	</li>
+		    	</ul>
 			</div>
-		</div><!-- end first column -->
-<!-- 		<div class="row-fluid"> -->
-			<div class="span8" ng-show="currentArea">
-			<ul class="nav nav-tabs">
-			  <li ng-class="{active: show=='spots'}">
-			    <a ng-click="show='spots'">Spots</a>
-			  </li>
-			  <li ng-class="{active: show=='categories'}">
-			  	<a ng-click="show='categories'">Assign Product Categories</a>
-			  </li>
-			</ul>
-			</div>
-		<!-- </div> -->
-
-		<!-- 2. column -->
-		<div class="span4" ng-show="currentArea.id && show=='spots'">
-			<!-- area spots list -->
-	    	<div class="row-fluid">
-				<div class="span9">
-					<h3 l="areas.spots.list.title">Spots</h3>
-				</div>
-				<div class="span3">
-					<button  class="btn btn-primary pull-right" ng-click="createSpot()"><i class="icon-plus icon-white"></i> <span l="spots.list.new">New</span></button>
-	    		</div>	
-			</div>
-			<div class="row-fluid">
-				<div class="span12 common-wrapper common-wrapper-detail-list" ng-show="currentArea.id">
-		    		<p l="areas.spots.list.description">List of spots assigned to this area. </p>
-		    		<div class="common-scrollable">
-		    			<ul class="nav nav-pills nav-stacked" id="spotsList">
-					        <li ng-repeat="spot in spots | orderBy:['name'] " ng-class="{active: currentSpot.id == spot.id}">	        	
-				        		<a ng-click="loadSpot(spot)">{{spot.name}}</a>
-				        	</li>
-			    		</ul>
-		    		</div>
-		    		<div ng-hide="currentSpot"></div>
-		    		<!-- spots detail -->
-			    	<div class="spot-detail" ng-show="currentSpot">
-				    	<div simple-property-editor editor-title="spots.editor.name" editor-property="currentSpot.name" editor-on-save="saveSpot()" editor-required editor-max-length="20">
-							<h3 class="edit" tooltip="spots.editor.name.tooltip">{{currentSpot.name}} <i class="icon-edit icon-black"></i></h3>
+		</div>
+		<!-- spots detail -->
+		<div class="span4" ng-show="currentSpot">
+			<div class="data-container-with-title">
+				<h4 class="data-container-title" l="spot.title">Edit Spot</h4>
+				<div class="data-container-block data-container-large">
+					<div simple-property-editor editor-title="spots.editor.name" editor-property="currentSpot.name" editor-on-save="saveSpot()" editor-required editor-max-length="20">
+							<h5 class="edit" tooltip="spots.editor.name.tooltip">{{currentSpot.name}} <i class="icon-edit icon-black"></i></h5>
 						</div>
 			    		<img ng-show="currentSpot.qrImageUrl" ng-src="{{currentSpot.qrImageUrl}}" alt="Spot Barcode"/>
 			    		<p>{{currentSpot.barcode}}</p>
@@ -136,44 +123,8 @@
 								</div>
 							</div>
 				    	</div>
-					</div>
 				</div>
 			</div>
-		</div>
-		<div class="span8" ng-show="currentArea.id && show=='categories'">
-		<!-- 	<div class="row-fluid">
-				<div class="span12">
-					<h3 l="areas.categories.title">Assign Product Categories</h3>
-				</div>
-			</div> -->
-			<div class="row-fluid ">
-				<div class="span6 data-container-with-title">
-					<div>
-						<h4 class="data-container-title" l="areas.allcategories.list.title">All categories</h4>
-						<div class="data-container-block">
-							<p l="areas.allcategories.list.description">Drag & Drop to assign category to current service area.</p>
-							<span l="common.search">Search</span>: <input ng-model="allMenusListSearch.title">
-						</div>
-						<ul class="nav nav-pills nav-stacked organizable-list data-container-block data-container-small data-container-scrollable" id="allMenusList">
-							<li ng-repeat="category in menus | filter:filterAssignedMenus | filter:allMenusListSearch | orderBy:['title']">
-								<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{category.title}}</a>
-							</li>
-						</ul>
-					</div>					
-			   	</div>
-			   	<div class="span6 data-container-with-title">
-			   		<!-- area menus -->
-			    	<div ng-show="currentArea.id">
-			    		<h4 class="data-container-title" l="areas.categories.list.title">Assigned categories</h4>
-			    		<p class="data-container-block" l="areas.categories.list.description">List of product categories (e. .g beverages) available to customers checked in in this service area.</p>
-			    		<ul class="nav nav-pills nav-stacked organizable-list data-container-block data-container-small data-container-scrollable" id="assignedMenusList">
-					        <li ng-repeat="category in currentAreaCategories"> <!-- filter:filterNotAssignedCockpitBusinesses -->
-					        	<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{category.title}}</a>
-				        	</li>
-			    		</ul>
-			    	</div>
-			   	</div>
-		   </div>
 		</div>
 	</div>
 </div>

@@ -180,6 +180,15 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		// $scope.currentSpot = null;
 	};
 
+	/**
+	* Toggle active state of area.
+	* Executes a save afterwards.
+	*/
+	$scope.toggleAreaActive = function() {
+		$scope.currentArea.active = !$scope.currentArea.active;
+		$scope.saveArea();
+	}
+
 
 	//areas end
 
