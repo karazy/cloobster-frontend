@@ -50,7 +50,7 @@
 
 			    			<button class="btn btn-danger span6" style="margin-left: 0px !important;" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="!currentArea.active && currentArea.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
 
-							<button class="btn btn-danger span6" data-toggle="modal" data-target="#deleteAreaModal"><i class="icon-trash"></i></button>
+							<button class="btn span6" data-toggle="modal" data-target="#deleteAreaModal"><i class="icon-trash"></i></button>
 						</div>
 						<div class="modal hide" id="deleteAreaModal">
 						 	<div class="modal-header">
@@ -92,22 +92,31 @@
 		    	</ul>
 			</div>
 		</div>
+		<!-- empty area container placeholder -->
+		<div class="span4" ng-hide="currentArea">
+			<div class="data-container-with-title data-container-small data-container-inactive">
+	    		<h4 class="data-container-title" l="areas.detail.title">Edit Service Area</h4>
+	    		<div class="data-container-block">
+	    			<p l="area.container.empty.description">Shows the selected area details. Select an area from the list.</p>
+	    		</div>
+	    	</div>
+		</div>
 		<!-- spots detail -->
 		<div class="span4" ng-show="currentSpot">
 			<div class="data-container-with-title">
 				<h4 class="data-container-title" l="spot.title">Edit Spot</h4>
-				<div class="data-container-block data-container-large">
+				<div class="data-container-block">
 					<div simple-property-editor editor-title="spots.editor.name" editor-property="currentSpot.name" editor-on-save="saveSpot()" editor-required editor-max-length="20">
 							<h5 class="edit" tooltip="spots.editor.name.tooltip">{{currentSpot.name}} <i class="icon-edit icon-black"></i></h5>
 						</div>
 			    		<img ng-show="currentSpot.qrImageUrl" ng-src="{{currentSpot.qrImageUrl}}" alt="Spot Barcode"/>
 			    		<p>{{currentSpot.barcode}}</p>
-			    		<div class="activation-checkbox">
-							<input type="checkbox" id="spotActiveCb" ng-model="currentSpot.active" ng-change="saveSpot()"></input>
-					    	<label l="spots.field.active" for="spotActiveCb">Active: Guests can check-in</label>
-						</div>
-			    		<div ng-show="currentSpot.id">
-				    		<button class="btn" data-toggle="modal" data-target="#deleteSpotModal"><i class="icon-trash"></i> <span l="spot.action.delete">Delete spot</span></button>
+			    		<div class="row-fluid" ng-show="currentSpot.id">
+			    			<button class="btn btn-success span6" type="button" ng-click="toggleSpotActive()" ng-model="currentSpot.active" ng-show="currentSpot.active && currentSpot.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
+
+			    			<button class="btn btn-danger span6" style="margin-left: 0px !important;" type="button" ng-click="toggleSpotActive()" ng-model="currentSpot.active" ng-show="!currentSpot.active && currentSpot.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
+
+				    		<button class="btn span6" data-toggle="modal" data-target="#deleteSpotModal"><i class="icon-trash"></i></button>
 				    		<!-- Modal delete dialog. -->
 				    		<div class="modal hide" id="deleteSpotModal">
 							 	<div class="modal-header">
@@ -125,6 +134,15 @@
 				    	</div>
 				</div>
 			</div>
+		</div>
+		<!-- empty spot container placeholder -->
+		<div class="span4" ng-hide="currentSpot">
+			<div class="data-container-with-title data-container-small data-container-inactive">
+	    		<h4 class="data-container-title" l="spot.title">Edit Spot</h4>
+	    		<div class="data-container-block">
+	    			<p l="spot.container.empty.description">Shows the selected spot details. Select a spot from the list.</p>
+	    		</div>
+	    	</div>
 		</div>
 	</div>
 </div>

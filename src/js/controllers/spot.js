@@ -240,6 +240,15 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		manageViewHiearchy("area");
 	}
 
+	/**
+	* Toggle active state of spot.
+	* Executes a save afterwards.
+	*/
+	$scope.toggleSpotActive = function() {
+		$scope.currentSpot.active = !$scope.currentSpot.active;
+		$scope.saveSpot();
+	}
+
 	//end spots
 
 	//start menus
