@@ -1113,6 +1113,23 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "{{currentSpot.name}} wird gelöscht!<br/>Bereits ausgedruckte Barcodes können nicht wiederverwendet werden!",
 			"EN" : "{{currentSpot.name}} will be deleted!<br/>Barcode can't be reused!"
 		},
+		//category_assignment partial
+		"activation.title" : {
+			"DE" :  "Kategorie zuweisen",
+			"EN" : "Activate category"
+		},
+		"activation.description" : {
+			"DE" :  "",
+			"EN" : ""
+		},
+		"activation.all.container.empty.description" : {
+			"DE" :  "Um alle Kategorien zu sehen, wählen Sie bitte einen Servicebereich aus der Liste aus.",
+			"EN" : "To view all categories choose a service area from the list."
+		},
+		"activation.assigned.container.empty.description" : {
+			"DE" :  "Um zugewiesene Kategorien zu sehen, wählen Sie bitte einen Servicebereich aus der Liste aus.",
+			"EN" : "To view assigned categories choose a service area from the list."
+		},
 		//accounts partial
 		"accounts.title" : {
 			"DE" : "Benutzerverwaltung",

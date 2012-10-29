@@ -5,6 +5,10 @@
   display: none;
 }
 
+.partial-wrapper {
+  margin: 0 0 1em 0;
+}
+
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -176,12 +180,20 @@ ul.payment-method-list li {
   padding-top: 15px;
 }
 
+.data-container-500 {
+  height: 500px;
+}
+
 .data-container-large {
   height: 400px;
 }
 
 .data-container-small {
   height: 200px;
+}
+
+.data-container-tiny {
+  height: 100px;
 }
 
 

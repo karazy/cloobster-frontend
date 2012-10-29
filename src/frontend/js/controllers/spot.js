@@ -101,6 +101,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.loadArea = function(areaItem) {
 		manageViewHiearchy("area");
 		$scope.currentArea = areaItem;
+		//initially show content of spots tab
+		$scope.show = 'spots';
 		$scope.spots = $scope.spotsResource.query({"areaId" : areaItem.id}, null, null, handleError);		
 		$scope.currentAreaCategories = new Array();
 		if(!$scope.currentArea.menuIds) {
@@ -178,6 +180,15 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		// $scope.currentSpot = null;
 	};
 
+	/**
+	* Toggle active state of area.
+	* Executes a save afterwards.
+	*/
+	$scope.toggleAreaActive = function() {
+		$scope.currentArea.active = !$scope.currentArea.active;
+		$scope.saveArea();
+	}
+
 
 	//areas end
 
@@ -227,6 +238,15 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		});
 
 		manageViewHiearchy("area");
+	}
+
+	/**
+	* Toggle active state of spot.
+	* Executes a save afterwards.
+	*/
+	$scope.toggleSpotActive = function() {
+		$scope.currentSpot.active = !$scope.currentSpot.active;
+		$scope.saveSpot();
 	}
 
 	//end spots
