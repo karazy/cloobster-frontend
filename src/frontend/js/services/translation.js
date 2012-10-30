@@ -47,6 +47,31 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Benutzerkonten",
 			"EN" : "User accounts"
 		},
+		//businesses header partial
+		"businesses.headertabs.location" : {
+			"DE" :  "Locations",
+			"EN" : "Locations"
+		},
+		"businesses.headertabs.locationsettings" : {
+			"DE" :  "Locations Einstellungen",
+			"EN" : "Location Settings"
+		},
+		"businesses.headertabs.categories" : {
+			"DE" :  "Kategorien und Produkte/Services",
+			"EN" : "Categories and Products/Services"
+		},
+		"businesses.headertabs.accounts" : {
+			"DE" :  "Benutzerkonten",
+			"EN" : "User Accounts"
+		},
+		"businesses.headertabs.activation" : {
+			"DE" :  "Kategorien aktivieren",
+			"EN" : "Activate categories"
+		},
+		"businesses.headertabs.areas" : {
+			"DE" :  "Servicebereiche und Spots",
+			"EN" : "Service Areas and Spots"
+		},
 		//registration partial
 		"registration.title" : {
 			"DE" : "Cloobster Registration",
