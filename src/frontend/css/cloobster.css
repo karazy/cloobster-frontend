@@ -212,8 +212,7 @@ ul.payment-method-list li {
 }
 
 .data-container-scrollable {
-  overflow: scroll;
-  /*height: 100%;*/
+  overflow: auto;
 }
 
 .data-container-seperator {

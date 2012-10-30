@@ -41,10 +41,6 @@
 						<div simple-property-editor editor-title="areas.editor.description" editor-property="currentArea.description" editor-on-save="saveArea()" editor-type="textarea">
 							<p class="edit" tooltip="areas.editor.description.tooltip">{{currentArea.description}} <i class="icon-edit icon-black"></i></p>
 						</div>
-						<!-- <div class="activation-checkbox">
-							<input type="checkbox" id="areaActiveCb" ng-model="currentArea.active" ng-change="saveArea()"></input>
-					    	<label l="areas.field.active" for="areaActiveCb">Active: Guests can check-in</label>
-						</div> -->
 						<div class="row-fluid" ng-show="currentArea.id">
 							<button class="btn btn-success span6" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="currentArea.active && currentArea.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
 
@@ -95,7 +91,7 @@
 		<!-- empty spot container placeholder -->
 		<div class="span4" ng-hide="currentArea">
 			<div class="data-container-with-title data-container-small data-container-inactive">
-	    		<h4 class="data-container-title" l="areas.spot.detail.title">Edit Service Area</h4>
+	    		<h4 class="data-container-title" l="areas.detail.title">Edit Service Area</h4>
 	    		<div class="data-container-block">
 	    			<p l="areas.container.empty.description">Shows the selected area details. Select an area from the list.</p>
 	    		</div>
@@ -104,7 +100,7 @@
 		<!-- spots detail -->
 		<div class="span4" ng-show="currentSpot">
 			<div class="data-container-with-title">
-				<h4 class="data-container-title" l="spot.title">Edit Spot</h4>
+				<h4 class="data-container-title" l="areas.spot.detail.title">Edit Spot</h4>
 				<div class="data-container-block">
 					<div simple-property-editor editor-title="spots.editor.name" editor-property="currentSpot.name" editor-on-save="saveSpot()" editor-required editor-max-length="20">
 							<h5 class="edit" tooltip="spots.editor.name.tooltip">{{currentSpot.name}} <i class="icon-edit icon-black"></i></h5>
@@ -138,7 +134,7 @@
 		<!-- empty spot container placeholder -->
 		<div class="span4" ng-hide="currentSpot">
 			<div class="data-container-with-title data-container-small data-container-inactive">
-	    		<h4 class="data-container-title" l="spot.title">Edit Spot</h4>
+	    		<h4 class="data-container-title" l="areas.spot.detail.title">Edit Spot</h4>
 	    		<div class="data-container-block">
 	    			<p l="areas.spot.container.empty.description">Shows the selected spot details. Select a spot from the list.</p>
 	    		</div>
