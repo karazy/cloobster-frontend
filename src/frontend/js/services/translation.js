@@ -1258,6 +1258,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Account aktivieren",
 			"EN" : "Activate account"
 		},
+		"activation.description" : {
+			"DE" :  "Hier können Sie den Servicebereichen spezifische Kategorien zuweisen.<br/>Somit können in einem \"Spa-Bereich\""+
+				" andere Produkte und Dienstleistungen als auf dem \"Zimmer\" angeboten werden.",
+			"EN" : "Here you can assign to your service areas specific categories.<br/>E.g. you provide different services in \"spa\" then in a \"room service\"."
+		},
 		"account.activation.admin.submit" : {
 			"DE" : "Aktivieren",
 			"EN" : "Activate"
