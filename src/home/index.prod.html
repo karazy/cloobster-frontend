@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/bootstrap.min.css"/>
   <link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
-  <link rel="stylesheet" type="text/css" href="cloobster.css">
+  <link rel="stylesheet" type="text/css" href="css/cloobster.css">
 </head>
 <body>
   <div class="container">
@@ -17,8 +17,8 @@
       </div>
     </div>
     <!-- Error alert -->
-    <div class="row" ng-show="error" ng-cloak>
-      <div class="alert alert-error alert-block span6" >
+    <div class="row ng-cloak" ng-show="error">
+      <div class="alert alert-error alert-block span6 fade in" >
         <button class="close" ng-click="error=false;">×</button>
         <h4 class="alert-heading" l="common.warning.title">Error!</h4>
         <p ng-bind="errorMessage"></p>

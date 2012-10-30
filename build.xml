@@ -5,6 +5,13 @@
 	
 	<target name="build-production" depends="compile, copylibs, copyresources, setversion">
 	</target>
+	<target name="build-customerhome">
+		<copy todir="build/home">
+			<fileset id="allhomefiles" dir="src/home/" >
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+	</target>
 	<property name="frontenddir" value="frontend"/>
 	<target name="clean-frontend">
 		<delete dir="build/${frontenddir}"></delete>

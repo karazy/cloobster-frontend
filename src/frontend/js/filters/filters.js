@@ -1,5 +1,3 @@
-var Cloobster = Cloobster || {};
-  
 Cloobster.filters = angular.module('Cloobster.filters', ['Cloobster.services']);
 
 Cloobster.filters.filter('kcurrency', ['$locale', '$log','config', function($locale, $log, config) {
