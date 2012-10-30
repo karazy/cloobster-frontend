@@ -11,12 +11,24 @@
 <div class="row-fluid">
 	<div class="span12">
 		<ul class="nav nav-tabs">
-			<li ng-class="getActive('/businesses',true)" ><a href="#/businesses" l="businesses.headertabs.locations">Locations</a></li>
-			<li ng-class="getActive('/businesses/' + activeBusinessId, true)", true><a href="#/businesses/{{activeBusinessId}}" l="businesses.headertabs.locationsettings">Location Settings</a></li>
-			<li ng-class="getActive('/businesses/' + activeBusinessId+'/spots', true)" ><a href="#/businesses/{{activeBusinessId}}/spots" l="businesses.headertabs.areas">Service Areas and Spots</a></li>
-			<li ng-class="getActive('/businesses/' + activeBusinessId+'/menus', true)" ><a href="#/businesses/{{activeBusinessId}}/menus" l="businesses.headertabs.categories">Categories and Products/Services</a></li>
-			<li ng-class="getActive('/businesses/' + activeBusinessId+'/category_assignment', true)" ><a href="#/businesses/{{activeBusinessId}}/category_assignment" l="businesses.headertabs.activation">Activate categories</a></li>
-			<li ng-class="getActive('/accounts')"><a href="#/accounts" l="businesses.headertabs.accounts">Accounts</a></li>
+			<li ng-class="getActive('/businesses',true)">
+				<a href="#/businesses" l="businesses.headertabs.locations">Locations</a>
+			</li>
+			<li ng-class="getActive('/businesses/' + activeBusinessId, true)", true>
+				<a href="#/businesses/{{activeBusinessId}}" l="businesses.headertabs.locationsettings">Location Settings</a>
+			</li>
+			<li ng-class="getActive('/businesses/' + activeBusinessId+'/spots', true)">
+				<a href="#/businesses/{{activeBusinessId}}/spots" l="businesses.headertabs.areas">Service Areas and Spots</a>
+			</li>
+			<li ng-class="getActive('/businesses/' + activeBusinessId+'/menus', true)">
+				<a href="#/businesses/{{activeBusinessId}}/menus" l="businesses.headertabs.categories">Categories and Products/Services</a>
+			</li>
+			<li ng-class="getActive('/businesses/' + activeBusinessId+'/category_assignment', true)">
+				<a href="#/businesses/{{activeBusinessId}}/category_assignment" l="businesses.headertabs.activation">Activate categories</a>
+			</li>
+			<li ng-class="getActive('/accounts')">
+				<a href="#/accounts" l="businesses.headertabs.accounts">Accounts</a>
+			</li>
 			<div class="loading-indicator" ng-show="ajaxLoading">
 			</div>
 		</ul>		

@@ -16,14 +16,14 @@
 	    				<button class="btn btn-primary span6" ng-click="createMenu()"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
 	    			</div>
 	    		</div>
-			<ul class="nav nav-pills nav-stacked data-container-block data-container-scrollable" id="menuList">
-		        <li ng-repeat="menu in menus | orderBy:['title'] " ng-class="{active: currentMenu.id == menu.id}">	        	
-		        	<a ng-click="loadMenu(menu)">{{menu.title}}</a>
-		        </li>
-		        <li ng-class="{active: orphanedProducts.length > 0 && !currentMenu}">
-		        	<a ng-click="loadOrphanedProducts()"><i class="icon-exclamation-sign icon-black" tooltip="menus.list.orphaned.tooltip" tooltip-position="right"></i> <span l="menus.list.orphaned">Unassigned products</span></a>
-		        </li>
-		    </ul>
+				<ul class="nav nav-pills nav-stacked data-container-block data-container-scrollable" id="menuList">
+			        <li ng-repeat="menu in menus | orderBy:['title'] " ng-class="{active: currentMenu.id == menu.id}">	        	
+			        	<a ng-click="loadMenu(menu)">{{menu.title}}</a>
+			        </li>
+			        <li ng-class="{active: orphanedProducts.length > 0 && !currentMenu}">
+			        	<a ng-click="loadOrphanedProducts()"><i class="icon-exclamation-sign icon-black" tooltip="menus.list.orphaned.tooltip" tooltip-position="right"></i> <span l="menus.list.orphaned">Unassigned products</span></a>
+			        </li>
+			    </ul>
 			</div>
 
 		<!-- Orphaned products list -->

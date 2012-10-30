@@ -18,12 +18,18 @@
 <div class="row-fluid">
 	<!-- Tab for admin accounts. -->
 	<div ng-show="tab == 'admin'" show-role="companyowner">
-		<div class="span2">
-			<h3 l="accounts.list.title">Users</h3>
-			<ul class="nav nav-pills nav-stacked">
-				<li>
+		<div class="data-container-with-title span3">
+			<h4 class="data-container-title" l="accounts.list.title">Users</h4>
+			<div class="data-container-block data-container-seperator">				
+				<div class="row-fluid">
+					<button type="button" class="btn btn-primary span6" ng-click="createAdminAccount()">
+						<i class="icon-plus icon-white"></i> <span l="common.new">New</span></button>
+				</div>
+			</div>
+			<ul class="nav data-container-block data-container-large nav-pills nav-stacked">
+			<!-- 	<li>
 					<a ng-click="createAdminAccount()"><i class="icon-plus icon-black"></i> <span l="accounts.list.new">New account...</span></a>
-				</li>
+				</li> -->
 		        <li ng-repeat="account in admins | orderBy:['name'] " ng-class="{active: currentAdmin.id == account.id}">	        	
 		        	<a ng-click="loadAdminAccount(account)">{{account.name}}</a>
 		        </li>
@@ -31,9 +37,9 @@
 		</div>
 		<!-- Account details -->
 		<!-- New Admin Account -->
-		<div class="common-wrapper span4 form-vertical" ng-show="currentAdmin && !currentAdmin.id">
-			<div class="common-detail">
-			<h3><i class="icon-user icon-black"></i> <span l="accounts.admin.new.title">New Admin Account</span></h3>
+		<div class="data-container-with-title span4 form-vertical" ng-show="currentAdmin && !currentAdmin.id">
+			<h4 class="data-container-title"><i class="icon-user icon-black"></i> <span l="accounts.admin.new.title">New Admin Account</span></h4>
+			<div class="common-detail">			
 			<div class="control-group">
 				<div class="controls">
 					<div class="input-append">
