@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="CloobsterFrontend" default="build-production" basedir=".">
+<project name="CloobsterFrontend" default="build-all" basedir=".">
 	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask"
 	           classpath="tools/closure-compiler/compiler.jar"/>
-	
-	<target name="build-production" depends="compile, copylibs, copyresources, setversion">
-	</target>
-	<target name="build-customerhome">
-		<copy todir="build/home">
-			<fileset id="allhomefiles" dir="src/home/" >
-				<include name="**/*"/>
-			</fileset>
-		</copy>
-	</target>
 	<property name="frontenddir" value="frontend"/>
+	<property name="customerhomedir" value="home"/>
+	
+	<target name="build-all" depends="build-frontend, build-customerhome">
+	</target>
+	<target name="build-frontend" depends="compile-frontend, copylibs-frontend, copyresources-frontend, setversion">
+	</target>
+	<target name="build-customerhome" depends="compile-customerhome, copylibs-customerhome, copyresources-customerhome">
+	</target>
+	
 	<target name="clean-frontend">
-		<delete dir="build/${frontenddir}"></delete>
+		<delete dir="build/${frontenddir}"></delete>	
+	</target>
+	<target name="clean-customerhome">
+		<delete dir="build/${customerhomedir}"></delete>
 	</target>
 	<target name="setversion">
 		<echo message="Setting version number" />
@@ -27,12 +29,8 @@
 		</replaceregexp>
 
 	</target>
-	<target name="compile">
+	<target name="compile-frontend">
 	    <jscomp compilationLevel="simple" warning="verbose" debug="false" output="build/${frontenddir}/app-all.min.js">
-	    	<!-- 
-	    	<externs dir="${basedir}/src">
-	        <file name="extern.js"/>
-	      </externs>!-->
 	    	<path id="sources">
 	    		<fileset dir="${basedir}/src/${frontenddir}/js/">
 	    			<include name="**/*.js"/>
@@ -43,7 +41,28 @@
 	    	</externs>
 	    </jscomp>
 	  </target>
-	<target name="copylibs">
+	<target name="compile-customerhome">
+	    <jscomp compilationLevel="simple" warning="verbose" debug="false" output="build/${customerhomedir}/app-all.min.js">
+	    	<path id="sources">
+	    		<fileset dir="${basedir}/src/${customerhomedir}/js/">
+	    			<include name="**/*.js"/>
+	    		</fileset>
+	    	</path>
+	    	<externs dir="src" >
+	    		<file name="extern.js"/>	
+	    	</externs>
+	    </jscomp>
+	  </target>
+
+	<target name="copylibs-customerhome">
+		<copy todir="build/${customerhomedir}/lib">
+			<filelist id="libfiles" dir="src/${customerhomedir}/lib" >
+				<file name="bootstrap/bootstrap.min.js" />
+				<file name="angular/angular-resource-1.0.1.min.js" />
+			</filelist>
+		</copy>
+	</target>
+	<target name="copylibs-frontend">
 		<copy todir="build/${frontenddir}/lib">
 			<filelist id="libfiles" dir="src/${frontenddir}/lib" >
 				<file name="jquery/jquery.ui.widget.js" />
@@ -59,7 +78,26 @@
 			</filelist>
 		</copy>
 	</target>
-	<target name="copyresources">
+	<target name="copyresources-customerhome">
+			<copy todir="build/${customerhomedir}">
+				<fileset id="indexfiles" dir="src/${customerhomedir}/" >
+					<include name="index.prod.html"/>
+				</fileset>
+				<fileset id="partialfiles" dir="src/${customerhomedir}/" >
+					<include name="partials/**/*"/>
+				</fileset>
+				<fileset id="imgfiles" dir="src/${customerhomedir}/" >
+					<include name="img/**/*"/>
+				</fileset>
+				<filelist id="cssfiles" dir="src/${customerhomedir}/">
+					<file name="css/bootstrap.min.css"/>
+					<file name="css/bootstrap-responsive.min.css"/>
+					<file name="css/cloobster.css"/>
+				</filelist>
+			</copy>
+			<move file="build/${customerhomedir}/index.prod.html" tofile="build/${customerhomedir}/index.html" />
+		</target>
+	<target name="copyresources-frontend">
 		<copy todir="build/${frontenddir}">
 			<fileset id="indexfiles" dir="src/${frontenddir}/" >
 				<include name="index.prod.html"/>

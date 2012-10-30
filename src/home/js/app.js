@@ -20,7 +20,7 @@ Cloobster.customermodule = angular.module('CloobsterHome', ['Cloobster.services'
 
 /**
 * Redirect to the homepage after loading
-*
+* @constructor
 **/
 Cloobster.Redirect = function($scope, $window) {
     $window.location.href='../';
@@ -30,13 +30,12 @@ Cloobster.Redirect.$inject = ['$scope','$window'];
 /**
 * Activates an account by sending an email token to the server.
 * Token is read from URL.
-* 
+* @constructor
 */
 Cloobster.ConfirmAccount = function($scope, $http, $routeParams, handleError, config) {
     // Send confirmation token to server via the login service.
     $http.put( config['serviceUrl'] + '/b/accounts/confirmation/' + $routeParams['emailToken'], null).success(function(result) {
         $scope.emailConfirmed = true;
-        loginService.setPresetLogin(result['login']);
     }).error(handleError);
 }
 Cloobster.ConfirmAccount.$inject = ['$scope', '$http', '$routeParams', 'errorHandler', 'config'];
@@ -44,7 +43,7 @@ Cloobster.ConfirmAccount.$inject = ['$scope', '$http', '$routeParams', 'errorHan
 /**
 * Activates a new e-mail address by sending an email token to the server.
 * Token is read from URL.
-* 
+* @constructor
 */
 Cloobster.ConfirmEmail = function($scope, $http, $routeParams, handleError, config) {
     // Send confirmation token to server via the login service.
@@ -57,13 +56,13 @@ Cloobster.ConfirmEmail.$inject = ['$scope', '$http', '$routeParams', 'errorHandl
 
 /**
 * Handles user password reset links send via e-mail.
-* 
+* @constructor
 */
-Cloobster.PasswordReset = function($scope, $http, $routeParams, handleError, $location) {
+Cloobster.PasswordReset = function($scope, $http, $routeParams, handleError, $location, config) {
 
     $scope.passwordReset = function() {
         $scope.passwordResetProgress = true;
-        loginService.passwordReset($routeParams['emailToken'],$scope.newPassword).success(function() {
+        $http.put( config['serviceUrl'] + '/accounts/password-reset/'+ $routeParams['emailToken'], { 'password' : $scope.newPassword}).success(function() {
             $scope.passwordResetComplete = true;
         }).error(function(data,status,config,headers) {
             $scope.passwordResetProgress = false;
@@ -100,4 +99,4 @@ Cloobster.PasswordReset = function($scope, $http, $routeParams, handleError, $lo
     };
 }
 
-Cloobster.PasswordReset.$inject = ['$scope', '$http', '$routeParams', 'errorHandler', '$location'];
+Cloobster.PasswordReset.$inject = ['$scope', '$http', '$routeParams', 'errorHandler', '$location', 'config'];

@@ -1,4 +1,3 @@
-var Cloobster = Cloobster || {};
 /** @module Cloobster/Translations */
 
 /**
@@ -12,7 +11,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 	var map = {
 		"confirmemail.title" : {
 			"DE" : "E-Mail Bestätigung",
-			"EN" : "E-Mail Confirmation",
+			"EN" : "E-Mail Confirmation"
 		},
 		"confirmemail.success" : {
 			"DE" : "Vielen Dank für die Bestätigung Ihrer E-Mailaddresse.<br>Wichtige Informationen zur Nutzung Ihres cloobster-Kontos werden an diese Addresse geschickt.",
@@ -20,7 +19,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"confirmnewemail.title" : {
 			"DE" : "E-Mail Änderung bestätigen",
-			"EN" : "E-Mail change confirmation",
+			"EN" : "E-Mail change confirmation"
 		},
 		"confirmnewemail.success" : {
 			"DE" : "Vielen Dank für die Bestätigung der Änderung Ihrer E-Mailaddresse.<br>Wichtige Informationen zur Nutzung Ihres cloobster-Kontos werden von jetzt ab an diese Addresse geschickt.",
