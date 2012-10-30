@@ -1036,6 +1036,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "To view option details please select a option from the list or add a new option."
 		},
 		//spots partial
+		"areas.description" : {
+			"DE" :  "Für jede \"cloobster location\" können Sie mehrere \"Servicebereiche\" anlegen(z. B. \"Bar\", \"Zimmer\", \"Spa\", \"Konferenzraum\", etc.).<br>"
+			+"Jeder Servicebereich beinhaltet verschiedene Spots (Barcode für den Check-in) und zugewiesene Produktkategorien.",
+			"EN" : "For each \"cloobster location\" you can add several \"service areas\" (like \"Bar\", \"Rooms\", \"Spa\", \"Conference Area\", etc.).<br>"+
+				"Each service area has different spots and a selection of product categories."
+		},
 		"area.new.default.name" : {
 			"DE" :  "Mein Servicebereich",
 			"EN" : "My Service Area"
