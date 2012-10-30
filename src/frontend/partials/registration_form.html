@@ -128,10 +128,22 @@
     	</div>
         </fieldset>
         </div>
-        <div class='row'>
+        <div class='row-fluid'>
         <div class='span12'>
+        	<span class="help-block"><a href="../agb_user.html" l="registration.form.terms">Terms of Use</a></span>
+			<div class="control-group" ng-class="getFieldInputClass(registrationForm.acceptTerms.$dirty, registrationForm.acceptTerms.$invalid)">
+				<div class="controls">
+					<label class="checkbox">
+						<input name='acceptTerms' id="acceptTerms" type='checkbox' ng-model="acceptTerms" required ><span l="registration.form.acceptterms">I have read and accept the terms of use.</span>
+					</label>					
+					<div class="help-inline" ng-show="registrationForm.acceptTerms.$dirty && registrationForm.acceptTerms.$invalid">
+		          		<span ng-show="registrationForm.acceptTerms.$error.required" l="registration.form.accept-terms.error.required">Must accept terms of use to continue.</span>
+	        		</div>
+				</div>				
+			</div>			
         <button type="button" ng-click="cancel()" class="btn" l="registration.form.action.reset">Reset</button>
       	<button type="submit" ng-disabled="registrationForm.$invalid"  class="btn btn-primary" l="registration.form.action.register">Register</button>
+
       </div>
       </div>
 

@@ -258,6 +258,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Registrieren",
 			"EN" : "Register"
 		},
+		"registration.form.terms" : {
+			"DE" : 'Allgemeine Geschäftsbedinungen (AGB) und Datenschutzbestimmung',
+			"EN" : 'Terms Of Service and Privacy Policy'
+		},
+		"registration.form.acceptterms" : {
+			"DE" : "Hiermit akzeptiere ich die AGB und Datenschutzbestimmung der Karazy GmbH",
+			"EN" : "I hereby accept the Terms Of Service and Privacy Policy "
+		},
+		"registration.form.accept-terms.error.required" : {
+			"DE" : "Akzeptiere die AGB und Datenschutzbestimmung um fortzufahren.",
+			"EN" : "Accept the Terms Of Service and Privacy Policy to continue."
+		},
 		"registration.form.action.register.tooltip" : {
 			"DE" : "Für die Registrierung bitte alle Pflichtfelder ausfüllen.",
 			"EN" : "Please enter all mandatory fields to complete registration."
