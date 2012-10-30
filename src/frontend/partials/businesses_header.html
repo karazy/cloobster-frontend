@@ -17,7 +17,9 @@
 			<li ng-class="getActive('/businesses/' + activeBusinessId+'/menus', true)" ><a href="#/businesses/{{activeBusinessId}}/menus" l="menus.title">Categories and Products/Services</a></li>
 			<li ng-class="getActive('/businesses/' + activeBusinessId+'/category_assignment', true)" ><a href="#/businesses/{{activeBusinessId}}/category_assignment" l="activation.title">Activate categories</a></li>
 			<li ng-class="getActive('/accounts')"><a href="#/accounts" >Accounts</a></li>
-		</ul>
-	</div>
+			<div class="loading-indicator" ng-show="ajaxLoading">
+			</div>
+		</ul>		
+	</div>	
 </div>
 </div>
