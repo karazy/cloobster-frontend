@@ -16,16 +16,16 @@
 					<button class="btn btn-primary span6" ng-click="createArea()"><i class="icon-plus icon-white"></i> <span l="areas.list.new">New</span></button>
 				</div>
 			</div>
-			<!-- <div class="row-fluid"> -->
-				<!-- <div class="common-wrapper common-wrapper-detail-list  common-scrollable"> -->
-					<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable">
-				        <li ng-repeat="area in areas | orderBy:['name'] " ng-class="{active: currentArea.id == area.id}">	        	
-				        	<a ng-click="loadArea(area)">{{area.name}}</a>
-				        </li>
-				    </ul>
-				<!-- </div> -->
-			<!-- </div> -->
-	
+		<!-- 	<div class="loading-indicator" ng-show="areas == null">
+			</div>
+			<div ng-show="areas.length == 0">
+				Keine Elemente
+			</div> -->
+			<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable">
+		        <li ng-repeat="area in areas | orderBy:['name'] " ng-class="{active: currentArea.id == area.id}">	        	
+		        	<a ng-click="loadArea(area)">{{area.name}}</a>
+		        </li>
+		    </ul>	
 		</div><!-- end first column -->
 
 		<!-- 2. column -->

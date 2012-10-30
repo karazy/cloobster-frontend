@@ -350,3 +350,14 @@ ul.options-list li:hover {
 
 /* General classes */
 
+.loading-indicator {
+  height: 16px;
+  width: 16px;
+  background-image: url('../img/ajax-loader.gif');
+  background-size: auto;
+  background-repeat: no-repeat;
+  margin: 5px;
+  position: absolute;
+  right: 15px;
+}
+
