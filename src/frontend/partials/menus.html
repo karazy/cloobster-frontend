@@ -329,12 +329,12 @@
 		       	 	<li ng-repeat="option in currentChoice.options" class="choice-option-item">
 		       	 		<div class="row-fluid">
 		       	 			<div class="span10">
-			       	 			<div simple-property-editor editor-title="option.editor.title" editor-property="option.name" editor-on-save="saveChoice()" editor-required>
-			       	 				<p class="edit" tooltip="option.editor.name.tooltip">{{option.name}} <i class="icon-edit icon-black"></i></p>
+			       	 			<div simple-property-editor editor-title="option.editor.name.tooltip" editor-property="option.name" editor-on-save="saveChoice()" editor-required>
+			       	 				<p class="edit">{{option.name}} <i class="icon-edit icon-black"></i></p>
 			       	 			</div> 
 			       	 			<div ng-hide="currentChoice.overridePrice == 'OVERRIDE_SINGLE_PRICE' || currentChoice.overridePrice == 'OVERRIDE_FIXED_SUM'">
-								<div class="edit" simple-property-editor editor-title="option.editor.price" editor-property="option.price" editor-on-save="	saveChoice()" editor-required >
-			       	 				<p class="edit" tooltip="option.editor.price.tooltip">{{option.price | kcurrency:activeBusiness.currency}} <i class="icon-edit icon-black"></i></p>
+								<div class="edit" simple-property-editor editor-title="option.editor.price.tooltip" editor-property="option.price" editor-on-save="	saveChoice()" editor-required >
+			       	 				<p class="edit">{{option.price | kcurrency:activeBusiness.currency}} <i class="icon-edit icon-black"></i></p>
 			       	 			</div>
 			       	 			</div> 
 		       	 			</div>

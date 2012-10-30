@@ -66,12 +66,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "At least six characters. Must contain one letter and one number or special character."
 		},
 		"passwordreset.newpasswordrepeat" : {
-			"DE" : "Passwort wiederholen",
+			"DE" : "Neues Passwort wiederholen",
 			"EN" : "Repeat new password"
 		},
-		"passwordreset.newpasswordrepeat" : {
-			"DE" : "Eingabe hier wiederholen",
-			"EN" : "repeat the input here"
+		"passwordreset.newpasswordrepeat.placeholder" : {
+			"DE" : "Passwort hier wiederholen",
+			"EN" : "repeat the new password"
 		},
 		"passwordreset.newpasswordrepeat.error.match" : {
 			"DE" : "Passwörter stimmen nicht überein.",
