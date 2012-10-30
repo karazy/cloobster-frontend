@@ -1347,13 +1347,13 @@ Cloobster.services.factory('onCompleteInterceptor', ['loadingService', '$rootSco
 /**
 * Add Cloobster.services.onCompleteInterceptor as $http interceptor.
 */
-Cloobster.services.config(function($httpProvider) {
+Cloobster.services.config(['$httpProvider', function($httpProvider) {
   $httpProvider.responseInterceptors.push('onCompleteInterceptor');
-});
+}]);
 
 /**
 * Add Cloobster.services.onStartInterceptor as $http transform method.
 */
-Cloobster.services.run(function($http, onStartInterceptor) {
+Cloobster.services.run(['$http','onStartInterceptor',function($http, onStartInterceptor) {
   $http.defaults.transformRequest.push(onStartInterceptor);
-});
+}]);
