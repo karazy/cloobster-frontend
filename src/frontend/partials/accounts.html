@@ -66,8 +66,8 @@
 				<div ng-show="emailValid">
 					<input type="text" ng-disabled="adminExists" id="adminName" ng-model="currentAdmin.name" placeholder="forename and surename" l="accounts.admin.new.name.placeholder" l-attribute="placeholder"/>
 				</div>
-		    	<div ng-show="emailValid">
-		    		<button class="btn btn-primary" ng-click="saveAdminAccount()" ng-disabled="!currentAdmin.name" l="accounts.create">Create</button>
+		    	<div class="row-fluid" ng-show="emailValid">
+		    		<button class="btn btn-primary span4" ng-click="saveAdminAccount()" ng-disabled="!currentAdmin.name"><i class="icon-ok icon-white"></i> <span l="accounts.create">Create</span></button>
 		    	</div>						
 	    	</div>
 		</div>
@@ -77,7 +77,9 @@
 				<h4 class="data-container-title"><i class="icon-user icon-black"></i> {{currentAdmin.name}}</h4>
 				<div class="data-container-block">
 					<p><i class="icon-envelope icon-black"></i> {{currentAdmin.email}}</p>
-					<button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#modalAdminDelete" ><i class="icon-trash icon-black"></i> <span l="common.remove">Remove</span></button>
+					<div class="row-fluid">
+						<button type="submit" class="btn btn-danger span4" data-toggle="modal" data-target="#modalAdminDelete" ><i class="icon-trash icon-black"></i> <span l="common.remove">Remove</span></button>
+					</div>
 					<!-- Remove dialog admin user -->
 		    		<div class="modal hide" id="modalAdminDelete">
 					 	<div class="modal-header">
@@ -170,9 +172,11 @@
 				        		</div>
 							</div>
 						</div>
-						<button class="btn" l="common.cancel" ng-click="currentUser=null;">Cancel</button>
-						<button type="submit" class="btn btn-primary" ng-disabled="editUserForm.$invalid" l="common.save">Save</button>
-						<button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#modalCockpitDelete" ><i class="icon-trash icon-black"></i> <span l="common.delete">Delete</span></button>
+						<div class="row-fluid">
+							<button class="btn span4" ng-click="currentUser=null;"><i class="icon-ban-circle icon-black"></i> <span l="common.cancel">Cancel</span></button>
+							<button type="submit" class="btn btn-primary span4" ng-disabled="editUserForm.$invalid"><i class="icon-ok icon-white"></i> <span l="common.save">Save</span></button>
+							<button type="submit" class="btn btn-danger span4" data-toggle="modal" data-target="#modalCockpitDelete" ><i class="icon-trash icon-black"></i></button>
+						</div>
 						<!-- Delete dialog cockpit user -->
 			    		<div class="modal hide" id="modalCockpitDelete">
 						 	<div class="modal-header">
@@ -236,8 +240,9 @@
 			        		</div>
 						</div>
 					</div>
-					<!-- <button class="btn" l="common.cancel" ng-click="currentUser=null;">Cancel</button> -->
-					<button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" l="accounts.create">Create</button>
+					<div class="row-fluid">
+						<button type="submit" class="btn btn-primary span4" ng-disabled="userForm.$invalid"><i class="icon-ok icon-white"></i> <span l="accounts.create">Create</span></button>
+					</div>
 				</form>
 			</div>
 		</div>
