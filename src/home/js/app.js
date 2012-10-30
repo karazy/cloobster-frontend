@@ -66,9 +66,6 @@ Cloobster.PasswordReset = function($scope, $http, $routeParams, handleError, $lo
             $scope.passwordResetComplete = true;
         }).error(function(data,status,config,headers) {
             $scope.passwordResetProgress = false;
-            if(status == 404) {
-                $location.path('/');
-            }
             handleError(data,status,config,headers);
         });
     };

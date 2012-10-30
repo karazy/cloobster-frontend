@@ -27,7 +27,6 @@
 		<echo message="Commit version: ${build.commit}" />
 		<replaceregexp file="${basedir}/build/${frontenddir}/partials/about.html" match="\{VERSIONINFO\}" replace="${build.commit}" byline="true">
 		</replaceregexp>
-
 	</target>
 	<target name="compile-frontend">
 	    <jscomp compilationLevel="simple" warning="verbose" debug="false" output="build/${frontenddir}/app-all.min.js">

@@ -55,7 +55,7 @@ Cloobster.services.provider('config', function() {
 	*	If called with two arguments, set the format string (specified by the second argument)
 	*	for currency specified by the first argument.
 	*	@param {(Object.<string, string>|string)} a1 - Map or currency identifier if called with the second argument.
-	*	@param {=string} a2 - format string for regex replacement for currency values.
+	*	@param {string} a2 - format string for regex replacement for currency values.
 	*/
 	self.setCurrencyFormats = function(a1, a2) {
 		if(arguments.length == 1) {
