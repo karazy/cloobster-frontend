@@ -1177,6 +1177,15 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Benutzerverwaltung",
 			"EN" : "Account management"
 		},
+		"accounts.description" : {
+			"DE" :  "Hier können Sie Benutzerkonten verwalten. Es gibt zwei Arten von Konten.<br/>"+
+			"<ol><li>Admin-Konten haben die gleichen Rechte wie der Firmenaccount.<br/>Können aber keine weiteren Admins "+
+			" anlegen und keine Locations anlegen/löschen.</li>"+
+			"<li>Service-Konten können nur auf das Cockpit zugreifen.</li></ol>"+
+			"Jedem Konto können Sie die Locations zuweisen auf die es Zugriff hat.",
+			"EN" : "Here you can manage accounts for your company.<br>"+
+			"For each created account you can assign the businesses the account has access two."
+		},
 		"accounts.admin.exists.company" : {
 			"DE" : "Dieser Benutzer ist mit einem anderen Firmenkonto verknüpft!",
 			"EN" : "This user is assigned to another company account."

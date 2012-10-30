@@ -1,10 +1,19 @@
 <div ng-include="'partials/businesses_header.html'">
 </div>
-<div class="page-header">
+<!-- <div class="page-header">
 	<h1 l="accounts.title">Account Management</h1>
 </div>
+ -->
 <div class="row-fluid">
 	<div class="span12">
+		<p l="accounts.description">
+			Here you can manage accounts for your company.<br>
+			For each created account you can assign the businesses the account has access two.
+		</p>
+	</div>
+</div>
+	<div class="tabbable tabs-left">
+	<!-- <div class="span12"> -->
 		<ul class="nav nav-tabs">
 			<li ng-class="{active: tab =='admin'}" show-role="companyowner">
 				<a ng-click="showAdminTab()" l="accounts.tab.admin">Admin</a>
@@ -13,12 +22,11 @@
 				<a ng-click="showCockpitTab()" l="accounts.tab.cockpit">Service</a>
 			</li>
 		</ul>
-	</div>
-</div>
-<div class="row-fluid">
-	<!-- Tab for admin accounts. -->
+		<div class="tab-content">
+			<!-- Tab for admin accounts. -->
+			<div class="row-fluid">
 	<div ng-show="tab == 'admin'" show-role="companyowner">
-		<div class="data-container-with-title span3">
+		<div class="data-container-with-title span2">
 			<h4 class="data-container-title" l="accounts.list.title">Users</h4>
 			<div class="data-container-block data-container-seperator">				
 				<div class="row-fluid">
@@ -120,7 +128,7 @@
 	</div>
 	<!-- Tab for cockpit accounts. -->
 	<div ng-show="tab == 'cockpit'">
-		<div class="data-container-with-title span3">
+		<div class="data-container-with-title span2">
 			<h4 class="data-container-title" l="accounts.list.title">Users</h4>
 			<div class="data-container-block data-container-seperator">
 				<div class="row-fluid">
@@ -259,4 +267,9 @@
     		</div>
 		</div>
 	</div>
-</div>
+	</div>
+
+		</div>
+	</div>
+	
+
