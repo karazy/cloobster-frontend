@@ -622,10 +622,6 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Thank you, the new e-mail address was confirmed.<br/>All new messages will be send to this address."
 		},
 		//menus partial
-		"menus.title" : {
-			"DE" : "Kategorien und Services/Produkte",
-			"EN" : "Categories and Services/Products"
-		},
 		"menus.description" : {
 			"DE" : "Hier können Sir ihre Produkte und Services anlegen und diesen einer Kategorie zuweisen.<br/>"+
 					"Alle Kategorien können verschiedenen \"Service Bereichen\" zugewiesen werden um Zeit zu sparen (im Service Area Tab).",
@@ -1111,23 +1107,6 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"spot.action.delete.text" : {
 			"DE" : "{{currentSpot.name}} wird gelöscht!<br/>Bereits ausgedruckte Barcodes können nicht wiederverwendet werden!",
 			"EN" : "{{currentSpot.name}} will be deleted!<br/>Barcode can't be reused!"
-		},
-		//category_assignment partial
-		"activation.title" : {
-			"DE" :  "Kategorie zuweisen",
-			"EN" : "Activate category"
-		},
-		"activation.description" : {
-			"DE" :  "",
-			"EN" : ""
-		},
-		"activation.all.container.empty.description" : {
-			"DE" :  "Um alle Kategorien zu sehen, wählen Sie bitte einen Servicebereich aus der Liste aus.",
-			"EN" : "To view all categories choose a service area from the list."
-		},
-		"activation.assigned.container.empty.description" : {
-			"DE" :  "Um zugewiesene Kategorien zu sehen, wählen Sie bitte einen Servicebereich aus der Liste aus.",
-			"EN" : "To view assigned categories choose a service area from the list."
 		},
 		//accounts partial
 		"accounts.title" : {
