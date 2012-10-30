@@ -17,12 +17,6 @@
 	    			</div>
 	    		</div>
 			<ul class="nav nav-pills nav-stacked data-container-block data-container-scrollable" id="menuList">
-				<!-- <li>
-					<a ng-click="createMenu()"><i class="icon-plus-sign icon-black"></i> <span l="menus.list.new">New menu...</span></a>
-				</li> -->
-<!-- 				<li ng-class="{active: organizeMenusContext}">
-					<a ng-click="organizeMenus()"><i class="icon-th-large icon-black"></i> <span l="menus.list.organize">Organize menus</span></a>
-				</li> -->
 		        <li ng-repeat="menu in menus | orderBy:['title'] " ng-class="{active: currentMenu.id == menu.id}">	        	
 		        	<a ng-click="loadMenu(menu)">{{menu.title}}</a>
 		        </li>
@@ -50,6 +44,7 @@
 	    	<div class="data-container-with-title">
 	    		<h4 class="data-container-title" l="menu.container.title">Category edit</h4>		    	
 				<div class="data-container-block">
+					<div l="menu.container.hint" style="font-size: 12px; color:red;">Don't forget to assign this category to an area afterwards.</div>
 					<div simple-property-editor editor-title="menu.editor.title" editor-property="currentMenu.title" editor-on-save="saveMenu()" editor-required>
 					<h5 class="edit" tooltip="menus.editor.title.tooltip" >{{currentMenu.title}} <i class="icon-edit icon-black"></i></h5>
 					</div>

@@ -674,10 +674,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Kategorien",
 			"EN" : "Categories"
 		},
-		// "menus.list.new" : {
-		// 	"DE" : "Neue Kategorie...",
-		// 	"EN" : "New category..."
-		// },
+		"menu.container.hint" : {
+			"DE" :  "Bitte vergessen Sie nicht die Kategorie einem Servicebereich zuzuweisen.",
+			"EN" : "Don't forget to assign this category to an area afterwards."
+		},
 		"menu.container.title" : {
 			"DE" : "Kategorie editieren",
 			"EN" : "Category edit"
