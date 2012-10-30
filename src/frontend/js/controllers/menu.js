@@ -593,6 +593,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		//reset currentChoice, because we don't want them to be displayed along the new product
 		$scope.currentChoice = newChoice;
 
+		$scope.linkedProductsForChoice = null;
+
 		$scope.options = new Array();
 
 		$scope.addOption();
