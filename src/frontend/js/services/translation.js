@@ -285,6 +285,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Meine Locations",
 			"EN" : "My Locations"
 		},
+		"businesses.description" : {
+			"DE" :  "Hier können Sie Ihre unterschiedlichen Locations (Hotels, Restaurants) die cloobster verwenden verwalten.",
+			"EN" : "You have more than one site you want to use cloobster with.<br/>"+
+					"Here you can maintain the different locations you want to \"cloobsterize\"."
+		},
 		"businesses.add" : {
 			"DE" : "Location hinzufügen",
 			"EN" : "Add location"
@@ -1042,6 +1047,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "For each \"cloobster location\" you can add several \"service areas\" (like \"Bar\", \"Rooms\", \"Spa\", \"Conference Area\", etc.).<br>"+
 				"Each service area has different spots and a selection of product categories."
 		},
+		"areas.list.title" : {
+			"DE" :  "Servicebereiche",
+			"EN" : "Service Areas"
+		},
+		"areas.detail.title" : {
+			"DE" :  "Servicebereich editieren",
+			"EN" : "Edit Service Area"
+		},
 		"area.new.default.name" : {
 			"DE" :  "Mein Servicebereich",
 			"EN" : "My Service Area"
@@ -1066,13 +1079,25 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Beschreibung editieren",
 			"EN" : "Edit description"
 		},
+		"areas.spot.detail.title" : {
+			"DE" :  "Spot editieren",
+			"EN" : "Edit spot"
+		},
 		"areas.spots.list.title" : {
 			"DE" : "Spots hinzufügen/editieren",
 			"EN" : "Edit/Add Spots"
 		},
+		"areas.container.empty.description" : {
+					"DE" :  "Zeigt Details des ausgewählten Servicebereichs an. Wählen Sie einen Bereich aus der Liste links",
+					"EN" : "Shows the selected area details. Select an area from the list."
+				},		
 		"areas.spots.list.description" : {
 			"DE" : "Spots (z. B. Tische oder Zimmer), die diesem Servicebereich zugeordnet sind.",
 			"EN" : "Spots assigned to this area."
+		},
+		"areas.spot.container.empty.description" : {
+			"DE" :  "Zeigt Details des ausgewählten Spots an. Wählen Sie einen Spot aus der Liste links.",
+			"EN" : "Shows the selected area details. Select an area from the list."
 		},
 		"areas.categories.list.title" : {
 			"DE" :  "Zugewiesenen Kategorien",
@@ -1106,10 +1131,6 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "You're about to delete {{currentArea.name}}. The area, all spots and their barcodes won't be usable."+
 					"All current customer checkins at the specific spots, will keep working.<br/>"+
 					"Data will be kept for a while until it will be deleted permanently."
-		},
-		"spots.list.new" : {
-			"DE" : "Neu",
-			"EN" : "New"
 		},
 		"spots.editor.name" : {
 			"DE" : "Name",

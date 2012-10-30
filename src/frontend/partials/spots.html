@@ -13,7 +13,7 @@
 			<h4 class="data-container-title" l="areas.list.title">Your service areas</h4>
 			<div class="data-container-block data-container-seperator">
 				<div class="row-fluid">
-					<button class="btn btn-primary span6" ng-click="createArea()"><i class="icon-plus icon-white"></i> <span l="areas.list.new">New</span></button>
+					<button class="btn btn-primary span6" ng-click="createArea()"><i class="icon-plus icon-white"></i> <span l="common.new">New</span></button>
 				</div>
 			</div>
 		<!-- 	<div class="loading-indicator" ng-show="areas == null">
@@ -82,7 +82,7 @@
 				</div>	
 				<div class="data-container-block data-container-seperator">
 					<div class="row-fluid">
-						<button  class="btn btn-primary span6" ng-click="createSpot()"><i class="icon-plus icon-white"></i> <span l="spots.list.new">New</span></button>
+						<button  class="btn btn-primary span6" ng-click="createSpot()"><i class="icon-plus icon-white"></i> <span l="common.new">New</span></button>
 					</div>
 				</div>
 				<ul class="nav nav-pills nav-stacked data-container-block data-container-small data-container-scrollable" id="spotsList">
@@ -92,12 +92,12 @@
 		    	</ul>
 			</div>
 		</div>
-		<!-- empty area container placeholder -->
+		<!-- empty spot container placeholder -->
 		<div class="span4" ng-hide="currentArea">
 			<div class="data-container-with-title data-container-small data-container-inactive">
-	    		<h4 class="data-container-title" l="areas.detail.title">Edit Service Area</h4>
+	    		<h4 class="data-container-title" l="areas.spot.detail.title">Edit Service Area</h4>
 	    		<div class="data-container-block">
-	    			<p l="area.container.empty.description">Shows the selected area details. Select an area from the list.</p>
+	    			<p l="areas.container.empty.description">Shows the selected area details. Select an area from the list.</p>
 	    		</div>
 	    	</div>
 		</div>
@@ -140,7 +140,7 @@
 			<div class="data-container-with-title data-container-small data-container-inactive">
 	    		<h4 class="data-container-title" l="spot.title">Edit Spot</h4>
 	    		<div class="data-container-block">
-	    			<p l="spot.container.empty.description">Shows the selected spot details. Select a spot from the list.</p>
+	    			<p l="areas.spot.container.empty.description">Shows the selected spot details. Select a spot from the list.</p>
 	    		</div>
 	    	</div>
 		</div>
