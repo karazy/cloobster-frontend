@@ -1329,7 +1329,7 @@ Cloobster.services.factory('onStartInterceptor', ['loadingService', '$rootScope'
 * 	@author Frederik Reifschneider
 *	@inspiredby https://groups.google.com/forum/#!msg/angular/BbZ7lQgd1GI/GJBTXcJLQMkJ
 */
-Cloobster.services.factory('onCompleteInterceptor', ['loadingService', '$rootScope', function(loadingService, $rootScope) {
+Cloobster.services.factory('onCompleteInterceptor', ['loadingService', '$rootScope','$q', function(loadingService, $rootScope, $q) {
   	return function (promise) {
             return promise.then(function (response) {
             	loadingService.requestCount--;
