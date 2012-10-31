@@ -242,13 +242,14 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 				   		'<h3>{{getTitle()}}</h3>'+
 					'</div>'+
 					'<form name="simpleImageForm" novalidate ng-submit="save()" class="upload-image-form">'+
-						'<div class="alert alert-error alert-block" ng-show="error">'+
-							'<button  type="button" class="close" ng-click="hideError()">×</button>'+
-							'<h4 class="alert-heading">Warning!</h4>'+
-							'{{errorMessage}}'+
-						'</div>'+
 						'<div class="modal-body">'+
+							'<div class="alert alert-error alert-block" ng-show="error">'+
+								'<button  type="button" class="close" ng-click="hideError()">×</button>'+
+								'<h4 class="alert-heading" l="common.warning.title">Warning!</h4>'+
+								'{{errorMessage}}'+
+							'</div>'+
 							'<div class="upload-area" ng-hide="selectionActive">'+
+								'<p l="fileupload.image.description"> Choose a GIF, PNG or JPEG file with a size less than 3 Mb.</p>'+
 							 	'<span class="btn btn-success fileinput-button">'+
 							 		'<i class="icon-plus icon-white"></i>'+
 		                    		'<span l="fileupload.button.add">Add image...</span>'+
