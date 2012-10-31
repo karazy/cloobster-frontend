@@ -96,9 +96,9 @@
 			</div>
 		</div>
 		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyCity.$dirty, registrationForm.companyCity.$invalid)">
-			<label class="control-label" for="companyCity" l="registration.form.city">Cit*</label>
+			<label class="control-label" for="companyCity" l="registration.form.city">City</label>
 			<div class="controls">
-				<input name='companyCity' id="companyCity" type='text' ng-model="account.company.city" placeholder="city" l-attribute="placeholder" l="registration.form.city.placeholder" required>
+				<input name='companyCity' id="companyCity" type='text' ng-model="account.company.city" placeholder="city" l-attribute="placeholder" l="registration.form.city.placeholder" >
 				<div class="help-inline" ng-show="registrationForm.companyCity.$dirty && registrationForm.companyCity.$invalid">
 	          		<span ng-show="registrationForm.companyCity.$error.required" l="registration.form.city.error.required">Provide a city.</span>
         		</div>
@@ -107,7 +107,7 @@
 		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyPostcode.$dirty, registrationForm.companyPostcode.$invalid)">
 			<label class="control-label" for="companyCity" l="registration.form.postcode" >Postcode</label>
 			<div class="controls">
-				<input name='companyPostcode' id="companyPostcode" type='text' ng-model="account.company.postcode" placeholder="postcode" l-attribute="placeholder" l="registration.form.postcode.placeholder" required >
+				<input name='companyPostcode' id="companyPostcode" type='text' ng-model="account.company.postcode" placeholder="postcode" l-attribute="placeholder" l="registration.form.postcode.placeholder" >
 				<div class="help-inline" ng-show="registrationForm.companyPostcode.$dirty && registrationForm.companyPostcode.$invalid">
 	          		<span ng-show="registrationForm.companyPostcode.$error.required" l="registration.form.postcode.error.required">Provide a postcode.</span>
         		</div>

@@ -715,8 +715,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Delete <strong>{{currentMenu.title}}</strong>? This can't be undone.!<br/>Products won't be deleted."
 		},
 		"menu.products.container.title" : {
-			"DE" : "Produkte zur Kategorie",
-			"EN" : "Products of categorie"
+			"DE" : "Produkte dieser Kategorie",
+			"EN" : "Products of this category"
 		},
 		"products.list.title" : {
 			"DE" : "Kategorien",

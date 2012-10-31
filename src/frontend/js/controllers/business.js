@@ -162,6 +162,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 				//close switches to another url so businesses will be refreshed automatically 
 				//and showing the new new business
 				$("#addBusinessButton").button("reset");
+				// refresh the active businesses in the background.
+				Business.getActiveBusinesses(true);
 				$scope.closeNewBusinessForm();
 			},
 			function(data,status,headers,config) {

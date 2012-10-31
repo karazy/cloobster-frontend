@@ -233,9 +233,8 @@ Cloobster.services.factory('Business',['cloobsterResource','login','errorHandler
 					}
 					activeBusinesses = resource.query({'account':accountId}, angular.noop, handleError);
 				}
-				else {
-					return activeBusinesses;
-				}
+				
+				return activeBusinesses;				
 			}
 			else {
 				return [];
