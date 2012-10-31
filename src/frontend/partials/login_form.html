@@ -1,12 +1,8 @@
 <div class="login-module span12">
 	<div ng-hide="loginProgress" >
-        <h2 l="nav.login">Login</h2>
-        <p>
 <!--             <form ng-submit="fbLogin()" >
                 <button type="submit" class="btn btn-primary" type="submit" l="login.facebook">Login with Facebook</button>
-            </form> -->
-            <a href="#/login/forgot" l="login.password.forgot">Forgot password?</a>
-        </p>
+            </form> -->    
         <form name="loginForm" class="form-inline" ng-submit="login()">
         	<input name="login" type="text" ng-model="loginData.login"  size="30" placeholder="login" l="login.input.login" l-attribute="placeholder" required>
         	<input name="password" type="password" ng-model="loginData.password"  size="30" placeholder="password" l="login.input.password" l-attribute="placeholder" required>
@@ -15,6 +11,9 @@
             </label>
         	<button type="submit" class="btn btn-primary" type="submit" ng-disabled="loginForm.$invalid">Login</button>
       	</form>
+        <p>
+            <small><a href="#/login/forgot" l="login.password.forgot">Forgot password?</a></small>
+        </p>
     </div>
     <div class="well progress" ng-show="loginProgress">
         <div class="bar" style="width: 60%;"></div>

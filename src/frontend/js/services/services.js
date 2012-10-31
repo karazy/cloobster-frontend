@@ -189,7 +189,8 @@ Cloobster.services.factory('Business',['cloobsterResource','login','errorHandler
 	*	
 	*/
 	var resource,
-		activeBusinesses;
+		activeBusinesses,
+		activeAccountId;
 
 	function createResource(accountId) {
 		return (resource = $resource('/b/businesses/:id',
@@ -227,11 +228,12 @@ Cloobster.services.factory('Business',['cloobsterResource','login','errorHandler
 		getActiveBusinesses: function(refresh) {
 			var accountId = loginService.getAccount()['id'];
 			if(accountId) {
-				if(!activeBusinesses || (refresh === true)) {
+				if(!activeBusinesses || (refresh === true) || (activeAccountId != accountId)) {
 					if(!resource) {
 						createResource(accountId);
 					}
 					activeBusinesses = resource.query({'account':accountId}, angular.noop, handleError);
+					activeAccountId = accountId;
 				}
 				
 				return activeBusinesses;				

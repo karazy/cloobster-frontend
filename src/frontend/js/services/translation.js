@@ -497,7 +497,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "App Header Image"
 		},
 		"business.detail.app.header.description" : {
-			"DE" : "Für ein optimales Aussehen wird das Bild auf ein festes Seitenverhältnis zugeschnitten.<br>Wählen sie mit dem Rahmen einen Ausschnitt.",
+			"DE" : "Für ein optimales Aussehen in der App wird das Bild auf ein festes Seitenverhältnis zugeschnitten.<br>Wählen sie mit dem Rahmen einen Ausschnitt.",
 			"EN" : "For the best looks in the app, the image will be cut.<br>Change the selection for cutting below."
 		},
 		"business.detail.themes" : {
@@ -537,7 +537,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Facebook Configuration"
 		},
 		"business.detail.section.facebook.description" : {
-			"DE" :  "Hier können Sie konfigurieren wie Posts in Facebook dargestellt werden.",
+			"DE" : "Hier können Sie konfigurieren wie Posts in Facebook dargestellt werden.",
 			"EN" : "Here you can configure how Facebook posts will look like."
 		},
 		"business.detail.facebook.url" : {
@@ -547,6 +547,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"business.detail.facebook.wallpost.image" : {
 			"DE" :  "Pinwand Bild",
 			"EN" : "Wallpost Image"
+		},
+		"business.detail.facebook.wallpost.image.description"  : {
+			"DE" : "Für ein optimales Aussehen in einem Facebookpost wird das Bild auf ein festes Seitenverhältnis zugeschnitten.<br>Wählen sie mit dem Rahmen einen Ausschnitt.",
+			"EN" : "For the best looks in a Facebook post, the image will be cut.<br>Change the selection for cutting below."
 		},
 		"business.action.delete.invalid" : {
 			"DE" : "Passwort inkorrekt!",
@@ -708,7 +712,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"menus.menu.delete" : {
 			"DE" : "Löschen",
-			"EN" : "Delete"
+			"EN" : "Delete"	
 		},
 		"menus.menu.dialog.delete.title" : {
 			"DE" : "Kategorie {{currentMenu.title}} löschen",
@@ -805,7 +809,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"menus.product.action.move.tooltip" : {
 			"DE" : "Verschiebt das aktuelle Produkt<br/>in ausgewähltes Kategorie.",
-			"EN" : "Moves current current to selected category."
+			"EN" : "Moves current product to selected category."
 		},
 		"menus.product.dialog.delete.title" : {
 			"DE" : "Produkt {{currentProduct.name}} löschen",
