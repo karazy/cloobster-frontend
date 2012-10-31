@@ -704,7 +704,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"menus.menu.delete" : {
 			"DE" : "Löschen",
-			"EN" : "Delete"
+			"EN" : "Delete"	
 		},
 		"menus.menu.dialog.delete.title" : {
 			"DE" : "Kategorie {{currentMenu.title}} löschen",
@@ -801,7 +801,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"menus.product.action.move.tooltip" : {
 			"DE" : "Verschiebt das aktuelle Produkt<br/>in ausgewähltes Kategorie.",
-			"EN" : "Moves current current to selected category."
+			"EN" : "Moves current product to selected category."
 		},
 		"menus.product.dialog.delete.title" : {
 			"DE" : "Produkt {{currentProduct.name}} löschen",
