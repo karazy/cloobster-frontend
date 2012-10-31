@@ -1,11 +1,8 @@
 <div ng-controller="Cloobster.Navigation">
 <div class="row-fluid">
-	<div class="span4">
-		<h2  ng-bind="company.name">Your company name</h2>
-	</div>
-	<div class="span8" ng-show="canSwitchBusiness">
-		<span L="navigation.selectbusiness"> Choose location: </span><select ng-model="activeBusinessId" ng-options="b.id as b.name for b in businesses" ng-change="switchBusiness()"></select>
-		<p></p>
+	<div class="span12">
+		<h2 style="float:left; margin-right: 20px"  ng-bind="company.name">Your company name</h2>
+		<select ng-model="activeBusinessId" style="margin-top: 15px" ng-options="b.id as b.name for b in businesses" ng-change="switchBusiness()" ng-show="canSwitchBusiness"></select>
 	</div>
 </div>
 <div class="row-fluid">
