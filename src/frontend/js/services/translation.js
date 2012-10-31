@@ -297,6 +297,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Meine Locations",
 			"EN" : "My Locations"
 		},
+		"businesses.empty.description" : {
+			"DE" :  "Im Moment haben Sie keine Locations. Um cloobster zu nutzen müssen Sie mindestens eine Location (Hotel, Restaurant) anlegen.",
+			"EN" : "Currently you don't have any locations. To use cloobster, you need at least one location (hotel, restaurant)."
+		},
 		"businesses.description" : {
 			"DE" :  "Hier können Sie Ihre unterschiedlichen Locations (Hotels, Restaurants) die cloobster verwenden verwalten.",
 			"EN" : "You have more than one site you want to use cloobster with.<br/>"+

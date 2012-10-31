@@ -16,6 +16,13 @@
 	</div>
 </div>
 
+<!-- Hint when no locations exist -->
+<div class="row-fluid" ng-show="!ajaxLoading || businesses.length == 0">
+	<div class="alert alert-block alert-info span8">
+	  <p l="businesses.empty.description">Currently you don't have any locations. To use cloobster, you need at least one location (hotel, restaurant).</p>
+	</div>
+</div>
+
 <div class="row-fluid">
 	<div class="span8">
 		<table class="table table-bordered">
