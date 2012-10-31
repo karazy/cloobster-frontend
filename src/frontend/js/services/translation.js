@@ -537,7 +537,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Facebook Configuration"
 		},
 		"business.detail.section.facebook.description" : {
-			"DE" :  "Hier können Sie konfigurieren wie Posts in Facebook dargestellt werden.",
+			"DE" : "Hier können Sie konfigurieren wie Posts in Facebook dargestellt werden.",
 			"EN" : "Here you can configure how Facebook posts will look like."
 		},
 		"business.detail.facebook.url" : {
