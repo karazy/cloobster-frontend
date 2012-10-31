@@ -197,7 +197,7 @@
 					Wall post Image
 				</div>
 				<div class="value">
-					<div simple-image-editor editor-title-key="business.detail.facebook.wallpost.image" editor-image-id="fbwallpost" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
+					<div simple-image-editor editor-title-key="business.detail.facebook.wallpost.image" editor-image-id="fbwallpost" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource" editor-crop-text="business.detail.facebook.wallpost.image.description" editor-ratio="4:3">
 						<div ng-show="activeBusiness.images.fbwallpost.url">
 							<img  ng-src="{{activeBusiness.images.fbwallpost.url}}=s96" alt="click to edit" />
 							<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>

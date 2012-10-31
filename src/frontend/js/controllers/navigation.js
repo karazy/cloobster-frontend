@@ -13,6 +13,10 @@
 Cloobster.Navigation = function($scope, $location, loginService, Company,$routeParams,handleError,Business,$route,$log) {
 	var businessResource = null;
 
+	$scope.cond = function(expression, trueValue, falseValue) {
+		return (expression ? trueValue : falseValue);
+	};
+
 	/**
 	* Checks if given path is the active path.
 	* @param path
@@ -24,6 +28,10 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	*	true if path is active, false otherwise
 	*/
 	$scope.getActive = function(path, suffix) {
+		return $scope.isActive(path, suffix) ? "active" : "";
+	}
+
+	$scope.isActive = function(path, suffix) {
 		var location = $location.path(),
 			active;
 			
@@ -38,14 +46,13 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 				active = active && location.indexOf(suffix, location.length - suffix.length) !== -1;	
 			}
 		}
-		return active ? "active" : "";
-	}
 
-	$scope.activeBusinessId = null;
+		return active;
+	};
 
-	if(loginService.getAccount()['businessIds']) {
-		$scope.activeBusinessId = loginService.getAccount()['businessIds'][0];
-	}
+	$scope.businesses = Business.getActiveBusinesses();
+
+	$scope.activeBusinessId = $scope.businesses.length > 0 ? $scope.businesses[0]['id'] : null;
 
 	$scope.canSwitchBusiness = false;
 
@@ -65,13 +72,14 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 			$location.path('/businesses/'+$scope.activeBusinessId);	
 		}
 	};
-	
+	$scope.$watch('businesses.length', function (newValue, oldValue) {
+		if(!$scope.activeBusinessId && (newValue > 0)) {
+			$scope.activeBusinessId = $scope.businesses[0]['id'];
+		}
+	});
 
 	$scope.$watch('loggedIn', function(newValue, oldValue) {
 		if(newValue === true) {
-			if(loginService.getAccount()['businessIds'].length > 0 && !$scope.activeBusinessId) {
-				$scope.activeBusinessId = loginService.getAccount()['businessIds'][0];	
-			}
 			$scope.company = Company.getActiveCompany();
 			$scope.businesses = Business.getActiveBusinesses();
 		}

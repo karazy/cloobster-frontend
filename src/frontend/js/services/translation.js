@@ -497,7 +497,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "App Header Image"
 		},
 		"business.detail.app.header.description" : {
-			"DE" : "Für ein optimales Aussehen wird das Bild auf ein festes Seitenverhältnis zugeschnitten.<br>Wählen sie mit dem Rahmen einen Ausschnitt.",
+			"DE" : "Für ein optimales Aussehen in der App wird das Bild auf ein festes Seitenverhältnis zugeschnitten.<br>Wählen sie mit dem Rahmen einen Ausschnitt.",
 			"EN" : "For the best looks in the app, the image will be cut.<br>Change the selection for cutting below."
 		},
 		"business.detail.themes" : {
@@ -547,6 +547,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"business.detail.facebook.wallpost.image" : {
 			"DE" :  "Pinwand Bild",
 			"EN" : "Wallpost Image"
+		},
+		"business.detail.facebook.wallpost.image.description"  : {
+			"DE" : "Für ein optimales Aussehen in einem Facebookpost wird das Bild auf ein festes Seitenverhältnis zugeschnitten.<br>Wählen sie mit dem Rahmen einen Ausschnitt.",
+			"EN" : "For the best looks in a Facebook post, the image will be cut.<br>Change the selection for cutting below."
 		},
 		"business.action.delete.invalid" : {
 			"DE" : "Passwort inkorrekt!",
