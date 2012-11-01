@@ -1404,8 +1404,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Choose a image file to upload. Check that it is not larger than 3Mb and the format is GIF, PNG or JPEG."
 		},
 		"fileupload.submit.error" : {
-			"DE" : "Beim Hochladen ist ein Fehler aufgetreten.<br>Beachten sie, dass die Dateigröße nicht mehr als 3 Mb ist und im GIF,PNG oder JPEG format vorliegt.",
-			"EN" : "An error occurred during upload.<br>Please confirm, that the file size is less than 3 Mb  and the format is GIF, PNG or JPEG."
+			"DE" : "Beim Hochladen ist ein Fehler aufgetreten. Überprüfen sie, dass die Datei nicht größer als 3 Mb ist und im GIF, PNG oder JPEG Format vorliegt.",
+			"EN" : "An error occurred during upload. Please check, that the file is smaller than 3 Mb and the format is GIF, PNG or JPEG."
+		},
+		"fileupload.crop.error" : {
+			"DE" : "Beim Zuschneiden ist ein Fehler aufgetreten. Überprüfen sie die Auswahl und probieren sie es noch einmal.",
+			"EN" : "An error occurred during the cropping operation. Check the selectioan and try again."
 		},
 		"fileupload.error.size" : {
 			"DE" : "Maximal erlaubte Dateigröße beträgt 3Mb.",
@@ -1504,6 +1508,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"error.general" : {
 			"DE" : "Es gibt ein Problem mit der Verbindung zum Service.",
 			"EN" : "A connection problem to the service exists."
+		},
+		"common.error.footer" : {
+			"DE" : "Falls dieser Fehler weiterhin besteht, konktaktieren sie <a href='mailto:support@cloobster.com'>support@cloobster.com</a>.",
+			"EN" : "If this error persists, contact <a href='mailto:support@cloobster.com'>support@cloobster.com</a>."
 		},
 		"common.sending" : {
 			"DE" :  "Sende...",
