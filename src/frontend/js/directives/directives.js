@@ -247,6 +247,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 								'<button  type="button" class="close" ng-click="hideError()">×</button>'+
 								'<h4 class="alert-heading" l="common.warning.title">Warning!</h4>'+
 								'{{errorMessage}}'+
+								'<p l="common.error.footer">If this error persists, contact <a href="mailto:support@cloobster.com">support@cloobster.com</a></p>'+
 							'</div>'+
 							'<div class="upload-area" ng-hide="selectionActive">'+
 								'<p l="fileupload.image.description"> Choose a GIF, PNG or JPEG file with a size less than 3 Mb.</p>'+
@@ -264,7 +265,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 					 			'<p ng-show="imgSelection"><span l="fileupload.crop.area">Selected area:</span> {{imgSelection.width}} x {{imgSelection.height}}</p>'+
 					 		'</div>'+
 					 		'<p>'+
-						 		'<div class="progress progress-success" ng-show="fileUploading || fileCropping">'+
+						 		'<div class="progress progress-success" ng-show="fileUploading">'+
 									'<div class="bar" ng-style="barStyle"></div>'+
 								'</div>'+
 							'</p>'+
@@ -344,6 +345,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 
 
 	    					scope.activeImage = activeImage;
+	    					scope.error = false;
 
 							if(scope.userCancelled) {
 		    					deleteActiveUpload();
@@ -358,16 +360,13 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 	    					else {
 	    						saveImageAndClose();
 	    					}
-
-	    					
-
-							scope.$digest();
-
+		
 						} else {
 							
 							submitButton.button('reset');
 							scope.errorMessage = langService.translate("fileupload.submit.error");
 							scope.error = true;
+							scope.barStyle.width = '0%';
 						}
 
 						scope.fileUploading = false;
@@ -468,7 +467,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 	        				).success(function(imageData) {
 	        					scope.barStyle.width = '50%';
 	        					scope.fileCropping = false;
-
+	        					scope.error = false;
 	        					if(scope.userCancelled) {
 	        						deleteActiveUpload();
 	        						return;
@@ -479,7 +478,8 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 	        					saveImageAndClose();
 		        			}).error(function() {
 		        				scope.fileCropping = false;
-		        				scope.errorMessage = langService.translate("fileupload.submit.error");
+		        				scope.barStyle.width = '0%';
+		        				scope.errorMessage = langService.translate("fileupload.crop.error");
 		        				scope.error = true;
 
 		        				if(scope.userCancelled) {
