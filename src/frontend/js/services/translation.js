@@ -1053,12 +1053,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Select a superior choice to only enable current choice when the superior gets selected."
 		},
 		"menus.choices.linkedchoices.tooltip" : {
-			"DE" : "Auflistung aller Auswahlmöglichkeiten die von dieser abhängen.",
+			"DE" : "Auflistung aller Auswahlmöglichkeiten, die von dieser abhängen.",
 			"EN" : "Listing of all choices depending on this one."
 		},
 		"choice.container.empty.description" : {
 			"DE" : "Um die Details zu einer Option anzuzeigen, wählen Sie bitte eine Option aus der Liste links oder legen eine neue an.",
-			"EN" : "To view option details please select a option from the list or add a new option."
+			"EN" : "To view option details please select an option from the list or add a new option."
 		},
 		//spots partial
 		"areas.description" : {
@@ -1126,19 +1126,19 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"areas.categories.list.description" : {
 			"DE" :  "Liste der Produktkategorien (z. B. Getränke) auf die der Gast zugriff hat, wenn er in diesem Bereich eingecheckt ist."+
 				"Die Anzeigereihenfolge kann hier ebenfalls per Drag&Drop geregelt werden.",
-			"EN" : "List of product categories (e. .g beverages) available to customers checked in in this service area."
+			"EN" : "List of product categories (e.g. beverages) available to customers checked into this service area."
 		},
 		"areas.allcategories.list.title" : {
 			"DE" :  "Verfügbare Kategorien",
 			"EN" : "Available categories"
 		},
 		"areas.allcategories.list.description" : {
-			"DE" :  "Hier aufgelistete Produktkategorien können (mittels Drag&Drop) dem aktuellen Servicebereich zugewiesen werden um diese für eingecheckte Gäste verfügbar zu machen.",
-			"EN" : "Here listed product categories can be assigned (via drag&drop) to current service area to make them available for checked in guests."
+			"DE" :  "Hier aufgelistete Produktkategorien können (mittels Drag&Drop) dem aktuellen Servicebereich zugewiesen werden, um diese für eingecheckte Gäste verfügbar zu machen.",
+			"EN" : "The following product categories can be assigned (via drag & drop) to current service area to make them available to users."
 		},
 		"areas.categories.moveable.tooltip" : {
-			"DE" :  "Ziehen und loslassen um zuzuweisen oder die Reihenfolge zu ändern.",
-			"EN" : "Drag&Drop to assign and order."
+			"DE" :  "Ziehen und loslassen, um zuzuweisen oder die Reihenfolge zu ändern.",
+			"EN" : "Drag & drop to assign and order."
 		},
 		"areas.action.delete" : {
 			"DE" : "Servicebereich löschen",
@@ -1148,9 +1148,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "{{currentArea.name}} wird gelöscht! Der Servicebereich, alle Spots und ihre Barcode können dann nicht mehr verwendet werden."+
 					" Aktuell eingeloggte Servicekräfte und Gäste können den Bereich noch nutzen.<br/>"+
 					"Der Bereich und alle Spots werden nach einer Weile permanent gelöscht",
-			"EN" : "You're about to delete {{currentArea.name}}. The area, all spots and their barcodes won't be usable."+
-					"All current customer checkins at the specific spots, will keep working.<br/>"+
-					"Data will be kept for a while until it will be deleted permanently."
+			"EN" : "You're about to delete {{currentArea.name}}. The area, all spots, and barcodes cannot be used anymore."+
+					"All current customer checkins at the specific spots will keep working.<br/>"+
+					"Data will be permanently deleted."
 		},
 		"spots.editor.name" : {
 			"DE" : "Name",
@@ -1192,7 +1192,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"<li>Service-Konten können nur auf das Cockpit zugreifen.</li></ol>"+
 			"Jedem Konto können Sie die Locations zuweisen auf die es Zugriff hat.",
 			"EN" : "Here you can manage accounts for your company.<br>"+
-			"For each created account you can assign the businesses the account has access two."
+			"For each account you can define businesses to which the account has access to."
 		},
 		"accounts.admin.exists.company" : {
 			"DE" : "Dieser Benutzer ist mit einem anderen Firmenkonto verknüpft!",
@@ -1200,7 +1200,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"accounts.admin.exists.user" : {
 			"DE" : "Dieser Benutzer existiert. Möchten Sie ihm Adminrechte für Ihre Firma gewähren?",
-			"EN" : "This user exists. Do you want to grant him administrative rights."  
+			"EN" : "This user exists. Do you want to assign administrative rights?"  
 		},
 		"accounts.admin.exists.assigned" : {
 			"DE" : "Dieser Benutzer ist bereits Administrator.",
@@ -1240,7 +1240,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"accounts.admin.new.name.placeholder" : {
 			"DE" : "Vor- und Nachname",
-			"EN" : "Fore- and lastname"
+			"EN" : "First and last name"
 		},
 		"accounts.admin.businesses.list.title" : {
 			"DE" : "Zugewiesene Betriebe",
@@ -1248,7 +1248,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"accounts.admin.businesses.list.description" : {
 			"DE" : "Für hier aufgelistete Betriebe hat der Benutzer Administrationsrechte.<br/>Dies beinhaltet auch das Servicecockpit.",
-			"EN" : "User has administrative rights for here listed businesses.<br/>This includes service cockpit."
+			"EN" : "User has administrative rights for the following locations.<br/>This includes the service cockpit."
 		},
 		"accounts.admin.dialog.remove.title" : {
 			"DE" : "Admin user entfernen",
@@ -1263,8 +1263,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Available businesses"
 		},
 		"accounts.all.businesses.list.description" : {
-			"DE" : "Drag&Drop in die Liste der zugewiesenen Betriebe um dem Benutzer entsprechende Rechte zu gewähren.",
-			"EN" : "Drag&Drop to list of assigned businesses to grant coressponding rights."
+			"DE" : "Drag & drop in die Liste der zugewiesenen Betriebe, um dem Benutzer entsprechende Rechte zu gewähren.",
+			"EN" : "Drag & drop to list of assigned businesses to grant user access."
 		},
 		"accounts.businesses.moveable.tooltip" : {
 			"DE" : "Ziehen um zuzuweisen.",
@@ -1280,7 +1280,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"accounts.cockpit.businesses.list.description" : {
 			"DE" : "Für hier aufgelistete Betriebe hat der Benutzer Zugriffsrechte auf das Service Cockpit.",
-			"EN" : "User has service cockpit access for here listed businesses"
+			"EN" : "User has access to the following locations."
 		},
 		//activate account partial
 		"account.activation.admin.title" : {
@@ -1290,7 +1290,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"activation.description" : {
 			"DE" :  "Hier können Sie den Servicebereichen spezifische Kategorien zuweisen.<br/>Somit können in einem \"Spa-Bereich\""+
 				" andere Produkte und Dienstleistungen als auf dem \"Zimmer\" angeboten werden.",
-			"EN" : "Here you can assign to your service areas specific categories.<br/>E.g. you provide different services in \"spa\" then in a \"room service\"."
+			"EN" : "Here you can assign specific categories to your service areas.<br/>E.g. you provide different services in \"spa\" then in a \"room service\"."
 		},
 		"account.activation.admin.submit" : {
 			"DE" : "Aktivieren",
@@ -1298,7 +1298,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"account.activation.admin.description" : {
 			"DE" : "Um die Aktivierung abzuschliessen, füllen Sie bitte die fehlenden Felder aus.",
-			"EN" : "To complete your account activation, please enter the missing details below!"
+			"EN" : "To complete your account activation, please enter missing details below!"
 		},
 		//general
 		"common.warning.title" : {
@@ -1384,8 +1384,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		//file upload
 		"fileupload.button.add" : {
-			"DE" : "Bild auswählen ...",
-			"EN" : "Select image"
+			"DE" : "Bild auswählen...",
+			"EN" : "Select image..."
 		},
 		"fileupload.button.crop" : {
 			"DE" : "Zuschneiden",
@@ -1393,35 +1393,35 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},	
 		"fileupload.image.label" : {
 			"DE" : "Ausgewähltes Bild: ",
-			"EN" : "Seelcted image: "
+			"EN" : "Selected image: "
 		},
 		"fileupload.button.submit.saving" : {
 			"DE" : "Speichere ...",
-			"EN" : "Save..."
+			"EN" : "Saving..."
 		},
 		"fileupload.image.description" : {
-			"DE" : "Wählen Sie eine Bilddatei zum hochladen. Überprüfen sie, dass sie nicht größer als 3Mb ist und vom Typ GIF, PNG oder JPEG.",
-			"EN" : "Choose a image file to upload. Check that it is not larger than 3Mb and the format is GIF, PNG or JPEG."
+			"DE" : "Wählen sie eine Bilddatei zum hochladen. Überprüfen sie, dass sie nicht größer als 3Mb ist und vom Typ GIF, PNG oder JPEG.",
+			"EN" : "Please select a file. Ensure the file is less than 3 MB in size and the format is GIF, PNG, or JPEG."
 		},
 		"fileupload.submit.error" : {
-			"DE" : "Beim Hochladen ist ein Fehler aufgetreten. Überprüfen sie, dass die Datei nicht größer als 3 Mb ist und im GIF, PNG oder JPEG Format vorliegt.",
-			"EN" : "An error occurred during upload. Please check, that the file is smaller than 3 Mb and the format is GIF, PNG or JPEG."
+			"DE" : "Beim Hochladen ist ein Fehler aufgetreten. Überprüfen sie, dass die Datei nicht größer als 3 Mb ist und vom Typ GIF, PNG oder JPEG.",
+			"EN" : "An error occurred during upload. Please check file size (< 3 MB) and format (GIF, PNG, JPEG)."
 		},
 		"fileupload.crop.error" : {
 			"DE" : "Beim Zuschneiden ist ein Fehler aufgetreten. Überprüfen sie die Auswahl und probieren sie es noch einmal.",
-			"EN" : "An error occurred during the cropping operation. Check the selectioan and try again."
+			"EN" : "An error occurred while cropping image. Please check selection and try again."
 		},
 		"fileupload.error.size" : {
-			"DE" : "Maximal erlaubte Dateigröße beträgt 3Mb.",
-			"EN" : "Maximum allowed file size is 3Mb."
+			"DE" : "Maximal erlaubte Dateigröße beträgt 3 MB.",
+			"EN" : "Maximum file size is 3 MB."
 		},
 		"fileupload.error.type" : {
 			"DE" : "Bild muss vom Typ JPEG, GIF oder PNG sein.",
-			"EN" : "Image type must be JPEG, GIF or PNG."
+			"EN" : "Image type must be JPEG, GIF, or PNG."
 		},
 		"propertyeditor.repeat.placeholder" : {
 			"DE" : "Hier die Eingabe wiederholen",
-			"EN" : "Repeat the input here"
+			"EN" : "Repeat input here"
 		},
 		"propertyeditor.error.required" : {
 			"DE" : "Bitte einen Text eingeben.",
@@ -1442,15 +1442,15 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"login.facebook" : {
 			"DE" :  "Login mit Facebook",
-			"EN" : "Login with Facebook"
+			"EN" :  "Login with Facebook"
 		},
 		"login.remember" : {
-			"DE" :  "eingeloggt bleiben",
-			"EN" : "remember login"
+			"DE" :  "Eingeloggt bleiben",
+			"EN" :  "Remember login"
 		},
 		"login.input.login" : {
 			"DE" :  "Login",
-			"EN" : "login"
+			"EN" : "Login"
 		},
 		"login.input.password" : {
 			"DE" :  "Passwort",
@@ -1459,34 +1459,34 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		//loginService errors
 		"login.error.cockpituser" : {
 			"DE" :  "Cockpit-Benutzerkonten haben auf die Verwaltung keinen Zugriff.",
-			"EN" : "Cockpit user accounts can't access the management options."
+			"EN" :  "Cockpit users cannot access management options."
 		},
 		//passwordforgot partial
 		"login.password.reset.title" : {
 			"DE" :  "Passwort zurücksetzen",
-			"EN" : "Password reset"
+			"EN" :  "Reset password"
 		},
 		"login.password.reset.description" : {
-			"DE" :  "Bitte gebe die E-Mail Adresse deines Accounts an.",
-			"EN" : "Enter the e-mail you registered with the account."
+			"DE" :  "Bitte gebe die E-Mail Adresse Deines Accounts an.",
+			"EN" :  "Enter email address you registered with your account."
 		},
 		"login.password.reset.complete.description" : {
-			"DE" :  "Eine Nachricht mit Resetlink wurde an deinen E-Mail Account geschickt.",
-			"EN" : "Watch your e-mail account for a message with the password reset link."
+			"DE" :  "Eine Nachricht mit Resetlink wurde an Deinen E-Mail Account geschickt.",
+			"EN" :  "Email has been sent to your email account."
 		},
 		//passwordreset partial
 		"passwordreset.complete" : {
 			"DE" :  "Neues Passwort erfolgreich gespeichert.",
-			"EN" : "The new password was saved."
+			"EN" :  "New password has been saved."
 		},
 		"passwordreset.description" : {
 			"DE" :  "Gib ein neues Passwort ein.",
-			"EN" : "Enter the new password."
+			"EN" :  "Enter a new password."
 		},
 		//specific error messages
 		"error.account.login.exists" : {
 			"DE" : "Der Benutzername existiert bereits.",
-			"EN" : "The login already exists."
+			"EN" : "User name already exists."
 		},
 		"error.account.email.exists" : {
 			"DE" : "Die E-Mail-Adresse wird bereits benutzt.",
@@ -1494,7 +1494,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"error.accesstoken.invalid" : {
 			"DE" : "Dieser Link ist nicht mehr gültig.",
-			"EN" : "The link is no longer valid."
+			"EN" : "This link is no longer valid."
 		},
 		//common error messages
 		"error.404" : {
@@ -1503,11 +1503,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"error.403" : {
 			"DE" : "Ungültige Zugangsdaten oder keine Zugriffsrechte.",
-			"EN" : "Invalid credentials, or insufficient rights."
+			"EN" : "Invalid credentials or insufficient access rights."
 		},
 		"error.general" : {
 			"DE" : "Es gibt ein Problem mit der Verbindung zum Service.",
-			"EN" : "A connection problem to the service exists."
+			"EN" : "There has been connection problem."
 		},
 		"common.error.footer" : {
 			"DE" : "Falls dieser Fehler weiterhin besteht, konktaktieren sie <a href='mailto:support@cloobster.com'>support@cloobster.com</a>.",
@@ -1515,11 +1515,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"common.sending" : {
 			"DE" :  "Sende...",
-			"EN" : "Sending..."
+			"EN" :  "Sending..."
 		},
 		"common.send" : {
 			"DE" :  "Sende",
-			"EN" : "Send"
+			"EN" :  "Send"
 		}
 	};
 
