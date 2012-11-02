@@ -1393,18 +1393,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},	
 		"fileupload.image.label" : {
 			"DE" : "Ausgewähltes Bild: ",
-			"EN" : "Seelcted image: "
+			"EN" : "Selected image: "
 		},
 		"fileupload.button.submit.saving" : {
 			"DE" : "Speichere ...",
 			"EN" : "Save..."
 		},
 		"fileupload.image.description" : {
-			"DE" : "Wählen Sie eine Bilddatei zum hochladen. Überprüfen sie, dass sie nicht größer als 3Mb ist und vom Typ GIF, PNG oder JPEG.",
+			"DE" : "Wählen sie eine Bilddatei zum hochladen. Überprüfen sie, dass sie nicht größer als 3Mb ist und vom Typ GIF, PNG oder JPEG.",
 			"EN" : "Choose a image file to upload. Check that it is not larger than 3Mb and the format is GIF, PNG or JPEG."
 		},
 		"fileupload.submit.error" : {
-			"DE" : "Beim Hochladen ist ein Fehler aufgetreten. Überprüfen sie, dass die Datei nicht größer als 3 Mb ist und im GIF, PNG oder JPEG Format vorliegt.",
+			"DE" : "Beim Hochladen ist ein Fehler aufgetreten. Überprüfen sie, dass die Datei nicht größer als 3 Mb ist und vom Typ GIF, PNG oder JPEG.",
 			"EN" : "An error occurred during upload. Please check, that the file is smaller than 3 Mb and the format is GIF, PNG or JPEG."
 		},
 		"fileupload.crop.error" : {
