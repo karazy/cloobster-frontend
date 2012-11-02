@@ -419,13 +419,12 @@ Cloobster.services.factory('Company',['cloobsterResource','login','errorHandler'
 			getActiveCompany: function(refresh) {
 				var companyId = loginService.getAccount()['companyId'];
 				if(companyId) {
-					if(!activeCompany || (refresh === true)) {
+					if(!activeCompany || (refresh === true) || activeCompany['id'] != companyId) {
 						createResource();
 						activeCompany = companyResource.get({'id':companyId}, angular.noop, handleError);
 					}
-					else {
-						return activeCompany;
-					}
+					
+					return activeCompany;
 				}
 				else {
 					return {};
