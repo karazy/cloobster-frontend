@@ -74,7 +74,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		//registration partial
 		"registration.title" : {
-			"DE" : "Cloobster Registration",
+			"DE" : "Cloobster Registrierung",
 			"EN" : "Cloobster Registration"
 		},
 		"registration.form.fullname" : {
@@ -82,7 +82,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Name*"
 		},
 		"registration.form.fullname.error.required" : {
-			"DE" : "Teile uns deinen Namen mit.",
+			"DE" : "Bitte teilen Sie uns ihren Namen mit.",
 			"EN" : "Tell us your Name."
 		},
 		"registration.form.fullname.error.minlength" : {
@@ -94,11 +94,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Username*"
 		},
 		"registration.form.login.error.required" : {
-			"DE" : "Such dir einen Benutzernamen aus.",
+			"DE" : "Suchen Sie sich bitte einen Benutzernamen aus.",
 			"EN" : "Choose a username."
 		},
 		"registration.form.login.error.pattern" : {
-			"DE" : 'Dein Benutzername muss zwischen 4-30 Zeichen lang sein. Es sind nur Kleinbuchstanen und "_" "-" "." erlaubt.',
+			"DE" : 'Ihr Benutzername muss zwischen 4-30 Zeichen lang sein. Es sind nur Kleinbuchstanen und "_" "-" "." erlaubt.',
 			"EN" : 'Your username must consist of 4-30 characters. Only lowercase and "_" "-" "." are permittet.'
 		},
 		"registration.form.email" : {
@@ -106,11 +106,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Email*"
 		},
 		"registration.form.email.error.required" : {
-			"DE" : "Bitte gib deine E-Mail ein",
+			"DE" : "Bitte geben Sie Ihre E-Mail an.",
 			"EN" : "Please enter your email."
 		},
 		"registration.form.email.error.email" : {
-			"DE" : "Keine gültige E-Mail",
+			"DE" : "Keine gültige E-Mail.",
 			"EN" : "No valid email."
 		},
 		"registration.form.emailrepeat" : {
@@ -126,7 +126,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Password*"
 		},
 		"registration.form.password.error.required" : {
-			"DE" : "Bitte gib ein Passwort ein.",
+			"DE" : "Bitte wählen Sie ein Passwort.",
 			"EN" : "Please enter a password."
 		},
 		"registration.form.password.error.pattern" : {
@@ -146,7 +146,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Phone*"
 		},
 		"registration.form.phone.error.required" : {
-			"DE" : "Bitte gib eine Telefonnummer für Rückfragen an.",
+			"DE" : "Bitte geben Sie eine Telefonnummer für Rückfragen an.",
 			"EN" : "Please enter a phone number, where we can call you back."
 		},
 		"registration.form.company" : {
@@ -155,15 +155,15 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 
 		"registration.form.company.error.required" : {
-			"DE" : "Bitte gib deine Firma an.",
+			"DE" : "Bitte geben Sie den Namen Ihrer Firma an.",
 			"EN" : "Please enter your company's name."
 		},
 		"registration.form.address" : {
-			"DE" : "Adresse",
-			"EN" : "Address"
+			"DE" : "Straße",
+			"EN" : "Street"
 		},
 		"registration.form.address.error.required" : {
-			"DE" : "Bitte gib deine Adresse an.",
+			"DE" : "Bitte geben Sie Ihre Adresse an.",
 			"EN" : "Please enter your address."
 		},
 		"registration.form.city" : {
@@ -171,7 +171,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "City"
 		},
 		"registration.form.city.error.required" : {
-			"DE" : "Bitte gib deine Stadt an.",
+			"DE" : "Bitte geben Sie Ihre Stadt an.",
 			"EN" : "Please enter your city."
 		},
 		"registration.form.postcode" : {
@@ -179,7 +179,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Zipcode"
 		},
 		"registration.form.postcode.error.required" : {
-			"DE" : "Bitte gib deine Postleitzahl an.",
+			"DE" : "Bitte geben Sie Ihre Postleitzahl an.",
 			"EN" : "Please enter your zipcode."
 		},
 		"registration.form.businessphone" : {
@@ -191,56 +191,56 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Country"
 		},
 		"registration.form.country.error.required" : {
-			"DE" : "Bitte gib dein Land an an.",
+			"DE" : "Bitte geben Sie Ihr Land an.",
 			"EN" : "Please enter your country."
 		},
 		"registration.form.fullname.placeholder" : {
-			"DE" : "Mein Name",
-			"EN" : "My name"
+			"DE" : "z. B. Max Mustermann",
+			"EN" : "e.g. John Doe"
 		},
 		"registration.form.login.placeholder" : {
-			"DE" : "Mein Benutzername",
-			"EN" : "My username"
+			"DE" : "z. B. mustermann63",
+			"EN" : "e.g. jdoe63"
 		},
 		"registration.form.email.placeholder" : {
-			"DE" : "Meine E-Mail",
-			"EN" : "My email"
+			"DE" : "z. B. mustermann@gmail.com",
+			"EN" : "e.g. johndoe@gmail.com"
 		},
 		"registration.form.emailrepeat.placeholder" : {
 			"DE" : "E-Mail wiederholen",
 			"EN" : "repeat email"
 		},
 		"registration.form.password.placeholder" : {
-			"DE" : "Mein Passwort",
-			"EN" : "my password"
+			"DE" : "Passwort",
+			"EN" : "Password"
 		},
 		"registration.form.passwordrepeat.placeholder" : {
 			"DE" : "Passwort wiederholen",
 			"EN" : "repeat password"
 		},
 		"registration.form.phone.placeholder" : {
-			"DE" : "Meine Telefonnummer",
-			"EN" : "my phone"
+			"DE" : "z. B. 0049-170-4153172",
+			"EN" : "e.g. 0049-170-4153172"
 		},
 		"registration.form.company.placeholder" : {
-			"DE" : "Meine Firma",
-			"EN" : "my company"
+			"DE" : "z. B. ACME Hotel",
+			"EN" : "e.g. ACME Hotel"
 		},
 		"registration.form.address.placeholder" : {
-			"DE" : "Meine Adresse",
-			"EN" : "my address"
+			"DE" : "z. B. Bahnhofstraße 3",
+			"EN" : "e.g. Mainstreet 3"
 		},
 		"registration.form.city.placeholder" : {
-			"DE" : "Mein Firmensitz",
-			"EN" : "my head office"
+			"DE" : "z. B. Frankfurt",
+			"EN" : "e.g. London"
 		},
 		"registration.form.postcode.placeholder" : {
-			"DE" : "Meine Postleitzahl",
-			"EN" : "my zipcode"
+			"DE" : "z. B. 60311",
+			"EN" : "e.g. W11"
 		},
 		"registration.form.businessphone.placeholder" : {
-			"DE" : "(optional) Meine Firmen Telefonnummer",
-			"EN" : "(optional) my business phone"
+			"DE" : "z. B. 0049-170-4153172",
+			"EN" : "e.g. 0049-170-4153172"
 		},
 		"registration.action.fblogin" : {
 			"DE" : "Mit Facebook einloggen und Cloobster verknüpfen.",
@@ -267,8 +267,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "I hereby accept the Terms Of Service and Privacy Policy "
 		},
 		"registration.form.accept-terms.error.required" : {
-			"DE" : "Akzeptiere die AGB und Datenschutzbestimmung um fortzufahren.",
-			"EN" : "Accept the Terms Of Service and Privacy Policy to continue."
+			"DE" : "Bitte akzeptieren Sie die AGB und Datenschutzbestimmung um fortzufahren.",
+			"EN" : "Please accept the Terms Of Service and Privacy Policy to continue."
 		},
 		"registration.form.action.register.tooltip" : {
 			"DE" : "Für die Registrierung bitte alle Pflichtfelder ausfüllen.",
@@ -291,6 +291,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"registration.confirmemail.message" : {
 			"DE" : "Vielen dank, die E-Mail Adresse wurde bestätigt und das Konto kann ab sofort genutzt werden.",
 			"EN" : "Thank you, the e-mail address was confirmed and the account can be used immediately."
+		},
+		"registration.form.requiredfield" : {
+			"DE" :  "* kennzeichnet Pflichtfelder",
+			"EN" : "* marks required fields"
+		},
+		"registration.success.title" : {
+			"DE" :  "Cloobster Registrierung Erfolgreich!",
+			"EN" : "Cloobster Registration Successful!"
 		},
 		//businesses partial
 		"businesses.title" : {
