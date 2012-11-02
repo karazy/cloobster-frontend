@@ -1,0 +1,275 @@
+<div ng-include="'partials/businesses_header.html'">
+</div>
+<!-- <div class="page-header">
+	<h1 l="accounts.title">Account Management</h1>
+</div>
+ -->
+<div class="row-fluid">
+	<div class="span12">
+		<p l="accounts.description">
+			Here you can manage accounts for your company.<br>
+			For each created account you can assign the businesses the account has access two.
+		</p>
+	</div>
+</div>
+	<div class="tabbable tabs-left">
+	<!-- <div class="span12"> -->
+		<ul class="nav nav-tabs">
+			<li ng-class="{active: tab =='admin'}" show-role="companyowner">
+				<a ng-click="showAdminTab()" l="accounts.tab.admin">Admin</a>
+			</li>
+			<li ng-class="{active: tab=='cockpit'}">
+				<a ng-click="showCockpitTab()" l="accounts.tab.cockpit">Service</a>
+			</li>
+		</ul>
+		<div class="tab-content">
+			<!-- Tab for admin accounts. -->
+			<div class="row-fluid">
+	<div ng-show="tab == 'admin'" show-role="companyowner">
+		<div class="data-container-with-title span2">
+			<h4 class="data-container-title" l="accounts.list.title">Users</h4>
+			<div class="data-container-block data-container-seperator">				
+				<div class="row-fluid">
+					<button type="button" class="btn btn-primary span6" ng-click="createAdminAccount()">
+						<i class="icon-plus icon-white"></i> <span l="common.new">New</span></button>
+				</div>
+			</div>
+			<ul class="nav data-container-block data-container-large data-container-scrollable nav-pills nav-stacked">
+			<!-- 	<li>
+					<a ng-click="createAdminAccount()"><i class="icon-plus icon-black"></i> <span l="accounts.list.new">New account...</span></a>
+				</li> -->
+		        <li ng-repeat="account in admins | orderBy:['name'] " ng-class="{active: currentAdmin.id == account.id}">	        	
+		        	<a ng-click="loadAdminAccount(account)">{{account.name}}</a>
+		        </li>
+		    </ul>
+		</div>
+		<!-- Account details -->
+		<!-- New Admin Account -->
+		<div class="data-container-with-title span4 form-vertical" ng-show="currentAdmin && !currentAdmin.id">
+			<h4 class="data-container-title"><i class="icon-user icon-black"></i> <span l="accounts.admin.new.title">New Admin Account</span></h4>
+			<div class="data-container-block">			
+				<div class="control-group">
+					<div class="controls">
+						<div class="input-append">
+		                	<input type="email" ng-model="currentAdmin.email" id="adminEmail" placeholder="users mail" l="accounts.admin.new.email.placeholder" l-attribute="placeholder"/>
+		                	<button class="btn" type="button" ng-click="checkAdminAccountEmail()" l="accounts.admin.mail.check" ng-disabled="!currentAdmin.email">Check email</button>
+		                	<!-- <input class="span2" id="prependedInput" size="16" type="text"> -->
+		              	</div>
+	              	</div>
+	            </div>
+	            <!-- Messages after email check -->
+	            <div class="alert" ng-show="adminInvalid">
+	  				<strong l="common.warning.title">Warning!</strong> <span l="accounts.admin.exists.company">This account is assigned to another company.</span>
+				</div>
+
+				<div class="alert alert-info" ng-show="adminExists">
+	  				<strong l="common.hint.title">Hint!</strong> <span l="accounts.admin.exists.user">This account exists. To you want grant it admin privileges for your company?</span>
+				</div>
+
+				<div class="alert alert-success" ng-show="adminAssigned">
+	  				<strong l="common.hint.title">Hint!</strong> <span l="accounts.admin.exists.assigned">This account is already assigned to your company.</span>
+				</div>
+					<!-- <span for="adminEmail" l="accounts.admin.email">Email: </span> -->
+					
+				<div ng-show="emailValid">
+					<input type="text" ng-disabled="adminExists" id="adminName" ng-model="currentAdmin.name" placeholder="forename and surename" l="accounts.admin.new.name.placeholder" l-attribute="placeholder"/>
+				</div>
+		    	<div class="row-fluid" ng-show="emailValid">
+		    		<button class="btn btn-primary span4" ng-click="saveAdminAccount()" ng-disabled="!currentAdmin.name"><i class="icon-ok icon-white"></i> <span l="accounts.create">Create</span></button>
+		    	</div>						
+	    	</div>
+		</div>
+		<!-- Existing Admin Account -->
+		<div class="span4">
+			<div class="data-container-with-title" ng-show="currentAdmin.id">
+				<h4 class="data-container-title"><i class="icon-user icon-black"></i> {{currentAdmin.name}}</h4>
+				<div class="data-container-block">
+					<p><i class="icon-envelope icon-black"></i> {{currentAdmin.email}}</p>
+					<div class="row-fluid">
+						<button type="submit" class="btn btn-danger span4" data-toggle="modal" data-target="#modalAdminDelete" ><i class="icon-trash icon-black"></i> <span l="common.remove">Remove</span></button>
+					</div>
+					<!-- Remove dialog admin user -->
+		    		<div class="modal hide" id="modalAdminDelete">
+					 	<div class="modal-header">
+					    	<button type="button" class="close" data-dismiss="modal">×</button>
+					    	<h3 l="accounts.admin.dialog.remove.title">Remove admin user</h3>
+						</div>
+						<div class="modal-body alert-error">
+					    	<p><span l="accounts.admin.dialog.remove.text">{{currentAdmin.name}} will be removed!</span></p>
+					    </div>  
+					  	<div class="modal-footer">
+					  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
+					    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteAdminAccount(currentAdmin)" l="common.remove">Remove</button>
+						</div>
+					</div>		
+				</div>			
+			</div>
+		<!-- List of assigned businesses. -->
+			<div class="data-container-with-title" ng-show="currentAdmin.id">
+		    	<h4 class="data-container-title" l="accounts.admin.businesses.list.title">Assigned businesses</h4>
+		    	<div class="data-container-block" l="accounts.admin.businesses.list.description">User has admin privileges for here listed businesses. This includes cockpit panel access.</div>
+		    	<ul class="nav nav-pills nav-stacked organizable-list data-container-block data-container-scrollable data-container-small" id="assignedBusinessesList">
+			      	 	<li ng-repeat="business in allBusinesses | filter:filterNotAssignedBusinesses | orderBy:'name'">
+			        	<a><i class="icon-move icon-black" tooltip="accounts.businesses.moveable.tooltip"></i> {{business.name}}</a>
+			        </li>
+	    		</ul>
+		    </div>
+		</div>
+		<!-- Holds the list of businesses assigned to this company. For easy drag&drop assignement to selected admin account. -->
+		<div class="data-container-with-title span4" ng-show="currentAdmin.id">
+			<h4 class="data-container-title" l="accounts.all.businesses.list.title">Available businesses</h4>
+				<div class="data-container-block" l="accounts.all.businesses.list.description">Drag & Drop to the list of assigned businesses for which the user shall have access.</div>
+				<ul class="nav nav-pills nav-stacked organizable-list data-container-block data-container-small data-container-scrollable" id="allBusinessesList">
+		       	 	<li ng-repeat="business in allBusinesses | filter:filterAssignedBusinesses | orderBy:'name'">
+			        	<a><i class="icon-move icon-black" tooltip="accounts.businesses.moveable.tooltip"></i> {{business.name}}</a>
+			        </li>
+	    		</ul>
+		</div>
+	</div>
+	<!-- Tab for cockpit accounts. -->
+	<div ng-show="tab == 'cockpit'">
+		<div class="data-container-with-title span2">
+			<h4 class="data-container-title" l="accounts.list.title">Users</h4>
+			<div class="data-container-block data-container-seperator">
+				<div class="row-fluid">
+					<button type="button" class="btn btn-primary span6" ng-click="createCockpitAccount()">
+						<i class="icon-plus icon-white"></i> <span l="common.new">New</span></button>
+				</div>
+			</div>
+			<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable">
+				<!-- <li>
+					<a ng-click="createCockpitAccount()"><i class="icon-plus icon-black"></i> <span l="accounts.list.new">New user account...</span></a>
+				</li> -->
+		        <li ng-repeat="account in users | orderBy:['login'] " ng-class="{active: currentUser.id == account.id}">	        	
+		        	<a ng-click="loadCockpitAccount(account)">{{account.login}}</a>
+		        </li>
+		    </ul>
+		</div>
+		<div class="span4" ng-show="currentUser.id">
+			<div class="data-container-with-title">
+				<h4 class="data-container-title"><i class="icon-user icon-black"></i> <span l="accounts.cockpit.edit.title">Edit Service Account</span></h4>
+				<div class="data-container-block">				
+					<form name="editUserForm" class="form-vertical" ng-submit="saveCockpitAccount()">
+						<label for="userName" l="accounts.name">Name: </label>
+						<input type="text" id="userName" ng-model="currentUser.name"/>
+			        	<div class="control-group" ng-class="getFieldInputClass(editUserForm.login.$dirty, editUserForm.login.$invalid)">
+				        	<label for="userLogin" class="control-label" l="registration.form.login">Login *:</label>
+				        	<div class="controls">
+								<input name="login" id="userLogin" type="text" ng-model="currentUser.login" required ng-pattern="/^[a-z0-9_\.-]{4,30}$/" placeholder="login name" >
+								<div class="help-inline" ng-show="editUserForm.login.$dirty && editUserForm.login.$invalid">
+					          		<span ng-show="editUserForm.login.$error.required" l="registration.form.login.error.required">Provide a username.</span>
+					          		<span ng-show="editUserForm.login.$error.pattern" l="registration.form.login.error.pattern">4 - 30 characters. Only lower case, digits, "_" "-" "." are allowed.</span>
+					        	</div>
+							</div>
+						</div>
+						<div class="control-group" ng-class="getFieldInputClass(editUserForm.password.$dirty, editUserForm.password.$invalid)">
+							<label for="password" class="control-label" l="registration.form.password">Password:</label>
+							<div class="controls">
+								<input name="password" type="password" ng-model="currentUser.password" ng-pattern="/^(?=[!-~]{6,}$)(?=.*([^A-Za-z0-9]|\d))(?=.*[a-zA-Z]).*$/" ng-change="matchPasswords(editUserForm)" placeholder="your password" l-attribute="placeholder" l="registration.form.password.placeholder">
+								<div class="help-inline" ng-show="editUserForm.password.$dirty && editUserForm.password.$invalid">
+					          		<span ng-show="editUserForm.password.$error.pattern" l="registration.form.password.error.pattern">Min. 6 characters. Must contain a letter and a number or one special character.</span>
+					        	</div>
+							</div>
+						</div>
+						<div class="control-group" ng-class="getFieldInputClass(editUserForm.passwordRepeat.$dirty, editUserForm.passwordRepeat.$invalid)">
+							<label class="control-label" for="passwordRepeat" l="registration.form.passwordrepeat">Repeat password *:</label>
+							<div class="controls">
+								<input name='passwordRepeat' type='password' ng-model="passwordRepeat" ng-change="matchPasswords(editUserForm)" placeholder="repeat your password" l-attribute="placeholder" l="registration.form.passwordrepeat.placeholder">
+								<div class="help-inline" ng-show="editUserForm.passwordRepeat.$invalid">
+					          		<span ng-show="editUserForm.passwordRepeat.$error.match" l="registration.form.passwordrepeat.error.match">Passwords don't match.</span>
+				        		</div>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<button class="btn span4" ng-click="currentUser=null;"><i class="icon-ban-circle icon-black"></i> <span l="common.cancel">Cancel</span></button>
+							<button type="submit" class="btn btn-primary span4" ng-disabled="editUserForm.$invalid"><i class="icon-ok icon-white"></i> <span l="common.save">Save</span></button>
+							<button type="submit" class="btn btn-danger span4" data-toggle="modal" data-target="#modalCockpitDelete" ><i class="icon-trash icon-black"></i></button>
+						</div>
+						<!-- Delete dialog cockpit user -->
+			    		<div class="modal hide" id="modalCockpitDelete">
+						 	<div class="modal-header">
+						    	<button type="button" class="close" data-dismiss="modal">×</button>
+						    	<h3 l="accounts.cockpit.dialog.delete.title">Delete service user</h3>
+							</div>
+							<div class="modal-body alert-error">
+						    	<p><span l="accounts.cockpit.dialog.delete.text">{{currentUser.login}} will be deleted!</span></p>
+						    </div>  
+						  	<div class="modal-footer">
+						  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
+						    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteCockpitAccount(currentUser)" l="common.delete">Delete</button>
+							</div>
+						</div>
+					</form>
+				</div>				
+			</div>
+			<!-- List of assigned businesses. -->
+			<div class="data-container-with-title" ng-show="currentUser.id">
+		    	<h4 class="data-container-title" l="accounts.admin.businesses.list.title">Assigned businesses</h4>
+		    	<div class="data-container-block" l="accounts.cockpit.businesses.list.description">User has service panel privileges for the here listed businesses.</div>
+		    	<ul class="nav nav-pills nav-stacked organizable-list data-container-block data-container-small data-container-scrollable" id="assignedCockpitBusinessesList">
+			      	 	<li ng-repeat="business in allBusinesses | filter:filterNotAssignedCockpitBusinesses | orderBy:'name'">
+			        	<a><i class="icon-move icon-black" tooltip="accounts.businesses.moveable.tooltip"></i> {{business.name}}</a>
+			        </li>
+	    		</ul>
+		    </div>
+		</div>
+		<div class="data-container-with-title span4" ng-show="currentUser && !currentUser.id">
+			<h4 class="data-container-title"><i class="icon-user icon-black"></i> <span l="accounts.cockpit.new.title">New Service Account</span></h4>
+			<div class="data-container-block">				
+				<form name="userForm" class="form-vertical" ng-submit="saveCockpitAccount()">
+					<label for="newUserName" l="accounts.name">Name: </label>
+					<input type="text" id="newUserName" ng-model="currentUser.name"/>
+		        	<div class="control-group" ng-class="getFieldInputClass(userForm.login.$dirty, userForm.login.$invalid)">
+			        	<label for="newUserLogin" class="control-label" l="registration.form.login">Login *:</label>
+			        	<div class="controls">
+							<input name="login" id="newUserLogin" type="text" ng-model="currentUser.login" required ng-pattern="/^[a-z0-9_\.-]{4,30}$/" placeholder="login name" >
+							<div class="help-inline" ng-show="userForm.login.$dirty && userForm.login.$invalid">
+				          		<span ng-show="userForm.login.$error.required" l="registration.form.login.error.required">Provide a username.</span>
+				          		<span ng-show="userForm.login.$error.pattern" l="registration.form.login.error.pattern">4 - 30 characters. Only lower case, digits, "_" "-" "." are allowed.</span>
+				        	</div>
+						</div>
+					</div>
+					<div class="control-group" ng-class="getFieldInputClass(userForm.password.$dirty, userForm.password.$invalid)">
+						<label for="newPassword" class="control-label" l="registration.form.password">Password *:</label>
+						<div class="controls">
+							<input id="newPassword" name="password" type="password" ng-model="currentUser.password" required ng-pattern="/^(?=[!-~]{6,}$)(?=.*([^A-Za-z0-9]|\d))(?=.*[a-zA-Z]).*$/" ng-change="matchPasswords(userForm)" placeholder="your password" l-attribute="placeholder" l="registration.form.password.placeholder">
+							<div class="help-inline" ng-show="userForm.password.$dirty && userForm.password.$invalid">
+				          		<span ng-show="userForm.password.$error.required" l="registration.form.password.error.required">Provide a password.</span>
+				          		<span ng-show="userForm.password.$error.pattern" l="registration.form.password.error.pattern">Min. 6 characters. Must contain a letter and a number or one special character.</span>
+				        	</div>
+						</div>
+					</div>
+					<div class="control-group" ng-class="{error: userForm.passwordRepeat.$invalid, success: !userForm.passwordRepeat.$invalid && userForm.passwordRepeat.$dirty }">
+						<label class="control-label" for="newPasswordRepeat" l="registration.form.passwordrepeat">Repeat password *:</label>
+						<div class="controls">
+							<input id="newPasswordRepeat" name='passwordRepeat' type='password' ng-model="passwordRepeat" ng-change="matchPasswords(userForm)" placeholder="repeat your password" l-attribute="placeholder" l="registration.form.passwordrepeat.placeholder">
+							<div class="help-inline">
+				          		<span ng-show="userForm.passwordRepeat.$error.match" l="registration.form.passwordrepeat.error.match">Passwords don't match.</span>
+			        		</div>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<button type="submit" class="btn btn-primary span4" ng-disabled="userForm.$invalid"><i class="icon-ok icon-white"></i> <span l="accounts.create">Create</span></button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- Holds the list of businesses assigned to this company. For easy drag&drop assignement to selected cockpit account. -->
+		<div class="data-container-with-title span4" ng-show="currentUser.id">
+			<h4 class="data-container-title" l="accounts.all.businesses.list.title">Available businesses</h4>
+			<div class="data-container-block">				
+				<div class="data-container-block" l="accounts.all.businesses.list.description">Drag & Drop to the list of assigned businesses for which the user shall have access.</div>
+				<ul class="nav nav-pills nav-stacked organizable-list data-container-block data-container-small data-container-scrollable" id="allCockpitBusinessesList">
+		       	 	<li ng-repeat="business in allBusinesses | filter:filterAssignedCockpitBusinesses | orderBy:'name'">
+			        	<a><i class="icon-move icon-black" tooltip="accounts.businesses.moveable.tooltip"></i> {{business.name}}</a>
+			        </li>
+	    		</ul>
+    		</div>
+		</div>
+	</div>
+	</div>
+
+		</div>
+	</div>
+	
+

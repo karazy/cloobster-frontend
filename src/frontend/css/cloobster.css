@@ -1,0 +1,362 @@
+/* cloobster css stylesheet */
+
+/* helber style for ng-cloak directive to hide elements until after angular is completely loaded*/
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none;
+}
+
+.partial-wrapper {
+  margin: 0 0 1em 0;
+}
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+/* Profile view */
+.content-wrapper {
+  position: relative;
+}
+
+.noLogo {
+  background-color: gray;
+}
+
+.noLogo div {
+  font-size: 1.5em;
+  text-align: center;
+  top: 45%;
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  text-align: right;
+  top: -48px;
+  right: 10px;
+}
+
+.data-section {
+
+}
+
+.data-section-seperator {
+  border-top: 2px solid #C3C3C3;
+}
+
+.data-element {
+  color: 
+  #333;
+  font: normal 13px arial,sans-serif;
+  margin: 0;
+  padding: 10px 0;
+  text-align: left;
+}
+
+.data-element.edit:hover, .edit:hover {
+    background-color: lightblue;
+}
+
+h1.edit:hover, h2.edit:hover {
+    background-color: lightblue;
+}
+
+.data-element .key {
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 1.2em;
+  margin-bottom: 0;
+  text-align: right;
+  vertical-align: top;
+  width: 130px;
+  float: left;
+}
+
+.data-element div.value {
+  padding: 0 0 0 13px;
+  vertical-align: top;
+  line-height: 1.39em;
+  display: inline-block;
+}
+
+.data-element select.value {
+  position: relative;;
+  left: 13px;
+}
+
+.imagebox {
+  position: relative;
+  border: lightgray 1px solid;
+  border-radius: 0.5em;
+  margin: 1em 0 1em 0;
+  padding: 0.5em;
+}
+
+.edit-property-form {
+  margin: 0;
+}
+
+.upload-image-form {
+  margin: 0;
+}
+
+.upload-image-placeholder {
+  width: 128px;
+  height: 128px;
+  background-color: gray;
+}
+
+.upload-image {
+  width:128px; 
+  height:128px; 
+  margin-left: 10px;
+}
+
+ul.payment-method-list {
+  list-style: none;
+}
+
+ul.payment-method-list li {
+  margin: 0.3em 0;
+}
+
+
+.menus-wrapper {
+  
+}
+
+.menus-list {
+  margin-left: 1em;
+  /*float: left;*/
+} 
+
+.menu-wrapper {
+  
+}
+
+.menu-detail {
+  padding: 0.5em;
+  border: 1px solid gray;
+  border-radius: 0.5em;
+}
+
+.menu-products-list { 
+  border: 1px solid gray; 
+  border-radius: 0.5em;
+  padding: 0.5em;
+  margin: 1.5em 0;
+}
+
+.data-container-with-title { 
+  border: 1px solid gray; 
+  border-radius: 0.5em;
+  margin: 15px 0 0 0;
+  position: relative;
+  padding-top: 15px;
+}
+
+.data-container-500 {
+  height: 500px;
+}
+
+.data-container-large {
+  height: 400px;
+}
+
+.data-container-small {
+  height: 200px;
+}
+
+.data-container-tiny {
+  height: 100px;
+}
+
+
+.data-container-title {
+  display: inline-block;
+  top: -20px;
+  left: 10px;
+  position: absolute;
+  background-color: white;
+  padding: 0 5px 0 5px;
+  /*margin-bottom: 10px;*/
+}
+
+.data-container-block {
+  padding: 0.5em; 
+}
+
+.data-container-scrollable {
+  overflow: auto;
+}
+
+.data-container-seperator {
+  border-bottom: 1px solid gray;
+}
+
+.data-container-inactive {
+  color: gray;
+  border-color: #C3C3C3 !important;
+}
+
+.product-wrapper {
+  border: 1px solid gray;
+  border-radius: 0.5em;  
+}
+
+.product-detail {
+  padding: 0.5em; 
+}
+
+.product-choices-list {
+  border-top: 1px solid gray; 
+  padding: 0.5em;
+  margin: 0.5em 0;
+}
+
+.product-choice-item {
+  margin: 0 0 0.3em 0;
+}
+
+.choice-wrapper {
+  border: 1px solid gray;
+  border-radius: 0.5em;  
+}
+
+.choice-detail {
+  padding: 0.5em; 
+}
+
+.choice-options-list {
+  border-top: 1px solid gray; 
+  padding: 0.5em;
+  margin: 0.5em 0;
+}
+
+.activation-checkbox input {
+  float: left;
+  margin-right: 0.5em
+}
+
+ul.options-list {
+  list-style: none;
+}
+
+ul.options-list li {
+  margin: 0.3em 0;
+}
+
+ul.options-list li:hover {
+  border-radius: 5px;
+  background-color: #eeeeee;
+}
+
+.spots-wrapper {
+
+}
+
+.spots-list {
+  margin-left: 1em;
+  /*float: left;*/
+} 
+
+.spot-wrapper {
+  border: 1px solid gray;
+  border-radius: 0.5em;  
+}
+
+.spot-detail {
+  padding: 0.5em;
+}
+
+.sortable-placeholder {
+  border: 1px dashed gray;
+}
+
+.organizable-list {
+  min-height: 50px;
+}
+
+.common-wrapper {
+  border: 1px solid silver;
+  /* Testing square edges */
+  border-radius: 0.5em; 
+}
+
+.common-detail {
+  padding: 0.5em;
+}
+
+.common-scrollable {
+  height: 400px; 
+  overflow: auto;
+}
+
+.common-wrapper-detail-list { 
+  border-top: 1px solid silver; 
+  padding: 0.5em;
+  margin: 0.5em 0;
+}
+
+.business-theme-preview {
+  width: 200px;
+  float: left;
+  min-height: 50px;
+  padding: 0.5em;
+  margin: 1em;
+}
+
+.business-theme-preview img {
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 0.3em 1em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 0.3em 1em;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 0.3em 1em;
+}
+
+.business-theme-preview p {
+  text-align: center;
+  margin: 0.3em 0;
+}
+
+.business-theme-preview.active {
+  border: 1px solid red;
+  border-radius: 0.5em;  
+}
+
+/* General classes */
+
+.loading-indicator {
+  height: 16px;
+  width: 16px;
+  background-image: url('../img/ajax-loader.gif');
+  background-size: auto;
+  background-repeat: no-repeat;
+  margin: 5px;
+  position: absolute;
+  right: 15px;
+}
+

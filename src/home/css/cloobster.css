@@ -1,0 +1,6 @@
+/* cloobster css stylesheet */
+
+/* helper style for ng-cloak directive to hide elements until after angular is completely loaded*/
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none;
+}

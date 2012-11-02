@@ -1,0 +1,115 @@
+<div ng-include="'partials/businesses_header.html'">
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<p l="businesses.description">You have more than one site you want to use cloobster with.<br/>
+		Here you can maintain the different locations you want to "cloobsterize".</p>
+	</div>
+</div>
+
+<div class="row-fluid" >
+	<div class="span4">
+		<h2 l="businesses.title">My Locations</h2>
+	</div>
+	<div class="span4" show-role="companyowner">
+		<button type="button" ng-hide="showNewBusinessForm" ng-click="toggleNewBusiness()" class="btn btn-primary pull-right" l="businesses.add">Add new restaurant</button>
+	</div>
+</div>
+
+<!-- Hint when no locations exist -->
+<div class="row-fluid" ng-show="!ajaxLoading && businesses.length == 0">
+	<div class="alert alert-block alert-info span8">
+	  <p l="businesses.empty.description">Currently you don't have any locations. To use cloobster, you need at least one location (hotel, restaurant).</p>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span8">
+		<table class="table table-bordered">
+			<tr ng-repeat="b in businesses">
+				<td ng-show="b.trash">{{b.name}} <i class="icon-trash icon-black" tooltip="busineses.business.deleted.tooltip" tooltip-position="right"></i></td>
+				<td ng-hide="b.trash"><strong>{{b.name}}</strong></td>
+				<td ng-hide="b.trash"><a href="#/businesses/{{b.id}}"><i class="icon-edit"/> <span l="businesses.action.show">Edit</span></a></td>
+				<td ng-hide="b.trash"><a href="#/businesses/{{b.id}}/spots" l="businesses.action.spots">Service areas</a></td>
+				<td ng-hide="b.trash"><a href="#/businesses/{{b.id}}/menus" l="businesses.action.menus">Menus</a></td>
+				<td ng-hide="b.trash"><a href="#/accounts" l="businesses.action.accounts">Accounts</a></td>
+				<td ng-hide="b.trash"><a href="../cockpit" target="_blank" >Cockpit</a></td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<div ng-show="showNewBusinessForm" class="row-fluid">
+	<div class="span8">
+		<form ng-submit="addNewBusiness()" name="newBusinessForm" class="well form-vertical" novalidate>
+			<div class="control-group" ng-class="getFieldInputClass(newBusinessForm.name.$dirty, newBusinessForm.name.$invalid)">
+			<label for="newBusinessName" class="control-label" l="businesses.form.name">Name*</label>
+			<div class="controls">
+				<input type="text" id="newBusinessName" name="name" ng-model="newBusiness.name" required></input>
+				<div class="help-inline" ng-show="newBusinessForm.$dirty && newBusinessForm.name.$dirty && newBusinessForm.name.$invalid">
+					<span ng-show="newBusinessForm.name.$error.required" l="businesses.form.error.required">Provide a name.</span>
+				</div>
+			</div>
+		</div>
+		<div class="control-group" ng-class="getFieldInputClass(newBusinessForm.description.$dirty, newBusinessForm.description.$invalid)">
+			<label for="newBusinessDesc" class="control-label" l="businesses.form.description">Description*</label>
+			<div class="controls">
+				<input type="text" id="newBusinessDesc" name="description" ng-model="newBusiness.description" required></input>
+					<div class="help-inline" ng-show="newBusinessForm.description.$dirty && newBusinessForm.description.$invalid">
+						<span ng-show="newBusinessForm.description.$error.required" l="businesses.form.error.required">Provide a description.</span>
+					</div>
+				</div>
+			</div>
+		<div class="control-group" ng-class="getFieldInputClass(newBusinessForm.address.$dirty, newBusinessForm.address.$invalid)">
+			<label for="newBusinessAddress" l="businesses.form.address">Address*</label>
+			<div class="controls">
+				<input type="text" id="newBusinessAddress" name="address" ng-model="newBusiness.address" required></input>
+				<div class="help-inline" ng-show="newBusinessForm.address.$dirty && newBusinessForm.address.$invalid">
+					<span ng-show="newBusinessForm.address.$error.required" l="businesses.form.error.required">Provide a address.</span>
+				</div>
+			</div>
+		</div>
+		<div class="control-group" ng-class="getFieldInputClass(newBusinessForm.city.$dirty, newBusinessForm.city.$invalid)">
+			<label for="newBusinessCity" class="control-label" l="businesses.form.city">City*</label>
+			<div class="controls">
+				<input type="text" id="newBusinessCity" name="city" ng-model="newBusiness.city" required></input>
+					<div class="help-inline" ng-show="newBusinessForm.city.$dirty && newBusinessForm.city.$invalid">
+						<span ng-show="newBusinessForm.city.$error.required" l="businesses.form.error.required">Provide a city.</span>
+					</div>
+			</div>
+		</div>
+			<div class="control-group" ng-class="getFieldInputClass(newBusinessForm.postcode.$dirty, newBusinessForm.postcode.$invalid)">
+			<label for="newBusinessPostcode" class="control-label" l="businesses.form.postcode">Postcode*</label>
+			<div class="controls">
+				<input type="text" id="newBusinessPostcode" name="postcode" ng-model="newBusiness.postcode" required></input>
+					<div class="help-inline" ng-show="newBusinessForm.postcode.$dirty && newBusinessForm.postcode.$invalid">
+						<span ng-show="newBusinessForm.postcode.$error.required" l="businesses.form.error.required">Provide a postcode.</span>
+					</div>
+			</div>
+		</div>
+		<div class="control-group" ng-class="getFieldInputClass(newBusinessForm.phone.$dirty, newBusinessForm.phone.$invalid)">
+			<label for="newBusinessPhone" class="control-label" l="businesses.form.phone">Phone</label>
+			<div class="controls">
+				<input type="text" id="newBusinessPhone" name="phone" ng-model="newBusiness.phone"></input>
+			</div>
+		</div>
+		<div>
+			<div class="control-group" ng-class="getFieldInputClass(newBusinessForm.currency.$dirty, newBusinessForm.currency.$invalid)">
+				<label for="newBusinessCurrency" l="businesses.form.currency">Currency*</label>
+				<div class="controls">
+					<select ng-model="newBusiness.currency" id="newBusinessCurrency" name="currency" required>
+						<option value="EUR">Euro</option>
+						<option value="USD">US Dollar</option>
+					</select>
+					<div class="help-inline" ng-show="newBusinessForm.currency.$dirty && newBusinessForm.currency.$invalid">
+						<span ng-show="newBusinessForm.currency.$error.required" l="businesses.form.error.required">Select a currency.</span>
+					</div>
+				</div>
+			</div>
+		</div>
+			<p l="businesses.form.mandatory">Fields marked with * are mandatory.</p>
+			<button type="button" ng-click="closeNewBusinessForm()" class="btn" l="common.cancel">Cancel</button>
+			<button id="addBusinessButton" type="submit" class="btn btn-primary" data-loading-text="Saving..." l="common.add">Add</button>
+		</form> 
+	</div>
+</div>

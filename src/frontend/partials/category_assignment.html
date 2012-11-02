@@ -1,0 +1,73 @@
+<div ng-include="'partials/businesses_header.html'">
+</div>
+<div class="partial-wrapper">
+	<div class="row-fluid">
+		<div class="span12">
+			<p l="activation.description">Here you can assign your categories to your service ares. E.g. you provide different services in "spa" then in a "restaurant".</p>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<!-- first column -->
+		<div class="span4">
+			<div class="data-container-with-title">
+				<h4 class="data-container-title" l="areas.list.title">Your service areas</h4>
+				<div class="data-container-block"></div>
+				<ul class="nav nav-pills nav-stacked data-container-block data-container-500 data-container-scrollable">
+			        <li ng-repeat="area in areas | orderBy:['name'] " ng-class="{active: currentArea.id == area.id}">	        	
+			        	<a ng-click="loadArea(area)">{{area.name}}</a>
+			        </li>
+			    </ul>
+			</div>
+		</div>
+		<!-- end first column -->
+		<div class="span8" ng-show="currentArea.id">
+			<div class="row-fluid ">
+				<div class="span6 data-container-with-title">
+			   		<!-- area menus -->
+			    	<div ng-show="currentArea.id">
+			    		<h4 class="data-container-title" l="areas.categories.list.title">Assigned categories</h4>
+			    		<div class="data-container-block data-container-tiny">
+			    			<p l="areas.categories.list.description">List of product categories (e. .g beverages) available to customers checked in in this service area.</p>
+			    		</div>
+			    		<ul class="nav nav-pills nav-stacked organizable-list data-container-block data-container-large data-container-scrollable" id="assignedMenusList">
+					        <li ng-repeat="category in currentAreaCategories"> <!-- filter:filterNotAssignedCockpitBusinesses -->
+					        	<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{category.title}}</a>
+				        	</li>
+			    		</ul>
+			    	</div>
+			   	</div>
+				<div class="span6 data-container-with-title">
+					<div>
+						<h4 class="data-container-title" l="areas.allcategories.list.title">All categories</h4>
+						<div class="data-container-block data-container-tiny">
+							<p l="areas.allcategories.list.description">Drag & Drop to assign category to current service area.</p>
+							<span l="common.search">Search</span>: <input ng-model="allMenusListSearch.title">
+						</div>
+						<ul class="nav nav-pills nav-stacked organizable-list data-container-block data-container-large data-container-scrollable" id="allMenusList">
+							<li ng-repeat="category in menus | filter:filterAssignedMenus | filter:allMenusListSearch | orderBy:['title']">
+								<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{category.title}}</a>
+							</li>
+						</ul>
+					</div>					
+			   	</div>			   	
+		   </div>
+		</div>
+		<!-- Empty placeholder  -->
+		<div class="span8" ng-hide="currentArea.id">			
+	    	<div class="data-container-with-title data-container-inactive span6">
+	    		<h4 class="data-container-title" l="areas.categories.list.title">Assigned categories</h4>
+	    		<div class="data-container-block"></div>
+	    		<div class="data-container-block data-container-500">
+	    			<p l="activation.assigned.container.empty.description">Shows the selected category details. Select a category from the list.</p>
+	    		</div>
+	    	</div>
+	    	<div class="data-container-with-title  data-container-inactive span6">
+	    		<h4 class="data-container-title" l="areas.allcategories.list.title">All categories</h4>
+	    		<div class="data-container-block"></div>
+	    		<div class="data-container-block data-container-500">
+	    			<p l="activation.all.container.empty.description">Shows the selected category details. Select a category from the list.</p>
+	    		</div>
+	    	</div>
+		</div>
+	</div>
+</div>

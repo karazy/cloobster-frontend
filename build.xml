@@ -1,56 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="CloobsterFrontend" default="build-production" basedir=".">
+<project name="CloobsterFrontend" default="build-all" basedir=".">
 	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask"
 	           classpath="tools/closure-compiler/compiler.jar"/>
+	<property name="frontenddir" value="frontend"/>
+	<property name="customerhomedir" value="home"/>
 	
-	<target name="build-production" depends="compile, copylibs, copyresources">
+	<target name="build-all" depends="build-frontend, build-customerhome">
 	</target>
-	<target name="compile">
-		
-	    <jscomp compilationLevel="simple" warning="verbose" debug="false" output="build/app-all.min.js">
-	    	<!-- 
-	    	<externs dir="${basedir}/src">
-	        <file name="extern.js"/>
-	      </externs>!-->
+	<target name="build-frontend" depends="compile-frontend, copylibs-frontend, copyresources-frontend, setversion">
+	</target>
+	<target name="build-customerhome" depends="compile-customerhome, copylibs-customerhome, copyresources-customerhome">
+	</target>
+	
+	<target name="clean-frontend">
+		<delete dir="build/${frontenddir}"></delete>	
+	</target>
+	<target name="clean-customerhome">
+		<delete dir="build/${customerhomedir}"></delete>
+	</target>
+	<target name="setversion">
+		<echo message="Setting version number" />
+		<exec executable="${git.cmd}" dir="${basedir}" outputproperty="build.commit" vmlauncher="${git.vmlauncher}">
+		    <arg value="describe"/>
+		    <arg value="--always"/>
+		</exec>
+		<echo message="Commit version: ${build.commit}" />
+		<replaceregexp file="${basedir}/build/${frontenddir}/partials/about.html" match="\{VERSIONINFO\}" replace="${build.commit}" byline="true">
+		</replaceregexp>
+	</target>
+	<target name="compile-frontend">
+	    <jscomp compilationLevel="simple" warning="verbose" debug="false" output="build/${frontenddir}/app-all.min.js">
 	    	<path id="sources">
-	    		<fileset dir="${basedir}/src/js/">
+	    		<fileset dir="${basedir}/src/${frontenddir}/js/">
 	    			<include name="**/*.js"/>
 	    		</fileset>
 	    	</path>
 	    	<externs dir="src" >
 	    		<file name="extern.js"/>	
 	    	</externs>
-	    		
 	    </jscomp>
 	  </target>
-	<target name="copylibs">
-		<copy todir="build/lib">
-			<filelist id="libfiles" dir="src/lib" >
+	<target name="compile-customerhome">
+	    <jscomp compilationLevel="simple" warning="verbose" debug="false" output="build/${customerhomedir}/app-all.min.js">
+	    	<path id="sources">
+	    		<fileset dir="${basedir}/src/${customerhomedir}/js/">
+	    			<include name="**/*.js"/>
+	    		</fileset>
+	    	</path>
+	    	<externs dir="src" >
+	    		<file name="extern.js"/>	
+	    	</externs>
+	    </jscomp>
+	  </target>
+
+	<target name="copylibs-customerhome">
+		<copy todir="build/${customerhomedir}/lib">
+			<filelist id="libfiles" dir="src/${customerhomedir}/lib" >
+				<file name="bootstrap/bootstrap.min.js" />
+				<file name="angular/angular-resource-1.0.1.min.js" />
+			</filelist>
+		</copy>
+	</target>
+	<target name="copylibs-frontend">
+		<copy todir="build/${frontenddir}/lib">
+			<filelist id="libfiles" dir="src/${frontenddir}/lib" >
 				<file name="jquery/jquery.ui.widget.js" />
 				<file name="jquery/jquery-ui-1.8.21.custom.min.js" />
 				<file name="jquery/jquery.iframe-transport.js" />
 				<file name="jquery/jquery.fileupload.js" />
 				<file name="jquery/jquery.fileupload-fp.js" />
 				<file name="jquery/jquery.fileupload-ui.js" />
+				<file name="jquery/jquery.imgareaselect.pack.js" />
+
 				<file name="bootstrap/bootstrap.min.js" />
 				<file name="angular/angular-resource-1.0.1.min.js" />
 			</filelist>
 		</copy>
 	</target>
-	<target name="copyresources">
-		<copy todir="build">
-			<fileset id="partialfiles" dir="src/" >
+	<target name="copyresources-customerhome">
+			<copy todir="build/${customerhomedir}">
+				<fileset id="indexfiles" dir="src/${customerhomedir}/" >
+					<include name="index.prod.html"/>
+				</fileset>
+				<fileset id="partialfiles" dir="src/${customerhomedir}/" >
+					<include name="partials/**/*"/>
+				</fileset>
+				<fileset id="imgfiles" dir="src/${customerhomedir}/" >
+					<include name="img/**/*"/>
+				</fileset>
+				<filelist id="cssfiles" dir="src/${customerhomedir}/">
+					<file name="css/bootstrap.min.css"/>
+					<file name="css/bootstrap-responsive.min.css"/>
+					<file name="css/cloobster.css"/>
+				</filelist>
+			</copy>
+			<move file="build/${customerhomedir}/index.prod.html" tofile="build/${customerhomedir}/index.html" />
+		</target>
+	<target name="copyresources-frontend">
+		<copy todir="build/${frontenddir}">
+			<fileset id="indexfiles" dir="src/${frontenddir}/" >
+				<include name="index.prod.html"/>
+			</fileset>
+			<fileset id="partialfiles" dir="src/${frontenddir}/" >
 				<include name="partials/**/*"/>
 			</fileset>
-			<fileset id="imgfiles" dir="src/" >
+			<fileset id="imgfiles" dir="src/${frontenddir}/" >
 				<include name="img/**/*"/>
 			</fileset>
-			<filelist id="cssfiles" dir="src/">
+			<filelist id="cssfiles" dir="src/${frontenddir}/">
 				<file name="css/bootstrap.min.css"/>
 				<file name="css/bootstrap-responsive.min.css"/>
 				<file name="css/cloobster.css"/>
 				<file name="css/jquery.fileupload-ui.css"/>
+				<file name="css/imgareaselect-default.css"/>
+				<file name="css/border-h.gif"/>
+				<file name="css/border-v.gif"/>
 			</filelist>
 		</copy>
+		<move file="build/${frontenddir}/index.prod.html" tofile="build/${frontenddir}/index.html" />
 	</target>
 </project>
