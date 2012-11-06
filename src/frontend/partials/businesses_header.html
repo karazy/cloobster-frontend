@@ -23,6 +23,9 @@
 			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/category_assignment',true), 'disabled': businesses.length==0}">
 				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/category_assignment','')}}" l="businesses.headertabs.activation">Activate categories</a>
 			</li>
+			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/infopages',true), 'disabled': businesses.length==0}">
+				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/infopages','')}}" l="businesses.headertabs.infopages">Infopages</a>
+			</li>
 			<li ng-class="{'active': isActive('/accounts',true)}">
 				<a href="#/accounts" l="businesses.headertabs.accounts">Accounts</a>
 			</li>

@@ -1,0 +1,37 @@
+<div ng-include="'partials/businesses_header.html'">
+</div>
+<div class="partial-wrapper">
+	<div class="row-fluid">
+		<div class="span12">
+			<p l="infopages.description">Here you can provide additional information for your customer like opening times, contact information etc.</p>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<!-- first column -->
+		<div class="span3">
+			<div class="data-container-with-title">
+				<h4 class="data-container-title" l="infopages.list.title">Infopages</h4>
+				<div class="data-container-block data-container-seperator">
+					<div class="row-fluid">
+	    				<button class="btn btn-primary span6" ng-click="createInfoPage()"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
+	    			</div>
+	    		</div>
+				<ul class="nav nav-pills nav-stacked data-container-block data-container-500 data-container-scrollable">
+			        <li ng-repeat="page in infopages | orderBy:['title'] " ng-class="{active: currentInfoPage.id == page.id}">	        	
+			        	<a ng-click="loadInfoPage(page)">{{page.title}}</a>
+			        </li>
+			    </ul>
+			</div>
+		</div>
+		<!-- end first column -->
+
+		<div class="span6" ng-hide="currentInfoPage">
+			<div class="data-container-with-title data-container-small data-container-inactive">
+				<h4 class="data-container-title" l="infopages.title">Infopage</h4>
+				<div class="data-container-block">
+					<p l="infogapes.empty.description">Here you can edit your selected info page. Please select a page from the list on the left.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

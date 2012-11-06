@@ -602,6 +602,44 @@ Cloobster.services.factory('CompanyAccount', ['cloobsterResource', function($res
 	return CompanyAccount;
 }]);
 
+
+/** 
+* 	@constructor
+* 	Factory function that creates the 'InfoPage' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Frederik Reifschneider
+*/
+Cloobster.services.factory('InfoPage',['cloobsterResource', function(cloobsterResource) {
+	/**
+	*	@name Cloobster.services.InfoPage
+	*	
+	*/
+	var InfoPage = cloobsterResource('/b/businesses/:bid/infopages/:id',
+			//params
+			{
+				'id' : '@id',
+				'bid' : businessId
+			},
+			//Custom actions can be called with $'methodname' on the Account.
+			{
+				/**
+				* @name Cloobster.services.InfoPage#$query
+				* @override
+				* Overrides default query method by overriding businessId as default parameter
+				*/
+				'query':  {method:'GET', params: { 'bid' : businessId}, isArray:true},
+				/*
+				* @name Cloobster.services.InfoPage#$update
+				* Like a save but uses PUT instead of POST.
+				*/
+				'update': { method: 'PUT'}
+			}
+		);
+
+	return InfoPage;
+}]);
+
 /** 
 * 	@constructor
 * 	Factory function that returns the 'facebookApi' service and

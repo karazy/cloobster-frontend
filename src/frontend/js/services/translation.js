@@ -72,6 +72,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Servicebereiche und Spots",
 			"EN" : "Service Areas and Spots"
 		},
+		"businesses.headertabs.infopages" : {
+			"DE" :  "Infoseiten",
+			"EN" : ""
+		},
 		//registration partial
 		"registration.title" : {
 			"DE" : "Cloobster Registrierung",
