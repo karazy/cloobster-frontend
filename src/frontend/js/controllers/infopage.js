@@ -76,4 +76,4 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	});
 }
 
-Cloobster.InfoPage.$inject = ['$scope', '$http', '$routeParams', '$location', 'loginService', 'uploadService', 'langService', '$log', 'handleError', 'InfoPage', 'Business'];
+Cloobster.InfoPage.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'upload', 'lang', '$log', 'errorHandler', 'InfoPage', 'Business'];
