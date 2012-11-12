@@ -8,7 +8,7 @@
 * 	View and manage infopages for static information (e.g. contact information).
 * 	@constructor
 */
-Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginService, uploadService, langService, $log, handleError, InfoPage, Business) {
+Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginService, langService, $log, handleError, InfoPage) {
 
 	var activeBusinessId,
 		defaultPage = {
@@ -39,28 +39,32 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 
 		account =  loginService.getAccount();
 
-		$scope.activeBusiness = Business.buildResource(account.id).get({'id' : activeBusinessId});
+		// $scope.activeBusiness = Business.buildResource(account.id).get({'id' : activeBusinessId});
 
 		//create info page resource
 		$scope.infoPageResource = InfoPage.buildResource(activeBusinessId);
 
 		//load info pages
 		$scope.infopages = $scope.infoPageResource.query(angular.noop,	handleError);
-	};
+	}
 
 	/**
 	*
 	*/
 	$scope.loadInfoPage =  function(page) {
 		$scope.currentInfoPage = page;
-	};
+	}
 
 	/**
 	*
 	*/
 	$scope.createInfoPage = function() {
 		$scope.currentInfoPage = new $scope.infoPageResource(defaultPage);
-	};
+	}
+
+	$scope.saveInfoPage = function() {
+
+	}
 
 	/** 
 	 * Watches loggedIn status and initializes controller when status changes to true.
@@ -68,7 +72,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	$scope.$watch('loggedIn', function(newValue, oldValue) {
 		var businessId = $routeParams.businessId || "";
 
-		if(newVal == true && businessId) {
+		if(newValue == true && businessId) {
 			$scope.loadInfoPages(businessId);
 		} else if(newValue == false) {
 			$location.url('/');
@@ -76,4 +80,4 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	});
 }
 
-Cloobster.InfoPage.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'upload', 'lang', '$log', 'errorHandler', 'InfoPage', 'Business'];
+Cloobster.InfoPage.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', 'errorHandler', 'InfoPage'];

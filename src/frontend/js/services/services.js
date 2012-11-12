@@ -610,33 +610,36 @@ Cloobster.services.factory('CompanyAccount', ['cloobsterResource', function($res
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('InfoPage',['cloobsterResource', function(cloobsterResource) {
+Cloobster.services.factory('InfoPage',['cloobsterResource', function($resource) {
 	/**
 	*	@name Cloobster.services.InfoPage
 	*	
 	*/
-	var InfoPage = cloobsterResource('/b/businesses/:bid/infopages/:id',
-			//params
-			{
-				'id' : '@id',
-				'bid' : businessId
-			},
-			//Custom actions can be called with $'methodname' on the Account.
-			{
-				/**
-				* @name Cloobster.services.InfoPage#$query
-				* @override
-				* Overrides default query method by overriding businessId as default parameter
-				*/
-				'query':  {method:'GET', params: { 'bid' : businessId}, isArray:true},
-				/*
-				* @name Cloobster.services.InfoPage#$update
-				* Like a save but uses PUT instead of POST.
-				*/
-				'update': { method: 'PUT'}
-			}
-		);
-
+	var InfoPage = {
+		buildResource: function(businessId) {
+			 return $resource('/b/businesses/:bid/infopages/:id',
+					//params
+					{
+						'id' : '@id',
+						'bid' : businessId
+					},
+					//Custom actions can be called with $'methodname' on the Account.
+					{
+						/**
+						* @name Cloobster.services.InfoPage#$query
+						* @override
+						* Overrides default query method by overriding businessId as default parameter
+						*/
+						'query':  {method:'GET', params: { 'bid' : businessId}, isArray:true},
+						/*
+						* @name Cloobster.services.InfoPage#$update
+						* Like a save but uses PUT instead of POST.
+						*/
+						'update': { method: 'PUT'}
+					}
+				)
+		}
+	}
 	return InfoPage;
 }]);
 
