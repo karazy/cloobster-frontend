@@ -21,6 +21,8 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	$scope.infopages = null;
 	/* holds the currently selected page */
 	$scope.currentInfoPage = null;
+	/** Template resource used to create concrete image resources. */
+	$scope.imageResource = null;
 
 	$scope.activeBusiness = null;
 
@@ -45,7 +47,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		$scope.infoPageResource = InfoPage.buildResource(activeBusinessId);
 
 		//load info pages
-		$scope.infopages = $scope.infoPageResource.query(angular.noop,	handleError);
+		$scope.infopages = $scope.infoPageResource.query(angular.noop,	handleError);		
 	}
 
 	/**
@@ -53,6 +55,8 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	*/
 	$scope.loadInfoPage =  function(page) {
 		$scope.currentInfoPage = page;
+
+		$scope.imageResource = InfoPage.buildImageResource(activeBusinessId, page.id);
 	}
 
 	/**
@@ -63,8 +67,32 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	}
 
 	$scope.saveInfoPage = function() {
+		$log.log("save infopage");
 
+		if($scope.currentInfoPage && $scope.currentInfoPage.id) {
+			$scope.currentMenu.$update(null, null, handleError);	
+		} else {
+			$scope.currentInfoPage.$save(saveSuccess, handleError);
+		}
+
+		function saveSuccess(infopage) {
+			$scope.infopages.push(infopage);
+		}
 	}
+
+	$scope.setImage = function(image) {
+		$scope.activeBusiness.image = {
+			url: image.url,
+			blobKey: image.blobKey
+		};
+	};
+
+	$scope.discardImage = function(image) {
+		if(image && image.blobKey) {
+			$http['delete']('/uploads/images/' + image.blobKey)
+			.error(handleError);
+		}
+	};
 
 	/** 
 	 * Watches loggedIn status and initializes controller when status changes to true.

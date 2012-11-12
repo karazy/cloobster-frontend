@@ -638,6 +638,15 @@ Cloobster.services.factory('InfoPage',['cloobsterResource', function($resource) 
 						'update': { method: 'PUT'}
 					}
 				)
+		},
+		/**
+		*	Returns a InfoPage image resource used to save, update the image assigned to an InfoPage.
+		*/
+		buildImageResource: function(businessId) {
+			return $resource('/b/businesses/:bid/infopages/:id/image', {
+				'businessId': businessId,
+				'id': '@id'
+			});
 		}
 	}
 	return InfoPage;
