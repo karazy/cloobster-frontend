@@ -312,9 +312,9 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 
 		        	resetScope();
 
-		        	/** Gets localized title. */
+		        	/** Gets localized title. Returns key of no title was found. */
 		        	scope.getTitle = function() {
-		        		return langService.translate(scope.editorTitleKey);
+		        		return langService.translate(scope.editorTitleKey) || scope.editorTitleKey;
 		        	}
 
 		        	/** Called from imgAreaSelect plugin after user selected an image area. */
@@ -530,7 +530,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 					});
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {
-		        		if(scope.editorEnabled == true) {
+		        		if(scope.editorEnabled === true || typeof scope.editorEnabled == "undefined") {
 		        			//init file upload plugin for this dialog
 	        				uploadObject = uploadService.getFileUploadObject(uploadInput, scope.editorImageResource, fileAddedCallback, fileUploadedCallback, fileUploadProgressCallback);
 
