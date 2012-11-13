@@ -1198,7 +1198,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		//infopage partial
 		"infopages.description" : {
-			"DE" :  "Hier können Sie Informationen zu aktuellen Location anlegen. Dies können zum Beispiel Informationen "+
+			"DE" :  "Hier können Sie Informationen zu aktuellen Location anlegen. Dies können zum Beispiel Informationen<br/>"+
 			"über Blumenservice, Frühstückszeiten, Kontaktdaten und so weiter sein.",
 			"EN" : ""
 		},

@@ -25,21 +25,30 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	$scope.imageResource = null;
 
 	$scope.activeBusiness = null;
+	/* The selected language in which to save data. */
+	$scope.currentLanguage = "";
 
 	/**
 	* Loads all infopages
 	*/
-	$scope.loadInfoPages = function(businessId) {
-		var account;
+	$scope.loadInfoPages = function(businessId, language) {
+		var account,
+			params = {};
 
 		if(!$scope.loggedIn) {
 			$log.log('Not logged in! Failed to load info pages.');
 			return;
 		}
 
+		if(language) {
+			params.lang = language;
+		}
+
 		activeBusinessId = businessId;
 
 		account =  loginService.getAccount();
+
+		$scope.currentInfoPage = null;
 
 		// $scope.activeBusiness = Business.buildResource(account.id).get({'id' : activeBusinessId});
 
@@ -47,7 +56,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		$scope.infoPageResource = InfoPage.buildResource(activeBusinessId);
 
 		//load info pages
-		$scope.infopages = $scope.infoPageResource.query(angular.noop,	handleError);		
+		$scope.infopages = $scope.infoPageResource.query(params, angular.noop,	handleError);		
 	}
 
 	/**
@@ -99,14 +108,23 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 			url: image.url,
 			blobKey: image.blobKey
 		};
-	};
+	}
 
 	$scope.discardImage = function(image) {
 		if(image && image.blobKey) {
 			$http['delete']('/uploads/images/' + image.blobKey)
 			.error(handleError);
 		}
-	};
+	}
+
+	$scope.switchLanguage = function() {
+		$scope.loadInfoPages(activeBusinessId, $scope.currentLanguage);
+		if($scope.currentLanguage) {
+			$http.defaults.headers.common['Content-Language'] = $scope.currentLanguage;	
+		} else {
+			delete $http.defaults.headers.common['Content-Language'];
+		}
+	}
 
 	/** 
 	 * Watches loggedIn status and initializes controller when status changes to true.

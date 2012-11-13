@@ -616,7 +616,7 @@ Cloobster.services.factory('InfoPage',['cloobsterResource', function($resource) 
 	*	
 	*/
 	var InfoPage = {
-		buildResource: function(businessId) {
+		buildResource: function(businessId, language) {
 			 return $resource('/b/businesses/:bid/infopages/:id',
 					//params
 					{
@@ -635,7 +635,10 @@ Cloobster.services.factory('InfoPage',['cloobsterResource', function($resource) 
 						* @name Cloobster.services.InfoPage#$update
 						* Like a save but uses PUT instead of POST.
 						*/
-						'update': { method: 'PUT'}
+						'update': { 
+							method: 'PUT',
+							headers: {'Content-Language': '*'}
+						}
 					}
 				)
 		},
