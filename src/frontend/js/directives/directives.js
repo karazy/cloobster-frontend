@@ -596,8 +596,8 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','$timeout', fun
 					'<div class="modal-body">'+
 					 	'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty.$invalid)">'+
 					 		'<div class="controls">'+
-					 			'<textarea style="float:left;" rows="10" cols="250" ng-model="editorValue"></textarea>'+
-					 			'<i class="icon-remove icon-black" ng-click="clearInput()"></i>'+
+					 			'<textarea style="float:left;" rows="12" cols="300" ng-model="editorValue"></textarea>'+
+					 			// '<i class="icon-remove icon-black" ng-click="clearInput()"></i>'+
 								'<div class="help-inline" ng-show="simplePropertyForm.simpleProperty.$dirty && simplePropertyForm.simpleProperty.$invalid">'+
 									'<span ng-show="simplePropertyForm.simpleProperty.$error.required">'+ l('propertyeditor.error.required') +'</span>'+							
 								'</div>'+
@@ -631,7 +631,7 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','$timeout', fun
 		        		//config
 		        		toolbar: [
 							// { name: 'document', items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
-							// { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+							{ name: 'clipboard', items : [ 'Undo','Redo' ] },
 							// { name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },
 							// { name: 'forms', items : [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 
 						 //        'HiddenField' ] },

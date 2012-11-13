@@ -40,9 +40,11 @@
 							<img  ng-src="{{currentInfoPage.image.url}}=s96" alt="click to edit" />
 							<p l="common.image.edit">Click image to edit</p>
 						</div>
-						<button ng-show="!currentInfoPage.image" class="btn btn-primary" ><i class="icon-picture icon-white"></i> <span l="infopage.image">Add Image</span></button>
+						<div class="row-fluid" ng-show="!currentInfoPage.image">
+						<button  class="btn span4 btn-primary" ><i class="icon-picture icon-white"></i> <span l="infopage.image">Add Image</span></button>
+						</div>
 					</div>
-					<div class="data-container-medium data-container-scrollable">
+					<div class="data-container-medium data-container-scrollable"  style="margin: 5px 0 5px 0;">
 						<div richtext-property-editor editor-title="infopage.html" editor-property="currentInfoPage.html" editor-on-save="saveInfoPage()" editor-required>
 							<div class="edit" tooltip="infopage.html">
 								<div ng-bind-html="currentInfoPage.html">
@@ -50,9 +52,8 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row-fluid">
-    				<button class="btn span3" data-toggle="modal" data-target="#deleteInfoPageModal" ng-show="currentInfoPage.id"><i class="icon-trash"></i></button>
+					<div class="row-fluid">
+    				<button class="btn span4" data-toggle="modal" data-target="#deleteInfoPageModal" ng-show="currentInfoPage.id"><i class="icon-trash"></i></button>
 		    		<!-- Modal delete dialog. -->
 		    		<div class="modal hide" id="deleteInfoPageModal">
 					 	<div class="modal-header">
@@ -68,6 +69,7 @@
 						</div>
 					</div>
     			</div>
+				</div>				
 	    		</div>
 			</div>
 		
