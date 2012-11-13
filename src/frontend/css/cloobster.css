@@ -188,6 +188,10 @@ ul.payment-method-list li {
   height: 400px;
 }
 
+.data-container-medium {
+  height: 300px;
+}
+
 .data-container-small {
   height: 200px;
 }

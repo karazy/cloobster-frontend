@@ -567,6 +567,184 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 	return config;
 }]);
 
+Cloobster.directives.directive('richtextPropertyEditor', ['lang','$timeout', function(langService,$timeout) {
+	var inputType, //type of the input to generate in form
+		required, //if present marks a required field
+		//directive configuration
+		config = {
+		restrict: 'A',
+		replace: false,
+		transclude: true,
+		scope: {
+			editorTitle: '@',
+			editorOnSave: '&',
+			editorProperty: '=',
+			editorEnabled: '=',
+			editorValidate: '&',
+			editorValidateText: '@'
+		},
+		compile: function(element, attrs, transclude) {
+			var required = attrs.hasOwnProperty('editorRequired') ? "required='required'" : "",				
+				html = 
+				'<div class="toggler" ng-transclude></div>'+
+				'<div class="modal hide">'+
+				  '<div class="modal-header">'+
+				   ' <button type="button" class="close" data-dismiss="modal">×</button>'+
+				    '<h3 l="{{editorTitle}}">Edit property</h3>'+
+				 '</div>'+
+				'<form name="simplePropertyForm" novalidate ng-submit="save()" class="edit-property-form">'+
+					'<div class="modal-body">'+
+					 	'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty.$invalid)">'+
+					 		'<div class="controls">'+
+					 			'<textarea style="float:left;" rows="10" cols="250" ng-model="editorValue"></textarea>'+
+					 			'<i class="icon-remove icon-black" ng-click="clearInput()"></i>'+
+								'<div class="help-inline" ng-show="simplePropertyForm.simpleProperty.$dirty && simplePropertyForm.simpleProperty.$invalid">'+
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.required">'+ l('propertyeditor.error.required') +'</span>'+
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.number">'+ l('propertyeditor.error.number') +'</span>'+
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.pattern" l="{{editorPatternText}}">No valid value.</span>'+
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.custom" l="{{editorValidateText}}">No valid value.</span>'+
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.email" >+'+ l('propertyeditor.error.email')+'</span>'+									
+								'</div>'+
+							'</div>'+
+						'</div>'+
+					'</div>'+
+					'<div class="modal-footer">'+
+						'<button type="button" class="btn" data-dismiss="modal">'+l('common.cancel')+'</button>'+
+						'<button type="submit" class="btn btn-primary" ng-disabled="simplePropertyForm.$invalid">'+l('common.save')+'</button>'+
+					'</div>'+
+					'</form>'+
+				'</div>';
+			
+			element.append(html);
+
+			return {
+		        pre: function preLink(scope, iElement, iAttrs, controller) { 
+		        	
+		        },
+		        post: function postLink(scope, iElement, iAttrs, controller) {
+		        	var dialog = iElement.find('div.modal'),
+		        		input = iElement.find('input.property-input, textarea.property-input'),
+		        		editorTextarea = iElement.find('textarea'),
+		        		ctrl = scope.simplePropertyForm.simpleProperty,
+		        		editor;
+
+		        	//init raptor editor
+		        	// if(!$('#richtext-edit').ckeditorGet()) {
+		        	
+		        	editor = editorTextarea.ckeditor(function() {
+		        		//callback
+		        	}, {
+		        		//config
+		        		toolbar: [
+							// { name: 'document', items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
+							// { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+							// { name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },
+							// { name: 'forms', items : [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 
+						 //        'HiddenField' ] },
+							// '/',
+							{ name: 'basicstyles', items : [ 'Bold','Italic','Underline', 'RemoveFormat' ] },
+							{ name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent',
+							'-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'] },
+							// { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+							// { name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe' ] },
+							// '/',
+							{ name: 'styles', items : [ 'Format'] },
+							// { name: 'colors', items : [ 'TextColor','BGColor' ] },
+							// { name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] }
+						]
+		        	});
+					// } else {
+					// 	editor = $('#richtext-edit').ckeditorGet();
+					// }
+
+		        	if(iAttrs.hasOwnProperty('editorValidate')) {
+		        		ctrl.$parsers.push(function(value) {
+			        		if(scope.editorValidate) {
+			        			if(scope.editorValidate({'value' : value})) {
+			        				ctrl.$setValidity('custom', true);
+			        				return value;
+			        			}
+			        			else {
+			        				ctrl.$setValidity('custom', false);
+			        				return undefined;
+			        			}	
+			        		}
+			        	});	
+		        	}
+		        	
+		        	scope.save = function () {
+		        		//only save when form is valid
+		        		if(scope.simplePropertyForm.$valid && !scope.saved) {
+		        			scope.saved = true;
+		        			//grab the value of richtext editor
+		        			scope.editorProperty = editor.val();
+		        			// Wrap this in a timeout, because the model change is not immediate.
+			        		$timeout(scope.editorOnSave);
+			        		dialog.modal('toggle');
+		        		}
+		        	}
+
+		        	/**
+		        	* Convenience method to clear the input field.
+		        	*/
+		        	scope.clearInput = function() {
+		        		scope.editorValue = "";
+		        		if(scope['editorRepeat']) {
+		        			scope['editorRepeat'] = "";
+		        		}
+		        		input.trigger("focus");
+		        	}
+
+		        	scope.matchInput = function() {
+						if(scope.simplePropertyForm.simpleProperty.$viewValue !== scope.simplePropertyForm.repeatProperty.$viewValue) {
+							scope.simplePropertyForm.repeatProperty.$setValidity("match", false);
+						} else {
+							scope.simplePropertyForm.repeatProperty.$setValidity("match", true);
+						}
+					}
+		        	
+		        	iElement.find('div.toggler').bind('click', function() {		   
+		        		if(scope.editorEnabled == true || typeof scope.editorEnabled == 'undefined') {
+		        			scope.$apply('editorValue = editorProperty;editorRepeat="";saved=false');
+						
+							dialog.modal('toggle');	
+							input.trigger("focus");
+		        		}
+					});
+
+		        	scope.getFieldInputClass = getFieldInputClass;
+
+		        }
+		      }
+		}
+	};
+
+	function l(key) {
+		return langService.translate(key) || key;
+	}
+
+
+	/*
+	* Get css class for field highlighting.
+	* 
+	* @param {boolean}  
+	* @returns error if invalid
+	*		  success if !invalid
+	*         empty string otherwise
+	*/
+	function getFieldInputClass(invalid) {
+		if(invalid) {
+			return "error";
+		} else if (!invalid) {
+			return "success";
+		} else {
+			return "";
+		}
+	};
+
+	return config;
+}]);
+
 /**
 * Used to translate UI texts.
 * Usage: l="languageKey"
