@@ -80,6 +80,20 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		}
 	}
 
+	$scope.deleteInfoPage = function(pageToDelete) {
+		pageToDelete.$delete(angular.noop, handleError);
+
+		angular.forEach($scope.infopages, function(page, index) {
+			if(pageToDelete.id == page.id) {
+				$scope.infopages.splice(index, 1);
+				//exit loop
+				return false;
+			}
+		});
+
+		$scope.currentInfoPage = null;
+	}
+
 	$scope.setImage = function(image) {
 		$scope.activeBusiness.image = {
 			url: image.url,

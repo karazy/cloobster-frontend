@@ -334,6 +334,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Produkte",
 			"EN" : "Products"
 		},
+		"businesses.action.infopages" : {
+			"DE" :  "Infoseiten",
+			"EN" : ""
+		},
 		"businesses.action.accounts" : {
 			"DE" : "Benutzerverwaltung",
 			"EN" : "User Management"
