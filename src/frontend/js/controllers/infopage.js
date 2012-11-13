@@ -104,7 +104,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	}
 
 	$scope.setImage = function(image) {
-		$scope.activeBusiness.image = {
+		$scope.currentInfoPage.image = {
 			url: image.url,
 			blobKey: image.blobKey
 		};
