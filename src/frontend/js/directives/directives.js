@@ -599,17 +599,13 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','$timeout', fun
 					 			'<textarea style="float:left;" rows="10" cols="250" ng-model="editorValue"></textarea>'+
 					 			'<i class="icon-remove icon-black" ng-click="clearInput()"></i>'+
 								'<div class="help-inline" ng-show="simplePropertyForm.simpleProperty.$dirty && simplePropertyForm.simpleProperty.$invalid">'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.required">'+ l('propertyeditor.error.required') +'</span>'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.number">'+ l('propertyeditor.error.number') +'</span>'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.pattern" l="{{editorPatternText}}">No valid value.</span>'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.custom" l="{{editorValidateText}}">No valid value.</span>'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.email" >+'+ l('propertyeditor.error.email')+'</span>'+									
+									'<span ng-show="simplePropertyForm.simpleProperty.$error.required">'+ l('propertyeditor.error.required') +'</span>'+							
 								'</div>'+
 							'</div>'+
 						'</div>'+
 					'</div>'+
 					'<div class="modal-footer">'+
-						'<button type="button" class="btn" data-dismiss="modal">'+l('common.cancel')+'</button>'+
+						'<button type="button" class="btn" ng-click="cancel()" data-dismiss="modal">'+l('common.cancel')+'</button>'+
 						'<button type="submit" class="btn btn-primary" ng-disabled="simplePropertyForm.$invalid">'+l('common.save')+'</button>'+
 					'</div>'+
 					'</form>'+
@@ -628,11 +624,9 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','$timeout', fun
 		        		ctrl = scope.simplePropertyForm.simpleProperty,
 		        		editor;
 
-		        	//init raptor editor
-		        	// if(!$('#richtext-edit').ckeditorGet()) {
-		        	
+					//init editor		        	
 		        	editor = editorTextarea.ckeditor(function() {
-		        		//callback
+		        		//callback after editor is succesfully loaded
 		        	}, {
 		        		//config
 		        		toolbar: [
@@ -653,9 +647,6 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','$timeout', fun
 							// { name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] }
 						]
 		        	});
-					// } else {
-					// 	editor = $('#richtext-edit').ckeditorGet();
-					// }
 
 		        	if(iAttrs.hasOwnProperty('editorValidate')) {
 		        		ctrl.$parsers.push(function(value) {
@@ -685,30 +676,26 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','$timeout', fun
 		        	}
 
 		        	/**
+		        	* User canceled edit. Reset the value of the texteditor.
+		        	*/
+		        	scope.cancel = function() {
+		        		editor.val(scope.editorProperty);
+		        	}
+
+		        	/**
 		        	* Convenience method to clear the input field.
 		        	*/
 		        	scope.clearInput = function() {
 		        		scope.editorValue = "";
-		        		if(scope['editorRepeat']) {
-		        			scope['editorRepeat'] = "";
-		        		}
-		        		input.trigger("focus");
+		        		// input.trigger("focus");
 		        	}
-
-		        	scope.matchInput = function() {
-						if(scope.simplePropertyForm.simpleProperty.$viewValue !== scope.simplePropertyForm.repeatProperty.$viewValue) {
-							scope.simplePropertyForm.repeatProperty.$setValidity("match", false);
-						} else {
-							scope.simplePropertyForm.repeatProperty.$setValidity("match", true);
-						}
-					}
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {		   
 		        		if(scope.editorEnabled == true || typeof scope.editorEnabled == 'undefined') {
-		        			scope.$apply('editorValue = editorProperty;editorRepeat="";saved=false');
+		        			scope.$apply('editorValue = editorProperty;saved=false;');
 						
 							dialog.modal('toggle');	
-							input.trigger("focus");
+							// input.trigger("focus");
 		        		}
 					});
 
