@@ -623,12 +623,15 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','$timeout', fun
 		        		editorTextarea = iElement.find('textarea'),
 		        		ctrl = scope.simplePropertyForm.simpleProperty,
 		        		editor;
+		        		
 
 					//init editor		        	
 		        	editor = editorTextarea.ckeditor(function() {
 		        		//callback after editor is succesfully loaded
+
 		        	}, {
 		        		//config
+		        		resize_enabled: false,
 		        		toolbar: [
 							// { name: 'document', items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
 							{ name: 'clipboard', items : [ 'Undo','Redo' ] },
@@ -687,15 +690,13 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','$timeout', fun
 		        	*/
 		        	scope.clearInput = function() {
 		        		scope.editorValue = "";
-		        		// input.trigger("focus");
 		        	}
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {		   
 		        		if(scope.editorEnabled == true || typeof scope.editorEnabled == 'undefined') {
 		        			scope.$apply('editorValue = editorProperty;saved=false;');
 						
-							dialog.modal('toggle');	
-							// input.trigger("focus");
+							dialog.modal('toggle');
 		        		}
 					});
 
