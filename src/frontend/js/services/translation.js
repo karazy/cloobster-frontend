@@ -1192,6 +1192,48 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "{{currentSpot.name}} wird gelöscht!<br/>Bereits ausgedruckte Barcodes können nicht wiederverwendet werden!",
 			"EN" : "{{currentSpot.name}} will be deleted!<br/>Barcode can't be reused!"
 		},
+		//infopage partial
+		"infopages.description" : {
+			"DE" :  "Hier können Sie Informationen zu aktuellen Location anlegen. Dies können zum Beispiel Informationen "+
+			"über Blumenservice, Frühstückszeiten, Kontaktdaten und so weiter sein.",
+			"EN" : ""
+		},
+		"infopages.list.title" : {
+			"DE" :  "Infoseiten",
+			"EN" : ""
+		},
+		"infopage.container.title" : {
+			"DE" :  "Informationsdetails",
+			"EN" : ""
+		},
+		"infopage.title" : {
+			"DE" :  "Titel bearbeiten",
+			"EN" : ""
+		},
+		"infopage.shortText" : {
+			"DE" :  "Kurztext bearbeiten",
+			"EN" : ""
+		},
+		"infopage.image" : {
+			"DE" :  "Bild hinzufügen",
+			"EN" : ""
+		},
+		"infopage.html" : {
+			"DE" :  "Text bearbeiten",
+			"EN" : ""
+		},
+		"infopages.dialog.delete.title" : {
+			"DE" :  "Infoseite löschen",
+			"EN" : ""
+		},
+		"infopages.dialog.delete.text" : {
+			"DE" :  "Die Seite {{currentInfoPage.title}} wird gelöscht.<br/>Dies kann nicht rückgängig gemacht werden.",
+			"EN" : ""
+		},
+		"infogape.empty.description" : {
+			"DE" :  "Um die Details zu einer Infoseite zu bearbeiten, wählen Sie bitte eine Infoseite aus der Liste links oder legen eine neue an.",
+			"EN" : ""
+		},
 		//accounts partial
 		"accounts.title" : {
 			"DE" : "Benutzerverwaltung",
@@ -1311,7 +1353,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"account.activation.admin.description" : {
 			"DE" : "Um die Aktivierung abzuschliessen, füllen Sie bitte die fehlenden Felder aus.",
 			"EN" : "To complete your account activation, please enter missing details below!"
-		},
+		},		
 		//general
 		"common.warning.title" : {
 			"DE" : "Achtung!",
@@ -1373,10 +1415,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Hilfe",
 			"EN" : "Help"
 		},
+		"common.image.edit" : {
+			"DE" :  "Bild anklicken um zu editieren",
+			"EN" : "Click image to edit"
+		},
 		"general.sortable" : {
 			"DE" : "Ziehen um zu sortieren",
 			"EN" : "Drag to sort"
-		},
+		},		
 		//breadcrumb
 		"breadcrumb.home" : {
 			"DE" : "Home",
