@@ -53,14 +53,16 @@
 					</div>					
 					<div simple-property-editor editor-title="infopage.shortText" editor-property="currentInfoPage.shortText" editor-on-save="saveInfoPage()" editor-type="textarea" >
 						<p class="edit" tooltip="infopage.shortText" >{{currentInfoPage.shortText}} <i class="icon-edit icon-black"></i></p>
-					</div>					
-					<div simple-image-editor editor-title-key="infopage.image" editor-image-id="image" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-image-resource="imageResource">
-						<div ng-show="currentInfoPage.image.url">
-							<img  ng-src="{{currentInfoPage.image.url}}=s96" alt="click to edit" />
-							<p l="common.image.edit">Click image to edit</p>
-						</div>
-						<div class="row-fluid" ng-show="!currentInfoPage.image">
-						<button  class="btn span4 btn-primary" ><i class="icon-picture icon-white"></i> <span l="infopage.image">Add Image</span></button>
+					</div>
+					<div ng-show="currentInfoPage.id">			
+						<div simple-image-editor editor-title-key="infopage.image" editor-image-id="image" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-image-resource="imageResource">
+							<div ng-show="currentInfoPage.image.url">
+								<img  ng-src="{{currentInfoPage.image.url}}=s96" alt="click to edit" />
+								<p l="common.image.edit">Click image to edit</p>
+							</div>
+							<div class="row-fluid" ng-show="!currentInfoPage.image">
+							<button  class="btn span4 btn-primary"><i class="icon-picture icon-white"></i> <span l="infopage.image">Add Image</span></button>
+							</div>
 						</div>
 					</div>
 					<div class="data-container-medium data-container-scrollable"  style="margin: 5px 0 5px 0;">

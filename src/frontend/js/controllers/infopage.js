@@ -86,6 +86,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 
 		function saveSuccess(infopage) {
 			$scope.infopages.push(infopage);
+			$scope.imageResource = InfoPage.buildImageResource(activeBusinessId, infopage.id);
 		}
 	}
 
