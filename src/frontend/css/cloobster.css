@@ -176,7 +176,7 @@ ul.payment-method-list li {
   border: 1px solid gray; 
   border-radius: 0.5em;
   position: fixed;
-  top: 50px;
+  top: 75px;
   right: 50px;
   left: 50px;
   bottom: 50px;
@@ -276,6 +276,10 @@ ul.payment-method-list li {
 .activation-checkbox input {
   float: left;
   margin-right: 0.5em
+}
+
+.language-checkbox {
+  float: left;
 }
 
 ul.options-list {

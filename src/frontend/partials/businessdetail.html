@@ -117,7 +117,7 @@
 				<div class="data-element">
 					<div class="key" l="business.detail.language">Sprachen</div>
 					<div class="value">
-							<button ng-disabled="!editMode" class="btn" ng-click="langSelection = true">Auswählen</button>
+							<button ng-disabled="!editMode" class="btn" ng-click="loadLanguageSelection()">Auswählen</button>
 				</div>				
 				</div>
 			</div>
@@ -253,14 +253,14 @@
 			</div>
 		</form>
 	</div>
-	<div class="data-container-block">
-		<div ng-repeat="lang in langcodes | filter:languageQuery" style="float: left;">
-			<span style="margin: 3px;"><label for="langcode_{{lang.code}}" style="display: inline;">{{lang.lang}}</label> <input type="checkbox" id="langcode_{{lang.code}}" value="{{lang.code}}">
+	<div class="data-container-block row-fluid data-container-scrollable">
+		<div ng-repeat="lang in langcodes | filter:languageQuery" class="span3">
+			<span><label for="langcode_{{lang.code}}" style="display: inline;">{{lang.lang}}</label> <input type="checkbox" ng-model="lang.selected" id="langcode_{{lang.code}}" value="{{lang.code}}">
 			</span>
 		</div>
 	</div>
-	<div class="row-fluid data-container-block">
+	<div class="row-fluid data-container-block" style="position: absolute; bottom: 10px;">
 		<button class="btn span3" l="common.cancel" ng-click="langSelection = false;">Cancel</button>
-		<button class="btn btn-primary span3" l="common.save">Save</button>
+		<button class="btn btn-primary span3" l="common.save" ng-click="saveLanguageSelection()">Save</button>
 	</div>
 </div>

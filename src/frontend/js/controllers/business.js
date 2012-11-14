@@ -125,6 +125,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		$scope.activeBusiness = $scope.businessResource.get({'id' : id}, function() {						
 			//if no images are included init with empty object
 			$scope.activeBusiness.images = $scope.activeBusiness.images || {};
+			//if no lang array exists create one
+			$scope.activeBusiness.lang = $scope.activeBusiness.lang || [];
 
 			$scope.imageResource =	createImageResource($scope.activeBusiness.id);
 		}, handleError);
@@ -321,6 +323,37 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	};
 
 	//end theme methods
+
+	//start language methods
+	
+	$scope.saveLanguageSelection = function() {
+		if(!$scope.activeBusiness.lang) {
+			$scope.activeBusiness.lang = [];
+		}
+
+		angular.forEach($scope.langcodes, function(lang, key) {
+			if(lang.selected) {
+				$scope.activeBusiness.lang.push(lang.code);
+			}
+		});
+
+		$scope.saveBusiness();
+		//hide lang selection window
+		$scope.langSelection = false;
+	}
+
+	$scope.loadLanguageSelection = function() {
+		//show lang selection window
+		$scope.langSelection = true;
+
+		angular.forEach($scope.langcodes, function(lang, key) {
+			if(jQuery.inArray(lang.code, $scope.activeBusiness.lang) > 0) {
+				lang.selected = true;
+			}
+		});
+	}
+
+	//end language methods
 
 	/*
 	* Get css class for field highlighting.
