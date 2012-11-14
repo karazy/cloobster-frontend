@@ -239,6 +239,7 @@
 
 <div class="data-container-floating" ng-show="langSelection">
 	<h4 class="data-container-title" l="">Language selection</h4>
+	<!-- <div style="position: relative; clear: both; float: left; width: 100%; overflow: hidden;"> -->
 	<div class="data-container-block data-container-seperator">
 		<p l="">Please select the languages you want to support.</p>
 		<form class="form-inline" style="margin: 7px 0;">
@@ -253,7 +254,7 @@
 			</div>
 		</form>
 	</div>
-	<div class="data-container-block row-fluid data-container-scrollable">
+	<div class="data-container-block row-fluid data-container-scrollable data-container-medium">
 		<div ng-repeat="lang in langcodes | filter:languageQuery" class="span3">
 			<span><label for="langcode_{{lang.code}}" style="display: inline;">{{lang.lang}}</label> <input type="checkbox" ng-model="lang.selected" id="langcode_{{lang.code}}" value="{{lang.code}}">
 			</span>
@@ -263,4 +264,5 @@
 		<button class="btn span3" l="common.cancel" ng-click="langSelection = false;">Cancel</button>
 		<button class="btn btn-primary span3" l="common.save" ng-click="saveLanguageSelection()">Save</button>
 	</div>
+	<!-- </div> -->
 </div>
