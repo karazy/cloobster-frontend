@@ -6,11 +6,8 @@
 			<p l="infopages.description">Here you can provide additional information for your customer like ermergency, contact information etc.</p>
 		</div>
 		<div class="span4">
-			<select name="lang_select" class="pull-right" ng-model="currentLanguage" ng-change="switchLanguage()">
+			<select name="lang_select" class="pull-right" ng-model="currentLanguage" ng-change="switchLanguage()" ng-options="lang.lang for lang in langcodes | filter:isSelectedLanguage">
 			  <option value="" selected>- default language -</option>
-			  <option value="en">EN</option>
-			  <option value="fr">FR</option>
-			  <option value="fr">ES</option>
 			</select>
 		</div>
 	</div>

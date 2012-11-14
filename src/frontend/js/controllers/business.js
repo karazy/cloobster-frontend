@@ -347,7 +347,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		$scope.langSelection = true;
 
 		angular.forEach($scope.langcodes, function(lang, key) {
-			if(jQuery.inArray(lang.code, $scope.activeBusiness.lang) > 0) {
+			if(jQuery.inArray(lang.code, $scope.activeBusiness.lang) >= 0) {
 				lang.selected = true;
 			}
 		});

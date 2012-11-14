@@ -8,7 +8,7 @@
 * 	View and manage infopages for static information (e.g. contact information).
 * 	@constructor
 */
-Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginService, langService, $log, handleError, InfoPage) {
+Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginService, langService, $log, handleError, InfoPage, Business, langcodes) {
 
 	var activeBusinessId,
 		defaultPage = {
@@ -23,10 +23,12 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	$scope.currentInfoPage = null;
 	/** Template resource used to create concrete image resources. */
 	$scope.imageResource = null;
-
+	/** Active business. */
 	$scope.activeBusiness = null;
 	/* The selected language in which to save data. */
 	$scope.currentLanguage = "";
+	/** List of a languages. */
+	$scope.langcodes = langcodes;
 
 	/**
 	* Loads all infopages
@@ -47,6 +49,8 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		activeBusinessId = businessId;
 
 		account =  loginService.getAccount();
+
+		$scope.activeBusiness = Business.buildResource(account.id).get({'id' : activeBusinessId});
 
 		$scope.currentInfoPage = null;
 
@@ -118,13 +122,26 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		}
 	}
 
-	$scope.switchLanguage = function() {
-		$scope.loadInfoPages(activeBusinessId, $scope.currentLanguage);
+	$scope.switchLanguage = function() {		
 		if($scope.currentLanguage) {
-			$http.defaults.headers.common['Content-Language'] = $scope.currentLanguage;	
+			$http.defaults.headers.common['Content-Language'] = $scope.currentLanguage.code;	
 		} else {
 			delete $http.defaults.headers.common['Content-Language'];
 		}
+
+		$scope.loadInfoPages(activeBusinessId, $scope.currentLanguage.code);
+	}
+
+	$scope.isSelectedLanguage = function(langToFilter) {
+		if(!$scope.activeBusiness.lang) {
+			return false;
+		}
+
+		if(jQuery.inArray(langToFilter.code, $scope.activeBusiness.lang) >= 0) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/** 
@@ -141,4 +158,4 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	});
 }
 
-Cloobster.InfoPage.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', 'errorHandler', 'InfoPage'];
+Cloobster.InfoPage.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', 'errorHandler', 'InfoPage', 'Business', 'langcodes'];
