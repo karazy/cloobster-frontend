@@ -384,4 +384,4 @@ angular.module("Cloobster.languages", [], ["$provide", function($provide) {
 	}
 
 	$provide.value("langcodes", map);
-}
+}]);
