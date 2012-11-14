@@ -6,7 +6,7 @@
 *	Other modules can depend on this, and resolve service instances
 *	with angulars depency injection.
 */
-Cloobster.services = angular.module('Cloobster.services', ['ngResource', "Cloobster.translations"]);
+Cloobster.services = angular.module('Cloobster.services', ['ngResource', "Cloobster.translations", "Cloobster.languages"]);
 
 /** 
 *	@constructor

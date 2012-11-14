@@ -172,6 +172,17 @@ ul.payment-method-list li {
   margin: 1.5em 0;
 }
 
+.data-container-floating { 
+  border: 1px solid gray; 
+  border-radius: 0.5em;
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  left: 50px;
+  bottom: 50px;
+  background-color: #FFF;
+}
+
 .data-container-with-title { 
   border: 1px solid gray; 
   border-radius: 0.5em;
