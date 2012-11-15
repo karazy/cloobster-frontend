@@ -236,18 +236,18 @@
 		</div>
 	</form>
 </div>
-
+<!-- Floating Dialog for language selection -->
 <div class="data-container-floating" ng-show="langSelection">
-	<h4 class="data-container-title" l="">Language selection</h4>
+	<h4 class="data-container-title" l="business.languageselection.title">Language selection</h4>
 	<!-- <div style="position: relative; clear: both; float: left; width: 100%; overflow: hidden;"> -->
 	<div class="data-container-block data-container-seperator">
-		<p l="">Please select the languages you want to support.</p>
+		<p l="business.languageselection.description">Please select the languages you want to support.</p>
 		<form class="form-inline" style="margin: 7px 0;">
 				<div class="controls">
 				<div class="input-prepend">
 					<span class="add-on"><i class="icon-search icon-black"></i>
 					</span>
-					<input l="common.search" l-attribute="placeholder" placeholder="Search" class="span3"  ng-model="languageQuery.lang">
+					<input l="common.search" l-attribute="placeholder" placeholder="Search" ng-model="languageQuery.lang">
 				</div>
 				<i class="icon-remove icon-black" ng-click="languageQuery.lang = ''">
 				</i> 

@@ -582,6 +582,16 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Bitte gib dein Passwort ein um die Löschaktion zu bestätigen.",
 			"EN" : "Please enter your password to confirm delete action."
 		},
+		"business.languageselection.title" : {
+			"DE" :  "Sprachauswahl",
+			"EN" : ""
+		},
+		"business.languageselection.description" : {
+			"DE" :  "Wählen Sie die Sprachen aus, die Sie in cloobster anbieten wollen.<br/>Sie können dann in Bereichen die Mehrsprachigkeit "+
+			"unterstützen mittels einer Auswahlliste (rechts oben) die jeweilige Sprache, die Sie pflegen wollen auswählen.<br/>"+
+			"Nicht übersetzte Felder werden dem Kunden in der Standardsprache angezeigt.",
+			"EN" : ""
+		},
 		//profile partial
 		"profile.title" : {
 			"DE" : "Profil",

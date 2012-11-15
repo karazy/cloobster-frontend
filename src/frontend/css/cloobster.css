@@ -181,6 +181,7 @@ ul.payment-method-list li {
   left: 50px;
   /*bottom: 50px;*/
   background-color: #FFF;
+  padding-top: 15px;
 }
 
 .data-container-with-title { 
