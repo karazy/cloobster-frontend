@@ -1446,6 +1446,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Bild anklicken um zu editieren",
 			"EN" : "Click image to edit"
 		},
+		"common.all" : {
+			"DE" :  "Alle",
+			"EN" : "All"
+		},
 		"general.sortable" : {
 			"DE" : "Ziehen um zu sortieren",
 			"EN" : "Drag to sort"

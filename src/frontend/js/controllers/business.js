@@ -53,6 +53,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.errorMessage = "";
 	/** A map with language names and codes. */
 	$scope.langcodes = langcodes;
+	/** Filter object for language selection dialog. */
+	$scope.languageQuery = {};
 
 	/**
 	* Returns all businesses
@@ -348,8 +350,9 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		//calc dynamic height for language box
 		jQuery('.data-container-dynamic').height(jQuery(window).height() * 0.6);
 
-		//reset search field
-		$scope.languageQuery.lang = ''
+		//reset filters
+		$scope.languageQuery.lang = '';
+		$scope.languageQuery.selected = '';
 
 		angular.forEach($scope.langcodes, function(lang, key) {
 			if(jQuery.inArray(lang.code, $scope.activeBusiness.lang) >= 0) {
