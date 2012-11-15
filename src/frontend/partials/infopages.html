@@ -1,6 +1,6 @@
+<div class="partial-wrapper">
 <div ng-include="'partials/businesses_header.html'">
 </div>
-<div class="partial-wrapper">
 	<div class="row-fluid">
 		<div class="span8">
 			<p l="infopages.description">Here you can provide additional information for your customer like ermergency, contact information etc.</p>
@@ -27,13 +27,13 @@
             					</span>
             					<input l="common.search" l-attribute="placeholder" placeholder="Search" class="span10"  ng-model="infopagesQuery.title">
         					</div>
-        					<i class="icon-remove icon-black" ng-click="infopagesQuery.title = ''">
+        					<i class="icon-remove icon-black" ng-click="resetSearchField()">
         					</i> 
 						</div>
 	    			</form>
 	    		</div>
 				<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable">
-			        <li ng-repeat="page in infopages | filter:infopagesQuery | orderBy:['title'] " ng-class="{active: currentInfoPage.id == page.id}">	        	
+			        <li ng-repeat="page in infopages | filter:infopagesQuery | orderBy:['title'] " ng-class="{active: currentInfoPage.id == page.id}">
 			        	<a ng-click="loadInfoPage(page)">{{page.title}}</a>
 			        </li>
 			    </ul>

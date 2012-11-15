@@ -57,7 +57,8 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		$scope.infoPageResource = InfoPage.buildResource(activeBusinessId);
 
 		//load info pages
-		$scope.infopages = $scope.infoPageResource.query(params, angular.noop,	handleError);		
+		$scope.infopages = $scope.infoPageResource.query(params, angular.noop,	handleError);
+	
 	}
 
 	/**
@@ -127,6 +128,9 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 			delete $http.defaults.headers.common['Content-Language'];
 			$scope.loadInfoPages(activeBusinessId);
 		}
+
+		$scope.resetSearchField();
+		
 	}
 
 	$scope.isSelectedLanguage = function(langToFilter) {
@@ -139,6 +143,15 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		}
 
 		return false;
+	}
+
+	/**
+	*
+	* Reset the searchfield to an empty state.
+	*/
+	$scope.resetSearchField = function() {
+		//reset search field
+		$scope.infopagesQuery.title = "";
 	}
 
 	/** 
