@@ -345,6 +345,11 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.loadLanguageSelection = function() {
 		//show lang selection window
 		$scope.langSelection = true;
+		//calc dynamic height for language box
+		jQuery('.data-container-dynamic').height(jQuery(window).height() * 0.6);
+
+		//reset search field
+		$scope.languageQuery.lang = ''
 
 		angular.forEach($scope.langcodes, function(lang, key) {
 			if(jQuery.inArray(lang.code, $scope.activeBusiness.lang) >= 0) {

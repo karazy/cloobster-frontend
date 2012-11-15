@@ -179,7 +179,7 @@ ul.payment-method-list li {
   top: 75px;
   right: 50px;
   left: 50px;
-  bottom: 50px;
+  /*bottom: 50px;*/
   background-color: #FFF;
 }
 

@@ -938,7 +938,10 @@ angular.module("Cloobster.languages", [], ["$provide", function($provide) {
 		"code" : "za"
 		},
 
-		{"Zulu" : "zu"}
+		{
+			"lang" : "Zulu", 
+			"code" :  "zu"
+		}
 	]
 
 	$provide.value("langcodes", map);
