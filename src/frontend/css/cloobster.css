@@ -172,6 +172,7 @@ ul.payment-method-list li {
   margin: 1.5em 0;
 }
 
+/* data container start */
 .data-container-floating { 
   border: 1px solid gray; 
   border-radius: 0.5em;
@@ -238,6 +239,12 @@ ul.payment-method-list li {
 .data-container-inactive {
   color: gray;
   border-color: #C3C3C3 !important;
+}
+
+/* data container end */
+
+.simple-property-placeholder {
+  color: gray;
 }
 
 .product-wrapper {

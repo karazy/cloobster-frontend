@@ -45,11 +45,16 @@
 			<div class="data-container-with-title">
 				<h4 class="data-container-title" l="infopage.container.title">Infopage</h4>
 				<div class="data-container-block">
-					<div simple-property-editor editor-title="infopage.title" editor-property="currentInfoPage.title" editor-on-save="saveInfoPage()" editor-required>
-						<h5 class="edit" tooltip="infopage.title" >{{currentInfoPage.title}} <i class="icon-edit icon-black"></i></h5>
-					</div>					
-					<div simple-property-editor editor-title="infopage.shortText" editor-property="currentInfoPage.shortText" editor-on-save="saveInfoPage()" editor-type="textarea" >
-						<p class="edit" tooltip="infopage.shortText" >{{currentInfoPage.shortText}} <i class="icon-edit icon-black"></i></p>
+					<div simple-property-editor editor-title="infopage.title" editor-property="currentInfoPage.title" editor-on-save="saveInfoPage()" editor-placeholder="infopage.placeholder.title" editor-required>
+						<h5 class="edit" tooltip="infopage.title">
+							<span l ="infopage.placeholder.title" ng-hide="currentInfoPage.title" class="simple-property-placeholder"></span>
+							{{currentInfoPage.title}} <i class="icon-edit icon-black"></i>
+						</h5>
+					</div>
+					<div simple-property-editor editor-title="infopage.shortText" editor-property="currentInfoPage.shortText" editor-on-save="saveInfoPage()" editor-placeholder="infopage.placeholder.shortText" editor-type="textarea">
+						<p class="edit" tooltip="infopage.shortText">
+							<span l ="infopage.placeholder.shortText" ng-hide="currentInfoPage.shortText" class="simple-property-placeholder"></span>{{currentInfoPage.shortText}} <i class="icon-edit icon-black"></i>
+						</p>
 					</div>
 					<div ng-show="currentInfoPage.id">			
 						<div simple-image-editor editor-title-key="infopage.image" editor-image-id="image" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-image-resource="imageResource">
@@ -63,8 +68,9 @@
 						</div>
 					</div>
 					<div class="data-container-medium data-container-scrollable"  style="margin: 5px 0 5px 0;">
-						<div richtext-property-editor editor-title="infopage.html" editor-property="currentInfoPage.html" editor-on-save="saveInfoPage()" editor-required>
+						<div richtext-property-editor editor-title="infopage.html" editor-property="currentInfoPage.html" editor-on-save="saveInfoPage()" editor-placeholder="infopage.placeholder.html" editor-required>
 							<div class="edit" tooltip="infopage.html">
+								<span l ="infopage.placeholder.html" ng-hide="currentInfoPage.html" class="simple-property-placeholder"></span>
 								<div ng-bind-html="currentInfoPage.html">
 								</div> <i class="icon-edit icon-black"></i>
 							</div>

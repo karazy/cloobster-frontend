@@ -23,7 +23,8 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 			editorProperty: '=',
 			editorEnabled: '=',
 			editorValidate: '&',
-			editorValidateText: '@'
+			editorValidateText: '@',
+			editorPlaceholder: '@'
 		},
 		compile: function(element, attrs, transclude) {
 			var required = attrs.hasOwnProperty('editorRequired') ? "required='required'" : "",
@@ -118,13 +119,13 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 		        	iElement.find('div.toggler').bind('click', function() {		   
 		        		if(scope.editorEnabled == true || typeof scope.editorEnabled == 'undefined') {
 		        			scope.$apply('editorValue = editorProperty;editorRepeat="";saved=false');
-						
+
 							dialog.modal('toggle');	
 							input.trigger("focus");
 		        		}
 					});
 
-		        	scope.getFieldInputClass = getFieldInputClass;
+		        	scope.getFieldInputClass = getFieldInputClass;		        	
 
 		        }
 		      }
@@ -181,17 +182,18 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 			pattern = attrs.hasOwnProperty('editorPattern') ? "ng-pattern='"+attrs.editorPattern+"'" : "",
 			repeat = attrs.hasOwnProperty('editorRepeat') ? "ng-change='matchInput()'" : "",
 			maxLength = attrs.hasOwnProperty('editorMaxLength') ? "maxlength='"+attrs.editorMaxLength+"'" : "",
+			placeholder = attrs.hasOwnProperty('editorPlaceholder') ? "placeholder='"+l(attrs.editorPlaceholder)+"'" : "",
 			type = 	attrs.hasOwnProperty('editorType') ? attrs.editorType : "text",
 			inputHtml;
 
 		if(type == "textarea") {
-			inputHtml = '<textarea class="property-input" rows="4" cols="100" name="simpleProperty" ng-model="editorValue"' + maxLength +' '+required+' '+pattern+'></textarea>';
+			inputHtml = '<textarea class="property-input" rows="4" cols="100" name="simpleProperty" ng-model="editorValue"' + maxLength +' '+required+' '+pattern+' '+placeholder+'></textarea>';
 		} else {
 			if(type != "email" && type != "password" && type != "number") {
 				type = "text";
 			}
 
-			inputHtml = '<input class="property-input" type="'+type+'" name="simpleProperty" ng-model="editorValue"' + maxLength +' '+required+' '+pattern+' '+repeat+'></input>';
+			inputHtml = '<input class="property-input" type="'+type+'" '+placeholder+' name="simpleProperty" ng-model="editorValue"' + maxLength +' '+required+' '+pattern+' '+repeat+'></input>';
 		}
 
 		return inputHtml;

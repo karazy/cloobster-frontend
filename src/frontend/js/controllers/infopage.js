@@ -12,7 +12,8 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 
 	var activeBusinessId,
 		defaultPage = {
-			title: langService.translate("infopages.new.default.title") || "My new InfoPage"
+			//title: langService.translate("infopage.placeholder.title") || "e. g. breakfast hours",
+			//shortText: langService.translate("infopage.placeholder.shortText") || "Provide a short information. e. g. from 8:00 am - 10:00 am",
 		};
 
 	/** Resource for CRUD on info pages. */	

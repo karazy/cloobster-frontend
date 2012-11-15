@@ -1248,6 +1248,19 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Um die Details zu einer Infoseite zu bearbeiten, wählen Sie bitte eine Infoseite aus der Liste links oder legen eine neue an.",
 			"EN" : ""
 		},
+		"infopage.placeholder.title" : {
+			"DE" :  "z. B. Frühstückszeiten",
+			"EN" : ""
+		},
+		"infopage.placeholder.shortText" : {
+			"DE" :  "Kurze Information! z. B. von 8:00 - 10:00",
+			"EN" : ""
+		},
+		"infopage.placeholder.html" : {
+			"DE" :  "Ausführliche Information!<br/> z. B. Zu unserem reichhaltigen Frühstück dürfen wir sie zu folgenden Zeiten begrüßen"+
+			"<ul><li>Mo- Fr von 8:00 - 10:00</li><li>Sa- So 8:00 - 12:00</li></ul>",
+			"EN" : ""
+		},
 		//accounts partial
 		"accounts.title" : {
 			"DE" : "Benutzerverwaltung",
