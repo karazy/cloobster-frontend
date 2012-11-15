@@ -134,7 +134,7 @@
 							<li ng-repeat="method in activeBusiness.paymentMethods" ng-class="getEditModeClass()">
 								<div class="row-fluid">	
 									<div class="span10">
-										<div simple-property-editor editor-title="business.detail.paymentmethod" editor-property="method.name" editor-on-save="saveBusiness()" editor-required>
+										<div simple-property-editor editor-title="business.detail.paymentmethod" editor-property="method.name" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
 											<span>{{method.name}}</span>
 										</div>
 									</div>
