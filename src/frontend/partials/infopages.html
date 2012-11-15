@@ -7,7 +7,7 @@
 		</div>
 		<div class="span4">
 			<select name="lang_select" class="pull-right" ng-model="currentLanguage" ng-change="switchLanguage()" ng-options="lang.lang for lang in langcodes | filter:isSelectedLanguage">
-			  <option value="" selected>- default language -</option>
+			  <option value="" selected l="common.default.language">- default language -</option>
 			</select>
 		</div>
 	</div>
@@ -25,7 +25,7 @@
 	    					<div class="input-prepend">
             					<span class="add-on"><i class="icon-search icon-black"></i>
             					</span>
-            					<input l="common.search" l-attribute="placeholder" placeholder="Search" class="span10"  ng-model="infopagesQuery.title">
+            					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" class="span10"  ng-model="infopagesQuery.title">
         					</div>
         					<i class="icon-remove icon-black" ng-click="resetSearchField()">
         					</i> 

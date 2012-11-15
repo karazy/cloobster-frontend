@@ -1450,6 +1450,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Alle",
 			"EN" : "All"
 		},
+		"common.default.language" : {
+			"DE" :  "- Standardsprache -",
+			"EN" : "- default language -"
+		},
 		"general.sortable" : {
 			"DE" : "Ziehen um zu sortieren",
 			"EN" : "Drag to sort"
