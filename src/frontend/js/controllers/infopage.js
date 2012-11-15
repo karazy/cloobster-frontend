@@ -10,11 +10,7 @@
 */
 Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginService, langService, $log, handleError, InfoPage, Business, langcodes) {
 
-	var activeBusinessId,
-		defaultPage = {
-			//title: langService.translate("infopage.placeholder.title") || "e. g. breakfast hours",
-			//shortText: langService.translate("infopage.placeholder.shortText") || "Provide a short information. e. g. from 8:00 am - 10:00 am",
-		};
+	var activeBusinessId;
 
 	/** Resource for CRUD on info pages. */	
 	$scope.infoPageResource = null;
@@ -77,7 +73,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	*
 	*/
 	$scope.createInfoPage = function() {
-		$scope.currentInfoPage = new $scope.infoPageResource(defaultPage);
+		$scope.currentInfoPage = new $scope.infoPageResource();
 	}
 
 	$scope.saveInfoPage = function() {
