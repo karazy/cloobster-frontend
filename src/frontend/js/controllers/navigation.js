@@ -63,16 +63,10 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	}
 
 	$scope.switchBusiness = function() {
-		if($location.url().match(/^\/businesses\/.+\/menus.*/) ) {
-			$location.path('/businesses/'+$scope.activeBusinessId+'/menus');
-		}
-		if($location.url().match(/^\/businesses\/.+\/spots.*/) ) {
-			$location.path('/businesses/'+$scope.activeBusinessId+'/spots');
-		}
-		if($location.url().match(/^\/businesses\/\d+$/) ) {
-			$location.path('/businesses/'+$scope.activeBusinessId);	
-		}
+		var newPath = $location.path().replace(/^\/businesses\/\d+/, '/businesses/'+$scope.activeBusinessId);
+		$location.path(newPath);
 	};
+	
 	$scope.$watch('businesses.length', function (newValue, oldValue) {
 		if(!$scope.activeBusinessId && (newValue > 0)) {
 			$scope.activeBusinessId = $scope.businesses[0]['id'];
