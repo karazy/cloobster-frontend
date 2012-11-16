@@ -647,7 +647,7 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','$timeout', fun
 							// { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
 							// { name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe' ] },
 							// '/',
-							{ name: 'styles', items : [ 'Format'] },
+							{ name: 'styles', items : [ 'Format'] }
 							// { name: 'colors', items : [ 'TextColor','BGColor' ] },
 							// { name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] }
 						]
