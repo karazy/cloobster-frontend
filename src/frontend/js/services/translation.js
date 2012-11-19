@@ -290,7 +290,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"registration.confirmemail.title" : {
 			"DE" : "E-Mail-Adresse Bestätigt",
-			"EN" : "E-Mail Adress Confirmed"
+			"EN" : "E-Mail Confirmed"
 		},
 		"registration.confirmemail.message" : {
 			"DE" : "Vielen dank, die E-Mail Adresse wurde bestätigt und das Konto kann ab sofort genutzt werden.",
