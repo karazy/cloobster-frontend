@@ -289,8 +289,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 				"An email with activation link will be send to {{account.email}}."
 		},
 		"registration.confirmemail.title" : {
-			"DE" : "E-Mail Bestätigung",
-			"EN" : "E-Mail Confirmation"
+			"DE" : "E-Mail-Adresse Bestätigt",
+			"EN" : "E-Mail Adress Confirmed"
 		},
 		"registration.confirmemail.message" : {
 			"DE" : "Vielen dank, die E-Mail Adresse wurde bestätigt und das Konto kann ab sofort genutzt werden.",
