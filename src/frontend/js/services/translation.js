@@ -314,13 +314,17 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Currently you don't have any locations. To use cloobster, you need at least one location (hotel, restaurant)."
 		},
 		"businesses.description" : {
-			"DE" :  "Hier können Sie Ihre unterschiedlichen Locations (Hotels, Restaurants) die cloobster verwenden verwalten.",
-			"EN" : "You have more than one site you want to use cloobster with.<br/>"+
+			"DE" :  "Hier können Sie Ihre unterschiedlichen Locations (Hotels, Restaurants) verwalten und für Cloobster vorbereiten.",
+			"EN" : "You have more than one site you want to use Cloobster with.<br/>"+
 					"Here you can maintain the different locations you want to \"cloobsterize\"."
 		},
 		"businesses.add" : {
 			"DE" : "Location hinzufügen",
 			"EN" : "Add location"
+		},
+		"businesses.add.title" : {
+			"DE" : "Location Hinzufügen",
+			"EN" : "Add Location"
 		},
 		"businesses.action.show" : {
 			"DE" : "Einstellungen",

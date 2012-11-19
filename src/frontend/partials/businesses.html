@@ -43,6 +43,8 @@
 
 <div ng-show="showNewBusinessForm" class="row-fluid">
 	<div class="span8">
+		<hr>
+		<h2 l="businesses.add.title">Add Location</h2>
 		<form ng-submit="addNewBusiness()" name="newBusinessForm" class="well form-vertical" novalidate>
 			<div class="control-group" ng-class="getFieldInputClass(newBusinessForm.name.$dirty, newBusinessForm.name.$invalid)">
 			<label for="newBusinessName" class="control-label" l="businesses.form.name">Name*</label>
@@ -111,7 +113,7 @@
 		</div>
 			<p l="businesses.form.mandatory">Fields marked with * are mandatory.</p>
 			<button type="button" ng-click="closeNewBusinessForm()" class="btn" l="common.cancel">Cancel</button>
-			<button id="addBusinessButton" type="submit" class="btn btn-primary" data-loading-text="Saving..." l="common.add">Add</button>
+			<button id="addBusinessButton" ng-disabled="newBusinessForm.$invalid" type="submit" class="btn btn-primary" data-loading-text="Saving..." l="common.add">Add</button>
 		</form> 
 	</div>
 </div>
