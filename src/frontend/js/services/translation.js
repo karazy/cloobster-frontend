@@ -582,6 +582,16 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Bitte gib dein Passwort ein um die Löschaktion zu bestätigen.",
 			"EN" : "Please enter your password to confirm delete action."
 		},
+		"business.languageselection.title" : {
+			"DE" :  "Sprachauswahl",
+			"EN" : ""
+		},
+		"business.languageselection.description" : {
+			"DE" :  "Wählen Sie die Sprachen aus, die Sie in cloobster anbieten wollen.<br/>Sie können dann in Bereichen die Mehrsprachigkeit "+
+			"unterstützen mittels einer Auswahlliste (rechts oben) die jeweilige Sprache, die Sie pflegen wollen auswählen.<br/>"+
+			"Nicht übersetzte Felder werden dem Kunden in der Standardsprache angezeigt.",
+			"EN" : ""
+		},
 		//profile partial
 		"profile.title" : {
 			"DE" : "Profil",
@@ -1238,6 +1248,19 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Um die Details zu einer Infoseite zu bearbeiten, wählen Sie bitte eine Infoseite aus der Liste links oder legen eine neue an.",
 			"EN" : ""
 		},
+		"infopage.placeholder.title" : {
+			"DE" :  "z. B. Frühstückszeiten",
+			"EN" : ""
+		},
+		"infopage.placeholder.shortText" : {
+			"DE" :  "Kurze Information! z. B. von 8:00 - 10:00",
+			"EN" : ""
+		},
+		"infopage.placeholder.html" : {
+			"DE" :  "Ausführliche Information!<br/> z. B. Zu unserem reichhaltigen Frühstück dürfen wir sie zu folgenden Zeiten begrüßen"+
+			"<ul><li>Mo- Fr von 8:00 - 10:00</li><li>Sa- So 8:00 - 12:00</li></ul>",
+			"EN" : ""
+		},
 		//accounts partial
 		"accounts.title" : {
 			"DE" : "Benutzerverwaltung",
@@ -1422,6 +1445,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.image.edit" : {
 			"DE" :  "Bild anklicken um zu editieren",
 			"EN" : "Click image to edit"
+		},
+		"common.all" : {
+			"DE" :  "Alle",
+			"EN" : "All"
+		},
+		"common.default.language" : {
+			"DE" :  "- Standardsprache -",
+			"EN" : "- default language -"
 		},
 		"general.sortable" : {
 			"DE" : "Ziehen um zu sortieren",
