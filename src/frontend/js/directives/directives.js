@@ -641,9 +641,9 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','$timeout', fun
 							// { name: 'forms', items : [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 
 						 //        'HiddenField' ] },
 							// '/',
-							{ name: 'basicstyles', items : [ 'Bold','Italic','Underline', 'RemoveFormat' ] },
-							{ name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent',
-							'-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'] },
+							{ name: 'basicstyles', items : [ 'Bold', 'Underline', 'RemoveFormat' ] },
+							{ name: 'paragraph', items : [ 'NumberedList','BulletedList', //'Outdent','Indent'
+							'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'] },
 							// { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
 							// { name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe' ] },
 							// '/',
