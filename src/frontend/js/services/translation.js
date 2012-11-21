@@ -1299,9 +1299,13 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Service",
 			"EN" : "service"
 		},
-		"accounts.list.title" : {
-			"DE" : "Benutzer",
-			"EN" : "User"
+		"accounts.list.title.users" : {
+			"DE" : "Benutzerkonten",
+			"EN" : "User Accounts"
+		},
+		"accounts.list.title.administrators" : {
+			"DE" : "Administratorkonten",
+			"EN" : "Administrator Accounts"
 		},
 		"accounts.list.new" : {
 			"DE" : "Neuer Benutzer ...",
