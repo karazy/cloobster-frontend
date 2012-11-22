@@ -695,11 +695,12 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','$timeout', fun
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {		   
 		        		if(scope.editorEnabled == true || typeof scope.editorEnabled == 'undefined') {
-		        			scope.$apply('editorValue = editorProperty;saved=false;');
 		        			scope.clearInput();
+		        			scope.$digest();
+		        			scope.$apply('editorValue = editorProperty;saved=false;');		        			
 							dialog.modal('toggle');
 							// Set focus to editor.
-		        			editor.ckeditorGet().focus();							
+		        			editor.ckeditorGet().focus();
 		        		}
 					});
 
