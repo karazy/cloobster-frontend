@@ -57,7 +57,7 @@
 						</p>
 					</div>
 					<div ng-show="currentInfoPage.id">			
-						<div simple-image-editor editor-title-key="infopage.image" editor-image-id="image" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-image-resource="imageResource">
+						<div simple-image-editor="currentInfoPage.image" editor-title-key="infopage.image" editor-image-id="image" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-image-resource="imageResource">
 							<div ng-show="currentInfoPage.image.url">
 								<img  ng-src="{{currentInfoPage.image.url}}=s96" alt="click to edit" />
 								<p l="common.image.edit">Click image to edit</p>

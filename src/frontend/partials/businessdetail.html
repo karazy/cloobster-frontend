@@ -24,7 +24,7 @@
 			<h3 l="business.detail.section.profile">Location Profile</h3>
 			<div class="row-fluid imagebox">
 				<div class="span12">
-					<div simple-image-editor editor-title-key="business.detail.logo.editor.title" editor-image-id="logo" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
+					<div simple-image-editor="activeBusiness.images.logo" editor-title-key="business.detail.logo.editor.title" editor-image-id="logo" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
 						<div ng-show="activeBusiness.images.logo.url" class="logo">
 							<img  ng-src="{{activeBusiness.images.logo.url}}=s96" alt="click to edit" />
 							<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
@@ -33,7 +33,7 @@
 					</div>
 					<div class="row-fluid">
 						<div class="span4">
-							<div simple-image-editor editor-title-key="business.detail.picture1.editor.title" editor-image-id="picture1" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
+							<div simple-image-editor="activeBusiness.images.picture1" editor-title-key="business.detail.picture1.editor.title" editor-image-id="picture1" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
 								<div ng-show="activeBusiness.images.picture1.url">
 									<img  ng-src="{{activeBusiness.images.picture1.url}}=s128" alt="click to edit" />
 									<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
@@ -42,7 +42,7 @@
 							</div>
 						</div>
 						<div class="span4">
-							<div simple-image-editor editor-title-key="business.detail.picture2.editor.title" editor-image-id="picture2" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
+							<div simple-image-editor="activeBusiness.images.picture2" editor-title-key="business.detail.picture2.editor.title" editor-image-id="picture2" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
 								<div ng-show="activeBusiness.images.picture2.url">
 									<img  ng-src="{{activeBusiness.images.picture2.url}}=s128" alt="click to edit" />
 									<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
@@ -51,7 +51,7 @@
 							</div>
 						</div>
 						<div class="span4">
-							<div simple-image-editor editor-title-key="business.detail.picture3.editor.title" editor-image-id="picture3" editor-on-save="setImage(image)" editor-on-	cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
+							<div simple-image-editor="activeBusiness.images.picture3" editor-title-key="business.detail.picture3.editor.title" editor-image-id="picture3" editor-on-save="setImage(image)" editor-on-	cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
 								<div ng-show="activeBusiness.images.picture3.url">
 									<img  ng-src="{{activeBusiness.images.picture3.url}}=s128" alt="click to edit" />
 									<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
@@ -169,7 +169,7 @@
 					App Header Image
 				</div>
 				<div class="value">
-				<div simple-image-editor editor-title-key="business.detail.app.header" editor-image-id="appheader" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource" editor-crop-text="business.detail.app.header.description" editor-ratio="3:1">
+				<div simple-image-editor="activeBusiness.images.appheader" editor-title-key="business.detail.app.header" editor-image-id="appheader" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource" editor-crop-text="business.detail.app.header.description" editor-ratio="3:1">
 					<div ng-show="activeBusiness.images.appheader.url">
 						<img  ng-src="{{activeBusiness.images.appheader.url}}=s96" alt="click to edit" />
 						<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
@@ -217,7 +217,7 @@
 					Wall post Image
 				</div>
 				<div class="value">
-					<div simple-image-editor editor-title-key="business.detail.facebook.wallpost.image" editor-image-id="fbwallpost" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource" editor-crop-text="business.detail.facebook.wallpost.image.description" editor-ratio="4:3">
+					<div simple-image-editor="activeBusiness.images.fbwallpost" editor-title-key="business.detail.facebook.wallpost.image" editor-image-id="fbwallpost" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource" editor-crop-text="business.detail.facebook.wallpost.image.description" editor-ratio="4:3">
 						<div ng-show="activeBusiness.images.fbwallpost.url">
 							<img  ng-src="{{activeBusiness.images.fbwallpost.url}}=s96" alt="click to edit" />
 							<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>

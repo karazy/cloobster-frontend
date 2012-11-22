@@ -233,7 +233,8 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 			editorOnCancel: '&',
 			editorImageResource: '=',
 			editorImageId: '@',
-			editorEnabled: '='		
+			simpleImageEditor: '=',
+			editorEnabled: '='
 		},
 		compile: function(element, attrs, transclude) {
 			var html = '<div class="toggler" ng-transclude></div>'+
@@ -251,6 +252,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 								'<p l="common.error.footer">If this error persists, contact <a href="mailto:support@cloobster.com">support@cloobster.com</a></p>'+
 							'</div>'+
 							'<div class="upload-area" ng-hide="selectionActive">'+
+								'<img ng-src="{{imageUrl}}" style="max-width: 800px">'+
 								'<p l="fileupload.image.description"> Choose a GIF, PNG or JPEG file with a size less than 3 Mb.</p>'+
 							 	'<span class="btn btn-success fileinput-button">'+
 							 		'<i class="icon-plus icon-white"></i>'+
@@ -308,6 +310,9 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 						scope.selectedFiles = null;
 						scope.errorMessage = "";
 						scope.userSaved = false;
+						if(scope.simpleImageEditor) {
+							scope.imageUrl = scope.simpleImageEditor['url'];	
+						}
 						scope.userCancelled = false;
 		        	}
 
@@ -333,7 +338,6 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 					/** Called from upload service when upload is finished and updates U */
 					function fileUploadedCallback(success, errorText) {
 						var imageResource = scope.editorImageResource,
-							imageUrl = imageResource.url,
 							activeImage = null;
 
 						if(success) {
@@ -346,6 +350,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 
 
 	    					scope.activeImage = activeImage;
+	    					scope.imageUrl = activeImage.url;
 	    					scope.error = false;
 
 							if(scope.userCancelled) {
