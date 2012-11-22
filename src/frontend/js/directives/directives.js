@@ -118,10 +118,9 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {		   
 		        		if(scope.editorEnabled == true || typeof scope.editorEnabled == 'undefined') {
+		        			scope.clearInput();
 		        			scope.$apply('editorValue = editorProperty;editorRepeat="";saved=false');
-
-							dialog.modal('toggle');	
-							input.trigger("focus");
+		        			dialog.modal('toggle');
 		        		}
 					});
 
@@ -697,8 +696,10 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','$timeout', fun
 		        	iElement.find('div.toggler').bind('click', function() {		   
 		        		if(scope.editorEnabled == true || typeof scope.editorEnabled == 'undefined') {
 		        			scope.$apply('editorValue = editorProperty;saved=false;');
-						
+		        			scope.clearInput();
 							dialog.modal('toggle');
+							// Set focus to editor.
+		        			editor.ckeditorGet().focus();							
 		        		}
 					});
 
