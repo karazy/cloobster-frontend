@@ -500,6 +500,15 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Bezahlarten",
 			"EN" : "Payments"
 		},
+		"business.detail.email" : {
+			"DE" : "E-Mail (öffentlich)",
+			"EN" : "E-Mail (public)"
+		},
+		"business.detail.stars" : {
+			"DE" : "Anzahl der Sterne",
+			"EN" : "Amount of Stars"
+		},
+		
 		"business.detail.paymentmethods.list.new" : {
 			"DE" : "Neue Bezahlart",
 			"EN" : "New payment"

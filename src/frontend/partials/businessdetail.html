@@ -68,6 +68,12 @@
 					<div class="value">{{activeBusiness.description}}</div>
 				</div>
 			</div>
+			<div simple-property-editor editor-title="business.detail.stars" editor-property="activeBusiness.stars" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-type="number" editor-required>
+				<div class="data-element" ng-class="getEditModeClass()">
+					<div class="key" l="business.detail.stars">Stars</div>
+					<div class="value">{{activeBusiness.stars}}</div>
+				</div>
+			</div>
 			<div simple-property-editor editor-title="business.detail.slogan" editor-property="activeBusiness.slogan" editor-on-save="saveBusiness()" editor-enabled="editMode">
 				<div class="data-element" ng-class="getEditModeClass()">
 					<div class="key" l="business.detail.slogan">Slogan</div>
@@ -78,6 +84,12 @@
 				<div class="data-element" ng-class="getEditModeClass()">
 					<div class="key" l="business.detail.url">Website</div>
 					<div class="value">{{activeBusiness.url}}</div>
+				</div>
+			</div>
+			<div simple-property-editor editor-title="business.detail.email" editor-property="activeBusiness.email" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-type="email">
+				<div class="data-element" ng-class="getEditModeClass()">
+					<div class="key" l="business.detail.email">E-Mail</div>
+					<div class="value">{{activeBusiness.email}}</div>
 				</div>
 			</div>
 			<div simple-property-editor editor-title="business.detail.address" editor-property="activeBusiness.address" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
