@@ -11,8 +11,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 	var map = {
 		//index
 		"product.brand" : {
-			"DE" : "Cloobster",
-			"EN" : "Cloobster"
+			"DE" : "cloobster",
+			"EN" : "cloobster"
 		},
 		"nav.logout" : {
 			"DE" : "Logout",
@@ -77,8 +77,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		//registration partial
 		"registration.title" : {
-			"DE" : "Cloobster Registrierung",
-			"EN" : "Cloobster Registration"
+			"DE" : "cloobster Registrierung",
+			"EN" : "cloobster Registration"
 		},
 		"registration.form.fullname" : {
 			"DE" : "Name*",
@@ -300,8 +300,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "* required field"
 		},
 		"registration.success.title" : {
-			"DE" :  "Cloobster Registrierung erfolgreich!",
-			"EN" :  "Cloobster registration successful!"
+			"DE" :  "cloobster Registrierung erfolgreich!",
+			"EN" :  "cloobster registration successful!"
 		},
 		//businesses partial
 		"businesses.title" : {
@@ -309,19 +309,19 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "My Locations"
 		},
 		"businesses.empty.description" : {
-			"DE" :  "Im Moment haben Sie keine gespeicherten Betriebe. Um cloobster zu nutzen, müssen Sie mindestens einen Betrieb (Hotel, Restaurant) anlegen.",
+			"DE" :  "Im Moment haben Sie keine gespeicherten Locations. Um cloobster zu nutzen, müssen Sie mindestens eine Location (Hotel, Restaurant) anlegen.",
 			"EN" : "You have no current locations. You need at least one location (hotel, restaurant) to use cloobster."
 		},
 		"businesses.description" : {
-			"DE" :  "Hier können Sie Ihre unterschiedlichen Betriebe (Hotels, Restaurants) verwalten und für Cloobster vorbereiten.",
+			"DE" :  "Hier können Sie Ihre unterschiedlichen Locations (Hotels, Restaurants) verwalten und für cloobster vorbereiten.",
 			"EN" :  "You can add, edit, or delete your locations (hotels, restaurants) here."
 		},
 		"businesses.add" : {
-			"DE" : "Betrieb hinzufügen",
+			"DE" : "Location hinzufügen",
 			"EN" : "Add location"
 		},
 		"businesses.add.title" : {
-			"DE" : "Betrieb hinzufügen",
+			"DE" : "Location hinzufügen",
 			"EN" : "Add location"
 		},
 		"businesses.action.show" : {
@@ -345,8 +345,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "User management"
 		},
 		"businesses.action.delete" : {
-			"DE" : "Betrieb löschen",
-			"EN" : "Delete business"
+			"DE" : "Location löschen",
+			"EN" : "Delete location"
 		},
 		"businesses.form.name" : {
 			"DE" : "Name*",
@@ -385,16 +385,16 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Fields marked with * are mandatory."
 		},
 		"businesses.dialog.delete" : {
-			"DE" : "Betrieb löschen",
-			"EN" : "Delete business"
+			"DE" : "Location löschen",
+			"EN" : "Delete location"
 		},
 		"busineses.business.deleted.tooltip" : {
-			"DE" : "Dieser Betrieb wurde gelöscht.",
+			"DE" : "Diese Location wurde gelöscht.",
 			"EN" : "This location has been deleted."
 		},
 		//business detail partial
 		"business.detail.help" : {
-			"DE" :  "Hier können Sie das Profil des aktiven Betriebs pflegen.<br/>Außerdem können Sie hier die Oberfläche der App konfigurieren.",
+			"DE" :  "Hier können Sie das Profil der aktiven Location pflegen.<br/>Außerdem können Sie hier die Oberfläche der App konfigurieren.",
 			"EN" : "Edit properties of current location.<br/>Configure corporate identity for app."
 		},
 		"business.action.edit.enable" : {
@@ -534,7 +534,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Click to activate theme."
 		},
 		"business.detail.themes.default.description" : {
-			"DE" :  "Das Standard-Cloobster-Motiv",
+			"DE" :  "Das Standard-cloobster-Motiv",
 			"EN" :  "Default cloobster theme"
 		},
 		"business.detail.themes.red.description" : {
@@ -578,8 +578,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Password invalid!"
 		},
 		"business.dialog.delete.text" : {
-		"DE" : "Du bist dabei, <strong>{{activeBusiness.name}}</strong> zu löschen! Der Betrieb wird deaktiviert und in einen Lesemodus versetzt. "+
-			"Aktuell eingeloggte Servicekräfte und Gäste können noch Bestellungen einsehen, aber keine weitere Aktionen tätigen. Der Betrieb "+
+		"DE" : "Du bist dabei, <strong>{{activeBusiness.name}}</strong> zu löschen! Die Location wird deaktiviert und in einen Lesemodus versetzt. "+
+			"Aktuell eingeloggte Servicekräfte und Gäste können noch Bestellungen einsehen, aber keine weitere Aktionen tätigen. Die Location "+
 			" wird nach einer Weile permanent gelöscht!",
 		"EN" : "You are about to delete <strong>{{activeBusiness.name}}</strong>! Location will be read-only after it has been deleted and will be permanently removed shortly afterwards."
 		},
@@ -1213,7 +1213,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		//infopage partial
 		"infopages.description" : {
-			"DE" :  "Hier können Sie Informationen zu aktuellen Betrieben anlegen. Dies können zum Beispiel Informationen<br/>"+
+			"DE" :  "Hier können Sie Informationen zur aktuellen Location anlegen. Dies können zum Beispiel Informationen<br/>"+
 			"über Blumenservice, Frühstückszeiten, Kontaktdaten und so weiter sein.",
 			"EN" : "Information pages for your locations (e.g. business hours, available services, tips)."
 		},
@@ -1274,9 +1274,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"accounts.description" : {
 			"DE" :  "Hier können Sie Benutzerkonten verwalten. Es gibt zwei Arten von Konten.<br/>"+
 			"<ol><li>Admin-Konten haben die gleichen Rechte wie das Firmenkonto,<br/>können aber keine weiteren Admins "+
-			" anlegen und keine Betriebe anlegen/löschen.</li>"+
+			" anlegen und keine Locations anlegen/löschen.</li>"+
 			"<li>Service-Konten können nur auf das Cockpit zugreifen.</li></ol>"+
-			"Jedem Konto können Sie die Betriebe zuweisen, auf die es Zugriff hat.",
+			"Jedem Konto können Sie die Locations zuweisen, auf die es Zugriff hat.",
 			"EN" : "Here you can manage user accounts for your company.<br>"+
 			"For each account you can define businesses to which the account has access."
 		},
@@ -1333,11 +1333,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "First and last name"
 		},
 		"accounts.admin.businesses.list.title" : {
-			"DE" : "Zugewiesene Betriebe",
+			"DE" : "Zugewiesene Locations",
 			"EN" : "Assigned businesses"
 		},
 		"accounts.admin.businesses.list.description" : {
-			"DE" : "Für hier aufgelistete Betriebe hat der Benutzer Administrationsrechte.<br/>Dies beinhaltet auch das Servicecockpit.",
+			"DE" : "Für hier aufgelistete Locations hat der Benutzer Administrationsrechte.<br/>Dies beinhaltet auch das Servicecockpit.",
 			"EN" : "User has administrative rights for the following locations.<br/>This includes the service cockpit."
 		},
 		"accounts.admin.dialog.remove.title" : {
@@ -1349,11 +1349,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "{{currentAdmin.name}} will be removed!"
 		},
 		"accounts.all.businesses.list.title" : {
-			"DE" : "Verfügbare Betriebe",
+			"DE" : "Verfügbare Locations",
 			"EN" : "Available businesses"
 		},
 		"accounts.all.businesses.list.description" : {
-			"DE" : "Drag & drop in die Liste der zugewiesenen Betriebe, um dem Benutzer entsprechende Rechte zu gewähren.",
+			"DE" : "Drag & drop in die Liste der zugewiesenen Locations, um dem Benutzer entsprechende Rechte zu gewähren.",
 			"EN" : "Drag & drop to list of assigned businesses to grant user access."
 		},
 		"accounts.businesses.moveable.tooltip" : {
@@ -1369,7 +1369,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Edit service user"
 		},
 		"accounts.cockpit.businesses.list.description" : {
-			"DE" : "Für hier aufgelistete Betriebe hat der Benutzer Zugriffsrechte auf das Service Cockpit.",
+			"DE" : "Für hier aufgelistete Locations hat der Benutzer Zugriffsrechte auf das Service Cockpit.",
 			"EN" : "User has access to the following locations."
 		},
 		//activate account partial
@@ -1473,7 +1473,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Home"
 		},
 		"breadcrumb.businesses" : {
-			"DE" : "Betriebe",
+			"DE" : "Locations",
 			"EN" : "businesses"
 		},
 		"breadcrumb.menus" : {
