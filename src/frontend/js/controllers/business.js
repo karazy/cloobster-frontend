@@ -292,22 +292,27 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.deleteExistingImage = function(imageId) {
 		if(!imageId) {
 			$log.log('Business.deleteExistingImage > no ImageId given');
+			return;
 		}
-		
+
 		if(!$scope.activeBusiness) {
 			$log.log('Business.deleteExistingImage > no activeBusiness not set');
+			return;
 		}
 
 		if(!$scope.activeBusiness.images) {
 			$log.log('Business.deleteExistingImage > activeBusiness has no images property');
+			return;
 		}
 
 		if(!$scope.activeBusiness.images[imageId]) {
 			$log.log('Business.deleteExistingImage > activeBusiness.images has no image with id=' + imageId);
+			return;
 		}
 
 		if(!$scope.imageResource) {
 			$log.log('Business.deleteExistingImage > no image resource exists');
+			return;
 		}
 
 		$log.log('Business.deleteExistingImage > deleting image with id='+imageId);
