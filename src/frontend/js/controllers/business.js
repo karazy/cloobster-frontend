@@ -317,7 +317,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 		$log.log('Business.deleteExistingImage > deleting image with id='+imageId);
 
-		$scope.imageResource.delete(
+		$scope.imageResource.remove(
 			{'id' : imageId},
 			angular.noop,
 			handleError
