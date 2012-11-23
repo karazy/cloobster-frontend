@@ -133,6 +133,7 @@
 					</div>
 					<button ng-show="!activeBusiness.images.appheader" ng-disabled="!editMode" class="btn" l="business.detail.add.image.button">Add Image</button>
 				</div>
+				<button ng-disabled="!editMode" ng-show="activeBusiness.images.appheader.url" class="btn" ng-click="deleteExistingImage(appheader)"><i class="icon-trash icon-black"></i></button>
 				</div>
 			</div>
 			<div class="data-element">
@@ -147,7 +148,7 @@
 						</div>						
 						<button ng-show="!activeBusiness.images.logo" ng-disabled="!editMode" class="btn" l="business.detail.logo.button">Add Logo</button>						
 					</div>
-					<button ng-disabled="!editMode" class="btn" ng-click="deleteExistingImage(logo)"><i class="icon-trash icon-black"></i></button>
+					<button ng-disabled="!editMode" ng-show="activeBusiness.images.logo.url" class="btn" ng-click="deleteExistingImage(logo)"><i class="icon-trash icon-black"></i></button>
 				</div>
 			</div>
 			<div class="data-element">				
@@ -196,6 +197,7 @@
 						</div>
 						<button ng-show="!activeBusiness.images.fbwallpost" ng-disabled="!editMode" class="btn" l="business.detail.add.image.button">Add Image</button>
 					</div>
+					<button ng-disabled="!editMode" ng-show="activeBusiness.images.fbwallpost.url" class="btn" ng-click="deleteExistingImage(fbwallpost)"><i class="icon-trash icon-black"></i></button>
 				</div>
 			</div>
 		</div>
@@ -212,6 +214,7 @@
 								</div>
 								<button ng-show="!activeBusiness.images.picture1" ng-disabled="!editMode" class="btn" l="business.detail.picture1.button">Add Profile Picture1</button>
 							</div>
+							<button ng-disabled="!editMode" ng-show="activeBusiness.images.picture1.url" class="btn" ng-click="deleteExistingImage(picture1)"><i class="icon-trash icon-black"></i></button>
 						</div>
 						<div class="span4">
 							<div simple-image-editor="activeBusiness.images.picture2" editor-title-key="business.detail.picture2.editor.title" editor-image-id="picture2" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
@@ -221,6 +224,7 @@
 								</div>
 								<button ng-show="!activeBusiness.images.picture2" ng-disabled="!editMode" class="btn" l="business.detail.picture2.button">Add Profile Picture2</button>
 							</div>
+							<button ng-disabled="!editMode" ng-show="activeBusiness.images.picture2.url" class="btn" ng-click="deleteExistingImage(picture2)"><i class="icon-trash icon-black"></i></button>
 						</div>
 						<div class="span4">
 							<div simple-image-editor="activeBusiness.images.picture3" editor-title-key="business.detail.picture3.editor.title" editor-image-id="picture3" editor-on-save="setImage(image)" editor-on-	cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
@@ -230,6 +234,7 @@
 								</div>
 								<button ng-show="!activeBusiness.images.picture3" ng-disabled="!editMode" class="btn" l="business.detail.picture3.button">Add Profile Picture3</button>
 							</div>
+							<button ng-disabled="!editMode" ng-show="activeBusiness.images.picture3.url" class="btn" ng-click="deleteExistingImage(picture3)"><i class="icon-trash icon-black"></i></button>
 						</div>
 					</div>
 				</div>

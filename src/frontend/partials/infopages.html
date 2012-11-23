@@ -71,7 +71,7 @@
 						<div richtext-property-editor editor-title="infopage.html" editor-property="currentInfoPage.html" editor-on-save="saveInfoPage()" editor-placeholder="infopage.placeholder.html" editor-required>
 							<div class="edit" tooltip="infopage.html">
 								<span l="infopage.placeholder.html" ng-hide="currentInfoPage.html" class="simple-property-placeholder">Detailed information!</span>
-								<div ng-bind-html="currentInfoPage.html">
+								<div ng-bind-html-unsafe="currentInfoPage.html">
 								</div> <i class="icon-edit icon-black"></i>
 							</div>
 						</div>
