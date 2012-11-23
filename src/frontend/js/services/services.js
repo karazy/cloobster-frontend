@@ -825,8 +825,6 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 			$rootScope.customer = true;
 		}
 	});
-	
-
 
 	/**
 	*	Callback to handle $http request success.
