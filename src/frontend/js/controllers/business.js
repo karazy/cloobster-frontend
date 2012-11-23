@@ -265,6 +265,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		$scope.activeProperty = null;
 	};
 
+	//image editing start
+
 	$scope.setImage = function(image) {
 		$log.info("save image " + image);
 		//make sure that images exist!
@@ -282,6 +284,45 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			.error(handleError);
 		}
 	};
+
+	/**
+	*
+	* Deletes an existing image based on given imageId
+	*/
+	$scope.deleteExistingImage = function(imageId) {
+		if(!imageId) {
+			$log.log('Business.deleteExistingImage > no ImageId given');
+		}
+
+		if(!$scope.activeBusiness) {
+			$log.log('Business.deleteExistingImage > no activeBusiness not set');
+		}
+
+		if(!$scope.activeBusiness.images) {
+			$log.log('Business.deleteExistingImage > activeBusiness has no images property');
+		}
+
+		if(!$scope.activeBusiness.images[imageId]) {
+			$log.log('Business.deleteExistingImage > activeBusiness.images has no image with id=' + imageId);
+		}
+
+		if(!$scope.imageResource) {
+			$log.log('Business.deleteExistingImage > no image resource exists');
+		}
+
+		$log.log('Business.deleteExistingImage > deleting image with id='+imageId);
+
+		$scope.imageResource.delete(
+			{'id' : imageId},
+			angular.noop,
+			handleError
+		);
+
+		$scope.activeBusiness.images[imageId] = null;
+		delete $scope.activeBusiness.images[imageId];
+	}
+
+	//image editing end
 
 	// start payment methods
 
