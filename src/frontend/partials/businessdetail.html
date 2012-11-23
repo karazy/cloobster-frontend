@@ -148,7 +148,7 @@
 						</div>						
 						<button ng-show="!activeBusiness.images.logo" ng-disabled="!editMode" class="btn" l="business.detail.logo.button">Add Logo</button>						
 					</div>
-					<button ng-disabled="!editMode" ng-show="activeBusiness.images.logo.url" class="btn" ng-click="deleteExistingImage(logo)"><i class="icon-trash icon-black"></i></button>
+					<button ng-disabled="!editMode" ng-show="activeBusiness.images.logo.url" class="btn" ng-click="deleteExistingImage('logo')"><i class="icon-trash icon-black"></i></button>
 				</div>
 			</div>
 			<div class="data-element">				
@@ -191,13 +191,13 @@
 				</div>
 				<div class="value">
 					<div simple-image-editor="activeBusiness.images.fbwallpost" editor-title-key="business.detail.facebook.wallpost.image" editor-image-id="fbwallpost" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource" editor-crop-text="business.detail.facebook.wallpost.image.description" editor-ratio="4:3">
-						<div ng-show="activeBusiness.images.fbwallpost.url">
+						<div ng-show="activeBusiness.images.fbwallpost.url" style="display: inline-block;">
 							<img  ng-src="{{activeBusiness.images.fbwallpost.url}}=s96" alt="click to edit" />
 							<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
 						</div>
 						<button ng-show="!activeBusiness.images.fbwallpost" ng-disabled="!editMode" class="btn" l="business.detail.add.image.button">Add Image</button>
 					</div>
-					<button ng-disabled="!editMode" ng-show="activeBusiness.images.fbwallpost.url" class="btn" ng-click="deleteExistingImage(fbwallpost)"><i class="icon-trash icon-black"></i></button>
+					<button ng-disabled="!editMode" ng-show="activeBusiness.images.fbwallpost.url" class="btn" ng-click="deleteExistingImage('fbwallpost')"><i class="icon-trash icon-black"></i></button>
 				</div>
 			</div>
 		</div>
@@ -214,7 +214,7 @@
 								</div>
 								<button ng-show="!activeBusiness.images.picture1" ng-disabled="!editMode" class="btn" l="business.detail.picture1.button">Add Profile Picture1</button>
 							</div>
-							<button ng-disabled="!editMode" ng-show="activeBusiness.images.picture1.url" class="btn" ng-click="deleteExistingImage(picture1)"><i class="icon-trash icon-black"></i></button>
+							<button ng-disabled="!editMode" ng-show="activeBusiness.images.picture1.url" class="btn" ng-click="deleteExistingImage('picture1')"><i class="icon-trash icon-black"></i></button>
 						</div>
 						<div class="span4">
 							<div simple-image-editor="activeBusiness.images.picture2" editor-title-key="business.detail.picture2.editor.title" editor-image-id="picture2" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
@@ -224,7 +224,7 @@
 								</div>
 								<button ng-show="!activeBusiness.images.picture2" ng-disabled="!editMode" class="btn" l="business.detail.picture2.button">Add Profile Picture2</button>
 							</div>
-							<button ng-disabled="!editMode" ng-show="activeBusiness.images.picture2.url" class="btn" ng-click="deleteExistingImage(picture2)"><i class="icon-trash icon-black"></i></button>
+							<button ng-disabled="!editMode" ng-show="activeBusiness.images.picture2.url" class="btn" ng-click="deleteExistingImage('picture2')"><i class="icon-trash icon-black"></i></button>
 						</div>
 						<div class="span4">
 							<div simple-image-editor="activeBusiness.images.picture3" editor-title-key="business.detail.picture3.editor.title" editor-image-id="picture3" editor-on-save="setImage(image)" editor-on-	cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
@@ -234,7 +234,7 @@
 								</div>
 								<button ng-show="!activeBusiness.images.picture3" ng-disabled="!editMode" class="btn" l="business.detail.picture3.button">Add Profile Picture3</button>
 							</div>
-							<button ng-disabled="!editMode" ng-show="activeBusiness.images.picture3.url" class="btn" ng-click="deleteExistingImage(picture3)"><i class="icon-trash icon-black"></i></button>
+							<button ng-disabled="!editMode" ng-show="activeBusiness.images.picture3.url" class="btn" ng-click="deleteExistingImage('picture3')"><i class="icon-trash icon-black"></i></button>
 						</div>
 					</div>
 				</div>
