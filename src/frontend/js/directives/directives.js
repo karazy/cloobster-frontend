@@ -120,7 +120,7 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 		        		if(scope.editorEnabled == true || typeof scope.editorEnabled == 'undefined') {
 		        			scope.$apply('editorValue = editorProperty;editorRepeat="";saved=false');
 		        			dialog.modal('toggle');
-		        			
+
 		        			input.trigger("focus");
 		        		}
 					});
@@ -313,6 +313,9 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 						scope.userSaved = false;
 						if(scope.simpleImageEditor) {
 							scope.imageUrl = scope.simpleImageEditor['url'];
+						}
+						else {
+							scope.imageUrl = null;
 						}
 						scope.userCancelled = false;
 		        	}
