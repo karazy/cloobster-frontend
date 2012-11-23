@@ -118,9 +118,10 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {		   
 		        		if(scope.editorEnabled == true || typeof scope.editorEnabled == 'undefined') {
-		        			scope.clearInput();
 		        			scope.$apply('editorValue = editorProperty;editorRepeat="";saved=false');
 		        			dialog.modal('toggle');
+		        			
+		        			input.trigger("focus");
 		        		}
 					});
 
@@ -311,7 +312,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 						scope.errorMessage = "";
 						scope.userSaved = false;
 						if(scope.simpleImageEditor) {
-							scope.imageUrl = scope.simpleImageEditor['url'];	
+							scope.imageUrl = scope.simpleImageEditor['url'];
 						}
 						scope.userCancelled = false;
 		        	}
