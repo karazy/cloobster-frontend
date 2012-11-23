@@ -327,7 +327,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		var product = $scope.currentProduct;
 
 		if(product && product.id) {
-			product.$update(null, null, handleError);	
+			product.$update(null, null, handleError);
 		} else {
 			product.$save(saveProductSuccess, handleError);
 		}
@@ -340,11 +340,13 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		// Clear product sort array.
 		$scope.currentMenu.productIds = [];
+		$scope.products.splice(0, $scope.products.length);
 
 		liElements.each(function(index, ele) {
 			//get corresponding product
 			tmpProduct = angular.element(ele).scope().product;
 			if(tmpProduct) {
+				$scope.products.push(tmpProduct);
 				$scope.currentMenu.productIds.push(tmpProduct.id);
 				$log.log("set product " + tmpProduct.name + " index to " + (index));
 			}
