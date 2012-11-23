@@ -4,7 +4,7 @@
 var Cloobster = Cloobster || {};
 
 // Declare app level module which depends on filters, and services
-Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster.directives', 'Cloobster.filters']).
+Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster.directives', 'Cloobster.filters', 'ngSanitize']).
   config(['$routeProvider','configProvider', function($routeProvider,configProvider) {
     // Here you set the service url that the Cloobster services use.
     //configProvider.setServiceUrl('https://eatsense-test.appspot.com');
@@ -23,6 +23,7 @@ Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster
     $routeProvider.when('/businesses/:businessId/menus', {templateUrl: 'partials/menus.html', controller: Cloobster.Menu});
     $routeProvider.when('/businesses/:businessId/spots', {templateUrl: 'partials/spots.html', controller: Cloobster.Spot});
     $routeProvider.when('/businesses/:businessId/category_assignment', {templateUrl: 'partials/category_assignment.html', controller: Cloobster.Spot});
+    $routeProvider.when('/businesses/:businessId/infopages', {templateUrl: 'partials/infopages.html', controller: Cloobster.InfoPage});
     $routeProvider.when('/businesses', {templateUrl: 'partials/businesses.html', controller: Cloobster.Business});
     $routeProvider.when('/businesses/new', {templateUrl: 'partials/businesses.html', controller: Cloobster.Business});
     $routeProvider.when('/businesses/:businessId', {templateUrl: 'partials/businessdetail.html', controller: Cloobster.Business});

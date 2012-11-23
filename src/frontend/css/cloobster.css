@@ -5,6 +5,15 @@
   display: none;
 }
 
+html, body {
+  height: 100%;
+}
+
+.fill { 
+    min-height: 100%;
+    height: 100%;
+}
+
 .partial-wrapper {
   margin: 0 0 1em 0;
 }
@@ -172,6 +181,19 @@ ul.payment-method-list li {
   margin: 1.5em 0;
 }
 
+/* data container start */
+.data-container-floating { 
+  border: 1px solid gray; 
+  border-radius: 0.5em;
+  position: fixed;
+  top: 75px;
+  right: 50px;
+  left: 50px;
+  /*bottom: 50px;*/
+  background-color: #FFF;
+  padding-top: 15px;
+}
+
 .data-container-with-title { 
   border: 1px solid gray; 
   border-radius: 0.5em;
@@ -186,6 +208,10 @@ ul.payment-method-list li {
 
 .data-container-large {
   height: 400px;
+}
+
+.data-container-medium {
+  height: 300px;
 }
 
 .data-container-small {
@@ -222,6 +248,12 @@ ul.payment-method-list li {
 .data-container-inactive {
   color: gray;
   border-color: #C3C3C3 !important;
+}
+
+/* data container end */
+
+.simple-property-placeholder {
+  color: gray;
 }
 
 .product-wrapper {
@@ -261,6 +293,10 @@ ul.payment-method-list li {
 .activation-checkbox input {
   float: left;
   margin-right: 0.5em
+}
+
+.language-checkbox {
+  float: left;
 }
 
 ul.options-list {

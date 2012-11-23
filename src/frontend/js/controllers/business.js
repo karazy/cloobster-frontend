@@ -10,7 +10,7 @@
 * 	View and manage businesses such as restaurants.
 * 	@constructor
 */
-Cloobster.Business = function($scope, $http, $routeParams, $location, loginService, uploadService, langService, Business, $log, handleError, Company) {
+Cloobster.Business = function($scope, $http, $routeParams, $location, loginService, uploadService, langService, Business, $log, handleError, Company, langcodes) {
 
 		/** Holds the Id of the active modal dialog.
 		@type {string} */
@@ -51,6 +51,10 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.error = false;
 	/** Error message. */ 
 	$scope.errorMessage = "";
+	/** A map with language names and codes. */
+	$scope.langcodes = langcodes;
+	/** Filter object for language selection dialog. */
+	$scope.languageQuery = {};
 
 	/**
 	* Returns all businesses
@@ -88,12 +92,13 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	*/
 	$scope.deleteBusiness = function() {
 		var errorMessageInvalid = langService.translate("business.action.delete.invalid");
-
-		$scope.deletePassword = null;
+		
 		
 		loginService.authenticatedRequest($scope.deletePassword, function() {
 			$scope.businessToDelete.$delete(success, error);
 		});
+
+		$scope.deletePassword = null;
 
 		function success() {
 			$scope.businessToDelete = null;
@@ -123,6 +128,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		$scope.activeBusiness = $scope.businessResource.get({'id' : id}, function() {						
 			//if no images are included init with empty object
 			$scope.activeBusiness.images = $scope.activeBusiness.images || {};
+			//if no lang array exists create one
+			$scope.activeBusiness.lang = $scope.activeBusiness.lang || [];
 
 			$scope.imageResource =	createImageResource($scope.activeBusiness.id);
 		}, handleError);
@@ -258,6 +265,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		$scope.activeProperty = null;
 	};
 
+	//image editing start
+
 	$scope.setImage = function(image) {
 		$log.info("save image " + image);
 		//make sure that images exist!
@@ -275,6 +284,50 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			.error(handleError);
 		}
 	};
+
+	/**
+	*
+	* Deletes an existing image based on given imageId
+	*/
+	$scope.deleteExistingImage = function(imageId) {
+		if(!imageId) {
+			$log.log('Business.deleteExistingImage > no ImageId given');
+			return;
+		}
+
+		if(!$scope.activeBusiness) {
+			$log.log('Business.deleteExistingImage > no activeBusiness not set');
+			return;
+		}
+
+		if(!$scope.activeBusiness.images) {
+			$log.log('Business.deleteExistingImage > activeBusiness has no images property');
+			return;
+		}
+
+		if(!$scope.activeBusiness.images[imageId]) {
+			$log.log('Business.deleteExistingImage > activeBusiness.images has no image with id=' + imageId);
+			return;
+		}
+
+		if(!$scope.imageResource) {
+			$log.log('Business.deleteExistingImage > no image resource exists');
+			return;
+		}
+
+		$log.log('Business.deleteExistingImage > deleting image with id='+imageId);
+
+		$scope.imageResource.remove(
+			{'id' : imageId},
+			angular.noop,
+			handleError
+		);
+
+		$scope.activeBusiness.images[imageId] = null;
+		delete $scope.activeBusiness.images[imageId];
+	}
+
+	//image editing end
 
 	// start payment methods
 
@@ -319,6 +372,43 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	};
 
 	//end theme methods
+
+	//start language methods
+	
+	$scope.saveLanguageSelection = function() {
+		if(!$scope.activeBusiness.lang) {
+			$scope.activeBusiness.lang = [];
+		}
+
+		angular.forEach($scope.langcodes, function(lang, key) {
+			if(lang.selected) {
+				$scope.activeBusiness.lang.push(lang.code);
+			}
+		});
+
+		$scope.saveBusiness();
+		//hide lang selection window
+		$scope.langSelection = false;
+	}
+
+	$scope.loadLanguageSelection = function() {
+		//show lang selection window
+		$scope.langSelection = true;
+		//calc dynamic height for language box
+		jQuery('.data-container-dynamic').height(jQuery(window).height() * 0.6);
+
+		//reset filters
+		$scope.languageQuery.lang = '';
+		$scope.languageQuery.selected = '';
+
+		angular.forEach($scope.langcodes, function(lang, key) {
+			if(jQuery.inArray(lang.code, $scope.activeBusiness.lang) >= 0) {
+				lang.selected = true;
+			}
+		});
+	}
+
+	//end language methods
 
 	/*
 	* Get css class for field highlighting.
@@ -385,4 +475,4 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 };
 
-Cloobster.Business.$inject = ['$scope', '$http','$routeParams', '$location', 'login', 'upload', 'lang', 'Business', '$log','errorHandler','Company'];
+Cloobster.Business.$inject = ['$scope', '$http','$routeParams', '$location', 'login', 'upload', 'lang', 'Business', '$log','errorHandler','Company', 'langcodes'];

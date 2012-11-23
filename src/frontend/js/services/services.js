@@ -6,7 +6,7 @@
 *	Other modules can depend on this, and resolve service instances
 *	with angulars depency injection.
 */
-Cloobster.services = angular.module('Cloobster.services', ['ngResource', "Cloobster.translations"]);
+Cloobster.services = angular.module('Cloobster.services', ['ngResource', "Cloobster.translations", "Cloobster.languages"]);
 
 /** 
 *	@constructor
@@ -602,6 +602,59 @@ Cloobster.services.factory('CompanyAccount', ['cloobsterResource', function($res
 	return CompanyAccount;
 }]);
 
+
+/** 
+* 	@constructor
+* 	Factory function that creates the 'InfoPage' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Frederik Reifschneider
+*/
+Cloobster.services.factory('InfoPage',['cloobsterResource', function($resource) {
+	/**
+	*	@name Cloobster.services.InfoPage
+	*	
+	*/
+	var InfoPage = {
+		buildResource: function(businessId, language) {
+			 return $resource('/b/businesses/:bid/infopages/:id',
+					//params
+					{
+						'id' : '@id',
+						'bid' : businessId
+					},
+					//Custom actions can be called with $'methodname' on the Account.
+					{
+						/**
+						* @name Cloobster.services.InfoPage#$query
+						* @override
+						* Overrides default query method by overriding businessId as default parameter
+						*/
+						'query':  {method:'GET', params: { 'bid' : businessId}, isArray:true},
+						/*
+						* @name Cloobster.services.InfoPage#$update
+						* Like a save but uses PUT instead of POST.
+						*/
+						'update': { 
+							method: 'PUT',
+							headers: {'Content-Language': '*'}
+						}
+					}
+				)
+		},
+		/**
+		*	Returns a InfoPage image resource used to save, update the image assigned to an InfoPage.
+		*/
+		buildImageResource: function(businessId, infoPageId) {
+			return $resource('/b/businesses/:bid/infopages/:id/image', {
+				'bid': businessId,
+				'id': infoPageId
+			});
+		}
+	}
+	return InfoPage;
+}]);
+
 /** 
 * 	@constructor
 * 	Factory function that returns the 'facebookApi' service and
@@ -768,12 +821,10 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 	$rootScope.customer = false;
 
 	$rootScope.$on('$routeChangeSuccess',function(event, current, previous) {
-		if(current.$route.hasOwnProperty('customer')) {
+		if(current.$route && current.$route.hasOwnProperty('customer')) {
 			$rootScope.customer = true;
 		}
 	});
-	
-
 
 	/**
 	*	Callback to handle $http request success.

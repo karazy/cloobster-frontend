@@ -11,8 +11,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 	var map = {
 		//index
 		"product.brand" : {
-			"DE" : "Cloobster",
-			"EN" : "Cloobster"
+			"DE" : "cloobster",
+			"EN" : "cloobster"
 		},
 		"nav.logout" : {
 			"DE" : "Logout",
@@ -36,7 +36,6 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"nav.profile" : {
 			"DE" : "Profil",
-			"EN" : "",
 			"EN" : "Profile"
 		},
 		"nav.registration" : {
@@ -53,7 +52,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Locations"
 		},
 		"businesses.headertabs.locationsettings" : {
-			"DE" :  "Locations Einstellungen",
+			"DE" :  "Location Einstellungen",
 			"EN" : "Location Settings"
 		},
 		"businesses.headertabs.categories" : {
@@ -72,10 +71,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Servicebereiche und Spots",
 			"EN" : "Service Areas and Spots"
 		},
+		"businesses.headertabs.infopages" : {
+			"DE" :  "Infoseiten",
+			"EN" :  "Info Pages"
+		},
 		//registration partial
 		"registration.title" : {
-			"DE" : "Cloobster Registrierung",
-			"EN" : "Cloobster Registration"
+			"DE" : "cloobster Registrierung",
+			"EN" : "cloobster Registration"
 		},
 		"registration.form.fullname" : {
 			"DE" : "Name*",
@@ -83,7 +86,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"registration.form.fullname.error.required" : {
 			"DE" : "Bitte teilen Sie uns ihren Namen mit.",
-			"EN" : "Tell us your Name."
+			"EN" : "Tell us your name."
 		},
 		"registration.form.fullname.error.minlength" : {
 			"DE" : "Der Name muss min. aus 3 Zeichen bestehen",
@@ -91,11 +94,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"registration.form.login" : {
 			"DE" : "Benutzername*",
-			"EN" : "Username*"
+			"EN" : "User name*"
 		},
 		"registration.form.login.error.required" : {
 			"DE" : "Suchen Sie sich bitte einen Benutzernamen aus.",
-			"EN" : "Choose a username."
+			"EN" : "Select a user name."
 		},
 		"registration.form.login.error.pattern" : {
 			"DE" : 'Ihr Benutzername muss zwischen 4-30 Zeichen lang sein. Es sind nur Kleinbuchstanen und "_" "-" "." erlaubt.',
@@ -107,19 +110,19 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"registration.form.email.error.required" : {
 			"DE" : "Bitte geben Sie Ihre E-Mail an.",
-			"EN" : "Please enter your email."
+			"EN" : "Please enter your email address."
 		},
 		"registration.form.email.error.email" : {
 			"DE" : "Keine gültige E-Mail.",
-			"EN" : "No valid email."
+			"EN" : "No valid email address."
 		},
 		"registration.form.emailrepeat" : {
 			"DE" : "E-Mail wiederholen*",
-			"EN" : "Email repeat*"
+			"EN" : "Repeat email address*"
 		},
 		"registration.form.emailrepeat.error.match" : {
 			"DE" : "E-Mails stimmen nicht überein.",
-			"EN" : "Emails don't match."
+			"EN" : "Email address does not match."
 		},
 		"registration.form.password" : {
 			"DE" : "Passwort*",
@@ -135,7 +138,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"registration.form.passwordrepeat" : {
 			"DE" : "Passwort wiederholen*",
-			"EN" : "Password repeat*"
+			"EN" : "Repeast password*"
 		},
 		"registration.form.passwordrepeat.error.match" : {
 			"DE" : "Passwörter stimmen nicht überein.",
@@ -147,7 +150,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"registration.form.phone.error.required" : {
 			"DE" : "Bitte geben Sie eine Telefonnummer für Rückfragen an.",
-			"EN" : "Please enter a phone number, where we can call you back."
+			"EN" : "Please enter a phone number, so you we can call you back."
 		},
 		"registration.form.company" : {
 			"DE" : "Firmenname*",
@@ -156,7 +159,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 
 		"registration.form.company.error.required" : {
 			"DE" : "Bitte geben Sie den Namen Ihrer Firma an.",
-			"EN" : "Please enter your company's name."
+			"EN" : "Please enter company name."
 		},
 		"registration.form.address" : {
 			"DE" : "Straße",
@@ -164,7 +167,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"registration.form.address.error.required" : {
 			"DE" : "Bitte geben Sie Ihre Adresse an.",
-			"EN" : "Please enter your address."
+			"EN" : "Please enter address."
 		},
 		"registration.form.city" : {
 			"DE" : "Stadt",
@@ -172,7 +175,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"registration.form.city.error.required" : {
 			"DE" : "Bitte geben Sie Ihre Stadt an.",
-			"EN" : "Please enter your city."
+			"EN" : "Please enter city."
 		},
 		"registration.form.postcode" : {
 			"DE" : "Postleitzahl",
@@ -180,7 +183,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"registration.form.postcode.error.required" : {
 			"DE" : "Bitte geben Sie Ihre Postleitzahl an.",
-			"EN" : "Please enter your zipcode."
+			"EN" : "Please enter zip code."
 		},
 		"registration.form.businessphone" : {
 			"DE" : "Telefon geschäftlich",
@@ -192,23 +195,23 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"registration.form.country.error.required" : {
 			"DE" : "Bitte geben Sie Ihr Land an.",
-			"EN" : "Please enter your country."
+			"EN" : "Please enter country."
 		},
 		"registration.form.fullname.placeholder" : {
-			"DE" : "z. B. Max Mustermann",
+			"DE" : "z.B. Max Mustermann",
 			"EN" : "e.g. John Doe"
 		},
 		"registration.form.login.placeholder" : {
-			"DE" : "z. B. mustermann63",
+			"DE" : "z.B. mustermann63",
 			"EN" : "e.g. jdoe63"
 		},
 		"registration.form.email.placeholder" : {
-			"DE" : "z. B. mustermann@gmail.com",
+			"DE" : "z.B. mustermann@gmail.com",
 			"EN" : "e.g. johndoe@gmail.com"
 		},
 		"registration.form.emailrepeat.placeholder" : {
 			"DE" : "E-Mail wiederholen",
-			"EN" : "repeat email"
+			"EN" : "Repeat email address"
 		},
 		"registration.form.password.placeholder" : {
 			"DE" : "Passwort",
@@ -216,35 +219,35 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"registration.form.passwordrepeat.placeholder" : {
 			"DE" : "Passwort wiederholen",
-			"EN" : "repeat password"
+			"EN" : "Repeat password"
 		},
 		"registration.form.phone.placeholder" : {
-			"DE" : "z. B. 0049-170-4153172",
+			"DE" : "z.B. 0049-170-4153172",
 			"EN" : "e.g. 0049-170-4153172"
 		},
 		"registration.form.company.placeholder" : {
-			"DE" : "z. B. ACME Hotel",
+			"DE" : "z.B. ACME Hotel",
 			"EN" : "e.g. ACME Hotel"
 		},
 		"registration.form.address.placeholder" : {
-			"DE" : "z. B. Bahnhofstraße 3",
+			"DE" : "z.B. Bahnhofstraße 3",
 			"EN" : "e.g. Mainstreet 3"
 		},
 		"registration.form.city.placeholder" : {
-			"DE" : "z. B. Frankfurt",
+			"DE" : "z.B. Frankfurt",
 			"EN" : "e.g. London"
 		},
 		"registration.form.postcode.placeholder" : {
-			"DE" : "z. B. 60311",
+			"DE" : "z.B. 60311",
 			"EN" : "e.g. W11"
 		},
 		"registration.form.businessphone.placeholder" : {
-			"DE" : "z. B. 0049-170-4153172",
+			"DE" : "z.B. 0049-170-4153172",
 			"EN" : "e.g. 0049-170-4153172"
 		},
 		"registration.action.fblogin" : {
-			"DE" : "Mit Facebook einloggen und Cloobster verknüpfen.",
-			"EN" : "Login with facebook and link Cloobster."
+			"DE" : "Mit Facebook einloggen und cloobster verknüpfen.",
+			"EN" : "Log in to Facebook and link with cloobster."
 		},
 		"registration.form.account.label" : {
 			"DE" : "Meine Benutzerkontodaten",
@@ -267,7 +270,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "I hereby accept the Terms Of Service and Privacy Policy "
 		},
 		"registration.form.accept-terms.error.required" : {
-			"DE" : "Bitte akzeptieren Sie die AGB und Datenschutzbestimmung um fortzufahren.",
+			"DE" : "Bitte akzeptieren Sie die AGB und Datenschutzbestimmung, um fortzufahren.",
 			"EN" : "Please accept the Terms Of Service and Privacy Policy to continue."
 		},
 		"registration.form.action.register.tooltip" : {
@@ -281,24 +284,24 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"registration.form.submit.message" : {
 			"DE" : "Vielen dank für die Registrierung {{account.name}},<br/>"+
 				"eine E-mail mit Bestätigungslink wurde an {{account.email}} gesendet.",
-			"EN" : "Thank you for your registration {{account.name}}.<br/>"+
-				"An email with activation link will be send to {{account.email}}."
+			"EN" : "Thank you for your registration, {{account.name}}.<br/>"+
+				"An email with an activation link will be sent to {{account.email}}."
 		},
 		"registration.confirmemail.title" : {
-			"DE" : "E-Mail Bestätigung",
-			"EN" : "E-Mail Confirmation"
+			"DE" : "E-Mail-Adresse bestätigt",
+			"EN" : "E-mail address has been confirmed."
 		},
 		"registration.confirmemail.message" : {
-			"DE" : "Vielen dank, die E-Mail Adresse wurde bestätigt und das Konto kann ab sofort genutzt werden.",
-			"EN" : "Thank you, the e-mail address was confirmed and the account can be used immediately."
+			"DE" : "Vielen Dank, die E-Mail-Adresse wurde bestätigt, und das Konto kann ab sofort genutzt werden.",
+			"EN" : "Thank you, your e-mail address has been confirmed and your account can now be used."
 		},
 		"registration.form.requiredfield" : {
-			"DE" :  "* kennzeichnet Pflichtfelder",
-			"EN" : "* marks required fields"
+			"DE" :  "* Pflichtfeld",
+			"EN" : "* required field"
 		},
 		"registration.success.title" : {
-			"DE" :  "Cloobster Registrierung Erfolgreich!",
-			"EN" : "Cloobster Registration Successful!"
+			"DE" :  "cloobster Registrierung erfolgreich!",
+			"EN" :  "cloobster registration successful!"
 		},
 		//businesses partial
 		"businesses.title" : {
@@ -306,15 +309,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "My Locations"
 		},
 		"businesses.empty.description" : {
-			"DE" :  "Im Moment haben Sie keine Locations. Um cloobster zu nutzen müssen Sie mindestens eine Location (Hotel, Restaurant) anlegen.",
-			"EN" : "Currently you don't have any locations. To use cloobster, you need at least one location (hotel, restaurant)."
+			"DE" :  "Im Moment haben Sie keine gespeicherten Locations. Um cloobster zu nutzen, müssen Sie mindestens eine Location (Hotel, Restaurant) anlegen.",
+			"EN" : "You have no current locations. You need at least one location (hotel, restaurant) to use cloobster."
 		},
 		"businesses.description" : {
-			"DE" :  "Hier können Sie Ihre unterschiedlichen Locations (Hotels, Restaurants) die cloobster verwenden verwalten.",
-			"EN" : "You have more than one site you want to use cloobster with.<br/>"+
-					"Here you can maintain the different locations you want to \"cloobsterize\"."
+			"DE" :  "Hier können Sie Ihre unterschiedlichen Locations (Hotels, Restaurants) verwalten und für cloobster vorbereiten.",
+			"EN" :  "You can add, edit, or delete your locations (hotels, restaurants) here."
 		},
 		"businesses.add" : {
+			"DE" : "Location hinzufügen",
+			"EN" : "Add location"
+		},
+		"businesses.add.title" : {
 			"DE" : "Location hinzufügen",
 			"EN" : "Add location"
 		},
@@ -324,19 +330,23 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"businesses.action.spots" : {
 			"DE" : "Servicebereiche und Spots",
-			"EN" : "Service Areas and Spots"
+			"EN" : "Service areas and spots"
 		},
 		"businesses.action.menus" : {
 			"DE" : "Produkte",
 			"EN" : "Products"
 		},
+		"businesses.action.infopages" : {
+			"DE" :  "Infoseiten",
+			"EN" :  "Info pages"
+		},
 		"businesses.action.accounts" : {
 			"DE" : "Benutzerverwaltung",
-			"EN" : "User Management"
+			"EN" : "User management"
 		},
 		"businesses.action.delete" : {
-			"DE" : "Betrieb löschen",
-			"EN" : "Delete business"
+			"DE" : "Location löschen",
+			"EN" : "Delete location"
 		},
 		"businesses.form.name" : {
 			"DE" : "Name*",
@@ -356,7 +366,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"businesses.form.postcode" : {
 			"DE" : "Postleitzahl*",
-			"EN" : "Zipcode*"
+			"EN" : "Zip code*"
 		},
 		"businesses.form.phone" : {
 			"DE" : "Telefon",
@@ -375,38 +385,37 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Fields marked with * are mandatory."
 		},
 		"businesses.dialog.delete" : {
-			"DE" : "Betrieb löschen",
-			"EN" : "Delete business"
+			"DE" : "Location löschen",
+			"EN" : "Delete location"
 		},
 		"busineses.business.deleted.tooltip" : {
-			"DE" : "Dieser Betrieb wurde gelöscht.",
-			"EN" : "This business has been deleted."
+			"DE" : "Diese Location wurde gelöscht.",
+			"EN" : "This location has been deleted."
 		},
 		//business detail partial
 		"business.detail.help" : {
-			"DE" :  "Hier können Sie das Profil der aktiven Location pflegen.<br/>Außerdem können Sie die CI für die App konfigurieren.",
-			"EN" : "Here you can manage the profil information for your selected business.<br/>"+
-			"You also can customize the CI which affects how your business is presented in the app."
+			"DE" :  "Hier können Sie das Profil der aktiven Location pflegen.<br/>Außerdem können Sie hier die Oberfläche der App konfigurieren.",
+			"EN" : "Edit properties of current location.<br/>Configure corporate identity for app."
 		},
 		"business.action.edit.enable" : {
 			"DE" : "Editiermodus aktivieren",
-			"EN" : "Activate edit mode"
+			"EN" : "Enable edit mode"
 		},
 		"business.action.edit.disabled" : {
 			"DE" : "Editiermodus beenden",
-			"EN" : "End edit mode"
+			"EN" : "Disable edit mode"
 		},
 		"business.action.edit.disable.hint" : {
-			"DE" : "Profileigenschaft anklicken um zu editieren.",
-			"EN" : "Click profile property to edit"
+			"DE" : "Profileigenschaft anklicken, um zu editieren.",
+			"EN" : "Select profile properties to edit"
 		},
 		"business.detail.section.profile" : {
 			"DE" :  "Location Profil",
-			"EN" : "Location Profile"
+			"EN" :  "Location profile"
 		},
 		"business.detail.add.image.button" : {
 			"DE" :  "Bild hinzufügen",
-			"EN" : "Add image"
+			"EN" :  "Add image"
 		},
 		"business.detail.logo.editor.title" : {
 			"DE" : "Logo",
@@ -423,6 +432,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"business.detail.picture3.editor.title" : {
 			"DE" : "Profilbild 3",
 			"EN" : "Profile picture 3"
+		},
+		"business.detail.logo" : {
+			"DE" :  "Logo Bild",
+			"EN" : "Logo picture"
 		},
 		"business.detail.logo.button" : {
 			"DE" : "Logo hinzufügen",
@@ -470,7 +483,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"business.detail.postcode" : {
 			"DE" : "Postleitzahl",
-			"EN" : "Zipcode"
+			"EN" : "Zip code"
 		},
 		"business.detail.phone" : {
 			"DE" : "Telefon",
@@ -482,11 +495,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"business.detail.paymentmethod" : {
 			"DE" : "Bezahlart",
-			"EN" : "Payment"
+			"EN" : "Payment method"
 		},
 		"business.detail.paymentmethods" : {
 			"DE" : "Bezahlarten",
-			"EN" : "Payments"
+			"EN" : "Payment methods"
 		},
 		"business.detail.paymentmethods.list.new" : {
 			"DE" : "Neue Bezahlart",
@@ -494,85 +507,95 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"business.detail.section.app" : {
 			"DE" :  "App Konfiguration",
-			"EN" : "App Configuration"
+			"EN" : "App configuration"
 		},
 		"business.detail.section.app.description" : {
-			"DE" :  "Konfigurieren Sie das Aussehen der cloobster App um es an Ihre CI anzupassen.",
-			"EN" : "Configure the look of the cloobster App to best fit your CI."
+			"DE" :  "Konfigurieren Sie das Aussehen der cloobster App, um es an Ihre CI anzupassen.",
+			"EN" : "Configure cloobster app to best fit your corporate identity."
 		},
 		"business.detail.app.header" : {
 			"DE" :  "App Header Bild ",
-			"EN" : "App Header Image"
+			"EN" :  "App header image"
 		},
 		"business.detail.app.header.description" : {
-			"DE" : "Für ein optimales Aussehen in der App wird das Bild auf ein festes Seitenverhältnis zugeschnitten.<br>Wählen sie mit dem Rahmen einen Ausschnitt.",
-			"EN" : "For the best looks in the app, the image will be cut.<br>Change the selection for cutting below."
+			"DE" : "Für ein optimales Aussehen der App wird das Bild auf ein festes Seitenverhältnis zugeschnitten.<br>Wählen Sie mit dem Rahmen einen Ausschnitt.",
+			"EN" : "To fit your app the image will have to be cropped.<br>Change aspect ratio below."
 		},
 		"business.detail.themes" : {
 			"DE" : "Themes",
 			"EN" : "Themes"
 		},
 		"business.detail.themes.description" : {
-			"DE" : "Wähle ein Theme was am besten zu deiner CI passt.",
-			"EN" : "Choose a theme which fits your CI best."
+			"DE" : "Wählen Sie das Motiv, das am besten zu Ihrer CI passt.",
+			"EN" : "Choose a theme which best fits your corporate identity."
 		},
 		"business.detail.themes.tooltip" : {
-			"DE" : "Klicken um Theme zu aktivieren.",
+			"DE" : "Bitte klicken, um Motiv zu aktivieren.",
 			"EN" : "Click to activate theme."
 		},
 		"business.detail.themes.default.description" : {
-			"DE" :  "Der Standard Cloobster Theme",
-			"EN" : "Default cloobster theme"
+			"DE" :  "Das Standard-cloobster-Motiv",
+			"EN" :  "Default cloobster theme"
 		},
 		"business.detail.themes.red.description" : {
-			"DE" :  "Ein roter und eleganter Theme",
-			"EN" : "A red and elegant theme"
+			"DE" :  "Ein rotes und elegantes Motiv",
+			"EN" :  "A red and elegant theme"
 		},
 		"business.detail.themes.green.description" : {
-			"DE" :  "Ein grüner und freundlicher Theme",
-			"EN" : "A green and friendly theme"
+			"DE" :  "Ein grünes und freundliches Motiv",
+			"EN" :  "A green and friendly theme"
 		},
 		"business.detail.themes.blue.description" : {
-			"DE" :  "Ein blauer und luftiger Theme",
-			"EN" : "A blue and airy theme"
+			"DE" :  "Ein blaues und luftiges Motiv",
+			"EN" :  "A blue and breezy theme"
 		},
 		"business.detail.themes.orange.description" : {
-			"DE" :  "Ein orangener und gemütlicher Theme",
-			"EN" : "An orange and cosy theme"
+			"DE" :  "Ein orangenes und gemütliches Motiv",
+			"EN" :  "An orange and cosy theme"
 		},
 		"business.detail.section.facebook" : {
 			"DE" :  "Facebook Konfiguration",
-			"EN" : "Facebook Configuration"
+			"EN" :  "Facebook configuration"
 		},
 		"business.detail.section.facebook.description" : {
-			"DE" : "Hier können Sie konfigurieren wie Posts in Facebook dargestellt werden.",
-			"EN" : "Here you can configure how Facebook posts will look like."
+			"DE" : "Hier können Sie konfigurieren, wie Posts in Facebook dargestellt werden.",
+			"EN" : "Configure appearance of facebook posts here."
 		},
 		"business.detail.facebook.url" : {
 			"DE" :  "Facebook Link",
-			"EN" : "Facebook URL"
+			"EN" :  "Facebook link"
 		},
 		"business.detail.facebook.wallpost.image" : {
 			"DE" :  "Pinwand Bild",
-			"EN" : "Wallpost Image"
+			"EN" :  "Wallpost image"
 		},
 		"business.detail.facebook.wallpost.image.description"  : {
-			"DE" : "Für ein optimales Aussehen in einem Facebookpost wird das Bild auf ein festes Seitenverhältnis zugeschnitten.<br>Wählen sie mit dem Rahmen einen Ausschnitt.",
-			"EN" : "For the best looks in a Facebook post, the image will be cut.<br>Change the selection for cutting below."
+			"DE" : "Für ein optimales Aussehen in einem Facebook-Post wird das Bild auf ein festes Seitenverhältnis zugeschnitten.<br>Wählen Sie mit dem Rahmen einen Ausschnitt.",
+			"EN" : "Image needs to be cropped.<br>Change aspect ratio below."
 		},
 		"business.action.delete.invalid" : {
 			"DE" : "Passwort inkorrekt!",
 			"EN" : "Password invalid!"
 		},
 		"business.dialog.delete.text" : {
-		"DE" : "Du bist dabei <strong>{{activeBusiness.name}}</strong> zu löschen! Der Betrieb wird deaktiviert und in einen read-only modus versetzt. "+
-			"Aktuell eingeloggte Servicekräfte und Gäste können noch Bestellungen einsehen aber keine weitere Aktionen tätigen. Der Betrieb "+
+		"DE" : "Du bist dabei, <strong>{{activeBusiness.name}}</strong> zu löschen! Die Location wird deaktiviert und in einen Lesemodus versetzt. "+
+			"Aktuell eingeloggte Servicekräfte und Gäste können noch Bestellungen einsehen, aber keine weitere Aktionen tätigen. Die Location "+
 			" wird nach einer Weile permanent gelöscht!",
-		"EN" : ""
+		"EN" : "You are about to delete <strong>{{activeBusiness.name}}</strong>! Location will be read-only after it has been deleted and will be permanently removed shortly afterwards."
 		},
 		"dialog.delete.confirm" : {
-			"DE" : "Bitte gib dein Passwort ein um die Löschaktion zu bestätigen.",
-			"EN" : "Please enter your password to confirm delete action."
+			"DE" : "Bitte geben Sie Ihr Passwort ein, um die Löschaktion zu bestätigen.",
+			"EN" : "Please enter your password to confirm deletion."
+		},
+		"business.languageselection.title" : {
+			"DE" :  "Sprachauswahl",
+			"EN" :  "Select language"
+		},
+		"business.languageselection.description" : {
+			"DE" :  "Wählen Sie die Sprachen aus, die Sie in cloobster anbieten wollen.<br/>Sie können dann in Bereichen, die Mehrsprachigkeit "+
+			"unterstützen, mittels einer Auswahlliste (rechts oben) die jeweilige Sprache, die Sie pflegen wollen, auswählen.<br/>"+
+			"Nicht übersetzte Felder werden dem Kunden in der Standardsprache angezeigt.",
+			"EN" : "Please select languages you want to offer in cloobster app.<br/>You can select a language for each location using the drop-down menu in the upper right corner.<br/>Fields that have not been translated will be shown in the default language."
 		},
 		//profile partial
 		"profile.title" : {
@@ -589,7 +612,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"profile.company.action.edit.enable" : {
 			"DE" : "Firmenprofil bearbeiten",
-			"EN" : "Edit Company Profile"
+			"EN" : "Edit company profile"
 		},
 		"profile.company.action.edit.disable" : {
 			"DE" : "Bearbeiten beenden",
@@ -600,20 +623,20 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Change password"
 		},
 		"profile.account.action.edit.enable" : {
-			"DE" : "Account bearbeiten",
-			"EN" : "Edit Account"
+			"DE" : "Konto bearbeiten",
+			"EN" : "Edit account"
 		},
 		"profile.account.action.edit.disable.hint" : {
-			"DE" : "Account Eigenschaft anklicken um diese zu editieren.",
-			"EN" : "Click a account profile feature to edit."
+			"DE" : "Kontoeigenschaft anklicken, um dieses zu editieren.",
+			"EN" : "Click to edit account profile."
 		},
 		"profile.account.action.edit.disable" : {
 			"DE" : "Bearbeiten beenden",
 			"EN" : "Done editing"
 		},
 		"profile.company.action.edit.disable.hint" : {
-			"DE" : "Profileigenschaft anklicken um zu editieren.",
-			"EN" : "Click property to edit."
+			"DE" : "Profileigenschaft anklicken, um zu editieren.",
+			"EN" : "Click to edit property."
 		},
 		"profile.company.address" : {
 			"DE" : "Adresse",
@@ -625,7 +648,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"profile.company.postcode" : {
 			"DE" : "Postleitzahl",
-			"EN" : "Zipcode"
+			"EN" : "Zip code"
 		},
 		"profile.company.phone" : {
 			"DE" : "Telefon",
@@ -664,39 +687,39 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Change password"
 		},
 		"profile.dialog.changepassword.text" : {
-			"DE" : "Bitte gib sowohl das aktuelle als auch das neue Passwort ein. Danach musst du dich mit den neuen Zugangsdaten erneut einloggen.",
-			"EN" : "Please enter the current and new password. After submitting the new password you will have to login again with the new credentials."	
+			"DE" : "Bitte geben Sie sowohl das aktuelle als auch das neue Passwort ein. Danach müssen Sie sich mit den neuen Zugangsdaten erneut einloggen.",
+			"EN" : "Please enter current and new password. You will have to log in again afterwards with your new credentials."	
 		},
 		"profile.account.newpasswordrepeat" : {
 			"DE" :  "Neues Passwort wiederholen",
-			"EN" : "Repeat new password"
+			"EN" :  "Repeat password"
 		},
 		"profile.account.newpassword" : {
 			"DE" :  "Neues Passwort",
-			"EN" : "New password"
+			"EN" :  "New password"
 		},
 		"profile.confirmemailupdate.message" : {
 			"DE" : "Vielen Dank, die neue E-Mail Adresse wurde bestätigt.<br/>Alle neuen Nachrichten werden an diese Adresse gesendet.",
-			"EN" : "Thank you, the new e-mail address was confirmed.<br/>All new messages will be send to this address."
+			"EN" : "Thank you, your new e-mail address has been confirmed.<br/>All new messages will be sent to this address."
 		},
 		//menus partial
 		"menus.description" : {
-			"DE" : "Hier können Sir ihre Produkte und Services anlegen und diesen einer Kategorie zuweisen.<br/>"+
-					"Alle Kategorien können verschiedenen \"Service Bereichen\" zugewiesen werden um Zeit zu sparen (im Service Area Tab).",
-			"EN" : "Here you can manage your catalog of products and services.<br/>"+
-					"All categories can be associated with several service areas to save time and avoid duplicate entries."
+			"DE" : "Hier können Sie Ihre Produkte und Services anlegen und diese einer Kategorie zuweisen.<br/>"+
+					"Alle Kategorien können verschiedenen \"Service Bereichen\" zugewiesen werden, um Zeit zu sparen (im Service Area Tab).",
+			"EN" : "You can manage your products and services here.<br/>"+
+					"In order to save time, all categories can be associated with several service areas."
 		},
 		"menus.list.title" : {
 			"DE" : "Kategorien",
 			"EN" : "Categories"
 		},
 		"menu.container.hint" : {
-			"DE" :  "Bitte vergessen Sie nicht die Kategorie einem Servicebereich zuzuweisen.",
-			"EN" : "Don't forget to assign this category to an area afterwards."
+			"DE" :  "Bitte vergessen Sie nicht, die Kategorie einem Servicebereich zuzuweisen.",
+			"EN" : "Don't forget to assign this category to a service area afterwards."
 		},
 		"menu.container.title" : {
 			"DE" : "Kategorie editieren",
-			"EN" : "Category edit"
+			"EN" : "Edit category"
 		},		
 		"menus.list.orphaned" : {
 			"DE" : "Verwaiste Produkte",
@@ -704,7 +727,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"menus.list.orphaned.tooltip" : {
 			"DE" : "Nicht zugewiesene Produkte anzeigen",
-			"EN" : "Show not assigned products."
+			"EN" : "Show non-assigned products."
 		},
 		// "menus.menu.field.active" : {
 		// 	"DE" : "Kategorie dem Gast anzeigen",
@@ -728,7 +751,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"menus.menu.dialog.delete.text" : {
 			"DE" : "<strong>{{currentMenu.title}}</strong> löschen? Dies kann nicht rückgängig gemacht werden!<br/>Produkte werden nicht gelöscht.",
-			"EN" : "Delete <strong>{{currentMenu.title}}</strong>? This can't be undone.!<br/>Products won't be deleted."
+			"EN" : "Delete <strong>{{currentMenu.title}}</strong>? This cannot be undone.!<br/>Products won't be deleted."
 		},
 		"menu.products.container.title" : {
 			"DE" : "Produkte dieser Kategorie",
@@ -763,7 +786,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "-copy"
 		},
 		"menus.products.link.description" : {
-			"DE" : "Klicke auf eine bestehendes Produkt, um dieses zu kopieren und der aktuellen Kategory hinzuzufügen. Wahlweise können zusätzlich <strong>Auswahlmöglichkeiten verknüpft</strong> oder <strong>kopiert werden</strong>.",
+			"DE" : "Klicken Sie auf eine bestehendes Produkt, um dieses zu kopieren und der aktuellen Kategory hinzuzufügen. Wahlweise können zusätzlich <strong>Auswahlmöglichkeiten verknüpft</strong> oder <strong>kopiert werden</strong>.",
 			"EN" : "Click on existing product to copy it and add to current category."+
 				"Optionally link or copy choices."
 		},
@@ -773,11 +796,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"menus.products.orphaned.description" : {
 			"DE" : "Liste aller Produkte die keiner Kategorie zugeordnet sind.",
-			"EN" : "List of all products not assigned to a category."
+			"EN" : "List of all non-assigned products."
 		},
 		"product.container.title" : {
 			"DE" : "Produkt editieren",
-			"EN" : "Product edit"
+			"EN" : "Edit product"
 		},
 		"menus.editor.title.tooltip" : {
 			"DE" : "Titel editieren",
@@ -805,7 +828,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"menus.product.field.active" : {
 			"DE" : "Produkt dem Gast anzeigen",
-			"EN" : "Show product to guest"
+			"EN" : "Show product to customers"
 		},
 		"menus.product.delete" : {
 			"DE" : "Löschen",
@@ -816,7 +839,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Move to..."
 		},
 		"menus.product.action.move.tooltip" : {
-			"DE" : "Verschiebt das aktuelle Produkt<br/>in ausgewähltes Kategorie.",
+			"DE" : "Verschiebt das aktuelle Produkt<br/>in ausgewählte Kategorie.",
 			"EN" : "Moves current product to selected category."
 		},
 		"menus.product.dialog.delete.title" : {
@@ -825,11 +848,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"menus.product.dialog.delete.text" : {
 			"DE" : "<strong>{{currentProduct.name}}</strong> löschen? Dies kann nicht rückgängig gemacht werden!",
-			"EN" : "Delete <strong>{{currentProduct.name}}</strong>? This can't be undone!"
+			"EN" : "Delete <strong>{{currentProduct.name}}</strong>? This cannot be undone!"
 		},
 		"product.choices.container.title" : {
 			"DE" : "Optionen zum Produkt",
-			"EN" : "Options of product"
+			"EN" : "Product options"
 		},
 		"menus.choices.list.new" : {
 			"DE" : "Neu.",
@@ -848,8 +871,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Remove choice from this product."
 		}, 
 		"menus.choices.link.description" : {
-			"DE" : "Klicke auf eine bestehende Auswahlmöglichkeit, um diese mit dem aktuellen Produkt zu <strong>verknüpfen</strong> oder zu <strong>kopieren</strong>.<br/>Es werden keine abhängigen Auswahlen angezeigt.",
-			"EN" : "Click on existing choice to link (or copy to) it with current product."
+			"DE" : "Klicken Sie auf eine bestehende Auswahlmöglichkeit, um diese mit dem aktuellen Produkt zu <strong>verknüpfen</strong> oder zu <strong>kopieren</strong>.<br/>Es werden keine abhängigen Auswahlen angezeigt.",
+			"EN" : "Click on existing choice to link with (or copy to) current product."
 		},
 		"choices.container.link.title" : {
 			"DE" : "Auswahlmöglichkeiten",
@@ -868,12 +891,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Link"
 		},
 		"menu.container.empty.description" : {
-			"DE" : "Um die Details zu einer Kategorie anzuzeigen, wählen Sie bitte eine Kategorie aus der Liste links oder legen eine neue an.",
-			"EN" : "To view category details please select a category from the list or add a new category."
+			"DE" : "Um die Details zu einer Kategorie anzuzeigen, wählen Sie bitte eine Kategorie aus der Liste links oder legen Sie eine neue an.",
+			"EN" : "To view category details, please select a category from the list or add a new category."
 		},
 		"choice.container.title" :{
 			"DE" : "Option editieren",
-			"EN" : "Option edit"
+			"EN" : "Edit option"
 		},
 		"menus.options.title" : {
 			"DE" : "Optionen",
@@ -881,7 +904,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"option.configuration.container.title" : {
 			"DE" : "Konfigurationen zur Option",
-			"EN" : "Configurations of option"
+			"EN" : "Configure options"
 		},
 		"menus.options.list.new" : {
 			"DE" : "Neue Option...",
@@ -905,7 +928,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"product.editor.price.validation" : {
 			"DE" : "Muss ein gültiger Preis sein (z.B. 9.95, oder 5).",
-			"EN" : "Must be a valid price (e. g. 9.95, or 5)."
+			"EN" : "Ente a valid price (e. g. 9.95, or 5)."
 		},
 		"product.editor.shortDesc" : {
 			"DE" : "Kurz Beschreibung",
@@ -916,8 +939,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Long description"
 		},
 		"product.container.empty.description" : {
-			"DE" : "Um die Details zu einem Produkt anzuzeigen, wählen Sie bitte ein Produkt aus der Liste links oder legen ein neues an.",
-			"EN" : "To view product details please select a product from the list or add a new product."
+			"DE" : "Um die Details zu einem Produkt anzuzeigen, wählen Sie bitte ein Produkt aus der Liste links oder legen Sie ein neues an.",
+			"EN" : "To view product details, please select a product from the list or add a new product."
 		},		
 		"choice.editor.text" : {
 			"DE" : "Auswahltext",
@@ -925,34 +948,34 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"choice.editor.maxOccurence" : {
 			"DE" : "Maximale Auswahl von Optionen",
-			"EN" : "Maximum selected options"
+			"EN" : "Maximum number of options"
 		},
 		"choice.editor.minOccurence" : {
 			"DE" : "Minimale Auswahl von Optionen",
-			"EN" : "Minimum selected options"
+			"EN" : "Minimum number of options"
 		},
 		"choice.editor.maxOccurence.error" : {
-			"DE" : "Maximale Auswahl muss größer als minimale Auswahl sein oder 0 für keine Beschränking.",
-			"EN" : "Maximum selected options must be greater than minimum selected options or 0 for no limit."
+			"DE" : "Maximale Auswahl muss größer als minimale Auswahl sein oder 0 für keine Beschränkung.",
+			"EN" : "Maximum number of options must be greater than minimum number of options or 0 for no limit."
 		},
 		"choice.editor.minOccurence.error" : {
 			"DE" : "Minimale Auswahl muss kleiner als maximale Auswahl sein, falls diese nicht 0 ist.",
-			"EN" : "Minimum selected options must be less than maximum selected, if the maximum is different from 0."
+			"EN" : "Minimum number of options must be less than maximum number of options if the maximum is greater than 0."
 		},
 		"choice.editor.included" : {
 			"DE" : "Anzahl von Inklusivoptionen",
-			"EN" : "Amount of options inclusive"
+			"EN" : "Amount of options included"
 		},
 		"menus.choices.field.maxOccurence" : {
-			"DE" : "Gast muss max auswählen {{currentChoice.maxOccurence}}",
-			"EN" : "Guest has to chose max {{currentChoice.maxOccurence}}"
+			"DE" : "Gast muss max. auswählen {{currentChoice.maxOccurence}}",
+			"EN" : "Guest has to choose max. {{currentChoice.maxOccurence}}"
 		},
 		"menus.choices.field.minOccurence" : {
 			"DE" : "Gast muss min auswählen {{currentChoice.minOccurence}}",
-			"EN" : "Guest has to chose min {{currentChoice.minOccurence}}"
+			"EN" : "Guest has to choose at min. {{currentChoice.minOccurence}}"
 		},
 		"menus.choices.field.included" : {
-			"DE" : "Optionen Inklusive: {{currentChoice.included}}",
+			"DE" : "Optionen inklusive: {{currentChoice.included}}",
 			"EN" : "Options free of charge {{currentChoice.included}}"
 		},
 		"menus.choices.field.price" : {
@@ -961,14 +984,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"menus.choices.field.linkedchoices" : {
 			"DE" : "Untergeordnete Auswahlen",
-			"EN" : "Subordinate choices"
+			"EN" : "Linked choices"
 		},
 		"menus.choices.field.linkedproducts" : {
 			"DE" : "Wird verwendet in ...",
 			"EN" : "Used in ..."
 		},
 		"menus.choices.field.linkedproducts.help" : {
-			"DE" : "Listet alle Produkte auf<br/> die diese Auswahlmöglichkeit verwenden.",
+			"DE" : "Listet alle Produkte auf,<br/> die diese Auswahlmöglichkeit verwenden.",
 			"EN" : "Lists all products<br/> using this choice."
 		},
 		"menus.choices.action.remove" : {
@@ -989,15 +1012,15 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"choice.editor.maxOccurence.tooltip" : {
 			"DE" : "Maximale Optionsauswahl editieren",
-			"EN" : "Edit maximum choice selection"
+			"EN" : "Edit maximum number of choices"
 		},
 		"choice.editor.minOccurence.tooltip" : {
 			"DE" : "Minimale Optionsauswahl editieren",
-			"EN" : "Edit minimum choice selection"
+			"EN" : "Edit minimum number of choices"
 		},
 		"choice.editor.included.tooltip" : {
 			"DE" : "Anzahl inklusiv<br/>Optionen editieren",
-			"EN" : "Edit amount of inclusive options"
+			"EN" : "Edit number of included options"
 		},
 		"option.editor.name.tooltip" : {
 			"DE" : "Name für Option editieren",
@@ -1024,12 +1047,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "My option"
 		},
 		"menus.choices.field.overridePrice.label" : {
-			"DE" : "Preis pro Selektion",
-			"EN" : "Price per selection"
+			"DE" : "Preis pro Auswahlmöglichkeit",
+			"EN" : "Price per choice"
 		},
 		"menus.choices.field.overridePrice.none" : {
 			"DE" : "Individueller Preis",
-			"EN" : "Individual Price"
+			"EN" : "Individual price"
 		},
 		"menus.choices.field.overridePrice.overridesingleprice" : {
 			"DE" : "Standardpreis",
@@ -1040,16 +1063,16 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Bundle price"
 		},
 		"menus.choices.field.overridePrice.description" : {
-			"DE" : "<b>Individueller Preis</b> - Alle Selektionen haben eigenen Preis<br/>"+
-					"<b>Standardpreis</b> - Alle Selektionen haben den selben Preis<br/>"+
-					"<b>Bündelpreis</b> - Alle Selektionen zusammen haben einen Preis<br/>",
-			"EN" : "<b>Individual Price</b> - Alle Selektionen haben eigenen Preis<br/>"+
-					"<b>Standard price</b> - Alle Selektionen haben den selben Preis<br/>"+
-					"<b>Bundle price</b> - Alle Selektionen zusammen haben einen Preis<br/>"
+			"DE" : "<b>Individueller Preis</b> - Alle Auswählmöglichkeiten haben einen eigenen Preis<br/>"+
+					"<b>Standardpreis</b> - Alle Auswählmöglichkeiten haben den gleichen Preis<br/>"+
+					"<b>Bündelpreis</b> - Alle Auswählmöglichkeiten zusammen haben einen Preis<br/>",
+			"EN" : "<b>Individual price</b> - All choices have an individual price<br/>"+
+					"<b>Standard price</b> - All choices have the same price<br/>"+
+					"<b>Bundle price</b> - All choices have one price and are included<br/>"
 		},
 		"menus.choices.field.parentselect.label" : {
 			"DE" : "Übergeordnete Auswahl:",
-			"EN" : "Superior choice"
+			"EN" : "Parent choice"
 		},
 		"menus.choices.field.parentselect.nullparent" : {
 			"DE" : "--- auswählen ---",
@@ -1058,106 +1081,106 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"menus.choices.parentselect.tooltip" : {
 			"DE" : "Ein hier ausgewähltes Element führt dazu, dass diese Auswahlmöglichkeit nur aktiv wird, "+
 			"wenn der Kunde im übergeordneten Element eine Auswahl trifft.",
-			"EN" : "Select a superior choice to only enable current choice when the superior gets selected."
+			"EN" : "Select a parent choice to only enable current choice when the parent gets selected."
 		},
 		"menus.choices.linkedchoices.tooltip" : {
 			"DE" : "Auflistung aller Auswahlmöglichkeiten, die von dieser abhängen.",
-			"EN" : "Listing of all choices depending on this one."
+			"EN" : "Lists all choices link to this choice."
 		},
 		"choice.container.empty.description" : {
-			"DE" : "Um die Details zu einer Option anzuzeigen, wählen Sie bitte eine Option aus der Liste links oder legen eine neue an.",
+			"DE" : "Um die Details zu einer Option anzuzeigen, wählen Sie bitte eine Option aus der Liste links oder legen Sie eine neue an.",
 			"EN" : "To view option details please select an option from the list or add a new option."
 		},
 		//spots partial
 		"areas.description" : {
-			"DE" :  "Für jede \"cloobster location\" können Sie mehrere \"Servicebereiche\" anlegen(z. B. \"Bar\", \"Zimmer\", \"Spa\", \"Konferenzraum\", etc.).<br>"
+			"DE" :  "Für jede \"cloobster location\" können Sie mehrere \"Servicebereiche\" anlegen(z.B. \"Bar\", \"Zimmer\", \"Spa\", \"Konferenzraum\", etc.).<br>"
 			+"Jeder Servicebereich beinhaltet verschiedene Spots (Barcode für den Check-in) und zugewiesene Produktkategorien.",
 			"EN" : "For each \"cloobster location\" you can add several \"service areas\" (like \"Bar\", \"Rooms\", \"Spa\", \"Conference Area\", etc.).<br>"+
 				"Each service area has different spots and a selection of product categories."
 		},
 		"areas.list.title" : {
 			"DE" :  "Servicebereiche",
-			"EN" : "Service Areas"
+			"EN" :  "Service areas"
 		},
 		"areas.detail.title" : {
 			"DE" :  "Servicebereich editieren",
-			"EN" : "Edit Service Area"
+			"EN" :  "Edit service area"
 		},
 		"area.new.default.name" : {
 			"DE" :  "Mein Servicebereich",
-			"EN" : "My Service Area"
+			"EN" :  "My service area"
 		},
 		"areas.field.active" : {
 			"DE" :  "Aktiv: Gäste können einchecken",
-			"EN" : "Active: Guests can check-in"
+			"EN" :  "Active: Guests can check in"
 		},
 		"areas.editor.name" : {
 			"DE" :  "Name des Servicebereichs",
-			"EN" : "Name of service area"
+			"EN" :  "Name of service area"
 		},
 		"areas.editor.name.tooltip" : {
 			"DE" :  "Name editieren",
-			"EN" : "Edit name"
+			"EN" :  "Edit name"
 		},
 		"areas.editor.description" : {
 			"DE" :  "Beschreibung des Servicebereichs",
-			"EN" : "Description of service area"
+			"EN" :  "Description of service area"
 		},
 		"areas.editor.description.tooltip" : {
 			"DE" :  "Beschreibung editieren",
-			"EN" : "Edit description"
+			"EN" : " Edit description"
 		},
 		"areas.spot.detail.title" : {
 			"DE" :  "Spot editieren",
-			"EN" : "Edit spot"
+			"EN" :  "Edit spot"
 		},
 		"areas.spots.list.title" : {
 			"DE" : "Spots hinzufügen/editieren",
-			"EN" : "Edit/Add Spots"
+			"EN" : "Edit/add spots"
 		},
 		"areas.container.empty.description" : {
 					"DE" :  "Zeigt Details des ausgewählten Servicebereichs an. Wählen Sie einen Bereich aus der Liste links",
-					"EN" : "Shows the selected area details. Select an area from the list."
+					"EN" :  "Shows details of the selected area. Select an area from the list."
 				},		
 		"areas.spots.list.description" : {
-			"DE" : "Spots (z. B. Tische oder Zimmer), die diesem Servicebereich zugeordnet sind.",
+			"DE" : "Spots (z.B. Tische oder Zimmer), die diesem Servicebereich zugeordnet sind.",
 			"EN" : "Spots assigned to this area."
 		},
 		"areas.spot.container.empty.description" : {
 			"DE" :  "Zeigt Details des ausgewählten Spots an. Wählen Sie einen Spot aus der Liste links.",
-			"EN" : "Shows the selected area details. Select an area from the list."
+			"EN" :  "Shows details of selected area. Select an area from the list."
 		},
 		"areas.categories.list.title" : {
 			"DE" :  "Zugewiesenen Kategorien",
-			"EN" : "Assigned categories"
+			"EN" :  "Assigned categories"
 		},
 		"areas.categories.list.description" : {
-			"DE" :  "Liste der Produktkategorien (z. B. Getränke) auf die der Gast zugriff hat, wenn er in diesem Bereich eingecheckt ist."+
+			"DE" :  "Liste der Produktkategorien (z.B. Getränke), auf die der Gast Zugriff hat, wenn er in diesem Bereich eingecheckt ist."+
 				"Die Anzeigereihenfolge kann hier ebenfalls per Drag&Drop geregelt werden.",
-			"EN" : "List of product categories (e.g. beverages) available to customers checked into this service area."
+			"EN" :  "List of product categories (e.g. beverages) available to customers checked in to this service area."
 		},
 		"areas.allcategories.list.title" : {
 			"DE" :  "Verfügbare Kategorien",
-			"EN" : "Available categories"
+			"EN" :  "Available categories"
 		},
 		"areas.allcategories.list.description" : {
 			"DE" :  "Hier aufgelistete Produktkategorien können (mittels Drag&Drop) dem aktuellen Servicebereich zugewiesen werden, um diese für eingecheckte Gäste verfügbar zu machen.",
-			"EN" : "The following product categories can be assigned (via drag & drop) to current service area to make them available to users."
+			"EN" : "The following product categories can be assigned (via drag & drop) to current service area to make them available to customers."
 		},
 		"areas.categories.moveable.tooltip" : {
 			"DE" :  "Ziehen und loslassen, um zuzuweisen oder die Reihenfolge zu ändern.",
-			"EN" : "Drag & drop to assign and order."
+			"EN" :  "Drag & drop to assign and change order of appearance."
 		},
 		"areas.action.delete" : {
 			"DE" : "Servicebereich löschen",
 			"EN" : "Delete service area"
 		},
 		"areas.dialog.delete.text" : {
-			"DE" : "{{currentArea.name}} wird gelöscht! Der Servicebereich, alle Spots und ihre Barcode können dann nicht mehr verwendet werden."+
+			"DE" : "{{currentArea.name}} wird gelöscht! Der Servicebereich, alle Spots und ihre Barcodes können dann nicht mehr verwendet werden."+
 					" Aktuell eingeloggte Servicekräfte und Gäste können den Bereich noch nutzen.<br/>"+
 					"Der Bereich und alle Spots werden nach einer Weile permanent gelöscht",
-			"EN" : "You're about to delete {{currentArea.name}}. The area, all spots, and barcodes cannot be used anymore."+
-					"All current customer checkins at the specific spots will keep working.<br/>"+
+			"EN" : "You're about to delete {{currentArea.name}}. This area, all spots, and barcodes cannot be used any longer."+
+					"All current customer checkins at the specific spots will continue to work.<br/>"+
 					"Data will be permanently deleted."
 		},
 		"spots.editor.name" : {
@@ -1178,7 +1201,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"spots.field.active" : {
 			"DE" : "Aktiv: Gäste können einchecken",
-			"EN" : "Activ: Guests can check-in"
+			"EN" : "Activ: Guests can check in"
 		},
 		"spot.action.delete" : {
 			"DE" : "Spot löschen",
@@ -1186,7 +1209,62 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"spot.action.delete.text" : {
 			"DE" : "{{currentSpot.name}} wird gelöscht!<br/>Bereits ausgedruckte Barcodes können nicht wiederverwendet werden!",
-			"EN" : "{{currentSpot.name}} will be deleted!<br/>Barcode can't be reused!"
+			"EN" : "{{currentSpot.name}} will be deleted!<br/>Barcode cannot be reused!"
+		},
+		//infopage partial
+		"infopages.description" : {
+			"DE" :  "Hier können Sie Informationen zur aktuellen Location anlegen. Dies können zum Beispiel Informationen<br/>"+
+			"über Blumenservice, Frühstückszeiten, Kontaktdaten und so weiter sein.",
+			"EN" : "Information pages for your locations (e.g. business hours, available services, tips)."
+		},
+		"infopages.list.title" : {
+			"DE" :  "Infoseiten",
+			"EN" :  "Info pages"
+		},
+		"infopage.container.title" : {
+			"DE" :  "Informationsdetails",
+			"EN" :  "Details"
+		},
+		"infopage.title" : {
+			"DE" :  "Titel bearbeiten",
+			"EN" :  "Edit title"
+		},
+		"infopage.shortText" : {
+			"DE" :  "Kurztext bearbeiten",
+			"EN" :  "Edit short text"
+		},
+		"infopage.image" : {
+			"DE" :  "Bild hinzufügen",
+			"EN" :  "Add picture"
+		},
+		"infopage.html" : {
+			"DE" :  "Text bearbeiten",
+			"EN" :  "Edit text"
+		},
+		"infopages.dialog.delete.title" : {
+			"DE" :  "Infoseite löschen",
+			"EN" :  "Delete info page"
+		},
+		"infopages.dialog.delete.text" : {
+			"DE" :  "Die Seite {{currentInfoPage.title}} wird gelöscht.<br/>Dies kann nicht rückgängig gemacht werden.",
+			"EN" :  "Info page {{currentInfoPage.title}} will be deleted.<br/>This action cannot be undone."
+		},
+		"infogape.empty.description" : {
+			"DE" :  "Um die Details zu einer Infoseite zu bearbeiten, wählen Sie bitte eine Infoseite aus der Liste links oder legen Sie eine neue an.",
+			"EN" :  "To edit info page, please select info page from list or add a new page."
+		},
+		"infopage.placeholder.title" : {
+			"DE" :  "Z.B. Frühstückszeiten",
+			"EN" :  "e.g. breakfast hours"
+		},
+		"infopage.placeholder.shortText" : {
+			"DE" :  "Kurze Information! z.B. von 8:00 - 10:00",
+			"EN" :  "Short text! E.g. 08:00 AM - 10.00 AM"
+		},
+		"infopage.placeholder.html" : {
+			"DE" :  "Ausführliche Information!<br/> z.B. Zu unserem reichhaltigen Frühstück dürfen wir sie zu folgenden Zeiten begrüßen"+
+			"<ul><li>Mo- Fr von 8:00 - 10:00</li><li>Sa- So 8:00 - 12:00</li></ul>",
+			"EN" :  "Long text! E.g. We offer breakfast between..."
 		},
 		//accounts partial
 		"accounts.title" : {
@@ -1195,19 +1273,19 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"accounts.description" : {
 			"DE" :  "Hier können Sie Benutzerkonten verwalten. Es gibt zwei Arten von Konten.<br/>"+
-			"<ol><li>Admin-Konten haben die gleichen Rechte wie der Firmenaccount.<br/>Können aber keine weiteren Admins "+
+			"<ol><li>Admin-Konten haben die gleichen Rechte wie das Firmenkonto,<br/>können aber keine weiteren Admins "+
 			" anlegen und keine Locations anlegen/löschen.</li>"+
 			"<li>Service-Konten können nur auf das Cockpit zugreifen.</li></ol>"+
-			"Jedem Konto können Sie die Locations zuweisen auf die es Zugriff hat.",
-			"EN" : "Here you can manage accounts for your company.<br>"+
-			"For each account you can define businesses to which the account has access to."
+			"Jedem Konto können Sie die Locations zuweisen, auf die es Zugriff hat.",
+			"EN" : "Here you can manage user accounts for your company.<br>"+
+			"For each account you can define businesses to which the account has access."
 		},
 		"accounts.admin.exists.company" : {
 			"DE" : "Dieser Benutzer ist mit einem anderen Firmenkonto verknüpft!",
-			"EN" : "This user is assigned to another company account."
+			"EN" : "This user is already assigned to another company account."
 		},
 		"accounts.admin.exists.user" : {
-			"DE" : "Dieser Benutzer existiert. Möchten Sie ihm Adminrechte für Ihre Firma gewähren?",
+			"DE" : "Dieser Benutzer existiert bereites. Möchten Sie ihm Adminrechte für Ihre Firma gewähren?",
 			"EN" : "This user exists. Do you want to assign administrative rights?"  
 		},
 		"accounts.admin.exists.assigned" : {
@@ -1220,11 +1298,15 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"accounts.tab.cockpit" : {
 			"DE" : "Service",
-			"EN" : "service"
+			"EN" : "Service"
 		},
-		"accounts.list.title" : {
-			"DE" : "Benutzer",
-			"EN" : "User"
+		"accounts.list.title.users" : {
+			"DE" : "Benutzerkonten",
+			"EN" : "User accounts"
+		},
+		"accounts.list.title.administrators" : {
+			"DE" : "Administratorkonten",
+			"EN" : "Administrator accounts"
 		},
 		"accounts.list.new" : {
 			"DE" : "Neuer Benutzer ...",
@@ -1236,7 +1318,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"accounts.admin.mail.check" : {
 			"DE" : "E-Mail prüfen",
-			"EN" : "Check email"
+			"EN" : "Check email address"
 		},
 		"accounts.create" : {
 			"DE" : "Anlegen",
@@ -1244,18 +1326,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"accounts.admin.new.email.placeholder" : {
 			"DE" : "Account E-Mail",
-			"EN" : "Account email"
+			"EN" : "Account email address"
 		},
 		"accounts.admin.new.name.placeholder" : {
 			"DE" : "Vor- und Nachname",
 			"EN" : "First and last name"
 		},
 		"accounts.admin.businesses.list.title" : {
-			"DE" : "Zugewiesene Betriebe",
+			"DE" : "Zugewiesene Locations",
 			"EN" : "Assigned businesses"
 		},
 		"accounts.admin.businesses.list.description" : {
-			"DE" : "Für hier aufgelistete Betriebe hat der Benutzer Administrationsrechte.<br/>Dies beinhaltet auch das Servicecockpit.",
+			"DE" : "Für hier aufgelistete Locations hat der Benutzer Administrationsrechte.<br/>Dies beinhaltet auch das Servicecockpit.",
 			"EN" : "User has administrative rights for the following locations.<br/>This includes the service cockpit."
 		},
 		"accounts.admin.dialog.remove.title" : {
@@ -1267,11 +1349,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "{{currentAdmin.name}} will be removed!"
 		},
 		"accounts.all.businesses.list.title" : {
-			"DE" : "Verfügbare Betriebe",
+			"DE" : "Verfügbare Locations",
 			"EN" : "Available businesses"
 		},
 		"accounts.all.businesses.list.description" : {
-			"DE" : "Drag & drop in die Liste der zugewiesenen Betriebe, um dem Benutzer entsprechende Rechte zu gewähren.",
+			"DE" : "Drag & drop in die Liste der zugewiesenen Locations, um dem Benutzer entsprechende Rechte zu gewähren.",
 			"EN" : "Drag & drop to list of assigned businesses to grant user access."
 		},
 		"accounts.businesses.moveable.tooltip" : {
@@ -1287,7 +1369,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Edit service user"
 		},
 		"accounts.cockpit.businesses.list.description" : {
-			"DE" : "Für hier aufgelistete Betriebe hat der Benutzer Zugriffsrechte auf das Service Cockpit.",
+			"DE" : "Für hier aufgelistete Locations hat der Benutzer Zugriffsrechte auf das Service Cockpit.",
 			"EN" : "User has access to the following locations."
 		},
 		//activate account partial
@@ -1298,7 +1380,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"activation.description" : {
 			"DE" :  "Hier können Sie den Servicebereichen spezifische Kategorien zuweisen.<br/>Somit können in einem \"Spa-Bereich\""+
 				" andere Produkte und Dienstleistungen als auf dem \"Zimmer\" angeboten werden.",
-			"EN" : "Here you can assign specific categories to your service areas.<br/>E.g. you provide different services in \"spa\" then in a \"room service\"."
+			"EN" : "Here you can assign specific categories to your service areas.<br/>E.g. provide different services in \"spa\" than in \"room service\"."
 		},
 		"account.activation.admin.submit" : {
 			"DE" : "Aktivieren",
@@ -1307,7 +1389,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"account.activation.admin.description" : {
 			"DE" : "Um die Aktivierung abzuschliessen, füllen Sie bitte die fehlenden Felder aus.",
 			"EN" : "To complete your account activation, please enter missing details below!"
-		},
+		},		
 		//general
 		"common.warning.title" : {
 			"DE" : "Achtung!",
@@ -1315,7 +1397,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"common.hint.title" : {
 			"DE" : "Hinweis!",
-			"EN" : "Hint!"
+			"EN" : "Message!"
 		},
 		"common.ok" : {
 			"DE" : "Ok",
@@ -1369,17 +1451,29 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Hilfe",
 			"EN" : "Help"
 		},
-		"general.sortable" : {
-			"DE" : "Ziehen um zu sortieren",
-			"EN" : "Drag to sort"
+		"common.image.edit" : {
+			"DE" :  "Bild anklicken um zu editieren",
+			"EN" : "Click image to edit"
 		},
+		"common.all" : {
+			"DE" :  "Alle",
+			"EN" : "All"
+		},
+		"common.default.language" : {
+			"DE" :  "- Standardsprache -",
+			"EN" : "- default language -"
+		},
+		"general.sortable" : {
+			"DE" : "Ziehen, um zu sortieren",
+			"EN" : "Drag to sort"
+		},		
 		//breadcrumb
 		"breadcrumb.home" : {
 			"DE" : "Home",
 			"EN" : "Home"
 		},
 		"breadcrumb.businesses" : {
-			"DE" : "Betriebe",
+			"DE" : "Locations",
 			"EN" : "businesses"
 		},
 		"breadcrumb.menus" : {

@@ -57,7 +57,7 @@
 		<copy todir="build/${customerhomedir}/lib">
 			<filelist id="libfiles" dir="src/${customerhomedir}/lib" >
 				<file name="bootstrap/bootstrap.min.js" />
-				<file name="angular/angular-resource-1.0.1.min.js" />
+				<file name="angular/angular-resource-1.0.1.min.js" />				
 			</filelist>
 		</copy>
 	</target>
@@ -71,11 +71,14 @@
 				<file name="jquery/jquery.fileupload-fp.js" />
 				<file name="jquery/jquery.fileupload-ui.js" />
 				<file name="jquery/jquery.imgareaselect.pack.js" />
-
 				<file name="bootstrap/bootstrap.min.js" />
 				<file name="angular/angular-resource-1.0.1.min.js" />
-			</filelist>
+				<file name="angular/angular-sanitize-1.0.1.min.js" />
+			</filelist>			
 		</copy>
+		<copy todir="build/${frontenddir}/lib/ckeditor">
+			<fileset dir="src/${frontenddir}/lib/ckeditor"></fileset>			
+		</copy>		
 	</target>
 	<target name="copyresources-customerhome">
 			<copy todir="build/${customerhomedir}">

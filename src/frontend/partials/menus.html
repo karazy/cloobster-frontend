@@ -132,10 +132,10 @@
 		    		<div simple-property-editor editor-title="product.editor.name" editor-property="currentProduct.name" editor-on-save="saveProduct()" editor-required>
 			    		<h5 class="edit" tooltip="product.editor.name.tooltip">{{currentProduct.name}} <i class="icon-edit icon-black"></i></h5>
 			    	</div>
-			    	<div simple-property-editor editor-title="product.editor.shortDesc" editor-property="currentProduct.shortDesc" editor-on-save="saveProduct()" editor-required editor-type="textarea">
+			    	<div simple-property-editor editor-title="product.editor.shortDesc" editor-property="currentProduct.shortDesc" editor-on-save="saveProduct()" editor-type="textarea">
 			    		<p class="edit" tooltip="product.editor.shortDesc.tooltip">{{currentProduct.shortDesc}} <i class="icon-edit icon-black"></i></p>
 			    	</div>
-			    	<div simple-property-editor editor-title="product.editor.longDesc" editor-property="currentProduct.longDesc" editor-on-save="saveProduct()" editor-required editor-type="textarea">
+			    	<div simple-property-editor editor-title="product.editor.longDesc" editor-property="currentProduct.longDesc" editor-on-save="saveProduct()" editor-type="textarea">
 			    		<p class="edit" tooltip="product.editor.longDesc.tooltip">{{currentProduct.longDesc}} <i class="icon-edit icon-black"></i></p>
 			    	</div>
 			    	<div simple-property-editor editor-title="product.editor.price" editor-property="currentProduct.price" editor-on-save="saveProduct()" editor-required editor-pattern="/^[0-9]+([.][0-9]+)?$/" editor-pattern-text="product.editor.price.validation" >
