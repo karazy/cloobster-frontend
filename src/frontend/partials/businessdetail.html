@@ -240,11 +240,11 @@
 <div class="modal hide" id="deleteModal">
  	<div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal">×</button>
-    	<h3 l="businesses.dialog.delete">Delete Restaurant</h3>
+    	<h3 l="businesses.dialog.delete">Delete Location</h3>
 	</div>
 	<form name="businessDeleteForm" ng-submit="deleteBusiness()" novalidate>
 		<div class="modal-body alert-error">
-	    	<p l="business.dialog.delete.text">Attention! You're about to delete {{activeBusiness.name}}. The business will be inactivated and put into a read-only mode. Users currently locked in will be able to see their current status (e. g. orders) but can't execute further actions. Business will be kept for a while before it will be deleted permanently.</p>
+	    	<p l="business.dialog.delete.text">Attention! You're about to delete {{activeBusiness.name}}. The location will be inactivated and put into a read-only mode. Users currently locked in will be able to see their current status (e. g. orders) but can't execute further actions. Location will be kept for a while before it will be deleted permanently.</p>
 	    	<p l="dialog.delete.confirm">Please confirm your delete attempt by entering your password.</p>
     		<label for="deletePassword" l="common.password">Password</label>
     		<input type="password" id="deletePassword" name="deletePassword" ng-model="deletePassword" required></input>
