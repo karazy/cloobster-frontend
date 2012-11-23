@@ -275,7 +275,9 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 						'</div>'+
 						'<div class="modal-footer" style="clear:both;">'+
 							'<button type="button" class="btn" ng-click="cancel()" data-dismiss="modal" l="common.cancel">Close</button>'+
-							'<button type="submit" ng-hide="selectionActive" ng-disabled="!fileAdded || fileUploading" class="btn btn-primary" data-loading-text="Saving..." l="common.save">Save</button>'+
+							'<button type="submit" ng-hide="selectionActive" ng-disabled="isSaveDisabled()" class="btn btn-primary">'+
+								'<span l="common.save" ng-hide="fileUploading">Save</span><span ng-show="fileUploading" l="fileupload.button.submit.saving"></span>'+
+							'</button>'+
 							'<button type="button" class="btn btn-primary" ng-click="crop()" ng-show="selectionActive" ng-disabled="fileCropping" l="fileupload.button.crop">Crop image</button>'
 						'</div>'+
 					'</form>'+
@@ -289,7 +291,6 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        	var dialog = iElement.find('div.modal'),
 		        		dialogBody = dialog.find('div.modal-body'),
 		        		fileList = iElement.find('.selected-files'),
-		        		submitButton = iElement.find("button[type=submit]"),
 		        		uploadInput = iElement.find('form[name=simpleImageForm]'),
 		        		imageElement = iElement.find('img.active-image'),
 		        		uploadObject, //returned from file upload initialization
@@ -299,7 +300,6 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 
 		        	/** Initialize private scope variables */
 		        	function resetScope () {
-						submitButton.button('reset');
 						scope.fileAdded = false;
 						scope.fileUploading = false;
 						scope.fileCropping = false;
@@ -322,6 +322,10 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        	scope.getTitle = function() {
 		        		return langService.translate(scope.editorTitleKey) || scope.editorTitleKey;
 		        	}
+
+		        	scope.isSaveDisabled = function() {
+		        		return !scope.fileAdded || scope.fileUploading;
+		        	};
 
 		        	/** Called from imgAreaSelect plugin after user selected an image area. */
 		        	function selectionEnd(img, selection) {
@@ -368,8 +372,6 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 	    					}
 		
 						} else {
-							
-							submitButton.button('reset');
 							scope.errorMessage = langService.translate("fileupload.submit.error");
 							scope.error = true;
 							scope.barStyle.width = '0%';
@@ -501,8 +503,6 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        			scope.userSaved = true;
 		        		}
 		        		if(!scope.selectionActive || scope.fileUploading) {
-			        		submitButton.attr('data-loading-text', langService.translate("fileupload.button.submit.saving"));
-			        		submitButton.button('loading');
 			        		scope.fileUploading = true;			        		
 			        		uploadObject.upload();
 		        		}
