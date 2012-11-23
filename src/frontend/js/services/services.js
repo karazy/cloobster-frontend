@@ -821,7 +821,7 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 	$rootScope.customer = false;
 
 	$rootScope.$on('$routeChangeSuccess',function(event, current, previous) {
-		if(current.$route.hasOwnProperty('customer')) {
+		if(current.$route && current.$route.hasOwnProperty('customer')) {
 			$rootScope.customer = true;
 		}
 	});
