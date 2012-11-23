@@ -293,7 +293,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		if(!imageId) {
 			$log.log('Business.deleteExistingImage > no ImageId given');
 		}
-
+		
 		if(!$scope.activeBusiness) {
 			$log.log('Business.deleteExistingImage > no activeBusiness not set');
 		}

@@ -143,10 +143,11 @@
 					<div simple-image-editor="activeBusiness.images.logo" editor-title-key="business.detail.logo.editor.title" editor-image-id="logo" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
 						<div ng-show="activeBusiness.images.logo.url">
 							<img  ng-src="{{activeBusiness.images.logo.url}}=s96" alt="click to edit" />
-							<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
-						</div>
-						<button ng-show="!activeBusiness.images.logo" ng-disabled="!editMode" class="btn" l="business.detail.logo.button">Add Logo</button>
+							<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>							
+						</div>						
+						<button ng-show="!activeBusiness.images.logo" ng-disabled="!editMode" class="btn" l="business.detail.logo.button">Add Logo</button>						
 					</div>
+					<button ng-disabled="!editMode" class="btn" ng-click="deleteExistingImage(logo)"><i class="icon-trash icon-black"></i></button>
 				</div>
 			</div>
 			<div class="data-element">				
