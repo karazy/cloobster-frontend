@@ -4,63 +4,20 @@
 			You also can customize the CI which affects how your business is presented in the app.</p>
 	</div>
 </div>
-<div simple-property-editor editor-title="business.detail.name" editor-property="activeBusiness.name" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
-	<h1 ng-class="getEditModeClass()">{{activeBusiness.name}}</h1>
-</div>
-<div class="content-wrapper well">
-		<div class="row-fluid">
-			<div class="span6" ng-hide="editMode">
-				<button type="button" class="btn btn-primary" ng-click="toggleEditMode()" l="business.action.edit.enable">Edit Profile</button>
-			</div>
-			<div class="span6" ng-show="editMode">
-				<button type="button" class="btn btn-primary" ng-click="toggleEditMode()" l="business.action.edit.disable">Done editing</button> 
-				<span l="business.action.edit.disable.hint">Click a profile feature to edit.</span>
-			</div>
-			<div class="span6" ng-hide="editMode">
-				<button ng-click="showDeleteDialog(activeBusiness)" class="btn btn-danger"><i class="icon-warning-sign icon-black"></i> <span l="businesses.action.delete">Delete Business</span></button>
-			</div>
-		</div>
-		<div class="data-section">
+<div class="data-container-with-title">
+	<h4 class="data-container-title" l="businesses.headertabs.locationsettings">Location Settings</h4>
+	<div class="data-container-block data-container-seperator">
+		<button type="button" ng-hide="editMode" class="btn btn-primary" ng-click="toggleEditMode()" l="business.action.edit.enable">Edit Profile</button>
+	<div ng-show="editMode">
+		<button type="button" class="btn btn-primary" ng-click="toggleEditMode()" l="business.action.edit.disable">Done editing</button> 
+		<span l="business.action.edit.disable.hint">Click a profile feature to edit.</span>
+	</div>
+		<button ng-hide="editMode" ng-click="showDeleteDialog(activeBusiness)" class="btn"><i class="icon-trash icon-black"></i> <span l="businesses.action.delete">Delete Business</span></button>
+	</div>
+		<div class="data-container-block data-container-seperator">
 			<h3 l="business.detail.section.profile">Location Profile</h3>
-			<div class="row-fluid imagebox">
-				<div class="span12">
-					<div simple-image-editor="activeBusiness.images.logo" editor-title-key="business.detail.logo.editor.title" editor-image-id="logo" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
-						<div ng-show="activeBusiness.images.logo.url" class="logo">
-							<img  ng-src="{{activeBusiness.images.logo.url}}=s96" alt="click to edit" />
-							<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
-						</div>
-						<button ng-show="!activeBusiness.images.logo" ng-disabled="!editMode" class="btn logo" l="business.detail.logo.button">Add Logo</button>
-					</div>
-					<div class="row-fluid">
-						<div class="span4">
-							<div simple-image-editor="activeBusiness.images.picture1" editor-title-key="business.detail.picture1.editor.title" editor-image-id="picture1" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
-								<div ng-show="activeBusiness.images.picture1.url">
-									<img  ng-src="{{activeBusiness.images.picture1.url}}=s128" alt="click to edit" />
-									<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
-								</div>
-								<button ng-show="!activeBusiness.images.picture1" ng-disabled="!editMode" class="btn" l="business.detail.picture1.button">Add Profile Picture1</button>
-							</div>
-						</div>
-						<div class="span4">
-							<div simple-image-editor="activeBusiness.images.picture2" editor-title-key="business.detail.picture2.editor.title" editor-image-id="picture2" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
-								<div ng-show="activeBusiness.images.picture2.url">
-									<img  ng-src="{{activeBusiness.images.picture2.url}}=s128" alt="click to edit" />
-									<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
-								</div>
-								<button ng-show="!activeBusiness.images.picture2" ng-disabled="!editMode" class="btn" l="business.detail.picture2.button">Add Profile Picture2</button>
-							</div>
-						</div>
-						<div class="span4">
-							<div simple-image-editor="activeBusiness.images.picture3" editor-title-key="business.detail.picture3.editor.title" editor-image-id="picture3" editor-on-save="setImage(image)" editor-on-	cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
-								<div ng-show="activeBusiness.images.picture3.url">
-									<img  ng-src="{{activeBusiness.images.picture3.url}}=s128" alt="click to edit" />
-									<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
-								</div>
-								<button ng-show="!activeBusiness.images.picture3" ng-disabled="!editMode" class="btn" l="business.detail.picture3.button">Add Profile Picture3</button>
-							</div>
-						</div>
-					</div>
-				</div>
+			<div simple-property-editor editor-title="business.detail.name" editor-property="activeBusiness.name" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
+				<h1 ng-class="getEditModeClass()">{{activeBusiness.name}}</h1>
 			</div>
 			<div simple-property-editor editor-title="business.detail.description" editor-property="activeBusiness.description" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-type="textarea" editor-required>
 				<div class="data-element" ng-class="getEditModeClass()">
@@ -161,7 +118,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="data-section data-section-seperator">
+		<div class="data-container-block data-container-seperator">
 			<h3 l="business.detail.section.app">App Configration</h3>
 			<p l="business.detail.section.app.description">Configure the look of the cloobster Application to best fit your CI.</p>
 			<div class="data-element">
@@ -176,6 +133,20 @@
 					</div>
 					<button ng-show="!activeBusiness.images.appheader" ng-disabled="!editMode" class="btn" l="business.detail.add.image.button">Add Image</button>
 				</div>
+				</div>
+			</div>
+			<div class="data-element">
+				<div class="key" l="business.detail.logo">
+					Logo Picture
+				</div>
+				<div class="value">
+					<div simple-image-editor="activeBusiness.images.logo" editor-title-key="business.detail.logo.editor.title" editor-image-id="logo" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
+						<div ng-show="activeBusiness.images.logo.url">
+							<img  ng-src="{{activeBusiness.images.logo.url}}=s96" alt="click to edit" />
+							<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
+						</div>
+						<button ng-show="!activeBusiness.images.logo" ng-disabled="!editMode" class="btn" l="business.detail.logo.button">Add Logo</button>
+					</div>
 				</div>
 			</div>
 			<div class="data-element">				
@@ -203,7 +174,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="data-section data-section-seperator">
+		<div class="data-container-block data-container-seperator">
 			<h3 l="business.detail.section.facebook">Facebook Configuration</h3>
 			<p l="business.detail.section.facebook.description">Configure how post in Facebook will appear.</p>
 			<div simple-property-editor editor-title="business.detail.facebook.url" editor-property="activeBusiness.fbUrl" editor-on-save="saveBusiness()" editor-enabled="editMode">
@@ -227,16 +198,53 @@
 				</div>
 			</div>
 		</div>
+		<div class="data-container-block data-container-seperator">
+			<h3 l="business.detail.section.pictures">Upload more pictures</h3>
+			<div class="row-fluid">
+				<div class="span12">					
+					<div class="row-fluid">
+						<div class="span4">
+							<div simple-image-editor="activeBusiness.images.picture1" editor-title-key="business.detail.picture1.editor.title" editor-image-id="picture1" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
+								<div ng-show="activeBusiness.images.picture1.url">
+									<img  ng-src="{{activeBusiness.images.picture1.url}}=s128" alt="click to edit" />
+									<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
+								</div>
+								<button ng-show="!activeBusiness.images.picture1" ng-disabled="!editMode" class="btn" l="business.detail.picture1.button">Add Profile Picture1</button>
+							</div>
+						</div>
+						<div class="span4">
+							<div simple-image-editor="activeBusiness.images.picture2" editor-title-key="business.detail.picture2.editor.title" editor-image-id="picture2" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
+								<div ng-show="activeBusiness.images.picture2.url">
+									<img  ng-src="{{activeBusiness.images.picture2.url}}=s128" alt="click to edit" />
+									<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
+								</div>
+								<button ng-show="!activeBusiness.images.picture2" ng-disabled="!editMode" class="btn" l="business.detail.picture2.button">Add Profile Picture2</button>
+							</div>
+						</div>
+						<div class="span4">
+							<div simple-image-editor="activeBusiness.images.picture3" editor-title-key="business.detail.picture3.editor.title" editor-image-id="picture3" editor-on-save="setImage(image)" editor-on-	cancel="discardImage(image)" editor-enabled="editMode" editor-image-resource="imageResource">
+								<div ng-show="activeBusiness.images.picture3.url">
+									<img  ng-src="{{activeBusiness.images.picture3.url}}=s128" alt="click to edit" />
+									<p ng-show="editMode" l="business.detail.picture.edit">Click image to edit</p>
+								</div>
+								<button ng-show="!activeBusiness.images.picture3" ng-disabled="!editMode" class="btn" l="business.detail.picture3.button">Add Profile Picture3</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- </div> -->
 </div>
 
 <div class="modal hide" id="deleteModal">
  	<div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal">×</button>
-    	<h3 l="businesses.dialog.delete">Delete Restaurant</h3>
+    	<h3 l="businesses.dialog.delete">Delete Location</h3>
 	</div>
 	<form name="businessDeleteForm" ng-submit="deleteBusiness()" novalidate>
 		<div class="modal-body alert-error">
-	    	<p l="business.dialog.delete.text">Attention! You're about to delete {{activeBusiness.name}}. The business will be inactivated and put into a read-only mode. Users currently locked in will be able to see their current status (e. g. orders) but can't execute further actions. Business will be kept for a while before it will be deleted permanently.</p>
+	    	<p l="business.dialog.delete.text">Attention! You're about to delete {{activeBusiness.name}}. The location will be inactivated and put into a read-only mode. Users currently locked in will be able to see their current status (e. g. orders) but can't execute further actions. Location will be kept for a while before it will be deleted permanently.</p>
 	    	<p l="dialog.delete.confirm">Please confirm your delete attempt by entering your password.</p>
     		<label for="deletePassword" l="common.password">Password</label>
     		<input type="password" id="deletePassword" name="deletePassword" ng-model="deletePassword" required></input>

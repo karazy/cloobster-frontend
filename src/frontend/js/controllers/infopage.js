@@ -120,7 +120,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		}
 	}
 
-	$scope.switchLanguage = function() {		
+	$scope.switchLanguage = function() {
 		if($scope.currentLanguage) {
 			$http.defaults.headers.common['Content-Language'] = $scope.currentLanguage.code;	
 			$scope.loadInfoPages(activeBusinessId, $scope.currentLanguage.code);
