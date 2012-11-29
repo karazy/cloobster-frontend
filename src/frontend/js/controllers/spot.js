@@ -10,7 +10,7 @@
 * 	@constructor
 */
 
-Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, Business, Area, Spot, Menu, langService, $log, handleError) {
+Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, loginService, Business, Area, Spot, Menu, langService, $log, handleError) {
 		//default information when adding a new barcode
 	var defaultSpot = {
 			name: langService.translate("barcode.new.default.name") || "New Spot",
@@ -337,6 +337,42 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		});
 	}
 
+	/**
+	* Check spots regarding the search filter.
+	*/
+	$scope.checkSpots = function() {
+		var filtered = null;
+
+		if(!$scope.spots && $scope.spots.length > 0) {
+			$log.log('Spot.setSpotsActiveState: $scope.spots does not exist or is empty.');
+			return;
+		}
+
+		filtered = $filter('filter')($scope.spots, $scope.spotsQuery);
+
+		angular.forEach(filtered, function(element, index) {
+			element.checked = true;		
+		});
+	}
+
+	/**
+	* Uncheck spots regarding the search filter.
+	*/
+	$scope.uncheckSpots = function() {
+		var filtered = null;
+
+		if(!$scope.spots && $scope.spots.length > 0) {
+			$log.log('Spot.setSpotsActiveState: $scope.spots does not exist or is empty.');
+			return;
+		}
+
+		filtered = $filter('filter')($scope.spots, $scope.spotsQuery);
+
+		angular.forEach($scope.spots, function(element, index) {
+			element.checked = null;		
+		});
+	}
+
 	//end spots
 
 	//start menus
@@ -472,4 +508,4 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 
 }
 
-Cloobster.Spot.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'Business', 'Area', 'Spot', 'Menu', 'lang', '$log', 'errorHandler'];
+Cloobster.Spot.$inject = ['$scope', '$http', '$routeParams', '$location', '$filter', 'login', 'Business', 'Area', 'Spot', 'Menu', 'lang', '$log', 'errorHandler'];
