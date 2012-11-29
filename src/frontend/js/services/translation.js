@@ -1243,6 +1243,15 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "z.B. 50",
 			"EN" : ""
 		},
+		"spots.massdelete.title" : {
+			"DE" :  "Selektierte Spots löschen",
+			"EN" : ""
+		},
+		"spots.massdelete.description" : {
+			"DE" :  "Löscht alle selektierten Spots. Diese Aktion kann nicht rückgängig gemacht werden.<br/>"+
+			"Ausgedruckte Barcodes sind danach nicht mehr gültig.",
+			"EN" : ""
+		},
 		//infopage partial
 		"infopages.description" : {
 			"DE" :  "Hier können Sie Informationen zur aktuellen Location anlegen. Dies können zum Beispiel Informationen<br/>"+

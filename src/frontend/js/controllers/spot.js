@@ -264,7 +264,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 			{
 				'name' : $scope.spotMassCreation.name,
 				'startNumber' : $scope.spotMassCreation.startNumber,
-				'count' : $scope.spotMassCreation.count
+				'count' : $scope.spotMassCreation.count,
+				'areaId' : $scope.currentArea.id
 			},
 			function(response) {
 				//success
@@ -275,6 +276,65 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		);
 
 		jQuery("#spotMassCreationDialog").modal('hide');
+	}
+
+	/**
+	* Sets active state for all checked spots.
+	* @param active
+	*	true to set spots active, false otherwise
+	*/
+	$scope.setCheckedSpotsActiveState = function(active) {
+		var ids = [];
+
+		if(!$scope.spots && $scope.spots.length > 0) {
+			$log.log('Spot.setSpotsActiveState: $scope.spots does not exist or is empty.');
+			return;
+		}
+
+		if(!$scope.spotsResource) {
+			$log.log('Spot.setSpotsActiveState: $scope.spotsResource does not exist.');
+			return;	
+		}
+
+		angular.forEach($scope.spots, function(element, index) {
+			if(element.checked) {
+				ids.push(element.id);	
+			}			
+		});
+
+		$scope.spotsResource.update({
+			'ids' : ids,
+			'spotData' : {
+				'active' : active
+			}
+		});
+	}
+
+	/**
+	* Deletes all checked spots.
+	*/
+	$scope.deleteCheckedSpots = function() {
+		var ids = [];
+
+		if(!$scope.spots && $scope.spots.length > 0) {
+			$log.log('Spot.setSpotsActiveState: $scope.spots does not exist or is empty.');
+			return;
+		}
+
+		if(!$scope.spotsResource) {
+			$log.log('Spot.setSpotsActiveState: $scope.spotsResource does not exist.');
+			return;	
+		}
+
+		angular.forEach($scope.spots, function(element, index) {
+			if(element.checked) {
+				ids.push(element.id);	
+			}			
+		});
+
+		$scope.spotsResource.delete({
+			'ids' : ids
+		});
 	}
 
 	//end spots
