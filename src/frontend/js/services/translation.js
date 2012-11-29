@@ -1219,6 +1219,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Hier können Sie mehrere Spots auf einmal anlegen. Z. B. Zimmer 100 bis Zimmer 199",
 			"EN" : ""
 		},
+		"spot.masscreation.button" : {
+			"DE" :  "Mehrere",
+			"EN" : ""
+		},
 		"spots.masscreation.name" : {
 			"DE" :  "Name",
 			"EN" : ""
@@ -1250,6 +1254,26 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"spots.massdelete.description" : {
 			"DE" :  "Löscht alle selektierten Spots. Diese Aktion kann nicht rückgängig gemacht werden.<br/>"+
 			"Ausgedruckte Barcodes sind danach nicht mehr gültig.",
+			"EN" : ""
+		},
+		"spots.massactivate.tooltip" : {
+			"DE" :  "Selektierte aktivieren",
+			"EN" : ""
+		},
+		"spots.massdeactivate.tooltip" : {
+			"DE" :  "Selektiere deaktivieren",
+			"EN" : ""
+		},
+		"spots.massdelete.tooltip" : {
+			"DE" :  "Selektierte löschen",
+			"EN" : ""
+		},
+		"spots.masscheck.tooltip" : {
+			"DE" :  "Alle selektieren",
+			"EN" : ""
+		},
+		"spots.massuncheck.tooltip" : {
+			"DE" :  "Alle deselektieren",
 			"EN" : ""
 		},
 		//infopage partial
