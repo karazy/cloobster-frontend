@@ -249,6 +249,14 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.saveSpot();
 	}
 
+	/**
+	*
+	*
+	*/
+	$scope.showSpotMassCreationDialog = function() {
+		
+	}
+
 	//end spots
 
 	//start menus

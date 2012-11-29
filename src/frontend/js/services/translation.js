@@ -1211,6 +1211,38 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "{{currentSpot.name}} wird gelöscht!<br/>Bereits ausgedruckte Barcodes können nicht wiederverwendet werden!",
 			"EN" : "{{currentSpot.name}} will be deleted!<br/>Barcode cannot be reused!"
 		},
+		"spots.masscreation.title" : {
+			"DE" :  "Mehrere Spots anlegen",
+			"EN" : ""
+		},
+		"spots.masscreation.description" : {
+			"DE" :  "Hier können Sie mehrere Spots auf einmal anlegen. Z. B. Zimmer 100 bis Zimmer 199",
+			"EN" : ""
+		},
+		"spots.masscreation.name" : {
+			"DE" :  "Name",
+			"EN" : ""
+		},
+		"spots.masscreation.startNumber" : {
+			"DE" :  "Startnummer",
+			"EN" : ""
+		},
+		"spots.masscreation.count" : {
+			"DE" :  "Anzahl",
+			"EN" : ""
+		},
+		"spots.masscreation.placeholder.name" : {
+			"DE" :  "z.B. Zimmer oder Tisch",
+			"EN" : ""
+		},
+		"spots.masscreation.placeholder.startNumber" : {
+			"DE" :  "z.B. 100",
+			"EN" : ""
+		},
+		"spots.masscreation.placeholder.count" : {
+			"DE" :  "z.B. 50",
+			"EN" : ""
+		},
 		//infopage partial
 		"infopages.description" : {
 			"DE" :  "Hier können Sie Informationen zur aktuellen Location anlegen. Dies können zum Beispiel Informationen<br/>"+
