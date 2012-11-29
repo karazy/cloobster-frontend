@@ -42,6 +42,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.currentArea = null;
 	/** Currently selected spot. */
 	$scope.currentSpot = null;
+	/* When creating multiple spots at once, spotMassCreation holds the data. */
+	$scope.spotMassCreation = null;
 	/** Business to which these spots belong to. */
 	$scope.activeBusiness = null;
 	/** A temporary order list of menus assigned to current area. */
@@ -250,11 +252,29 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	}
 
 	/**
-	*
+	* Generate multiple spots at once.
 	*
 	*/
-	$scope.showSpotMassCreationDialog = function() {
-		
+	$scope.generateSpots = function() {
+		//1. PUT /b/businesses/{id}/spots/ Param: name, startNumber, count, Return complete array
+		//2. Update view
+		//3. clear spotMassCreation
+
+		$scope.spotsResource.generate( 
+			{
+				'name' : $scope.spotMassCreation.name,
+				'startNumber' : $scope.spotMassCreation.startNumber,
+				'count' : $scope.spotMassCreation.count
+			},
+			function(response) {
+				//success
+				$scope.spots = $scope.spots.concat(response);
+			},
+			// Error callback
+			handleError
+		);
+
+		jQuery("#spotMassCreationDialog").modal('hide');
 	}
 
 	//end spots
