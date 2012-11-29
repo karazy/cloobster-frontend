@@ -502,8 +502,13 @@ Cloobster.services.factory('Spot', ['cloobsterResource', function($resource) {
 						* Like a save but uses PUT instead of POST.
 						*/
 						'update': { method: 'PUT'},
-
-						'generate' : { method: 'PUT'}
+						/*
+						* @name Cloobster.services.Spot#$generate
+						* Creates multiple spots at once.
+						* @return
+						*	Created spots
+						*/
+						'generate' : { method: 'PUT', isArray:true}
 				}
 
 				)
