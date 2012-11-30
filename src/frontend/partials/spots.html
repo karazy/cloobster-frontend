@@ -121,8 +121,8 @@
 				</div>
 				<ul class="nav nav-pills nav-stacked data-container-block data-container-small data-container-scrollable" id="spotsList">
 				        <li ng-repeat="spot in spots | filter:spotsQuery | orderBy:['name'] " ng-class="{active: currentSpot.id == spot.id}">	        	
-			        		
-			        		<a ><input type="checkbox" ng-model="spot.checked"><span ng-click="loadSpot(spot)">{{spot.name}}</span></a>
+			        		<input type="checkbox" ng-model="spot.checked">
+			        		<a ng-click="loadSpot(spot)">{{spot.name}}</a>
 			        	</li>
 		    	</ul>
 			</div>
