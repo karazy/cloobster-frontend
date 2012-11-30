@@ -1216,7 +1216,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : ""
 		},
 		"spots.masscreation.description" : {
-			"DE" :  "Hier können Sie mehrere Spots auf einmal anlegen. Z. B. Zimmer 100 bis Zimmer 199",
+			"DE" :  "Hier können Sie mehrere Spots auf einmal anlegen.<br/>Zum Beispiel Zimmer 100 bis Zimmer 199",
 			"EN" : ""
 		},
 		"spot.masscreation.button" : {
@@ -1224,7 +1224,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : ""
 		},
 		"spots.masscreation.name" : {
-			"DE" :  "Name",
+			"DE" :  "Name*",
 			"EN" : ""
 		},
 		"spots.masscreation.startnumber" : {
@@ -1232,7 +1232,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : ""
 		},
 		"spots.masscreation.count" : {
-			"DE" :  "Anzahl",
+			"DE" :  "Anzahl*",
 			"EN" : ""
 		},
 		"spots.masscreation.placeholder.name" : {
@@ -1245,6 +1245,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"spots.masscreation.placeholder.count" : {
 			"DE" :  "z.B. 50",
+			"EN" : ""
+		},
+		"spots.masscreation.count.error.min" : {
+			"DE" :  "Anzahl muss min. 1 sein.",
+			"EN" : ""
+		},
+		"spots.masscreation.count.error.max" : {
+			"DE" :  "Anzahl darf max. 500 sein.",
 			"EN" : ""
 		},
 		"spots.massdelete.title" : {

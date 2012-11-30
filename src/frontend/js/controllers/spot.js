@@ -10,7 +10,7 @@
 * 	@constructor
 */
 
-Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, loginService, Business, Area, Spot, Menu, langService, $log, handleError) {
+Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, loginService, Business, Area, Spot, Menu, langService, $log, handleError, helperFn) {
 		//default information when adding a new barcode
 	var defaultSpot = {
 			name: langService.translate("barcode.new.default.name") || "New Spot",
@@ -511,11 +511,20 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		if(newVal == true && businessId) {
 			//load areas
 			$scope.loadAreas(businessId);
+
 		}
 
 	});	
 
+	/**
+	* Use function from helper service.
+	*
+	*/
+	$scope.getFieldInputClass = function(input) {
+		return helperFn.getFieldInputClass(input);
+	}
+
 
 }
 
-Cloobster.Spot.$inject = ['$scope', '$http', '$routeParams', '$location', '$filter', 'login', 'Business', 'Area', 'Spot', 'Menu', 'lang', '$log', 'errorHandler'];
+Cloobster.Spot.$inject = ['$scope', '$http', '$routeParams', '$location', '$filter', 'login', 'Business', 'Area', 'Spot', 'Menu', 'lang', '$log', 'errorHandler', 'helper'];

@@ -81,7 +81,7 @@
 						<div class="row-fluid show-grid">
   							
 						<button  class="btn btn-primary span6" ng-click="createSpot()"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
-						<a  class="btn btn-primary span6" href="#spotMassCreationDialog" data-toggle="modal" ><i class="icon-th icon-white"></i> <span l="spot.masscreation.button">Multiple</span></a>
+						<a  class="btn btn-primary span6" href="#spotMassCreationDialog" data-toggle="modal" ng-click="spotMassCreation = null"><i class="icon-th icon-white"></i> <span l="spot.masscreation.button">Multiple</span></a>
 							
 						</div>						
 					<!-- </div> -->
@@ -195,10 +195,10 @@
   </div>
   <div class="modal-body">
   	<p l="spots.masscreation.description">Here you can create multiple spots at once.</p>
-    <form class="form" name="spotMassCreationForm">
-			<div class="control-group">				
+    	<form class="form" name="spotMassCreationForm">
+			<div class="control-group" ng-class="getFieldInputClass(spotMassCreationForm.massCreationName)">				
 				<div class="controls">
-					<label class="control-label" for="spots.masscreation.name" l="spots.masscreation.name">Name</label>
+					<label class="control-label" for="spots.masscreation.name" l="spots.masscreation.name">Name*</label>
 					<div class="controls">
 						<input id="spots.masscreation.name" name="massCreationName" type="text" l="spots.masscreation.placeholder.name" l-attribute="placeholder" placeholder="e.g. room or table" ng-model="spotMassCreation.name" required>
 						<div class="help-inline" ng-show="spotMassCreationForm.massCreationName.$dirty && spotMassCreationForm.massCreationName.$invalid">
@@ -218,18 +218,19 @@
 					</div>
 				</div>
 			</div>
-			<div class="controls">
-				<label class="control-label" for="spots.masscreation.count" l="spots.masscreation.count">Count</label>
+			<div class="control-group" ng-class="getFieldInputClass(spotMassCreationForm.massCreationCount)">
+				<label class="control-label" for="spots.masscreation.count" l="spots.masscreation.count">Count*</label>
 				<div class="controls">
 					<input id="spots.masscreation.count" name="massCreationCount" type="number" l="spots.masscreation.placeholder.count" l-attribute="placeholder" placeholder="e.g. 50" ng-model="spotMassCreation.count" required min="1" max="500">
 					<div class="help-inline" ng-show="spotMassCreationForm.massCreationCount.$dirty && spotMassCreationForm.massCreationCount.$invalid">
 						<span ng-show="spotMassCreationForm.massCreationCount.$error.required" l="propertyeditor.error.number">Required field</span>
-						<span ng-show="spotMassCreationForm.massCreationCount.$error.min" l="propertyeditor.error.min">Min. number is 1</span>
-						<span ng-show="spotMassCreationForm.massCreationCount.$error.max" l="propertyeditor.error.max">Max. number is 500</span>
+						<span ng-show="spotMassCreationForm.massCreationCount.$error.min" l="spots.masscreation.count.error.min">Min. number is 1</span>
+						<span ng-show="spotMassCreationForm.massCreationCount.$error.max" l="spots.masscreation.count.error.max">Max. number is 500</span>
 					</div>
 				</div>
 			</div>
-		</form>		
+		</form>
+		<p l="registration.form.requiredfield">* marks required fields</p>
   </div>
   <div class="modal-footer">
   	<button class="btn" l="common.cancel" data-dismiss="modal" ng-click="spotMassCreation = null;">Cancel</button>
