@@ -256,13 +256,24 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 	*
 	*/
 	$scope.generateSpots = function() {
+
+		if(!$scope.spots) {
+			$log.error('Spot.generateSpots: no spots collection exists');
+			return;
+		}
+
+		if(!$scope.spotsResource) {
+			$log.error('Spot.generateSpots: no spotsResource exists');
+			return;
+		}
+
 		//1. PUT /b/businesses/{id}/spots/ Param: name, startNumber, count, Return complete array
 		//2. Update view
 		//3. clear spotMassCreation
 
+		//form not valid
 		if($scope.spotMassCreationForm.$invalid) {
-			//form not valid
-			$scope.spotMassCreationForm.$invalid
+			$log.warn('Spot.generateSpots: form is invalid');			
 			return;
 		}
 
@@ -291,7 +302,9 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 	*	true to set spots active, false otherwise
 	*/
 	$scope.setCheckedSpotsActiveState = function(active) {
-		var ids = [];
+		var ids = [],
+			//used in forEach to match returned spots with local ones
+			foundSpot;
 
 		if(!$scope.spots && $scope.spots.length > 0) {
 			$log.log('Spot.setSpotsActiveState: $scope.spots does not exist or is empty.');
@@ -309,10 +322,30 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			}			
 		});
 
-		$scope.spotsResource.update({
+		$scope.spotsResource.process(
+			{
 			'ids' : ids,
 			'active' : active
-		});
+			}, 
+			function(response) {
+				//update status on success
+				angular.forEach($scope.spots, function(element, index) {
+					foundSpot = jQuery.grep(response, function(spotFromResponse) {
+						return spotFromResponse.id == element.id;
+					});
+
+					if(foundSpot.length > 1) {
+						$log.warn('Spot.setSpotsActiveState: more than one returned spot matches with local ones!');
+					} else if(!foundSpot || foundSpot.length == 0) {
+						$log.warn('Spot.setSpotsActiveState: no matching spot found');
+					} else {
+						//replace old spot with updated
+						$scope.spots[index] = foundSpot[0];
+					}	
+				});
+			},
+			handleError
+		);
 
 		manageViewHiearchy("area");
 	}
@@ -321,7 +354,11 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 	* Deletes all checked spots.
 	*/
 	$scope.deleteCheckedSpots = function() {
-		var ids = [];
+		var ids = [],
+			//used in forEach to match returned spots with local ones
+			foundSpot,
+			indexesToRemove = [],
+			clearedSpots = [];
 
 		if(!$scope.spots && $scope.spots.length > 0) {
 			$log.log('Spot.setSpotsActiveState: $scope.spots does not exist or is empty.');
@@ -336,13 +373,45 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		angular.forEach($scope.spots, function(element, index) {
 			if(element.checked) {
 				ids.push(element.id);	
-			}			
+			}				
 		});
 
-		$scope.spotsResource.update({
+		$scope.spotsResource.process(
+			{
 			'ids' : ids,
 			'remove': true
-		});
+			},
+			function(response) {
+				//update status on success
+				angular.forEach($scope.spots, function(element, index) {
+					foundSpot = jQuery.grep(response, function(spotFromResponse) {
+						return spotFromResponse.id == element.id;
+					});
+
+					// if(foundSpot.length > 1) {
+					// 	$log.warn('Spot.deleteCheckedSpots: more than one returned spot matches with local ones!');
+					// } else 
+					if(!foundSpot || foundSpot.length == 0) {
+						//this is non removed spot so add it
+						clearedSpots.push(element);
+					} 
+					// else {
+					// 	//remove spot from list
+					// 	indexesToRemove.push(index);						
+					// }	
+				});				
+				$scope.spots = clearedSpots;
+
+				// for (var i = indexesToRemove.length - 1; i >= 0; i--) {
+				// 	$scope.spots.splice(i, 1);
+				// };
+				// angular.forEach(indexesToRemove, function(element, index) {
+				// 	$scope.spots.splice(element, 1);
+				// });
+
+			},
+			handleError	
+		);
 
 		manageViewHiearchy("area");
 	}

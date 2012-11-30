@@ -500,8 +500,16 @@ Cloobster.services.factory('Spot', ['cloobsterResource', function($resource) {
 						/*
 						* @name Cloobster.services.Spot#$update
 						* Like a save but uses PUT instead of POST.
+						* Used for udpates on single entities.
 						*/
 						'update': { method: 'PUT'},
+						/*
+						* @name Cloobster.services.Spot#$process
+						* Used to update collections of spots.
+						* @return
+						*	Array of spots with updated values.
+						*/
+						'process': { method: 'PUT', isArray:true},
 						/*
 						* @name Cloobster.services.Spot#$generate
 						* Creates multiple spots at once.

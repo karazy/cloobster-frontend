@@ -23,7 +23,7 @@
 			</div> -->
 			<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable">
 		        <li ng-repeat="area in areas | orderBy:['name'] " ng-class="{active: currentArea.id == area.id}">	        	
-		        	<a ng-click="loadArea(area)">{{area.name}}</a>
+		        	<a ng-click="loadArea(area)">{{area.name}}  <i class="icon-ban-circle icon-black" ng-hide="area.active"></i></a>
 		        </li>
 		    </ul>	
 		</div><!-- end first column -->
@@ -115,18 +115,19 @@
         					</div>
         					<i class="icon-remove icon-black" ng-click="spotsQuery = null">
         					</i> 
+        					<span> Spots count {{filteredSpots.length}}</span>
 						</div>
 	    			</form>
 					
 				</div>
 				<ul class="nav-pills-checkbox data-container-block data-container-small data-container-scrollable" id="spotsList">
-				        <li ng-repeat="spot in spots | filter:spotsQuery | orderBy:['name'] " >	        	
+				        <li ng-repeat="spot in filteredSpots = (spots | filter:spotsQuery) | orderBy:['name'] " >	        	
 				        	
 				        	<div ng-class="{active: currentSpot.id == spot.id}">
 				        		<div>
 				        			<input type="checkbox" ng-model="spot.checked">
 				        		</div>
-			        			<div ng-click="loadSpot(spot, $event)">{{spot.name}}</div>
+			        			<div ng-click="loadSpot(spot, $event)">{{spot.name}} <i class="icon-ban-circle icon-black" ng-hide="spot.active"></i></div>
 			        			<!-- <a ></a> -->
 			        		</div>
 			        	</li>
