@@ -400,3 +400,46 @@ ul.options-list li:hover {
   margin: 5px 0;
 }
 
+/* Styles to display a list with checkboxes at start. Inspired by bootstrap style "nav nav-pills nav-pills-stacked" */
+.nav-pills-checkbox {
+  margin: 0;
+}
+
+.nav-pills-checkbox > li > div {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  color: #08C;
+}
+
+.nav-pills-checkbox > li > div:hover {
+  background-color: #EEE;
+}
+
+.nav-pills-checkbox > li > div.active {
+  color: white;
+  background-color: #08C;
+}
+
+.nav-pills-checkbox > li > div > div:first-child {
+  /*display: inline;*/
+  float: left;
+}
+
+.nav-pills-checkbox > li > div > div:nth-child(2) {
+  /*display: inline;*/
+  width: 100%;
+}
+
+.nav-pills-checkbox > li > div input {
+  margin: 0 5px 0 5px;
+}
+
+.nav-pills-checkbox > li > div.active > span{
+  color: white;
+}
+

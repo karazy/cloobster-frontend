@@ -119,10 +119,16 @@
 	    			</form>
 					
 				</div>
-				<ul class="nav nav-pills nav-stacked data-container-block data-container-small data-container-scrollable" id="spotsList">
-				        <li ng-repeat="spot in spots | filter:spotsQuery | orderBy:['name'] " ng-class="{active: currentSpot.id == spot.id}">	        	
-			        		<input type="checkbox" ng-model="spot.checked">
-			        		<a ng-click="loadSpot(spot)">{{spot.name}}</a>
+				<ul class="nav-pills-checkbox data-container-block data-container-small data-container-scrollable" id="spotsList">
+				        <li ng-repeat="spot in spots | filter:spotsQuery | orderBy:['name'] " >	        	
+				        	
+				        	<div ng-class="{active: currentSpot.id == spot.id}">
+				        		<div>
+				        			<input type="checkbox" ng-model="spot.checked">
+				        		</div>
+			        			<div ng-click="loadSpot(spot, $event)">{{spot.name}}</div>
+			        			<!-- <a ></a> -->
+			        		</div>
 			        	</li>
 		    	</ul>
 			</div>

@@ -197,7 +197,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 
 	//start spots
 
-	$scope.loadSpot = function(spotItem) {
+	$scope.loadSpot = function(spotItem, $event) {
 		$log.log("load spot " + spotItem.id);
 		
 		$scope.currentSpot = spotItem;
@@ -304,9 +304,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 
 		$scope.spotsResource.update({
 			'ids' : ids,
-			'spotData' : {
-				'active' : active
-			}
+			'active' : active
 		});
 	}
 
@@ -332,8 +330,9 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			}			
 		});
 
-		$scope.spotsResource.delete({
-			'ids' : ids
+		$scope.spotsResource.update({
+			'ids' : ids,
+			'remove': true
 		});
 	}
 
