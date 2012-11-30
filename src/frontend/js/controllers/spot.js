@@ -260,6 +260,12 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		//2. Update view
 		//3. clear spotMassCreation
 
+		if($scope.spotMassCreationForm.$invalid) {
+			//form not valid
+			$scope.spotMassCreationForm.$invalid
+			return;
+		}
+
 		$scope.spotsResource.generate( 
 			{
 				'name' : $scope.spotMassCreation.name,
@@ -275,7 +281,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			handleError
 		);
 
-		jQuery("#spotMassCreationDialog").modal('hide');
+		$scope.spotMassCreation = null;
+		jQuery("#spotMassCreationDialog").modal('toggle');
 	}
 
 	/**
@@ -306,6 +313,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			'ids' : ids,
 			'active' : active
 		});
+
+		manageViewHiearchy("area");
 	}
 
 	/**
@@ -334,6 +343,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			'ids' : ids,
 			'remove': true
 		});
+
+		manageViewHiearchy("area");
 	}
 
 	/**

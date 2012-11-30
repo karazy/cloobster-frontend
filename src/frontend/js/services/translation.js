@@ -1227,7 +1227,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Name",
 			"EN" : ""
 		},
-		"spots.masscreation.startNumber" : {
+		"spots.masscreation.startnumber" : {
 			"DE" :  "Startnummer",
 			"EN" : ""
 		},
@@ -1239,8 +1239,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "z.B. Zimmer oder Tisch",
 			"EN" : ""
 		},
-		"spots.masscreation.placeholder.startNumber" : {
-			"DE" :  "z.B. 100",
+		"spots.masscreation.placeholder.startnumber" : {
+			"DE" :  "z.B. 100 (Standard 1)",
 			"EN" : ""
 		},
 		"spots.masscreation.placeholder.count" : {
