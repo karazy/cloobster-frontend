@@ -105,14 +105,16 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		$scope.currentArea = areaItem;
 		//initially show content of spots tab
 		$scope.show = 'spots';
-		$scope.spots = $scope.spotsResource.query({"areaId" : areaItem.id}, null, null, handleError);		
+		$scope.spots = $scope.spotsResource.query({"areaId" : areaItem.id}, null, null, handleError);
+		//Reset search field for spots
+		$scope.spotsQuery = null
 		$scope.currentAreaCategories = new Array();
 		if(!$scope.currentArea.menuIds) {
 			$scope.currentArea.menuIds = new Array();
 		} else {
 			//create a temporary order list of menu items based on menuIds
 			angular.forEach($scope.currentArea.menuIds, function(mId) {
-				angular.forEach($scope.menus, function(menu) {				
+				angular.forEach($scope.menus, function(menu) {
 					if(mId == menu.id) {
 						$scope.currentAreaCategories.push(menu);
 					}

@@ -1277,15 +1277,23 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : ""
 		},
 		"spots.masscheck.tooltip" : {
-			"DE" :  "Alle selektieren",
-			"EN" : ""
-		},
-		"spots.massuncheck.tooltip" : {
-			"DE" :  "Alle deselektieren",
+			"DE" :  "Alle anwählen/abwählen",
 			"EN" : ""
 		},
 		"spots.filtered.status" : {
 			"DE" :  "Spots gefiltert {{filteredSpots.length}} | markiert {{getCheckedSpotsCount()}}",
+			"EN" : ""
+		},
+		"spots.legend.inactive" : {
+			"DE" :  "Inaktiv",
+			"EN" : ""
+		},
+		"spots.listheader.selected" : {
+			"DE" :  "Markierte ...",
+			"EN" : ""
+		},
+		"spots.listheader.create" : {
+			"DE" :  "Anlegen ...",
 			"EN" : ""
 		},
 		//infopage partial

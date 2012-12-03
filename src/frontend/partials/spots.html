@@ -95,23 +95,29 @@
 						    <span class="caret"></span>
 						  </a>
 						  <ul class="dropdown-menu">
+						  	<li class="nav-header" l="spots.massupdate.list.header">
+						  		Selected ...
+						  	</li>
 						  	<li>
-						  		<a  class="" ng-click="setCheckedSpotsActiveState(true)" tooltip="spots.massactivate.tooltip">
+						  		<a  class="" ng-click="setCheckedSpotsActiveState(true)">
 									<i class="icon-ok icon-black"></i> <span>Aktiv setzen</span>
 								</a>
 						  	</li>						    
 							<li>
-								<a  class="" ng-click="setCheckedSpotsActiveState(false)" tooltip="spots.massdeactivate.tooltip">
+								<a  class="" ng-click="setCheckedSpotsActiveState(false)">
 									<i class="icon-ban-circle icon-black"></i> <span>Inaktiv setzen</span>
 								</a>
 							</li>							
 							<li>
-								<a  class="" data-toggle="modal" data-target="#deleteCheckedSpotsModal" tooltip="spots.massdelete.tooltip">
+								<a  class="" data-toggle="modal" data-target="#deleteCheckedSpotsModal">
 									<i class="icon-trash icon-black"></i> <span>Löschen</span>
 								</a>
 							</li>
 							<li class="divider">
 							</li>
+							<li class="nav-header">
+						  		Create ...
+						  	</li>
 							<li>
 								<a  class="" ng-click="createSpot()">
 									<i class="icon-plus-sign icon-black"></i> <span l="common.new">New</span>
@@ -140,20 +146,19 @@
 			    					<div class="input-prepend" style="margin-bottom:0;">
 		            					<span class="add-on"><i class="icon-search icon-black"></i>
 		            					</span>
-		            					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="spotsQuery.name">
+		            					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="spotsQuery.name" ng-change="">
 		            					<i class="icon-remove icon-black" ng-click="spotsQuery = null">
 		        						</i> 
 		        					</div>
-
 							<!-- 	</div>
-			    			</form>
- -->		    			</div>
+			    			</form> -->
+ 			    			</div>
 					</div>
 					<span style="font-size: 10px;" l="spots.filtered.status">Spots count {{filteredSpots.length}} | checked {{getCheckedSpotsCount()}}</span>
+					<div class="pull-right"><i class="icon-ban-circle icon-black"></i> <span l="spots.legend.inactive">Inactive</span></div>
 				</div>
 				<ul class="nav-pills-checkbox data-container-block data-container-small data-container-scrollable" id="spotsList">
-				        <li ng-repeat="spot in filteredSpots = (spots | filter:spotsQuery) | orderBy:['name'] " >	        	
-				        	
+				        <li ng-repeat="spot in filteredSpots = (spots | filter:spotsQuery) | orderBy:['name'] " >	        					        	
 				        	<div ng-class="{active: currentSpot.id == spot.id}">
 				        		<div>
 				        			<input type="checkbox" ng-model="spot.checked">
