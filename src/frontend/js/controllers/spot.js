@@ -399,28 +399,12 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 					foundSpot = jQuery.grep(response, function(spotFromResponse) {
 						return spotFromResponse.id == element.id;
 					});
-
-					// if(foundSpot.length > 1) {
-					// 	$log.warn('Spot.deleteCheckedSpots: more than one returned spot matches with local ones!');
-					// } else 
 					if(!foundSpot || foundSpot.length == 0) {
 						//this is non removed spot so add it
 						clearedSpots.push(element);
-					} 
-					// else {
-					// 	//remove spot from list
-					// 	indexesToRemove.push(index);						
-					// }	
+					} 	
 				});				
 				$scope.spots = clearedSpots;
-
-				// for (var i = indexesToRemove.length - 1; i >= 0; i--) {
-				// 	$scope.spots.splice(i, 1);
-				// };
-				// angular.forEach(indexesToRemove, function(element, index) {
-				// 	$scope.spots.splice(element, 1);
-				// });
-
 			},
 			handleError	
 		);
