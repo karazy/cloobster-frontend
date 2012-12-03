@@ -322,6 +322,11 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			}			
 		});
 
+		//No spots selected
+		if(ids.length == 0) {
+			return;	
+		}
+
 		$scope.spotsResource.process(
 			{
 			'ids' : ids,
@@ -376,6 +381,11 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			}				
 		});
 
+		//No spots selected
+		if(ids.length == 0) {
+			return;	
+		}
+
 		$scope.spotsResource.process(
 			{
 			'ids' : ids,
@@ -417,39 +427,39 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 	}
 
 	/**
-	* Check spots regarding the search filter.
+	* Check/Uncheck spots regarding the search filter.
+	* If less then all filtered spots are checked, check all of them. Otherwise uncheck all.
 	*/
 	$scope.checkSpots = function() {
-		var filtered = null;
+		var filtered = null,
+			setChecked;
 
 		if(!$scope.spots && $scope.spots.length > 0) {
 			$log.log('Spot.setSpotsActiveState: $scope.spots does not exist or is empty.');
 			return;
 		}
-
+		
 		filtered = $filter('filter')($scope.spots, $scope.spotsQuery);
 
+		setChecked = jQuery.grep(filtered, function(element) {
+			return element.checked;
+		}).length < filtered.length;
+
+
 		angular.forEach(filtered, function(element, index) {
-			element.checked = true;		
+			element.checked = setChecked;		
 		});
 	}
 
 	/**
-	* Uncheck spots regarding the search filter.
+	* Count checked spots.
 	*/
-	$scope.uncheckSpots = function() {
-		var filtered = null;
+	$scope.getCheckedSpotsCount = function() {
+		var filtered;
 
-		if(!$scope.spots && $scope.spots.length > 0) {
-			$log.log('Spot.setSpotsActiveState: $scope.spots does not exist or is empty.');
-			return;
-		}
+		filtered = $filter('filter')($scope.spots, { 'checked' : true});
 
-		filtered = $filter('filter')($scope.spots, $scope.spotsQuery);
-
-		angular.forEach($scope.spots, function(element, index) {
-			element.checked = null;		
-		});
+		return filtered.length;
 	}
 
 	//end spots

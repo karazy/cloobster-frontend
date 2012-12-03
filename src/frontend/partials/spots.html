@@ -73,28 +73,57 @@
 			<!-- area spots list -->
 			<div class="data-container-with-title" ng-show="currentArea.id">
 				<h4 class="data-container-title" l="areas.spots.list.title">Spots</h4>
-				<div class="data-container-block">
-					<p l="areas.spots.list.description">List of spots assigned to this area. </p>
-				</div>	
 				<div class="data-container-block data-container-seperator">
+					<p l="areas.spots.list.description">List of spots assigned to this area. </p>
 					<!-- <div class="row-fluid show-grid"> -->
-						<div class="row-fluid show-grid">
+						<!-- <div class="row-fluid show-grid">
   							
 						<button  class="btn btn-primary span6" ng-click="createSpot()"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
 						<a  class="btn btn-primary span6" href="#spotMassCreationDialog" data-toggle="modal" ng-click="spotMassCreation = null"><i class="icon-th icon-white"></i> <span l="spot.masscreation.button">Multiple</span></a>
 							
-						</div>						
+						</div>	 -->					
 					<!-- </div> -->
-					<div class="btn-toolbar">
+					<div class="btn-toolbar">						
 						<div class="btn-group">						
 							<button  class="btn" ng-click="checkSpots()" tooltip="spots.masscheck.tooltip">
 								<i class="icon-check icon-black"></i>
-							</button>
-							<button  class="btn" ng-click="uncheckSpots()" tooltip="spots.massuncheck.tooltip">
-								<i class="icon-stop icon-black"></i>
 							</button>						
 						</div>
 						<div class="btn-group">
+						  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+						  	<span l="common.action">Action</span>
+						    <span class="caret"></span>
+						  </a>
+						  <ul class="dropdown-menu">
+						  	<li>
+						  		<a  class="" ng-click="setCheckedSpotsActiveState(true)" tooltip="spots.massactivate.tooltip">
+									<i class="icon-ok icon-black"></i> <span>Aktiv setzen</span>
+								</a>
+						  	</li>						    
+							<li>
+								<a  class="" ng-click="setCheckedSpotsActiveState(false)" tooltip="spots.massdeactivate.tooltip">
+									<i class="icon-ban-circle icon-black"></i> <span>Inaktiv setzen</span>
+								</a>
+							</li>							
+							<li>
+								<a  class="" data-toggle="modal" data-target="#deleteCheckedSpotsModal" tooltip="spots.massdelete.tooltip">
+									<i class="icon-trash icon-black"></i> <span>Löschen</span>
+								</a>
+							</li>
+							<li class="divider">
+							</li>
+							<li>
+								<a  class="" ng-click="createSpot()">
+									<i class="icon-plus-sign icon-black"></i> <span l="common.new">New</span>
+								</a>
+							</li>
+							<li>
+								<a  class="" href="#spotMassCreationDialog" data-toggle="modal" ng-click="spotMassCreation = null"><i class="icon-th icon-black"></i> <span l="spot.masscreation.button">Multiple</span></a>
+							</li>
+							
+						  </ul>
+						</div>
+						<!-- <div class="btn-group">
 							<button  class="btn btn-success" ng-click="setCheckedSpotsActiveState(true)" tooltip="spots.massactivate.tooltip">
 								<i class="icon-ok icon-white"></i>
 							</button>
@@ -104,21 +133,23 @@
 							<button  class="btn btn" data-toggle="modal" data-target="#deleteCheckedSpotsModal" tooltip="spots.massdelete.tooltip">
 								<i class="icon-trash icon-black"></i>
 							</button>
-						</div>					
-	    			</div>
-	    			<form class="form-inline">
- 						<div class="controls">
-	    					<div class="input-prepend">
-            					<span class="add-on"><i class="icon-search icon-black"></i>
-            					</span>
-            					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" class="span10"  ng-model="spotsQuery.name">
-        					</div>
-        					<i class="icon-remove icon-black" ng-click="spotsQuery = null">
-        					</i> 
-        					<span> Spots count {{filteredSpots.length}}</span>
-						</div>
-	    			</form>
-					
+						</div> -->					
+		    			<div class="btn-group">
+			    			<!-- <form class="form-inline">
+		 						<div class="controls">  -->
+			    					<div class="input-prepend" style="margin-bottom:0;">
+		            					<span class="add-on"><i class="icon-search icon-black"></i>
+		            					</span>
+		            					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="spotsQuery.name">
+		            					<i class="icon-remove icon-black" ng-click="spotsQuery = null">
+		        						</i> 
+		        					</div>
+
+							<!-- 	</div>
+			    			</form>
+ -->		    			</div>
+					</div>
+					<span style="font-size: 10px;" l="spots.filtered.status">Spots count {{filteredSpots.length}} | checked {{getCheckedSpotsCount()}}</span>
 				</div>
 				<ul class="nav-pills-checkbox data-container-block data-container-small data-container-scrollable" id="spotsList">
 				        <li ng-repeat="spot in filteredSpots = (spots | filter:spotsQuery) | orderBy:['name'] " >	        	

@@ -1284,6 +1284,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Alle deselektieren",
 			"EN" : ""
 		},
+		"spots.filtered.status" : {
+			"DE" :  "Spots gefiltert {{filteredSpots.length}} | markiert {{getCheckedSpotsCount()}}",
+			"EN" : ""
+		},
 		//infopage partial
 		"infopages.description" : {
 			"DE" :  "Hier können Sie Informationen zur aktuellen Location anlegen. Dies können zum Beispiel Informationen<br/>"+
@@ -1535,6 +1539,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.default.language" : {
 			"DE" :  "- Standardsprache -",
 			"EN" : "- default language -"
+		},
+		"common.action" : {
+			"DE" :  "Aktion",
+			"EN" : "Action"
 		},
 		"general.sortable" : {
 			"DE" : "Ziehen, um zu sortieren",
