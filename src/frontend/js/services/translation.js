@@ -1409,7 +1409,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : ""
 		},
 		"documents.dialogdelete.description" : {
-			"DE" :  "Löschen des Dokuments \"{{documentToDelete.status}}\" kann nicht rückgängig gemacht werden.",
+			"DE" :  "Löschen des Dokuments \"{{documentToDelete.name}}\" vom {{documentToDelete.createDate | date:'short'}} kann nicht rückgängig gemacht werden.",
 			"EN" : ""
 		},
 		"documents.status.complete" : {
