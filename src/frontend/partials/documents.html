@@ -18,11 +18,11 @@
 					<th l="documents.table.date">Date</th>
 					<th l="documents.table.actions">Actions</th>
 				</tr>
-				<tr ng-repeat="d in documents | orderBy:['createDate']">
-					<td>{{d.entity}}</td>
-					<td>{{d.type}}</td>
+				<tr ng-repeat="d in documents | orderBy:['createDate']:true">
+					<td>{{d.name}}</td>					
 					<td class="document-status-{{d.status}}"><span class="label" ng-class="getStatusColumnClass(d)"  l="documents.status.{{d.status}}">{{d.status}}</span></td>
-					<td>{{d.createDate}}</td>
+					<td>{{d.createDate | date:'short'}}</td>
+					<td>{{d.type}}</td>
 					<td>
 						<div ng-show="d.status == 'complete'">
 							<a href="{{d.url}}" target="_blank"><i class="icon-download icon-back" tooltip="common.download"></i></a> - 

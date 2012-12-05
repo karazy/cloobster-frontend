@@ -7,23 +7,26 @@ Cloobster.Documents = function($scope, $rootScope, $http, $routeParams, $locatio
 		dummyDocuments = [
 			{
 				id: 1,
+				name: 'Barcodes für Schablonen',
 				type: 'PDF',
 				entity: 'Spot',
-				createDate: '1.11.2012',
+				createDate: (new Date().getTime()) - 10000000,
 				status: 'complete'
 			},
 			{
 				id: 2,
 				type: 'PDF',
+				name: 'Barcodes für Schablonen',
 				entity: 'Spot',
-				createDate: '30.11.2012',
+				createDate: new Date().getTime(),
 				status: 'pending'
 			},
 			{
 				id: 3,
 				type: 'PDF',
+				name: 'Barcodes für Schablonen',
 				entity: 'Spot',
-				createDate: '05.12.2012',
+				createDate: new Date().getTime() + 10000000,
 				status: 'error'
 			}
 		];
