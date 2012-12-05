@@ -447,7 +447,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 	$scope.getCheckedSpotsCount = function() {
 		var filtered;
 
-		filtered = $filter('filter')($scope.spots, { 'checked' : true});
+		filtered = $filter('filter')($scope.spots, { 'checked' : true}) || [];
 
 		return filtered.length;
 	}
@@ -456,34 +456,43 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 	* Submits a document generation request for the selected spots.
 	*/
 	$scope.generatePdfForCheckedSpots = function() {
-		var filtered;
+		var ids = [],
+			newDocument,
+			docResource;
 
-		filtered = $filter('filter')($scope.spots, { 'checked' : true});
+		if(!$scope.spots && $scope.spots.length > 0) {
+			$log.log('Spot.generatePdfForCheckedSpots: $scope.spots does not exist or is empty.');
+			return;
+		}
 
-		// var ids = [],
-		// 	//used in forEach to match returned spots with local ones
-		// 	foundSpot;
+		if(!$scope.documentsResource) {
+			$log.log('Spot.generatePdfForCheckedSpots: $scope.documentsResource does not exist.');
+			return;	
+		}
 
-		// if(!$scope.spots && $scope.spots.length > 0) {
-		// 	$log.log('Spot.setSpotsActiveState: $scope.spots does not exist or is empty.');
-		// 	return;
-		// }
+		angular.forEach($scope.spots, function(element, index) {
+			if(element.checked) {
+				ids.push(element.id);	
+			}			
+		});
 
-		// if(!$scope.spotsResource) {
-		// 	$log.log('Spot.setSpotsActiveState: $scope.spotsResource does not exist.');
-		// 	return;	
-		// }
+		//No spots selected
+		if(ids.length == 0) {
+			return;	
+		}
 
-		// angular.forEach($scope.spots, function(element, index) {
-		// 	if(element.checked) {
-		// 		ids.push(element.id);	
-		// 	}			
-		// });
+		newDocument = {
+			type: 'pdf',
+			entity: 'spot',
+			representation: 'pure',
+			'ids': ids
+		};
 
-		// //No spots selected
-		// if(ids.length == 0) {
-		// 	return;	
-		// }
+		docResource = new $scope.documentsResource(newDocument);
+
+		docResource.$save();
+
+
 
 	}
 

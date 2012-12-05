@@ -14,14 +14,17 @@
 					<th l="documents.table.type">Type</th>
 					<th l="documents.table.status">Status</th>
 					<th l="documents.table.date">Date</th>
-					<th l="documents.table.download">Download</th>
+					<th l="documents.table.actions">Actions</th>
 				</tr>
 				<tr ng-repeat="d in documents">
 					<td>{{d.entity}}</td>
 					<td>{{d.type}}</td>
 					<td>{{d.status}}</td>
 					<td>{{d.createDate}}</td>
-					<td><a ng-enabled="d.status == 'complete'" href="{{d.url}}" target="_blank"><i class="icon-download icon-back"></i></a></td>
+					<td>
+						<a ng-enabled="d.status == 'complete'" href="{{d.url}}" target="_blank"><i class="icon-download icon-back"></i></a> - 
+						<i class="icon-trash icon-back" ng-enabled="d.status == 'complete'" ng-click="deleteDocument(d.id)"></i>
+					</td>
 				</tr>
 			</table>
 		</div>

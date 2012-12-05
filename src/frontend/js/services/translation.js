@@ -1296,6 +1296,22 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Anlegen ...",
 			"EN" : ""
 		},
+		"spots.action.setactive" : {
+			"DE" :  "Aktiv setzen",
+			"EN" : ""
+		},
+		"spots.action.setinactive" : {
+			"DE" :  "Inaktiv setzen",
+			"EN" : ""
+		},
+		"spots.action.generatepdf" : {
+			"DE" :  "PDF generieren",
+			"EN" : ""
+		},
+		"spots.action.generatepdf.description" : {
+			"DE" :  "Geniert ein Aufsteller PDF für ausgewählte Spots. Wenn das Dokument fertig erstellt wurde, kann es im Dokumententab heruntergeladen werden.",
+			"EN" : ""
+		},
 		//infopage partial
 		"infopages.description" : {
 			"DE" :  "Hier können Sie Informationen zur aktuellen Location anlegen. Dies können zum Beispiel Informationen<br/>"+
