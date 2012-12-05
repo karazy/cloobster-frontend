@@ -10,7 +10,7 @@
 * 	@constructor
 */
 
-Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, loginService, Business, Area, Spot, Menu, langService, $log, handleError, helperFn) {
+Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, loginService, Business, Area, Spot, Menu, Documents, langService, $log, handleError, helperFn) {
 		//default information when adding a new barcode
 	var defaultSpot = {
 			name: langService.translate("barcode.new.default.name") || "New Spot",
@@ -32,6 +32,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 	$scope.areasResource = null;
 	/** Spot resource. */
 	$scope.spotsResource = null;
+	/** Documents resource */
+	$scope.documentsResource = null;
 	/** Menu resource.*/
 	$scope.menusResource = null;
 	/** Spots assigned to current area. */
@@ -89,6 +91,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		$scope.areasResource = Area.buildResource(activeBusinessId);
 		//create spots resource
 		$scope.spotsResource = Spot.buildResource(activeBusinessId);
+		//create documents resource
+		$scope.documentsResource = Documents.buildResource(activeBusinessId);
 		//create menu resource
 		$scope.menusResource = Menu.buildResource(activeBusinessId);
 		//only load menus once
@@ -448,6 +452,41 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		return filtered.length;
 	}
 
+	/**
+	* Submits a document generation request for the selected spots.
+	*/
+	$scope.generatePdfForCheckedSpots = function() {
+		var filtered;
+
+		filtered = $filter('filter')($scope.spots, { 'checked' : true});
+
+		// var ids = [],
+		// 	//used in forEach to match returned spots with local ones
+		// 	foundSpot;
+
+		// if(!$scope.spots && $scope.spots.length > 0) {
+		// 	$log.log('Spot.setSpotsActiveState: $scope.spots does not exist or is empty.');
+		// 	return;
+		// }
+
+		// if(!$scope.spotsResource) {
+		// 	$log.log('Spot.setSpotsActiveState: $scope.spotsResource does not exist.');
+		// 	return;	
+		// }
+
+		// angular.forEach($scope.spots, function(element, index) {
+		// 	if(element.checked) {
+		// 		ids.push(element.id);	
+		// 	}			
+		// });
+
+		// //No spots selected
+		// if(ids.length == 0) {
+		// 	return;	
+		// }
+
+	}
+
 	//end spots
 
 	//start menus
@@ -592,4 +631,4 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 
 }
 
-Cloobster.Spot.$inject = ['$scope', '$http', '$routeParams', '$location', '$filter', 'login', 'Business', 'Area', 'Spot', 'Menu', 'lang', '$log', 'errorHandler', 'helper'];
+Cloobster.Spot.$inject = ['$scope', '$http', '$routeParams', '$location', '$filter', 'login', 'Business', 'Area', 'Spot', 'Menu', 'Documents', 'lang', '$log', 'errorHandler', 'helper'];

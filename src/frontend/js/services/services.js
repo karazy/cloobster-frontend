@@ -670,6 +670,52 @@ Cloobster.services.factory('InfoPage',['cloobsterResource', function($resource) 
 	return InfoPage;
 }]);
 
+/**
+* @constructor
+* Factory function that creates the 'Documents' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Frederik Reifschneider
+*/
+Cloobster.services.factory('Documents', ['cloobsterResource', function($resource) {
+
+	/**
+	*	@name Cloobster.services.Documents
+	*	
+	*/
+	var Documents = {
+
+		buildResource: function(businessId) {
+			return $resource('/b/businesses/:bid/documents/:id',
+				//params
+				{
+					'id' : '@id',
+					'bid' : businessId
+				},
+				//Custom actions can be called with $'methodname' on the Account.
+				{
+					/**
+					* @name Cloobster.services.Documents#$query
+					* @override
+					* Overrides default query method by overriding businessId as default parameter
+					*/
+					'query':  {method:'GET', params: { 'bid' : businessId}, isArray:true},
+					/*
+					* @name Cloobster.services.Documents#$update
+					* Like a save but uses PUT instead of POST.
+					*/
+					'update': { 
+						method: 'PUT'
+					}
+				}
+			)
+		}
+
+	}
+	return Documents;
+
+}]);
+
 /** 
 * 	@constructor
 * 	Factory function that returns the 'facebookApi' service and
