@@ -75,6 +75,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Infoseiten",
 			"EN" :  "Info Pages"
 		},
+		"businesses.headertabs.documents" : {
+			"DE" :  "Dokumente",
+			"EN" : ""
+		},
 		//registration partial
 		"registration.title" : {
 			"DE" : "cloobster Registrierung",
@@ -335,6 +339,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"businesses.action.menus" : {
 			"DE" : "Produkte",
 			"EN" : "Products"
+		},
+		"businesses.action.documents" : {
+			"DE" :  "Dokumente",
+			"EN" : ""
 		},
 		"businesses.action.infopages" : {
 			"DE" :  "Infoseiten",
@@ -1366,6 +1374,31 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Ausführliche Information!<br/> z.B. Zu unserem reichhaltigen Frühstück dürfen wir sie zu folgenden Zeiten begrüßen"+
 			"<ul><li>Mo- Fr von 8:00 - 10:00</li><li>Sa- So 8:00 - 12:00</li></ul>",
 			"EN" :  "Long text! E.g. We offer breakfast between..."
+		},
+		//documents partial
+		"documents.description" : {
+			"DE" :  "Hier können Sie Dokumente der ausgewählten Location verwalten. Dokumente sind zum Beispiel Spot Aufsteller als PDF oder Marketing Flyer.",
+			"EN" : ""
+		},
+		"documents.table.document" : {
+			"DE" :  "Name",
+			"EN" : ""
+		},
+		"documents.table.type" : {
+			"DE" :  "Typ",
+			"EN" : ""
+		},
+		"documents.table.status" : {
+			"DE" :  "Status",
+			"EN" : ""
+		},
+		"documents.table.date" : {
+			"DE" :  "Erstellt",
+			"EN" : ""
+		},
+		"documents.table.actions" : {
+			"DE" :  "Aktionen",
+			"EN" : ""
 		},
 		//accounts partial
 		"accounts.title" : {

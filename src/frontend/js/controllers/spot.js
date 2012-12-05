@@ -491,9 +491,6 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		docResource = new $scope.documentsResource(newDocument);
 
 		docResource.$save();
-
-
-
 	}
 
 	//end spots
