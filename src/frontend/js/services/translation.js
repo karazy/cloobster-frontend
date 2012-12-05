@@ -72,7 +72,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Service Areas and Spots"
 		},
 		"businesses.headertabs.infopages" : {
-			"DE" :  "Infoseiten",
+			"DE" :  "Info-Seiten",
 			"EN" :  "Info Pages"
 		},
 		"businesses.headertabs.documents" : {
@@ -345,7 +345,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : ""
 		},
 		"businesses.action.infopages" : {
-			"DE" :  "Infoseiten",
+			"DE" :  "Info-Seiten",
 			"EN" :  "Info pages"
 		},
 		"businesses.action.accounts" : {
@@ -1327,7 +1327,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Information pages for your locations (e.g. business hours, available services, tips)."
 		},
 		"infopages.list.title" : {
-			"DE" :  "Infoseiten",
+			"DE" :  "Info-Seiten",
 			"EN" :  "Info pages"
 		},
 		"infopage.container.title" : {
@@ -1351,7 +1351,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" :  "Edit text"
 		},
 		"infopages.dialog.delete.title" : {
-			"DE" :  "Infoseite löschen",
+			"DE" :  "Info-Seite löschen",
 			"EN" :  "Delete info page"
 		},
 		"infopages.dialog.delete.text" : {
@@ -1359,7 +1359,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" :  "Info page {{currentInfoPage.title}} will be deleted.<br/>This action cannot be undone."
 		},
 		"infogape.empty.description" : {
-			"DE" :  "Um die Details zu einer Infoseite zu bearbeiten, wählen Sie bitte eine Infoseite aus der Liste links oder legen Sie eine neue an.",
+			"DE" :  "Um die Details zu einer Info-Seite zu bearbeiten, wählen Sie bitte eine Info-Seite aus der Liste links oder legen Sie eine neue an.",
 			"EN" :  "To edit info page, please select info page from list or add a new page."
 		},
 		"infopage.placeholder.title" : {

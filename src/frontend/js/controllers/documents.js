@@ -1,7 +1,9 @@
 /** @module Cloobster/Documents */
 'use strict';
 
-Cloobster.Documents = function($scope, $http, $routeParams, $location, loginService, langService, $log, handleError, Documents) {
+Cloobster.Documents = function($scope, $rootScope, $http, $routeParams, $location, loginService, langService, $log, handleError, Documents, $timeout) {
+
+	var pollingInterval = 5000;
 
 	$scope.documentsResource = null;
 	$scope.documents = null;
@@ -16,6 +18,23 @@ Cloobster.Documents = function($scope, $http, $routeParams, $location, loginServ
 		$scope.documentsResource = Documents.buildResource(businessId);		
 
 		$scope.documents = $scope.documentsResource.query(angular.noop, handleError);
+
+		//cancel old timeouts
+		if($rootScope.documentTimeoutPromise) {
+			$timeout.cancel($rootScope.documentTimeoutPromise);
+		}		
+		pollDocuments();
+	}
+
+	function pollDocuments(businessId) {
+
+		//only poll if the documents tab is open
+		if($location.path().indexOf('documents') > -1) {
+			$scope.documents = $scope.documentsResource.query(angular.noop, handleError);
+			$rootScope.documentTimeoutPromise = $timeout(pollDocuments, pollingInterval);
+		} else {
+			$log.log('Documents.pollDocuments: stop polling');			
+		}
 	}
 
 	$scope.deleteDocument = function(id) {
@@ -56,10 +75,11 @@ Cloobster.Documents = function($scope, $http, $routeParams, $location, loginServ
 		if(newVal == true && businessId) {
 			//load areas
 			$scope.loadDocuments(businessId);
+		} else if(newValue == false) {
+			$location.url('/');
 		}
-
 	});	
 
 }
 
-Cloobster.Documents.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', 'errorHandler', 'Documents'];
+Cloobster.Documents.$inject = ['$scope', '$rootScope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', 'errorHandler', 'Documents', '$timeout'];
