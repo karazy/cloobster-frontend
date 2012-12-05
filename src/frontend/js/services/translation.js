@@ -1376,6 +1376,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" :  "Long text! E.g. We offer breakfast between..."
 		},
 		//documents partial
+		"documents.title" : {
+			"DE" :  "Dokumente",
+			"EN" : ""
+		},
 		"documents.description" : {
 			"DE" :  "Hier können Sie Dokumente der ausgewählten Location verwalten. Dokumente sind zum Beispiel Spot Aufsteller als PDF oder Marketing Flyer.",
 			"EN" : ""
@@ -1393,11 +1397,31 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : ""
 		},
 		"documents.table.date" : {
-			"DE" :  "Erstellt",
+			"DE" :  "Erstellt am",
 			"EN" : ""
 		},
 		"documents.table.actions" : {
 			"DE" :  "Aktionen",
+			"EN" : ""
+		},
+		"documents.dialogdelete.title" : {
+			"DE" :  "Dokument löschen",
+			"EN" : ""
+		},
+		"documents.dialogdelete.description" : {
+			"DE" :  "Löschen des Dokuments \"{{documentToDelete.status}}\" kann nicht rückgängig gemacht werden.",
+			"EN" : ""
+		},
+		"documents.status.complete" : {
+			"DE" :  "Abgeschlossen",
+			"EN" : ""
+		},
+		"documents.status.error" : {
+			"DE" :  "Fehler",
+			"EN" : ""
+		},
+		"documents.status.pending" : {
+			"DE" :  "In Bearbeitung",
 			"EN" : ""
 		},
 		//accounts partial
@@ -1600,6 +1624,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.action" : {
 			"DE" :  "Aktion",
 			"EN" : "Action"
+		},
+		"common.download" : {
+			"DE" :  "Download",
+			"EN" : ""
 		},
 		"general.sortable" : {
 			"DE" : "Ziehen, um zu sortieren",

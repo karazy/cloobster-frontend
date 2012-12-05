@@ -3,10 +3,36 @@
 
 Cloobster.Documents = function($scope, $rootScope, $http, $routeParams, $location, loginService, langService, $log, handleError, Documents, $timeout) {
 
-	var pollingInterval = 5000;
+	var pollingInterval = 5000,
+		dummyDocuments = [
+			{
+				id: 1,
+				type: 'PDF',
+				entity: 'Spot',
+				createDate: '1.11.2012',
+				status: 'complete'
+			},
+			{
+				id: 2,
+				type: 'PDF',
+				entity: 'Spot',
+				createDate: '30.11.2012',
+				status: 'pending'
+			},
+			{
+				id: 3,
+				type: 'PDF',
+				entity: 'Spot',
+				createDate: '05.12.2012',
+				status: 'error'
+			}
+		];
 
 	$scope.documentsResource = null;
 	$scope.documents = null;
+	$scope.documentToDelete = null;
+
+
 
 	$scope.loadDocuments = function(businessId) {
 
@@ -19,6 +45,9 @@ Cloobster.Documents = function($scope, $rootScope, $http, $routeParams, $locatio
 
 		$scope.documents = $scope.documentsResource.query(angular.noop, handleError);
 
+		//TODO testing purpose
+		$scope.documents = dummyDocuments;
+
 		//cancel old timeouts
 		if($rootScope.documentTimeoutPromise) {
 			$timeout.cancel($rootScope.documentTimeoutPromise);
@@ -30,7 +59,7 @@ Cloobster.Documents = function($scope, $rootScope, $http, $routeParams, $locatio
 
 		//only poll if the documents tab is open
 		if($location.path().indexOf('documents') > -1) {
-			$scope.documents = $scope.documentsResource.query(angular.noop, handleError);
+			//$scope.documents = $scope.documentsResource.query(angular.noop, handleError);
 			$rootScope.documentTimeoutPromise = $timeout(pollDocuments, pollingInterval);
 		} else {
 			$log.log('Documents.pollDocuments: stop polling');			
@@ -64,7 +93,35 @@ Cloobster.Documents = function($scope, $rootScope, $http, $routeParams, $locatio
 
 		function success() {
 			//remove document from list
+			$scope.documentToDelete = null;
 			$scope.documents.splice(index, 1);
+		}
+	}
+
+	/**
+	* Sets document to delete.
+	*/
+	$scope.setDeleteDocument = function(d) {
+		//TODO  FR: since ng-click="documentToDelete=d" didn't work, I use this workaround
+		$scope.documentToDelete = d;
+	}
+
+	/**
+	* Returns a css class based on the documents status.
+	* @param doc
+	*	Doc whos status gets examined
+	*/
+	$scope.getStatusColumnClass = function(doc) {
+
+		switch(doc.status) {
+			case "complete":
+				return "label-success";
+			case "pending":
+				return "label-warning";
+			case "error":
+				return "label-important"
+			default:
+				return "";
 		}
 	}
 
