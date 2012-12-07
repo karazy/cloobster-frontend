@@ -49,7 +49,7 @@ Cloobster.Documents = function($scope, $rootScope, $http, $routeParams, $locatio
 		$scope.documents = $scope.documentsResource.query(angular.noop, handleError);
 
 		//TODO testing purpose
-		$scope.documents = dummyDocuments;
+		// $scope.documents = dummyDocuments;
 
 		//cancel old timeouts
 		if($rootScope.documentTimeoutPromise) {
@@ -62,7 +62,7 @@ Cloobster.Documents = function($scope, $rootScope, $http, $routeParams, $locatio
 
 		//only poll if the documents tab is open
 		if($location.path().indexOf('documents') > -1) {
-			//$scope.documents = $scope.documentsResource.query(angular.noop, handleError);
+			$scope.documents = $scope.documentsResource.query(angular.noop, handleError);
 			$rootScope.documentTimeoutPromise = $timeout(pollDocuments, pollingInterval);
 		} else {
 			$log.log('Documents.pollDocuments: stop polling');			
@@ -116,7 +116,7 @@ Cloobster.Documents = function($scope, $rootScope, $http, $routeParams, $locatio
 	*/
 	$scope.getStatusColumnClass = function(doc) {
 
-		switch(doc.status) {
+		switch(doc.status.toLowerCase()) {
 			case "complete":
 				return "label-success";
 			case "pending":

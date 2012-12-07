@@ -482,6 +482,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		}
 
 		newDocument = {
+			name: 'Spot Barcodes',
 			type: 'pdf',
 			entity: 'spot',
 			representation: 'pure',

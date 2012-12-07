@@ -20,7 +20,7 @@
 				</tr>
 				<tr ng-repeat="d in documents | orderBy:['createDate']:true">
 					<td>{{d.name}}</td>					
-					<td class="document-status-{{d.status}}"><span class="label" ng-class="getStatusColumnClass(d)"  l="documents.status.{{d.status}}">{{d.status}}</span></td>
+					<td class="document-status-{{d.status.toLowerCase()}}"><span class="label" ng-class="getStatusColumnClass(d)"  l="documents.status.{{d.status.toLowerCase()}}">{{d.status}}</span></td>
 					<td>{{d.createDate | date:'short'}}</td>
 					<td>{{d.type}}</td>
 					<td>
