@@ -1317,7 +1317,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : ""
 		},
 		"spots.action.generatepdf.description" : {
-			"DE" :  "Geniert ein Aufsteller PDF für ausgewählte Spots. Wenn das Dokument fertig erstellt wurde, kann es im Dokumententab heruntergeladen werden.",
+			"DE" :  "Geniert ein Aufsteller PDF für ausgewählte Spots. Wenn das Dokument fertig erstellt wurde, kann es im Dokumententab heruntergeladen werden.<br/>Sie haben <strong>{{getCheckedSpotsCount()}}</strong> Spots ausgewählt.",
 			"EN" : ""
 		},
 		"spots.generatepdf.documentname" : {
