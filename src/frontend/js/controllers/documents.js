@@ -1,9 +1,10 @@
 /** @module Cloobster/Documents */
 'use strict';
 
-Cloobster.Documents = function($scope, $rootScope, $http, $routeParams, $location, loginService, langService, $log, handleError, Documents, $timeout) {
+Cloobster.Documents = function($scope, $rootScope, $http, $routeParams, $location, loginService, langService, $log, handleError, Business, Documents, $timeout) {
 
 	var pollingInterval = 5000,
+		account,
 		dummyDocuments = [
 			{
 				id: 1,
@@ -34,6 +35,7 @@ Cloobster.Documents = function($scope, $rootScope, $http, $routeParams, $locatio
 	$scope.documentsResource = null;
 	$scope.documents = null;
 	$scope.documentToDelete = null;
+	$scope.activeBusiness = null;
 
 
 
@@ -44,7 +46,11 @@ Cloobster.Documents = function($scope, $rootScope, $http, $routeParams, $locatio
 			return;
 		}
 		
-		$scope.documentsResource = Documents.buildResource(businessId);		
+		$scope.documentsResource = Documents.buildResource(businessId);
+
+		account =  loginService.getAccount();
+
+		$scope.activeBusiness = Business.buildResource(account.id).get({'id' : businessId});
 
 		$scope.documents = $scope.documentsResource.query(angular.noop, handleError);
 
@@ -142,4 +148,4 @@ Cloobster.Documents = function($scope, $rootScope, $http, $routeParams, $locatio
 
 }
 
-Cloobster.Documents.$inject = ['$scope', '$rootScope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', 'errorHandler', 'Documents', '$timeout'];
+Cloobster.Documents.$inject = ['$scope', '$rootScope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', 'errorHandler', 'Business', 'Documents', '$timeout'];
