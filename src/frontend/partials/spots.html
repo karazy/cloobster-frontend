@@ -304,12 +304,13 @@
 	<div class="modal-body alert-info">
     	<p><span l="spots.action.generatepdf.description">Generate a PDF for the selected spots. You can watch the status of this job in the documents tab.<br/>
     		When the job is finished you can download the PDF from there.</span></p>
-    		<label for="generatedSpotsDocumentName" l="spots.masscreation.documentname">optional document name</label>
-    		<input type="text" id="generatedSpotsDocumentName" ng-model="generatedSpotsDocumentName" placeholder="Spot Barcodes">
+    		<label for="generatedSpotsDocumentName" l="spots.generatepdf.documentname">Optional document name:</label>
+    		<input type="text" id="generatedSpotsDocumentName" style="width: 80%;" ng-model="generatedSpotsDocumentName" placeholder="e.g. Barcodes Rooms 100 to 199" l-attribute="placeholder" l="spots.generatepdf.documentname.placeholder">
+    		<p style="color:red;" ng-show="generatedSpotsDocumentName.length > 100" l="spots.generatepdf.documentname.maxlength">Maximum of 100 characters allowed.</p>
     </div>
   	<div class="modal-footer">
   		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
-    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="generatePdfForCheckedSpots(generatedSpotsDocumentName)" l="common.generate">Generate</button>
+    	<button type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="generatedSpotsDocumentName.length > 100" ng-click="generatePdfForCheckedSpots(generatedSpotsDocumentName)" l="common.generate">Generate</button>
 	</div>
 </div>
 

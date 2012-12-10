@@ -1320,6 +1320,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Geniert ein Aufsteller PDF für ausgewählte Spots. Wenn das Dokument fertig erstellt wurde, kann es im Dokumententab heruntergeladen werden.",
 			"EN" : ""
 		},
+		"spots.generatepdf.documentname" : {
+			"DE" :  "Optionaler Dokumentname:",
+			"EN" : ""
+		},
+		"spots.generatepdf.documentname.placeholder" : {
+			"DE" :  "z.B. Barcodes für Zimmer 100 bis 199",
+			"EN" : ""
+		},
+		"spots.generatepdf.documentname.maxlength" : {
+			"DE" :  "Maximal 100 Zeichen erlaubt.",
+			"EN" : ""
+		},
 		//infopage partial
 		"infopages.description" : {
 			"DE" :  "Hier können Sie Informationen zur aktuellen Location anlegen. Dies können zum Beispiel Informationen<br/>"+
