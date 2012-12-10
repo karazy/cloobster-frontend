@@ -484,7 +484,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		newDocument = {
 			name: 'Spot Barcodes',
 			type: 'pdf',
-			entity: 'spot',
+			entity: 'net.eatsense.domain.Spot',
 			representation: 'pure',
 			'ids': ids
 		};
