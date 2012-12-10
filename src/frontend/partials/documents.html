@@ -25,7 +25,7 @@
 					<td>{{d.type}}</td>
 					<td>
 						<div ng-show="d.status == 'complete'">
-							<a href="{{d.url}}" target="_blank"><i class="icon-download icon-back" tooltip="common.download"></i></a> - 
+							<a href="/b/businesses/documents/{{d.id}}/download" target="_blank"><i class="icon-download icon-back" tooltip="common.download"></i></a> - 
 							<i class="icon-trash icon-back" data-toggle="modal" data-target="#deleteDocumentModel" ng-click="setDeleteDocument(d)" tooltip="common.delete"></i>
 						</div>
 					</td>
