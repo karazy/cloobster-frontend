@@ -1416,6 +1416,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Aktionen",
 			"EN" : ""
 		},
+		"documents.table.actions.description" : {
+			"DE" :  "<i class='icon-download'></i> Dokument herunterladen<br/>"
+					+"<i class='icon-trash'></i> Dokument löschen",
+			"EN" : ""
+		},
 		"documents.dialogdelete.title" : {
 			"DE" :  "Dokument löschen",
 			"EN" : ""

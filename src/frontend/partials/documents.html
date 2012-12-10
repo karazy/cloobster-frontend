@@ -16,17 +16,17 @@
 					<th l="documents.table.status">Status</th>
 					<th l="documents.table.date">Date</th>
 					<th l="documents.table.type">Type</th>
-					<th l="documents.table.actions">Actions</th>
+					<th id="documentsActionColumnHelp"><span l="documents.table.actions">Actions</span> <i class="icon-question-sign"></i></th>
 				</tr>
 				<tr ng-repeat="d in documents | orderBy:['createDate']:true">
-					<td>{{d.name}}</td>					
+					<td>{{d.name}}</td>
 					<td class="document-status-{{d.status.toLowerCase()}}"><span class="label" ng-class="getStatusColumnClass(d)"  l="documents.status.{{d.status.toLowerCase()}}">{{d.status}}</span></td>
 					<td>{{d.createDate | date:'short'}}</td>
 					<td>{{d.type}}</td>
 					<td>
 						<div ng-show="d.status.toLowerCase() == 'complete'">
-							<a href="/b/businesses/{{activeBusiness.id}}/documents/{{d.id}}/download" target="_blank"><i class="icon-download icon-back" tooltip="common.download"></i></a> - 
-							<i class="icon-trash icon-back" data-toggle="modal" data-target="#deleteDocumentModel" ng-click="setDeleteDocument(d)" tooltip="common.delete"></i>
+							<a href="/b/businesses/{{activeBusiness.id}}/documents/{{d.id}}/download" target="_blank"><i class="icon-download icon-back"></i></a> - 
+							<i class="icon-trash icon-black" data-toggle="modal" data-target="#deleteDocumentModel" ng-click="setDeleteDocument(d)"></i>
 						</div>
 					</td>
 				</tr>

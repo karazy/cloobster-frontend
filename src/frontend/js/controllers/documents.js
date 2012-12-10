@@ -37,6 +37,15 @@ Cloobster.Documents = function($scope, $rootScope, $http, $routeParams, $locatio
 	$scope.documentToDelete = null;
 	$scope.activeBusiness = null;
 
+	//initialize action column help popover
+	jQuery('#documentsActionColumnHelp').popover({
+		placement: 'left',
+		title: langService.translate("common.help"),
+		trigger: 'hover',
+		html: true,
+		content: langService.translate("documents.table.actions.description")
+	});
+
 
 
 	$scope.loadDocuments = function(businessId) {
@@ -90,7 +99,7 @@ Cloobster.Documents = function($scope, $rootScope, $http, $routeParams, $locatio
 
 		for (var i = $scope.documents.length - 1; i >= 0; i--) {
 			if($scope.documents[i].id == id) {
-				index = id;
+				index = i;
 				$scope.documents[i].$delete(
 					success,
 					handleError
