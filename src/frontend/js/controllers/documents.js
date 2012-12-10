@@ -135,7 +135,7 @@ Cloobster.Documents = function($scope, $rootScope, $http, $routeParams, $locatio
 		if(newVal == true && businessId) {
 			//load areas
 			$scope.loadDocuments(businessId);
-		} else if(newValue == false) {
+		} else if(newVal == false) {
 			$location.url('/');
 		}
 	});	
