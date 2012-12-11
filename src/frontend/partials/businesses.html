@@ -29,7 +29,7 @@
 			</div>
 		</div>
 		<table class="table table-striped table-hover table-bordered">
-			<tr ng-repeat="b in businesses">
+			<tr ng-repeat="b in businesses | filter:filterTrashedBusiness">
 				<td ng-show="b.trash">{{b.name}} <i class="icon-trash icon-black" tooltip="busineses.business.deleted.tooltip" tooltip-position="right"></i></td>
 				<td ng-hide="b.trash"><strong>{{b.name}}</strong></td>
 				<td ng-hide="b.trash"><a href="#/businesses/{{b.id}}"><i class="icon-edit"/> <span l="businesses.action.show">Edit</span></a></td>

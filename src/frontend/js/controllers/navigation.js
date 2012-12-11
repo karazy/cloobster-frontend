@@ -73,6 +73,15 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 		}
 	});
 
+	/**
+	* Filter given business based on trash status.
+	* @return
+	*	true if not trashed
+	*/
+	$scope.filterTrashedBusiness = function(business) {
+		return !business.trash;
+	}
+
 	$scope.$watch('loggedIn', function(newValue, oldValue) {
 		if(newValue === true) {
 			$scope.company = Company.getActiveCompany();
