@@ -252,8 +252,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 								'{{errorMessage}}'+
 								'<p l="common.error.footer">If this error persists, contact <a href="mailto:support@cloobster.com">support@cloobster.com</a></p>'+
 							'</div>'+
-							'<div class="upload-area" ng-hide="selectionActive">'+
-								'<img ng-src="{{imageUrl}}" style="max-width: 800px">'+
+							'<div class="upload-area" ng-hide="selectionActive">'+								
 								'<p l="fileupload.image.description"> Choose a GIF, PNG or JPEG file with a size less than 3 Mb.</p>'+
 							 	'<span class="btn btn-success fileinput-button">'+
 							 		'<i class="icon-plus icon-white"></i>'+
@@ -262,6 +261,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 							 		'<input type="hidden" value="{{editorImageId}}">'+
 						 		'</span>'+
 						 		'<p ng-show="selectedFiles"><span l="fileupload.image.label">Selected file: </span><span ng-bind="selectedFiles"></span></p>'+
+						 		'<img ng-src="{{imageUrl}}" style="max-width: 800px; display: block; clear: both; padding-top: 10px;">'+
 					 		'</div>'+
 					 		'<div class="crop-area" ng-show="selectionActive">'+
 					 			'<p>'+langService.translate(attrs.editorCropText)+'</p>'+
