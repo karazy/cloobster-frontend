@@ -74,11 +74,21 @@ Cloobster.Documents = function($scope, $rootScope, $http, $routeParams, $locatio
 	}
 
 	function pollDocuments(businessId) {
+		var tmpArray;
 
 		//only poll if the documents tab is open
 		if($location.path().indexOf('documents') > -1) {
-			$scope.documents = $scope.documentsResource.query(angular.noop, handleError);
-			$rootScope.documentTimeoutPromise = $timeout(pollDocuments, pollingInterval);
+			tmpArray = $scope.documentsResource.query(function() {
+				//to prevent flickering remove all elements and then add new ones
+				$scope.documents.splice(0, $scope.documents.length);
+				angular.forEach(tmpArray, function(element) {
+					$scope.documents.push(element);
+				});
+				// $scope.documents = $scope.documentsResource.query(angular.noop, handleError);
+				$rootScope.documentTimeoutPromise = $timeout(pollDocuments, pollingInterval);
+			}, handleError);
+			
+			
 		} else {
 			$log.log('Documents.pollDocuments: stop polling');			
 		}
