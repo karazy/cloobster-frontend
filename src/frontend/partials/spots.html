@@ -164,11 +164,11 @@
 				</div>
 				<ul class="nav-pills-checkbox data-container-block data-container-small data-container-scrollable" id="spotsList">
 				        <li ng-repeat="spot in filteredSpots = (spots | filter:spotsQuery) | orderBy:['name'] " >	        					        	
-				        	<div ng-class="{active: currentSpot.id == spot.id}">
+				        	<div ng-class="{active: currentSpot.id == spot.id}" ng-click="loadSpot(spot, $event)">
 				        		<div>
 				        			<input type="checkbox" ng-model="spot.checked">
 				        		</div>
-			        			<div ng-click="loadSpot(spot, $event)">{{spot.name}} <i class="icon-ban-circle icon-black" ng-hide="spot.active"></i></div>
+			        			<div>{{spot.name}} <i class="icon-ban-circle icon-black" ng-hide="spot.active"></i></div>
 			        			<!-- <a ></a> -->
 			        		</div>
 			        	</li>

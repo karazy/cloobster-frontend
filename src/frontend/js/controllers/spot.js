@@ -204,6 +204,11 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 	//start spots
 
 	$scope.loadSpot = function(spotItem, $event) {
+		//checkbox clicked. Do nothing.
+		if(jQuery($event.srcElement).is("input")) {
+			return;
+		}
+
 		$log.log("load spot " + spotItem.id);
 		
 		$scope.currentSpot = spotItem;
