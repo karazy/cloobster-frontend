@@ -237,6 +237,10 @@ ul.payment-method-list li {
   padding: 0.5em; 
 }
 
+.data-container-block [simple-property-editor] {
+  word-break: break-word;
+}
+
 .data-container-scrollable {
   overflow: auto;
 }
@@ -249,6 +253,7 @@ ul.payment-method-list li {
   color: gray;
   border-color: #C3C3C3 !important;
 }
+
 
 /* data container end */
 
@@ -441,5 +446,10 @@ ul.options-list li:hover {
 
 .nav-pills-checkbox > li > div.active > span{
   color: white;
+}
+
+/* Add overflow hidden to cut long names. */
+.nav-pills.nav-stacked > li > a {
+  overflow: hidden;
 }
 
