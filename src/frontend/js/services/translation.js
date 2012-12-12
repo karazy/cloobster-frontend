@@ -1400,6 +1400,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Hier können Sie Dokumente der ausgewählten Location verwalten. Dokumente sind zum Beispiel Spot Aufsteller als PDF oder Marketing Flyer.",
 			"EN" : ""
 		},
+		"documents.table.description" : {
+			"DE" :  "Die Dokumentabelle aktualisiert sich automatisch.",
+			"EN" : ""
+		},
 		"documents.table.document" : {
 			"DE" :  "Name",
 			"EN" : ""
