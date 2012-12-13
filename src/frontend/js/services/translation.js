@@ -77,7 +77,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"businesses.headertabs.documents" : {
 			"DE" :  "Dokumente",
-			"EN" : ""
+			"EN" : "Documents"
 		},
 		//registration partial
 		"registration.title" : {
@@ -160,7 +160,6 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Firmenname*",
 			"EN" : "Company name*"
 		},
-
 		"registration.form.company.error.required" : {
 			"DE" : "Bitte geben Sie den Namen Ihrer Firma an.",
 			"EN" : "Please enter company name."
