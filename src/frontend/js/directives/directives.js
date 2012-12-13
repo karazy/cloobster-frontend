@@ -31,13 +31,16 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 				pattern = attrs.hasOwnProperty('editorPattern') ? "ng-pattern='"+attrs.editorPattern+"'" : "",
 				html = 
 				'<div class="toggler" ng-transclude></div>'+
-				'<div class="modal hide">'+
-				  '<div class="modal-header">'+
-				   ' <button type="button" class="close" data-dismiss="modal">×</button>'+
-				    '<h3 l="{{editorTitle}}">Edit property</h3>'+
-				 '</div>'+
+				'<div class="simple-property-editor-mask"></div>'+
+				// '<div class="modal hide">'+
+				 //  '<div class="modal-header">'+
+				 //   ' <button type="button" class="close" data-dismiss="modal">×</button>'+
+				 //    '<h3 l="{{editorTitle}}">Edit property</h3>'+
+				 // '</div>'+				
+				'<div class="simple-property-editor" style="display:none; position:absolute; background-color:white;">'+
+				'<h5 class="editor-title" l="{{editorTitle}}">Edit property</h5>'+
 				'<form name="simplePropertyForm" novalidate ng-submit="save()" class="edit-property-form">'+
-					'<div class="modal-body">'+
+					'<div class="">'+
 					 	'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty.$invalid)">'+
 					 		'<div class="controls">'+
 					 			createFormInput(attrs)+
@@ -53,9 +56,9 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 						'</div>'+
 						createRepeatInput(attrs)+
 					'</div>'+
-					'<div class="modal-footer">'+
-						'<button type="button" class="btn" data-dismiss="modal">'+l('common.cancel')+'</button>'+
-						'<button type="submit" class="btn btn-primary" ng-disabled="simplePropertyForm.$invalid">'+l('common.save')+'</button>'+
+					'<div class="row-fluid">'+
+						'<button type="button" ng-click="closeDialog()" class="btn span6" data-dismiss="modal">'+l('common.cancel')+'</button>'+
+						'<button type="submit" class="btn btn-primary span6" ng-disabled="simplePropertyForm.$invalid">'+l('common.save')+'</button>'+
 					'</div>'+
 					'</form>'+
 				'</div>';
@@ -67,7 +70,8 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 		        	
 		        },
 		        post: function postLink(scope, iElement, iAttrs, controller) {
-		        	var dialog = iElement.find('div.modal'),
+		        	var dialog = iElement.find('div.simple-property-editor'),
+		        		mask = iElement.find('div.simple-property-editor-mask'),
 		        		input = iElement.find('input.property-input, textarea.property-input'),
 		        		ctrl = scope.simplePropertyForm.simpleProperty;
 
@@ -93,8 +97,16 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 		        			scope.editorProperty = scope.editorValue;
 		        			// Wrap this in a timeout, because the model change is not immediate.
 			        		$timeout(scope.editorOnSave);
-			        		dialog.modal('toggle');
+			        		// dialog.modal('toggle');
+
+			        		mask.hide();
+		        			dialog.hide();
 		        		}
+		        	}
+
+		        	scope.closeDialog = function() {
+		        		mask.hide();
+		        		dialog.hide();
 		        	}
 
 		        	/**
@@ -116,13 +128,41 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 						}
 					}
 		        	
-		        	iElement.find('div.toggler').bind('click', function() {		   
+		        	iElement.find('div.toggler').bind('click', function() {   
 		        		if(scope.editorEnabled == true || typeof scope.editorEnabled == 'undefined') {
 		        			scope.$apply('editorValue = editorProperty;editorRepeat="";saved=false');
-		        			dialog.modal('toggle');
+		        			// dialog.modal('toggle');
+		        			var titleHeight,  
+		        				offsetTop, 
+		        				maskHeight, 
+		        				maskWidth;
+		        			
+		        			offsetTop = iElement.find('div.toggler').offset().top - iElement.find('div.toggler').offsetParent().offset().top;
+		        			titleHeight = iElement.find('h5.editor-title').css('lineHeight');
+		        			titleHeight = titleHeight.replace('px','');
+
+		        			maskHeight = $(document).height();
+        					maskWidth = $(window).width();
+		        			 //Set height and width to mask to fill up the whole screen
+        					mask.css({'width':maskWidth,'height':maskHeight}); 
+        					mask.show();
+
+		        			dialog.css('top', offsetTop - titleHeight - 25);
+		        			dialog.show();
 
 		        			input.trigger("focus");
 		        		}
+					});
+
+					mask.bind('click', function() {
+						scope.closeDialog();
+					});
+
+					dialog.bind('keyup', function(event) {
+						//hide dialog on escape
+						if(event.which == 27) {
+							scope.closeDialog();	
+						}						
 					});
 
 		        	scope.getFieldInputClass = getFieldInputClass;		        	
