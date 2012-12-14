@@ -785,7 +785,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		title: langService.translate("common.help"),
 		trigger: 'hover',
 		html: true,
-		content: langService.translate("documents.actions.description")
+		content: langService.translate("menus.choices.field.overridePrice.description")
 	});
 
 
