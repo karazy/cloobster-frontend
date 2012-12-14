@@ -917,6 +917,9 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 
 		$http.defaults.headers.common['X-Auth'] = accessToken;
 
+		// Reset activeBusinessId on rootScope.
+		$rootScope.activeBusinessId = null;
+
 		loginDeferred.resolve(data);
 	}
 
