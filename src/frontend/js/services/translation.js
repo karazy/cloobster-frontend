@@ -56,8 +56,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Location Settings"
 		},
 		"businesses.headertabs.categories" : {
-			"DE" :  "Kategorien und Produkte/Services",
-			"EN" : "Categories and Products/Services"
+			"DE" :  "Produkte",
+			"EN" : "Products"
 		},
 		"businesses.headertabs.accounts" : {
 			"DE" :  "Benutzerkonten",
@@ -68,8 +68,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Activate categories"
 		},
 		"businesses.headertabs.areas" : {
-			"DE" :  "Servicebereiche und Spots",
-			"EN" : "Service Areas and Spots"
+			"DE" :  "Spots",
+			"EN" : "Spots"
 		},
 		"businesses.headertabs.infopages" : {
 			"DE" :  "Info-Seiten",
@@ -332,8 +332,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Settings"
 		},
 		"businesses.action.spots" : {
-			"DE" : "Servicebereiche",
-			"EN" : "Service areas"
+			"DE" : "Spots",
+			"EN" : "Spots"
 		},
 		"businesses.action.menus" : {
 			"DE" : "Produkte",
