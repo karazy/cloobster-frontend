@@ -237,6 +237,10 @@ ul.payment-method-list li {
   padding: 0.5em; 
 }
 
+.data-container-block [simple-property-editor] {
+  word-break: break-word;
+}
+
 .data-container-scrollable {
   overflow: auto;
 }
@@ -250,10 +254,41 @@ ul.payment-method-list li {
   border-color: #C3C3C3 !important;
 }
 
+
 /* data container end */
+
+.simple-property-editor {
+  border: 1px solid gray;
+  background-color: white;
+  padding: 5px;
+  box-sizing:border-box;
+  border-radius: 0.5em;
+  right: 5px;
+  left: 5px;
+  z-index: 101;
+  max-width: 400px;
+}
+
+.simple-property-editor input {
+  width: 85%;
+}
+
+.simple-property-editor textarea {
+  width: 85%;
+}
 
 .simple-property-placeholder {
   color: gray;
+}
+
+.simple-property-editor-mask {
+  position:fixed;
+  top: 0;
+  left: 0;
+  z-index:100;
+  background-color:#000;
+  opacity: .4;
+  display:none;
 }
 
 .product-wrapper {
@@ -394,5 +429,57 @@ ul.options-list li:hover {
   margin: 5px;
   position: absolute;
   right: 15px;
+}
+
+.show-grid {
+  margin: 5px 0;
+}
+
+/* Styles to display a list with checkboxes at start. Inspired by bootstrap style "nav nav-pills nav-pills-stacked" */
+.nav-pills-checkbox {
+  margin: 0;
+}
+
+.nav-pills-checkbox > li > div {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  color: #08C;
+}
+
+.nav-pills-checkbox > li > div:hover {
+  background-color: #EEE;
+}
+
+.nav-pills-checkbox > li > div.active {
+  color: white;
+  background-color: #08C;
+}
+
+.nav-pills-checkbox > li > div > div:first-child {
+  /*display: inline;*/
+  float: left;
+}
+
+.nav-pills-checkbox > li > div > div:nth-child(2) {
+  /*display: inline;*/
+  width: 100%;
+}
+
+.nav-pills-checkbox > li > div input {
+  margin: 0 5px 0 5px;
+}
+
+.nav-pills-checkbox > li > div.active > span{
+  color: white;
+}
+
+/* Add overflow hidden to cut long names. */
+.nav-pills.nav-stacked > li > a {
+  overflow: hidden;
 }
 

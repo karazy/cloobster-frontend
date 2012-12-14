@@ -45,7 +45,7 @@
 		</div>
 		<!-- Account details -->
 		<!-- New Admin Account -->
-		<div class="data-container-with-title span4 form-vertical" ng-show="currentAdmin && !currentAdmin.id">
+		<div class="data-container-with-title span6 form-vertical" ng-show="currentAdmin && !currentAdmin.id">
 			<h4 class="data-container-title"><i class="icon-user icon-black"></i> <span l="accounts.admin.new.title">New Admin Account</span></h4>
 			<div class="data-container-block">			
 				<div class="control-group">
@@ -62,20 +62,20 @@
 	  				<strong l="common.warning.title">Warning!</strong> <span l="accounts.admin.exists.company">This account is assigned to another company.</span>
 				</div>
 
-				<div class="alert alert-info" ng-show="adminExists">
+				<div class="alert alert-info" ng-show="adminExists && !adminAssigned">
 	  				<strong l="common.hint.title">Hint!</strong> <span l="accounts.admin.exists.user">This account exists. To you want grant it admin privileges for your company?</span>
 				</div>
 
-				<div class="alert alert-success" ng-show="adminAssigned">
+				<div class="alert alert-success" ng-show="adminAssigned && !adminInvalid">
 	  				<strong l="common.hint.title">Hint!</strong> <span l="accounts.admin.exists.assigned">This account is already assigned to your company.</span>
 				</div>
 					<!-- <span for="adminEmail" l="accounts.admin.email">Email: </span> -->
 					
 				<div ng-show="emailValid">
-					<input type="text" ng-disabled="adminExists" id="adminName" ng-model="currentAdmin.name" placeholder="forename and surename" l="accounts.admin.new.name.placeholder" l-attribute="placeholder"/>
+					<input type="text" ng-disabled="adminExists" ng-hide="adminExists" id="adminName" ng-model="currentAdmin.name" placeholder="forename and surename" l="accounts.admin.new.name.placeholder" l-attribute="placeholder"/>
 				</div>
 		    	<div class="row-fluid" ng-show="emailValid">
-		    		<button class="btn btn-primary span4" ng-click="saveAdminAccount()" ng-disabled="!currentAdmin.name"><i class="icon-ok icon-white"></i> <span l="accounts.create">Create</span></button>
+		    		<button class="btn btn-primary span6" ng-click="saveAdminAccount()" ng-enabled="currentAdmin.name || adminExists" ng-hide="adminAssigned"><i class="icon-ok icon-white"></i> <span l="accounts.create">Create</span></button>
 		    	</div>						
 	    	</div>
 		</div>
@@ -86,7 +86,7 @@
 				<div class="data-container-block">
 					<p><i class="icon-envelope icon-black"></i> {{currentAdmin.email}}</p>
 					<div class="row-fluid">
-						<button type="submit" class="btn btn-danger span4" data-toggle="modal" data-target="#modalAdminDelete" ><i class="icon-trash icon-black"></i> <span l="common.remove">Remove</span></button>
+						<button type="submit" class="btn span6" data-toggle="modal" data-target="#modalAdminDelete" ><i class="icon-trash icon-black"></i></button>
 					</div>
 					<!-- Remove dialog admin user -->
 		    		<div class="modal hide" id="modalAdminDelete">
@@ -181,9 +181,9 @@
 							</div>
 						</div>
 						<div class="row-fluid">
-							<button class="btn span4" ng-click="currentUser=null;"><i class="icon-ban-circle icon-black"></i> <span l="common.cancel">Cancel</span></button>
-							<button type="submit" class="btn btn-primary span4" ng-disabled="editUserForm.$invalid"><i class="icon-ok icon-white"></i> <span l="common.save">Save</span></button>
-							<button type="submit" class="btn btn-danger span4" data-toggle="modal" data-target="#modalCockpitDelete" ><i class="icon-trash icon-black"></i></button>
+							<button class="btn span5" ng-click="currentUser=null;"><i class="icon-ban-circle icon-black"></i> <span l="common.cancel">Cancel</span></button>
+							<button type="submit" class="btn btn-primary span5" ng-disabled="editUserForm.$invalid"><i class="icon-ok icon-white"></i> <span l="common.save">Save</span></button>
+							<button type="submit" class="btn span2" data-toggle="modal" data-target="#modalCockpitDelete" ><i class="icon-trash icon-black"></i></button>
 						</div>
 						<!-- Delete dialog cockpit user -->
 			    		<div class="modal hide" id="modalCockpitDelete">
@@ -213,7 +213,7 @@
 	    		</ul>
 		    </div>
 		</div>
-		<div class="data-container-with-title span4" ng-show="currentUser && !currentUser.id">
+		<div class="data-container-with-title span6" ng-show="currentUser && !currentUser.id">
 			<h4 class="data-container-title"><i class="icon-user icon-black"></i> <span l="accounts.cockpit.new.title">New Service Account</span></h4>
 			<div class="data-container-block">				
 				<form name="userForm" class="form-vertical" ng-submit="saveCockpitAccount()">
@@ -249,7 +249,7 @@
 						</div>
 					</div>
 					<div class="row-fluid">
-						<button type="submit" class="btn btn-primary span4" ng-disabled="userForm.$invalid"><i class="icon-ok icon-white"></i> <span l="accounts.create">Create</span></button>
+						<button type="submit" class="btn btn-primary span6" ng-disabled="userForm.$invalid"><i class="icon-ok icon-white"></i> <span l="accounts.create">Create</span></button>
 					</div>
 				</form>
 			</div>

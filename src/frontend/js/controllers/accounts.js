@@ -119,13 +119,13 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 				$scope.currentAdmin.name = data[0].name;
 			} else if(data[0].companyId == account.companyId){
 				//this account is already assigned to this company				
-				$scope.adminExists = null;
+				$scope.adminExists = true;
 				$scope.adminAssigned = true;
 				$scope.adminInvalid = null;				
 			} else {
 				//this account is already assigned to another business
-				$scope.adminExists = null;
-				$scope.adminAssigned = null;
+				$scope.adminExists = true;
+				$scope.adminAssigned = true;
 				$scope.adminInvalid = true;
 				$scope.currentAdmin.name = null;								
 			}

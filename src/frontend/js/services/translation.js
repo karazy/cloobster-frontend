@@ -56,8 +56,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Location Settings"
 		},
 		"businesses.headertabs.categories" : {
-			"DE" :  "Kategorien und Produkte/Services",
-			"EN" : "Categories and Products/Services"
+			"DE" :  "Produkte",
+			"EN" : "Products"
 		},
 		"businesses.headertabs.accounts" : {
 			"DE" :  "Benutzerkonten",
@@ -68,12 +68,16 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Activate categories"
 		},
 		"businesses.headertabs.areas" : {
-			"DE" :  "Servicebereiche und Spots",
-			"EN" : "Service Areas and Spots"
+			"DE" :  "Spots",
+			"EN" : "Spots"
 		},
 		"businesses.headertabs.infopages" : {
-			"DE" :  "Infoseiten",
+			"DE" :  "Info-Seiten",
 			"EN" :  "Info Pages"
+		},
+		"businesses.headertabs.documents" : {
+			"DE" :  "Dokumente",
+			"EN" : "Documents"
 		},
 		//registration partial
 		"registration.title" : {
@@ -156,7 +160,6 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Firmenname*",
 			"EN" : "Company name*"
 		},
-
 		"registration.form.company.error.required" : {
 			"DE" : "Bitte geben Sie den Namen Ihrer Firma an.",
 			"EN" : "Please enter company name."
@@ -329,15 +332,19 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Settings"
 		},
 		"businesses.action.spots" : {
-			"DE" : "Servicebereiche und Spots",
-			"EN" : "Service areas and spots"
+			"DE" : "Spots",
+			"EN" : "Spots"
 		},
 		"businesses.action.menus" : {
 			"DE" : "Produkte",
 			"EN" : "Products"
 		},
+		"businesses.action.documents" : {
+			"DE" :  "Dokumente",
+			"EN" : ""
+		},
 		"businesses.action.infopages" : {
-			"DE" :  "Infoseiten",
+			"DE" :  "Info-Seiten",
 			"EN" :  "Info pages"
 		},
 		"businesses.action.accounts" : {
@@ -347,6 +354,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"businesses.action.delete" : {
 			"DE" : "Location löschen",
 			"EN" : "Delete location"
+		},
+		"businesses.action.activate" : {
+			"DE" :  "Aktivieren",
+			"EN" : "Activate"
 		},
 		"businesses.form.name" : {
 			"DE" : "Name*",
@@ -602,6 +613,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Profil",
 			"EN" : "Profile"
 		},
+		"profile.description" : {
+			"DE" :  "Hier können Sie Ihr Profil anpassen.",
+			"EN" : "Here you can edit your profile information."
+		},
+		"profile.account.title" : {
+			"DE" :  "Accountdaten",
+			"EN" : "Account Data"
+		},
+		"profile.account.login" : {
+			"DE" :  "Benutzername",
+			"EN" : "User name"
+		},
 		"profile.account.name" : {
 			"DE" : "Name",
 			"EN" : "Name"
@@ -637,6 +660,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"profile.company.action.edit.disable.hint" : {
 			"DE" : "Profileigenschaft anklicken, um zu editieren.",
 			"EN" : "Click to edit property."
+		},
+		"profile.company.title" : {
+			"DE" :  "Firmendaten",
+			"EN" : "Company Data"
+		},
+		"profile.company.name" : {
+			"DE" :  "Firmenname",
+			"EN" : "Company name"
 		},
 		"profile.company.address" : {
 			"DE" : "Adresse",
@@ -1211,6 +1242,119 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "{{currentSpot.name}} wird gelöscht!<br/>Bereits ausgedruckte Barcodes können nicht wiederverwendet werden!",
 			"EN" : "{{currentSpot.name}} will be deleted!<br/>Barcode cannot be reused!"
 		},
+		"spots.masscreation.title" : {
+			"DE" :  "Mehrere Spots anlegen",
+			"EN" : ""
+		},
+		"spots.masscreation.description" : {
+			"DE" :  "Hier können Sie mehrere Spots auf einmal anlegen.<br/>Zum Beispiel Zimmer 100 bis Zimmer 199",
+			"EN" : ""
+		},
+		"spot.masscreation.button" : {
+			"DE" :  "Mehrere",
+			"EN" : ""
+		},
+		"spots.masscreation.name" : {
+			"DE" :  "Name*",
+			"EN" : ""
+		},
+		"spots.masscreation.startnumber" : {
+			"DE" :  "Startnummer",
+			"EN" : ""
+		},
+		"spots.masscreation.count" : {
+			"DE" :  "Anzahl*",
+			"EN" : ""
+		},
+		"spots.masscreation.placeholder.name" : {
+			"DE" :  "z.B. Zimmer oder Tisch",
+			"EN" : ""
+		},
+		"spots.masscreation.placeholder.startnumber" : {
+			"DE" :  "z.B. 100 (Standard 1)",
+			"EN" : ""
+		},
+		"spots.masscreation.placeholder.count" : {
+			"DE" :  "z.B. 50",
+			"EN" : ""
+		},
+		"spots.masscreation.count.error.min" : {
+			"DE" :  "Anzahl muss min. 1 sein.",
+			"EN" : ""
+		},
+		"spots.masscreation.count.error.max" : {
+			"DE" :  "Anzahl darf max. 500 sein.",
+			"EN" : ""
+		},
+		"spots.massdelete.title" : {
+			"DE" :  "Selektierte Spots löschen",
+			"EN" : ""
+		},
+		"spots.massdelete.description" : {
+			"DE" :  "Löscht alle selektierten Spots. Diese Aktion kann nicht rückgängig gemacht werden.<br/>"+
+			"Ausgedruckte Barcodes sind danach nicht mehr gültig.",
+			"EN" : ""
+		},
+		"spots.massactivate.tooltip" : {
+			"DE" :  "Selektierte aktivieren",
+			"EN" : ""
+		},
+		"spots.massdeactivate.tooltip" : {
+			"DE" :  "Selektiere deaktivieren",
+			"EN" : ""
+		},
+		"spots.massdelete.tooltip" : {
+			"DE" :  "Selektierte löschen",
+			"EN" : ""
+		},
+		"spots.masscheck.tooltip" : {
+			"DE" :  "Alle anwählen/abwählen",
+			"EN" : ""
+		},
+		"spots.filtered.status" : {
+			"DE" :  "Spots gefiltert {{filteredSpots.length}} | markiert {{getCheckedSpotsCount()}}",
+			"EN" : ""
+		},
+		"spots.legend.inactive" : {
+			"DE" :  "Inaktiv",
+			"EN" : ""
+		},
+		"spots.listheader.selected" : {
+			"DE" :  "Markierte ...",
+			"EN" : ""
+		},
+		"spots.listheader.create" : {
+			"DE" :  "Anlegen ...",
+			"EN" : ""
+		},
+		"spots.action.setactive" : {
+			"DE" :  "Aktiv setzen",
+			"EN" : ""
+		},
+		"spots.action.setinactive" : {
+			"DE" :  "Inaktiv setzen",
+			"EN" : ""
+		},
+		"spots.action.generatepdf" : {
+			"DE" :  "PDF generieren",
+			"EN" : ""
+		},
+		"spots.action.generatepdf.description" : {
+			"DE" :  "Geniert ein Aufsteller PDF für ausgewählte Spots. Wenn das Dokument fertig erstellt wurde, kann es im Dokumententab heruntergeladen werden.<br/>Sie haben <strong>{{getCheckedSpotsCount()}}</strong> Spots ausgewählt.",
+			"EN" : ""
+		},
+		"spots.generatepdf.documentname" : {
+			"DE" :  "Optionaler Dokumentname:",
+			"EN" : ""
+		},
+		"spots.generatepdf.documentname.placeholder" : {
+			"DE" :  "z.B. Barcodes für Zimmer 100 bis 199",
+			"EN" : ""
+		},
+		"spots.generatepdf.documentname.maxlength" : {
+			"DE" :  "Maximal 100 Zeichen erlaubt.",
+			"EN" : ""
+		},
 		//infopage partial
 		"infopages.description" : {
 			"DE" :  "Hier können Sie Informationen zur aktuellen Location anlegen. Dies können zum Beispiel Informationen<br/>"+
@@ -1218,7 +1362,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Information pages for your locations (e.g. business hours, available services, tips)."
 		},
 		"infopages.list.title" : {
-			"DE" :  "Infoseiten",
+			"DE" :  "Info-Seiten",
 			"EN" :  "Info pages"
 		},
 		"infopage.container.title" : {
@@ -1242,7 +1386,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" :  "Edit text"
 		},
 		"infopages.dialog.delete.title" : {
-			"DE" :  "Infoseite löschen",
+			"DE" :  "Info-Seite löschen",
 			"EN" :  "Delete info page"
 		},
 		"infopages.dialog.delete.text" : {
@@ -1250,7 +1394,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" :  "Info page {{currentInfoPage.title}} will be deleted.<br/>This action cannot be undone."
 		},
 		"infogape.empty.description" : {
-			"DE" :  "Um die Details zu einer Infoseite zu bearbeiten, wählen Sie bitte eine Infoseite aus der Liste links oder legen Sie eine neue an.",
+			"DE" :  "Um die Details zu einer Info-Seite zu bearbeiten, wählen Sie bitte eine Info-Seite aus der Liste links oder legen Sie eine neue an.",
 			"EN" :  "To edit info page, please select info page from list or add a new page."
 		},
 		"infopage.placeholder.title" : {
@@ -1265,6 +1409,64 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Ausführliche Information!<br/> z.B. Zu unserem reichhaltigen Frühstück dürfen wir sie zu folgenden Zeiten begrüßen"+
 			"<ul><li>Mo- Fr von 8:00 - 10:00</li><li>Sa- So 8:00 - 12:00</li></ul>",
 			"EN" :  "Long text! E.g. We offer breakfast between..."
+		},
+		//documents partial
+		"documents.title" : {
+			"DE" :  "Dokumente",
+			"EN" : ""
+		},
+		"documents.description" : {
+			"DE" :  "Hier können Sie Dokumente der ausgewählten Location verwalten. Dokumente sind zum Beispiel Spot Aufsteller als PDF oder Marketing Flyer.",
+			"EN" : ""
+		},
+		"documents.table.description" : {
+			"DE" :  "Die Dokumentabelle aktualisiert sich automatisch.",
+			"EN" : ""
+		},
+		"documents.table.document" : {
+			"DE" :  "Name",
+			"EN" : ""
+		},
+		"documents.table.type" : {
+			"DE" :  "Typ",
+			"EN" : ""
+		},
+		"documents.table.status" : {
+			"DE" :  "Status",
+			"EN" : ""
+		},
+		"documents.table.date" : {
+			"DE" :  "Erstellt am",
+			"EN" : ""
+		},
+		"documents.table.actions" : {
+			"DE" :  "Aktionen",
+			"EN" : ""
+		},
+		"documents.table.actions.description" : {
+			"DE" :  "<i class='icon-download'></i> Dokument herunterladen<br/>"
+					+"<i class='icon-trash'></i> Dokument löschen",
+			"EN" : ""
+		},
+		"documents.dialogdelete.title" : {
+			"DE" :  "Dokument löschen",
+			"EN" : ""
+		},
+		"documents.dialogdelete.description" : {
+			"DE" :  "Löschen des Dokuments \"{{documentToDelete.name}}\" vom {{documentToDelete.createDate | date:'short'}} kann nicht rückgängig gemacht werden.",
+			"EN" : ""
+		},
+		"documents.status.complete" : {
+			"DE" :  "Abgeschlossen",
+			"EN" : ""
+		},
+		"documents.status.error" : {
+			"DE" :  "Fehler",
+			"EN" : ""
+		},
+		"documents.status.pending" : {
+			"DE" :  "In Bearbeitung",
+			"EN" : ""
 		},
 		//accounts partial
 		"accounts.title" : {
@@ -1462,6 +1664,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.default.language" : {
 			"DE" :  "- Standardsprache -",
 			"EN" : "- default language -"
+		},
+		"common.action" : {
+			"DE" :  "Aktion",
+			"EN" : "Action"
+		},
+		"common.download" : {
+			"DE" :  "Download",
+			"EN" : ""
 		},
 		"general.sortable" : {
 			"DE" : "Ziehen, um zu sortieren",

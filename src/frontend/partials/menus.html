@@ -9,14 +9,14 @@
 			</div>
     	</div>
 		<div class="row-fluid">
-			<div class="data-container-with-title data-container-large span3">
+			<div class="data-container-with-title span3">
 				<h4 class="data-container-title" l="menus.list.title">Categories</h4>
 				<div class="data-container-block data-container-seperator">
 					<div class="row-fluid">
 	    				<button class="btn btn-primary span6" ng-click="createMenu()"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
 	    			</div>
 	    		</div>
-				<ul class="nav nav-pills nav-stacked data-container-block data-container-scrollable" id="menuList">
+				<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable" id="menuList">
 			        <li ng-repeat="menu in menus | orderBy:['title'] " ng-class="{active: currentMenu.id == menu.id}">	        	
 			        	<a ng-click="loadMenu(menu)">{{menu.title}}</a>
 			        </li>

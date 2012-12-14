@@ -409,6 +409,15 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	}
 
 	//end language methods
+	
+	/**
+	* Filter given business based on trash status.
+	* @return
+	*	true if not trashed
+	*/
+	$scope.filterTrashedBusiness = function(business) {
+		return !business.trash;
+	}
 
 	/*
 	* Get css class for field highlighting.

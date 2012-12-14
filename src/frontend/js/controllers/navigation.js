@@ -10,7 +10,7 @@
 * 	View and manage profiles.
 * 	@constructor
 */
-Cloobster.Navigation = function($scope, $location, loginService, Company,$routeParams,handleError,Business,$route,$log) {
+Cloobster.Navigation = function($scope, $location, loginService, Company,$routeParams,handleError,Business,$route,$log, $rootScope) {
 	var businessResource = null;
 
 	$scope.cond = function(expression, trueValue, falseValue) {
@@ -53,25 +53,38 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	$scope.businesses = Business.getActiveBusinesses();
 	$scope.company = Company.getActiveCompany();
 
-	$scope.activeBusinessId = $scope.businesses.length > 0 ? $scope.businesses[0]['id'] : null;
+	if(!$rootScope.activeBusinessId) {
+		$rootScope.activeBusinessId = $scope.businesses.length > 0 ? $scope.businesses[0]['id'] : null;	
+	}
+	
 
 	$scope.canSwitchBusiness = false;
 
 	if($routeParams['businessId']) {
-		$scope.activeBusinessId = parseInt($routeParams['businessId']);
+		$rootScope.activeBusinessId = parseInt($routeParams['businessId']);
 		$scope.canSwitchBusiness = true;
 	}
 
 	$scope.switchBusiness = function() {
 		var newPath = $location.path().replace(/^\/businesses\/\d+/, '/businesses/'+$scope.activeBusinessId);
+		$rootScope.activeBusinessId = $scope.activeBusinessId;
 		$location.path(newPath);
 	};
 	
 	$scope.$watch('businesses.length', function (newValue, oldValue) {
-		if(!$scope.activeBusinessId && (newValue > 0)) {
-			$scope.activeBusinessId = $scope.businesses[0]['id'];
+		if(!$rootScope.activeBusinessId && (newValue > 0)) {
+			$rootScope.activeBusinessId = $scope.businesses[0]['id'];
 		}
 	});
+
+	/**
+	* Filter given business based on trash status.
+	* @return
+	*	true if not trashed
+	*/
+	$scope.filterTrashedBusiness = function(business) {
+		return !business.trash;
+	}
 
 	$scope.$watch('loggedIn', function(newValue, oldValue) {
 		if(newValue === true) {
@@ -80,4 +93,4 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 		}
 	});
 };
-Cloobster.Navigation.$inject = ['$scope', '$location', 'login', 'Company','$routeParams','errorHandler','Business','$route','$log'];
+Cloobster.Navigation.$inject = ['$scope', '$location', 'login', 'Company','$routeParams','errorHandler','Business','$route','$log','$rootScope'];

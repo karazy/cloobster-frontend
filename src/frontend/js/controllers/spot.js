@@ -10,7 +10,7 @@
 * 	@constructor
 */
 
-Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, Business, Area, Spot, Menu, langService, $log, handleError) {
+Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, loginService, Business, Area, Spot, Menu, Documents, langService, $log, handleError, helperFn) {
 		//default information when adding a new barcode
 	var defaultSpot = {
 			name: langService.translate("barcode.new.default.name") || "New Spot",
@@ -32,6 +32,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.areasResource = null;
 	/** Spot resource. */
 	$scope.spotsResource = null;
+	/** Documents resource */
+	$scope.documentsResource = null;
 	/** Menu resource.*/
 	$scope.menusResource = null;
 	/** Spots assigned to current area. */
@@ -42,6 +44,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.currentArea = null;
 	/** Currently selected spot. */
 	$scope.currentSpot = null;
+	/* When creating multiple spots at once, spotMassCreation holds the data. */
+	$scope.spotMassCreation = null;
 	/** Business to which these spots belong to. */
 	$scope.activeBusiness = null;
 	/** A temporary order list of menus assigned to current area. */
@@ -87,6 +91,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.areasResource = Area.buildResource(activeBusinessId);
 		//create spots resource
 		$scope.spotsResource = Spot.buildResource(activeBusinessId);
+		//create documents resource
+		$scope.documentsResource = Documents.buildResource(activeBusinessId);
 		//create menu resource
 		$scope.menusResource = Menu.buildResource(activeBusinessId);
 		//only load menus once
@@ -103,14 +109,16 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.currentArea = areaItem;
 		//initially show content of spots tab
 		$scope.show = 'spots';
-		$scope.spots = $scope.spotsResource.query({"areaId" : areaItem.id}, null, null, handleError);		
+		$scope.spots = $scope.spotsResource.query({"areaId" : areaItem.id}, null, null, handleError);
+		//Reset search field for spots
+		$scope.spotsQuery = null
 		$scope.currentAreaCategories = new Array();
 		if(!$scope.currentArea.menuIds) {
 			$scope.currentArea.menuIds = new Array();
 		} else {
 			//create a temporary order list of menu items based on menuIds
 			angular.forEach($scope.currentArea.menuIds, function(mId) {
-				angular.forEach($scope.menus, function(menu) {				
+				angular.forEach($scope.menus, function(menu) {
 					if(mId == menu.id) {
 						$scope.currentAreaCategories.push(menu);
 					}
@@ -195,7 +203,12 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 
 	//start spots
 
-	$scope.loadSpot = function(spotItem) {
+	$scope.loadSpot = function(spotItem, $event) {
+		//checkbox clicked. Do nothing.
+		if(jQuery($event.srcElement).is("input")) {
+			return;
+		}
+
 		$log.log("load spot " + spotItem.id);
 		
 		$scope.currentSpot = spotItem;
@@ -247,6 +260,243 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.toggleSpotActive = function() {
 		$scope.currentSpot.active = !$scope.currentSpot.active;
 		$scope.saveSpot();
+	}
+
+	/**
+	* Generate multiple spots at once.
+	*
+	*/
+	$scope.generateSpots = function() {
+
+		if(!$scope.spots) {
+			$log.error('Spot.generateSpots: no spots collection exists');
+			return;
+		}
+
+		if(!$scope.spotsResource) {
+			$log.error('Spot.generateSpots: no spotsResource exists');
+			return;
+		}
+
+		//1. PUT /b/businesses/{id}/spots/ Param: name, startNumber, count, Return complete array
+		//2. Update view
+		//3. clear spotMassCreation
+
+		//form not valid
+		if($scope.spotMassCreationForm.$invalid) {
+			$log.warn('Spot.generateSpots: form is invalid');			
+			return;
+		}
+
+		$scope.spotsResource.generate( 
+			{
+				'name' : $scope.spotMassCreation.name,
+				'startNumber' : $scope.spotMassCreation.startNumber,
+				'count' : $scope.spotMassCreation.count,
+				'areaId' : $scope.currentArea.id
+			},
+			function(response) {
+				//success
+				$scope.spots = $scope.spots.concat(response);
+			},
+			// Error callback
+			handleError
+		);
+
+		$scope.spotMassCreation = null;
+		jQuery("#spotMassCreationDialog").modal('toggle');
+	}
+
+	/**
+	* Sets active state for all checked spots.
+	* @param active
+	*	true to set spots active, false otherwise
+	*/
+	$scope.setCheckedSpotsActiveState = function(active) {
+		var ids = [],
+			//used in forEach to match returned spots with local ones
+			foundSpot;
+
+		if(!$scope.spots && $scope.spots.length > 0) {
+			$log.log('Spot.setSpotsActiveState: $scope.spots does not exist or is empty.');
+			return;
+		}
+
+		if(!$scope.spotsResource) {
+			$log.log('Spot.setSpotsActiveState: $scope.spotsResource does not exist.');
+			return;	
+		}
+
+		angular.forEach($scope.spots, function(element, index) {
+			if(element.checked) {
+				ids.push(element.id);	
+			}			
+		});
+
+		//No spots selected
+		if(ids.length == 0) {
+			return;	
+		}
+
+		$scope.spotsResource.process(
+			{
+			'ids' : ids,
+			'active' : active
+			}, 
+			function(response) {
+				//update status on success
+				angular.forEach($scope.spots, function(element, index) {
+					foundSpot = jQuery.grep(response, function(spotFromResponse) {
+						return spotFromResponse.id == element.id;
+					});
+
+					if(foundSpot.length > 1) {
+						$log.warn('Spot.setSpotsActiveState: more than one returned spot matches with local ones!');
+					} else if(!foundSpot || foundSpot.length == 0) {
+						$log.warn('Spot.setSpotsActiveState: no matching spot found');
+					} else {
+						//replace old spot with updated
+						$scope.spots[index] = foundSpot[0];
+					}	
+				});
+			},
+			handleError
+		);
+
+		manageViewHiearchy("area");
+	}
+
+	/**
+	* Deletes all checked spots.
+	*/
+	$scope.deleteCheckedSpots = function() {
+		var ids = [],
+			//used in forEach to match returned spots with local ones
+			foundSpot,
+			indexesToRemove = [],
+			clearedSpots = [];
+
+		if(!$scope.spots && $scope.spots.length > 0) {
+			$log.log('Spot.setSpotsActiveState: $scope.spots does not exist or is empty.');
+			return;
+		}
+
+		if(!$scope.spotsResource) {
+			$log.log('Spot.setSpotsActiveState: $scope.spotsResource does not exist.');
+			return;	
+		}
+
+		angular.forEach($scope.spots, function(element, index) {
+			if(element.checked) {
+				ids.push(element.id);	
+			}				
+		});
+
+		//No spots selected
+		if(ids.length == 0) {
+			return;	
+		}
+
+		$scope.spotsResource.process(
+			{
+			'ids' : ids,
+			'remove': true
+			},
+			function(response) {
+				//update status on success
+				angular.forEach($scope.spots, function(element, index) {
+					foundSpot = jQuery.grep(response, function(spotFromResponse) {
+						return spotFromResponse.id == element.id;
+					});
+					if(!foundSpot || foundSpot.length == 0) {
+						//this is non removed spot so add it
+						clearedSpots.push(element);
+					} 	
+				});				
+				$scope.spots = clearedSpots;
+			},
+			handleError	
+		);
+
+		manageViewHiearchy("area");
+	}
+
+	/**
+	* Check/Uncheck spots regarding the search filter.
+	* If less then all filtered spots are checked, check all of them. Otherwise uncheck all.
+	*/
+	$scope.checkSpots = function() {
+		var filtered = null,
+			setChecked;
+
+		if(!$scope.spots && $scope.spots.length > 0) {
+			$log.log('Spot.setSpotsActiveState: $scope.spots does not exist or is empty.');
+			return;
+		}
+		
+		filtered = $filter('filter')($scope.spots, $scope.spotsQuery);
+
+		setChecked = jQuery.grep(filtered, function(element) {
+			return element.checked;
+		}).length < filtered.length;
+
+
+		angular.forEach(filtered, function(element, index) {
+			element.checked = setChecked;		
+		});
+	}
+
+	/**
+	* Count checked spots.
+	*/
+	$scope.getCheckedSpotsCount = function() {
+		var filtered;
+
+		filtered = $filter('filter')($scope.spots, { 'checked' : true}) || [];
+
+		return filtered.length;
+	}
+
+	/**
+	* Submits a document generation request for the selected spots.
+	*/
+	$scope.generatePdfForCheckedSpots = function() {
+		var ids = [],
+			newDocument,
+			docResource;
+
+		if(!$scope.spots && $scope.spots.length > 0) {
+			$log.log('Spot.generatePdfForCheckedSpots: $scope.spots does not exist or is empty.');
+			return;
+		}
+
+		if(!$scope.documentsResource) {
+			$log.log('Spot.generatePdfForCheckedSpots: $scope.documentsResource does not exist.');
+			return;	
+		}
+
+		angular.forEach($scope.spots, function(element, index) {
+			if(element.checked) {
+				ids.push(element.id);	
+			}			
+		});
+
+		//No spots selected
+		if(ids.length == 0) {
+			return;	
+		}
+
+		newDocument = {
+			name: $scope.generatedSpotsDocumentName || 'Spot Barcodes',
+			type: 'pdf',
+			entity: 'net.eatsense.domain.Spot',
+			representation: 'pure',
+			'ids': ids
+		};
+
+		docResource = new $scope.documentsResource(newDocument);
+
+		docResource.$save();
 	}
 
 	//end spots
@@ -377,11 +627,20 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, loginService, 
 		if(newVal == true && businessId) {
 			//load areas
 			$scope.loadAreas(businessId);
+
 		}
 
 	});	
 
+	/**
+	* Use function from helper service.
+	*
+	*/
+	$scope.getFieldInputClass = function(input) {
+		return helperFn.getFieldInputClass(input);
+	}
+
 
 }
 
-Cloobster.Spot.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'Business', 'Area', 'Spot', 'Menu', 'lang', '$log', 'errorHandler'];
+Cloobster.Spot.$inject = ['$scope', '$http', '$routeParams', '$location', '$filter', 'login', 'Business', 'Area', 'Spot', 'Menu', 'Documents', 'lang', '$log', 'errorHandler', 'helper'];

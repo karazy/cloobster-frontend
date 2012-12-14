@@ -500,8 +500,23 @@ Cloobster.services.factory('Spot', ['cloobsterResource', function($resource) {
 						/*
 						* @name Cloobster.services.Spot#$update
 						* Like a save but uses PUT instead of POST.
+						* Used for udpates on single entities.
 						*/
-						'update': { method: 'PUT'}
+						'update': { method: 'PUT'},
+						/*
+						* @name Cloobster.services.Spot#$process
+						* Used to update collections of spots.
+						* @return
+						*	Array of spots with updated values.
+						*/
+						'process': { method: 'PUT', isArray:true},
+						/*
+						* @name Cloobster.services.Spot#$generate
+						* Creates multiple spots at once.
+						* @return
+						*	Created spots
+						*/
+						'generate' : { method: 'PUT', isArray:true}
 				}
 
 				)
@@ -653,6 +668,52 @@ Cloobster.services.factory('InfoPage',['cloobsterResource', function($resource) 
 		}
 	}
 	return InfoPage;
+}]);
+
+/**
+* @constructor
+* Factory function that creates the 'Documents' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Frederik Reifschneider
+*/
+Cloobster.services.factory('Documents', ['cloobsterResource', function($resource) {
+
+	/**
+	*	@name Cloobster.services.Documents
+	*	
+	*/
+	var Documents = {
+
+		buildResource: function(businessId) {
+			return $resource('/b/businesses/:bid/documents/:id',
+				//params
+				{
+					'id' : '@id',
+					'bid' : businessId
+				},
+				//Custom actions can be called with $'methodname' on the Account.
+				{
+					/**
+					* @name Cloobster.services.Documents#$query
+					* @override
+					* Overrides default query method by overriding businessId as default parameter
+					*/
+					'query':  {method:'GET', params: { 'bid' : businessId}, isArray:true},
+					/*
+					* @name Cloobster.services.Documents#$update
+					* Like a save but uses PUT instead of POST.
+					*/
+					'update': { 
+						method: 'PUT'
+					}
+				}
+			)
+		}
+
+	}
+	return Documents;
+
 }]);
 
 /** 
@@ -855,6 +916,9 @@ Cloobster.services.factory('login', ['$window','$http','$q','$rootScope', '$log'
 		// Save access token as default header.
 
 		$http.defaults.headers.common['X-Auth'] = accessToken;
+
+		// Reset activeBusinessId on rootScope.
+		$rootScope.activeBusinessId = null;
 
 		loginDeferred.resolve(data);
 	}
@@ -1408,3 +1472,36 @@ Cloobster.services.config(['$httpProvider', function($httpProvider) {
 Cloobster.services.run(['$http','onStartInterceptor',function($http, onStartInterceptor) {
   $http.defaults.transformRequest.push(onStartInterceptor);
 }]);
+
+/** 
+* 	@constructor
+* 	Factory function for the 'helper' service.
+* 	Provides a number of useful helper methods.
+* 	Returns the service.
+* 
+* 	@author Frederik Reifschneider
+*/
+Cloobster.services.factory('helper', function() {
+
+  var helperFunctions = {
+
+    /*
+	* Get css class for field highlighting.
+	* @param {NgModelController} input ng-model controller for the input to check.
+	* @returns error if dirty && invalid
+	*		  success if dirty && !invalid
+	*         empty string otherwise
+	*/
+	getFieldInputClass : function(input) {
+		if(input.$dirty && input.$invalid) {
+			return "error";
+		} else if (input.$dirty && !input.$invalid) {
+			return "success";
+		} else {
+			return "";
+		}
+	}
+  };
+
+  return helperFunctions;
+});
