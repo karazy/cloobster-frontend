@@ -50,141 +50,116 @@
 		</fieldset>
 	</form>
 </div>
-<div class="content_wrapper">
-	<div class="page-header">
-		<h1 l="profile.title">Profile</h1>
-	</div>
-	<div class="row-fluid account-profile-wrapper">
-		<div class="span12">
-			<p>
-				<button class="btn" ng-click="showChangePasswordModal()" l="profile.account.action.changepassword">Change password</button>
-				<button type="button" class="btn btn-primary" ng-click="toggleEditMode('account')" data-toggle="button">
-					<span l="profile.account.action.edit.enable" ng-hide="editModeAccount">Edit Account Profile</span><span ng-show="editModeAccount" l="profile.account.action.edit.disable">Done editing</span>
-				</button> <span ng-show="editModeAccount" l="profile.account.action.edit.disable.hint">Click a account profile feature to edit.</span>
-			</p>
-			<div simple-property-editor editor-enabled="editModeAccount" editor-type="text" editor-title="profile.account.login" editor-property="account.login" editor-on-save="saveAccount()">
-				<h2 ng-class="getEditModeClass('account')"><span ng-bind="account.login"></span><span ng-show="!account.login && editModeAccount">(Add Login)</span></h2>
-			</div>
-			<div class="well">
-				<div simple-property-editor editor-enabled="editModeAccount" editor-type="text" editor-title="profile.account.name" editor-property="account.name" editor-required editor-on-save="saveAccount()">
-					<div class="data-element" ng-class="getEditModeClass('account')">
-						<div class="key" l="profile.accounts.name">Name</div>
-						<div class="value">{{account.name}}</div>
-					</div>
-				</div>
-				<div simple-property-editor editor-enabled="editModeAccount" editor-type="email" editor-title="profile.account.email" editor-property="account.email" editor-repeat editor-required editor-on-save="saveAccount()">
-					<div class="data-element" ng-class="getEditModeClass('account')">
-						<div class="key" l="profile.account.email">Email</div>
-						<div class="value">{{account.email}}<span ng-show="account.newEmail" tooltip="Awaiting confirmation."> - {{account.newEmail}} ?</span></div>
-					</div>
-				</div>
-				<div simple-property-editor editor-enabled="editModeAccount" editor-title="profile.account.phone" editor-property="account.phone" editor-on-save="saveAccount()">
-					<div class="data-element" ng-class="getEditModeClass('account')">
-						<div class="key" l="profile.account.phone">Phone</div>
-						<div class="value">{{account.phone}}</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row-fluid company-profile-wrapper">
-		<div class="span12">
-			<div show-role="companyowner">
-				<div simple-property-editor editor-title="Name" editor-property="company.name" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
-					<h2 ng-class="getEditModeClass('company')">{{company.name}}</h2>
-				</div>
-				<p>
-					<button type="button" class="btn btn-primary" ng-click="toggleEditMode('company')" data-toggle="button">
-						<span l="profile.company.action.edit.enable" ng-hide="editModeCompany">Edit Company Profile</span><span ng-show="editModeCompany" l="profile.company.action.edit.disable">Done editing</span>
-					</button> <span ng-show="editModeCompany" l="profile.company.action.edit.disable.hint">Click a profile feature to edit.</span>
-				</p>
-				<div class="well">
-					<div simple-property-editor editor-title="profile.company.address.editor.title" editor-property="company.address" editor-required editor-on-save="saveCompany()" editor-enabled="editModeCompany">
-						<div class="data-element" ng-class="getEditModeClass('company')">
-						<div class="key" l="profile.company.address">Address</div>
-							<div class="value">{{company.address}}</div>
-						</div>
-					</div>
-					<div simple-property-editor editor-title="profile.company.city.editor.title" editor-property="company.city" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
-						<div class="data-element" ng-class="getEditModeClass('company')">
-							<div class="key" l="profile.company.city">City</div>
-							<div class="value">{{company.city}}</div>
-						</div>
-					</div>
-					<div simple-property-editor editor-title="profile.company.postcode.editor.title" editor-property="company.postcode" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
-						<div class="data-element" ng-class="getEditModeClass('company')" >
-							<div class="key" l="profile.company.postcode">Postcode</div>
-							<div class="value">{{company.postcode}}</div>
-						</div>
-					</div>
-					<div simple-property-editor editor-title="profile.company.phone.editor.title" editor-property="company.phone" editor-on-save="saveCompany()" editor-enabled="editModeCompany">
-						<div class="data-element" ng-class="getEditModeClass('company')" >
-							<div class="key" l="profile.company.phone">Business phone</div>
-							<div class="value">{{company.phone}}</div>
-						</div>
-					</div>
-					<div simple-property-editor editor-title="profile.company.url.editor.title" editor-property="company.url" editor-on-save="saveCompany()" editor-enabled="editModeCompany">
-						<div class="data-element" ng-class="getEditModeClass('company')">
-							<div class="key" l="profile.company.url">Website</div>
-							<div class="value">{{company.url}}</div>
-						</div>
-					</div>
-					<div class="data-element">
-						<div class="key" l="profile.company.country">Country</div>
-						<select ng-model="company.country" class="value" ng-disabled="!editModeCompany" ng-change="saveCompany()" required>
-							<option selected="selected" value="DE">Germany</option>
-						</select>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
-
-<!-- 	<div class="row-fluid">
-		<div class="span6">
-			<h2>Logo</h2>
-			<div ng-show="logoFormMode == 'view'" >
-				<div ng-show="company.images.logo.url">
-					<img  ng-src="{{company.images.logo.url}}" ng-click="editLogo()" alt="click to edit" />
-					<p>Click image to edit</p>
-				</div>
-				<button ng-show="!company.images.logo" ng-click="editLogo()" class="btn">Add Logo</button>
-			</div>
-			<form class="well form-vertical" name="logoForm" ng-show="logoFormMode == 'edit'" ng-submit="saveLogo()" novalidate>
-				<img ng-show="logoResource.url" ng-src="{{logoResource.url}}"/>
-				<input type="file" name="logo" id="logo"></input>
-				<button type="button" ng-click="cancelLogo()" class="btn">Cancel</button>
-				<button type="submit" ng-disabled="!logoUploadFinished" class="btn btn-primary">Done</button>
-			</form>
+<div class="partial_wrapper">
+	<div class="row-fluid">
+		<div class="span8">
+			<h1 l="profile.title">Profile</h1>
+			<p l="profile.description">Here you can edit your profile data.</p>
 		</div>
 	</div>
 	<div class="row-fluid">
 		<div class="span6">
-			<h2>Description</h2>
-			<div ng-show="profileFormMode == 'view'">
-				<p>Slogan: {{company.slogan}}</p>
-				<p>Description: {{company.description}}</p>
-				<button ng-click="editProfile()" class="btn">Edit</button>
-			</div>
-			<div ng-show="profileFormMode == 'edit'">
-				<form class="well form-vertical" name='profileForm' ng-submit="save()" novalidate>
-					<div class="control-group">
-						<label for="slogan" class="control-label">Slogan</label>
-						<div class="controls">
-							<input type="text" name="slogan" id="slogan" ng-model="company.slogan" required></input> 
+			<div class="data-container-with-title">
+				<h5 class="data-container-title" l="profile.account.title">Account Data</h5>
+				<div class="data-container-block data-container-seperator">
+					<div class="row-fluid">
+						<button class="btn span6" ng-click="showChangePasswordModal()" l="profile.account.action.changepassword">Change password</button>
+						<button type="button" class="btn btn-primary span6" ng-click="toggleEditMode('account')" data-toggle="button">
+							<span l="profile.account.action.edit.enable" ng-hide="editModeAccount">Edit Account Profile</span><span ng-show="editModeAccount" l="profile.account.action.edit.disable">Done editing</span>						
+						</button>
+					</div>
+					<div style="height: 20px">
+						<span ng-show="editModeAccount" l="profile.account.action.edit.disable.hint">Click a account profile feature to edit.</span>
+					</div>
+				</div>
+				<div class="data-container-block data-container-medium">					
+					<div simple-property-editor editor-enabled="editModeAccount" editor-type="text" editor-title="profile.account.login" editor-property="account.login" editor-on-save="saveAccount()">
+						<div class="data-element" ng-class="getEditModeClass('account')">
+							<div class="key" l="profile.account.login">User name</div>
+							<div class="value" style="font-weight: bold;">
+								<span ng-bind="account.login"></span><span ng-show="!account.login && editModeAccount">(Add Login)</span>
+							</div>
 						</div>
 					</div>
-					<div class="control-group">
-						<label for="description" class="control-label">Description</label>
-						<div class="controls">
-							<textarea name="description" id="description" ng-model="company.description" cols="50" rows="10"></textarea>
+					<div simple-property-editor editor-enabled="editModeAccount" editor-type="text" editor-title="profile.account.name" editor-property="account.name" editor-required editor-on-save="saveAccount()">
+						<div class="data-element" ng-class="getEditModeClass('account')">
+							<div class="key" l="profile.account.name">Name</div>
+							<div class="value">{{account.name}}</div>
 						</div>
 					</div>
-					<button ng-click="cancelProfile()" class="btn">Cancel</button>
-					<button type="submit" class="btn btn-primary">Save</button>
-				</form>	 
+					<div simple-property-editor editor-enabled="editModeAccount" editor-type="email" editor-title="profile.account.email" editor-property="account.email" editor-repeat editor-required editor-on-save="saveAccount()">
+						<div class="data-element" ng-class="getEditModeClass('account')">
+							<div class="key" l="profile.account.email">Email</div>
+							<div class="value">{{account.email}}<span ng-show="account.newEmail" tooltip="Awaiting confirmation."> - {{account.newEmail}} ?</span></div>
+						</div>
+					</div>
+					<div simple-property-editor editor-enabled="editModeAccount" editor-title="profile.account.phone" editor-property="account.phone" editor-on-save="saveAccount()">
+						<div class="data-element" ng-class="getEditModeClass('account')">
+							<div class="key" l="profile.account.phone">Phone</div>
+							<div class="value">{{account.phone}}</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div> -->
+		
+		<div class="data-container-with-title span6" show-role="companyowner">
+			<h5 class="data-container-title" l="profile.company.title">Company Data</h5>
+			<div class="data-container-block data-container-seperator">
+				<div class="row-fluid">
+					<button type="button" class="btn btn-primary span6" ng-click="toggleEditMode('company')" data-toggle="button">
+						<span l="profile.company.action.edit.enable" ng-hide="editModeCompany">Edit Company Profile</span><span ng-show="editModeCompany" l="profile.company.action.edit.disable">Done editing</span>
+					</button>
+				</div>
+				<div style="height: 20px">
+					<span ng-show="editModeCompany" l="profile.company.action.edit.disable.hint">Click a profile feature to edit.</span>
+				</div>
+			</div>
+			<div class="data-container-block data-container-medium">
+				<div simple-property-editor editor-title="Name" editor-property="company.name" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
+					<div class="data-element" ng-class="getEditModeClass('company')">
+						<div class="key" l="profile.company.name">Company name</div>
+						<div class="value" style="font-weight: bold;">{{company.name}}</div>
+					</div>
+				</div>
+				<div simple-property-editor editor-title="profile.company.address.editor.title" editor-property="company.address" editor-required editor-on-save="saveCompany()" editor-enabled="editModeCompany">
+					<div class="data-element" ng-class="getEditModeClass('company')">
+					<div class="key" l="profile.company.address">Address</div>
+						<div class="value">{{company.address}}</div>
+					</div>
+				</div>
+				<div simple-property-editor editor-title="profile.company.city.editor.title" editor-property="company.city" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
+					<div class="data-element" ng-class="getEditModeClass('company')">
+						<div class="key" l="profile.company.city">City</div>
+						<div class="value">{{company.city}}</div>
+					</div>
+				</div>
+				<div simple-property-editor editor-title="profile.company.postcode.editor.title" editor-property="company.postcode" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
+					<div class="data-element" ng-class="getEditModeClass('company')" >
+						<div class="key" l="profile.company.postcode">Postcode</div>
+						<div class="value">{{company.postcode}}</div>
+					</div>
+				</div>
+				<div simple-property-editor editor-title="profile.company.phone.editor.title" editor-property="company.phone" editor-on-save="saveCompany()" editor-enabled="editModeCompany">
+					<div class="data-element" ng-class="getEditModeClass('company')" >
+						<div class="key" l="profile.company.phone">Business phone</div>
+						<div class="value">{{company.phone}}</div>
+					</div>
+				</div>
+				<div simple-property-editor editor-title="profile.company.url.editor.title" editor-property="company.url" editor-on-save="saveCompany()" editor-enabled="editModeCompany">
+					<div class="data-element" ng-class="getEditModeClass('company')">
+						<div class="key" l="profile.company.url">Website</div>
+						<div class="value">{{company.url}}</div>
+					</div>
+				</div>
+				<div class="data-element">
+					<div class="key" l="profile.company.country">Country</div>
+					<select ng-model="company.country" class="value" ng-disabled="!editModeCompany" ng-change="saveCompany()" required>
+						<option selected="selected" value="DE">Germany</option>
+					</select>
+				</div>
+			</div>	
+		</div>
+	</div>
 </div>

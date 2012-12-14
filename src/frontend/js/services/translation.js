@@ -613,6 +613,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Profil",
 			"EN" : "Profile"
 		},
+		"profile.description" : {
+			"DE" :  "Hier können Sie Ihr Profil anpassen.",
+			"EN" : "Here you can edit your profile information."
+		},
+		"profile.account.title" : {
+			"DE" :  "Accountdaten",
+			"EN" : "Account Data"
+		},
+		"profile.account.login" : {
+			"DE" :  "Benutzername",
+			"EN" : "User name"
+		},
 		"profile.account.name" : {
 			"DE" : "Name",
 			"EN" : "Name"
@@ -648,6 +660,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"profile.company.action.edit.disable.hint" : {
 			"DE" : "Profileigenschaft anklicken, um zu editieren.",
 			"EN" : "Click to edit property."
+		},
+		"profile.company.title" : {
+			"DE" :  "Firmendaten",
+			"EN" : "Company Data"
+		},
+		"profile.company.name" : {
+			"DE" :  "Firmenname",
+			"EN" : "Company name"
 		},
 		"profile.company.address" : {
 			"DE" : "Adresse",
