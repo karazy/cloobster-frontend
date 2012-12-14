@@ -269,11 +269,11 @@ ul.payment-method-list li {
 }
 
 .simple-property-editor input {
-  width: 90%;
+  width: 85%;
 }
 
 .simple-property-editor textarea {
-  width: 90%;
+  width: 85%;
 }
 
 .simple-property-placeholder {
@@ -286,7 +286,7 @@ ul.payment-method-list li {
   left: 0;
   z-index:100;
   background-color:#000;
-  opacity: .5;
+  opacity: .4;
   display:none;
 }
 

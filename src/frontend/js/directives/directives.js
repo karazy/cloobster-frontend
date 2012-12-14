@@ -31,12 +31,7 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 				pattern = attrs.hasOwnProperty('editorPattern') ? "ng-pattern='"+attrs.editorPattern+"'" : "",
 				html = 
 				'<div class="toggler" ng-transclude></div>'+
-				'<div class="simple-property-editor-mask"></div>'+
-				// '<div class="modal hide">'+
-				 //  '<div class="modal-header">'+
-				 //   ' <button type="button" class="close" data-dismiss="modal">×</button>'+
-				 //    '<h3 l="{{editorTitle}}">Edit property</h3>'+
-				 // '</div>'+				
+				'<div class="simple-property-editor-mask"></div>'+			
 				'<div class="simple-property-editor" style="display:none; position:absolute; background-color:white;">'+
 				'<h5 class="editor-title" l="{{editorTitle}}">Edit property</h5>'+
 				'<form name="simplePropertyForm" novalidate ng-submit="save()" class="edit-property-form">'+
