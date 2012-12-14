@@ -262,6 +262,7 @@ ul.payment-method-list li {
   background-color: white;
   padding: 5px;
   box-sizing:border-box;
+  border-radius: 0.5em;
   right: 5px;
   left: 5px;
   z-index: 101;

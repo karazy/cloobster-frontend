@@ -8,7 +8,7 @@
 */
 Cloobster.directives = angular.module('Cloobster.directives', []);
 
-Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', function(langService,$timeout) {
+Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', '$log', function(langService,$timeout, $log) {
 	var inputType, //type of the input to generate in form
 		required, //if present marks a required field
 		//directive configuration
@@ -154,7 +154,7 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
         							dialog.css('left', dataElementValueLeft);
         						}	
         					} catch(e) {
-        						console.log('simplePropertyEditor: failed to calculate left');
+        						$log.error('simplePropertyEditor: failed to calculate left');
         					}
         					
 
