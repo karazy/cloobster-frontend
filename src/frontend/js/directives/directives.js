@@ -130,17 +130,33 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', funct
 		        			var titleHeight,  
 		        				offsetTop, 
 		        				maskHeight, 
-		        				maskWidth;
+		        				maskWidth,
+		        				dataElementValue,
+		        				dataElementValueLeft;
 		        			
 		        			offsetTop = iElement.find('div.toggler').offset().top - iElement.find('div.toggler').offsetParent().offset().top;
 		        			titleHeight = iElement.find('h5.editor-title').css('lineHeight');
 		        			titleHeight = titleHeight.replace('px','');
+		        			dataElementValue = iElement.find('div.value');
 
 		        			maskHeight = $(document).height();
         					maskWidth = $(window).width();
 		        			 //Set height and width to mask to fill up the whole screen
         					mask.css({'width':maskWidth,'height':maskHeight}); 
         					mask.show();
+
+        					//if editor is used on a data-element use value div to calculate left!
+        					//TODO 14.12.2012 this should be optimized to avoid dependencies to html
+        					//maybe make it configurable.
+        					try {
+        						if(dataElementValue && dataElementValue.length == 1) {
+        							dataElementValueLeft = dataElementValue.offset().left - dataElementValue.offsetParent().offset().left;
+        							dialog.css('left', dataElementValueLeft);
+        						}	
+        					} catch(e) {
+        						console.log('simplePropertyEditor: failed to calculate left');
+        					}
+        					
 
 		        			dialog.css('top', offsetTop - titleHeight - 25);
 		        			dialog.show();
