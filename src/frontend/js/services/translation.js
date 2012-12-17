@@ -392,7 +392,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Please fill out this field."
 		},
 		"businesses.form.mandatory" : {
-			"DE" : "Felder markiert mit * sind pflicht.",
+			"DE" : "Felder markiert mit * sind Pflicht.",
 			"EN" : "Fields marked with * are mandatory."
 		},
 		"businesses.dialog.delete" : {
@@ -409,7 +409,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Edit properties of current location.<br/>Configure corporate identity for app."
 		},
 		"business.action.edit.enable" : {
-			"DE" : "Editiermodus aktivieren",
+			"DE" : "Location editieren",
 			"EN" : "Enable edit mode"
 		},
 		"business.action.edit.disabled" : {
@@ -589,7 +589,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Password invalid!"
 		},
 		"business.dialog.delete.text" : {
-		"DE" : "Du bist dabei, <strong>{{activeBusiness.name}}</strong> zu löschen! Die Location wird deaktiviert und in einen Lesemodus versetzt. "+
+		"DE" : "Sie sind dabei, <strong>{{activeBusiness.name}}</strong> zu löschen! Die Location wird deaktiviert und in einen Lesemodus versetzt. "+
 			"Aktuell eingeloggte Servicekräfte und Gäste können noch Bestellungen einsehen, aber keine weitere Aktionen tätigen. Die Location "+
 			" wird nach einer Weile permanent gelöscht!",
 		"EN" : "You are about to delete <strong>{{activeBusiness.name}}</strong>! Location will be read-only after it has been deleted and will be permanently removed shortly afterwards."
@@ -745,7 +745,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Categories"
 		},
 		"menu.container.hint" : {
-			"DE" :  "Bitte vergessen Sie nicht, die Kategorie einem Servicebereich zuzuweisen.",
+			"DE" :  "Bitte vergessen Sie nicht, die Kategorie im <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"Tab Aktivieren\"</a> einem Servicebereich zuzuweisen.",
 			"EN" : "Don't forget to assign this category to a service area afterwards."
 		},
 		"menu.container.title" : {
@@ -817,9 +817,17 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "-copy"
 		},
 		"menus.products.link.description" : {
-			"DE" : "Klicken Sie auf eine bestehendes Produkt, um dieses zu kopieren und der aktuellen Kategory hinzuzufügen. Wahlweise können zusätzlich <strong>Auswahlmöglichkeiten verknüpft</strong> oder <strong>kopiert werden</strong>.",
+			"DE" : "Klicken Sie auf eine bestehendes Produkt, um dieses zu kopieren und der aktuellen Kategorie hinzuzufügen. Optional können Auswahlmöglichkeiten <strong>verknüpft</strong> oder <strong>kopiert</strong> werden. <i class='icon-question-sign'></i>",
 			"EN" : "Click on existing product to copy it and add to current category."+
 				"Optionally link or copy choices."
+		},
+		"menus.products.link.description.popover" : {
+			"DE" :  "Änderungen an Auswahlmöglichkeiten (AM) ...<br/>"+
+				"<b>verknüpfen</b> - Änderung der AM am kopiertem Produkt ändert diese auch am original Produkt, da diese voneinander abhängen (oder umgekehrt).<br/>"+
+				"<b>kopieren</b> - Änderung der AM am kopiertem Produkt hat keinen Einfluss auf die AM am original Produkt, da diese unabhängig sind (oder umgekehrt).",
+			"EN" : "Editing choices ...<br/>"+
+				"<b>linking</b> - changes to choices of copied product also changes them for original product (vice versa). They are linked.<br/>"+
+				"<b>copy</b> - changes to choices of copied product have no effect on original product (vice versa). They are independent."
 		},
 		"menus.products.orphaned.title" : {
 			"DE" : "Verwaiste Produkte",
@@ -1714,11 +1722,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Saving..."
 		},
 		"fileupload.image.description" : {
-			"DE" : "Wählen sie eine Bilddatei zum hochladen. Überprüfen sie, dass sie nicht größer als 3Mb ist und vom Typ GIF, PNG oder JPEG.",
+			"DE" : "Wählen Sie eine Bilddatei zum Hochladen. Überprüfen Sie, dass sie nicht größer als 3MB ist und vom Typ GIF, PNG oder JPEG.",
 			"EN" : "Please select a file. Ensure the file is less than 3 MB in size and the format is GIF, PNG, or JPEG."
 		},
 		"fileupload.submit.error" : {
-			"DE" : "Beim Hochladen ist ein Fehler aufgetreten. Überprüfen sie, dass die Datei nicht größer als 3 Mb ist und vom Typ GIF, PNG oder JPEG.",
+			"DE" : "Beim Hochladen ist ein Fehler aufgetreten. Überprüfen Sie, dass die Datei nicht größer als 3 MB ist und vom Typ GIF, PNG oder JPEG.",
 			"EN" : "An error occurred during upload. Please check file size (< 3 MB) and format (GIF, PNG, JPEG)."
 		},
 		"fileupload.crop.error" : {
