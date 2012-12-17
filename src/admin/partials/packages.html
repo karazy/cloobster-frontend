@@ -12,7 +12,7 @@
 				</div>
 				<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable">
 		        	<li ng-repeat="p in packages | orderBy:['name'] " ng-class="{active: currentPackage.name == p.name}">
-		        		<a ng-click="showPackage(p)">{{p.name}}</a>
+		        		<a ng-click="showPackage(p)">{{p.name}} <span class="badge badge-success" ng-show="p.basic">Basic</span></a>
 			        </li>
 			    </ul>
 			</div>
@@ -22,7 +22,7 @@
 			<!-- edit existing package -->
 			<div class="span4" ng-show="currentPackage && currentPackage.id">
 				<div class="data-container-with-title">
-					<h4 class="data-container-title">Edit Package</h4>
+					<h4 class="data-container-title">Edit Package</h4>						
 						<div class="data-container-block data-container-small">
 							<div simple-property-editor editor-title="Name" editor-property="currentPackage.name" editor-on-save="savePackage()" editor-placeholder="infopage.placeholder.shortText" editor-required>
 								<h5 class="edit">
@@ -39,6 +39,13 @@
 									{{currentPackage.fee}} <i class="icon-edit icon-black"></i>
 								</p>
 							</div>
+							<div class="row-fluid" ng-hide="currentPackage.basic">
+								<button class="btn btn-success span6" ng-click="setCurrentPackageAsBasic()"><i class="icon-ok icon-white"></i> Set as Basic</button>								
+								<button class="btn span6" ng-click="deletePackage()"><i class="icon-trash"></i></button>
+							</div>
+							<div ng-show="currentPackage.basic">
+								Basic packages can't be deleted.
+							</div>							
 					</div>
 				</div>
 			</div>
@@ -122,9 +129,12 @@
 						</tr>						
 						<tr ng-repeat="p in packages">
 							<td>{{p.name}}</td>
-							<td>{{p.maxSpotCount}}</td>
+							<td>{{p.maxSpotCount | mSCFF:p.basic}}</td>
 							<td>{{p.fee}}</td>
-							<td><i class="icon-ok" ng-show="p.basic"></i></td>
+							<td>
+								<i class="icon-ok" ng-show="p.basic"></i>
+								<button class="btn btn-small" ng-click="setBasicPackage(p)" ng-hide="p.basic">Set basic</i>
+							</td>
 						</tr>
 					</table>
 				</div>

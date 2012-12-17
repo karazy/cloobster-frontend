@@ -29,22 +29,32 @@ CloobsterAdmin.Package = function($scope, $http, Package) {
 		$scope.currentPackage = new Package();
 	}
 
-	$scope.savePackage = function() {
+	$scope.savePackage = function(reload) {
 		if(!$scope.currentPackage) {
 			return;
 		}
 
-		$scope.currentPackage.$save(
+		if(!$scope.currentPackage.id) {
+			$scope.currentPackage.$save(
 			function(response) {
-				$scope.currentPackage = null;
-				$scope.packages.push(response);
-			});
+						
+				if(reload || $scope.currentPackage.basic) {
+					$scope.loadPackages();
+				} else {
+					$scope.packages.push(response);
+				}
 
-		// if($scope.currentPackage.id) {
-		// 	$scope.currentPackage.save();
-		// } else {
-		// 	//validate new package and save
-		// }		
+				$scope.currentPackage = null;		
+			});
+		} else {
+			$scope.currentPackage.$update(
+			function(response) {
+				if(reload) {
+					$scope.loadPackages();
+				}
+			});
+		}
+
 	}
 
 	$scope.deletePackage = function() {
@@ -69,6 +79,29 @@ CloobsterAdmin.Package = function($scope, $http, Package) {
 			});
 		}
 	}
+
+	$scope.setCurrentPackageAsBasic = function() {
+		if(!$scope.currentPackage) {
+			return;
+		}
+
+		$scope.currentPackage.basic = true;
+		$scope.savePackage(true);
+	}
+
+	$scope.setBasicPackage = function(packageToSet) {
+		if(!packageToSet) {
+			return;
+		}
+
+		packageToSet.basic = true;
+
+		packageToSet.$update(
+			function(response) {
+				$scope.loadPackages();
+			});
+	}
+
 
 	//Manage package subscription functions
 
@@ -107,7 +140,8 @@ CloobsterAdmin.module.factory('Package', ['$resource', function($resource) {
 		},
 		//methods
 		{
-			'query':  {method:'GET', isArray:true}
-		})
+			'query':  {method:'GET', isArray:true},
+			'update': {method: 'PUT'}
+		});
 
 }]);
