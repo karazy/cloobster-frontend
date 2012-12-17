@@ -1,0 +1,109 @@
+/** Data container styles. Used for basic building blocks. */
+
+.data-container-floating { 
+  border: 1px solid gray; 
+  border-radius: 0.5em;
+  position: fixed;
+  top: 75px;
+  right: 50px;
+  left: 50px;
+  /*bottom: 50px;*/
+  background-color: #FFF;
+  padding-top: 15px;
+}
+
+.data-container-with-title { 
+  border: 1px solid gray; 
+  border-radius: 0.5em;
+  margin: 15px 0 0 0;
+  position: relative;
+  padding-top: 15px;
+}
+
+.data-container-500 {
+  height: 500px;
+}
+
+.data-container-large {
+  height: 400px;
+}
+
+.data-container-medium {
+  height: 300px;
+}
+
+.data-container-small {
+  height: 200px;
+}
+
+.data-container-tiny {
+  height: 100px;
+}
+
+
+.data-container-title {
+  display: inline-block;
+  top: -20px;
+  left: 10px;
+  position: absolute;
+  background-color: white;
+  padding: 0 5px 0 5px;
+  /*margin-bottom: 10px;*/
+}
+
+.data-container-block {
+  padding: 0.5em; 
+}
+
+.data-container-block [simple-property-editor] {
+  word-break: break-word;
+}
+
+.data-container-scrollable {
+  overflow: auto;
+}
+
+.data-container-seperator {
+  border-bottom: 1px solid gray;
+}
+
+.data-container-inactive {
+  color: gray;
+  border-color: #C3C3C3 !important;
+}
+
+/** simple property editor */
+
+.simple-property-editor {
+  border: 1px solid gray;
+  background-color: white;
+  padding: 5px;
+  box-sizing:border-box;
+  border-radius: 0.5em;
+  right: 5px;
+  left: 5px;
+  z-index: 101;
+  max-width: 400px;
+}
+
+.simple-property-editor input {
+  width: 85%;
+}
+
+.simple-property-editor textarea {
+  width: 85%;
+}
+
+.simple-property-placeholder {
+  color: gray;
+}
+
+.simple-property-editor-mask {
+  position:fixed;
+  top: 0;
+  left: 0;
+  z-index:100;
+  background-color:#000;
+  opacity: .4;
+  display:none;
+}
