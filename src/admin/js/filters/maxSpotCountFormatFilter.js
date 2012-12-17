@@ -12,7 +12,7 @@ CloobsterAdmin.filters.filter('mSCFF', ['$locale', '$log', function($locale, $lo
 		var formated = maxSpotCount;
 
 		if(basic) {
-			formated = "0";
+			formated = "1";
 		} else if(maxSpotCount == 0) {
 			formated = "unlimited";
 		}

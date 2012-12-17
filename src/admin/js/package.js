@@ -85,7 +85,7 @@ CloobsterAdmin.Package = function($scope, $http, Package) {
 			return;
 		}
 
-		$scope.currentPackage.basic = true;
+		$scope.currentPackage.basic = true;		
 		$scope.savePackage(true);
 	}
 

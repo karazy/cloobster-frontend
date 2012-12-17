@@ -18,9 +18,9 @@
 			</div>
 		</div>
 		<!-- single package view -->
-		<div ng-hide="showAllPackages == true" >
+		<div ng-hide="showAllPackages == true" class="span4">
 			<!-- edit existing package -->
-			<div class="span4" ng-show="currentPackage && currentPackage.id">
+			<div ng-show="currentPackage && currentPackage.id">
 				<div class="data-container-with-title">
 					<h4 class="data-container-title">Edit Package</h4>						
 						<div class="data-container-block data-container-small">
@@ -50,7 +50,7 @@
 				</div>
 			</div>
 			<!-- add new package -->
-			<div class="span4" ng-show="currentPackage && !currentPackage.id">
+			<div ng-show="currentPackage && !currentPackage.id">
 				<div class="data-container-with-title">
 					<h4 class="data-container-title">New Package</h4>
 					<div class="data-container-block">
@@ -58,7 +58,7 @@
 							<div class="control-group" ng-class="getFieldInputClass(newPackageForm.packageName.$dirty, newPackageForm.packageName.$invalid)">
 								<label for="packageName" class="control-label">Name*</label>
 								<div class="controls">
-									<input name="packageName" id="packageName" type='text' ng-model="currentPackage.name" required ng-minlength="1" placeholder="e.g. M">	
+									<input name="packageName" id="packageName" type='text' ng-model="currentPackage.name" required placeholder="e.g. M">	
 									 <div class="help-inline" ng-show="newPackageForm.packageName.$dirty && newPackageForm.packageName.$invalid">
 						          		<span ng-show="newPackageForm.packageName.$error.required">Required field.</span>
 						          		<span ng-show="newPackageForm.packageName.$error.minlength">At least one character required.</span>
@@ -68,7 +68,7 @@
 				        	<div class="control-group" ng-class="getFieldInputClass(newPackageForm.controls.$dirty, newPackageForm.controls.$invalid)">
 								<label for="spotsCount" class="control-label">Maximum number of spots*</label>
 								<div class="controls">
-									<input name="spotsCount" id="spotsCount" type='number' ng-model="currentPackage.maxSpotCount" required min="0" max="100000" placeholder="e.g. 150 (0 means unlimited)">	
+									<input name="spotsCount" id="spotsCount" type='number' ng-model="currentPackage.maxSpotCount" ng-disabled="currentPackage.basic" required min="0" max="100000" placeholder="e.g. 150 (0 means unlimited)">	
 									 <div class="help-inline" ng-show="newPackageForm.spotsCount.$dirty && newPackageForm.spotsCount.$invalid">
 						          		<span ng-show="newPackageForm.spotsCount.$error.required">Required field.</span>
 						          		<span ng-show="newPackageForm.spotsCount.$error.min">Values must be equal or greater then zero.</span>
@@ -78,7 +78,7 @@
 				        	<div class="control-group" ng-class="getFieldInputClass(newPackageForm.fee.$dirty, newPackageForm.fee.$invalid)">
 								<label for="fee" class="control-label">Fee*</label>
 								<div class="controls">
-									<input name="fee" id="fee" type='number' ng-model="currentPackage.fee" min="0" max="10000" required>	
+									<input name="fee" id="fee" type='number' ng-model="currentPackage.fee" min="0" max="10000" ng-disabled="currentPackage.basic" required>	
 									 <div class="help-inline" ng-show="newPackageForm.fee.$dirty && newPackageForm.fee.$invalid">
 						          		<span ng-show="newPackageForm.fee.$error.required">Required field.</span>
 						          		<span ng-show="newPackageForm.fee.$error.min">Values must be equal or greater then zero.</span>
@@ -89,7 +89,7 @@
 				        	<div class="control-group" ng-class="getFieldInputClass(newPackageForm.basic.$dirty, newPackageForm.basic.$invalid)">
 								<label for="basic" class="control-label">Basic</label>
 								<div class="controls">
-									<input name="basic" id="basic" type='checkbox' ng-model="currentPackage.basic">	
+									<input name="basic" id="basic" type='checkbox' ng-model="currentPackage.basic" ng-change="currentPackage.maxSpotCount = 1; currentPackage.fee=0;">	
 									 <div class="help-inline" ng-show="newPackageForm.basic.$dirty && newPackageForm.basic.$invalid">
 						          		<span ng-show="newPackageForm.basic.$error.required">Required field.</span>
 						          		<span ng-show="newPackageForm.basic.$error.min">Values must be equal or greater then zero.</span>
@@ -98,14 +98,14 @@
 				        	</div>
 				        	<div class="row-fluid">
 				        		<div class="span8"></div>
-				        		<button type="submit" class="btn btn-primary span4" ng-disabled="newPackageForm.fee.$invalid">Save</button>
+				        		<button type="submit" class="btn btn-primary span4" ng-disabled="newPackageForm.$invalid">Save</button>
 				        	</div>				        	
 						</form>
 					</div>
 				</div>
 			</div>
 			<!-- empty package placeholder -->
-			<div class="span4" ng-hide="currentPackage">
+			<div ng-hide="currentPackage">
 				<div class="data-container-with-title data-container-inactive">
 					<h4 class="data-container-title">Package</h4>
 					<div class="data-container-block data-container-small">
