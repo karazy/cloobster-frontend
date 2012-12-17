@@ -107,3 +107,8 @@
   opacity: .4;
   display:none;
 }
+
+/** common css */
+.edit:hover {
+    background-color: lightblue;
+}
