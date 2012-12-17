@@ -1244,116 +1244,117 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"spots.masscreation.title" : {
 			"DE" :  "Mehrere Spots anlegen",
-			"EN" : ""
+			"EN" :  "Create multiple spots"
 		},
 		"spots.masscreation.description" : {
 			"DE" :  "Hier können Sie mehrere Spots auf einmal anlegen.<br/>Zum Beispiel Zimmer 100 bis Zimmer 199",
-			"EN" : ""
+			"EN" :  "Create multiple spots at a time here. E.g. room 100 to 199."
 		},
 		"spot.masscreation.button" : {
 			"DE" :  "Mehrere",
-			"EN" : ""
+			"EN" :  "Multiple"
 		},
 		"spots.masscreation.name" : {
 			"DE" :  "Name*",
-			"EN" : ""
+			"EN" :  "Name*"
 		},
 		"spots.masscreation.startnumber" : {
 			"DE" :  "Startnummer",
-			"EN" : ""
+			"EN" :  "Start number"
 		},
 		"spots.masscreation.count" : {
 			"DE" :  "Anzahl*",
-			"EN" : ""
+			"EN" :  "Number*"
 		},
 		"spots.masscreation.placeholder.name" : {
 			"DE" :  "z.B. Zimmer oder Tisch",
-			"EN" : ""
+			"EN" :  "e.g. room or table"
 		},
 		"spots.masscreation.placeholder.startnumber" : {
 			"DE" :  "z.B. 100 (Standard 1)",
-			"EN" : ""
+			"EN" :  "e.g. 100 (standard 1)"
 		},
 		"spots.masscreation.placeholder.count" : {
 			"DE" :  "z.B. 50",
-			"EN" : ""
+			"EN" :  "e.g. 50"
 		},
 		"spots.masscreation.count.error.min" : {
 			"DE" :  "Anzahl muss min. 1 sein.",
-			"EN" : ""
+			"EN" :  "Create at minimum 1 spot."
 		},
 		"spots.masscreation.count.error.max" : {
 			"DE" :  "Anzahl darf max. 500 sein.",
-			"EN" : ""
+			"EN" :  "Create at maximum 500 spots."
 		},
 		"spots.massdelete.title" : {
 			"DE" :  "Selektierte Spots löschen",
-			"EN" : ""
+			"EN" :  "Delete selected spots"
 		},
 		"spots.massdelete.description" : {
 			"DE" :  "Löscht alle selektierten Spots. Diese Aktion kann nicht rückgängig gemacht werden.<br/>"+
 			"Ausgedruckte Barcodes sind danach nicht mehr gültig.",
-			"EN" : ""
+			"EN" :  "Deletes all selected spots. Action cannot be undone.<br/>"+
+			"Printed bar codes will become invalid."
 		},
 		"spots.massactivate.tooltip" : {
 			"DE" :  "Selektierte aktivieren",
-			"EN" : ""
+			"EN" :  "Activate selectted spots"
 		},
 		"spots.massdeactivate.tooltip" : {
-			"DE" :  "Selektiere deaktivieren",
-			"EN" : ""
+			"DE" :  "Selektierte deaktivieren",
+			"EN" :  "Deactivate selected spots"
 		},
 		"spots.massdelete.tooltip" : {
 			"DE" :  "Selektierte löschen",
-			"EN" : ""
+			"EN" :  "Delete selected spots"
 		},
 		"spots.masscheck.tooltip" : {
 			"DE" :  "Alle anwählen/abwählen",
-			"EN" : ""
+			"EN" :  "Select/deselect all"
 		},
 		"spots.filtered.status" : {
 			"DE" :  "Spots gefiltert {{filteredSpots.length}} | markiert {{getCheckedSpotsCount()}}",
-			"EN" : ""
+			"EN" :  "Spots filtered {{filteredSpots.length}} | selected {{getCheckedSpotsCount()}}"
 		},
 		"spots.legend.inactive" : {
 			"DE" :  "Inaktiv",
-			"EN" : ""
+			"EN" :  "Inactive"
 		},
 		"spots.listheader.selected" : {
 			"DE" :  "Markierte ...",
-			"EN" : ""
+			"EN" :  "Selected ..."
 		},
 		"spots.listheader.create" : {
 			"DE" :  "Anlegen ...",
-			"EN" : ""
+			"EN" :  "Create ..."
 		},
 		"spots.action.setactive" : {
 			"DE" :  "Aktiv setzen",
-			"EN" : ""
+			"EN" :  "Make active"
 		},
 		"spots.action.setinactive" : {
 			"DE" :  "Inaktiv setzen",
-			"EN" : ""
+			"EN" :  "Make inactive"
 		},
 		"spots.action.generatepdf" : {
-			"DE" :  "PDF generieren",
-			"EN" : ""
+			"DE" :  "PDF-Datei generieren",
+			"EN" :  "Generate PDF file"
 		},
 		"spots.action.generatepdf.description" : {
 			"DE" :  "Geniert ein Aufsteller PDF für ausgewählte Spots. Wenn das Dokument fertig erstellt wurde, kann es im Dokumententab heruntergeladen werden.<br/>Sie haben <strong>{{getCheckedSpotsCount()}}</strong> Spots ausgewählt.",
-			"EN" : ""
+			"EN" :  "Generates printable PDF file for selected spots. Once document has been generated, you can download it in the documents tab.<br/>You have selected <strong>{{getCheckedSpotsCount()}}</strong> spots."
 		},
 		"spots.generatepdf.documentname" : {
 			"DE" :  "Optionaler Dokumentname:",
-			"EN" : ""
+			"EN" :  "Optional document name"
 		},
 		"spots.generatepdf.documentname.placeholder" : {
 			"DE" :  "z.B. Barcodes für Zimmer 100 bis 199",
-			"EN" : ""
+			"EN" :  "e.g. bar codes for rooms 100 to 199"
 		},
 		"spots.generatepdf.documentname.maxlength" : {
 			"DE" :  "Maximal 100 Zeichen erlaubt.",
-			"EN" : ""
+			"EN" :  "Maximum number of characters is 100."
 		},
 		//infopage partial
 		"infopages.description" : {
@@ -1413,60 +1414,61 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		//documents partial
 		"documents.title" : {
 			"DE" :  "Dokumente",
-			"EN" : ""
+			"EN" :  "Documents"
 		},
 		"documents.description" : {
 			"DE" :  "Hier können Sie Dokumente der ausgewählten Location verwalten. Dokumente sind zum Beispiel Spot Aufsteller als PDF oder Marketing Flyer.",
-			"EN" : ""
+			"EN" :  "Organize your documents here (e.g. PDF files, marketing handouts)"
 		},
 		"documents.table.description" : {
 			"DE" :  "Die Dokumentabelle aktualisiert sich automatisch.",
-			"EN" : ""
+			"EN" :  "Document tables refreshes automatically."
 		},
 		"documents.table.document" : {
 			"DE" :  "Name",
-			"EN" : ""
+			"EN" :  "Name"
 		},
 		"documents.table.type" : {
 			"DE" :  "Typ",
-			"EN" : ""
+			"EN" :  "Type"
 		},
 		"documents.table.status" : {
 			"DE" :  "Status",
-			"EN" : ""
+			"EN" :  "Status"
 		},
 		"documents.table.date" : {
 			"DE" :  "Erstellt am",
-			"EN" : ""
+			"EN" :  "Created on"
 		},
 		"documents.table.actions" : {
 			"DE" :  "Aktionen",
-			"EN" : ""
+			"EN" :  "Actions"
 		},
 		"documents.table.actions.description" : {
 			"DE" :  "<i class='icon-download'></i> Dokument herunterladen<br/>"
 					+"<i class='icon-trash'></i> Dokument löschen",
-			"EN" : ""
+			"EN" : "<i class='icon-download'></i> Download document<br/>"
+					+"<i class='icon-trash'></i> Delete document"
 		},
 		"documents.dialogdelete.title" : {
 			"DE" :  "Dokument löschen",
-			"EN" : ""
+			"EN" :  "Delete document"
 		},
 		"documents.dialogdelete.description" : {
 			"DE" :  "Löschen des Dokuments \"{{documentToDelete.name}}\" vom {{documentToDelete.createDate | date:'short'}} kann nicht rückgängig gemacht werden.",
-			"EN" : ""
+			"EN" : "Deletion of document \"{{documentToDelete.name}}\" dated {{documentToDelete.createDate | date:'short'}} cannot be undone."
 		},
 		"documents.status.complete" : {
 			"DE" :  "Abgeschlossen",
-			"EN" : ""
+			"EN" :  "Complete"
 		},
 		"documents.status.error" : {
 			"DE" :  "Fehler",
-			"EN" : ""
+			"EN" :  "Error"
 		},
 		"documents.status.pending" : {
 			"DE" :  "In Bearbeitung",
-			"EN" : ""
+			"EN" :  "In progress"
 		},
 		//accounts partial
 		"accounts.title" : {
