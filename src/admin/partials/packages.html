@@ -23,12 +23,22 @@
 			<div class="span4" ng-show="currentPackage && currentPackage.id">
 				<div class="data-container-with-title">
 					<h4 class="data-container-title">Edit Package</h4>
-						<div class="data-container-block">
+						<div class="data-container-block data-container-small">
 							<div simple-property-editor editor-title="Name" editor-property="currentPackage.name" editor-on-save="savePackage()" editor-placeholder="infopage.placeholder.shortText" editor-required>
-							<p class="edit">
-								{{currentPackage.name}} <i class="icon-edit icon-black"></i>
-							</p>
-						</div>
+								<h5 class="edit">
+									{{currentPackage.name}} <i class="icon-edit icon-black"></i>
+								</h5>
+							</div>
+							<div simple-property-editor editor-title="Maximum Spots" editor-property="currentPackage.maxSpotCount" editor-on-save="savePackage()" editor-placeholder="infopage.placeholder.shortText" editor-required editor-type="number">
+								<p class="edit">
+									{{currentPackage.maxSpotCount}} <i class="icon-edit icon-black"></i>
+								</p>
+							</div>
+							<div simple-property-editor editor-title="Maximum Spots" editor-property="currentPackage.fee" editor-on-save="savePackage()" editor-placeholder="infopage.placeholder.shortText" editor-required editor-type="number">
+								<p class="edit">
+									{{currentPackage.fee}} <i class="icon-edit icon-black"></i>
+								</p>
+							</div>
 					</div>
 				</div>
 			</div>
