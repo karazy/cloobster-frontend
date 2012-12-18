@@ -1,7 +1,7 @@
 /** @module CloobsterAdmin */
 'use strict';
 
-CloobsterAdmin.Package = function($scope, $http, $log, Package, Company, Location) {
+CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Location, LocationSubscription) {
 
 	//available template subscriptions
 	$scope.packages = null;
@@ -17,7 +17,7 @@ CloobsterAdmin.Package = function($scope, $http, $log, Package, Company, Locatio
 
 	//Manage subscription template functions start
 	$scope.loadPackages = function() {
-		$scope.packages = Package.query({ 'template' : true});
+		$scope.packages = Subscription.query({ 'template' : true});
 	}
 
 	$scope.showPackage = function(p) {
@@ -32,7 +32,7 @@ CloobsterAdmin.Package = function($scope, $http, $log, Package, Company, Locatio
 
 	$scope.newPackage = function() {
 		$scope.showAllPackages = false;
-		$scope.currentPackage = new Package();
+		$scope.currentPackage = new Subscription();
 	}
 
 	$scope.savePackage = function(reload) {
@@ -133,6 +133,61 @@ CloobsterAdmin.Package = function($scope, $http, $log, Package, Company, Locatio
 		$scope.locationsMap[company.id] = Location.query({'companyId' : company.id});
 	}
 
+	$scope.showLocationDetail = function(location) {
+		jQuery('#details_'+location.id).toggle();
+		//load subscriptions
+		if(jQuery('#details_'+location.id).is(":visible")) {
+			$scope.loadSubscriptionsForLocation(location);	
+		}
+	}
+
+	$scope.loadSubscriptionsForLocation = function(location) {
+		location.subscriptions = LocationSubscription.query({'bid' : location.id});
+	}
+
+	$scope.setActivePackageForLocation = function(location) {
+		var newSubscription;
+
+		if(!location) {
+			$log.log('setActivePackageForLocation: no location provided');
+			return;
+		}
+
+		if(!location.tempSubscription) {
+			$log.log('setActivePackageForLocation: no tempSubscription set');
+			return;
+		}
+
+		// if(!$scope.packages) {
+		// 	$log.log('setActivePackageForLocation: no packages available');
+		// }
+
+		// angular.forEach($scope.packages, function(p) {
+		// 	if(p.id == )
+		// })
+		
+		newSubscription = {
+			name: location.tempSubscription.name,
+			fee: location.tempSubscription.fee,
+			maxSpotCount: location.tempSubscription.maxSpotCount,
+			basic: location.tempSubscription.basic,
+			templateId: location.tempSubscription.id,
+			status: 'APPROVED'
+		}
+
+		newSubscription = new LocationSubscription(newSubscription);
+
+		// delete newSubscription.id;
+		newSubscription.$save({'bid' : location.id},
+			function() {
+				$scope.loadSubscriptionsForLocation(location);
+			});
+
+		delete location.tempSubscription;
+	
+
+	}
+
 
 	//General Functions
 
@@ -160,4 +215,4 @@ CloobsterAdmin.Package = function($scope, $http, $log, Package, Company, Locatio
 
 }
 
-CloobsterAdmin.Package.$inject = ['$scope', '$http', '$log', 'Subscription', 'Company', 'Location'];
+CloobsterAdmin.Package.$inject = ['$scope', '$http', '$log', 'Subscription', 'Company', 'Location', 'LocationSubscription'];

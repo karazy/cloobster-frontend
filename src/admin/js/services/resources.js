@@ -41,3 +41,52 @@ CloobsterAdmin.module.factory('Location', ['$resource', function($resource) {
 		});
 
 }]);
+
+CloobsterAdmin.module.factory('LocationSubscription', ['$resource', function($resource) {
+
+	return $resource('/admin/services/locations/:bid/subscriptions/:id',
+		{
+			'id': '@id',
+			'bid' : '@bid'
+		},
+		//methods
+		{
+			'query':  {method:'GET', isArray:true},
+			'update': {method: 'PUT'}
+		});
+
+}]);
+
+
+
+// CloobsterAdmin.module.factory('Location', ['$resource', function($resource) {
+
+// 	return {
+// 		buildResource : function() {
+// 			return $resource('/admin/services/locations/:id',
+// 				{
+// 					'id': '@id'
+// 				},
+// 				//methods
+// 				{
+// 					'query':  {method:'GET', isArray:true},
+// 					'update': {method: 'PUT'}
+// 				});
+// 		},
+
+// 		buildSubscriptionResource: function() {
+// 			return $resource('/admin/services/locations/:bid/subscription/:id',
+// 				{
+// 					'id': '@id',
+// 					'bid': '@bid'
+// 				},
+// 				//methods
+// 				{
+// 					'query':  {method:'GET', isArray:true},
+// 					'update': {method: 'PUT'}
+// 				});
+// 		}
+// 	}
+	
+
+// }]);
