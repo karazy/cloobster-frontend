@@ -1,15 +1,21 @@
 /** @module CloobsterAdmin */
 'use strict';
 
-CloobsterAdmin.Package = function($scope, $http, Package) {
+CloobsterAdmin.Package = function($scope, $http, $log, Package, Company, Location) {
 
-	//available template packages
+	//available template subscriptions
 	$scope.packages = null;
+	//active subscription
 	$scope.currentPackage = null;
 	//ui flag, toggling a view of a table showing all templates or single template view
 	$scope.showAllPackages = false;	
 
-	//Manage package template functions
+	//all companies
+	$scope.companies = null;
+	//map of locations grouped by company id
+	$scope.locationsMap = null;
+
+	//Manage subscription template functions start
 	$scope.loadPackages = function() {
 		$scope.packages = Package.query({ 'template' : true});
 	}
@@ -103,7 +109,29 @@ CloobsterAdmin.Package = function($scope, $http, Package) {
 	}
 
 
-	//Manage package subscription functions
+	//Manage subscription template functions start
+
+	$scope.loadCompanies = function() {
+		$scope.companies = Company.query(success);
+
+		function success(response) {
+			angular.forEach(response, function(company) {
+				$scope.loadLocationsForCompany(company);
+			});
+		}
+	}
+
+
+	$scope.loadLocationsForCompany = function(company) {
+		if(!company) {
+			$log.log('loadLocationsForCompany: no company provided')
+			return;
+		}
+
+		$scope.locationsMap = $scope.locationsMap || {};
+
+		$scope.locationsMap[company.id] = Location.query({'companyId' : company.id});
+	}
 
 
 	//General Functions
@@ -124,24 +152,12 @@ CloobsterAdmin.Package = function($scope, $http, Package) {
 		}
 	}
 
+	/** Initialization. */
 
+	$scope.activeTab = 'locations';
 	$scope.loadPackages();
+	$scope.loadCompanies();
 
 }
 
-CloobsterAdmin.Package.$inject = ['$scope', '$http', 'Package'];
-
-//package resource
-CloobsterAdmin.module.factory('Package', ['$resource', function($resource) {
-
-	return $resource('/admin/services/subscriptions/:id',
-		{
-			'id': '@id'
-		},
-		//methods
-		{
-			'query':  {method:'GET', isArray:true},
-			'update': {method: 'PUT'}
-		});
-
-}]);
+CloobsterAdmin.Package.$inject = ['$scope', '$http', '$log', 'Subscription', 'Company', 'Location'];
