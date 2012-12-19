@@ -18,8 +18,8 @@
       margin: 5px;
     }
 
-    .anchor-left-top {
-      left:0px;
+    .anchor-right-top {
+      right:0px;
       top: 40px;
       position:fixed;
     }
@@ -53,7 +53,7 @@
   </div>
 
   <div class="container-fluid">
-    <div class="loading-indicator anchor-left-top" ng-show="ajaxLoading"></div>
+    <div class="loading-indicator anchor-right-top" ng-show="ajaxLoading"></div>
     <div ng-view></div>
   </div> <!-- /container -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -65,6 +65,7 @@
   <script src="js/package.js"></script>
   <script src="js/services/translation.js"></script>
   <script src="js/services/services.js"></script>
+  <script src="js/services/loadingService.js"></script>
   <script src="js/services/resources.js"></script>
   <script src="js/directives/directives.js"></script>
   <script src="js/filters/maxSpotCountFormatFilter.js"></script>
