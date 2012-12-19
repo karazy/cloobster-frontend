@@ -9,7 +9,8 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 	$scope.currentPackage = null;
 	//ui flag, toggling a view of a table showing all templates or single template view
 	$scope.showAllPackages = false;	
-
+	//subscriptions with status pending
+	$scope.pendingSubscriptions = null;
 	//all companies
 	$scope.companies = null;
 	//map of locations grouped by company id
@@ -135,6 +136,8 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 
 	$scope.showLocationDetail = function(location) {
 		jQuery('#details_'+location.id).toggle();
+		jQuery('#toggle_open_'+location.id).toggle();
+		jQuery('#toggle_close_'+location.id).toggle();
 		//load subscriptions
 		if(jQuery('#details_'+location.id).is(":visible")) {
 			$scope.loadSubscriptionsForLocation(location);	
@@ -186,6 +189,13 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 		delete location.tempSubscription;
 	
 
+	}
+
+	//pending subscription tab functions
+
+	$scope.loadPendingSubscriptions = function() {
+		$scope.activeTab = 'pending';
+		$scope.pendingSubscriptions = Subscription.query({'status' : 'PENDING'});
 	}
 
 
