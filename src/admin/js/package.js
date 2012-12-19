@@ -113,6 +113,13 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 
 
 	//Manage subscription template functions start
+	$scope.showCompanies = function() {
+		$scope.activeTab = 'locations';
+		$scope.loadCompanies();
+	}
+
+	
+
 
 	$scope.loadCompanies = function() {
 		$scope.companies = Company.query(success);
@@ -220,15 +227,15 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 			return;	
 		}
 
-		$scope.pendingSubscriptions = $scope.pendingSubscriptions || {};
+		$scope.locationsPendingMap = $scope.locationsPendingMap || {};
 
-		$scope.pendingSubscriptions[subscription.businessId] = Location.get(
-			{ 'id' : subscription.businessId},
+		$scope.locationsPendingMap[subscription.businessId] = Location.get(
+			{ 'id' : subscription.businessId },
 
 			function(response) {
 				if(response.activeSubscriptionId) {
 					//if an active subscription exist load it
-					$scope.pendingSubscriptions[subscription.businessId].activeSubscription = Subscription.get({'id' : activeSubscriptionId});
+					$scope.locationsPendingMap[subscription.businessId].activeSubscription = LocationSubscription.get({'id' : response.activeSubscriptionId, 'bid' : subscription.businessId});
 				}
 			}
 
@@ -237,6 +244,8 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 	}
 
 	$scope.approvePendingSubscription = function(subscription) {
+		var updatedSubscription;
+
 		if(!subscription) {
 			$log.log('approvePendingSubscription: no subscription given');
 			return;
@@ -252,12 +261,29 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 			return;
 		}
 
-		subscription.status = "APPROVED";
 
-		subscription.$save();
+		updatedSubscription = {
+			id: subscription.id,
+			name: subscription.name,
+			fee: subscription.fee,
+			maxSpotCount: subscription.maxSpotCount,
+			basic: subscription.basic,
+			templateId: subscription.templateId,
+			businessId: subscription.businessId,
+			status: 'APPROVED'
+		}
+
+		updatedSubscription = new LocationSubscription(updatedSubscription);
+
+		updatedSubscription.$update(function() {
+			//set status of original subscription to change state in ui
+			subscription.status == 'APPROVED;'
+		});
 	}
 
 	$scope.cancelPendingSubscription = function(subscription) {
+		var updatedSubscription;
+
 		if(!subscription) {
 			$log.log('approvePendingSubscription: no subscription given');
 			return;
@@ -273,9 +299,23 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 			return;
 		}
 
-		subscription.status = "CANCELED";
+		updatedSubscription = {
+			id: subscription.id,
+			name: subscription.name,
+			fee: subscription.fee,
+			maxSpotCount: subscription.maxSpotCount,
+			basic: subscription.basic,
+			templateId: subscription.templateId,
+			businessId: subscription.businessId,
+			status: 'ARCHIVED'
+		}
 
-		subscription.$save();
+		updatedSubscription = new LocationSubscription(updatedSubscription);
+
+		updatedSubscription.$update(function() {
+			//set status of original subscription to change state in ui
+			subscription.status == 'ARCHIVED;'
+		});
 	}
 
 

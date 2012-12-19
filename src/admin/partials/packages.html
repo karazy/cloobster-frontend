@@ -2,7 +2,7 @@
 <div class="partial-wrapper">
 	<ul class="nav nav-tabs">
   		<li ng-class="{active : activeTab == 'locations'}">
-    		<a ng-click="activeTab = 'locations'">Companies</a>
+    		<a ng-click="showCompanies()">Companies</a>
   		</li>
   		<li ng-class="{active : activeTab == 'pending'}">
   			<a ng-click="loadPendingSubscriptions()">Pending</a>
@@ -119,13 +119,13 @@
 					</div>
 					<div ng-repeat="sp in pendingSubscriptions" class="data-container-block">
 						<div class="row-fluid">
-							<div class="span2">{{pendingSubscriptions[sp.businessId].name}}</div>
-							<div class="span2">{{pendingSubscriptions[sp.businessId].activeSubscription.name}}</div>
+							<div class="span2">{{locationsPendingMap[sp.businessId].name}}</div>
+							<div class="span2">{{locationsPendingMap[sp.businessId].activeSubscription.name}}</div>
 							<div class="span2">{{sp.name}}</div>
 							<div class="span2">{{sp.status}}</div>
 							<div class="span2">								
 								<button class="btn btn-small btn-primary" ng-click="approvePendingSubscription(sp)" ng-show="sp.status == 'PENDING'">Approve</button>
-								<button class="btn btn-small btn-danger" ng-click="cancelPendingSubscription(sp)" ng-show="sp.status == 'PENDING'">Cancel</button>
+								<button class="btn btn-small btn-danger" ng-click="cancelPendingSubscription(sp)" ng-show="sp.status == 'PENDING'">End</button>
 							</div>
 						</div>
 					</div>

@@ -47,7 +47,7 @@ CloobsterAdmin.module.factory('LocationSubscription', ['$resource', function($re
 	return $resource('/admin/services/locations/:bid/subscriptions/:id',
 		{
 			'id': '@id',
-			'bid' : '@bid'
+			'bid' : '@businessId'
 		},
 		//methods
 		{

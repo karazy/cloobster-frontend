@@ -10,7 +10,7 @@
 * 	View and manage businesses such as restaurants.
 * 	@constructor
 */
-Cloobster.Business = function($scope, $http, $routeParams, $location, loginService, uploadService, langService, Business, $log, handleError, Company, langcodes) {
+Cloobster.Business = function($scope, $http, $routeParams, $location, loginService, uploadService, langService, Business, $log, handleError, Company, Subscription, langcodes) {
 
 		/** Holds the Id of the active modal dialog.
 		@type {string} */
@@ -30,9 +30,16 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.businessResource = null;
 	/** Template resource used to create concrete image resources. */
 	$scope.imageResource = null;
+	/** Subscription resource */
+	$scope.subscriptionResource = null;
 	$scope.businesses = null;
+	$scope.subscriptions = null;
 	/** The currently selected business. */
 	$scope.activeBusiness = null;
+	/** Subscription of activeBusiness */
+	$scope.activeSubscription = null;
+	/** Subscription of pendingBusiness */
+	$scope.pendingSubscription = null;
 	/** In case of delete attempt, the business to delete. */
 	$scope.businessToDelete = null;
 	/** Property which is currently edited. */
@@ -74,6 +81,13 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		//load businesses
 		$scope.businesses = $scope.businessResource.query(null, null, null, handleError);
 	};
+
+	/**
+	* Load all available subscriptions.
+	*/
+	$scope.loadSubscriptions = function() {
+		$scope.subscriptions = Subscription.query(angular.noop, handleError);
+	}
 
 	/**
 	* Display the delete business modal dialog.
@@ -132,6 +146,16 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			$scope.activeBusiness.lang = $scope.activeBusiness.lang || [];
 
 			$scope.imageResource =	createImageResource($scope.activeBusiness.id);
+			$scope.subscriptionResource = Business.buildSubscriptionResource($scope.activeBusiness.id);
+
+			if($scope.activeBusiness.activeSubscriptionId) {
+				$scope.activeSubscription = $scope.subscriptionResource.get({ 'id' : $scope.activeBusiness.activeSubscriptionId});	
+			}
+
+			if($scope.activeBusiness.pendingSubscriptionId) {
+				$scope.pendingSubscription = $scope.subscriptionResource.get({ 'id' : $scope.activeBusiness.pendingSubscriptionId});	
+			}
+
 		}, handleError);
 	};
 
@@ -435,6 +459,50 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		}
 	};
 
+	//start subscription methods
+
+	$scope.setActivePackageForLocation = function(subscription) {
+		var newSubscription;
+
+		if(!subscription) {
+			$log.log('setActivePackageForLocation: no subscription provided');
+			return;
+		}
+
+		if(subscription.templateId) {
+			$log.log('setActivePackageForLocation: this is not a subscription template');
+			return;
+		}
+		
+		newSubscription = {
+			// name: subscription.name,
+			// fee: subscription.fee,
+			// maxSpotCount: subscription.maxSpotCount,
+			// basic: subscription.basic,
+			templateId: subscription.id,
+			// status: 'PENDING'
+		}
+
+		newSubscription = new $scope.subscriptionResource(newSubscription);
+
+		newSubscription.$save(function() {
+			$scope.pendingSubscription = newSubscription;
+		});
+	}
+
+	$scope.cancelPendingSubscription = function() {
+		if(!$scope.pendingSubscription) {
+			$log.log('cancelPendingSubscription: no pending subscription exists');
+			return;
+		}
+		
+		$scope.pendingSubscription.$delete(function() {
+			$scope.pendingSubscription = null;
+		}, handleError);
+	}
+
+	//end subscriptions methods
+
 	/**
 	* @name Cloobster.Login~hideError
 	*
@@ -463,13 +531,15 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.$watch('loggedIn', function(newValue, oldValue) {
 		if(newValue == true) {
 			$scope.loadBusinesses();
+			$scope.loadSubscriptions();
+
 			$scope.company = Company.buildResource().get({
 				'id': loginService.getAccount()['companyId']
 			},angular.noop, handleError);
 
 			//load business details
 			if($routeParams['businessId']) {
-				$scope.loadBusiness($routeParams['businessId']);
+				$scope.loadBusiness($routeParams['businessId']);				
 			}
 
 			if($location.path() == "/businesses/new") {
@@ -484,4 +554,4 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 };
 
-Cloobster.Business.$inject = ['$scope', '$http','$routeParams', '$location', 'login', 'upload', 'lang', 'Business', '$log','errorHandler','Company', 'langcodes'];
+Cloobster.Business.$inject = ['$scope', '$http','$routeParams', '$location', 'login', 'upload', 'lang', 'Business', '$log','errorHandler','Company', 'Subscription', 'langcodes'];

@@ -1,7 +1,12 @@
 <div ng-include="'partials/businesses_header.html'"></div>
-<div class="row-fluid">
+	<div class="row-fluid">
 		<p l="business.detail.help">Here you can manage the profil information for your selected business.<br>
 			You also can customize the CI which affects how your business is presented in the app.</p>
+		<div class="alert alert-block" ng-show="!activeSubscription || activeSubscription.basic">
+		  <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
+		  <h4>Upgrade today!</h4>
+		 	<span class="label label-important">Basic</span> You have a basic subscription. Upgrade now to gain more features or <a href="https://www.cloobster.com" target="_blank">learn more</a>
+		</div>	
 	</div>
 </div>
 <div class="data-container-with-title">
@@ -12,7 +17,7 @@
 		<button type="button" class="btn btn-primary" ng-click="toggleEditMode()" l="business.action.edit.disable">Done editing</button> 
 		<span l="business.action.edit.disable.hint">Click a profile feature to edit.</span>
 	</div>
-		<button ng-hide="editMode" ng-click="showDeleteDialog(activeBusiness)" class="btn"><i class="icon-trash icon-black"></i> <span l="businesses.action.delete">Delete Business</span></button>
+		<button ng-hide="editMode" ng-click="showDeleteDialog(activeBusiness)" class="btn"><i class="icon-trash icon-black"></i> <span l="businesses.action.delete">Delete Business</span></button>		
 	</div>
 		<div class="data-container-block data-container-seperator">
 			<h3 l="business.detail.section.profile">Location Profile</h3>
@@ -112,14 +117,52 @@
 									</div>
 								</div>
 							</li>
-							
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="data-container-block data-container-seperator" id="subscriptionBlock" name="subscriptionBlock">
+			<h3 l="business.detail.section.subscription">Subscription Management</h3>
+			<p l="business.detail.section.subscription.description">Here you can manage your cloobster subscription. Basic subscriptions can't use features like,
+				ordering, VIP call and feedback.</p>
+			<div class="row-fluid">
+				<div ng-show="pendingSubscription" class="span6 alert alert-info">
+					A request to change your subscription to <strong>{{pendingSubscription.name}}</strong> is running. <button class="btn btn-small btn-warning" ng-click="cancelPendingSubscription()" l="common.cancel">Cancel</button>
+				</div>
+			</div>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Subscription</th>
+							<th>Number Spots</th>
+							<th>Fee</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tr ng-repeat="s in subscriptions">
+						<td>{{s.name}}</td>
+						<td>{{s.maxSpotCount}}</td>
+						<td style="text-align:right;">{{s.fee | kcurrency:activeBusiness.currency}}</td>
+						<td>
+							<span ng-show="(activeSubscription.templateId == s.id)">Your subscription</span>
+							<span ng-show="(pendingSubscription.templateId == s.id)">Pending request</span>
+							<button class="btn btn-success" ng-click="setActivePackageForLocation(s)" ng-show="(activeSubscription.templateId != s.id && pendingSubscription.templateId != s.id)">Request Change</button>
+							<!-- <button class="btn btn-success" ng-click="setActivePackageForLocation(s)" ng-show="(activeSubscription.templateId != s.id) || (!activeBusiness.activeSubscriptionId && !s.basic)">Cancel</button> -->
+						</td>
+					</tr>
+				</table>
+			<!-- <div class="row-fluid">
+				<div class="span4">
+					<h4>Your active subscription</h4>
+					<p>{{activeSubscription.name}}</p>
+					<p>Spots: {{activeSubscription.macSpotCount}}</p>
+					<p>Fee: {{activeSubscription.fee}}</p>
+				</div>
+			</div> -->
+		</div>
 		<div class="data-container-block data-container-seperator">
-			<h3 l="business.detail.section.app">App Configration</h3>
+			<h3 l="business.detail.section.app">App Configuration</h3>
 			<p l="business.detail.section.app.description">Configure the look of the cloobster Application to best fit your CI.</p>
 			<div class="data-element">
 				<div class="key" l="business.detail.app.header">
