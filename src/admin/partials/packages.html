@@ -109,20 +109,24 @@
 		<div class="row-fluid">
 			<div class="span12 data-container-with-title">				
 				<h4 class="data-container-title">Pending subscriptions</h4>
-				<div class="row-fluid">
-					<div class="span2">Location</div>
-					<div class="span2">Current Subscription</div>
-					<div class="span2">Upgrade To</div>
-					<!-- <div class="span2">End Date</div> -->
-					<div class="span2">Action</div>
-				</div>
-				<div ng-repeat="sp in pendingSubscriptions" class="data-container-block">
+				<div class="data-container-block">
 					<div class="row-fluid">
-						<div class="span2"></div>
-						<div class="span2">{{sp.name}}</div>
-						<div class="span2"></div>
-						<div class="span2">
-							<button class="btn btn-small btn-primary">Approve</button>
+						<div class="span2">Location</div>
+						<div class="span2">Current Subscription</div>
+						<div class="span2">Upgrade To</div>
+						<div class="span2">Status</div>
+						<div class="span2">Action</div>
+					</div>
+					<div ng-repeat="sp in pendingSubscriptions" class="data-container-block">
+						<div class="row-fluid">
+							<div class="span2">{{pendingSubscriptions[sp.businessId].name}}</div>
+							<div class="span2"></div>
+							<div class="span2">{{sp.name}}</div>
+							<div class="span2">{{sp.status}}</div>
+							<div class="span2">								
+								<button class="btn btn-small btn-primary" ng-click="approvePendingSubscription(sp)" ng-show="sp.status == 'PENDING'">Approve</button>
+								<button class="btn btn-small btn-danger" ng-click="cancelPendingSubscription(sp)" ng-show="sp.status == 'PENDING'">Cancel</button>
+							</div>
 						</div>
 					</div>
 				</div>

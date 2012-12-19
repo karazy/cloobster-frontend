@@ -11,6 +11,8 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 	$scope.showAllPackages = false;	
 	//subscriptions with status pending
 	$scope.pendingSubscriptions = null;
+	//map of locations grouped by subscription id
+	$scope.locationsPendingMap = null;
 	//all companies
 	$scope.companies = null;
 	//map of locations grouped by company id
@@ -195,7 +197,75 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 
 	$scope.loadPendingSubscriptions = function() {
 		$scope.activeTab = 'pending';
-		$scope.pendingSubscriptions = Subscription.query({'status' : 'PENDING'});
+		$scope.pendingSubscriptions = Subscription.query(
+			{'status' : 'PENDING'},
+			success);
+
+		function success() {
+			angular.forEach($scope.pendingSubscriptions, function(subscription) {
+				$scope.loadPendingSubscriptionsForLocation(subscription);
+			})
+		}
+	}
+
+	$scope.loadPendingSubscriptionsForLocation = function(subscription) {
+
+		if(!subscription) {
+			$log.log('loadPendingSubscriptionsForLocation: no subscription given');
+			return;
+		}
+
+		if(!subscription.businessId) {
+			$log.log('loadPendingSubscriptionsForLocation: subscription has no businessId');
+			return;	
+		}
+
+		$scope.pendingSubscriptions = $scope.pendingSubscriptions || {};
+
+		$scope.pendingSubscriptions[subscription.businessId] = Location.get({ 'id' : subscription.businessId});
+
+	}
+
+	$scope.approvePendingSubscription = function(subscription) {
+		if(!subscription) {
+			$log.log('approvePendingSubscription: no subscription given');
+			return;
+		}
+
+		if(!subscription.status == "PENDING") {
+			$log.log('approvePendingSubscription: status not pending');
+			return;
+		}
+
+		if(subscription.template || !subscription.templateId) {
+			$log.log('approvePendingSubscription: subscription is a template');
+			return;
+		}
+
+		subscription.status = "APPROVED";
+
+		subscription.$save();
+	}
+
+	$scope.cancelPendingSubscription = function(subscription) {
+		if(!subscription) {
+			$log.log('approvePendingSubscription: no subscription given');
+			return;
+		}
+
+		if(!subscription.status == "PENDING") {
+			$log.log('approvePendingSubscription: status not pending');
+			return;
+		}
+
+		if(subscription.template || !subscription.templateId) {
+			$log.log('approvePendingSubscription: subscription is a template');
+			return;
+		}
+
+		subscription.status = "CANCELED";
+
+		subscription.$save();
 	}
 
 
