@@ -135,15 +135,15 @@
 					<thead>
 						<tr>
 							<th>Subscription</th>
-							<th>Number Spots</th>
-							<th>Fee</th>
+							<th style="text-align:right; width: 150px;">Number of Spots</th>
+							<th style="text-align:right; width: 150px;">Fee per Month</th>
 							<th>Action</th>
 						</tr>
 					</thead>
 					<tr ng-repeat="s in subscriptions">
 						<td>{{s.name}}</td>
-						<td>{{s.maxSpotCount}}</td>
-						<td style="text-align:right;">{{s.fee | kcurrency:activeBusiness.currency}}</td>
+						<td style="text-align:right; width: 150px;">{{s.maxSpotCount}}</td>
+						<td style="text-align:right; width: 150px;">{{s.fee | kcurrency:activeBusiness.currency}}</td>
 						<td>
 							<span ng-show="(activeSubscription.templateId == s.id)">Your subscription</span>
 							<span ng-show="(pendingSubscription.templateId == s.id)">Pending request</span>
@@ -151,15 +151,13 @@
 							<!-- <button class="btn btn-success" ng-click="setActivePackageForLocation(s)" ng-show="(activeSubscription.templateId != s.id) || (!activeBusiness.activeSubscriptionId && !s.basic)">Cancel</button> -->
 						</td>
 					</tr>
+					<tr ng-show="staleSubscription">
+						<td>{{activeSubscription.name}}</td>
+						<td style="text-align:right;  width: 150px;">{{activeSubscription.maxSpotCount}}</td>
+						<td style="text-align:right;  width: 150px;">{{activeSubscription.fee | kcurrency:activeBusiness.currency}}</td>
+						<td>Your subscription</td>
+					</tr>
 				</table>
-			<!-- <div class="row-fluid">
-				<div class="span4">
-					<h4>Your active subscription</h4>
-					<p>{{activeSubscription.name}}</p>
-					<p>Spots: {{activeSubscription.macSpotCount}}</p>
-					<p>Fee: {{activeSubscription.fee}}</p>
-				</div>
-			</div> -->
 		</div>
 		<div class="data-container-block data-container-seperator">
 			<h3 l="business.detail.section.app">App Configuration</h3>

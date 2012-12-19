@@ -277,7 +277,7 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 
 		updatedSubscription.$update(function() {
 			//set status of original subscription to change state in ui
-			subscription.status == 'APPROVED;'
+			subscription.status = 'APPROVED';
 		});
 	}
 
@@ -307,14 +307,14 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 			basic: subscription.basic,
 			templateId: subscription.templateId,
 			businessId: subscription.businessId,
-			status: 'ARCHIVED'
+			status: 'CANCELED'
 		}
 
 		updatedSubscription = new LocationSubscription(updatedSubscription);
 
 		updatedSubscription.$update(function() {
 			//set status of original subscription to change state in ui
-			subscription.status == 'ARCHIVED;'
+			subscription.status = 'CANCELED';
 		});
 	}
 

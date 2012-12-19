@@ -149,7 +149,11 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			$scope.subscriptionResource = Business.buildSubscriptionResource($scope.activeBusiness.id);
 
 			if($scope.activeBusiness.activeSubscriptionId) {
-				$scope.activeSubscription = $scope.subscriptionResource.get({ 'id' : $scope.activeBusiness.activeSubscriptionId});	
+				$scope.activeSubscription = $scope.subscriptionResource.get(
+					{ 'id' : $scope.activeBusiness.activeSubscriptionId },
+					checkStaleSubscription,
+					handleError
+				);	
 			}
 
 			if($scope.activeBusiness.pendingSubscriptionId) {
@@ -499,6 +503,23 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		$scope.pendingSubscription.$delete(function() {
 			$scope.pendingSubscription = null;
 		}, handleError);
+	}
+
+	function checkStaleSubscription() {
+		var found = false;
+		if(!$scope.activeSubscription) {
+			return;
+		}
+
+		angular.forEach($scope.subscriptions, function(s) {
+			if(s.id == $scope.activeSubscription) {
+				found = true;				
+			}
+		});
+
+		if(!found) {
+			$scope.staleSubscription = true;
+		}
 	}
 
 	//end subscriptions methods
