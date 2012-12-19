@@ -484,6 +484,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Webseite",
 			"EN" : "Website"
 		},
+		"business.detail.stars" : {
+			"DE" :  "Sterne",
+			"EN" : "Stars"
+		},
 		"business.detail.address" : {
 			"DE" : "Adresse",
 			"EN" : "Address"

@@ -203,26 +203,36 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 
 		function success() {
 			angular.forEach($scope.pendingSubscriptions, function(subscription) {
-				$scope.loadPendingSubscriptionsForLocation(subscription);
+				$scope.loadLocationForPendingSubscriptions(subscription);
 			})
 		}
 	}
 
-	$scope.loadPendingSubscriptionsForLocation = function(subscription) {
+	$scope.loadLocationForPendingSubscriptions = function(subscription) {
 
 		if(!subscription) {
-			$log.log('loadPendingSubscriptionsForLocation: no subscription given');
+			$log.log('loadLocationForPendingSubscriptions: no subscription given');
 			return;
 		}
 
 		if(!subscription.businessId) {
-			$log.log('loadPendingSubscriptionsForLocation: subscription has no businessId');
+			$log.log('loadLocationForPendingSubscriptions: subscription has no businessId');
 			return;	
 		}
 
 		$scope.pendingSubscriptions = $scope.pendingSubscriptions || {};
 
-		$scope.pendingSubscriptions[subscription.businessId] = Location.get({ 'id' : subscription.businessId});
+		$scope.pendingSubscriptions[subscription.businessId] = Location.get(
+			{ 'id' : subscription.businessId},
+
+			function(response) {
+				if(response.activeSubscriptionId) {
+					//if an active subscription exist load it
+					$scope.pendingSubscriptions[subscription.businessId].activeSubscription = Subscription.get({'id' : activeSubscriptionId});
+				}
+			}
+
+		);
 
 	}
 

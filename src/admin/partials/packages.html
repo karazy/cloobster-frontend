@@ -120,7 +120,7 @@
 					<div ng-repeat="sp in pendingSubscriptions" class="data-container-block">
 						<div class="row-fluid">
 							<div class="span2">{{pendingSubscriptions[sp.businessId].name}}</div>
-							<div class="span2"></div>
+							<div class="span2">{{pendingSubscriptions[sp.businessId].activeSubscription.name}}</div>
 							<div class="span2">{{sp.name}}</div>
 							<div class="span2">{{sp.status}}</div>
 							<div class="span2">								
@@ -166,7 +166,7 @@
 							</div>
 							<div simple-property-editor editor-title="Maximum Spots" editor-property="currentPackage.maxSpotCount" editor-on-save="savePackage()" editor-placeholder="infopage.placeholder.shortText" editor-required editor-type="number">
 								<p class="edit">
-									{{currentPackage.maxSpotCount}} <i class="icon-edit icon-black"></i>
+									{{currentPackage.maxSpotCount | mSCFF:currentPackage.basic}} <i class="icon-edit icon-black"></i>
 								</p>
 							</div>
 							<div simple-property-editor editor-title="Maximum Spots" editor-property="currentPackage.fee" editor-on-save="savePackage()" editor-placeholder="infopage.placeholder.shortText" editor-required editor-type="number">
