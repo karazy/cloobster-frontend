@@ -174,18 +174,6 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		});
 		
 		$scope.deletePassword = null;
-
-		// spotToDelete.$delete(angular.noop, handleError);
-
-		// angular.forEach($scope.spots, function(spot, index) {
-		// 	if(spot.id == $scope.currentSpot.id) {
-		// 		$scope.spots.splice(index, 1);
-		// 		//exit loop
-		// 		return;
-		// 	}
-		// });
-
-		// $scope.currentSpot = null;
 	};
 
 	/**

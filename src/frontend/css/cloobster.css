@@ -483,3 +483,10 @@ ul.options-list li:hover {
   overflow: hidden;
 }
 
+/** spots partial */
+
+.spot-count-information {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+}

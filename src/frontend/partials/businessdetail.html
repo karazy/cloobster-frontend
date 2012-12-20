@@ -125,15 +125,18 @@
 			</div>
 		</div>
 		<div class="data-container-block data-container-seperator" id="subscriptionBlock" name="subscriptionBlock">
+			
 			<h3 l="business.detail.section.subscription">Subscription Management</h3>
 			<p l="business.detail.section.subscription.description">Here you can manage your cloobster subscription. Basic subscriptions can't use features like,
 				ordering, VIP call and feedback.</p>
 			<div class="row-fluid">
-				<div ng-show="pendingSubscription" class="span6 alert alert-info">
+				<div ng-show="pendingSubscription" class="span8 alert alert-info">
 					<span l="business.detail.subscription.pending.description">A request to change your subscription to <strong>{{pendingSubscription.name}}</strong> is running.</span> <button class="btn btn-small btn-warning" ng-click="cancelPendingSubscription()" l="common.cancel">Cancel</button>
 				</div>
 			</div>
-			<table class="table table-hover" style="width: 70%;">
+			<div class="row-fluid" id="subscriptionTableWrapper">
+				<div class="span8">	
+			<table class="table table-hover" 
 				<thead>
 					<tr>
 						<th l="business.detail.subscription.th.subscription">Subscription</th>
@@ -162,6 +165,28 @@
 					</tr>
 				</tbody>
 			</table>
+			</div>
+			<div class="span4" style="min-height: 100px;">
+				<h4 l="business.detail.subscriptioncounter.title">You currently use</h4>
+				<div id="spotCountContainer" class="spot-count-information alert" ng-class="{ 'alert-info' : !activeSubscription.activeSubscription, 'alert-error' : activeSubscription.activeSubscription}">
+				{{activeBusiness.spotCount}} / {{activeSubscription.maxSpotCount | mSCFF:activeSubscription.basic}} Spots
+				</div>
+				<script type="text/javascript">
+					//calculate height of spot container
+					try {
+					var heightWrapper, titleHeight = 0;
+					heightWrapper = jQuery('#subscriptionTableWrapper table').height();
+					//get h4 element
+					titleHeight = jQuery('#spotCountContainer').prev().height();
+					console.log('titleHeight: ' +titleHeight);
+					jQuery('#spotCountContainer').height(heightWrapper - titleHeight);
+					$('#spotCountContainer').css('line-height', heightWrapper - titleHeight + 'px');
+					} catch(e) {
+						//fail silently
+					}
+				</script>
+			</div>
+			</div>
 		</div>
 		<div class="data-container-block data-container-seperator">
 			<h3 l="business.detail.section.app">App Configuration</h3>
