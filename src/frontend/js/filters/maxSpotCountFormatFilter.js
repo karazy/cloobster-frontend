@@ -15,7 +15,7 @@ Cloobster.filters.filter('mSCFF', ['$locale', '$log', 'lang', function($locale, 
 	*	
 	*/
 	function formatMaxSpotCount(maxSpotCount, basic) {
-		var formated = maxSpotCount;
+		var formated = maxSpotCount || 0;
 
 		if(basic) {
 			formated = "1";

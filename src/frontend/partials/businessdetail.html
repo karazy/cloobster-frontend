@@ -147,7 +147,7 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="s in subscriptions">
-						<td>{{s.name}} <span class="label label-important" ng-show="s.basic" l="business.detail.subscription.basic">Basic</span></td>
+						<td>{{s.name}} <span class="label label-important" ng-show="s.basic" l="subscription.basic">Basic</span></td>
 						<td style="text-align:right;">{{s.maxSpotCount | mSCFF:s.basic}}</td>
 						<td style="text-align:right;">{{s.fee | kcurrency:activeBusiness.currency}}</td>
 						<td>
@@ -158,7 +158,7 @@
 						</td>
 					</tr>
 					<tr ng-show="staleSubscription">
-						<td>{{activeSubscription.name}} <span class="label label-important" ng-show="s.basic" l="business.detail.subscription.basic">Basic</span></td>
+						<td>{{activeSubscription.name}} <span class="label label-important" ng-show="s.basic" l="subscription.basic">Basic</span></td>
 						<td style="text-align:right;">{{activeSubscription.maxSpotCount | mSCFF:s.basic}}</td>
 						<td style="text-align:right;">{{activeSubscription.fee | kcurrency:activeBusiness.currency}}</td>
 						<td  l="business.detail.subscription.subscribed">Your subscription</td>
@@ -167,9 +167,9 @@
 			</table>
 			</div>
 			<div class="span4" style="min-height: 100px;">
-				<h4 l="business.detail.subscriptioncounter.title">You currently use</h4>
-				<div id="spotCountContainer" class="spot-count-information alert" ng-class="{ 'alert-info' : !activeSubscription.activeSubscription, 'alert-error' : activeSubscription.activeSubscription}">
-				{{activeBusiness.spotCount}} / {{activeSubscription.maxSpotCount | mSCFF:activeSubscription.basic}} Spots
+				<h4 l="business.detail.subscriptioncounter.title">Used spots</h4>
+				<div id="spotCountContainer" class="spot-count-information alert" ng-class="{ 'alert-info' : !activeSubscription.quotaExceeded, 'alert-error' : activeSubscription.quotaExceeded}">
+				{{activeBusiness.spotCount}} / {{activeSubscription.maxSpotCount | mSCFF:activeSubscription.basic}}
 				</div>
 				<script type="text/javascript">
 					//calculate height of spot container

@@ -663,7 +663,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			'<a href="https://www.cloobster.com" target="_blank">Mehr Information</a>',
 			"EN" : ""
 		},
-		"business.detail.subscription.basic" : {
+		"subscription.basic" : {
 			"DE" :  "Basis",
 			"EN" : "Basic"
 		},
@@ -672,7 +672,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "unlimited"
 		},
 		"business.detail.subscriptioncounter.title" : {
-			"DE" :  "Sie verwenden gerade",
+			"DE" :  "Benutzte Spots",
 			"EN" : ""
 		},
 		//profile partial
@@ -1430,6 +1430,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"spots.generatepdf.documentname.maxlength" : {
 			"DE" :  "Maximal 100 Zeichen erlaubt.",
 			"EN" :  "Maximum number of characters is 100."
+		},
+		"areas.subscription.basic.description" : {
+			"DE" :  "<span class='label label-important'>Basic</span> You have a basic subscription. You can create areas and spots. But customers won't be able to order or place VIP calls."+
+			 		"<a href='https://www.cloobster.com' target='_blank'>Learn more</a> or <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>.",
+			"EN" : ""
 		},
 		//infopage partial
 		"infopages.description" : {

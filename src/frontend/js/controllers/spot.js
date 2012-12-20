@@ -50,6 +50,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 	$scope.activeBusiness = null;
 	/** A temporary order list of menus assigned to current area. */
 	$scope.currentAreaCategories = null;
+	/** Active Subscription. Used to check for basis mode. */
+	$scope.activeSubscription = null;
 
 	//Drag&Drop for menus assignment
 	jQuery( "#assignedMenusList, #allMenusList" ).sortable({
@@ -74,7 +76,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 
 	// areas start
 	$scope.loadAreas = function(businessId) {
-		var account;
+		var account,
+			subscriptionResource;
 
 		if(!$scope.loggedIn) {
 			$log.log('Not logged in! Failed to load areas.');
@@ -85,7 +88,14 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 
 		account =  loginService.getAccount();
 
-		$scope.activeBusiness = Business.buildResource(account.id).get({'id' : activeBusinessId});
+		subscriptionResource = Business.buildSubscriptionResource(activeBusinessId);
+
+		$scope.activeBusiness = Business.buildResource(account.id).get(
+			{'id' : activeBusinessId},
+			function() {
+				$scope.activeSubscription = subscriptionResource.get({'id' : $scope.activeBusiness.activeSubscriptionId});
+			}
+		);
 
 		//create areas resource
 		$scope.areasResource = Area.buildResource(activeBusinessId);
