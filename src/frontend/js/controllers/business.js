@@ -512,7 +512,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		}
 
 		angular.forEach($scope.subscriptions, function(s) {
-			if(s.id == $scope.activeSubscription) {
+			if(s.id == $scope.activeSubscription.templateId) {
 				found = true;				
 			}
 		});

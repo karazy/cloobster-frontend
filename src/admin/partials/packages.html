@@ -160,17 +160,17 @@
 					<h4 class="data-container-title">Edit Package</h4>						
 						<div class="data-container-block data-container-small">
 							<div simple-property-editor editor-title="Name" editor-property="currentPackage.name" editor-on-save="savePackage()" editor-placeholder="infopage.placeholder.shortText" editor-required>
-								<h5 class="edit">
+								<h5 class="edit" tooltip="Name">
 									{{currentPackage.name}} <i class="icon-edit icon-black"></i>
 								</h5>
 							</div>
 							<div simple-property-editor editor-title="Maximum Spots" editor-property="currentPackage.maxSpotCount" editor-on-save="savePackage()" editor-placeholder="infopage.placeholder.shortText" editor-required editor-type="number">
-								<p class="edit">
+								<p class="edit" tooltip="Max Spots">
 									{{currentPackage.maxSpotCount | mSCFF:currentPackage.basic}} <i class="icon-edit icon-black"></i>
 								</p>
 							</div>
 							<div simple-property-editor editor-title="Maximum Spots" editor-property="currentPackage.fee" editor-on-save="savePackage()" editor-placeholder="infopage.placeholder.shortText" editor-required editor-type="number">
-								<p class="edit">
+								<p class="edit" tooltip="Fee">
 									{{currentPackage.fee}} <i class="icon-edit icon-black"></i>
 								</p>
 							</div>
