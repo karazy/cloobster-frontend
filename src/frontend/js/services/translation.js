@@ -662,7 +662,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			'Wechseln Sie auf ein anderes Paket um alle cloobster Funktionen zu nutzen. '+ 
 			'<a href="https://www.cloobster.com" target="_blank">Mehr Information</a>',
 			"EN" : ""
-		},		
+		},
+		"business.detail.subscription.basic" : {
+			"DE" :  "Basis",
+			"EN" : "Basic"
+		},
 		//profile partial
 		"profile.title" : {
 			"DE" : "Profil",
