@@ -4,8 +4,10 @@
 			You also can customize the CI which affects how your business is presented in the app.</p>
 		<div class="alert alert-block" ng-show="!activeSubscription || activeSubscription.basic">
 		  <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-		  <h4>Upgrade today!</h4>
+		  <h4 l="business.detail.subscription.upgrade.title">Upgrade today!</h4>
+		 	 <div l="business.detail.subscription.upgrade.description">
 		 	<span class="label label-important">Basic</span> You have a basic subscription. Upgrade now to gain more features or <a href="https://www.cloobster.com" target="_blank">learn more</a>
+		 </div>
 		</div>	
 	</div>
 </div>
@@ -128,36 +130,38 @@
 				ordering, VIP call and feedback.</p>
 			<div class="row-fluid">
 				<div ng-show="pendingSubscription" class="span6 alert alert-info">
-					A request to change your subscription to <strong>{{pendingSubscription.name}}</strong> is running. <button class="btn btn-small btn-warning" ng-click="cancelPendingSubscription()" l="common.cancel">Cancel</button>
+					<span l="business.detail.subscription.pending.description">A request to change your subscription to <strong>{{pendingSubscription.name}}</strong> is running.</span> <button class="btn btn-small btn-warning" ng-click="cancelPendingSubscription()" l="common.cancel">Cancel</button>
 				</div>
 			</div>
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>Subscription</th>
-							<th style="text-align:right; width: 150px;">Number of Spots</th>
-							<th style="text-align:right; width: 150px;">Fee per Month</th>
-							<th>Action</th>
-						</tr>
-					</thead>
+			<table class="table table-hover" style="width: 70%;">
+				<thead>
+					<tr>
+						<th l="business.detail.subscription.th.subscription">Subscription</th>
+						<th style="text-align:right;" l="business.detail.subscription.th.spots">Number of Spots</th>
+						<th style="text-align:right;" l="business.detail.subscription.th.fee">Fee per Month</th>
+						<th l="business.detail.subscription.th.action">Action</th>
+					</tr>
+				</thead>
+				<tbody>
 					<tr ng-repeat="s in subscriptions">
 						<td>{{s.name}}</td>
-						<td style="text-align:right; width: 150px;">{{s.maxSpotCount}}</td>
-						<td style="text-align:right; width: 150px;">{{s.fee | kcurrency:activeBusiness.currency}}</td>
+						<td style="text-align:right;">{{s.maxSpotCount}}</td>
+						<td style="text-align:right;">{{s.fee | kcurrency:activeBusiness.currency}}</td>
 						<td>
-							<span ng-show="(activeSubscription.templateId == s.id)">Your subscription</span>
-							<span ng-show="(pendingSubscription.templateId == s.id)">Pending request</span>
-							<button class="btn btn-success" ng-click="setActivePackageForLocation(s)" ng-show="(activeSubscription.templateId != s.id && pendingSubscription.templateId != s.id)">Request Change</button>
+							<span ng-show="(activeSubscription.templateId == s.id)" l="business.detail.subscription.subscribed">Your subscription</span>
+							<span ng-show="(pendingSubscription.templateId == s.id)" l="business.detail.subscription.pending">Pending request</span>
+							<button class="btn btn-success" ng-click="setActivePackageForLocation(s)" ng-show="(activeSubscription.templateId != s.id && pendingSubscription.templateId != s.id)" l="business.deatail.subscription.change">Request Change</button>
 							<!-- <button class="btn btn-success" ng-click="setActivePackageForLocation(s)" ng-show="(activeSubscription.templateId != s.id) || (!activeBusiness.activeSubscriptionId && !s.basic)">Cancel</button> -->
 						</td>
 					</tr>
 					<tr ng-show="staleSubscription">
 						<td>{{activeSubscription.name}}</td>
-						<td style="text-align:right;  width: 150px;">{{activeSubscription.maxSpotCount}}</td>
-						<td style="text-align:right;  width: 150px;">{{activeSubscription.fee | kcurrency:activeBusiness.currency}}</td>
-						<td>Your subscription</td>
+						<td style="text-align:right;">{{activeSubscription.maxSpotCount}}</td>
+						<td style="text-align:right;">{{activeSubscription.fee | kcurrency:activeBusiness.currency}}</td>
+						<td  l="business.detail.subscription.subscribed">Your subscription</td>
 					</tr>
-				</table>
+				</tbody>
+			</table>
 		</div>
 		<div class="data-container-block data-container-seperator">
 			<h3 l="business.detail.section.app">App Configuration</h3>

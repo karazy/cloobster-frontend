@@ -139,7 +139,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	* 	business to load
 	*/
 	$scope.loadBusiness = function(id) {
-		$scope.activeBusiness = $scope.businessResource.get({'id' : id}, function() {						
+		$scope.activeBusiness = $scope.businessResource.get({'id' : id, 'countSpots' : true}, function() {						
 			//if no images are included init with empty object
 			$scope.activeBusiness.images = $scope.activeBusiness.images || {};
 			//if no lang array exists create one

@@ -612,6 +612,57 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"Nicht übersetzte Felder werden dem Kunden in der Standardsprache angezeigt.",
 			"EN" : "Please select languages you want to offer in cloobster app.<br/>You can select a language for each location using the drop-down menu in the upper right corner.<br/>Fields that have not been translated will be shown in the default language."
 		},
+		"business.detail.section.subscription" : {
+			"DE" :  "Paket Verwaltung",
+			"EN" : ""
+		},
+		"business.detail.section.subscription.description" : {
+			"DE" :  "Hier können Sie ihr cloobster Paket verwalten. Im Basis Paket sind die Funktionen"+
+				" Bestellen, Feedback und VIP Call nicht vergübar.",
+			"EN" : ""
+		},
+		"business.detail.subscription.pending.description" : {
+			"DE" :  "Eine Anfrage zum Wechsel in Paket <strong>{{pendingSubscription.name}}</strong> läuft.",
+			"EN" : ""
+		},
+		"business.detail.subscription.th.subscription" : {
+			"DE" :  "Paket",
+			"EN" : ""
+		},
+		"business.detail.subscription.th.spots" : {
+			"DE" :  "Maximale nutzbare Spots",
+			"EN" : ""
+		},
+		"business.detail.subscription.th.fee" : {
+			"DE" :  "Kosten pro Monat",
+			"EN" : ""
+		},
+		"business.detail.subscription.th.action" : {
+			"DE" :  "Aktion",
+			"EN" : ""
+		},
+		"business.deatail.subscription.change" : {
+			"DE" :  "Wechsel anfordern",
+			"EN" : ""
+		},
+		"business.detail.subscription.subscribed" : {
+			"DE" :  "Ihr aktuelles Paket",
+			"EN" : ""
+		},
+		"business.detail.subscription.pending" : {
+			"DE" :  "Laufende Anfrage",
+			"EN" : ""
+		},
+		"business.detail.subscription.upgrade.title" : {
+			"DE" :  "Wechseln Sie heute!",
+			"EN" : ""
+		},
+		"business.detail.subscription.upgrade.description" : {
+			"DE" :  '<span class="label label-important">Basis</span> Momentan haben Sie ein Basis Paket.<br/>'+ 
+			'Wechseln Sie auf ein anderes Paket um alle cloobster Funktionen zu nutzen. '+ 
+			'<a href="https://www.cloobster.com" target="_blank">Mehr Information</a>',
+			"EN" : ""
+		},		
 		//profile partial
 		"profile.title" : {
 			"DE" : "Profil",
