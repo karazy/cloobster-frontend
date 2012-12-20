@@ -145,7 +145,7 @@
 				<tbody>
 					<tr ng-repeat="s in subscriptions">
 						<td>{{s.name}} <span class="label label-important" ng-show="s.basic" l="business.detail.subscription.basic">Basic</span></td>
-						<td style="text-align:right;">{{s.maxSpotCount}}</td>
+						<td style="text-align:right;">{{s.maxSpotCount | mSCFF:s.basic}}</td>
 						<td style="text-align:right;">{{s.fee | kcurrency:activeBusiness.currency}}</td>
 						<td>
 							<span ng-show="(activeSubscription.templateId == s.id)" l="business.detail.subscription.subscribed">Your subscription</span>
@@ -156,7 +156,7 @@
 					</tr>
 					<tr ng-show="staleSubscription">
 						<td>{{activeSubscription.name}} <span class="label label-important" ng-show="s.basic" l="business.detail.subscription.basic">Basic</span></td>
-						<td style="text-align:right;">{{activeSubscription.maxSpotCount}}</td>
+						<td style="text-align:right;">{{activeSubscription.maxSpotCount | mSCFF:s.basic}}</td>
 						<td style="text-align:right;">{{activeSubscription.fee | kcurrency:activeBusiness.currency}}</td>
 						<td  l="business.detail.subscription.subscribed">Your subscription</td>
 					</tr>

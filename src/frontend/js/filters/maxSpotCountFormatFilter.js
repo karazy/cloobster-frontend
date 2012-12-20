@@ -1,5 +1,3 @@
-CloobsterAdmin.filters = angular.module('CloobsterAdmin.filters', ['CloobsterAdmin.services']);
-
 /**
 * mSCFF = max spot count format filter
 * @param maxSpotCount
@@ -11,7 +9,7 @@ CloobsterAdmin.filters = angular.module('CloobsterAdmin.filters', ['CloobsterAdm
 *	unlimited if package not basic and maxSpotCount = 0
 *	maxSpotCount it not basic and greater 0
 */
-CloobsterAdmin.filters.filter('mSCFF', ['$locale', '$log', function($locale, $log) {
+Cloobster.filters.filter('mSCFF', ['$locale', '$log', 'lang', function($locale, $log, langService) {
 
 	/**
 	*	
@@ -22,8 +20,8 @@ CloobsterAdmin.filters.filter('mSCFF', ['$locale', '$log', function($locale, $lo
 		if(basic) {
 			formated = "1";
 		} else if(maxSpotCount == 0) {
-			formated = "unlimited";
-		}
+			formated = langService.translate('business.detail.subscription.unlimited');
+		} 
 
 		return formated;
 	};

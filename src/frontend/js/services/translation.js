@@ -667,6 +667,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Basis",
 			"EN" : "Basic"
 		},
+		"business.detail.subscription.unlimited" : {
+			"DE" :  "unbegrenzt",
+			"EN" : "unlimited"
+		},
 		//profile partial
 		"profile.title" : {
 			"DE" : "Profil",
