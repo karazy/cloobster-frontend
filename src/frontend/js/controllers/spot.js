@@ -217,12 +217,13 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 	$scope.saveSpot = function() {		
 		if($scope.currentSpot && $scope.currentSpot.id) {
 			$log.log("update spot " + $scope.currentSpot.id);
-			$scope.currentSpot.$update(angular.noop, handleError);
+			$scope.currentSpot.$update(angular.noop, handleError);			
 		} else {
 			$log.log("save new spot");
 			$scope.currentSpot.$save(
 				function() { 
 					$scope.spots.push($scope.currentSpot);
+					$scope.updateSpotCount(1, false);
 				},
 				// Error callback
 				handleError
@@ -248,6 +249,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			}
 		});
 
+		$scope.updateSpotCount(1, true);
+
 		manageViewHiearchy("area");
 	}
 
@@ -265,6 +268,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 	*
 	*/
 	$scope.generateSpots = function() {
+		var count;
 
 		if(!$scope.spots) {
 			$log.error('Spot.generateSpots: no spots collection exists');
@@ -286,6 +290,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			return;
 		}
 
+		count = $scope.spotMassCreation.count;
+
 		$scope.spotsResource.generate( 
 			{
 				'name' : $scope.spotMassCreation.name,
@@ -296,6 +302,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			function(response) {
 				//success
 				$scope.spots = $scope.spots.concat(response);
+				$scope.updateSpotCount(count, false);
 			},
 			// Error callback
 			handleError
@@ -412,6 +419,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 					} 	
 				});				
 				$scope.spots = clearedSpots;
+				$scope.updateSpotCount(ids.length, true);
 			},
 			handleError	
 		);
@@ -453,6 +461,31 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		filtered = $filter('filter')($scope.spots, { 'checked' : true}) || [];
 
 		return filtered.length;
+	}
+
+	/**
+	* Updates spotCount on activeBusiness after adding/removing spots.
+	* This prevents a server rounddrip.
+	*/
+	$scope.updateSpotCount = function(amount, substract) {
+
+		if(!$scope.activeBusiness) {
+			return;
+		}
+
+		if(!substract) {
+			$scope.activeBusiness.spotCount += amount;	
+		} else {
+			$scope.activeBusiness.spotCount -= amount;
+		}
+
+		//set quotaExceeded
+		if($scope.activeBusiness.spotCount > $scope.activeSubscription.maxSpotCount) {
+			$scope.activeSubscription.quotaExceeded = true;
+		} else {
+			$scope.activeSubscription.quotaExceeded = false;
+		}
+		
 	}
 
 	/**

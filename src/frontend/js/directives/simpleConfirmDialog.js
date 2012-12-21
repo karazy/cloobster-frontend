@@ -2,7 +2,7 @@ Cloobster.directives.directive('simpleConfirmDialog', ['lang', '$log', function(
 	var //directive configuration
 		config = {
 		restrict: 'A',
-		replace: false,
+		replace: true,
 		transclude: true,
 		priority: 100,
 		scope: {
@@ -15,15 +15,15 @@ Cloobster.directives.directive('simpleConfirmDialog', ['lang', '$log', function(
 			var html;
 
 			html = 
-			'<div class="toggler" ng-transclude></div>'+
-				'<div class="modal hide confirm-modal">'+
-				 	'<div class="modal-header">'+
+			'<span class="toggler" ng-transclude></span>'+
+			'<div class="modal hide confirm-modal">'+
+			 	'<div class="modal-header">'+
 				    	'<button type="button" class="close" data-dismiss="modal">×</button>'+
 				    	'<h4 l="{{dialogTitle}}">Confirm dialog</h4>'+
-					'</div>'+
-					'<div class="modal-body alert-info">'+
+				'</div>'+
+				'<div class="modal-body alert-info">'+
 				    	'<p l="{{dialogText}}"></p>'+
-				   '</div>  '+
+			   '</div>  '+
 				'<div class="modal-footer">'+
 				  		'<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>'+
 				    	'<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="confirm()" l="{{dialogConfirmButton}}">Confirm</button>'+
@@ -37,7 +37,7 @@ Cloobster.directives.directive('simpleConfirmDialog', ['lang', '$log', function(
 		        	
 		        },
 		        post: function postLink(scope, iElement, iAttrs, controller) {
-		        	var dialog = iElement.find('div.simple-confirm-dialog');
+		        	var dialog = iElement.find('.simple-confirm-dialog');
 	
 		        	scope.confirm = function () {
 		        		scope.dialogOnConfirm();
@@ -45,7 +45,7 @@ Cloobster.directives.directive('simpleConfirmDialog', ['lang', '$log', function(
 		        	}
 
 		        	
-		        	iElement.find('div.toggler').bind('click', function() { 
+		        	iElement.find('.toggler').bind('click', function() { 
 		        		var modal;
 
 		        		modal = iElement.find(".confirm-modal");

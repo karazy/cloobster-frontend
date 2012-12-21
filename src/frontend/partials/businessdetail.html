@@ -130,8 +130,8 @@
 			<p l="business.detail.section.subscription.description">Here you can manage your cloobster subscription. Basic subscriptions can't use features like,
 				ordering, VIP call and feedback.</p>
 			<div class="row-fluid">
-				<div ng-show="pendingSubscription" class="span8 alert alert-info">
-					<span l="business.detail.subscription.pending.description">A request to change your subscription to <strong>{{pendingSubscription.name}}</strong> is running.</span>
+				<div ng-show="pendingSubscription" class="span8">
+					<span l="business.detail.subscription.pending.description" class="text-info">A request to change your subscription to <strong>{{pendingSubscription.name}}</strong> is running.</span>
 					<span simple-confirm-dialog dialog-title="business.detail.subscription.cancel" dialog-text="business.detail.subscription.cancel.text" dialog-on-confirm="cancelPendingSubscription()" 
 							dialog-confirm-button="common.confirm">
 						<button class="btn btn-small btn-warning" l="common.cancel">Cancel</button>
@@ -158,10 +158,9 @@
 							<span ng-show="(activeSubscription.templateId == s.id)" l="business.detail.subscription.subscribed">Your subscription</span>
 							<span ng-show="(pendingSubscription.templateId == s.id)" l="business.detail.subscription.pending">Pending request</span>
 							<div simple-confirm-dialog dialog-title="business.detail.subscription.change" dialog-text="business.detail.subscription.change.text" dialog-on-confirm="setActivePackageForLocation(s)" 
-							dialog-confirm-button="common.confirm">
+							dialog-confirm-button="common.confirm">	
 								<button class="btn btn-success"  ng-show="(activeSubscription.templateId != s.id && pendingSubscription.templateId != s.id)" l="business.detail.subscription.change">Request Change</button>
-							</div>
-							
+							</div>							
 							<!-- ng-click="setActivePackageForLocation(s)" <button class="btn btn-success" ng-click="setActivePackageForLocation(s)" ng-show="(activeSubscription.templateId != s.id) || (!activeBusiness.activeSubscriptionId && !s.basic)">Cancel</button> -->
 						</td>
 					</tr>
