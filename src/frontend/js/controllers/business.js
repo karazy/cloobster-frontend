@@ -505,7 +505,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			// fee: subscription.fee,
 			// maxSpotCount: subscription.maxSpotCount,
 			// basic: subscription.basic,
-			templateId: subscription.id,
+			templateId: subscription.id
 			// status: 'PENDING'
 		}
 
