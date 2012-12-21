@@ -267,6 +267,7 @@ ul.payment-method-list li {
   left: 5px;
   z-index: 101;
   max-width: 400px;
+  min-width: 250px;
 }
 
 .simple-property-editor input {

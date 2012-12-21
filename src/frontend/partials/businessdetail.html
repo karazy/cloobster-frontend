@@ -25,19 +25,15 @@
 			<h3 l="business.detail.section.profile">Location Profile</h3>
 			<div simple-property-editor editor-title="business.detail.name" editor-property="activeBusiness.name" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
 				<h1 ng-class="getEditModeClass()">{{activeBusiness.name}}</h1>
-			</div>
-			<div simple-property-editor editor-title="business.detail.description" editor-property="activeBusiness.description" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-type="textarea" editor-required>
+			</div>			
+			<div class="row-fluid">
+				<div class="span6">
+				<div simple-property-editor editor-title="business.detail.description" editor-property="activeBusiness.description" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-type="textarea" editor-required>
 				<div class="data-element" ng-class="getEditModeClass()">
 					<div class="key" l="business.detail.description">Description</div>
 					<div class="value">{{activeBusiness.description}}</div>
 				</div>
-			</div>
-			<div simple-property-editor editor-title="business.detail.stars" editor-property="activeBusiness.stars" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-type="number" editor-required>
-				<div class="data-element" ng-class="getEditModeClass()">
-					<div class="key" l="business.detail.stars">Stars</div>
-					<div class="value">{{activeBusiness.stars}}</div>
-				</div>
-			</div>
+			</div>		
 			<div simple-property-editor editor-title="business.detail.slogan" editor-property="activeBusiness.slogan" editor-on-save="saveBusiness()" editor-enabled="editMode">
 				<div class="data-element" ng-class="getEditModeClass()">
 					<div class="key" l="business.detail.slogan">Slogan</div>
@@ -80,7 +76,15 @@
 					<div class="value">{{activeBusiness.phone}}</div>
 				</div>
 			</div>
-			<div >
+				</div>
+				<div class="span6">
+						<div simple-property-editor editor-title="business.detail.stars" editor-property="activeBusiness.stars" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-type="number" editor-required>
+				<div class="data-element" ng-class="getEditModeClass()">
+					<div class="key" l="business.detail.stars">Stars</div>
+					<div class="value">{{activeBusiness.stars}}</div>
+				</div>
+			</div>
+				<div>
 				<div class="data-element">
 					<div class="key" l="business.detail.currency">Currency</div>
 					<select ng-model="activeBusiness.currency" class="value" ng-disabled="!editMode" ng-change="saveBusiness()" required>
@@ -108,7 +112,8 @@
 								<button class="btn" ng-click="addPaymentMethod()" ng-disabled="!editMode"><i class="icon-plus icon-black"></i><span l="business.detail.paymentmethods.list.new"> New payment method...</span></button>
 							</li>
 							<li ng-repeat="method in activeBusiness.paymentMethods" ng-class="getEditModeClass()">
-								<div class="row-fluid">	
+								<!-- add position relative for correct positioning of simple-property-editor -->
+								<div class="row-fluid" style="position: relative;">	
 									<div class="span10">
 										<div simple-property-editor editor-title="business.detail.paymentmethod" editor-property="method.name" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
 											<span>{{method.name}}</span>
@@ -123,6 +128,10 @@
 					</div>
 				</div>
 			</div>
+				</div>
+			</div>
+
+		
 		</div>
 		<div class="data-container-block data-container-seperator" id="subscriptionBlock" name="subscriptionBlock">
 			
