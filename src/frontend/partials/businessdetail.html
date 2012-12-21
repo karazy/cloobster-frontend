@@ -23,57 +23,58 @@
 	</div>
 		<div class="data-container-block data-container-seperator">
 			<h3 l="business.detail.section.profile">Location Profile</h3>
-			<div simple-property-editor editor-title="business.detail.name" editor-property="activeBusiness.name" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
+			<div simple-property-editor editor-title="business.detail.name" editor-property="activeBusiness.name" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required editor-placeholder="registration.form.company.placeholder">
 				<h1 ng-class="getEditModeClass()">{{activeBusiness.name}}</h1>
 			</div>			
 			<div class="row-fluid">
 				<div class="span6">
-				<div simple-property-editor editor-title="business.detail.description" editor-property="activeBusiness.description" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-type="textarea" editor-required>
+				<div simple-property-editor editor-title="business.detail.description" editor-property="activeBusiness.description" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-type="textarea" editor-required editor-placeholder="location.placeholder.description">
 				<div class="data-element" ng-class="getEditModeClass()">
 					<div class="key" l="business.detail.description">Description</div>
-					<div class="value">{{activeBusiness.description}}</div>
+					<div class="value">{{activeBusiness.description}}<span l="location.placeholder.description" ng-hide="activeBusiness.description" class="simple-property-placeholder">e. g. Located near Frankfurt, we're one
+						of the finest Spa Hotels you can find!</span></div>
 				</div>
 			</div>		
-			<div simple-property-editor editor-title="business.detail.slogan" editor-property="activeBusiness.slogan" editor-on-save="saveBusiness()" editor-enabled="editMode">
+			<div simple-property-editor editor-title="business.detail.slogan" editor-property="activeBusiness.slogan" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-placeholder="location.placeholder.slogan">
 				<div class="data-element" ng-class="getEditModeClass()">
 					<div class="key" l="business.detail.slogan">Slogan</div>
-					<div class="value">{{activeBusiness.slogan}}</div>
+					<div class="value">{{activeBusiness.slogan}}<span l="location.placeholder.slogan" ng-hide="activeBusiness.slogan" class="simple-property-placeholder">e. g. Service at its Peak!</span></div>
 				</div>
 			</div>
-			<div simple-property-editor editor-title="business.detail.url" editor-property="activeBusiness.url" editor-on-save="saveBusiness()" editor-enabled="editMode">
+			<div simple-property-editor editor-title="business.detail.url" editor-property="activeBusiness.url" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-placeholder="location.placeholder.url">
 				<div class="data-element" ng-class="getEditModeClass()">
 					<div class="key" l="business.detail.url">Website</div>
-					<div class="value">{{activeBusiness.url}}</div>
+					<div class="value">{{activeBusiness.url}}<span l="location.placeholder.url" ng-hide="activeBusiness.url" class="simple-property-placeholder">e. g. http://www.example.com</span></div>
 				</div>
 			</div>
-			<div simple-property-editor editor-title="business.detail.email" editor-property="activeBusiness.email" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-type="email">
+			<div simple-property-editor editor-title="business.detail.email" editor-property="activeBusiness.email" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-type="email" editor-placeholder="registration.form.email.placeholder">
 				<div class="data-element" ng-class="getEditModeClass()">
 					<div class="key" l="business.detail.email">E-Mail</div>
-					<div class="value">{{activeBusiness.email}}</div>
+					<div class="value">{{activeBusiness.email}}<span l="registration.form.email.placeholder" ng-hide="activeBusiness.email" class="simple-property-placeholder">e.g. johndoe@gmail.com</span></div>
 				</div>
 			</div>
-			<div simple-property-editor editor-title="business.detail.address" editor-property="activeBusiness.address" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
+			<div simple-property-editor editor-title="business.detail.address" editor-property="activeBusiness.address" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required editor-placeholder="registration.form.address.placeholder">
 				<div class="data-element" ng-class="getEditModeClass()">
 					<div class="key" l="business.detail.address">Address</div>
-					<div class="value">{{activeBusiness.address}}</div>
+					<div class="value">{{activeBusiness.address}}<span l="registration.form.address.placeholder" ng-hide="activeBusiness.address" class="simple-property-placeholder">e. g. Mainstreet 3</span></div>
 				</div>
 			</div>
-			<div simple-property-editor editor-title="business.detail.city" editor-property="activeBusiness.city" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
+			<div simple-property-editor editor-title="business.detail.city" editor-property="activeBusiness.city" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required editor-placeholder="registration.form.city.placeholder">
 				<div class="data-element" ng-class="getEditModeClass()">
 					<div class="key" l="business.detail.city">City</div>
-					<div class="value">{{activeBusiness.city}}</div>
+					<div class="value">{{activeBusiness.city}}<span l="registration.form.city.placeholder" ng-hide="activeBusiness.city" class="simple-property-placeholder">e. g. London</span></div>
 				</div>
 			</div>
-			<div simple-property-editor editor-title="business.detail.postcode" editor-property="activeBusiness.postcode" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required>
+			<div simple-property-editor editor-title="business.detail.postcode" editor-property="activeBusiness.postcode" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-required editor-placeholder="registration.form.postcode.placeholder">
 				<div class="data-element" ng-class="getEditModeClass()">
 					<div class="key" l="business.detail.postcode">Postcode</div>
-					<div class="value">{{activeBusiness.postcode}}</div>
+					<div class="value">{{activeBusiness.postcode}}<span l="registration.form.postcode.placeholder" ng-hide="activeBusiness.postcode" class="simple-property-placeholder">e. g. W11</span></div>
 				</div>
 			</div>
-			<div simple-property-editor editor-title="business.detail.phone" editor-property="activeBusiness.phone" editor-on-save="saveBusiness()" editor-enabled="editMode">
+			<div simple-property-editor editor-title="business.detail.phone" editor-property="activeBusiness.phone" editor-on-save="saveBusiness()" editor-enabled="editMode" editor-placeholder="registration.form.businessphone.placeholder">
 				<div class="data-element" ng-class="getEditModeClass()">
 					<div class="key" l="business.detail.phone">Phone</div>
-					<div class="value">{{activeBusiness.phone}}</div>
+					<div class="value">{{activeBusiness.phone}}<span l="registration.form.businessphone.placeholder" ng-hide="activeBusiness.phone" class="simple-property-placeholder">e. g. 0049-170-4153172</span></div>
 				</div>
 			</div>
 				</div>

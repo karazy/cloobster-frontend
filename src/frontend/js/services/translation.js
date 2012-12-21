@@ -248,6 +248,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "z.B. 0049-170-4153172",
 			"EN" : "e.g. 0049-170-4153172"
 		},
+		"location.placeholder.description" : {
+			"DE" :  "z.B. In der Nähe von Frankfurt gelegen, zählen wir zu den besten Spa Hotels der Region!",
+			"EN" : ""
+		},
+		"location.placeholder.slogan" : {
+			"DE" :  "z.B. Service at its Peak!",
+			"EN" : ""
+		},
+		"location.placeholder.url" : {
+			"DE" :  "z.B. http://www.example.com",
+			"EN" : ""
+		},
 		"registration.action.fblogin" : {
 			"DE" : "Mit Facebook einloggen und cloobster verknüpfen.",
 			"EN" : "Log in to Facebook and link with cloobster."
