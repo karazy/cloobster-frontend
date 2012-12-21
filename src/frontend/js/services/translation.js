@@ -641,7 +641,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Aktion",
 			"EN" : ""
 		},
-		"business.deatail.subscription.change" : {
+		"business.detail.subscription.change" : {
 			"DE" :  "Wechsel anfordern",
 			"EN" : ""
 		},
@@ -673,6 +673,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"business.detail.subscriptioncounter.title" : {
 			"DE" :  "Benutzte Spots",
+			"EN" : ""
+		},
+		"business.detail.subscription.change.text" : {
+			"DE" :  "Paketwechsel anfordern?",
+			"EN" : ""
+		},
+		"business.detail.subscription.cancel" : {
+			"DE" :  "Anfrage widerrufen",
+			"EN" : ""
+		},
+		"business.detail.subscription.cancel.text" : {
+			"DE" :  "Möchten Sie die Anfrage widerrufen?",
 			"EN" : ""
 		},
 		//profile partial
@@ -1760,6 +1772,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.download" : {
 			"DE" :  "Download",
 			"EN" : ""
+		},
+		"common.confirm" : {
+			"DE" :  "Bestätigen",
+			"EN" : "Confirm"
 		},
 		"general.sortable" : {
 			"DE" : "Ziehen, um zu sortieren",

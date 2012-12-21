@@ -12,21 +12,27 @@
 			 	</div>
 			</div>
 		</div>
-		<div class="span2">
-			<h4 l="business.detail.subscriptioncounter.title" style="margin: 0 0 5px 0;">Used spots</h4>
-			<div id="spotCountContainer" style="line-height: 50px; height: 50px;" class="spot-count-information alert" ng-class="{ 'alert-info' : !activeSubscription.quotaExceeded, 'alert-error' : activeSubscription.quotaExceeded}">
-			{{activeBusiness.spotCount}} / {{activeSubscription.maxSpotCount | mSCFF:activeSubscription.basic}}
+		<div class="span4" ng-show="activeSubscription">
+			<!-- <h4 l="business.detail.subscriptioncounter.title" style="margin: 0 0 5px 0;">Used spots</h4> -->
+			<div id="spotCountContainer" class="alert pull-right" ng-class="{ 'alert-info' : !activeSubscription.quotaExceeded, 'alert-error' : activeSubscription.quotaExceeded}">
+				<span l="business.detail.subscriptioncounter.title" style="margin-right: 5px;">
+					Used spots
+				</span>
+				 <span>
+				 	{{activeBusiness.spotCount}} / {{activeSubscription.maxSpotCount | mSCFF:activeSubscription.basic}}
+				 </span>
 			</div>
 			<script type="text/javascript">
 				//calculate height of spot container
 				try {
-				var heightWrapper, titleHeight = 0;
+				var heightWrapper, titleHeight = 0, spotContainerHeight;
 				heightWrapper = jQuery('#spotsPartialDescription').height();
 				//get h4 element
 				titleHeight = jQuery('#spotCountContainer').prev().height();
-				console.log('titleHeight: ' +titleHeight);
 				//jQuery('#spotCountContainer').height(heightWrapper - titleHeight);
-				//$('#spotCountContainer').css('line-height', heightWrapper - titleHeight + 'px');
+				// spotContainerHeight = jQuery('#spotCountContainer').height();
+				// $('#spotCountContainer').css('line-height', spotContainerHeight + 'px');
+				// 
 				} catch(e) {
 					//fail silently
 				}
