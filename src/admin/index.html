@@ -41,11 +41,11 @@
           <ul class="nav">
             <!-- class="active" -->
             <li ng-class="getActive('/packges')"><a href="#/packages">Management</a></li>
-            <li ng-class="getActive('/main')"><a href="#/main">Setup</a></li>
-            <li ng-class="getActive('/configuration')"><a href="#/configuration">Configuration</a></li>            
-            <li ng-class="getActive('/templates')"><a href="#/templates">E-Mail Templates</a></li>
-            <li ng-class="getActive('/dummydata')"><a href="#/dummydata">InfoPage Generation</a></li>
-            <li ng-class="getActive('/trash')"><a href="#/trash">Trash Can</a></li>
+            <li ng-class="getActive('/main')" ng-hide="!user.awesome"><a href="#/main">Setup</a></li>
+            <li ng-class="getActive('/configuration')" ng-hide="!user.awesome"><a href="#/configuration">Configuration</a></li>            
+            <li ng-class="getActive('/templates')" ng-hide="!user.awesome"><a href="#/templates">E-Mail Templates</a></li>
+            <li ng-class="getActive('/dummydata')" ng-hide="!user.awesome"><a href="#/dummydata">InfoPage Generation</a></li>
+            <li ng-class="getActive('/trash')" ng-hide="!user.awesome"><a href="#/trash">Trash Can</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

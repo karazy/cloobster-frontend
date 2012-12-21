@@ -1,7 +1,7 @@
 
 CloobsterAdmin.module.factory('Subscription', ['$resource', function($resource) {
 
-	return $resource('/admin/services/subscriptions/:id',
+	return $resource('/admin/m/subscriptions/:id',
 		{
 			'id': '@id'
 		},
@@ -16,7 +16,7 @@ CloobsterAdmin.module.factory('Subscription', ['$resource', function($resource) 
 
 CloobsterAdmin.module.factory('Company', ['$resource', function($resource) {
 
-	return $resource('/admin/services/companies/:id',
+	return $resource('/admin/m/companies/:id',
 		{
 			'id': '@id'
 		},
@@ -30,7 +30,7 @@ CloobsterAdmin.module.factory('Company', ['$resource', function($resource) {
 
 CloobsterAdmin.module.factory('Location', ['$resource', function($resource) {
 
-	return $resource('/admin/services/locations/:id',
+	return $resource('/admin/m/locations/:id',
 		{
 			'id': '@id'
 		},
@@ -44,7 +44,7 @@ CloobsterAdmin.module.factory('Location', ['$resource', function($resource) {
 
 CloobsterAdmin.module.factory('LocationSubscription', ['$resource', function($resource) {
 
-	return $resource('/admin/services/locations/:bid/subscriptions/:id',
+	return $resource('/admin/m/locations/:bid/subscriptions/:id',
 		{
 			'id': '@id',
 			'bid' : '@businessId'
@@ -57,36 +57,35 @@ CloobsterAdmin.module.factory('LocationSubscription', ['$resource', function($re
 
 }]);
 
+CloobsterAdmin.module.factory('User', ['$resource', function($resource) {
 
+	return $resource('/admin/user/:id',
+		{
+			'id': '@id'
+		}
+	);
 
-// CloobsterAdmin.module.factory('Location', ['$resource', function($resource) {
+}]);
 
-// 	return {
-// 		buildResource : function() {
-// 			return $resource('/admin/services/locations/:id',
-// 				{
-// 					'id': '@id'
-// 				},
-// 				//methods
-// 				{
-// 					'query':  {method:'GET', isArray:true},
-// 					'update': {method: 'PUT'}
-// 				});
-// 		},
+CloobsterAdmin.module.factory('Template', ['$resource', function($resource){
+    return $resource('/admin/s/templates/:id',
+      {
+        'id': '@id'
+      },
+      {
+        save: {method:'PUT'},
+        init: {method:'POST', isArray: true}
+      }
+    );
+}]);
 
-// 		buildSubscriptionResource: function() {
-// 			return $resource('/admin/services/locations/:bid/subscription/:id',
-// 				{
-// 					'id': '@id',
-// 					'bid': '@bid'
-// 				},
-// 				//methods
-// 				{
-// 					'query':  {method:'GET', isArray:true},
-// 					'update': {method: 'PUT'}
-// 				});
-// 		}
-// 	}
-	
-
-// }]);
+CloobsterAdmin.module.factory('TrashEntry', ['$resource', function($resource){
+    return $resource('/admin/s/trash/:id',
+      {
+        'id': '@id'
+      },
+      {
+        restore: {method:'DELETE', params: {'restore':'true'}}
+      }
+    );
+}]);

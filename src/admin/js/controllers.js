@@ -102,7 +102,7 @@ CloobsterAdmin.Import.$inject = ['$scope', '$http', '$anchorScroll'];
 */
 CloobsterAdmin.Configuration = function($scope, $http, $anchorScroll, $timeout) {
 	// Get current config from server
-	$scope.spotPurePDFConfig = $http.get('/admin/services/configuration/spotpurepdf')
+	$scope.spotPurePDFConfig = $http.get('/admin/s/configuration/spotpurepdf')
 										.error(importError);
 	$scope.saveSpotPurePDFConfigProgress = false;
 	
@@ -152,7 +152,7 @@ CloobsterAdmin.Configuration = function($scope, $http, $anchorScroll, $timeout) 
 
 	$scope.saveSpotPurePDFConfig= function() {
 		$scope.saveSpotPurePDFConfigProgress = true;
-		$http.put("/admin/services/configuration/spotpurepdf", $scope.spotPurePDFConfig).error(importError);
+		$http.put("/admin/s/configuration/spotpurepdf", $scope.spotPurePDFConfig).error(importError);
 	};
 
 	$scope.saveDefaultFeedback = function() {
@@ -166,7 +166,7 @@ CloobsterAdmin.Configuration = function($scope, $http, $anchorScroll, $timeout) 
 			setError("JSON parsing error: " + err.message);
 			return;
 		}
-		$http.put("/admin/services/configuration/defaultfeedbackform", dto).success(importSuccess)
+		$http.put("/admin/s/configuration/defaultfeedbackform", dto).success(importSuccess)
 		.error(importError);
 	}
 
@@ -175,7 +175,7 @@ CloobsterAdmin.Configuration = function($scope, $http, $anchorScroll, $timeout) 
 	resetForm();
 
 	$scope.defaultFeedbackForm = "Loading ...";
-	$http.get("/admin/services/configuration/defaultfeedbackform").success(function(data) {
+	$http.get("/admin/s/configuration/defaultfeedbackform").success(function(data) {
 		$scope.defaultFeedbackForm = angular.toJson(data, true);
 	});
 
@@ -194,7 +194,7 @@ CloobsterAdmin.Configuration.$inject = ['$scope', '$http', '$anchorScroll', '$ti
 */
 CloobsterAdmin.PDFConfiguration = function($scope, $http, $timeout) {
 	// Get current config from server
-	$http.get('/admin/services/configuration/spotpurepdf')
+	$http.get('/admin/s/configuration/spotpurepdf')
 		.success(function(data) {
 			$scope.spotPurePDFConfig = data;
 		})
@@ -234,7 +234,7 @@ CloobsterAdmin.PDFConfiguration = function($scope, $http, $timeout) {
 
 	$scope.saveSpotPurePDFConfig= function() {
 		$scope.saveSpotPurePDFConfigProgress = true;
-		$http.put("/admin/services/configuration/spotpurepdf", $scope.spotPurePDFConfig)
+		$http.put("/admin/s/configuration/spotpurepdf", $scope.spotPurePDFConfig)
 			.success(resetForm)
 			.error(handleError);
 	};
@@ -253,7 +253,7 @@ CloobsterAdmin.Functions = function($scope, $http) {
 	$scope.deleteAllData = function() {
 		$scope.confirmDeleteAllText = "Deleting ...";
 		$scope.confirmDeleteAllDisabled = true;
-		$http.delete('/admin/services/datastore/all').success(function() {
+		$http.delete('/admin/s/datastore/all').success(function() {
 				$scope.confirmDeleteAllText = "All data deleted.";
 			}).error(function (data, status) {
 				$scope.confirmDeleteAllText = status + " error.";
@@ -263,7 +263,7 @@ CloobsterAdmin.Functions = function($scope, $http) {
 	$scope.deleteLiveData = function() {
 		$scope.confirmDeleteLiveText = "Deleting ...";
 		$scope.confirmDeleteLiveDisabled = true;
-		$http.delete('/admin/services/datastore/live').success(function() {
+		$http.delete('/admin/s/datastore/live').success(function() {
 				$scope.confirmDeleteLiveText = "Live data deleted.";
 			}).error(function (data, status) {
 				$scope.confirmDeleteLiveText = status + " error.";
@@ -273,7 +273,7 @@ CloobsterAdmin.Functions = function($scope, $http) {
 	$scope.createDummieAccounts = function() {
 		$scope.createDummieAccountsText = "Creating ...";
 		$scope.createDummieAccountsDisabled = true;
-		$http.post('/admin/services/accounts/dummies', {}).success(function() {
+		$http.post('/admin/s/accounts/dummies', {}).success(function() {
 				$scope.createDummieAccountsText = "Accounts created.";
 			}).error(function (data, status) {
 				$scope.createDummieAccountsText = status + " error.";
@@ -283,7 +283,7 @@ CloobsterAdmin.Functions = function($scope, $http) {
 	$scope.sendCockpitUpdateMessage = function() {
 		$scope.sendCockpitUpdateMessageText = "Creating ...";
 		$scope.sendCockpitUpdateMessageDisabled = true;
-		$http.post('/admin/services/channels/messages', {'type':'application', 'action': 'update'}).success(function() {
+		$http.post('/admin/s/channels/messages', {'type':'application', 'action': 'update'}).success(function() {
 				$scope.sendCockpitUpdateMessageText = "Message sent.";
 			}).error(function (data, status) {
 				$scope.sendCockpitUpdateMessageText = status + " error.";
@@ -298,13 +298,13 @@ CloobsterAdmin.SelectBusiness = function($scope, $http) {
 	$scope.message = "Loading businesses ...";
 	$scope.business = {};
 
-	$http.get('/admin/services/businesses').success( function(data ) {
+	$http.get('/admin/s/businesses').success( function(data ) {
 		delete $scope.message;
 		$scope.businesses = data;
 		$scope.$watch('business', function(newVal, old, scope) {
 			if(newVal.hasOwnProperty('id')) {
 				scope.businessSelected = true;
-			scope.importUrl = '/admin/services/businesses/'+newVal.id+'/feedbackforms';	
+			scope.importUrl = '/admin/s/businesses/'+newVal.id+'/feedbackforms';	
 			}
 		});
 		$scope.business = $scope.businesses[0];
@@ -402,7 +402,7 @@ CloobsterAdmin.TrashCan.$inject = ['$scope','TrashEntry'];
 CloobsterAdmin.Fixes = function($scope, $http) {
 	
 	$scope.fixBusinessesTypo = function() {
-		$http.put('/admin/services/accounts/fixbusinesses')
+		$http.put('/admin/s/accounts/fixbusinesses')
 		.success(function(data, status) {
 			alert('Successfully applied fix!');
 		}).error(function(data, status) {
@@ -478,7 +478,7 @@ CloobsterAdmin.InfoPages = function($scope, $http, $anchorScroll) {
 				'Content-Language': $scope.lang
 			}
 		}
-		$http.post('/admin/services/businesses/'+$scope.business.id+'/infopages/'+$scope.infoPageCount, {}, config)
+		$http.post('/admin/s/businesses/'+$scope.business.id+'/infopages/'+$scope.infoPageCount, {}, config)
 			.success(importSuccess)
 			.error(importError);
 	}

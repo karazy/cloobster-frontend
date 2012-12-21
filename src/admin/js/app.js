@@ -21,6 +21,12 @@ CloobsterAdmin.module = angular.module('CloobsterAdmin', ['ngResource', 'Cloobst
     $routeProvider.otherwise({redirectTo: '/main'});
  }]);
 
+CloobsterAdmin.module.run(['$http', '$rootScope', function($http, $rootScope) {
+  $http.get('/admin/user').success(function(response) {
+    $rootScope.user = response;
+  });
+}]);
+
 CloobsterAdmin.module.directive('alert', function(){
     return {
       restrict: 'A',
@@ -44,27 +50,6 @@ CloobsterAdmin.module.directive('alert', function(){
     };
   });
 
-CloobsterAdmin.module.factory('Template', ['$resource', function($resource){
-    return $resource('/admin/services/templates/:id',
-      {
-        'id': '@id'
-      },
-      {
-        save: {method:'PUT'},
-        init: {method:'POST', isArray: true}
-      }
-    );
-}]);
 
-CloobsterAdmin.module.factory('TrashEntry', ['$resource', function($resource){
-    return $resource('/admin/services/trash/:id',
-      {
-        'id': '@id'
-      },
-      {
-        restore: {method:'DELETE', params: {'restore':'true'}}
-      }
-    );
-}]);
 
 
