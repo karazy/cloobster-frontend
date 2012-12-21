@@ -3,6 +3,8 @@
 /* Cloobster namespace. Create if not exists.*/
 var Cloobster = Cloobster || {};
 
+Cloobster.services = angular.module('Cloobster.services', ['ngResource', "Cloobster.translations", "Cloobster.languages"]);
+
 // Declare app level module which depends on filters, and services
 Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster.directives', 'Cloobster.filters', 'ngSanitize']).
   config(['$routeProvider','configProvider', function($routeProvider,configProvider) {

@@ -1,6 +1,5 @@
 //contains all resources used in frontend
-
-Cloobster.services.factory('cloobsterResource',['$resource','config', function($resource, config) {
+angular.module('Cloobster.services').factory('cloobsterResource',['$resource','config', function($resource, config) {
 	function ResourceFactory(url, paramDefaults, actions) {
 		return $resource(config['serviceUrl'] + url, paramDefaults, actions);
 	}
@@ -15,7 +14,7 @@ Cloobster.services.factory('cloobsterResource',['$resource','config', function($
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Account',['cloobsterResource', function(cloobsterResource) {
+angular.module('Cloobster.services').factory('Account',['cloobsterResource', function(cloobsterResource) {
 	/**
 	*	@name Cloobster.services.Account
 	*	
@@ -51,7 +50,7 @@ Cloobster.services.factory('Account',['cloobsterResource', function(cloobsterRes
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Business',['cloobsterResource','login','errorHandler', function($resource,loginService,handleError) {	
+angular.module('Cloobster.services').factory('Business',['cloobsterResource','login','errorHandler', function($resource,loginService,handleError) {	
 	/**
 	*	@name Cloobster.services.Business
 	*	
@@ -138,7 +137,7 @@ Cloobster.services.factory('Business',['cloobsterResource','login','errorHandler
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Menu', ['cloobsterResource', function($resource) {
+angular.module('Cloobster.services').factory('Menu', ['cloobsterResource', function($resource) {
 	/**
 	*	@name Cloobster.services.Menu
 	*	
@@ -187,7 +186,7 @@ Cloobster.services.factory('Menu', ['cloobsterResource', function($resource) {
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Choice', ['cloobsterResource', function($resource) {
+angular.module('Cloobster.services').factory('Choice', ['cloobsterResource', function($resource) {
 	/**
 	*	@name Cloobster.services.Menu
 	*	
@@ -236,7 +235,7 @@ Cloobster.services.factory('Choice', ['cloobsterResource', function($resource) {
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Product', ['cloobsterResource', function($resource) {
+angular.module('Cloobster.services').factory('Product', ['cloobsterResource', function($resource) {
 	/**
 	*	@name Cloobster.services.Menu
 	*	
@@ -285,7 +284,7 @@ Cloobster.services.factory('Product', ['cloobsterResource', function($resource) 
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Company',['cloobsterResource','login','errorHandler', function($resource,loginService,handleError) {
+angular.module('Cloobster.services').factory('Company',['cloobsterResource','login','errorHandler', function($resource,loginService,handleError) {
 		var companyResource,
 			activeCompany,
 			/**
@@ -352,7 +351,7 @@ Cloobster.services.factory('Company',['cloobsterResource','login','errorHandler'
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Spot', ['cloobsterResource', function($resource) {
+angular.module('Cloobster.services').factory('Spot', ['cloobsterResource', function($resource) {
 	/**
 	*	@name Cloobster.services.Spot
 	*	
@@ -410,7 +409,7 @@ Cloobster.services.factory('Spot', ['cloobsterResource', function($resource) {
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Area', ['cloobsterResource', function($resource) {
+angular.module('Cloobster.services').factory('Area', ['cloobsterResource', function($resource) {
 	/**
 	*	@name Cloobster.services.Area
 	*	
@@ -453,7 +452,7 @@ Cloobster.services.factory('Area', ['cloobsterResource', function($resource) {
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('CompanyAccount', ['cloobsterResource', function($resource) {
+angular.module('Cloobster.services').factory('CompanyAccount', ['cloobsterResource', function($resource) {
 	/**
 	*	@name Cloobster.services.CompanyAccount
 	*	
@@ -502,7 +501,7 @@ Cloobster.services.factory('CompanyAccount', ['cloobsterResource', function($res
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('InfoPage',['cloobsterResource', function($resource) {
+angular.module('Cloobster.services').factory('InfoPage',['cloobsterResource', function($resource) {
 	/**
 	*	@name Cloobster.services.InfoPage
 	*	
@@ -554,7 +553,7 @@ Cloobster.services.factory('InfoPage',['cloobsterResource', function($resource) 
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Documents', ['cloobsterResource', function($resource) {
+angular.module('Cloobster.services').factory('Documents', ['cloobsterResource', function($resource) {
 
 	/**
 	*	@name Cloobster.services.Documents
@@ -600,7 +599,7 @@ Cloobster.services.factory('Documents', ['cloobsterResource', function($resource
 * 
 * 	@author Frederik Reifschneider
 */
-Cloobster.services.factory('Subscription',['cloobsterResource', function(cloobsterResource) {
+angular.module('Cloobster.services').factory('Subscription',['cloobsterResource', function(cloobsterResource) {
 	/**
 	*	@name Cloobster.services.Subscription
 	*	
