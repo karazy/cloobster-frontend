@@ -135,6 +135,13 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		}
 	};
 
+
+	$scope.showLocationSettings = function(business) {
+		if(business && business.id) {
+			$location.url("/businesses/"+business.id);
+		}
+	}
+
 	/**
 	* Loads a complete business.
 	* @param id
@@ -169,7 +176,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	* Show/hide new business form.
 	*/
 	$scope.toggleNewBusiness = function() {
-		$location.url("/businesses/new");
+		$location.url("#/businesses/new");
 		// $scope.showNewBusinessForm = !$scope.showNewBusinessForm;
 	};
 
