@@ -1252,6 +1252,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Spots (z.B. Tische oder Zimmer), die diesem Servicebereich zugeordnet sind.",
 			"EN" : "Spots assigned to this area."
 		},
+		"areas.spots.list.description.welcome" : {
+			"DE" :  "Dies ist eine spezielle Welcome Area mit Welcome Spot. Sie können keine Spots löschen oder hinzufügen zu einer Welcome Area."
+				+" Ein Welcome Spot repräsentiert die gesamte Location. Kunden können eichecken und Ihre Informationen sowie Produkte einsehen. Aber Sie können keine Bestellung oder VIP Calls tätigen.",
+			"EN" : ""
+		},
 		"areas.spot.container.empty.description" : {
 			"DE" :  "Zeigt Details des ausgewählten Spots an. Wählen Sie einen Spot aus der Liste links.",
 			"EN" :  "Shows details of selected area. Select an area from the list."
@@ -1915,6 +1920,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.send" : {
 			"DE" :  "Sende",
 			"EN" :  "Send"
+		},
+		"common.password.invalid" : {
+			"DE" : "Passwort inkorrekt!",
+			"EN" : "Password invalid!"
 		}
 	};
 

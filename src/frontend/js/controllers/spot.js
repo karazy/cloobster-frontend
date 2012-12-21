@@ -91,7 +91,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		subscriptionResource = Business.buildSubscriptionResource(activeBusinessId);
 
 		$scope.activeBusiness = Business.buildResource(account.id).get(
-			{'id' : activeBusinessId},
+			{'id' : activeBusinessId, 'countSpots' : true},
 			function() {
 				$scope.activeSubscription = subscriptionResource.get({'id' : $scope.activeBusiness.activeSubscriptionId});
 			}
@@ -177,8 +177,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 					}
 				});
 			}, function(data,status) {//error during save
-				if(status == 403) {
-					$scope.deleteError = langService.translate('profile.account.wrongpassword') || 'Incorrect password.'
+				if(data.status == 403) {
+					$scope.deleteError = langService.translate('common.password.invalid')
 				}
 			});
 		});
