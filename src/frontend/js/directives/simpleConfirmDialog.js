@@ -9,7 +9,8 @@ Cloobster.directives.directive('simpleConfirmDialog', ['lang', '$log', function(
 			dialogTitle: '@',
 			dialogText: '@',
 			dialogOnConfirm: '&',
-			dialogConfirmButton: '@'
+			dialogConfirmButton: '@',
+			dialogDisabled: '='
 		},
 		compile: function(element, attrs, transclude) {
 			var html;
@@ -47,9 +48,10 @@ Cloobster.directives.directive('simpleConfirmDialog', ['lang', '$log', function(
 		        	
 		        	iElement.find('.toggler').bind('click', function() { 
 		        		var modal;
-
-		        		modal = iElement.find(".confirm-modal");
-		        		modal.modal('toggle');
+		        		if(!scope.dialogDisabled) {
+		        			modal = iElement.find(".confirm-modal");
+		        			modal.modal('toggle');	
+		        		}		        		
 		        		
 					});        	
 

@@ -118,6 +118,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			$scope.businessToDelete = null;
 			$scope.deleteError = null;
 
+			$scope.$broadcast('update-businesses');
+
 			//hide delete dialog
 			jQuery("#deleteModal").modal('hide');
 			//navigate to business overview
@@ -180,6 +182,19 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		var fields = ['name', 'city', 'address', 'postcode', 'phone', 'description', 'currency'],
 			isInvalid = false;
 
+		if(!$scope.newBusiness.name) {
+			return;
+		}
+
+		$scope.newBusinessEntity = new $scope.businessResource($scope.newBusiness);
+
+		$scope.newBusinessEntity.$save(function(response) {
+			$scope.$broadcast('update-businesses');
+			$location.url('/businesses/'+response.id);
+		}, handleError);
+
+		return;
+		//old code
 		if($scope.newBusinessForm.$valid) {
 			$scope.newBusinessEntity = new $scope.businessResource({
 				'name' : $scope.newBusiness.name,

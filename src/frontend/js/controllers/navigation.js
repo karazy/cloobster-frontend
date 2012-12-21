@@ -53,6 +53,10 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	$scope.businesses = Business.getActiveBusinesses();
 	$scope.company = Company.getActiveCompany();
 
+	$scope.$on('update-businesses', function() {
+		$scope.businesses = Business.getActiveBusinesses(true);
+	});
+
 	if(!$rootScope.activeBusinessId) {
 		$rootScope.activeBusinessId = $scope.businesses.length > 0 ? $scope.businesses[0]['id'] : null;	
 	}

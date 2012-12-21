@@ -403,6 +403,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Diese Location wurde gelöscht.",
 			"EN" : "This location has been deleted."
 		},
+		"businesses.new.name.placeholder" : {
+			"DE" :  "z.B. Hotel goldener Palast",
+			"EN" : "e.g. Hotel golden Palace"
+		},
+		"business.new.title" : {
+			"DE" :  "Neue Location",
+			"EN" : ""
+		},
+		"business.new.text" : {
+			"DE" :  "Möchten Sie eine neue Location anlegen?",
+			"EN" : ""
+		},
 		//business detail partial
 		"business.detail.help" : {
 			"DE" :  "Hier können Sie das Profil der aktiven Location pflegen.<br/>Außerdem können Sie hier die Oberfläche der App konfigurieren.",
