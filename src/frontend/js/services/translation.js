@@ -1200,9 +1200,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		//spots partial
 		"areas.description" : {
 			"DE" :  "Für jede \"cloobster location\" können Sie mehrere \"Servicebereiche\" anlegen(z.B. \"Bar\", \"Zimmer\", \"Spa\", \"Konferenzraum\", etc.).<br>"
-			+"Jeder Servicebereich beinhaltet verschiedene Spots (Barcode für den Check-in) und zugewiesene Produktkategorien.",
+			+"Jeder Servicebereich beinhaltet verschiedene Spots (Barcode für den Check-in).",
 			"EN" : "For each \"cloobster location\" you can add several \"service areas\" (like \"Bar\", \"Rooms\", \"Spa\", \"Conference Area\", etc.).<br>"+
-				"Each service area has different spots and a selection of product categories."
+				"Each service area has different spots (barcode for check-in)."
 		},
 		"areas.list.title" : {
 			"DE" :  "Servicebereiche",
@@ -1432,8 +1432,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" :  "Maximum number of characters is 100."
 		},
 		"areas.subscription.basic.description" : {
-			"DE" :  "<span class='label label-important'>Basic</span> You have a basic subscription. You can create areas and spots. But customers won't be able to order or place VIP calls."+
-			 		"<a href='https://www.cloobster.com' target='_blank'>Learn more</a> or <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>.",
+			"DE" :  "<span class='label label-important'>Basis</span> Sie verwenden ein Basis Paket. Sie können ganz normal Servicebereiche und Spots anlegen.<br/>Kunden können jedoch weder bestellen (nur ihre Produkte & Dienstleistungen einsehen)"+
+					" und keinen VIP Call benutzen.<br/>" +
+			 		"<a href='https://www.cloobster.com' target='_blank'>Mehr Information</a> oder <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>.",
 			"EN" : ""
 		},
 		//infopage partial
