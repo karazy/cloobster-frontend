@@ -85,11 +85,11 @@
 											<div class="row-fluid">
 												<div class="span2">{{s.name}}</div>
 												<div class="span2">{{s.status}}</div>
-												<div class="span2">{{s.startDate | date:short}}</div>
-												<div class="span2">{{s.endDate | date:short}}</div>
+												<div class="span2">{{s.startDate | date:'dd.MM.yyyy H:mm'}}</div>
+												<div class="span2">{{s.endDate | date:'dd.MM.yyyy H:mm'}}</div>
 												<div class="span2">
-													<button class="btn btn-small btn-primary" ng-show="s.status == 'PENDING'">Approve</button>
-													<button class="btn btn-small btn-warning" ng-show="s.status == 'APPROVED'">Disable</button>
+													<button class="btn btn-small btn-primary" ng-show="s.status == 'PENDING'" ng-click="approvePendingSubscription(s, l)">Approve</button>
+													<button class="btn btn-small btn-warning" ng-show="s.status == 'APPROVED'" ng-click="cancelPendingSubscription(s, l)">Disable</button>
 												</div>											 
 											</div>
 										</div>

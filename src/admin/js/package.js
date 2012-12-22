@@ -243,7 +243,7 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 
 	}
 
-	$scope.approvePendingSubscription = function(subscription) {
+	$scope.approvePendingSubscription = function(subscription, location) {
 		var updatedSubscription;
 
 		if(!subscription) {
@@ -275,13 +275,17 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 
 		updatedSubscription = new LocationSubscription(updatedSubscription);
 
-		updatedSubscription.$update(function() {
-			//set status of original subscription to change state in ui
-			subscription.status = 'APPROVED';
+		updatedSubscription.$update(function() {			
+			if(location) {
+				$scope.loadSubscriptionsForLocation(location);
+			} else {
+				//set status of original subscription to change state in ui
+				subscription.status = 'APPROVED';
+			}
 		});
 	}
 
-	$scope.cancelPendingSubscription = function(subscription) {
+	$scope.cancelPendingSubscription = function(subscription, location) {
 		var updatedSubscription;
 
 		if(!subscription) {
@@ -313,8 +317,12 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 		updatedSubscription = new LocationSubscription(updatedSubscription);
 
 		updatedSubscription.$update(function() {
-			//set status of original subscription to change state in ui
-			subscription.status = 'CANCELED';
+			if(location) {
+				$scope.loadSubscriptionsForLocation(location);
+			} else {
+				//set status of original subscription to change state in ui
+				subscription.status = 'CANCELED';
+			}			
 		});
 	}
 
