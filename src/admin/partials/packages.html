@@ -69,7 +69,9 @@
 										<select ng-model="l.tempSubscription" ng-options="s.name for s in packages">
 											<option value="">-- chose subscription --</option>
 										</select>
-										<button class="btn btn-primary" ng-click="setActivePackageForLocation(l)">Set active Package</button>
+										<span simple-confirm-dialog dialog-on-confirm="setActivePackageForLocation(l)" dialog-title="subscription.setactive.title" dialog-text="subscription.setactive.text" dialog-confirm-button="common.confirm">
+										<button class="btn btn-primary" ng-click="">Set active Package</button>
+										</span>
 									</form>
 
 									<div style="margin-top: 5px;">
@@ -88,8 +90,12 @@
 												<div class="span2">{{s.startDate | date:'dd.MM.yyyy H:mm'}}</div>
 												<div class="span2">{{s.endDate | date:'dd.MM.yyyy H:mm'}}</div>
 												<div class="span2">
-													<button class="btn btn-small btn-primary" ng-show="s.status == 'PENDING'" ng-click="approvePendingSubscription(s, l)">Approve</button>
-													<button class="btn btn-small btn-warning" ng-show="s.status == 'APPROVED'" ng-click="cancelPendingSubscription(s, l)">Disable</button>
+													<span simple-confirm-dialog dialog-on-confirm="approvePendingSubscription(s, l)" dialog-title="subscription.approve.title" dialog-text="subscription.approve.text" dialog-confirm-button="common.confirm">
+													<button class="btn btn-small btn-primary" ng-show="s.status == 'PENDING'">Approve</button>
+												</span>
+												<span simple-confirm-dialog dialog-on-confirm="cancelPendingSubscription(s, l)" dialog-title="subscription.cancel.title" dialog-text="subscription.cancel.text" dialog-confirm-button="common.confirm">
+													<button class="btn btn-small btn-warning" ng-show="s.status == 'APPROVED'">Cancel</button>
+												</span>
 												</div>											 
 											</div>
 										</div>
@@ -123,9 +129,13 @@
 							<div class="span2">{{locationsPendingMap[sp.businessId].activeSubscription.name}}</div>
 							<div class="span2">{{sp.name}}</div>
 							<div class="span2">{{sp.status}}</div>
-							<div class="span2">								
-								<button class="btn btn-small btn-primary" ng-click="approvePendingSubscription(sp)" ng-show="sp.status == 'PENDING'">Approve</button>
-								<button class="btn btn-small btn-danger" ng-click="cancelPendingSubscription(sp)" ng-show="sp.status == 'PENDING'">Cancel</button>
+							<div class="span2">
+							<span simple-confirm-dialog dialog-on-confirm="approvePendingSubscription(sp)" dialog-title="subscription.approve.title" dialog-text="subscription.approve.text" dialog-confirm-button="common.confirm">				
+								<button class="btn btn-small btn-primary" ng-show="sp.status == 'PENDING'">Approve</button>
+							</span>
+							<span simple-confirm-dialog dialog-on-confirm="cancelPendingSubscription(sp)" dialog-title="subscription.cancel.title" dialog-text="subscription.cancel.text" dialog-confirm-button="common.confirm">
+								<button class="btn btn-small btn-danger" ng-show="sp.status == 'PENDING'">Cancel</button>
+							</span>
 							</div>
 						</div>
 					</div>
@@ -165,12 +175,12 @@
 								</h5>
 							</div>
 							<div simple-property-editor editor-title="subscription.maxspotcount" editor-property="currentPackage.maxSpotCount" editor-on-save="savePackage()" editor-required editor-type="number">
-								<p class="edit" tooltip="Max Spots" tooltip="subscription.maxSpotcount">
+								<p class="edit" tooltip="subscription.maxSpotcount">
 									{{currentPackage.maxSpotCount | mSCFF:currentPackage.basic}} <i class="icon-edit icon-black"></i>
 								</p>
 							</div>
 							<div simple-property-editor editor-title="subscription.fee" editor-property="currentPackage.fee" editor-on-save="savePackage()" editor-required editor-type="number">
-								<p class="edit" tooltip="Fee" tooltip="subscription.fee">
+								<p class="edit" tooltip="subscription.fee">
 									{{currentPackage.fee}} <i class="icon-edit icon-black"></i>
 								</p>
 							</div>

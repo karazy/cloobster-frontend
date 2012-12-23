@@ -94,6 +94,10 @@ angular.module("CloobsterAdmin.translations", [], ["$provide", function($provide
 			"DE" : "Ziehen, um zu sortieren",
 			"EN" : "Drag to sort"
 		},
+		"common.confirm" : {
+			"DE" :  "Bestätigen",
+			"EN" : "Confirm"
+		},
 		//subscriptions
 		"subscription.name" : {
 			"DE" :  "Name",
@@ -106,6 +110,30 @@ angular.module("CloobsterAdmin.translations", [], ["$provide", function($provide
 		"subscription.fee" : {
 			"DE" :  "Kosten",
 			"EN" : "Costs"
+		},
+		"subscription.setactive.title" : {
+			"DE" :  "Paket ändern",
+			"EN" : "Change subscription"
+		},
+		"subscription.setactive.text" : {
+			"DE" :  "Wollen Sie dieses Paket aktivieren?",
+			"EN" : "Do you want to activate this subscription?"
+		},
+		"subscription.approve.title" : {
+			"DE" :  "Anfrage Bestätigen",
+			"EN" : "Approve subscription"
+		},
+		"subscription.approve.text" : {
+			"DE" :  "Wollen Sie diese Anfrage bestätigen?",
+			"EN" : "Do you want to approve this request?"
+		},
+		"subscription.cancel.title" : {
+			"DE" :  "Anfrage ablehnen",
+			"EN" : "Cancel request"
+		},
+		"subscription.cancel.text" : {
+			"DE" :  "Wollen Sie diese Anfrage ablehnen?",
+			"EN" : "Do you want to cancel this request?"
 		},
 	}
 	$provide.value("translation", map);
