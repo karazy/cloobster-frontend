@@ -93,7 +93,20 @@ angular.module("CloobsterAdmin.translations", [], ["$provide", function($provide
 		"general.sortable" : {
 			"DE" : "Ziehen, um zu sortieren",
 			"EN" : "Drag to sort"
-		}
+		},
+		//subscriptions
+		"subscription.name" : {
+			"DE" :  "Name",
+			"EN" : "Name"
+		},
+		"subscription.maxspotcount" : {
+			"DE" :  "Maximale Anzahl Spots",
+			"EN" : "Maximum Spots"
+		},
+		"subscription.fee" : {
+			"DE" :  "Kosten",
+			"EN" : "Costs"
+		},
 	}
 	$provide.value("translation", map);
 }]);

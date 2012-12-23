@@ -136,7 +136,7 @@
 
 	<!-- Subscription management tab -->
 	<div class="row-fluid" ng-show="activeTab == 'packages'">
-		<div class="span2">
+		<div class="span3">
 			<div class="data-container-with-title">
 				<h4 class="data-container-title">Packages</h4>
 				<div class="data-container-block data-container-seperator">
@@ -153,24 +153,24 @@
 			</div>
 		</div>
 		<!-- single package view -->
-		<div ng-hide="showAllPackages == true" class="span4">
+		<div ng-hide="showAllPackages == true" class="span6">
 			<!-- edit existing package -->
 			<div ng-show="currentPackage && currentPackage.id">
 				<div class="data-container-with-title">
 					<h4 class="data-container-title">Edit Package</h4>						
 						<div class="data-container-block data-container-small">
-							<div simple-property-editor editor-title="Name" editor-property="currentPackage.name" editor-on-save="savePackage()" editor-placeholder="infopage.placeholder.shortText" editor-required>
-								<h5 class="edit" tooltip="Name">
+							<div simple-property-editor editor-title="subscription.name" editor-property="currentPackage.name" editor-on-save="savePackage()" editor-required>
+								<h5 class="edit" tooltip="subscription.name">
 									{{currentPackage.name}} <i class="icon-edit icon-black"></i>
 								</h5>
 							</div>
-							<div simple-property-editor editor-title="Maximum Spots" editor-property="currentPackage.maxSpotCount" editor-on-save="savePackage()" editor-placeholder="infopage.placeholder.shortText" editor-required editor-type="number">
-								<p class="edit" tooltip="Max Spots">
+							<div simple-property-editor editor-title="subscription.maxspotcount" editor-property="currentPackage.maxSpotCount" editor-on-save="savePackage()" editor-required editor-type="number">
+								<p class="edit" tooltip="Max Spots" tooltip="subscription.maxSpotcount">
 									{{currentPackage.maxSpotCount | mSCFF:currentPackage.basic}} <i class="icon-edit icon-black"></i>
 								</p>
 							</div>
-							<div simple-property-editor editor-title="Maximum Spots" editor-property="currentPackage.fee" editor-on-save="savePackage()" editor-placeholder="infopage.placeholder.shortText" editor-required editor-type="number">
-								<p class="edit" tooltip="Fee">
+							<div simple-property-editor editor-title="subscription.fee" editor-property="currentPackage.fee" editor-on-save="savePackage()" editor-required editor-type="number">
+								<p class="edit" tooltip="Fee" tooltip="subscription.fee">
 									{{currentPackage.fee}} <i class="icon-edit icon-black"></i>
 								</p>
 							</div>
@@ -203,7 +203,7 @@
 				        	<div class="control-group" ng-class="getFieldInputClass(newPackageForm.controls.$dirty, newPackageForm.controls.$invalid)">
 								<label for="spotsCount" class="control-label">Maximum number of spots*</label>
 								<div class="controls">
-									<input name="spotsCount" id="spotsCount" type='number' ng-model="currentPackage.maxSpotCount" ng-disabled="currentPackage.basic" required min="0" max="100000" placeholder="e.g. 150 (0 means unlimited)">	
+									<input name="spotsCount" id="spotsCount" type='number' ng-model="currentPackage.maxSpotCount" ng-disabled="currentPackage.basic" required min="0" max="100000" placeholder="e.g. 100 (0 means unlimited)">	
 									 <div class="help-inline" ng-show="newPackageForm.spotsCount.$dirty && newPackageForm.spotsCount.$invalid">
 						          		<span ng-show="newPackageForm.spotsCount.$error.required">Required field.</span>
 						          		<span ng-show="newPackageForm.spotsCount.$error.min">Values must be equal or greater then zero.</span>
@@ -213,7 +213,7 @@
 				        	<div class="control-group" ng-class="getFieldInputClass(newPackageForm.fee.$dirty, newPackageForm.fee.$invalid)">
 								<label for="fee" class="control-label">Fee*</label>
 								<div class="controls">
-									<input name="fee" id="fee" type='number' ng-model="currentPackage.fee" min="0" max="10000" ng-disabled="currentPackage.basic" required>	
+									<input name="fee" id="fee" type='number' ng-model="currentPackage.fee" min="0" max="10000" ng-disabled="currentPackage.basic" required placeholder="e.g. 149">	
 									 <div class="help-inline" ng-show="newPackageForm.fee.$dirty && newPackageForm.fee.$invalid">
 						          		<span ng-show="newPackageForm.fee.$error.required">Required field.</span>
 						          		<span ng-show="newPackageForm.fee.$error.min">Values must be equal or greater then zero.</span>
