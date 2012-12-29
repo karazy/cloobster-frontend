@@ -491,3 +491,52 @@ ul.options-list li:hover {
   font-size: 40px;
   font-weight: bold;
 }
+
+/** howto partial */
+
+.step-wrapper {
+  position: relative;
+  clear: both;
+  margin-bottom: 10px;
+  min-height: 50px;
+}
+
+.step-counter {
+  width: 50px;
+  height: 50px;
+  border: 1px solid green;
+  border-radius: 5px;
+  background-color: #AFA;
+  text-align: center;
+  float: left;
+  font-size: 20px;
+  line-height: 50px;
+  position: absolute;
+  margin-right: 10px;
+  color: white;
+}
+
+.step-content {
+  margin-left: 60px;
+}
+
+.step-title {
+  left: 60px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.step-description {
+  left: 60px;
+  max-width: 500px;
+  /*clear: both;*/
+}
+
+.step-inactive a {
+  color: gray;
+}
+
+.step-inactive a:hover {
+  color: gray;
+  text-decoration: none;
+}

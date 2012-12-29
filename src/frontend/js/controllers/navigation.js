@@ -10,7 +10,7 @@
 * 	View and manage profiles.
 * 	@constructor
 */
-Cloobster.Navigation = function($scope, $location, loginService, Company,$routeParams,handleError,Business,$route,$log, $rootScope) {
+Cloobster.Navigation = function($scope, $location, loginService, Company,$routeParams,handleError,Business,$route,$log, $rootScope, Spot) {
 	var businessResource = null;
 
 	$scope.cond = function(expression, trueValue, falseValue) {
@@ -59,6 +59,8 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 
 	if(!$rootScope.activeBusinessId) {
 		$rootScope.activeBusinessId = $scope.businesses.length > 0 ? $scope.businesses[0]['id'] : null;	
+
+		// $scope.loadWelcomeSpot();
 	}
 	
 
@@ -72,6 +74,7 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	$scope.switchBusiness = function() {
 		var newPath = $location.path().replace(/^\/businesses\/\d+/, '/businesses/'+$scope.activeBusinessId);
 		$rootScope.activeBusinessId = $scope.activeBusinessId;
+		$scope.loadWelcomeSpot();
 		$location.path(newPath);
 	};
 	
@@ -90,11 +93,55 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 		return !business.trash;
 	}
 
+	/**
+	* Adds a new business.
+	* @param businessName
+	*	Name for the new business
+	*/
+	$scope.addNewBusiness = function() {
+		var account;
+
+		if(!$scope.newBusiness.name) {
+			return;
+		}
+
+		if(!$scope.businessResource) {
+			account = loginService.getAccount();
+			$scope.businessResource = Business.buildResource(account.id);	
+		}
+
+		
+
+		$scope.newBusinessEntity = new $scope.businessResource($scope.newBusiness);
+
+		$scope.newBusinessEntity.$save(function(response) {
+			$scope.$broadcast('update-businesses');
+			$location.url('/businesses/'+response.id);
+		}, handleError);
+	};
+
+	$scope.loadWelcomeSpot = function() {
+
+		if(!$scope.spotResource) {
+			$scope.spotResource = Spot.buildResource($rootScope.activeBusinessId);
+		}
+
+		$scope.welcomeSpots = $scope.spotResource.query({'bid' : $rootScope.activeBusinessId, 'welcome' : true});
+		
+
+	}
+
+	// $scope.$watch($rootScope.activeBusinessId, function(newValue, oldValue) {
+	// 	if(newValue != oldValue) {
+	// 		$scope.loadWelcomeSpot();	
+	// 	}		
+	// });
+
 	$scope.$watch('loggedIn', function(newValue, oldValue) {
 		if(newValue === true) {
 			$scope.company = Company.getActiveCompany();
-			$scope.businesses = Business.getActiveBusinesses();
+			$scope.businesses = Business.getActiveBusinesses();			
 		}
 	});
 };
-Cloobster.Navigation.$inject = ['$scope', '$location', 'login', 'Company','$routeParams','errorHandler','Business','$route','$log','$rootScope'];
+Cloobster.Navigation.$inject = ['$scope', '$location', 'login', 'Company','$routeParams','errorHandler','Business','$route','$log','$rootScope', 'Spot'];
