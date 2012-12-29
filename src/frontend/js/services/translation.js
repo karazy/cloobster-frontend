@@ -1716,6 +1716,57 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Um die Aktivierung abzuschliessen, füllen Sie bitte die fehlenden Felder aus.",
 			"EN" : "To complete your account activation, please enter missing details below!"
 		},		
+		//howto partial
+		"howto.title" : {
+			"DE" :  "In 4 Schritten zur eigenen App",
+			"EN" : ""
+		},
+		"howto.step1.title" : {
+			"DE" :  "Location anlegen",
+			"EN" : ""
+		},
+		"howto.step1.description" : {
+			"DE" :  "Legen Sie Ihre \"Location\" an. Laden Sie Bilder hoch, wählen das Farbschema aus und konfigurieren "+
+			" sie Facebook.",
+			"EN" : ""
+		},
+		"howto.step2.title" : {
+			"DE" :  "Service und Produkte anlegen",
+			"EN" : ""
+		},
+		"howto.step3.title" : {
+			"DE" :  "Services und Produkte aktivieren",
+			"EN" : ""
+		},
+		"howto.step4.title" : {
+			"DE" :  "Infoseiten anlegen",
+			"EN" : ""
+		},
+		"howto.step2.description" : {
+			"DE" :  "Legen Sie hier Ihren Produkt- und Servicekatalog an (Room Service, Wellness, Ausflüge).",
+			"EN" : ""
+		},
+		"howto.step3.description" : {
+			"DE" :  "Machen Sie die Produkte sichtbar indem Sie sie für den Welcome Spot aktivieren.",
+			"EN" : ""
+		},
+		"howto.step4.description" : {
+			"DE" :  "Hier können Sie für den Gast wichtige Informationen anlegen (z. B. Gäste ABC).",
+			"EN" : ""
+		},
+		"howto.success.title" : {
+			"DE" :  "Gratulation",
+			"EN" : ""
+		},
+		"howto.success.description" : {
+			"DE" :  "Scannen Sie den QR Code rechts. Wenn Sie cloobster nicht auf Ihrem Smartphone haben, "+
+			"landen Sie im App Store.<p style='color: red;'>Tipp: Zeigen Sie den QR Code auf Ihrer Website, Facebook, Twitter und Broschüren.</p>",
+			"EN" : ""
+		},
+		"howto.location.select" : {
+			"DE" :  "Wählen oder erstellen Sie eine Location bevor Sie mit Schritt 2-4 fortfahren.",
+			"EN" : ""
+		},
 		//general
 		"common.warning.title" : {
 			"DE" : "Achtung!",
@@ -1800,6 +1851,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.confirm" : {
 			"DE" :  "Bestätigen",
 			"EN" : "Confirm"
+		},
+		"common.dropdown.select" : {
+			"DE" :  "-- auswählen --",
+			"EN" : "-- select --"
 		},
 		"general.sortable" : {
 			"DE" : "Ziehen, um zu sortieren",

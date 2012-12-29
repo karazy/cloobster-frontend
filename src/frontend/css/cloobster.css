@@ -513,11 +513,19 @@ ul.options-list li:hover {
   line-height: 50px;
   position: absolute;
   margin-right: 10px;
+  margin-left: 100px;
   color: white;
 }
 
+.welcome-spot {
+  float: left;
+  width: 150px;
+  height: 150px;
+  margin-right: 10px;
+}
+
 .step-content {
-  margin-left: 60px;
+  margin-left: 160px;
 }
 
 .step-title {
