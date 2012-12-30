@@ -59,8 +59,6 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 
 	if(!$rootScope.activeBusinessId) {
 		$rootScope.activeBusinessId = $scope.businesses.length > 0 ? $scope.businesses[0]['id'] : null;	
-
-		// $scope.loadWelcomeSpot();
 	}
 	
 
@@ -74,7 +72,6 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	$scope.switchBusiness = function() {
 		var newPath = $location.path().replace(/^\/businesses\/\d+/, '/businesses/'+$scope.activeBusinessId);
 		$rootScope.activeBusinessId = $scope.activeBusinessId;
-		$scope.loadWelcomeSpot();
 		$location.path(newPath);
 	};
 	
@@ -120,6 +117,9 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 		}, handleError);
 	};
 
+	/**
+	* Load welcome spot for active business.
+	*/
 	$scope.loadWelcomeSpot = function() {
 
 		if(!$scope.spotResource) {
@@ -127,15 +127,16 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 		}
 
 		$scope.welcomeSpots = $scope.spotResource.query({'bid' : $rootScope.activeBusinessId, 'welcome' : true});
-
-
 	}
 
-	// $scope.$watch($rootScope.activeBusinessId, function(newValue, oldValue) {
-	// 	if(newValue != oldValue) {
-	// 		$scope.loadWelcomeSpot();	
-	// 	}		
-	// });
+	//if activeBusinessId changes reload welcome spot
+	$scope.$watch('activeBusinessId', function(newValue, oldValue) {
+		if(newValue) {
+			$scope.loadWelcomeSpot();	
+		} else {
+			$scope.welcomeSpots = null;
+		}	
+	});
 
 	$scope.$watch('loggedIn', function(newValue, oldValue) {
 		if(newValue === true) {

@@ -64,8 +64,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "User Accounts"
 		},
 		"businesses.headertabs.activation" : {
-			"DE" :  "Kategorien aktivieren",
-			"EN" : "Activate categories"
+			"DE" :  "Kategorien zuweisen",
+			"EN" : "Assign categories"
 		},
 		"businesses.headertabs.areas" : {
 			"DE" :  "Spots",
@@ -838,8 +838,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		//menus partial
 		"menus.description" : {
-			"DE" : "Hier können Sie Ihre Produkte und Services anlegen und diese einer Kategorie zuweisen.<br/>"+
-					"Alle Kategorien können verschiedenen \"Service Bereichen\" zugewiesen werden, um Zeit zu sparen (im Service Area Tab).",
+			"DE" : "Hier können Sie Ihre Produkte und Services anlegen. Alle Produkte und Services werden einer Kategorie zugeordnet.<br/>"+
+					"Alle Kategorien können verschiedenen \"Service Bereichen\" zugewiesen werden (im Tab Kategorie zuweisen).",
 			"EN" : "You can manage your products and services here.<br/>"+
 					"In order to save time, all categories can be associated with several service areas."
 		},
@@ -848,7 +848,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Categories"
 		},
 		"menu.container.hint" : {
-			"DE" :  "Bitte vergessen Sie nicht, die Kategorie im <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"Tab Aktivieren\"</a> einem Servicebereich zuzuweisen.",
+			"DE" :  "Bitte vergessen Sie nicht, die Kategorie im Tab<a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"Kategorien zuweisen\"</a> einem Servicebereich zuzuweisen.",
 			"EN" : "Don't forget to assign this category to a service area afterwards."
 		},
 		"menu.container.title" : {
@@ -1735,7 +1735,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : ""
 		},
 		"howto.step3.title" : {
-			"DE" :  "Services und Produkte aktivieren",
+			"DE" :  "Services und Produkte zuweisen",
 			"EN" : ""
 		},
 		"howto.step4.title" : {
@@ -1747,7 +1747,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : ""
 		},
 		"howto.step3.description" : {
-			"DE" :  "Machen Sie die Produkte sichtbar indem Sie sie für den Welcome Spot aktivieren.",
+			"DE" :  "Machen Sie die Produkte sichtbar indem Sie sie dem Welcome Spot zuweisen.",
 			"EN" : ""
 		},
 		"howto.step4.description" : {

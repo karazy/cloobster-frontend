@@ -551,22 +551,52 @@ ul.options-list li:hover {
 }
 
 .step-counter-bar {
-  width: 30px;
-  height: 30px;
-  border: 1px solid blue;
-  border-radius: 5px;
+  width: 20px;
+  height: 20px;
+  /*border: 1px solid blue;*/
+  border-radius: 10px;
   background-color: #e46c0a;
   text-align: center;
-  float: left;
-  font-size: 20px;
-  font-weight: bold;
-  line-height: 30px;
-  margin: 10px 10px 0 0px;
+  /*float: left;*/
+  font-weight: bold;  
   color: white;
-  padding: 3px;
+  margin-right: 3px;
 }
 
-.active-step {
-    border-color: #e46c0a;
+.howto-bar {
+  clear: both;
+  margin: 0px 0 10px 0;
+}
+
+.howto-step {
+  float: left;
+  padding: 3px;
+  color: grey;
+  line-height: 20px;
+  font-size: 15px;
+  height: 20px;
+  /*margin: 10px 10px 0 0px;*/
+}
+
+.howto-step:hover > div {
+  background-color: yellow;
+  color: red;
+}
+
+.howto-step > div {
+  float: left;
+}
+
+.howto-step > div:nth-child(2) {
+  margin-right: 5px;
+  background-color: white !important;
+}
+
+.active-step .step-counter-bar {
+    /*border-color: #e46c0a;*/
     background-color: blue;
+}
+
+.active-step > div:nth-child(2) {
+    color: black;
 }
