@@ -2,7 +2,24 @@
 <div class="row-fluid">
 	<div class="span12">
 		<h2 style="float:left; margin-right: 20px"  ng-bind="company.name">Your company name</h2>
-		<select ng-model="activeBusinessId" style="margin-top: 15px" ng-options="b.id as b.name for b in businesses | filter:filterTrashedBusiness" ng-change="switchBusiness()" ng-show="canSwitchBusiness"></select>
+		<select ng-model="activeBusinessId" style="margin-top: 15px; float: left; margin-right: 20px;" ng-options="b.id as b.name for b in businesses | filter:filterTrashedBusiness" ng-change="switchBusiness()" ng-show="canSwitchBusiness"></select>
+		<div class="howto-bar" ng-show="howtoMode">
+			<a href="#/howto">
+				<div class="step-counter-bar" style="width: auto;">Howto</div>
+			</a>
+			<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'?howto=1','')}}">
+				<div class="step-counter-bar" ng-class="{ 'active-step' : howtoStep == 1}" tooltip="howto.step1.title">1</div>
+			</a>
+			 <a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/spots?howto=2','')}}">
+				<div class="step-counter-bar" ng-class="{ 'active-step' : howtoStep == 2}" tooltip="howto.step2.title">2</div>
+			</a> 
+			<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/menus?howto=3','')}}">
+				<div class="step-counter-bar" ng-class="{ 'active-step' : howtoStep == 3}" tooltip="howto.step3.title">3</div>
+			</a>
+			<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/infopages?howto=4','')}}">
+				<div class="step-counter-bar" ng-class="{ 'active-step' : howtoStep == 4}" tooltip="howto.step4.title">4</div>
+			</a>
+		</div>
 	</div>
 </div>
 <div class="row-fluid">

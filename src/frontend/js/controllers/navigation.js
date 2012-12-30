@@ -116,7 +116,7 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 
 		$scope.newBusinessEntity.$save(function(response) {
 			$scope.$broadcast('update-businesses');
-			$location.url('/businesses/'+response.id);
+			$location.url('/businesses/'+response.id+'?howto=1');
 		}, handleError);
 	};
 
@@ -127,7 +127,7 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 		}
 
 		$scope.welcomeSpots = $scope.spotResource.query({'bid' : $rootScope.activeBusinessId, 'welcome' : true});
-		
+
 
 	}
 
@@ -143,5 +143,11 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 			$scope.businesses = Business.getActiveBusinesses();			
 		}
 	});
+
+	// var howtostep = $location.search('howto');
+	if($routeParams['howto']) {
+		$scope.howtoMode = true;
+		$scope.howtoStep = $routeParams['howto'];
+	}
 };
 Cloobster.Navigation.$inject = ['$scope', '$location', 'login', 'Company','$routeParams','errorHandler','Business','$route','$log','$rootScope', 'Spot'];

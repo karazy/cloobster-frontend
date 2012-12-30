@@ -1759,8 +1759,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : ""
 		},
 		"howto.success.description" : {
-			"DE" :  "Scannen Sie den QR Code rechts. Wenn Sie cloobster nicht auf Ihrem Smartphone haben, "+
-			"landen Sie im App Store.<p style='color: red;'>Tipp: Zeigen Sie den QR Code auf Ihrer Website, Facebook, Twitter und Broschüren.</p>",
+			"DE" :  "Scannen Sie den QR Code links. Wenn Sie cloobster nicht auf Ihrem Smartphone haben, "+
+			"werden Sie automatisch zum App Store geleitet.<p style='color: red;'>Tipp: Zeigen Sie den QR Code auf Ihrer Website, Facebook, Twitter und Broschüren.</p>",
 			"EN" : ""
 		},
 		"howto.location.select" : {
@@ -1855,6 +1855,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.dropdown.select" : {
 			"DE" :  "-- auswählen --",
 			"EN" : "-- select --"
+		},
+		"common.back" : {
+			"DE" :  "zurück",
+			"EN" : ""
 		},
 		"general.sortable" : {
 			"DE" : "Ziehen, um zu sortieren",

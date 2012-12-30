@@ -504,12 +504,13 @@ ul.options-list li:hover {
 .step-counter {
   width: 50px;
   height: 50px;
-  border: 1px solid green;
+  border: 1px solid blue;
   border-radius: 5px;
-  background-color: #AFA;
+  background-color: #e46c0a;
   text-align: center;
   float: left;
   font-size: 20px;
+  font-weight: bold;
   line-height: 50px;
   position: absolute;
   margin-right: 10px;
@@ -547,4 +548,25 @@ ul.options-list li:hover {
 .step-inactive a:hover {
   color: gray;
   text-decoration: none;
+}
+
+.step-counter-bar {
+  width: 30px;
+  height: 30px;
+  border: 1px solid blue;
+  border-radius: 5px;
+  background-color: #e46c0a;
+  text-align: center;
+  float: left;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 30px;
+  margin: 10px 10px 0 0px;
+  color: white;
+  padding: 3px;
+}
+
+.active-step {
+    border-color: #e46c0a;
+    background-color: blue;
 }
