@@ -8,12 +8,12 @@
 <div class="row-fluid" ng-show="howtoMode">
 	<div class="span12">
 		<div class="howto-bar">
-			<a href="#/howto">
+			<!-- <a href="#/howto">
 				<div class="howto-step">
 					<div class="step-counter-bar">0</div>
 					<div l="common.back">back</div>
 				</div>
-			</a>
+			</a> -->
 			<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'?howto=1','')}}">
 				<div class="howto-step" ng-class="{ 'active-step' : howtoStep == 1}">
 				<div class="step-counter-bar">1</div>

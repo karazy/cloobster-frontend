@@ -47,6 +47,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "User accounts"
 		},
 		//businesses header partial
+		"businesses.headertabs.howto" : {
+			"DE" :  "Los geht's",
+			"EN" : "Howto"
+		},
 		"businesses.headertabs.location" : {
 			"DE" :  "Locations",
 			"EN" : "Locations"
@@ -588,9 +592,13 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Ein blaues und luftiges Motiv",
 			"EN" :  "A blue and breezy theme"
 		},
-		"business.detail.themes.orange.description" : {
-			"DE" :  "Ein orangenes und gemütliches Motiv",
-			"EN" :  "An orange and cosy theme"
+		"business.detail.themes.blackpink.description" : {
+			"DE" :  "Ein ausgeflipptes schwarz-pink Motiv",
+			"EN" :  "A funky black and pink theme"
+		},
+		"business.detail.themes.bluegold.description" : {
+			"DE" :  "Ein edles blau-golden Motiv",
+			"EN" : "A noble blue-gold theme"
 		},
 		"business.detail.section.facebook" : {
 			"DE" :  "Facebook Konfiguration",
@@ -1731,11 +1739,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : ""
 		},
 		"howto.step2.title" : {
-			"DE" :  "Service und Produkte anlegen",
+			"DE" :  "Angebote anlegen",
 			"EN" : ""
 		},
 		"howto.step3.title" : {
-			"DE" :  "Services und Produkte zuweisen",
+			"DE" :  "Angebote zuweisen",
 			"EN" : ""
 		},
 		"howto.step4.title" : {
