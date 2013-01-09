@@ -3,6 +3,9 @@
       <div class="well">
         <h2>Admin Functions</h2>
         <h6 class="nav-header">Datastore Functions</h6>
+        <p>
+        	<button type="button" class="btn btn-small" ng-click="upgradeLocations()" ng-bind="upgradeLocationsText" ng-disabled="upgradeLocationsDisabled" ng-init="upgradeLocationsText='Create Welcome Area/Spot and Basic Subscriptions'"></button>
+        </p>
         <div ng-hide="deleteFunctionsDisabled">
 	        <p ng-hide="showDeleteAll">
 	        	<button type="button" class="btn btn-small btn-danger" ng-click="showDeleteAll=true;confirmDeleteAllText='Confirm Delete'">Delete All Content</button>

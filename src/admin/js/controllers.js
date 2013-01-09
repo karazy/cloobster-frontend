@@ -280,6 +280,16 @@ CloobsterAdmin.Functions = function($scope, $http) {
 			});	
 	};
 
+	$scope.upgradeLocations = function() {
+		$scope.upgradeLocationsText = "Upgrading ...";
+		$scope.upgradeLocationsDisabled = true;
+		$http.put('/admin/s/dataupgrades/subscriptionandwelcome', {}).success(function(data) {
+				$scope.upgradeLocationsText = data['entityCount'] + " Locations updated.";
+			}).error(function (data, status) {
+				$scope.upgradeLocationsText = status + " error.";
+			});	
+	};
+
 	$scope.sendCockpitUpdateMessage = function() {
 		$scope.sendCockpitUpdateMessageText = "Creating ...";
 		$scope.sendCockpitUpdateMessageDisabled = true;
