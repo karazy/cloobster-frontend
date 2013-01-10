@@ -450,6 +450,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		//reset filters
 		$scope.languageQuery.lang = '';
 		$scope.languageQuery.selected = '';
+		$scope.languageQuery.active = true;
 
 		angular.forEach($scope.langcodes, function(lang, key) {
 			if(jQuery.inArray(lang.code, $scope.activeBusiness.lang) >= 0) {
