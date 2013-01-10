@@ -1341,6 +1341,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 					"All current customer checkins at the specific spots will continue to work.<br/>"+
 					"Data will be permanently deleted."
 		},
+		"areas.basicmode.message.text" : {
+			"DE" :  "Sie benutzen ein Basis Paket. Sie können Servicebereiche und Spots anlegen. Diese sind jedoch nicht aktiv.",
+			"EN" : "You are using a basic subscription. You can create/manage service areas and spots but they won't be active."
+		},
 		"spots.editor.name" : {
 			"DE" : "Name",
 			"EN" : "Name"
@@ -1790,9 +1794,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Achtung!",
 			"EN" : "Warning!"
 		},
-		"common.hint.title" : {
-			"DE" : "Hinweis!",
-			"EN" : "Message!"
+		"common.hint" : {
+			"DE" : "Hinweis",
+			"EN" : "Message"
 		},
 		"common.ok" : {
 			"DE" : "Ok",

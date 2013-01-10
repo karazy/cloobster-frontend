@@ -44,8 +44,12 @@
 		<div class="data-container-with-title span3">
 			<h4 class="data-container-title" l="areas.list.title">Your service areas</h4>
 			<div class="data-container-block data-container-seperator">
-				<div class="row-fluid">
-					<button class="btn btn-primary span6" ng-click="createArea()"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
+				<div class="row-fluid">					
+					<button class="btn btn-primary span6" ng-click="createArea()" ng-hide="activeBusiness.basic"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
+					<span simple-confirm-dialog dialog-title="common.hint" dialog-text="areas.basicmode.message.text" dialog-class="alert-error"
+					 dialog-on-confirm="createArea()" dialog-confirm-button="common.confirm" dialog-disabled="!activeBusiness.basic" ng-show="activeBusiness.basic">
+						<button class="btn btn-primary span6" ng-show="activeBusiness.basic"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
+					</span>
 				</div>
 			</div>
 		<!-- 	<div class="loading-indicator" ng-show="areas == null">

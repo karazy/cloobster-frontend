@@ -10,10 +10,12 @@ Cloobster.directives.directive('simpleConfirmDialog', ['lang', '$log', function(
 			dialogText: '@',
 			dialogOnConfirm: '&',
 			dialogConfirmButton: '@',
-			dialogDisabled: '='
+			dialogDisabled: '=',
+			dialogClass: '@'
 		},
 		compile: function(element, attrs, transclude) {
-			var html;
+			var html,
+				dClass = attrs.hasOwnProperty('dialogClass') ? attrs.dialogClass : "alert-info";
 
 			html = 
 			'<span class="toggler" ng-transclude></span>'+
@@ -22,7 +24,7 @@ Cloobster.directives.directive('simpleConfirmDialog', ['lang', '$log', function(
 				    	'<button type="button" class="close" data-dismiss="modal">×</button>'+
 				    	'<h4 l="{{dialogTitle}}">Confirm dialog</h4>'+
 				'</div>'+
-				'<div class="modal-body alert-info">'+
+				'<div class="modal-body '+dClass+'">'+
 				    	'<p l="{{dialogText}}"></p>'+
 			   '</div>  '+
 				'<div class="modal-footer">'+

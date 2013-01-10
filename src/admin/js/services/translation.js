@@ -14,9 +14,9 @@ angular.module("CloobsterAdmin.translations", [], ["$provide", function($provide
 			"DE" : "Achtung!",
 			"EN" : "Warning!"
 		},
-		"common.hint.title" : {
-			"DE" : "Hinweis!",
-			"EN" : "Message!"
+		"common.hint" : {
+			"DE" : "Hinweis",
+			"EN" : "Message"
 		},
 		"common.ok" : {
 			"DE" : "Ok",
