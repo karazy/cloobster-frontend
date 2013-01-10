@@ -14,7 +14,6 @@
 						<form class="form-inline">
 							<div class="input-append">
 							<input type="text" required l="businesses.new.name.placeholder" l-attribute="placeholder" ng-model="newBusiness.name" style="width: 170px;">
-							<!-- ng-click="toggleNewBusiness()" -->
 							<span simple-confirm-dialog dialog-title="business.new.title" dialog-text="business.new.text" dialog-on-confirm="addNewBusiness()" dialog-confirm-button="common.confirm" dialog-disabled="!newBusiness.name">
 								<button type="button" class="btn btn-primary" ng-disabled="!newBusiness.name"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
 							</span>

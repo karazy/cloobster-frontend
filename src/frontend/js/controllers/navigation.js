@@ -129,14 +129,16 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 		$scope.welcomeSpots = $scope.spotResource.query({'bid' : $rootScope.activeBusinessId, 'welcome' : true});
 	}
 
-	//if activeBusinessId changes reload welcome spot
-	$scope.$watch('activeBusinessId', function(newValue, oldValue) {
-		if(newValue) {
-			$scope.loadWelcomeSpot();	
-		} else {
-			$scope.welcomeSpots = null;
-		}	
-	});
+	if($location.url() == "/howto") {
+		//if activeBusinessId changes reload welcome spot
+		$scope.$watch('activeBusinessId', function(newValue, oldValue) {
+			if(newValue) {
+				$scope.loadWelcomeSpot();	
+			} else {
+				$scope.welcomeSpots = null;
+			}	
+		});
+	}
 
 	$scope.$watch('loggedIn', function(newValue, oldValue) {
 		if(newValue === true) {
