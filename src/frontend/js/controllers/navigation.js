@@ -57,7 +57,7 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 		$scope.businesses = Business.getActiveBusinesses(true);
 	});
 
-	if(!$rootScope.activeBusinessId && $location.url() != "/howto" && $location.url() != "/businesses") {
+	if(!$rootScope.activeBusinessId) {
 		$rootScope.activeBusinessId = $scope.businesses.length > 0 ? $scope.businesses[0]['id'] : null;	
 	}
 	
@@ -76,12 +76,9 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	};
 	
 	$scope.$watch('businesses.length', function (newValue, oldValue) {
-		//select first business if none is selected and not in howto partial
-		if(!$rootScope.activeBusinessId && (newValue > 0) && $location.url() != "/howto" && $location.url() != "/businesses") {
+		if(!$rootScope.activeBusinessId && (newValue > 0)) {
 			$rootScope.activeBusinessId = $scope.businesses[0]['id'];
-		} else {
-
-		}
+		} 
 	});
 
 	/**
@@ -146,9 +143,19 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	$scope.$watch('loggedIn', function(newValue, oldValue) {
 		if(newValue === true) {
 			$scope.company = Company.getActiveCompany();
-			$scope.businesses = Business.getActiveBusinesses();			
+			$scope.businesses = Business.getActiveBusinesses(false, checkBusinessesCount);					
 		}
 	});
+
+	/**
+	* @private
+	*	If no locations exist redirect to howto page.
+	*/
+	function checkBusinessesCount() {
+		if($scope.businesses && $scope.businesses.length == 0) {
+			$location.url("/howto");
+		}
+	}
 
 	// var howtostep = $location.search('howto');
 	if($routeParams['howto']) {

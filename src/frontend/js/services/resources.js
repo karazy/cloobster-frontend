@@ -92,14 +92,19 @@ angular.module('Cloobster.services').factory('Business',['cloobsterResource','lo
 		buildResource: function(accountId) {
 			return createResource(accountId);
 		},
-		getActiveBusinesses: function(refresh) {
+		getActiveBusinesses: function(refresh, callback) {
 			var accountId = loginService.getAccount()['id'];
 			if(accountId) {
 				if(!activeBusinesses || (refresh === true) || (activeAccountId != accountId)) {
 					if(!resource) {
 						createResource(accountId);
 					}
-					activeBusinesses = resource.query({'account':accountId}, angular.noop, handleError);
+					activeBusinesses = resource.query({'account':accountId}, function() {
+						if(callback) {
+							//TODO if this is a proper function
+							callback();
+						}
+					}, handleError);
 					activeAccountId = accountId;
 				}
 				
