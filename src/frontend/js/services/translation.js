@@ -254,15 +254,15 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"location.placeholder.description" : {
 			"DE" :  "z.B. In der Nähe von Frankfurt gelegen, zählen wir zu den besten Spa Hotels der Region!",
-			"EN" : ""
+			"EN" : "e.g. An Iconic 5* hotel providing 21st century comforts against a backdrop of exquisitely restored splendor."
 		},
 		"location.placeholder.slogan" : {
 			"DE" :  "z.B. Service at its Peak!",
-			"EN" : ""
+			"EN" : "e.g. Service at its Peak!"
 		},
 		"location.placeholder.url" : {
 			"DE" :  "z.B. http://www.example.com",
-			"EN" : ""
+			"EN" : "e.g. http://www.example.com"
 		},
 		"registration.action.fblogin" : {
 			"DE" : "Mit Facebook einloggen und cloobster verknüpfen.",
@@ -357,7 +357,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"businesses.action.documents" : {
 			"DE" :  "Dokumente",
-			"EN" : ""
+			"EN" : "Documents"
 		},
 		"businesses.action.infopages" : {
 			"DE" :  "Info-Seiten",
@@ -425,11 +425,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"business.new.title" : {
 			"DE" :  "Neue Location",
-			"EN" : ""
+			"EN" : "New Location"
 		},
 		"business.new.text" : {
 			"DE" :  "Möchten Sie eine neue Location anlegen?",
-			"EN" : ""
+			"EN" : "Do you want to add a new Location?"
 		},
 		//business detail partial
 		"business.detail.help" : {
@@ -646,54 +646,56 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"business.detail.section.subscription" : {
 			"DE" :  "Paket Verwaltung",
-			"EN" : ""
+			"EN" : "Subscription Management"
 		},
 		"business.detail.section.subscription.description" : {
 			"DE" :  "Hier können Sie ihr cloobster Paket verwalten. Im Basis Paket sind die Funktionen"+
 				" Bestellen, Feedback und VIP Call nicht vergübar.",
-			"EN" : ""
+			"EN" : "Manage your cloobster subscription. Basic subscription does not support Ordering, Feedback and VIP call."
 		},
 		"business.detail.subscription.pending.description" : {
 			"DE" :  "Eine Anfrage zum Wechsel in Paket <strong>{{pendingSubscription.name}}</strong> läuft.",
-			"EN" : ""
+			"EN" : "A change request for subscription <strong>{{pendingSubscription.name}}</strong> is running."
 		},
 		"business.detail.subscription.th.subscription" : {
 			"DE" :  "Paket",
-			"EN" : ""
+			"EN" : "Subscription"
 		},
 		"business.detail.subscription.th.spots" : {
 			"DE" :  "Maximale nutzbare Spots",
-			"EN" : ""
+			"EN" : "Maximum usable spots"
 		},
 		"business.detail.subscription.th.fee" : {
 			"DE" :  "Kosten pro Monat",
-			"EN" : ""
+			"EN" : "Cost per month"
 		},
 		"business.detail.subscription.th.action" : {
 			"DE" :  "Aktion",
-			"EN" : ""
+			"EN" : "Action"
 		},
 		"business.detail.subscription.change" : {
 			"DE" :  "Wechsel anfordern",
-			"EN" : ""
+			"EN" : "Change request"
 		},
 		"business.detail.subscription.subscribed" : {
 			"DE" :  "Ihr aktuelles Paket",
-			"EN" : ""
+			"EN" : "Your current subscription"
 		},
 		"business.detail.subscription.pending" : {
 			"DE" :  "Laufende Anfrage",
-			"EN" : ""
+			"EN" : "Pending subscription"
 		},
 		"business.detail.subscription.upgrade.title" : {
 			"DE" :  "Wechseln Sie heute!",
-			"EN" : ""
+			"EN" : "Upgrade today!"
 		},
 		"business.detail.subscription.upgrade.description" : {
 			"DE" :  '<span class="label label-important">Basis</span> Momentan haben Sie ein Basis Paket.<br/>'+ 
 			'Wechseln Sie auf ein anderes Paket um alle cloobster Funktionen zu nutzen. '+ 
 			'<a href="https://www.cloobster.com" target="_blank">Mehr Information</a>',
-			"EN" : ""
+			"EN" : '<span class="label label-important">Basic</span> Currently you are using a basic subscription.<br/>'+ 
+			'Upgrade to another cloobster subscription to gain access to all funtions. '+ 
+			'<a href="https://www.cloobster.com" target="_blank">Learn more</a>'
 		},
 		"subscription.basic" : {
 			"DE" :  "Basis",
@@ -705,19 +707,19 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"business.detail.subscriptioncounter.title" : {
 			"DE" :  "Benutzte Spots",
-			"EN" : ""
+			"EN" : "Used spots"
 		},
 		"business.detail.subscription.change.text" : {
 			"DE" :  "Paketwechsel anfordern?",
-			"EN" : ""
+			"EN" : "Request subscription change?"
 		},
 		"business.detail.subscription.cancel" : {
 			"DE" :  "Anfrage widerrufen",
-			"EN" : ""
+			"EN" : "Cancel request?"
 		},
 		"business.detail.subscription.cancel.text" : {
 			"DE" :  "Möchten Sie die Anfrage widerrufen?",
-			"EN" : ""
+			"EN" : "Do you want to cancel your request?"
 		},
 		//profile partial
 		"profile.title" : {
@@ -1299,7 +1301,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"areas.spots.list.description.welcome" : {
 			"DE" :  "Dies ist eine spezielle Welcome Area mit Welcome Spot. Sie können keine Spots löschen oder hinzufügen zu einer Welcome Area."
 				+" Ein Welcome Spot repräsentiert die gesamte Location. Kunden können eichecken und Ihre Informationen sowie Produkte einsehen. Aber Sie können keine Bestellung oder VIP Calls tätigen.",
-			"EN" : ""
+			"EN" : "This is a special welcome area with a welcome spot. You can't add or remove spots to a welcome area. " +
+				"A welcome spot represents your whole location. Customers can check-i and have a look at your information as well as your products and services. But they can't order or submit a VIP Call."
 		},
 		"areas.spot.container.empty.description" : {
 			"DE" :  "Zeigt Details des ausgewählten Spots an. Wählen Sie einen Spot aus der Liste links.",
@@ -1484,7 +1487,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "<span class='label label-important'>Basis</span> Sie verwenden ein Basis Paket. Sie können ganz normal Servicebereiche und Spots anlegen.<br/>Kunden können jedoch weder bestellen (nur ihre Produkte & Dienstleistungen einsehen)"+
 					" und keinen VIP Call benutzen.<br/>" +
 			 		"<a href='https://www.cloobster.com' target='_blank'>Mehr Information</a> oder <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>.",
-			"EN" : ""
+			"EN" :  "<span class='label label-important'>Basic</span> Currently you are using a basic subscription. You can add service areas and spots <br/>but customers can't order"+
+					" or use the VIP Call.<br/>" +
+			 		"<a href='https://www.cloobster.com' target='_blank'>Learn more</a> or <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>."
 		},
 		//infopage partial
 		"infopages.description" : {
@@ -1727,57 +1732,58 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		//howto partial
 		"howto.title" : {
 			"DE" :  "In 4 Schritten zur eigenen App",
-			"EN" : ""
+			"EN" : "4 steps for your own app"
 		},
 		"howto.step1.title" : {
 			"DE" :  "Location anlegen",
-			"EN" : ""
+			"EN" : "Create location"
 		},
 		"howto.step1.description" : {
 			"DE" :  "Legen Sie Ihre \"Location\" an. Laden Sie Bilder hoch, wählen<br/> das Farbschema aus und konfigurieren "+
 			" sie Facebook.",
-			"EN" : ""
+			"EN" : "Create your \"Location\". Upload pictures, choose your color theme  and configure Facebook."
 		},
 		"howto.step2.title" : {
 			"DE" :  "Angebote anlegen",
-			"EN" : ""
+			"EN" : "Add offers"
 		},
 		"howto.step3.title" : {
 			"DE" :  "Angebote zuweisen",
-			"EN" : ""
+			"EN" : "Assign offers"
 		},
 		"howto.step4.title" : {
 			"DE" :  "Infoseiten anlegen",
-			"EN" : ""
+			"EN" : "Create infopages"
 		},
 		"howto.step2.description" : {
 			"DE" :  "Legen Sie hier Ihren Produkt- und Servicekatalog an (Room Service, Wellness, Ausflüge).",
-			"EN" : ""
+			"EN" : "Add your products and services (e.g. room service, wellness, arrangements)."
 		},
 		"howto.step3.description" : {
 			"DE" :  "Machen Sie die Produkte sichtbar indem Sie sie dem Welcome Spot zuweisen.",
-			"EN" : ""
+			"EN" : "Make your products visible by assigning them to a welcome spot."
 		},
 		"howto.step4.description" : {
 			"DE" :  "Hier können Sie für den Gast wichtige Informationen anlegen (z. B. Gäste ABC).",
-			"EN" : ""
+			"EN" : "Provide valuable information for your customer (e.g. breakfast times)"
 		},
 		"howto.success.title" : {
 			"DE" :  "Gratulation",
-			"EN" : ""
+			"EN" : "Congratulation"
 		},
 		"howto.success.description" : {
 			"DE" :  "Scannen Sie den QR Code links. Wenn Sie cloobster nicht auf Ihrem Smartphone haben, "+
 			"werden Sie automatisch zum App Store geleitet.<p style='color: red;'>Tipp: Zeigen Sie den QR Code auf Ihrer Website, Facebook, Twitter und Broschüren. (Download: Rechte Maustaste und speichern unter.)</p>",
-			"EN" : ""
+			"EN" : "Scan the QR code on the left. If you don't have cloobster installed you will be redirected to the app store."+
+				"<p style='color: red;'>Hint: Show the QR Code on your website, facebook, twitter and brochures. (Download: right click and save under)</p>"
 		},
 		"howto.success.qr.tooltip" : {
 			"DE" :  "Download: Rechte Maustaste und speichern unter.",
-			"EN" : ""
+			"EN" : "Download: right click and save under"
 		},
 		"howto.location.select" : {
 			"DE" :  "Wählen oder erstellen Sie eine Location bevor Sie mit Schritt 2-4 fortfahren.",
-			"EN" : ""
+			"EN" : "Choose or create a location before proceeding with step 2-4."
 		},
 		//general
 		"common.warning.title" : {
@@ -1858,7 +1864,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"common.download" : {
 			"DE" :  "Download",
-			"EN" : ""
+			"EN" : "Download"
 		},
 		"common.confirm" : {
 			"DE" :  "Bestätigen",
@@ -1870,7 +1876,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"common.back" : {
 			"DE" :  "zurück",
-			"EN" : ""
+			"EN" : "back"
 		},
 		"general.sortable" : {
 			"DE" : "Ziehen, um zu sortieren",

@@ -57,7 +57,7 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 		$scope.businesses = Business.getActiveBusinesses(true);
 	});
 
-	if(!$rootScope.activeBusinessId) {
+	if(!$rootScope.activeBusinessId && $location.url() != "/howto" && $location.url() != "/businesses") {
 		$rootScope.activeBusinessId = $scope.businesses.length > 0 ? $scope.businesses[0]['id'] : null;	
 	}
 	
@@ -76,8 +76,11 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	};
 	
 	$scope.$watch('businesses.length', function (newValue, oldValue) {
-		if(!$rootScope.activeBusinessId && (newValue > 0)) {
+		//select first business if none is selected and not in howto partial
+		if(!$rootScope.activeBusinessId && (newValue > 0) && $location.url() != "/howto" && $location.url() != "/businesses") {
 			$rootScope.activeBusinessId = $scope.businesses[0]['id'];
+		} else {
+
 		}
 	});
 
