@@ -20,13 +20,13 @@
 					<div><span l="howto.step1.title"></span> &gt;</div>
 				</div>
 			</a>
-			 <a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/spots?howto=2','')}}">
+			 <a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/menus?howto=2','')}}">
 			 	<div class="howto-step" ng-class="{ 'active-step' : howtoStep == 2}">
 					<div class="step-counter-bar" >2</div>
 					<div><span l="howto.step2.title"></span> &gt;</div>
 				</div>
 			</a> 
-			<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/menus?howto=3','')}}">
+			<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/category_assignment?howto=3','')}}">
 				<div class="howto-step" ng-class="{ 'active-step' : howtoStep == 3}"> 
 					<div class="step-counter-bar">3</div>
 					<div><span l="howto.step3.title"></span> &gt;</div>
