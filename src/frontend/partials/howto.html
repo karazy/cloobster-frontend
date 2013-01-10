@@ -10,10 +10,10 @@
 					<div class="step-counter">1</div>
 					<div class="step-content">
 						<div class="step-title" l="howto.step1.title">Create location</div>
-						<div class="step-description" l="howto.step1.description">Legen Sie Ihre Location an. Laden Sie Bilder hoch, wählen das Farbschema aus und konfigurieren Facebook. Geben Sie einfach den Namen der Location ein und klicken auf "Neu".</div>
+						<div class="step-description" style="float: left; margin-right: 10px;" l="howto.step1.description">Legen Sie Ihre Location an. Laden Sie Bilder hoch, wählen das Farbschema aus und konfigurieren Facebook. Geben Sie einfach den Namen der Location ein und klicken auf "Neu".</div>
 						<form class="form-inline">
 							<div class="input-append">
-							<input type="text" required l="businesses.new.name.placeholder" l-attribute="placeholder" ng-model="newBusiness.name">
+							<input type="text" required l="businesses.new.name.placeholder" l-attribute="placeholder" ng-model="newBusiness.name" style="width: 170px;">
 							<!-- ng-click="toggleNewBusiness()" -->
 							<span simple-confirm-dialog dialog-title="business.new.title" dialog-text="business.new.text" dialog-on-confirm="addNewBusiness()" dialog-confirm-button="common.confirm" dialog-disabled="!newBusiness.name">
 								<button type="button" class="btn btn-primary" ng-disabled="!newBusiness.name"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
@@ -24,7 +24,7 @@
 				</div>				
 				<div class="step-wrapper">
 					<div class="step-content">
-						<div ng-hide="activeBusinessId" l="howto.location.select">
+						<div ng-hide="activeBusinessId" l="howto.location.select" style="color: red;">
 							Select or create your location to proceed ...
 						</div>
 					<select ng-model="activeBusinessId" style="margin-top: 15px" ng-options="b.id as b.name for b in businesses | filter:filterTrashedBusiness" ng-change="switchBusiness()" ng-show="businesses.length > 0">
@@ -62,9 +62,9 @@
 				</div>
 				<!-- Welcome Spot -->
 				<div class="step-wrapper" ng-show="welcomeSpots[0].qrImageUrl">
-					<img ng-show="welcomeSpots[0].qrImageUrl" ng-src="{{welcomeSpots[0].qrImageUrl}}" alt="Spot Barcode" class="welcome-spot"/>
+					<img ng-show="welcomeSpots[0].qrImageUrl" ng-src="{{welcomeSpots[0].qrImageUrl}}" alt="Spot Barcode" class="welcome-spot" tooltip="howto.success.qr.tooltip"/>
 					<div class="step-content">
-						<div class="step-title" l="howto.success.title">
+						<div class="step-title" l="howto.success.title" style="font-size: 25px; margin-bottom: 6px;">
 							Gratulation
 						</div>
 						<div class="step-description" l="howto.success.description">Scannen Sie den QR Code Rechts

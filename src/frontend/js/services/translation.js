@@ -1734,7 +1734,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : ""
 		},
 		"howto.step1.description" : {
-			"DE" :  "Legen Sie Ihre \"Location\" an. Laden Sie Bilder hoch, wählen das Farbschema aus und konfigurieren "+
+			"DE" :  "Legen Sie Ihre \"Location\" an. Laden Sie Bilder hoch, wählen<br/> das Farbschema aus und konfigurieren "+
 			" sie Facebook.",
 			"EN" : ""
 		},
@@ -1768,7 +1768,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"howto.success.description" : {
 			"DE" :  "Scannen Sie den QR Code links. Wenn Sie cloobster nicht auf Ihrem Smartphone haben, "+
-			"werden Sie automatisch zum App Store geleitet.<p style='color: red;'>Tipp: Zeigen Sie den QR Code auf Ihrer Website, Facebook, Twitter und Broschüren.</p>",
+			"werden Sie automatisch zum App Store geleitet.<p style='color: red;'>Tipp: Zeigen Sie den QR Code auf Ihrer Website, Facebook, Twitter und Broschüren. (Download: Rechte Maustaste und speichern unter.)</p>",
+			"EN" : ""
+		},
+		"howto.success.qr.tooltip" : {
+			"DE" :  "Download: Rechte Maustaste und speichern unter.",
 			"EN" : ""
 		},
 		"howto.location.select" : {
