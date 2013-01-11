@@ -862,8 +862,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Categories"
 		},
 		"menu.container.hint" : {
-			"DE" :  "Bitte vergessen Sie nicht, die Kategorie im Tab<a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"Kategorien zuweisen\"</a> einem Servicebereich zuzuweisen.",
-			"EN" : "Don't forget to assign this category to a service area afterwards."
+			"DE" :  "Bitte vergessen Sie nicht, die Kategorie im Tab <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"Kategorien zuweisen\"</a> einem Servicebereich zuzuweisen.",
+			"EN" : "Don't forget to <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"assign\"</a>assign this category to a service area afterwards."
 		},
 		"menu.container.title" : {
 			"DE" : "Kategorie editieren",
