@@ -1328,7 +1328,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"areas.allcategories.list.description" : {
 			"DE" :  "Hier aufgelistete Produktkategorien können (mittels Drag&Drop) dem aktuellen Servicebereich zugewiesen werden, um diese für eingecheckte Gäste verfügbar zu machen.",
 			"EN" : "The following product categories can be assigned (via drag & drop) to current service area to make them available to customers."
-		},
+		},		
 		"areas.categories.moveable.tooltip" : {
 			"DE" :  "Ziehen und loslassen, um zuzuweisen oder die Reihenfolge zu ändern.",
 			"EN" :  "Drag & drop to assign and change order of appearance."
@@ -1724,11 +1724,6 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Account aktivieren",
 			"EN" : "Activate account"
 		},
-		"activation.description" : {
-			"DE" :  "Hier können Sie den Servicebereichen spezifische Kategorien zuweisen.<br/>Somit können in einem \"Spa-Bereich\""+
-				" andere Produkte und Dienstleistungen als auf dem \"Zimmer\" angeboten werden.",
-			"EN" : "Here you can assign specific categories to your service areas.<br/>E.g. provide different services in \"spa\" than in \"room service\"."
-		},
 		"account.activation.admin.submit" : {
 			"DE" : "Aktivieren",
 			"EN" : "Activate"
@@ -1736,7 +1731,21 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"account.activation.admin.description" : {
 			"DE" : "Um die Aktivierung abzuschliessen, füllen Sie bitte die fehlenden Felder aus.",
 			"EN" : "To complete your account activation, please enter missing details below!"
-		},		
+		},	
+		//category assignment partial
+		"activation.description" : {
+			"DE" :  "Hier können Sie den Servicebereichen spezifische Kategorien zuweisen.<br/>Somit können in einem \"Spa-Bereich\""+
+				" andere Produkte und Dienstleistungen als auf dem \"Zimmer\" angeboten werden.",
+			"EN" : "Here you can assign specific categories to your service areas.<br/>E.g. provide different services in \"spa\" than in \"room service\"."
+		},
+		"activation.assigned.container.empty.description" : {
+			"DE" :  "Liste zugewiesener Kategorien des ausgewählten Servicebereichs. Bitte wählen Sie einen Bereich links.",
+			"EN" : "List of assigned categories of selected service area. Please choose an area to the left."
+		},
+		"activation.all.container.empty.description" : {
+			"DE" :  "Liste aller verfügbaren Kategorien.",
+			"EN" : "Lists all available categories."
+		},	
 		//howto partial
 		"howto.title" : {
 			"DE" :  "In 4 Schritten zur eigenen App",
