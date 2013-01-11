@@ -10,7 +10,7 @@
 * 	View and manage businesses such as restaurants.
 * 	@constructor
 */
-Cloobster.Business = function($scope, $http, $routeParams, $location, loginService, uploadService, langService, Business, $log, handleError, Company, Subscription, langcodes) {
+Cloobster.Business = function($scope, $http, $routeParams, $location, loginService, uploadService, langService, Business, $log, handleError, Company, Subscription, langcodes, $rootScope) {
 
 		/** Holds the Id of the active modal dialog.
 		@type {string} */
@@ -117,6 +117,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		function success() {
 			$scope.businessToDelete = null;
 			$scope.deleteError = null;
+			$rootScope.activeBusinessId = null;
 
 			$scope.$broadcast('update-businesses');
 
@@ -213,46 +214,46 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 		return;
 		//old code
-		if($scope.newBusinessForm.$valid) {
-			$scope.newBusinessEntity = new $scope.businessResource({
-				'name' : $scope.newBusiness.name,
-				'city' : $scope.newBusiness.city,
-				'address' : $scope.newBusiness.address,
-				'postcode' : $scope.newBusiness.postcode,
-				'phone' : $scope.newBusiness.phone,
-				'description' : $scope.newBusiness.description,
-				'currency' : $scope.newBusiness.currency
-			});
+		// if($scope.newBusinessForm.$valid) {
+		// 	$scope.newBusinessEntity = new $scope.businessResource({
+		// 		'name' : $scope.newBusiness.name,
+		// 		'city' : $scope.newBusiness.city,
+		// 		'address' : $scope.newBusiness.address,
+		// 		'postcode' : $scope.newBusiness.postcode,
+		// 		'phone' : $scope.newBusiness.phone,
+		// 		'description' : $scope.newBusiness.description,
+		// 		'currency' : $scope.newBusiness.currency
+		// 	});
 
-			$("#addBusinessButton").button("loading");
+		// 	$("#addBusinessButton").button("loading");
 
-			$scope.newBusinessEntity.$save(function() {
-				//close switches to another url so businesses will be refreshed automatically 
-				//and showing the new new business
-				$("#addBusinessButton").button("reset");
-				// refresh the active businesses in the background.
-				Business.getActiveBusinesses(true);
-				$scope.closeNewBusinessForm();
-			},
-			function(data,status,headers,config) {
-				//Error handling
-				$("#addBusinessButton").button("reset");
-				handleError(data, status, headers, config);
-			});
-		} else {
-			//mark form as dirty to show validation errors
-			jQuery.each(fields, function(index, value) {
-				if($scope.newBusinessForm[value] && !$scope.newBusinessForm[value].invalid) {
-					//mark property as dirty to display error messages
-					$scope.newBusinessForm[value].$dirty = true;
-					isInvalid = true;
-				}
+		// 	$scope.newBusinessEntity.$save(function() {
+		// 		//close switches to another url so businesses will be refreshed automatically 
+		// 		//and showing the new new business
+		// 		$("#addBusinessButton").button("reset");
+		// 		// refresh the active businesses in the background.
+		// 		Business.getActiveBusinesses(true);
+		// 		$scope.closeNewBusinessForm();
+		// 	},
+		// 	function(data,status,headers,config) {
+		// 		//Error handling
+		// 		$("#addBusinessButton").button("reset");
+		// 		handleError(data, status, headers, config);
+		// 	});
+		// } else {
+		// 	//mark form as dirty to show validation errors
+		// 	jQuery.each(fields, function(index, value) {
+		// 		if($scope.newBusinessForm[value] && !$scope.newBusinessForm[value].invalid) {
+		// 			//mark property as dirty to display error messages
+		// 			$scope.newBusinessForm[value].$dirty = true;
+		// 			isInvalid = true;
+		// 		}
 
-				if(isInvalid) {
-					$scope.newBusinessForm.$setDirty();
-				}
-			})			
-		}
+		// 		if(isInvalid) {
+		// 			$scope.newBusinessForm.$setDirty();
+		// 		}
+		// 	})			
+		// }
 	};
 
 	/**
@@ -622,4 +623,4 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 };
 
-Cloobster.Business.$inject = ['$scope', '$http','$routeParams', '$location', 'login', 'upload', 'lang', 'Business', '$log','errorHandler','Company', 'Subscription', 'langcodes'];
+Cloobster.Business.$inject = ['$scope', '$http','$routeParams', '$location', 'login', 'upload', 'lang', 'Business', '$log','errorHandler','Company', 'Subscription', 'langcodes', '$rootScope'];
