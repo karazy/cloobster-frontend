@@ -155,21 +155,32 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			$scope.activeBusiness.lang = $scope.activeBusiness.lang || [];
 
 			$scope.imageResource =	createImageResource($scope.activeBusiness.id);
-			$scope.subscriptionResource = Business.buildSubscriptionResource($scope.activeBusiness.id);
 
-			if($scope.activeBusiness.activeSubscriptionId) {
-				$scope.activeSubscription = $scope.subscriptionResource.get(
-					{ 'id' : $scope.activeBusiness.activeSubscriptionId },
-					checkStaleSubscription,
-					handleError
-				);	
-			}
-
-			if($scope.activeBusiness.pendingSubscriptionId) {
-				$scope.pendingSubscription = $scope.subscriptionResource.get({ 'id' : $scope.activeBusiness.pendingSubscriptionId});	
-			}
+			$scope.loadBusinessSubscriptions($scope.activeBusiness);
+			
 
 		}, handleError);
+	};
+
+	/**
+	* Load subscriptions for a business.
+	* @param business
+	*	business to load subscriptions for
+	*/
+	$scope.loadBusinessSubscriptions = function(business) {
+		$scope.subscriptionResource = Business.buildSubscriptionResource(business.id);
+
+		if(business.activeSubscriptionId) {
+			$scope.activeSubscription = $scope.subscriptionResource.get(
+				{ 'id' : business.activeSubscriptionId },
+				checkStaleSubscription,
+				handleError
+			);	
+		}
+
+		if(business.pendingSubscriptionId) {
+			$scope.pendingSubscription = $scope.subscriptionResource.get({ 'id' : business.pendingSubscriptionId});
+		}
 	};
 
 	/**
@@ -525,7 +536,20 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		
 		$scope.pendingSubscription.$delete(function() {
 			$scope.pendingSubscription = null;
-		}, handleError);
+		}, error);
+
+		function error(response) {
+			//
+			if(response && response.status == 409) {
+				if($scope.subscriptionResource) {
+					$scope.cancelPendingSubscriptionError = true;
+					$scope.activeBusiness.pendingSubscriptionId = null;
+					$scope.pendingSubscription = null;
+				}				
+			} else {
+				handleError(response);
+			}
+		}
 	}
 
 	function checkStaleSubscription() {

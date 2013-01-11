@@ -657,6 +657,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Eine Anfrage zum Wechsel in Paket <strong>{{pendingSubscription.name}}</strong> läuft.",
 			"EN" : "A change request for subscription <strong>{{pendingSubscription.name}}</strong> is running."
 		},
+		"business.detail.subscription.cancel.error" : {
+			"DE" :  "Ihre Anfrage wurde bereits vom cloobster Support bearbeitet und kann nicht angebrochen werden.",
+			"EN" : "Your request already has been processed by cloobster support and can't be canceled."
+		},
 		"business.detail.subscription.th.subscription" : {
 			"DE" :  "Paket",
 			"EN" : "Subscription"
