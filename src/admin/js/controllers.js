@@ -411,15 +411,6 @@ CloobsterAdmin.TrashCan.$inject = ['$scope','TrashEntry'];
 
 CloobsterAdmin.Fixes = function($scope, $http) {
 	
-	$scope.fixBusinessesTypo = function() {
-		$http.put('/admin/s/accounts/fixbusinesses')
-		.success(function(data, status) {
-			alert('Successfully applied fix!');
-		}).error(function(data, status) {
-			alert('fix failed! ' + status);
-		});
-	};
-	
 };
 CloobsterAdmin.Fixes.$inject = ['$scope', '$http'];
 
