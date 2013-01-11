@@ -105,8 +105,11 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		$scope.documentsResource = Documents.buildResource(activeBusinessId);
 		//create menu resource
 		$scope.menusResource = Menu.buildResource(activeBusinessId);
-		//only load menus once
-		$scope.menus = $scope.menusResource.query(angular.noop, handleError);	
+		//only load menus once and only when in category assign tap
+		if($location.url() != "/businesses/"+businessId+"/spots") {
+			$scope.menus = $scope.menusResource.query(angular.noop, handleError);		
+		}
+		
 
 		//load spots
 		$scope.areas = $scope.areasResource.query(angular.noop,	handleError);
