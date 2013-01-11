@@ -70,7 +70,7 @@ CloobsterAdmin.Import = function($scope, $http, $anchorScroll) {
 		setProgress("0%");
 	}
 
-	$scope.import = function() {
+	$scope.submitImport = function() {
 		var dto;
 		$scope.importProgress = true;
 		try {
@@ -242,18 +242,18 @@ CloobsterAdmin.PDFConfiguration = function($scope, $http, $timeout) {
 	dismissAlert();
 	resetForm();
 }
-CloobsterAdmin.Configuration.$inject = ['$scope', '$http', '$timeout'];
+CloobsterAdmin.PDFConfiguration.$inject = ['$scope', '$http', '$timeout'];
 
 
 CloobsterAdmin.Functions = function($scope, $http) {
-	$scope.deleteFunctionsDisabled = (Karazy.environment === "prod")? true : false;
+	$scope.deleteFunctionsDisabled = (Karazy.environment === "dev")? false : true;
 	$scope.confirmDeleteAllDisabled = false;
 	$scope.confirmDeleteLiveDisabled = false;
 
 	$scope.deleteAllData = function() {
 		$scope.confirmDeleteAllText = "Deleting ...";
 		$scope.confirmDeleteAllDisabled = true;
-		$http.delete('/admin/s/datastore/all').success(function() {
+		$http['delete']('/admin/s/datastore/all').success(function() {
 				$scope.confirmDeleteAllText = "All data deleted.";
 			}).error(function (data, status) {
 				$scope.confirmDeleteAllText = status + " error.";
@@ -263,7 +263,7 @@ CloobsterAdmin.Functions = function($scope, $http) {
 	$scope.deleteLiveData = function() {
 		$scope.confirmDeleteLiveText = "Deleting ...";
 		$scope.confirmDeleteLiveDisabled = true;
-		$http.delete('/admin/s/datastore/live').success(function() {
+		$http['delete']('/admin/s/datastore/live').success(function() {
 				$scope.confirmDeleteLiveText = "Live data deleted.";
 			}).error(function (data, status) {
 				$scope.confirmDeleteLiveText = status + " error.";

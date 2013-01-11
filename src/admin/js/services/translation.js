@@ -134,7 +134,7 @@ angular.module("CloobsterAdmin.translations", [], ["$provide", function($provide
 		"subscription.cancel.text" : {
 			"DE" :  "Wollen Sie diese Anfrage ablehnen?",
 			"EN" : "Do you want to cancel this request?"
-		},
+		}
 	}
 	$provide.value("translation", map);
 }]);

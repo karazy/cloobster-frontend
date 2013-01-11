@@ -2,68 +2,98 @@
 <project name="CloobsterFrontend" default="build-all" basedir=".">
 	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask"
 	           classpath="tools/closure-compiler/compiler.jar"/>
+	<property name="admindir" value="admin"/>
 	<property name="frontenddir" value="frontend"/>
 	<property name="customerhomedir" value="home"/>
-	
-	<target name="build-all" depends="build-frontend, build-customerhome">
+
+	<target name="build-all" depends="clean-all, build-frontend, build-customerhome, build-admin">
+	</target>
+	<target name="clean-all" depends="clean-frontend, clean-customerhome, clean-admin">
+		</target>
+	<target name="build-admin" depends="compile-admin, copylibs-admin, copyresources-admin">
 	</target>
 	<target name="build-frontend" depends="compile-frontend, copylibs-frontend, copyresources-frontend, setversion">
 	</target>
 	<target name="build-customerhome" depends="compile-customerhome, copylibs-customerhome, copyresources-customerhome">
 	</target>
-	
+
 	<target name="clean-frontend">
-		<delete dir="build/${frontenddir}"></delete>	
+		<delete dir="build/${frontenddir}">
+		</delete>
 	</target>
 	<target name="clean-customerhome">
-		<delete dir="build/${customerhomedir}"></delete>
+		<delete dir="build/${customerhomedir}">
+		</delete>
+	</target>
+	<target name="clean-admin">
+		<delete dir="build/${admindir}">
+			</delete>
 	</target>
 	<target name="setversion">
 		<echo message="Setting version number" />
 		<exec executable="${git.cmd}" dir="${basedir}" outputproperty="build.commit" vmlauncher="${git.vmlauncher}">
-		    <arg value="describe"/>
-		    <arg value="--always"/>
+			<arg value="describe"/>
+			<arg value="--always"/>
 		</exec>
 		<echo message="Commit version: ${build.commit}" />
 		<replaceregexp file="${basedir}/build/${frontenddir}/partials/about.html" match="\{VERSIONINFO\}" replace="${build.commit}" byline="true">
 		</replaceregexp>
 	</target>
+	<target name="compile-admin">
+		<jscomp compilationLevel="simple" warning="verbose" debug="false" output="build/${admindir}/app-all.min.js">
+			<path id="sources">
+				<fileset dir="${basedir}/src/${admindir}/js/">
+					<include name="**/*.js" />
+				</fileset>
+			</path>
+			<externs dir="src">
+				<file name="extern.js" />
+			</externs>
+		</jscomp>
+	</target>
 	<target name="compile-frontend">
-	    <jscomp compilationLevel="simple" warning="verbose" debug="false" output="build/${frontenddir}/app-all.min.js">
-	    	<path id="sources">
-	    		<fileset dir="${basedir}/src/${frontenddir}/js/">
-	    			<include name="**/*.js"/>
-	    		</fileset>
-	    	</path>
-	    	<externs dir="src" >
-	    		<file name="extern.js"/>	
-	    	</externs>
-	    </jscomp>
-	  </target>
+		<jscomp compilationLevel="simple" warning="verbose" debug="false" output="build/${frontenddir}/app-all.min.js">
+			<path id="sources">
+				<fileset dir="${basedir}/src/${frontenddir}/js/">
+					<include name="**/*.js"/>
+				</fileset>
+			</path>
+			<externs dir="src" >
+				<file name="extern.js"/>
+			</externs>
+		</jscomp>
+	</target>
 	<target name="compile-customerhome">
-	    <jscomp compilationLevel="simple" warning="verbose" debug="false" output="build/${customerhomedir}/app-all.min.js">
-	    	<path id="sources">
-	    		<fileset dir="${basedir}/src/${customerhomedir}/js/">
-	    			<include name="**/*.js"/>
-	    		</fileset>
-	    	</path>
-	    	<externs dir="src" >
-	    		<file name="extern.js"/>	
-	    	</externs>
-	    </jscomp>
-	  </target>
-
+		<jscomp compilationLevel="simple" warning="verbose" debug="false" output="build/${customerhomedir}/app-all.min.js">
+			<path id="sources">
+				<fileset dir="${basedir}/src/${customerhomedir}/js/">
+					<include name="**/*.js"/>
+				</fileset>
+			</path>
+			<externs dir="src" >
+				<file name="extern.js"/>
+			</externs>
+		</jscomp>
+	</target>
+	<target name="copylibs-admin">
+		<copy todir="build/${admindir}/lib">
+			<filelist id="adminlibfiles" dir="src/${admindir}/lib" >
+				<file name="bootstrap.min.js" />
+				<file name="angular-resource-1.0.1.min.js" />
+			</filelist>
+		</copy>
+	</target>
 	<target name="copylibs-customerhome">
 		<copy todir="build/${customerhomedir}/lib">
-			<filelist id="libfiles" dir="src/${customerhomedir}/lib" >
+			<filelist id="customerhomelibfiles" dir="src/${customerhomedir}/lib" >
 				<file name="bootstrap/bootstrap.min.js" />
-				<file name="angular/angular-resource-1.0.1.min.js" />				
+				<file name="angular/angular-resource-1.0.1.min.js" />
 			</filelist>
 		</copy>
 	</target>
 	<target name="copylibs-frontend">
 		<copy todir="build/${frontenddir}/lib">
-			<filelist id="libfiles" dir="src/${frontenddir}/lib" >
+			<filelist id="frontendlibfiles" dir="src/${frontenddir}/lib" >
 				<file name="jquery/jquery.ui.widget.js" />
 				<file name="jquery/jquery-ui-1.8.21.custom.min.js" />
 				<file name="jquery/jquery.iframe-transport.js" />
@@ -74,31 +104,51 @@
 				<file name="bootstrap/bootstrap.min.js" />
 				<file name="angular/angular-resource-1.0.1.min.js" />
 				<file name="angular/angular-sanitize-1.0.1.min.js" />
-			</filelist>			
+			</filelist>
 		</copy>
 		<copy todir="build/${frontenddir}/lib/ckeditor">
-			<fileset dir="src/${frontenddir}/lib/ckeditor"></fileset>			
-		</copy>		
+			<fileset dir="src/${frontenddir}/lib/ckeditor">
+			</fileset>
+		</copy>
+	</target>
+	<target name="copyresources-admin">
+		<copy todir="build/${admindir}">
+			<fileset id="indexfiles" dir="src/${admindir}/" >
+				<include name="index.prod.html"/>
+			</fileset>
+			<fileset id="partialfiles" dir="src/${admindir}/" >
+				<include name="partials/**/*"/>
+			</fileset>
+			<fileset id="imgfiles" dir="src/${admindir}/" >
+				<include name="img/**/*"/>
+			</fileset>
+			<filelist id="cssfiles" dir="src/${admindir}/">
+				<file name="css/bootstrap.min.css"/>
+				<file name="css/bootstrap-responsive.min.css"/>
+				<file name="css/admin.css"/>
+			</filelist>
+		</copy>
+		<move file="build/${admindir}/index.prod.html" tofile="build/${admindir}/index.html" />
 	</target>
 	<target name="copyresources-customerhome">
-			<copy todir="build/${customerhomedir}">
-				<fileset id="indexfiles" dir="src/${customerhomedir}/" >
-					<include name="index.prod.html"/>
-				</fileset>
-				<fileset id="partialfiles" dir="src/${customerhomedir}/" >
-					<include name="partials/**/*"/>
-				</fileset>
-				<fileset id="imgfiles" dir="src/${customerhomedir}/" >
-					<include name="img/**/*"/>
-				</fileset>
-				<filelist id="cssfiles" dir="src/${customerhomedir}/">
-					<file name="css/bootstrap.min.css"/>
-					<file name="css/bootstrap-responsive.min.css"/>
-					<file name="css/cloobster.css"/>
-				</filelist>
-			</copy>
-			<move file="build/${customerhomedir}/index.prod.html" tofile="build/${customerhomedir}/index.html" />
-		</target>
+		<copy todir="build/${customerhomedir}">
+			<fileset id="indexfiles" dir="src/${customerhomedir}/" >
+				<include name="index.prod.html"/>
+			</fileset>
+			<fileset id="partialfiles" dir="src/${customerhomedir}/" >
+				<include name="partials/**/*"/>
+			</fileset>
+			<fileset id="imgfiles" dir="src/${customerhomedir}/" >
+				<include name="img/**/*"/>
+			</fileset>
+			<filelist id="cssfiles" dir="src/${customerhomedir}/">
+				<file name="css/bootstrap.min.css"/>
+				<file name="css/bootstrap-responsive.min.css"/>
+				<file name="css/cloobster.css"/>
+			</filelist>
+		</copy>
+		<move file="build/${customerhomedir}/index.prod.html" tofile="build/${customerhomedir}/index.html" />
+	</target>
 	<target name="copyresources-frontend">
 		<copy todir="build/${frontenddir}">
 			<fileset id="indexfiles" dir="src/${frontenddir}/" >

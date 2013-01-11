@@ -1,5 +1,6 @@
+CloobsterAdmin.resources = angular.module('CloobsterAdmin.resources', ['ngResource']);
 
-CloobsterAdmin.module.factory('Subscription', ['$resource', function($resource) {
+CloobsterAdmin.resources.factory('Subscription', ['$resource', function($resource) {
 
 	return $resource('/admin/m/subscriptions/:id',
 		{
@@ -14,7 +15,7 @@ CloobsterAdmin.module.factory('Subscription', ['$resource', function($resource) 
 }]);
 
 
-CloobsterAdmin.module.factory('Company', ['$resource', function($resource) {
+CloobsterAdmin.resources.factory('Company', ['$resource', function($resource) {
 
 	return $resource('/admin/m/companies/:id',
 		{
@@ -28,7 +29,7 @@ CloobsterAdmin.module.factory('Company', ['$resource', function($resource) {
 }]);
 
 
-CloobsterAdmin.module.factory('Location', ['$resource', function($resource) {
+CloobsterAdmin.resources.factory('Location', ['$resource', function($resource) {
 
 	return $resource('/admin/m/locations/:id',
 		{
@@ -42,7 +43,7 @@ CloobsterAdmin.module.factory('Location', ['$resource', function($resource) {
 
 }]);
 
-CloobsterAdmin.module.factory('LocationSubscription', ['$resource', function($resource) {
+CloobsterAdmin.resources.factory('LocationSubscription', ['$resource', function($resource) {
 
 	return $resource('/admin/m/locations/:bid/subscriptions/:id',
 		{
@@ -57,7 +58,7 @@ CloobsterAdmin.module.factory('LocationSubscription', ['$resource', function($re
 
 }]);
 
-CloobsterAdmin.module.factory('User', ['$resource', function($resource) {
+CloobsterAdmin.resources.factory('User', ['$resource', function($resource) {
 
 	return $resource('/admin/user/:id',
 		{
@@ -67,7 +68,7 @@ CloobsterAdmin.module.factory('User', ['$resource', function($resource) {
 
 }]);
 
-CloobsterAdmin.module.factory('Template', ['$resource', function($resource){
+CloobsterAdmin.resources.factory('Template', ['$resource', function($resource){
     return $resource('/admin/s/templates/:id',
       {
         'id': '@id'
@@ -79,7 +80,7 @@ CloobsterAdmin.module.factory('Template', ['$resource', function($resource){
     );
 }]);
 
-CloobsterAdmin.module.factory('TrashEntry', ['$resource', function($resource){
+CloobsterAdmin.resources.factory('TrashEntry', ['$resource', function($resource){
     return $resource('/admin/s/trash/:id',
       {
         'id': '@id'

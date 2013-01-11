@@ -9,7 +9,7 @@ var Karazy = {
 var CloobsterAdmin =  {};
 
 // Declare app level module which depends on filters, and services
-CloobsterAdmin.module = angular.module('CloobsterAdmin', ['ngResource', 'CloobsterAdmin.services', 'CloobsterAdmin.directives', 'CloobsterAdmin.filters']).
+CloobsterAdmin.module = angular.module('CloobsterAdmin', ['CloobsterAdmin.services','CloobsterAdmin.resources', 'CloobsterAdmin.directives', 'CloobsterAdmin.filters']).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   	$locationProvider.hashPrefix = '!';
   	$routeProvider.when('/main', {templateUrl: 'partials/main.html'});
