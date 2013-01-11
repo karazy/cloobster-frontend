@@ -251,7 +251,7 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 			return;
 		}
 
-		if(!subscription.status == "PENDING") {
+		if(subscription.status != "PENDING") {
 			$log.log('approvePendingSubscription: status not pending');
 			return;
 		}
@@ -293,7 +293,7 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 			return;
 		}
 
-		if(!subscription.status == "PENDING") {
+		if(subscription.status != "PENDING") {
 			$log.log('approvePendingSubscription: status not pending');
 			return;
 		}
