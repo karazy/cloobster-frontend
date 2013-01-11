@@ -108,10 +108,9 @@
 	    <div class="span3 data-container-with-title" ng-show="allProducts.length > 0">
 	    	<h4 class="data-container-title" l="menu.products.container.link.title">All Products</h4>
 	    	<div class="data-container-block data-container-seperator">
-	    		<p l="menus.products.link.description">Select an existing product to copy it and assign to active menu.</p>
+	    		<p l="menus.products.link.description" id="menusLinkHelp">Select an existing product to copy it and assign to active menu.</p>
 	    		<span l="menus.products.link.search">Search:</span><input ng-model="productCopyQuery.name">
-	    	</div>
-	    	
+	    	</div>	    	
     		<ul class="nav nav-pills nav-stacked data-container-block data-container-small data-container-scrollable">
 	       	 	<li ng-repeat="product in allProducts | filter:productCopyQuery" class="product-item dropdown">
 		        	<a class="dropdown-toggle" data-toggle="dropdown">{{product.name}}<b class="caret"></b></a>

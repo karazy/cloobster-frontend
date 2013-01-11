@@ -10,7 +10,7 @@
 * 	View and manage profiles.
 * 	@constructor
 */
-Cloobster.Navigation = function($scope, $location, loginService, Company,$routeParams,handleError,Business,$route,$log, $rootScope) {
+Cloobster.Navigation = function($scope, $location, loginService, Company,$routeParams,handleError,Business,$route,$log, $rootScope, Spot) {
 	var businessResource = null;
 
 	$scope.cond = function(expression, trueValue, falseValue) {
@@ -53,6 +53,10 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	$scope.businesses = Business.getActiveBusinesses();
 	$scope.company = Company.getActiveCompany();
 
+	$scope.$on('update-businesses', function() {
+		$scope.businesses = Business.getActiveBusinesses(true);
+	});
+
 	if(!$rootScope.activeBusinessId) {
 		$rootScope.activeBusinessId = $scope.businesses.length > 0 ? $scope.businesses[0]['id'] : null;	
 	}
@@ -74,7 +78,7 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	$scope.$watch('businesses.length', function (newValue, oldValue) {
 		if(!$rootScope.activeBusinessId && (newValue > 0)) {
 			$rootScope.activeBusinessId = $scope.businesses[0]['id'];
-		}
+		} 
 	});
 
 	/**
@@ -86,11 +90,77 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 		return !business.trash;
 	}
 
+	/**
+	* Adds a new business.
+	* @param businessName
+	*	Name for the new business
+	*/
+	$scope.addNewBusiness = function() {
+		var account;
+
+		if(!$scope.newBusiness.name) {
+			return;
+		}
+
+		if(!$scope.businessResource) {
+			account = loginService.getAccount();
+			$scope.businessResource = Business.buildResource(account.id);	
+		}
+
+		
+
+		$scope.newBusinessEntity = new $scope.businessResource($scope.newBusiness);
+
+		$scope.newBusinessEntity.$save(function(response) {
+			$scope.$broadcast('update-businesses');
+			$location.url('/businesses/'+response.id+'?howto=1');
+		}, handleError);
+	};
+
+	/**
+	* Load welcome spot for active business.
+	*/
+	$scope.loadWelcomeSpot = function() {
+
+		if(!$scope.spotResource) {
+			$scope.spotResource = Spot.buildResource($rootScope.activeBusinessId);
+		}
+
+		$scope.welcomeSpots = $scope.spotResource.query({'bid' : $rootScope.activeBusinessId, 'welcome' : true});
+	}
+
+	if($location.url() == "/howto") {
+		//if activeBusinessId changes reload welcome spot
+		$scope.$watch('activeBusinessId', function(newValue, oldValue) {
+			if(newValue) {
+				$scope.loadWelcomeSpot();	
+			} else {
+				$scope.welcomeSpots = null;
+			}	
+		});
+	}
+
 	$scope.$watch('loggedIn', function(newValue, oldValue) {
 		if(newValue === true) {
 			$scope.company = Company.getActiveCompany();
-			$scope.businesses = Business.getActiveBusinesses();
+			$scope.businesses = Business.getActiveBusinesses(false, checkBusinessesCount);					
 		}
 	});
+
+	/**
+	* @private
+	*	If no locations exist redirect to howto page.
+	*/
+	function checkBusinessesCount() {
+		if($scope.businesses && $scope.businesses.length == 0) {
+			$location.url("/howto");
+		}
+	}
+
+	// var howtostep = $location.search('howto');
+	if($routeParams['howto']) {
+		$scope.howtoMode = true;
+		$scope.howtoStep = $routeParams['howto'];
+	}
 };
-Cloobster.Navigation.$inject = ['$scope', '$location', 'login', 'Company','$routeParams','errorHandler','Business','$route','$log','$rootScope'];
+Cloobster.Navigation.$inject = ['$scope', '$location', 'login', 'Company','$routeParams','errorHandler','Business','$route','$log','$rootScope', 'Spot'];

@@ -10,7 +10,7 @@
 * 	View and manage businesses such as restaurants.
 * 	@constructor
 */
-Cloobster.Business = function($scope, $http, $routeParams, $location, loginService, uploadService, langService, Business, $log, handleError, Company, langcodes) {
+Cloobster.Business = function($scope, $http, $routeParams, $location, loginService, uploadService, langService, Business, $log, handleError, Company, Subscription, langcodes, $rootScope) {
 
 		/** Holds the Id of the active modal dialog.
 		@type {string} */
@@ -30,9 +30,16 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.businessResource = null;
 	/** Template resource used to create concrete image resources. */
 	$scope.imageResource = null;
+	/** Subscription resource */
+	$scope.subscriptionResource = null;
 	$scope.businesses = null;
+	$scope.subscriptions = null;
 	/** The currently selected business. */
 	$scope.activeBusiness = null;
+	/** Subscription of activeBusiness */
+	$scope.activeSubscription = null;
+	/** Subscription of pendingBusiness */
+	$scope.pendingSubscription = null;
 	/** In case of delete attempt, the business to delete. */
 	$scope.businessToDelete = null;
 	/** Property which is currently edited. */
@@ -76,6 +83,13 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	};
 
 	/**
+	* Load all available subscriptions.
+	*/
+	$scope.loadSubscriptions = function() {
+		$scope.subscriptions = Subscription.query(angular.noop, handleError);
+	}
+
+	/**
 	* Display the delete business modal dialog.
 	* @param business
 	*	Business to show delete dialog for.
@@ -103,6 +117,9 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		function success() {
 			$scope.businessToDelete = null;
 			$scope.deleteError = null;
+			$rootScope.activeBusinessId = null;
+
+			$scope.$broadcast('update-businesses');
 
 			//hide delete dialog
 			jQuery("#deleteModal").modal('hide');
@@ -119,27 +136,59 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		}
 	};
 
+
+	$scope.showLocationSettings = function(business) {
+		if(business && business.id) {
+			$location.url("/businesses/"+business.id);
+		}
+	}
+
 	/**
 	* Loads a complete business.
 	* @param id
 	* 	business to load
 	*/
 	$scope.loadBusiness = function(id) {
-		$scope.activeBusiness = $scope.businessResource.get({'id' : id}, function() {						
+		$scope.activeBusiness = $scope.businessResource.get({'id' : id, 'countSpots' : true}, function() {						
 			//if no images are included init with empty object
 			$scope.activeBusiness.images = $scope.activeBusiness.images || {};
 			//if no lang array exists create one
 			$scope.activeBusiness.lang = $scope.activeBusiness.lang || [];
 
 			$scope.imageResource =	createImageResource($scope.activeBusiness.id);
+
+			$scope.loadBusinessSubscriptions($scope.activeBusiness);
+			
+
 		}, handleError);
+	};
+
+	/**
+	* Load subscriptions for a business.
+	* @param business
+	*	business to load subscriptions for
+	*/
+	$scope.loadBusinessSubscriptions = function(business) {
+		$scope.subscriptionResource = Business.buildSubscriptionResource(business.id);
+
+		if(business.activeSubscriptionId) {
+			$scope.activeSubscription = $scope.subscriptionResource.get(
+				{ 'id' : business.activeSubscriptionId },
+				checkStaleSubscription,
+				handleError
+			);	
+		}
+
+		if(business.pendingSubscriptionId) {
+			$scope.pendingSubscription = $scope.subscriptionResource.get({ 'id' : business.pendingSubscriptionId});
+		}
 	};
 
 	/**
 	* Show/hide new business form.
 	*/
 	$scope.toggleNewBusiness = function() {
-		$location.url("/businesses/new");
+		$location.url("#/businesses/new");
 		// $scope.showNewBusinessForm = !$scope.showNewBusinessForm;
 	};
 
@@ -152,46 +201,59 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		var fields = ['name', 'city', 'address', 'postcode', 'phone', 'description', 'currency'],
 			isInvalid = false;
 
-		if($scope.newBusinessForm.$valid) {
-			$scope.newBusinessEntity = new $scope.businessResource({
-				'name' : $scope.newBusiness.name,
-				'city' : $scope.newBusiness.city,
-				'address' : $scope.newBusiness.address,
-				'postcode' : $scope.newBusiness.postcode,
-				'phone' : $scope.newBusiness.phone,
-				'description' : $scope.newBusiness.description,
-				'currency' : $scope.newBusiness.currency
-			});
-
-			$("#addBusinessButton").button("loading");
-
-			$scope.newBusinessEntity.$save(function() {
-				//close switches to another url so businesses will be refreshed automatically 
-				//and showing the new new business
-				$("#addBusinessButton").button("reset");
-				// refresh the active businesses in the background.
-				Business.getActiveBusinesses(true);
-				$scope.closeNewBusinessForm();
-			},
-			function(data,status,headers,config) {
-				//Error handling
-				$("#addBusinessButton").button("reset");
-				handleError(data, status, headers, config);
-			});
-		} else {
-			//mark form as dirty to show validation errors
-			jQuery.each(fields, function(index, value) {
-				if($scope.newBusinessForm[value] && !$scope.newBusinessForm[value].invalid) {
-					//mark property as dirty to display error messages
-					$scope.newBusinessForm[value].$dirty = true;
-					isInvalid = true;
-				}
-
-				if(isInvalid) {
-					$scope.newBusinessForm.$setDirty();
-				}
-			})			
+		if(!$scope.newBusiness.name) {
+			return;
 		}
+
+		$scope.newBusinessEntity = new $scope.businessResource($scope.newBusiness);
+
+		$scope.newBusinessEntity.$save(function(response) {
+			$scope.$broadcast('update-businesses');
+			$location.url('/businesses/'+response.id);
+		}, handleError);
+
+		return;
+		//old code
+		// if($scope.newBusinessForm.$valid) {
+		// 	$scope.newBusinessEntity = new $scope.businessResource({
+		// 		'name' : $scope.newBusiness.name,
+		// 		'city' : $scope.newBusiness.city,
+		// 		'address' : $scope.newBusiness.address,
+		// 		'postcode' : $scope.newBusiness.postcode,
+		// 		'phone' : $scope.newBusiness.phone,
+		// 		'description' : $scope.newBusiness.description,
+		// 		'currency' : $scope.newBusiness.currency
+		// 	});
+
+		// 	$("#addBusinessButton").button("loading");
+
+		// 	$scope.newBusinessEntity.$save(function() {
+		// 		//close switches to another url so businesses will be refreshed automatically 
+		// 		//and showing the new new business
+		// 		$("#addBusinessButton").button("reset");
+		// 		// refresh the active businesses in the background.
+		// 		Business.getActiveBusinesses(true);
+		// 		$scope.closeNewBusinessForm();
+		// 	},
+		// 	function(data,status,headers,config) {
+		// 		//Error handling
+		// 		$("#addBusinessButton").button("reset");
+		// 		handleError(data, status, headers, config);
+		// 	});
+		// } else {
+		// 	//mark form as dirty to show validation errors
+		// 	jQuery.each(fields, function(index, value) {
+		// 		if($scope.newBusinessForm[value] && !$scope.newBusinessForm[value].invalid) {
+		// 			//mark property as dirty to display error messages
+		// 			$scope.newBusinessForm[value].$dirty = true;
+		// 			isInvalid = true;
+		// 		}
+
+		// 		if(isInvalid) {
+		// 			$scope.newBusinessForm.$setDirty();
+		// 		}
+		// 	})			
+		// }
 	};
 
 	/**
@@ -400,6 +462,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		//reset filters
 		$scope.languageQuery.lang = '';
 		$scope.languageQuery.selected = '';
+		$scope.languageQuery.active = true;
 
 		angular.forEach($scope.langcodes, function(lang, key) {
 			if(jQuery.inArray(lang.code, $scope.activeBusiness.lang) >= 0) {
@@ -435,6 +498,80 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		}
 	};
 
+	//start subscription methods
+
+	$scope.setActivePackageForLocation = function(subscription) {
+		var newSubscription;
+
+		if(!subscription) {
+			$log.log('setActivePackageForLocation: no subscription provided');
+			return;
+		}
+
+		if(subscription.templateId) {
+			$log.log('setActivePackageForLocation: this is not a subscription template');
+			return;
+		}
+		
+		newSubscription = {
+			// name: subscription.name,
+			// fee: subscription.fee,
+			// maxSpotCount: subscription.maxSpotCount,
+			// basic: subscription.basic,
+			templateId: subscription.id
+			// status: 'PENDING'
+		}
+
+		newSubscription = new $scope.subscriptionResource(newSubscription);
+
+		newSubscription.$save(function() {
+			$scope.pendingSubscription = newSubscription;
+		});
+	}
+
+	$scope.cancelPendingSubscription = function() {
+		if(!$scope.pendingSubscription) {
+			$log.log('cancelPendingSubscription: no pending subscription exists');
+			return;
+		}
+		
+		$scope.pendingSubscription.$delete(function() {
+			$scope.pendingSubscription = null;
+		}, error);
+
+		function error(response) {
+			//
+			if(response && response.status == 409) {
+				if($scope.subscriptionResource) {
+					$scope.cancelPendingSubscriptionError = true;
+					$scope.activeBusiness.pendingSubscriptionId = null;
+					$scope.pendingSubscription = null;
+				}				
+			} else {
+				handleError(response);
+			}
+		}
+	}
+
+	function checkStaleSubscription() {
+		var found = false;
+		if(!$scope.activeSubscription) {
+			return;
+		}
+
+		angular.forEach($scope.subscriptions, function(s) {
+			if(s.id == $scope.activeSubscription.templateId) {
+				found = true;				
+			}
+		});
+
+		if(!found) {
+			$scope.staleSubscription = true;
+		}
+	}
+
+	//end subscriptions methods
+
 	/**
 	* @name Cloobster.Login~hideError
 	*
@@ -463,13 +600,15 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.$watch('loggedIn', function(newValue, oldValue) {
 		if(newValue == true) {
 			$scope.loadBusinesses();
+			$scope.loadSubscriptions();
+
 			$scope.company = Company.buildResource().get({
 				'id': loginService.getAccount()['companyId']
 			},angular.noop, handleError);
 
 			//load business details
 			if($routeParams['businessId']) {
-				$scope.loadBusiness($routeParams['businessId']);
+				$scope.loadBusiness($routeParams['businessId']);				
 			}
 
 			if($location.path() == "/businesses/new") {
@@ -484,4 +623,4 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 };
 
-Cloobster.Business.$inject = ['$scope', '$http','$routeParams', '$location', 'login', 'upload', 'lang', 'Business', '$log','errorHandler','Company', 'langcodes'];
+Cloobster.Business.$inject = ['$scope', '$http','$routeParams', '$location', 'login', 'upload', 'lang', 'Business', '$log','errorHandler','Company', 'Subscription', 'langcodes', '$rootScope'];

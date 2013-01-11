@@ -50,6 +50,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 	$scope.activeBusiness = null;
 	/** A temporary order list of menus assigned to current area. */
 	$scope.currentAreaCategories = null;
+	/** Active Subscription. Used to check for basis mode. */
+	$scope.activeSubscription = null;
 
 	//Drag&Drop for menus assignment
 	jQuery( "#assignedMenusList, #allMenusList" ).sortable({
@@ -74,7 +76,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 
 	// areas start
 	$scope.loadAreas = function(businessId) {
-		var account;
+		var account,
+			subscriptionResource;
 
 		if(!$scope.loggedIn) {
 			$log.log('Not logged in! Failed to load areas.');
@@ -85,7 +88,14 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 
 		account =  loginService.getAccount();
 
-		$scope.activeBusiness = Business.buildResource(account.id).get({'id' : activeBusinessId});
+		subscriptionResource = Business.buildSubscriptionResource(activeBusinessId);
+
+		$scope.activeBusiness = Business.buildResource(account.id).get(
+			{'id' : activeBusinessId, 'countSpots' : true},
+			function() {
+				$scope.activeSubscription = subscriptionResource.get({'id' : $scope.activeBusiness.activeSubscriptionId});
+			}
+		);
 
 		//create areas resource
 		$scope.areasResource = Area.buildResource(activeBusinessId);
@@ -95,8 +105,11 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		$scope.documentsResource = Documents.buildResource(activeBusinessId);
 		//create menu resource
 		$scope.menusResource = Menu.buildResource(activeBusinessId);
-		//only load menus once
-		$scope.menus = $scope.menusResource.query(angular.noop, handleError);	
+		//only load menus once and only when in category assign tap
+		if($location.url() != "/businesses/"+businessId+"/spots") {
+			$scope.menus = $scope.menusResource.query(angular.noop, handleError);		
+		}
+		
 
 		//load spots
 		$scope.areas = $scope.areasResource.query(angular.noop,	handleError);
@@ -167,25 +180,13 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 					}
 				});
 			}, function(data,status) {//error during save
-				if(status == 403) {
-					$scope.deleteError = langService.translate('profile.account.wrongpassword') || 'Incorrect password.'
+				if(data.status == 403) {
+					$scope.deleteError = langService.translate('common.password.invalid')
 				}
 			});
 		});
 		
 		$scope.deletePassword = null;
-
-		// spotToDelete.$delete(angular.noop, handleError);
-
-		// angular.forEach($scope.spots, function(spot, index) {
-		// 	if(spot.id == $scope.currentSpot.id) {
-		// 		$scope.spots.splice(index, 1);
-		// 		//exit loop
-		// 		return;
-		// 	}
-		// });
-
-		// $scope.currentSpot = null;
 	};
 
 	/**
@@ -219,12 +220,13 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 	$scope.saveSpot = function() {		
 		if($scope.currentSpot && $scope.currentSpot.id) {
 			$log.log("update spot " + $scope.currentSpot.id);
-			$scope.currentSpot.$update(angular.noop, handleError);
+			$scope.currentSpot.$update(angular.noop, handleError);			
 		} else {
 			$log.log("save new spot");
 			$scope.currentSpot.$save(
 				function() { 
 					$scope.spots.push($scope.currentSpot);
+					$scope.updateSpotCount(1, false);
 				},
 				// Error callback
 				handleError
@@ -250,6 +252,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			}
 		});
 
+		$scope.updateSpotCount(1, true);
+
 		manageViewHiearchy("area");
 	}
 
@@ -267,6 +271,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 	*
 	*/
 	$scope.generateSpots = function() {
+		var count;
 
 		if(!$scope.spots) {
 			$log.error('Spot.generateSpots: no spots collection exists');
@@ -288,6 +293,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			return;
 		}
 
+		count = $scope.spotMassCreation.count;
+
 		$scope.spotsResource.generate( 
 			{
 				'name' : $scope.spotMassCreation.name,
@@ -298,6 +305,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			function(response) {
 				//success
 				$scope.spots = $scope.spots.concat(response);
+				$scope.updateSpotCount(count, false);
 			},
 			// Error callback
 			handleError
@@ -414,6 +422,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 					} 	
 				});				
 				$scope.spots = clearedSpots;
+				$scope.updateSpotCount(ids.length, true);
 			},
 			handleError	
 		);
@@ -455,6 +464,31 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		filtered = $filter('filter')($scope.spots, { 'checked' : true}) || [];
 
 		return filtered.length;
+	}
+
+	/**
+	* Updates spotCount on activeBusiness after adding/removing spots.
+	* This prevents a server rounddrip.
+	*/
+	$scope.updateSpotCount = function(amount, substract) {
+
+		if(!$scope.activeBusiness) {
+			return;
+		}
+
+		if(!substract) {
+			$scope.activeBusiness.spotCount += amount;	
+		} else {
+			$scope.activeBusiness.spotCount -= amount;
+		}
+
+		//set quotaExceeded
+		if($scope.activeBusiness.spotCount > $scope.activeSubscription.maxSpotCount) {
+			$scope.activeSubscription.quotaExceeded = true;
+		} else {
+			$scope.activeSubscription.quotaExceeded = false;
+		}
+		
 	}
 
 	/**

@@ -779,13 +779,22 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		return true;
 	}
 
-	//initialize price selection popover
+	//initialize price selection popover help
 	jQuery('#choiceOverridePriceLabel').popover({
 		placement: 'left',
 		title: langService.translate("common.help"),
 		trigger: 'hover',
 		html: true,
 		content: langService.translate("menus.choices.field.overridePrice.description")
+	});
+
+		//initialize action column help popover
+	jQuery('#menusLinkHelp').popover({
+		placement: 'left',
+		title: langService.translate("common.help"),
+		trigger: 'hover',
+		html: true,
+		content: langService.translate("menus.products.link.description.popover")
 	});
 
 

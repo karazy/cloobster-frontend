@@ -3,6 +3,8 @@
 /* Cloobster namespace. Create if not exists.*/
 var Cloobster = Cloobster || {};
 
+Cloobster.services = angular.module('Cloobster.services', ['ngResource', "Cloobster.translations", "Cloobster.languages"]);
+
 // Declare app level module which depends on filters, and services
 Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster.directives', 'Cloobster.filters', 'ngSanitize']).
   config(['$routeProvider','configProvider', function($routeProvider,configProvider) {
@@ -30,6 +32,7 @@ Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster
     $routeProvider.when('/businesses/:businessId', {templateUrl: 'partials/businessdetail.html', controller: Cloobster.Business});
     $routeProvider.when('/accounts', {templateUrl: 'partials/accounts.html', controller: Cloobster.Accounts});
     $routeProvider.when('/accounts/setup/:token', {templateUrl: 'partials/activate_account.html', controller: Cloobster.Accounts});    
+    $routeProvider.when('/howto', {templateUrl: 'partials/howto.html', controller: Cloobster.Navigation});
     // $routeProvider.when('/', {templateUrl: 'partials/login.html', controller: Cloobster.Login});
     
     $routeProvider.otherwise({redirectTo: '/home'});

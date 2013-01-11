@@ -47,6 +47,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "User accounts"
 		},
 		//businesses header partial
+		"businesses.headertabs.howto" : {
+			"DE" :  "Los geht's",
+			"EN" : "Howto"
+		},
 		"businesses.headertabs.location" : {
 			"DE" :  "Locations",
 			"EN" : "Locations"
@@ -64,8 +68,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "User Accounts"
 		},
 		"businesses.headertabs.activation" : {
-			"DE" :  "Kategorien aktivieren",
-			"EN" : "Activate categories"
+			"DE" :  "Kategorien zuweisen",
+			"EN" : "Assign categories"
 		},
 		"businesses.headertabs.areas" : {
 			"DE" :  "Spots",
@@ -248,6 +252,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "z.B. 0049-170-4153172",
 			"EN" : "e.g. 0049-170-4153172"
 		},
+		"location.placeholder.description" : {
+			"DE" :  "z.B. In der Nähe von Frankfurt gelegen, zählen wir zu den besten Spa Hotels der Region!",
+			"EN" : "e.g. An Iconic 5* hotel providing 21st century comforts against a backdrop of exquisitely restored splendor."
+		},
+		"location.placeholder.slogan" : {
+			"DE" :  "z.B. Service at its Peak!",
+			"EN" : "e.g. Service at its Peak!"
+		},
+		"location.placeholder.url" : {
+			"DE" :  "z.B. http://www.example.com",
+			"EN" : "e.g. http://www.example.com"
+		},
 		"registration.action.fblogin" : {
 			"DE" : "Mit Facebook einloggen und cloobster verknüpfen.",
 			"EN" : "Log in to Facebook and link with cloobster."
@@ -341,7 +357,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"businesses.action.documents" : {
 			"DE" :  "Dokumente",
-			"EN" : ""
+			"EN" : "Documents"
 		},
 		"businesses.action.infopages" : {
 			"DE" :  "Info-Seiten",
@@ -392,7 +408,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Please fill out this field."
 		},
 		"businesses.form.mandatory" : {
-			"DE" : "Felder markiert mit * sind pflicht.",
+			"DE" : "Felder markiert mit * sind Pflicht.",
 			"EN" : "Fields marked with * are mandatory."
 		},
 		"businesses.dialog.delete" : {
@@ -403,13 +419,25 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Diese Location wurde gelöscht.",
 			"EN" : "This location has been deleted."
 		},
+		"businesses.new.name.placeholder" : {
+			"DE" :  "z.B. Hotel goldener Palast",
+			"EN" : "e.g. Hotel golden Palace"
+		},
+		"business.new.title" : {
+			"DE" :  "Neue Location",
+			"EN" : "New Location"
+		},
+		"business.new.text" : {
+			"DE" :  "Möchten Sie eine neue Location anlegen?",
+			"EN" : "Do you want to add a new Location?"
+		},
 		//business detail partial
 		"business.detail.help" : {
 			"DE" :  "Hier können Sie das Profil der aktiven Location pflegen.<br/>Außerdem können Sie hier die Oberfläche der App konfigurieren.",
 			"EN" : "Edit properties of current location.<br/>Configure corporate identity for app."
 		},
 		"business.action.edit.enable" : {
-			"DE" : "Editiermodus aktivieren",
+			"DE" : "Location editieren",
 			"EN" : "Enable edit mode"
 		},
 		"business.action.edit.disabled" : {
@@ -483,6 +511,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"business.detail.url" : {
 			"DE" : "Webseite",
 			"EN" : "Website"
+		},
+		"business.detail.stars" : {
+			"DE" :  "Sterne",
+			"EN" : "Stars"
 		},
 		"business.detail.address" : {
 			"DE" : "Adresse",
@@ -560,9 +592,13 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Ein blaues und luftiges Motiv",
 			"EN" :  "A blue and breezy theme"
 		},
-		"business.detail.themes.orange.description" : {
-			"DE" :  "Ein orangenes und gemütliches Motiv",
-			"EN" :  "An orange and cosy theme"
+		"business.detail.themes.blackpink.description" : {
+			"DE" :  "Ein ausgeflipptes schwarz-pink Motiv",
+			"EN" :  "A funky black and pink theme"
+		},
+		"business.detail.themes.bluegold.description" : {
+			"DE" :  "Ein edles blau-golden Motiv",
+			"EN" : "A noble blue-gold theme"
 		},
 		"business.detail.section.facebook" : {
 			"DE" :  "Facebook Konfiguration",
@@ -589,7 +625,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Password invalid!"
 		},
 		"business.dialog.delete.text" : {
-		"DE" : "Du bist dabei, <strong>{{activeBusiness.name}}</strong> zu löschen! Die Location wird deaktiviert und in einen Lesemodus versetzt. "+
+		"DE" : "Sie sind dabei, <strong>{{activeBusiness.name}}</strong> zu löschen! Die Location wird deaktiviert und in einen Lesemodus versetzt. "+
 			"Aktuell eingeloggte Servicekräfte und Gäste können noch Bestellungen einsehen, aber keine weitere Aktionen tätigen. Die Location "+
 			" wird nach einer Weile permanent gelöscht!",
 		"EN" : "You are about to delete <strong>{{activeBusiness.name}}</strong>! Location will be read-only after it has been deleted and will be permanently removed shortly afterwards."
@@ -607,6 +643,87 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"unterstützen, mittels einer Auswahlliste (rechts oben) die jeweilige Sprache, die Sie pflegen wollen, auswählen.<br/>"+
 			"Nicht übersetzte Felder werden dem Kunden in der Standardsprache angezeigt.",
 			"EN" : "Please select languages you want to offer in cloobster app.<br/>You can select a language for each location using the drop-down menu in the upper right corner.<br/>Fields that have not been translated will be shown in the default language."
+		},
+		"business.detail.section.subscription" : {
+			"DE" :  "Paket Verwaltung",
+			"EN" : "Subscription Management"
+		},
+		"business.detail.section.subscription.description" : {
+			"DE" :  "Hier können Sie ihr cloobster Paket verwalten. Im Basis Paket sind die Funktionen"+
+				" Bestellen, Feedback und VIP Call nicht vergübar.",
+			"EN" : "Manage your cloobster subscription. Basic subscription does not support Ordering, Feedback and VIP call."
+		},
+		"business.detail.subscription.pending.description" : {
+			"DE" :  "Eine Anfrage zum Wechsel in Paket <strong>{{pendingSubscription.name}}</strong> läuft.",
+			"EN" : "A change request for subscription <strong>{{pendingSubscription.name}}</strong> is running."
+		},
+		"business.detail.subscription.cancel.error" : {
+			"DE" :  "Ihre Anfrage wurde bereits vom cloobster Support bearbeitet und kann nicht angebrochen werden.",
+			"EN" : "Your request already has been processed by cloobster support and can't be canceled."
+		},
+		"business.detail.subscription.th.subscription" : {
+			"DE" :  "Paket",
+			"EN" : "Subscription"
+		},
+		"business.detail.subscription.th.spots" : {
+			"DE" :  "Maximale nutzbare Spots",
+			"EN" : "Maximum usable spots"
+		},
+		"business.detail.subscription.th.fee" : {
+			"DE" :  "Kosten pro Monat",
+			"EN" : "Cost per month"
+		},
+		"business.detail.subscription.th.action" : {
+			"DE" :  "Aktion",
+			"EN" : "Action"
+		},
+		"business.detail.subscription.change" : {
+			"DE" :  "Wechsel anfordern",
+			"EN" : "Change request"
+		},
+		"business.detail.subscription.subscribed" : {
+			"DE" :  "Ihr aktuelles Paket",
+			"EN" : "Your current subscription"
+		},
+		"business.detail.subscription.pending" : {
+			"DE" :  "Laufende Anfrage",
+			"EN" : "Pending subscription"
+		},
+		"business.detail.subscription.upgrade.title" : {
+			"DE" :  "Wechseln Sie heute!",
+			"EN" : "Upgrade today!"
+		},
+		"business.detail.subscription.upgrade.description" : {
+			"DE" :  '<span class="label label-important">Basis</span> Momentan haben Sie ein Basis Paket.<br/>'+ 
+			'Wechseln Sie auf ein anderes Paket um alle cloobster Funktionen zu nutzen. '+ 
+			'<a href="https://www.cloobster.com" target="_blank">Mehr Information</a>',
+			"EN" : '<span class="label label-important">Basic</span> Currently you are using a basic subscription.<br/>'+ 
+			'Upgrade to another cloobster subscription to gain access to all funtions. '+ 
+			'<a href="https://www.cloobster.com" target="_blank">Learn more</a>'
+		},
+		"subscription.basic" : {
+			"DE" :  "Basis",
+			"EN" : "Basic"
+		},
+		"business.detail.subscription.unlimited" : {
+			"DE" :  "unbegrenzt",
+			"EN" : "unlimited"
+		},
+		"business.detail.subscriptioncounter.title" : {
+			"DE" :  "Benutzte Spots",
+			"EN" : "Used spots"
+		},
+		"business.detail.subscription.change.text" : {
+			"DE" :  "Paketwechsel anfordern?",
+			"EN" : "Request subscription change?"
+		},
+		"business.detail.subscription.cancel" : {
+			"DE" :  "Anfrage widerrufen",
+			"EN" : "Cancel request?"
+		},
+		"business.detail.subscription.cancel.text" : {
+			"DE" :  "Möchten Sie die Anfrage widerrufen?",
+			"EN" : "Do you want to cancel your request?"
 		},
 		//profile partial
 		"profile.title" : {
@@ -735,8 +852,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		//menus partial
 		"menus.description" : {
-			"DE" : "Hier können Sie Ihre Produkte und Services anlegen und diese einer Kategorie zuweisen.<br/>"+
-					"Alle Kategorien können verschiedenen \"Service Bereichen\" zugewiesen werden, um Zeit zu sparen (im Service Area Tab).",
+			"DE" : "Hier können Sie Ihre Produkte und Services anlegen. Alle Produkte und Services werden einer Kategorie zugeordnet.<br/>"+
+					"Alle Kategorien können verschiedenen \"Service Bereichen\" zugewiesen werden (im Tab Kategorie zuweisen).",
 			"EN" : "You can manage your products and services here.<br/>"+
 					"In order to save time, all categories can be associated with several service areas."
 		},
@@ -745,8 +862,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Categories"
 		},
 		"menu.container.hint" : {
-			"DE" :  "Bitte vergessen Sie nicht, die Kategorie einem Servicebereich zuzuweisen.",
-			"EN" : "Don't forget to assign this category to a service area afterwards."
+			"DE" :  "Bitte vergessen Sie nicht, die Kategorie im Tab <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"Kategorien zuweisen\"</a> einem Servicebereich zuzuweisen.",
+			"EN" : "Don't forget to <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"assign\"</a>assign this category to a service area afterwards."
 		},
 		"menu.container.title" : {
 			"DE" : "Kategorie editieren",
@@ -817,9 +934,17 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "-copy"
 		},
 		"menus.products.link.description" : {
-			"DE" : "Klicken Sie auf eine bestehendes Produkt, um dieses zu kopieren und der aktuellen Kategory hinzuzufügen. Wahlweise können zusätzlich <strong>Auswahlmöglichkeiten verknüpft</strong> oder <strong>kopiert werden</strong>.",
+			"DE" : "Klicken Sie auf eine bestehendes Produkt, um dieses zu kopieren und der aktuellen Kategorie hinzuzufügen. Optional können Auswahlmöglichkeiten <strong>verknüpft</strong> oder <strong>kopiert</strong> werden. <i class='icon-question-sign'></i>",
 			"EN" : "Click on existing product to copy it and add to current category."+
 				"Optionally link or copy choices."
+		},
+		"menus.products.link.description.popover" : {
+			"DE" :  "Änderungen an Auswahlmöglichkeiten (AM) ...<br/>"+
+				"<b>verknüpfen</b> - Änderung der AM am kopiertem Produkt ändert diese auch am original Produkt, da diese voneinander abhängen (oder umgekehrt).<br/>"+
+				"<b>kopieren</b> - Änderung der AM am kopiertem Produkt hat keinen Einfluss auf die AM am original Produkt, da diese unabhängig sind (oder umgekehrt).",
+			"EN" : "Editing choices ...<br/>"+
+				"<b>linking</b> - changes to choices of copied product also changes them for original product (vice versa). They are linked.<br/>"+
+				"<b>copy</b> - changes to choices of copied product have no effect on original product (vice versa). They are independent."
 		},
 		"menus.products.orphaned.title" : {
 			"DE" : "Verwaiste Produkte",
@@ -1125,9 +1250,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		//spots partial
 		"areas.description" : {
 			"DE" :  "Für jede \"cloobster location\" können Sie mehrere \"Servicebereiche\" anlegen(z.B. \"Bar\", \"Zimmer\", \"Spa\", \"Konferenzraum\", etc.).<br>"
-			+"Jeder Servicebereich beinhaltet verschiedene Spots (Barcode für den Check-in) und zugewiesene Produktkategorien.",
+			+"Jeder Servicebereich beinhaltet verschiedene Spots (Barcode für den Check-in).",
 			"EN" : "For each \"cloobster location\" you can add several \"service areas\" (like \"Bar\", \"Rooms\", \"Spa\", \"Conference Area\", etc.).<br>"+
-				"Each service area has different spots and a selection of product categories."
+				"Each service area has different spots (barcode for check-in)."
 		},
 		"areas.list.title" : {
 			"DE" :  "Servicebereiche",
@@ -1177,6 +1302,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Spots (z.B. Tische oder Zimmer), die diesem Servicebereich zugeordnet sind.",
 			"EN" : "Spots assigned to this area."
 		},
+		"areas.spots.list.description.welcome" : {
+			"DE" :  "Dies ist eine spezielle Welcome Area mit Welcome Spot. Sie können keine Spots löschen oder hinzufügen zu einer Welcome Area."
+				+" Ein Welcome Spot repräsentiert die gesamte Location. Kunden können eichecken und Ihre Informationen sowie Produkte einsehen. Aber Sie können keine Bestellung oder VIP Calls tätigen.",
+			"EN" : "This is a special welcome area with a welcome spot. You can't add or remove spots to a welcome area. " +
+				"A welcome spot represents your whole location. Customers can check-i and have a look at your information as well as your products and services. But they can't order or submit a VIP Call."
+		},
 		"areas.spot.container.empty.description" : {
 			"DE" :  "Zeigt Details des ausgewählten Spots an. Wählen Sie einen Spot aus der Liste links.",
 			"EN" :  "Shows details of selected area. Select an area from the list."
@@ -1197,7 +1328,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"areas.allcategories.list.description" : {
 			"DE" :  "Hier aufgelistete Produktkategorien können (mittels Drag&Drop) dem aktuellen Servicebereich zugewiesen werden, um diese für eingecheckte Gäste verfügbar zu machen.",
 			"EN" : "The following product categories can be assigned (via drag & drop) to current service area to make them available to customers."
-		},
+		},		
 		"areas.categories.moveable.tooltip" : {
 			"DE" :  "Ziehen und loslassen, um zuzuweisen oder die Reihenfolge zu ändern.",
 			"EN" :  "Drag & drop to assign and change order of appearance."
@@ -1213,6 +1344,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "You're about to delete {{currentArea.name}}. This area, all spots, and barcodes cannot be used any longer."+
 					"All current customer checkins at the specific spots will continue to work.<br/>"+
 					"Data will be permanently deleted."
+		},
+		"areas.basicmode.message.text" : {
+			"DE" :  "Sie benutzen ein Basis Paket. Sie können Servicebereiche und Spots anlegen. Diese sind jedoch nicht aktiv.",
+			"EN" : "You are using a basic subscription. You can create/manage service areas and spots but they won't be active."
 		},
 		"spots.editor.name" : {
 			"DE" : "Name",
@@ -1244,116 +1379,125 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"spots.masscreation.title" : {
 			"DE" :  "Mehrere Spots anlegen",
-			"EN" : ""
+			"EN" :  "Create multiple spots"
 		},
 		"spots.masscreation.description" : {
 			"DE" :  "Hier können Sie mehrere Spots auf einmal anlegen.<br/>Zum Beispiel Zimmer 100 bis Zimmer 199",
-			"EN" : ""
+			"EN" :  "Create multiple spots at a time here. E.g. room 100 to 199."
 		},
 		"spot.masscreation.button" : {
 			"DE" :  "Mehrere",
-			"EN" : ""
+			"EN" :  "Multiple"
 		},
 		"spots.masscreation.name" : {
 			"DE" :  "Name*",
-			"EN" : ""
+			"EN" :  "Name*"
 		},
 		"spots.masscreation.startnumber" : {
 			"DE" :  "Startnummer",
-			"EN" : ""
+			"EN" :  "Start number"
 		},
 		"spots.masscreation.count" : {
 			"DE" :  "Anzahl*",
-			"EN" : ""
+			"EN" :  "Number*"
 		},
 		"spots.masscreation.placeholder.name" : {
 			"DE" :  "z.B. Zimmer oder Tisch",
-			"EN" : ""
+			"EN" :  "e.g. room or table"
 		},
 		"spots.masscreation.placeholder.startnumber" : {
 			"DE" :  "z.B. 100 (Standard 1)",
-			"EN" : ""
+			"EN" :  "e.g. 100 (standard 1)"
 		},
 		"spots.masscreation.placeholder.count" : {
 			"DE" :  "z.B. 50",
-			"EN" : ""
+			"EN" :  "e.g. 50"
 		},
 		"spots.masscreation.count.error.min" : {
 			"DE" :  "Anzahl muss min. 1 sein.",
-			"EN" : ""
+			"EN" :  "Create at minimum 1 spot."
 		},
 		"spots.masscreation.count.error.max" : {
 			"DE" :  "Anzahl darf max. 500 sein.",
-			"EN" : ""
+			"EN" :  "Create at maximum 500 spots."
 		},
 		"spots.massdelete.title" : {
 			"DE" :  "Selektierte Spots löschen",
-			"EN" : ""
+			"EN" :  "Delete selected spots"
 		},
 		"spots.massdelete.description" : {
 			"DE" :  "Löscht alle selektierten Spots. Diese Aktion kann nicht rückgängig gemacht werden.<br/>"+
 			"Ausgedruckte Barcodes sind danach nicht mehr gültig.",
-			"EN" : ""
+			"EN" :  "Deletes all selected spots. Action cannot be undone.<br/>"+
+			"Printed bar codes will become invalid."
 		},
 		"spots.massactivate.tooltip" : {
 			"DE" :  "Selektierte aktivieren",
-			"EN" : ""
+			"EN" :  "Activate selectted spots"
 		},
 		"spots.massdeactivate.tooltip" : {
-			"DE" :  "Selektiere deaktivieren",
-			"EN" : ""
+			"DE" :  "Selektierte deaktivieren",
+			"EN" :  "Deactivate selected spots"
 		},
 		"spots.massdelete.tooltip" : {
 			"DE" :  "Selektierte löschen",
-			"EN" : ""
+			"EN" :  "Delete selected spots"
 		},
 		"spots.masscheck.tooltip" : {
 			"DE" :  "Alle anwählen/abwählen",
-			"EN" : ""
+			"EN" :  "Select/deselect all"
 		},
 		"spots.filtered.status" : {
 			"DE" :  "Spots gefiltert {{filteredSpots.length}} | markiert {{getCheckedSpotsCount()}}",
-			"EN" : ""
+			"EN" :  "Spots filtered {{filteredSpots.length}} | selected {{getCheckedSpotsCount()}}"
 		},
 		"spots.legend.inactive" : {
 			"DE" :  "Inaktiv",
-			"EN" : ""
+			"EN" :  "Inactive"
 		},
 		"spots.listheader.selected" : {
 			"DE" :  "Markierte ...",
-			"EN" : ""
+			"EN" :  "Selected ..."
 		},
 		"spots.listheader.create" : {
 			"DE" :  "Anlegen ...",
-			"EN" : ""
+			"EN" :  "Create ..."
 		},
 		"spots.action.setactive" : {
 			"DE" :  "Aktiv setzen",
-			"EN" : ""
+			"EN" :  "Make active"
 		},
 		"spots.action.setinactive" : {
 			"DE" :  "Inaktiv setzen",
-			"EN" : ""
+			"EN" :  "Make inactive"
 		},
 		"spots.action.generatepdf" : {
-			"DE" :  "PDF generieren",
-			"EN" : ""
+			"DE" :  "PDF-Datei generieren",
+			"EN" :  "Generate PDF file"
 		},
 		"spots.action.generatepdf.description" : {
 			"DE" :  "Geniert ein Aufsteller PDF für ausgewählte Spots. Wenn das Dokument fertig erstellt wurde, kann es im Dokumententab heruntergeladen werden.<br/>Sie haben <strong>{{getCheckedSpotsCount()}}</strong> Spots ausgewählt.",
-			"EN" : ""
+			"EN" :  "Generates printable PDF file for selected spots. Once document has been generated, you can download it in the documents tab.<br/>You have selected <strong>{{getCheckedSpotsCount()}}</strong> spots."
 		},
 		"spots.generatepdf.documentname" : {
 			"DE" :  "Optionaler Dokumentname:",
-			"EN" : ""
+			"EN" :  "Optional document name"
 		},
 		"spots.generatepdf.documentname.placeholder" : {
 			"DE" :  "z.B. Barcodes für Zimmer 100 bis 199",
-			"EN" : ""
+			"EN" :  "e.g. bar codes for rooms 100 to 199"
 		},
 		"spots.generatepdf.documentname.maxlength" : {
 			"DE" :  "Maximal 100 Zeichen erlaubt.",
-			"EN" : ""
+			"EN" :  "Maximum number of characters is 100."
+		},
+		"areas.subscription.basic.description" : {
+			"DE" :  "<span class='label label-important'>Basis</span> Sie verwenden ein Basis Paket. Sie können ganz normal Servicebereiche und Spots anlegen.<br/>Kunden können jedoch weder bestellen (nur ihre Produkte & Dienstleistungen einsehen)"+
+					" und keinen VIP Call benutzen.<br/>" +
+			 		"<a href='https://www.cloobster.com' target='_blank'>Mehr Information</a> oder <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>.",
+			"EN" :  "<span class='label label-important'>Basic</span> Currently you are using a basic subscription. You can add service areas and spots <br/>but customers can't order"+
+					" or use the VIP Call.<br/>" +
+			 		"<a href='https://www.cloobster.com' target='_blank'>Learn more</a> or <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>."
 		},
 		//infopage partial
 		"infopages.description" : {
@@ -1413,60 +1557,61 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		//documents partial
 		"documents.title" : {
 			"DE" :  "Dokumente",
-			"EN" : ""
+			"EN" :  "Documents"
 		},
 		"documents.description" : {
 			"DE" :  "Hier können Sie Dokumente der ausgewählten Location verwalten. Dokumente sind zum Beispiel Spot Aufsteller als PDF oder Marketing Flyer.",
-			"EN" : ""
+			"EN" :  "Organize your documents here (e.g. PDF files, marketing handouts)"
 		},
 		"documents.table.description" : {
 			"DE" :  "Die Dokumentabelle aktualisiert sich automatisch.",
-			"EN" : ""
+			"EN" :  "Document tables refreshes automatically."
 		},
 		"documents.table.document" : {
 			"DE" :  "Name",
-			"EN" : ""
+			"EN" :  "Name"
 		},
 		"documents.table.type" : {
 			"DE" :  "Typ",
-			"EN" : ""
+			"EN" :  "Type"
 		},
 		"documents.table.status" : {
 			"DE" :  "Status",
-			"EN" : ""
+			"EN" :  "Status"
 		},
 		"documents.table.date" : {
 			"DE" :  "Erstellt am",
-			"EN" : ""
+			"EN" :  "Created on"
 		},
 		"documents.table.actions" : {
 			"DE" :  "Aktionen",
-			"EN" : ""
+			"EN" :  "Actions"
 		},
 		"documents.table.actions.description" : {
 			"DE" :  "<i class='icon-download'></i> Dokument herunterladen<br/>"
 					+"<i class='icon-trash'></i> Dokument löschen",
-			"EN" : ""
+			"EN" : "<i class='icon-download'></i> Download document<br/>"
+					+"<i class='icon-trash'></i> Delete document"
 		},
 		"documents.dialogdelete.title" : {
 			"DE" :  "Dokument löschen",
-			"EN" : ""
+			"EN" :  "Delete document"
 		},
 		"documents.dialogdelete.description" : {
 			"DE" :  "Löschen des Dokuments \"{{documentToDelete.name}}\" vom {{documentToDelete.createDate | date:'short'}} kann nicht rückgängig gemacht werden.",
-			"EN" : ""
+			"EN" : "Deletion of document \"{{documentToDelete.name}}\" dated {{documentToDelete.createDate | date:'short'}} cannot be undone."
 		},
 		"documents.status.complete" : {
 			"DE" :  "Abgeschlossen",
-			"EN" : ""
+			"EN" :  "Complete"
 		},
 		"documents.status.error" : {
 			"DE" :  "Fehler",
-			"EN" : ""
+			"EN" :  "Error"
 		},
 		"documents.status.pending" : {
 			"DE" :  "In Bearbeitung",
-			"EN" : ""
+			"EN" :  "In progress"
 		},
 		//accounts partial
 		"accounts.title" : {
@@ -1579,11 +1724,6 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Account aktivieren",
 			"EN" : "Activate account"
 		},
-		"activation.description" : {
-			"DE" :  "Hier können Sie den Servicebereichen spezifische Kategorien zuweisen.<br/>Somit können in einem \"Spa-Bereich\""+
-				" andere Produkte und Dienstleistungen als auf dem \"Zimmer\" angeboten werden.",
-			"EN" : "Here you can assign specific categories to your service areas.<br/>E.g. provide different services in \"spa\" than in \"room service\"."
-		},
 		"account.activation.admin.submit" : {
 			"DE" : "Aktivieren",
 			"EN" : "Activate"
@@ -1591,15 +1731,85 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"account.activation.admin.description" : {
 			"DE" : "Um die Aktivierung abzuschliessen, füllen Sie bitte die fehlenden Felder aus.",
 			"EN" : "To complete your account activation, please enter missing details below!"
-		},		
+		},	
+		//category assignment partial
+		"activation.description" : {
+			"DE" :  "Hier können Sie den Servicebereichen spezifische Kategorien zuweisen.<br/>Somit können in einem \"Spa-Bereich\""+
+				" andere Produkte und Dienstleistungen als auf dem \"Zimmer\" angeboten werden.",
+			"EN" : "Here you can assign specific categories to your service areas.<br/>E.g. provide different services in \"spa\" than in \"room service\"."
+		},
+		"activation.assigned.container.empty.description" : {
+			"DE" :  "Liste zugewiesener Kategorien des ausgewählten Servicebereichs. Bitte wählen Sie einen Bereich links.",
+			"EN" : "List of assigned categories of selected service area. Please choose an area to the left."
+		},
+		"activation.all.container.empty.description" : {
+			"DE" :  "Liste aller verfügbaren Kategorien.",
+			"EN" : "Lists all available categories."
+		},	
+		//howto partial
+		"howto.title" : {
+			"DE" :  "In 4 Schritten zur eigenen App",
+			"EN" : "4 steps for your own app"
+		},
+		"howto.step1.title" : {
+			"DE" :  "Location anlegen",
+			"EN" : "Create location"
+		},
+		"howto.step1.description" : {
+			"DE" :  "Legen Sie Ihre \"Location\" an. Laden Sie Bilder hoch, wählen<br/> das Farbschema aus und konfigurieren "+
+			" sie Facebook.",
+			"EN" : "Create your \"Location\". Upload pictures, choose your color theme  and configure Facebook."
+		},
+		"howto.step2.title" : {
+			"DE" :  "Angebote anlegen",
+			"EN" : "Add offers"
+		},
+		"howto.step3.title" : {
+			"DE" :  "Angebote zuweisen",
+			"EN" : "Assign offers"
+		},
+		"howto.step4.title" : {
+			"DE" :  "Infoseiten anlegen",
+			"EN" : "Create infopages"
+		},
+		"howto.step2.description" : {
+			"DE" :  "Legen Sie hier Ihren Produkt- und Servicekatalog an (Room Service, Wellness, Ausflüge).",
+			"EN" : "Add your products and services (e.g. room service, wellness, arrangements)."
+		},
+		"howto.step3.description" : {
+			"DE" :  "Machen Sie die Produkte sichtbar indem Sie sie dem Welcome Spot zuweisen.",
+			"EN" : "Make your products visible by assigning them to a welcome spot."
+		},
+		"howto.step4.description" : {
+			"DE" :  "Hier können Sie für den Gast wichtige Informationen anlegen (z. B. Gäste ABC).",
+			"EN" : "Provide valuable information for your customer (e.g. breakfast times)"
+		},
+		"howto.success.title" : {
+			"DE" :  "Gratulation",
+			"EN" : "Congratulation"
+		},
+		"howto.success.description" : {
+			"DE" :  "Scannen Sie den QR Code links. Wenn Sie cloobster nicht auf Ihrem Smartphone haben, "+
+			"werden Sie automatisch zum App Store geleitet.<p style='color: red;'>Tipp: Zeigen Sie den QR Code auf Ihrer Website, Facebook, Twitter und Broschüren. (Download: Rechte Maustaste und speichern unter.)</p>",
+			"EN" : "Scan the QR code on the left. If you don't have cloobster installed you will be redirected to the app store."+
+				"<p style='color: red;'>Hint: Show the QR Code on your website, facebook, twitter and brochures. (Download: right click and save under)</p>"
+		},
+		"howto.success.qr.tooltip" : {
+			"DE" :  "Download: Rechte Maustaste und speichern unter.",
+			"EN" : "Download: right click and save under"
+		},
+		"howto.location.select" : {
+			"DE" :  "Wählen oder erstellen Sie eine Location bevor Sie mit Schritt 2-4 fortfahren.",
+			"EN" : "Choose or create a location before proceeding with step 2-4."
+		},
 		//general
 		"common.warning.title" : {
 			"DE" : "Achtung!",
 			"EN" : "Warning!"
 		},
-		"common.hint.title" : {
-			"DE" : "Hinweis!",
-			"EN" : "Message!"
+		"common.hint" : {
+			"DE" : "Hinweis",
+			"EN" : "Message"
 		},
 		"common.ok" : {
 			"DE" : "Ok",
@@ -1671,7 +1881,19 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"common.download" : {
 			"DE" :  "Download",
-			"EN" : ""
+			"EN" : "Download"
+		},
+		"common.confirm" : {
+			"DE" :  "Bestätigen",
+			"EN" : "Confirm"
+		},
+		"common.dropdown.select" : {
+			"DE" :  "-- auswählen --",
+			"EN" : "-- select --"
+		},
+		"common.back" : {
+			"DE" :  "zurück",
+			"EN" : "back"
 		},
 		"general.sortable" : {
 			"DE" : "Ziehen, um zu sortieren",
@@ -1712,11 +1934,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Saving..."
 		},
 		"fileupload.image.description" : {
-			"DE" : "Wählen sie eine Bilddatei zum hochladen. Überprüfen sie, dass sie nicht größer als 3Mb ist und vom Typ GIF, PNG oder JPEG.",
+			"DE" : "Wählen Sie eine Bilddatei zum Hochladen. Überprüfen Sie, dass sie nicht größer als 3MB ist und vom Typ GIF, PNG oder JPEG.",
 			"EN" : "Please select a file. Ensure the file is less than 3 MB in size and the format is GIF, PNG, or JPEG."
 		},
 		"fileupload.submit.error" : {
-			"DE" : "Beim Hochladen ist ein Fehler aufgetreten. Überprüfen sie, dass die Datei nicht größer als 3 Mb ist und vom Typ GIF, PNG oder JPEG.",
+			"DE" : "Beim Hochladen ist ein Fehler aufgetreten. Überprüfen Sie, dass die Datei nicht größer als 3 MB ist und vom Typ GIF, PNG oder JPEG.",
 			"EN" : "An error occurred during upload. Please check file size (< 3 MB) and format (GIF, PNG, JPEG)."
 		},
 		"fileupload.crop.error" : {
@@ -1832,6 +2054,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.send" : {
 			"DE" :  "Sende",
 			"EN" :  "Send"
+		},
+		"common.password.invalid" : {
+			"DE" : "Passwort inkorrekt!",
+			"EN" : "Password invalid!"
 		}
 	};
 
