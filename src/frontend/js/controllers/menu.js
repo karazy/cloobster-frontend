@@ -561,6 +561,15 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.saveProduct();
 	}
 
+	/**
+	* Toggle sepcial flag of product.
+	* Executes a save afterwards.
+	*/
+	$scope.toggleProductSpecial = function() {
+		$scope.currentProduct.special = !$scope.currentProduct.special;
+		$scope.saveProduct();
+	}
+
 	//End Product logic
 
 	// //Start Choice logic
