@@ -139,11 +139,20 @@
 			    	</div>
 			    	<div simple-property-editor editor-title="product.editor.price" editor-property="currentProduct.price" editor-on-save="saveProduct()" editor-required editor-pattern="/^[0-9]+([.][0-9]+)?$/" editor-pattern-text="product.editor.price.validation" >
 			    		<p class="edit"  tooltip="product.editor.price.tooltip">{{currentProduct.price | kcurrency:activeBusiness.currency}} <i class="icon-edit icon-black"></i></p>
-			    	</div>			    	
+			    	</div>	    	
 			    	<!-- <div class="activation-checkbox">		    		
 			    		<input type="checkbox" id="productActiveCb" ng-model="currentProduct.active" ng-change="saveProduct()"></input>
 			    		<label l="menus.product.field.active" for="productActiveCb">Active: Show product for guest</label>
 			    	</div> -->
+			    	<div simple-image-editor="currentProduct.image" editor-title-key="common.image.add" editor-image-id="image" editor-on-save="setProductImage(image)" editor-on-cancel="discardImage(image)" editor-image-resource="productImageResource">
+							<div ng-show="currentProduct.image.url">
+								<img  ng-src="{{currentProduct.image.url}}=s96" alt="click to edit" />
+								<p l="common.image.edit">Click image to edit</p>
+							</div>
+							<div class="row-fluid" ng-show="!currentProduct.image">
+							<button  class="btn span4 btn-primary"><i class="icon-picture icon-white"></i> <span l="common.image.add">Add Image</span></button>
+							</div>
+						</div>
 			    	<div class="row-fluid">
 			    		<button class="btn btn-success span6" type="button" ng-click="toggleProductActive()" ng-model="currentProduct.active" ng-show="currentProduct.active && currentProduct.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
 

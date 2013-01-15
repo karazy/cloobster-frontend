@@ -68,6 +68,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.linkedProductsForChoice = null;
 	/** Holds all necessary innformation during menu organization. */
 	$scope.organizeMenusContext = false;
+	/** Image resource for product images */
+	$scope.productImageResource = null;
 
 	//Start Menu logic
 
@@ -300,6 +302,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		$scope.currentProduct = productItem;
 		$scope.choices = choicesResource.query({"productId": productItem.id},null,null,handleError);
+		$scope.productImageResource = Product.buildImageResource(activeBusinessId, productItem.id);
 	};
 
 	$scope.createProduct = function() {
@@ -878,6 +881,22 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$scope.loadMenu(menuId);
 		$location.path($location.path() + "/" + menuId);		
 	};
+
+	// Product image methods
+
+	$scope.setProductImage = function(image) {
+		$scope.currentProduct.image = {
+			url: image.url,
+			blobKey: image.blobKey
+		};
+	}
+
+	$scope.discardImage = function(image) {
+		if(image && image.blobKey) {
+			$http['delete']('/uploads/images/' + image.blobKey)
+			.error(handleError);
+		}
+	}
 
 	$scope.$watch('loggedIn', function(newVal, oldVal) {
 		var menuId = $routeParams.menuId || "",

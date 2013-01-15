@@ -1867,6 +1867,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Bild anklicken um zu editieren",
 			"EN" : "Click image to edit"
 		},
+		"common.image.add" : {
+			"DE" :  "Bild hinzufügen",
+			"EN" :  "Add picture"
+		},
 		"common.all" : {
 			"DE" :  "Alle",
 			"EN" : "All"

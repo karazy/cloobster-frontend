@@ -276,6 +276,15 @@ angular.module('Cloobster.services').factory('Product', ['cloobsterResource', fu
 				}
 
 				)
+		},
+		/**
+		*	Returns a InfoPage image resource used to save, update the image assigned to an InfoPage.
+		*/
+		buildImageResource: function(businessId, infoPageId) {
+			return $resource('/b/businesses/:bid/products/:id/image', {
+				'bid': businessId,
+				'id': infoPageId
+			});
 		}
 	}
 
