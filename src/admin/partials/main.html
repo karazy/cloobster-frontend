@@ -7,6 +7,12 @@
         	<button type="button" class="btn btn-small" ng-click="upgradeLocations()" ng-bind="upgradeLocationsText" ng-disabled="upgradeLocationsDisabled" ng-init="upgradeLocationsText='Create Welcome Area/Spot and Basic Subscriptions'"></button>
         </p>
         <div ng-hide="deleteFunctionsDisabled">
+        	<p>
+        		<button type="button" class="btn btn-small" ng-click="createTestData()" ng-bind="createTestDataText" ng-disabled="createTestDataDisabled" ng-init="	createTestDataText='Create Test Data'"></button>
+        	</p>
+        	<p>
+        		<button type="button" class="btn btn-small" ng-click="deleteTestData()" ng-bind="deleteTestDataText" ng-disabled="deleteTestDataDisabled" ng-init="	deleteTestDataText='Delete Test Data'"></button>
+        	</p>
 	        <p ng-hide="showDeleteAll">
 	        	<button type="button" class="btn btn-small btn-danger" ng-click="showDeleteAll=true;confirmDeleteAllText='Confirm Delete'">Delete All Content</button>
 	        </p>
