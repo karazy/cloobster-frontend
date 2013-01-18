@@ -290,6 +290,26 @@ CloobsterAdmin.Functions = function($scope, $http) {
 			});	
 	};
 
+	$scope.createTestData = function() {
+		$scope.createTestDataText = "Creating ...";
+		$scope.createTestDataDisabled = true;
+		$http.post('/admin/s/testdata', {}).success(function(data) {
+				$scope.createTestDataText = "Data created.";
+			}).error(function (data, status) {
+				$scope.createTestDataText = status + " error.";
+			});	
+	};
+
+	$scope.deleteTestData = function() {
+		$scope.deleteTestDataText = "Deleting ...";
+		$scope.deleteTestDataDisabled = true;
+		$http['delete']('/admin/s/testdata', {}).success(function(data) {
+				$scope.deleteTestDataText = "Data deleted.";
+			}).error(function (data, status) {
+				$scope.deleteTestDataText = status + " error.";
+			});	
+	};
+
 	$scope.sendCockpitUpdateMessage = function() {
 		$scope.sendCockpitUpdateMessageText = "Creating ...";
 		$scope.sendCockpitUpdateMessageDisabled = true;
