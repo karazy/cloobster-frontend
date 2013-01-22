@@ -308,7 +308,7 @@
 		      </tr>
 		    </thead>
 		    <tbody>
-		      <tr ng-repeat="channel in channels">
+		      <tr ng-repeat="channel in channels|orderBy:'locationId'">
 		      	<td>{{channel.locationName}}</td>
 		      	<td>{{channel.locationId}}</td>
 		        <td>{{channel.id}}</td>
