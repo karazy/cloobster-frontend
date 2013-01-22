@@ -304,6 +304,7 @@
 		        <th>last full Channel ID</th>
 		        <th>number of Channels opened</th>
 		        <th>Account ID</th>
+		        <th>E-Mail sent?</th>
 		        <th>Actions</th>
 		      </tr>
 		    </thead>
@@ -317,6 +318,7 @@
 		        <td>{{channel.lastChannelId}}</td>
 		        <td>{{channel.channelCount}}</td>
 		        <td>{{channel.accountId}}</td>
+		        <td><span ng-show="channel.warningSent">Yes</span><span ng-show="!channel.warningSent">No</span></td>
 		        <td><button class="btn btn-warning" ng-click="sendWarning($index)" ng-disabled="sendWarningProgress[$index]" ng-init="sendWarningText[$index]='Send E-Mail Alert'"><i class="icon-envelope"></i> {{ sendWarningText[$index] }}</button>
 		        <button class="btn btn-danger" ng-click="removeChannel($index)" ng-disabled="removeChannelProgress[$index]" ng-init="removeChannelText[$index]='Delete Channel Info'"><i class="icon-trash"></i> {{ removeChannelText[$index] }}</button></td>
 		      </tr>
