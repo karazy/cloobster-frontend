@@ -531,8 +531,9 @@ CloobsterAdmin.ChannelsController = function($scope, $http) {
 		if(channel) {
 			$scope.sendWarningProgress[index] = true;
 			$scope.sendWarningText[index] = 'Sending ...';
-			$http.post(buildChannelUrl(channel), null).success(function() {
+			$http.post(buildChannelUrl(channel), null).success(function(data) {
 				$scope.sendWarningProgress[index] = false;
+				$scope.channels[index] = data;
 				$scope.sendWarningText[index] = 'Done';
 			});
 		}
