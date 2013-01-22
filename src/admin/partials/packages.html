@@ -10,6 +10,9 @@
   		<li ng-class="{active : activeTab == 'packages'}">
   			<a ng-click="activeTab = 'packages'">Subscriptions</a>
   		</li>
+  		<li ng-class="{active : activeTab == 'channels'}">
+  			<a ng-click="activeTab = 'channels'">Channel Monitor</a>
+  		</li>
 	</ul>
 
 	<!-- Companies tab -->
@@ -284,6 +287,42 @@
 					</table>
 				</div>
 			</div>
+		</div>
+	</div>
+	<div class="row-fluid" ng-show="activeTab == 'channels'" >
+		<div class="span12 data-container-with-title" style="padding-left: 10px; padding-right: 10px;" ng-controller="CloobsterAdmin.ChannelsController">
+			<h4 class="data-container-title">Active Cockpit Clients</h4>
+			<button class="btn btn-primary" ng-click="refresh()"><i class="icon-refresh icon-white"></i> <span ng-show="refreshing">Refreshing ...</span><span ng-hide="refreshing">Refresh</span></button>
+			<table class="table">
+		    <thead>
+		      <tr>
+		        <th>Location</th>
+		        <th>Location ID</th>
+		        <th>Client ID</th>
+		        <th>Last online check on</th>
+		        <th>Created on</th>
+		        <th>last full Channel ID</th>
+		        <th>number of Channels opened</th>
+		        <th>Account ID</th>
+		        <th>Actions</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr ng-repeat="channel in channels">
+		      	<td>{{channel.locationName}}</td>
+		      	<td>{{channel.locationId}}</td>
+		        <td>{{channel.id}}</td>
+		        <td>{{channel.lastOnlineCheck | date:'medium'}}</td>
+		        <td>{{channel.creationTime | date:'medium'}}</td>
+		        <td>{{channel.lastChannelId}}</td>
+		        <td>{{channel.channelCount}}</td>
+		        <td>{{channel.accountId}}</td>
+		        <td><button class="btn btn-warning" ng-click="sendWarning($index)" ng-disabled="sendWarningProgress[$index]" ng-init="sendWarningText[$index]='Send E-Mail Alert'"><i class="icon-envelope"></i> {{ sendWarningText[$index] }}</button>
+		        <button class="btn btn-danger" ng-click="removeChannel($index)" ng-disabled="removeChannelProgress[$index]" ng-init="removeChannelText[$index]='Delete Channel Info'"><i class="icon-trash"></i> {{ removeChannelText[$index] }}</button></td>
+		      </tr>
+		    </tbody>
+			</table>
+	    <p ng-show="channels && channels.length == 0"> No active Cockpits.</p>
 		</div>
 	</div>
 </div>

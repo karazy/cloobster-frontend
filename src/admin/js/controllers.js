@@ -510,3 +510,56 @@ CloobsterAdmin.InfoPages = function($scope, $http, $anchorScroll) {
 	$anchorScroll();
 }
 CloobsterAdmin.InfoPages.$inject = ['$scope', '$http', '$anchorScroll'];
+
+CloobsterAdmin.ChannelsController = function($scope, $http) {
+	$scope.channels = null;
+	$scope.refreshing = false;
+	$scope.sendWarningText = new Array();
+	$scope.sendWarningProgress = new Array();
+	$scope.removeChannelText = new Array();
+	$scope.removeChannelProgress = new Array();
+
+	function buildChannelUrl(channel) {
+		if(channel) {
+			return "/admin/m/locations/" + channel['locationId'] + '/channels/' + channel['id'];
+		}
+	}
+
+	$scope.sendWarning = function(index) {
+		var channel = $scope.channels[index];
+
+		if(channel) {
+			$scope.sendWarningProgress[index] = true;
+			$scope.sendWarningText[index] = 'Sending ...';
+			$http.post(buildChannelUrl(channel), null).success(function() {
+				$scope.sendWarningProgress[index] = false;
+				$scope.sendWarningText[index] = 'Done';
+			});
+		}
+	}
+
+	$scope.refresh = function() {
+		$scope.refreshing = true;
+		$http.get("/admin/m/channels").success(function(data) {
+			$scope.refreshing = false;
+			$scope.channels = data;
+		});		
+	};
+
+	$scope.removeChannel = function(index) {
+		var channel = $scope.channels[index];
+
+		if(channel) {
+			$scope.removeChannelProgress[index] = true;
+			$scope.removeChannelText[index] = 'Removing ...';
+			$http['delete'](buildChannelUrl(channel), null).success(function() {
+				$scope.channels.splice(index, 1);
+				$scope.removeChannelProgress[index] = false;
+				$scope.removeChannelText[index] = 'Done';
+			});
+		}
+	}
+
+	$scope.refresh();
+}
+CloobsterAdmin.ChannelsController.$inject = ['$scope', '$http'];
