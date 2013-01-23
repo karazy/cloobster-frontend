@@ -591,20 +591,22 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 					});
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {
+		        		var modalBodyHeight;
+
 		        		if(scope.editorEnabled === true || typeof scope.editorEnabled == "undefined") {
 		        			//init file upload plugin for this dialog
 	        				uploadObject = uploadService.getFileUploadObject(uploadInput, scope.editorImageResource, fileAddedCallback, fileUploadedCallback, fileUploadProgressCallback);
 
+	   							dialog.modal('show');
+
 							if(editorCropText) {
-								dialogBody.css('height',function () { 
-								    	return ($(window).height() * .8) + 'px';
-								    });
+								modalBodyHeight = ($(window).height() * .8) + 'px';
+								dialogBody.css('height', modalBodyHeight);
 
-								dialogBody.css('max-height', function() { return $(this).height()});
+								dialogBody.css('max-height', modalBodyHeight);
 								// Expand the dialog to 80% width and 80% height of window.								
-
+								dialog.css('width', '80%');
 								dialog.css({
-						    		'width': '80%',
 								    // 'height': function () { 
 								    // 	return ($(window).height() * .8) + 'px';
 								    // },								    
@@ -617,7 +619,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 								});
 								
 							}
-							dialog.modal('show');
+							
 		        		}
 					});
 
