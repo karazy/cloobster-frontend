@@ -933,6 +933,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "-Kopie",
 			"EN" : "-copy"
 		},
+		"menus.product.special.badge" : {
+			"DE" :  "Spezialangebot",
+			"EN" : "special offer"
+		},
+		"menus.product.special.tooltip" : {
+			"DE" :  "Spezialangebot (de)aktivieren. Diese werden gesondert im App Startscreen hervorgehoben.",
+			"EN" : "(de)activate special offer. They will be highlighted on the app home screen."
+		},
 		"menus.products.link.description" : {
 			"DE" : "Klicken Sie auf eine bestehendes Produkt, um dieses zu kopieren und der aktuellen Kategorie hinzuzufügen. Optional können Auswahlmöglichkeiten <strong>verknüpft</strong> oder <strong>kopiert</strong> werden. <i class='icon-question-sign'></i>",
 			"EN" : "Click on existing product to copy it and add to current category."+
