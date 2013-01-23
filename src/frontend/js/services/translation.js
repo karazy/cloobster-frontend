@@ -954,6 +954,36 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 				"<b>linking</b> - changes to choices of copied product also changes them for original product (vice versa). They are linked.<br/>"+
 				"<b>copy</b> - changes to choices of copied product have no effect on original product (vice versa). They are independent."
 		},
+		"menus.help.symbols.popover" : {
+			"DE" :  "<dl>"+
+						"<dt><i class='icon-edit icon-black'></i></dt>"+
+					  "<dd>Bearbeiten</dd>"+
+					  "<dt><i class='icon-ok icon-black'></i></dt>"+
+					  "<dd>Aktives Produkt</dd>"+
+					  "<dt><i class='icon-ban-circle icon-black'></i></dt>"+
+					  "<dd>Inaktives Produkt</dd>"+
+					  "<dt><i class='icon-move icon-black'></i></dt>"+
+					  "<dd>Per Drag&Drop verschieben</dd>"+
+					  "<dt><i class='icon-trash icon-black'></i></dt>"+
+					  "<dd>Löschen</dd>"+
+					  "<dt><i class='icon-star icon-black'></i></dt>"+
+					  "<dd>Spezialangebot</dd>"+
+					"</dl>",
+			"EN" :  "<dl>"+
+						"<dt><i class='icon-edit icon-black'></i></dt>"+
+					  "<dd>edit</dd>"+
+					  "<dt><i class='icon-ok icon-black'></i></dt>"+
+					  "<dd>active product</dd>"+
+					  "<dt><i class='icon-ban-circle icon-black'></i></dt>"+
+					  "<dd>inactive product</dd>"+
+					  "<dt><i class='icon-move icon-black'></i></dt>"+
+					  "<dd>rearrange by drag&drop</dd>"+
+					  "<dt><i class='icon-trash icon-black'></i></dt>"+
+					  "<dd>delete</dd>"+
+					  "<dt><i class='icon-star icon-black'></i></dt>"+
+					  "<dd>special offer</dd>"+
+					"</dl>"
+		},			
 		"menus.products.orphaned.title" : {
 			"DE" : "Verwaiste Produkte",
 			"EN" : "Orphaned products"

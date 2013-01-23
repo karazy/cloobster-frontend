@@ -24,7 +24,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			price: 0,
 			shortDesc: "",
 			longDesc: "",
-			active: false
+			active: true
 		},
 		/** Default values for new choices. */
 		defaultChoice = {
@@ -809,6 +809,14 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		content: langService.translate("menus.products.link.description.popover")
 	});
 
+	//initialize general symbol help
+	jQuery('#symbolLegend').popover({
+		placement: 'right',
+		title: langService.translate("common.help"),
+		trigger: 'hover',
+		html: true,
+		content: langService.translate("menus.help.symbols.popover")
+	});
 
 	//End Choice logic
 
