@@ -18,7 +18,7 @@
 	    		</div>
 				<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable" id="menuList">
 			        <li ng-repeat="menu in menus | orderBy:['title'] " ng-class="{active: currentMenu.id == menu.id}">	        	
-			        	<a ng-click="loadMenu(menu)">{{menu.title}}</a>
+			        	<a ng-click="loadMenu(menu)">{{menu.title}} <i class="icon-ban-circle icon-black" ng-hide="menu.active"></i></a>
 			        </li>
 			        <li ng-class="{active: orphanedProducts.length > 0 && !currentMenu}">
 			        	<a ng-click="loadOrphanedProducts()"><i class="icon-exclamation-sign icon-black" tooltip="menus.list.orphaned.tooltip" tooltip-position="right"></i> <span l="menus.list.orphaned">Unassigned products</span></a>
@@ -89,7 +89,7 @@
 						<a ng-click="showAllProducts()"><i class="icon-plus-sign icon-black"></i> <span l="menus.products.list.existing">Existing product...</span></a>
 					</li> -->
 		       	 	<li ng-repeat="product in products" class="menu-products-item sortable" ng-class="{active: currentProduct.id == product.id}">
-			        	<a ng-click="loadProduct(product)"><i class="icon-move icon-black" tooltip="general.sortable"></i> {{product.name}}</a>
+			        	<a ng-click="loadProduct(product)"><i class="icon-move icon-black" tooltip="general.sortable"></i> {{product.name}} <i class="icon-ban-circle icon-black" ng-hide="product.active"></i></a>
 			        </li>
 	    		</ul>
 	    	</div>
@@ -159,7 +159,7 @@
 			    	<div class="row-fluid">
 			    		<button class="btn btn-success span6" type="button" ng-click="toggleProductActive()" ng-model="currentProduct.active" ng-show="currentProduct.active && currentProduct.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
 
-			    		<button class="btn btn-danger span6" simple-property-editorle="margin-left: 0px !important;" type="button" ng-click="toggleProductActive()" ng-model="currentProduct.active" ng-show="!currentProduct.active && currentProduct.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
+			    		<button class="btn btn-danger span6" style="margin-left: 0px !important;"  type="button" ng-click="toggleProductActive()" ng-model="currentProduct.active" ng-show="!currentProduct.active && currentProduct.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
 
 			    		<div class="btn-group span2">
 				    		<button class="btn btn-primary dropdown-toggle" style="width:100%;"  data-toggle="dropdown" ng-show="currentProduct.id" tooltip="menus.product.action.move.tooltip">
@@ -305,7 +305,7 @@
 				        	<ul class="dropdown-menu">
 				        		<li>
 				        			<a ng-repeat="product in linkedProductsForChoice" ng-click="loadProduct(product)">
-				        			{{product.name}}
+
 				        			</a>
 				        		</li>
 		    				</ul>
