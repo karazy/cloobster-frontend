@@ -144,7 +144,7 @@
 			    		<input type="checkbox" id="productActiveCb" ng-model="currentProduct.active" ng-change="saveProduct()"></input>
 			    		<label l="menus.product.field.active" for="productActiveCb">Active: Show product for guest</label>
 			    	</div> -->
-			    	<div simple-image-editor="currentProduct.image" editor-title-key="common.image.add" editor-image-id="image" editor-on-save="setProductImage(image)" editor-on-cancel="discardImage(image)" editor-image-resource="productImageResource" editor-ratio="7:3">
+			    	<div simple-image-editor="currentProduct.image" editor-title-key="common.image.add" editor-image-id="image" editor-on-save="setProductImage(image)" editor-on-cancel="discardImage(image)" editor-image-resource="productImageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description">
 							<div ng-show="currentProduct.image.url">
 								<img  ng-src="{{currentProduct.image.url}}=s96" alt="click to edit" />
 								<p l="common.image.edit">Click image to edit</p>

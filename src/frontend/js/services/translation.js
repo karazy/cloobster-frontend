@@ -982,6 +982,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Preis editieren",
 			"EN" : "Edit price"
 		},
+		"product.editor.image.description" : {
+			"DE" : "Das Produktbild muss für die beste Darstellung am Gerät auf ein passendes Seitenverhältnis zugeschnitten werden.",
+			"EN" : "For the best result on the device, the product image has to be cut to a fitting aspect ratio."
+		}
 		"menus.product.field.active" : {
 			"DE" : "Produkt dem Gast anzeigen",
 			"EN" : "Show product to customers"
