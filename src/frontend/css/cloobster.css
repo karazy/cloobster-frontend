@@ -599,3 +599,10 @@ ul.options-list li:hover {
 .active-step > div:nth-child(2) {
     color: black;
 }
+
+/** howto partial */
+
+.active > .active-howto-tab {
+  background-color: #DF6B20 !important;
+  color: white !important;
+}
