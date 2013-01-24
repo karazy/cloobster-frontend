@@ -58,7 +58,7 @@
 				Keine Elemente
 			</div> -->
 			<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable">
-		        <li ng-repeat="area in areas | orderBy:['name'] " ng-class="{active: currentArea.id == area.id}">	        	
+		        <li ng-repeat="area in areas | orderBy:['-welcome','name'] " ng-class="{active: currentArea.id == area.id}">	        	
 		        	<a ng-click="loadArea(area)">{{area.name}}  <i class="icon-ban-circle icon-black" ng-hide="area.active"></i></a>
 		        </li>
 		    </ul>	
