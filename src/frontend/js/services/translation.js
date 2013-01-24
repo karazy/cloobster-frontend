@@ -1125,8 +1125,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Price"
 		},
 		"product.editor.price.validation" : {
-			"DE" : "Muss ein gültiger Preis sein (z.B. 9.95, oder 5).",
-			"EN" : "Ente a valid price (e. g. 9.95, or 5)."
+			"DE" : "Muss eine Zahl sein und falls nötig einen Punkt als Dezimaltrennzeichen haben. (z.B. 9.95, oder 5)",
+			"EN" : "Must be a number and if needed use a colon as decimal mark. (e. g. 9.95, or 5)"
 		},
 		"product.editor.shortDesc" : {
 			"DE" : "Kurz Beschreibung",
