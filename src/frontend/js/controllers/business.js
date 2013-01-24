@@ -86,6 +86,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	* Load all available subscriptions.
 	*/
 	$scope.loadSubscriptions = function() {
+		// Delete previous subscriptions, needed because we sometimes refresh them
+		$scope.subscriptions.splice(0, $scope.subscriptions.length);
 		$scope.subscriptions = Subscription.query(angular.noop, handleError);
 	}
 
@@ -546,6 +548,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 					$scope.cancelPendingSubscriptionError = true;
 					$scope.activeBusiness.pendingSubscriptionId = null;
 					$scope.pendingSubscription = null;
+					// Reload the business and subscriptions to get actual data
+					$scope.loadBusiness($routeParams['businessId']);
 				}				
 			} else {
 				handleError(response);
