@@ -91,7 +91,7 @@
 						<a ng-click="showAllProducts()"><i class="icon-plus-sign icon-black"></i> <span l="menus.products.list.existing">Existing product...</span></a>
 					</li> -->
 		       	 	<li ng-repeat="product in products" class="menu-products-item sortable" ng-class="{active: currentProduct.id == product.id}">
-			        	<a ng-click="loadProduct(product)"><i class="icon-move icon-black" tooltip="general.sortable"></i> {{product.name}} <i class="icon-ban-circle icon-black" ng-hide="product.active"></i> <i class="icon-star icon-black" ng-hide="product.special"></i></a>
+			        	<a ng-click="loadProduct(product)"><i class="icon-move icon-black" tooltip="general.sortable"></i> {{product.name}} <i class="icon-ban-circle icon-black" ng-hide="product.active"></i> <i class="icon-star icon-black" ng-show="product.special"></i></a>
 			        </li>
 	    		</ul>
 	    	</div>
