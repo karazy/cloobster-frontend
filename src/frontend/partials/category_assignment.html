@@ -13,7 +13,7 @@
 				<h4 class="data-container-title" l="areas.list.title">Your service areas</h4>
 				<div class="data-container-block"></div>
 				<ul class="nav nav-pills nav-stacked data-container-block data-container-500 data-container-scrollable">
-			        <li ng-repeat="area in areas | orderBy:['name'] " ng-class="{active: currentArea.id == area.id}">	        	
+			        <li ng-repeat="area in areas | orderBy:['-welcome', 'name'] " ng-class="{active: currentArea.id == area.id}">	        	
 			        	<a ng-click="loadArea(area)">{{area.name}}</a>
 			        </li>
 			    </ul>
