@@ -908,6 +908,12 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		};
 	}
 
+	$scope.deleteProductImage = function() {
+		if($scope.productImageResource) {
+			$scope.productImageResource.remove(null,null, angular.noop, handleError);	
+		}
+	};
+
 	$scope.discardImage = function(image) {
 		if(image && image.blobKey) {
 			$http['delete']('/uploads/images/' + image.blobKey)
