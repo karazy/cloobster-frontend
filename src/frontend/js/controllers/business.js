@@ -87,7 +87,10 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	*/
 	$scope.loadSubscriptions = function() {
 		// Delete previous subscriptions, needed because we sometimes refresh them
-		$scope.subscriptions.splice(0, $scope.subscriptions.length);
+		if($scope.subscriptions && $scope.subscriptions.length != 0) {
+			$scope.subscriptions.splice(0, $scope.subscriptions.length);	
+		}
+		
 		$scope.subscriptions = Subscription.query(angular.noop, handleError);
 	}
 
