@@ -147,14 +147,17 @@
 			    		<input type="checkbox" id="productActiveCb" ng-model="currentProduct.active" ng-change="saveProduct()"></input>
 			    		<label l="menus.product.field.active" for="productActiveCb">Active: Show product for guest</label>
 			    	</div> -->
-			    	<div simple-image-editor="currentProduct.image" editor-title-key="common.image.add" editor-image-id="image" editor-on-save="setProductImage(image)" editor-on-cancel="discardImage(image)" editor-image-resource="productImageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" style="margin: 0 0 10px;">
-							<div ng-show="currentProduct.image.url">
-								<img  ng-src="{{currentProduct.image.url}}=s96" alt="click to edit" />
-								<p l="common.image.edit">Click image to edit</p>
-							</div>
-							<div class="row-fluid" ng-show="!currentProduct.image">
-								<button  class="btn span6 btn-primary"><i class="icon-picture icon-white"></i> <span l="common.image.add">Add Image</span></button>
-							</div>
+			    	<div class="row-fluid">
+				    	<div simple-image-editor="currentProduct.image" editor-title-key="common.image.add" editor-image-id="image" editor-on-save="setProductImage(image)" editor-on-cancel="discardImage(image)" editor-image-resource="productImageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" style="margin: 0 0 10px;" class="span6">
+								<div ng-show="currentProduct.image.url">
+									<img  ng-src="{{currentProduct.image.url}}=s96" alt="click to edit" />
+									<p l="common.image.edit">Click image to edit</p>
+								</div>
+								<div ng-show="!currentProduct.image">
+									<button  class="btn btn-primary" style="width: 100%"><i class="icon-picture icon-white"></i> <span l="common.image.add">Add Image</span></button>
+								</div>
+						</div>					 
+						<button class="btn span2" ng-click="deleteProductImage(currentProduct.image)" ng-disabled="!currentProduct.image" ng-show="currentProduct.image"><i class="icon-trash icon-black"></i></button>
 					</div>
 					<!-- </div> -->
 					<!-- Action buttons -->
