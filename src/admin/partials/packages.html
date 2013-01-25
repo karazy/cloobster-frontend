@@ -296,6 +296,9 @@
 			<div class="row-fluid" ng-repeat="location in locations">
 				<div class="span12 well">
 					<h4>{{location.name}}</h4>
+					<p>Address: {{location.address}} , {{location.postcode}} {{location.city}}<br>
+						<span ng-show="location.phone">Phone: {{location.phone}}</span>
+					</p>
 					<table class="table" ng-show="location.channels.length > 0">
 				    <thead>
 				      <tr>
