@@ -333,6 +333,19 @@
 				</div>
 			</div>
 		</div>
+		<div class="data-container-block data-container-seperator">
+			<h3 l="business.detail.section.pictures">Cockpit Settings</h3>
+			<div class="row-fluid">
+				<div class="data-element" ng-class="getEditModeClass()">
+					<div class="key" l="business.detail.cockpitsettings.offlinealert">Offline E-Mail Alert</div>
+					<div class="value">
+	    			<button class="btn btn-success" type="button" ng-disabled="!editMode" ng-click="activeBusiness.offlineEmailAlertActive = false; saveBusiness()" ng-show="activeBusiness.offlineEmailAlertActive" ><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
+	    			<button class="btn btn-danger" type="button" ng-disabled="!editMode" ng-click="activeBusiness.offlineEmailAlertActive = true; saveBusiness()" ng-hide="activeBusiness.offlineEmailAlertActive"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button> <span l="business.detail.cockpitsettings.offlinealert.description">The system will send an e-mail, if it detects a connection problem or the client was closed accidently and is offline for more than 30 minutes.</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 	<!-- </div> -->
 </div>
 
