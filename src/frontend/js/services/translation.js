@@ -1359,9 +1359,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" :  "Assigned categories"
 		},
 		"areas.categories.list.description" : {
-			"DE" :  "Liste der Produktkategorien (z.B. Getränke), auf die der Gast Zugriff hat, wenn er in diesem Bereich eingecheckt ist."+
-				"Die Anzeigereihenfolge kann hier ebenfalls per Drag&Drop geregelt werden.",
-			"EN" :  "List of product categories (e.g. beverages) available to customers checked in to this service area."
+			"DE" :  "Liste der Produktkategorien (z.B. Getränke), auf die der Gast Zugriff hat, wenn er in diesem Bereich eingecheckt ist. "+
+				"Die Reihenfolge der Kategorien regelt auch die Darstellungsreihenfolge in der App (mittels Drag&Drop die Reihenfolge ändern).",
+			"EN" :  "List of product categories (e.g. beverages) available to customers checked in to this service area. Order of areas also reflects display order inside the app."
 		},
 		"areas.allcategories.list.title" : {
 			"DE" :  "Verfügbare Kategorien",
