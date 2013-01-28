@@ -15,16 +15,23 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		choicesResource = null,
 		/** Default values for new menus.*/
 		defaultMenu = {
-			title: langService.translate("menu.new.default.title") || "My new Menu",
+			// title: langService.translate("menu.new.default.title") || "My new Menu",
 			active: true
+		},
+		/** Required menu fields. */
+		requiredMenuFields = {
+			title: true
 		},
 		/** Default values for new products. */
 		defaultProduct = {
-			name: langService.translate("product.new.default.name") || "My new Product",
+			// name: langService.translate("product.new.default.name") || "My new Product",
 			price: 0,
 			shortDesc: "",
 			longDesc: "",
 			active: true
+		},
+		requiredProductFields = {
+			name: true
 		},
 		/** Default values for new choices. */
 		defaultChoice = {
@@ -208,11 +215,19 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$log.log("save menu ");
 		var order = 0;
 
+		if(!$scope.validateModel($scope.currentMenu, requiredMenuFields)) {
+			$scope.menuInvalid = true;
+			return;
+		}
+		
+
 		if($scope.currentMenu && $scope.currentMenu.id) {
 			$scope.currentMenu.$update(null, null, handleError);	
 		} else {
 			$scope.currentMenu.$save(saveMenuSuccess, handleError);
 		}
+
+		$scope.menuInvalid = false;
 
 		function saveMenuSuccess(menu) {
 			$scope.menus.push(menu);
@@ -328,6 +343,13 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$log.log("save product");
 
 		var product = $scope.currentProduct;
+
+		if(!$scope.validateModel(product, requiredProductFields)) {
+			$scope.productInvalid = true;
+			return;
+		}
+
+		$scope.productInvalid = false;
 
 		if(product && product.id) {
 			product.$update(null, null, handleError);
@@ -839,6 +861,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 				// $scope.orphanedProducts = null;
 				// break;
 			case "menu":
+				$scope.menuInvalid = false;
 				$scope.currentProduct = null;
 				// $scope.currentChoice = null;
 				// $scope.allChoices = null;
@@ -848,6 +871,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 				// break;
 			case "product":
 				$scope.currentChoice = null;
+				$scope.productInvalid = false;
 				// $scope.allChoices = null;
 				$scope.allProducts = null;
 				// break;
@@ -891,6 +915,28 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			break;
 		}
 	};
+
+	/**
+	* @private
+	* 
+	* @param model
+	*	The object to validate
+	* @param requiredFields
+	*	Object containing the required fields
+	* @return
+	*	True if valid model
+	*/
+	$scope.validateModel = function(model, requiredFields) {
+		for(var field in requiredFields) {
+			if(requiredFields[field] === true) {
+				if(!model[field] || !model[field].length > 0) {
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
 
 	//end utility
 

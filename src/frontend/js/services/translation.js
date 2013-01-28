@@ -880,7 +880,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"menus.list.title" : {
 			"DE" : "Kategorien",
 			"EN" : "Categories"
-		},
+		},		
 		"menu.container.hint" : {
 			"DE" :  "Bitte vergessen Sie nicht, die Kategorie im Tab <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"Kategorien zuweisen\"</a> einem Servicebereich zuzuweisen.",
 			"EN" : "Don't forget to <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"assign\"</a>assign this category to a service area afterwards."
@@ -896,11 +896,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"menus.list.orphaned.tooltip" : {
 			"DE" : "Nicht zugewiesene Produkte anzeigen",
 			"EN" : "Show non-assigned products."
-		},
-		// "menus.menu.field.active" : {
-		// 	"DE" : "Kategorie dem Gast anzeigen",
-		// 	"EN" : "Show category to guest."
-		// },
+		},		
 		"menus.menu.field.activate" : {
 			"DE" : "Aktiv",
 			"EN" : "Active"
@@ -1024,6 +1020,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Beschreibung editieren",
 			"EN" : "Edit description"
 		},
+		"menus.placeholder.title" : {
+			"DE" :  "Titel *",
+			"EN" : "Title *"
+		},
+		"menus.placeholder.description" : {
+			"DE" :  "Beschreibung",
+			"EN" : "Description"
+		},
 		"product.editor.name.tooltip" : {
 			"DE" : "Name editieren",
 			"EN" : "Edit name"
@@ -1043,6 +1047,22 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"product.editor.image.description" : {
 			"DE" : "Das Produktbild muss für die beste Darstellung am Gerät auf ein passendes Seitenverhältnis zugeschnitten werden.",
 			"EN" : "For the best result on the device, the product image has to be cut to a fitting aspect ratio."
+		},
+		"product.placeholder.name" : {
+			"DE" :  "Name *",
+			"EN" : "Name *"
+		},
+		"product.placeholder.shortDesc" : {
+			"DE" :  "Kurze Beschreibung",
+			"EN" : "Short description"
+		},
+		"product.placeholder.longDesc" : {
+			"DE" :  "Lange Beschreibung",
+			"EN" : "Long description"
+		},
+		"product.placeholder.price" : {
+			"DE" :  "Preis*",
+			"EN" : "Price*"
 		},
 		"menus.product.field.active" : {
 			"DE" : "Produkt dem Gast anzeigen",
@@ -1965,6 +1985,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Ziehen, um zu sortieren",
 			"EN" : "Drag to sort"
 		},		
+		"validation.field.required" : {
+			"DE" :  "* Bitte füllen Sie die Pflichtfelder aus.",
+			"EN" : "* Please fill out required fields."
+		},
 		//breadcrumb
 		"breadcrumb.home" : {
 			"DE" : "Home",

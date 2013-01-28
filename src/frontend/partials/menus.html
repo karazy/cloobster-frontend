@@ -47,11 +47,19 @@
 	    		<h4 class="data-container-title" l="menu.container.title">Category edit</h4>		    	
 				<div class="data-container-block">
 					<div l="menu.container.hint" class="alert">Don't forget to assign this category to an area afterwards.</div>
-					<div simple-property-editor editor-title="menu.editor.title" editor-property="currentMenu.title" editor-on-save="saveMenu()" editor-required>
-					<h5 class="edit" tooltip="menus.editor.title.tooltip" >{{currentMenu.title}} <i class="icon-edit icon-black"></i></h5>
-					</div>
-					<div simple-property-editor editor-title="menu.editor.description" editor-property="currentMenu.description" editor-type="textarea" editor-on-save="saveMenu()">
-			    		<p class="edit" tooltip="menus.editor.description.tooltip">{{currentMenu.description}} <i class="icon-edit icon-black"></i></p>
+					<div simple-property-editor editor-title="menu.editor.title" editor-property="currentMenu.title" editor-on-save="saveMenu()" editor-placeholder="menus.placeholder.title" editor-required>
+					<h5 class="edit" tooltip="menus.editor.title.tooltip">
+						<span l="menus.placeholder.title" ng-hide="currentMenu.title" ng-class="{'text-error' : menuInvalid, 'simple-property-placeholder' : !menuInvalid}">e. g. main courses*</span>
+						{{currentMenu.title}} <i class="icon-edit icon-black"></i></h5>
+					</div>					
+					<div simple-property-editor editor-title="menu.editor.description" editor-property="currentMenu.description" editor-type="textarea" editor-placeholder="menus.placeholder.description" editor-on-save="saveMenu()">
+			    		<p class="edit" tooltip="menus.editor.description.tooltip">
+			    			<span l="menus.placeholder.description" ng-hide="currentMenu.description" class="simple-property-placeholder">e.g. always fresh and seasonal*</span>
+			    			{{currentMenu.description}} <i class="icon-edit icon-black"></i>
+			    		</p>
+			    	</div>
+			    	<div ng-show="menuInvalid" class="text-error">
+			    		<span l="validation.field.required">* Please fill out all required fields.</span>
 			    	</div>
 			    	<div class="row-fluid">
 				    		<button class="btn  btn-success span6" type="button" ng-click="toggleMenuActive()" ng-model="currentMenu.active" ng-show="currentMenu.active && currentMenu.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
@@ -131,18 +139,32 @@
 		    	<h4 class="data-container-title" l="product.container.title">Product edit</h4>
 		    	<div ng-show="currentProduct.special" style="position: absolute; top:2px; right: 2px;"><span class="badge badge-warning" l="menus.product.special.badge">special offer</span></div>
 		    	<div class="data-container-block">
-		    		<div simple-property-editor editor-title="product.editor.name" editor-property="currentProduct.name" editor-on-save="saveProduct()" editor-required>
-			    		<h5 class="edit" tooltip="product.editor.name.tooltip">{{currentProduct.name}} <i class="icon-edit icon-black"></i></h5>
+		    		<div simple-property-editor editor-title="product.editor.name" editor-property="currentProduct.name" editor-on-save="saveProduct()" editor-required editor-placeholder="product.placeholder.name">
+			    		<h5 class="edit" tooltip="product.editor.name.tooltip">
+			    			<span l="product.placeholder.name" ng-hide="currentProduct.name" ng-class="{'text-error' : productInvalid, 'simple-property-placeholder' : !productInvalid}">Name*</span>
+			    			{{currentProduct.name}} <i class="icon-edit icon-black"></i>
+			    		</h5>
 			    	</div>
-			    	<div simple-property-editor editor-title="product.editor.shortDesc" editor-property="currentProduct.shortDesc" editor-on-save="saveProduct()" editor-type="textarea">
-			    		<p class="edit" tooltip="product.editor.shortDesc.tooltip">{{currentProduct.shortDesc}} <i class="icon-edit icon-black"></i></p>
+			    	<div simple-property-editor editor-title="product.editor.shortDesc" editor-property="currentProduct.shortDesc" editor-on-save="saveProduct()" editor-type="textarea" editor-placeholder="product.placeholder.shortDesc">
+			    		<p class="edit" tooltip="product.editor.shortDesc.tooltip">
+			    			<span l="product.placeholder.shortDesc" ng-hide="currentProduct.shortDesc" class="simple-property-placeholder">Short description*</span>
+			    			{{currentProduct.shortDesc}} <i class="icon-edit icon-black"></i>
+			    		</p>
 			    	</div>
-			    	<div simple-property-editor editor-title="product.editor.longDesc" editor-property="currentProduct.longDesc" editor-on-save="saveProduct()" editor-type="textarea">
-			    		<p class="edit" tooltip="product.editor.longDesc.tooltip">{{currentProduct.longDesc}} <i class="icon-edit icon-black"></i></p>
+			    	<div simple-property-editor editor-title="product.editor.longDesc" editor-property="currentProduct.longDesc" editor-on-save="saveProduct()" editor-type="textarea" editor-placeholder="product.placeholder.longDesc">
+			    		<p class="edit" tooltip="product.editor.longDesc.tooltip">
+			    			<span l="product.placeholder.longDesc" ng-hide="currentProduct.longDesc" class="simple-property-placeholder">Long description*</span>
+			    			{{currentProduct.longDesc}} <i class="icon-edit icon-black"></i>
+			    		</p>
 			    	</div>
-			    	<div simple-property-editor editor-title="product.editor.price" editor-property="currentProduct.price" editor-on-save="saveProduct()" editor-required editor-pattern="/^[0-9]+([.][0-9]+)?$/" editor-pattern-text="product.editor.price.validation" >
-			    		<p class="edit"  tooltip="product.editor.price.tooltip">{{currentProduct.price | kcurrency:activeBusiness.currency}} <i class="icon-edit icon-black"></i></p>
-			    	</div>	    	
+			    	<div simple-property-editor editor-title="product.editor.price" editor-property="currentProduct.price" editor-on-save="saveProduct()" editor-required editor-pattern="/^[0-9]+([.][0-9]+)?$/" editor-pattern-text="product.editor.price.validation" editor-placeholder="product.placeholder.price">
+			    		<p class="edit"  tooltip="product.editor.price.tooltip">
+			    			{{currentProduct.price | kcurrency:activeBusiness.currency}} <i class="icon-edit icon-black"></i>
+			    		</p>
+			    	</div>
+			    	<div ng-show="productInvalid" class="text-error">
+			    		<span l="validation.field.required">* Please fill out all required fields.</span>
+			    	</div>	
 			    	<!-- <div class="activation-checkbox">		    		
 			    		<input type="checkbox" id="productActiveCb" ng-model="currentProduct.active" ng-change="saveProduct()"></input>
 			    		<label l="menus.product.field.active" for="productActiveCb">Active: Show product for guest</label>
