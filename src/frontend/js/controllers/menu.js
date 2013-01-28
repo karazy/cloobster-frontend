@@ -35,7 +35,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		},
 		/** Default values for new choices. */
 		defaultChoice = {
-			text: langService.translate("choice.new.default.text") || "My new choice",
+			// text: langService.translate("choice.new.default.text") || "My new choice",
 			minOccurence: 0,
 			maxOccurence: 0,
 			price: 0,
@@ -43,10 +43,16 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			overridePrice: "NONE",
 			options: new Array()
 		},
+		requiredChoiceFields = {
+			text: true
+		},
 		/** Default values for new options. */
 		defaultOption = {
 			name: langService.translate("option.new.default.name") || "My new option",
 			price: 0
+		},
+		requiredOptionFields = {
+			name: true
 		};
 
 	/** Menu Resource. */
@@ -612,6 +618,14 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	}
 
 	$scope.saveChoice = function() {
+
+		if(!$scope.validateModel($scope.currentChoice, requiredChoiceFields)) {
+			$scope.choiceInvalid = true;
+			return;
+		}
+
+		$scope.choiceInvalid = false;
+
 		if($scope.currentChoice && $scope.currentChoice.id) {
 			$scope.currentChoice.$update(null, null, handleError);	
 		} else {
@@ -854,34 +868,21 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			case "menus":
 				$scope.currentMenu = null;
 				$scope.products = null;
-				// $scope.currentProduct = null;
-				// $scope.currentChoice = null;
-				// $scope.allChoices = null;
-				// $scope.allProducts = null;
-				// $scope.orphanedProducts = null;
-				// break;
 			case "menu":
 				$scope.menuInvalid = false;
 				$scope.currentProduct = null;
-				// $scope.currentChoice = null;
-				// $scope.allChoices = null;
-				// $scope.allProducts = null;
 				$scope.orphanedProducts = null;
 				$scope.organizeMenusContext = null;
-				// break;
 			case "product":
 				$scope.currentChoice = null;
 				$scope.productInvalid = false;
-				// $scope.allChoices = null;
 				$scope.allProducts = null;
-				// break;
 			case "choice":
 				$scope.allChoices = null;
-				// $scope.allProducts = null;
+				$scope.choiceInvalid = false;
 				break;
 			case "all-choices":
 				$scope.currentChoice = null;
-				// $scope.allProducts = null;
 				break;
 			case "orphaned-products":
 				$scope.currentMenu = null;

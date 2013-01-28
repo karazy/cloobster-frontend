@@ -276,8 +276,11 @@
 	    	<div class="data-container-with-title">
 	    		<h4 class="data-container-title" l="choice.container.title">Choice edit</h4>    		
 		    	<div class="data-container-block">
-		    		<div simple-property-editor editor-title="choice.editor.text" editor-property="currentChoice.text" editor-on-save="saveChoice()" editor-required>
-		    		<h5 class="edit" tooltip="choice.editor.text.tooltip">{{currentChoice.text}}<i class="icon-edit icon-black"></i></h5>
+		    		<div simple-property-editor editor-title="choice.editor.text" editor-property="currentChoice.text" editor-on-save="saveChoice()" editor-placeholder="choice.placeholder.text" editor-required>
+		    		<h5 class="edit" tooltip="choice.editor.text.tooltip">
+		    			<span l="choice.placeholder.text" ng-hide="currentChoice.text" ng-class="{'text-error' : choiceInvalid, 'simple-property-placeholder' : !choiceInvalid}">Choice text*</span>
+		    			{{currentChoice.text}} <i class="icon-edit icon-black"></i>
+		    		</h5>
 		    		</div>
 			    	<div simple-property-editor editor-type="number" editor-title="choice.editor.maxOccurence" editor-property="currentChoice.maxOccurence" editor-on-save="saveChoice()" editor-required editor-validate="value >= currentChoice.minOccurence || value == 0" editor-validate-text="choice.editor.maxOccurence.error">
 			    		<p class="edit" tooltip="choice.editor.maxOccurence.tooltip"><span l="menus.choices.field.maxOccurence">Guest has to chose max: {{currentChoice.maxOccurence}}</span> <i class="icon-edit icon-black"></i></p>
@@ -339,6 +342,9 @@
 		    				</ul>
 				    	</div>
 			    	</div>
+			    	<div ng-show="choiceInvalid" class="text-error">
+			    		<span l="validation.field.required">* Please fill out all required fields.</span>
+			    	</div>	
 			    	<div class="row-fluid" style="margin-top: 7px;">	    		
 			    		<button class="btn span6" data-toggle="modal" data-target="#deleteChoiceModal">
 			    			<i class="icon-trash"></i>

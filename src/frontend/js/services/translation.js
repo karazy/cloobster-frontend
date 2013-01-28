@@ -1184,6 +1184,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Auswahltext",
 			"EN" : "Choice text"
 		},
+		"choice.placeholder.text" : {
+			"DE" :  "Auswahltext *",
+			"EN" : "Choice text *"
+		},
 		"choice.editor.maxOccurence" : {
 			"DE" : "Maximale Auswahl von Optionen",
 			"EN" : "Maximum number of options"
@@ -1267,6 +1271,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"option.editor.price.tooltip" : {
 			"DE" : "Preis für Option editieren",
 			"EN" : "Edit option price"
+		},
+		"option.placeholder.name" : {
+			"DE" :  "Optionsname *",
+			"EN" : "Option name *"
+		},
+		"option.placeholder.price" : {
+			"DE" :  "Optionspreise *",
+			"EN" : "Option price *"
 		},
 		"menu.new.default.title" : {
 			"DE" : "Meine Kategorie",
