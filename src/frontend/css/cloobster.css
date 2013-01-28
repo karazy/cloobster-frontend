@@ -191,13 +191,13 @@ ul.payment-method-list li {
   left: 50px;
   /*bottom: 50px;*/
   background-color: #FFF;
-  padding-top: 15px;
+  padding-top: 15px;  
 }
 
 .data-container-with-title { 
   border: 1px solid gray; 
   border-radius: 0.5em;
-  margin: 15px 0 0 0;
+  margin: 15px 0 10px 0;
   position: relative;
   padding-top: 15px;
 }
