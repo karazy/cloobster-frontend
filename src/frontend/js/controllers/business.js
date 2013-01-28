@@ -63,6 +63,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	/** Filter object for language selection dialog. */
 	$scope.languageQuery = {};
 
+
 	/**
 	* Returns all businesses
 	*/
@@ -625,6 +626,15 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		} else if(newValue == false) {
 			$location.url('/');
 		}
+	});
+
+	//initialize payment method symbol help
+	jQuery('#paymentMethodLabel').popover({
+		placement: 'right',
+		title: langService.translate("common.help"),
+		trigger: 'hover',
+		html: true,
+		content: langService.translate("business.help.paymentmethod.popover")
 	});
 
 

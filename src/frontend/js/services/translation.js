@@ -436,6 +436,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Hier können Sie das Profil der aktiven Location pflegen.<br/>Außerdem können Sie hier die Oberfläche der App konfigurieren.",
 			"EN" : "Edit properties of current location.<br/>Configure corporate identity for app."
 		},
+		"business.help.paymentmethod.popover" : {
+			"DE" :  "Legen Sie hier fest, welche Möglichkeiten der Gast hat, den Check-In abzuschliessen (Z. B. auf Hotelrechnung, Bar).",
+			"EN" : "Here you can define the options a customer has to complete the check-in (e.g. hotel bill, cash)."
+		},
 		"business.action.edit.enable" : {
 			"DE" : "Location editieren",
 			"EN" : "Enable edit mode"
@@ -479,6 +483,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"business.detail.logo.button" : {
 			"DE" : "Logo hinzufügen",
 			"EN" : "Add logo"
+		},
+		"business.detail.section.pictures" : {
+			"DE" :  "Profilbilder hochladen",
+			"EN" : "Upload profile pictures"
 		},
 		"business.detail.picture1.button" : {
 			"DE" : "Profilbild 1 hinzufügen",
@@ -724,6 +732,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"business.detail.subscription.cancel.text" : {
 			"DE" :  "Möchten Sie die Anfrage widerrufen?",
 			"EN" : "Do you want to cancel your request?"
+		},
+		"business.detail.section.cockpit" : {
+			"DE" :  "Cockpit Einstellungen",
+			"EN" : "Cockpit Settings"
+		},
+		"business.detail.cockpitsettings.offlinealert" : {
+			"DE" :  "E-Mail Benachrichtigung",
+			"EN" : "Offline E-Mail Alert"
+		},
+		"business.detail.cockpitsettings.offlinealert.description" : {
+			"DE" :  "Eine E-Mail wird versendet, wenn Probleme mit dem Cockpit auftreten. Dazu gehören Verbindungsabbrüche oder unbeabsichtigtes schliessen des Cockpits.",
+			"EN" : "The system will send an e-mail, if it detects a connection problem or the client was closed accidently and is offline for more than 30 minutes."
 		},
 		//profile partial
 		"profile.title" : {
