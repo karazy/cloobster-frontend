@@ -10,18 +10,26 @@
 * 	@constructor
 */
 
-Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, loginService, Business, Area, Spot, Menu, Documents, langService, $log, handleError, helperFn) {
+Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, loginService, Business, Area, Spot, Menu, Documents, langService, $log, handleError, helperFn, validator) {
 		//default information when adding a new barcode
 	var defaultSpot = {
-			name: langService.translate("barcode.new.default.name") || "New Spot",
+			//name: langService.translate("barcode.new.default.name") || "New Spot",
+			name: "",
 			barcode : "",
 			qrImageUrl: null,
 			active: true
 		},
+		requiredSpotFields = {
+			name: true
+		},
 		defaultArea = {
-			name: langService.translate("area.new.default.name") || "My Service Area",
+			//name: langService.translate("area.new.default.name") || "My Service Area",
+			name: "",
 			active: true,
 			menuIds: []
+		},
+		requiredAreaFields = {
+			name: true
 		},
 		//Id of active business
 		activeBusinessId = null,
@@ -149,6 +157,11 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 	};
 
 	$scope.saveArea = function() {
+		if(!validator.validateModel($scope.currentArea, requiredAreaFields)) {
+			$scope.areaInvalid = true;
+			return;
+		}
+
 		if($scope.currentArea && $scope.currentArea.id) {
 			$log.log("update area " + $scope.currentArea.id);
 			$scope.currentArea.$update(angular.noop, handleError);
@@ -218,6 +231,10 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 
 
 	$scope.saveSpot = function() {		
+		if(!validator.validateModel($scope.currentSpot, requiredSpotFields)) {
+			$scope.spotInvalid = true;
+			return;
+		}
 		if($scope.currentSpot && $scope.currentSpot.id) {
 			$log.log("update spot " + $scope.currentSpot.id);
 			$scope.currentSpot.$update(angular.noop, handleError);			
@@ -647,9 +664,10 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 				// break;
 			case "area":
 				$scope.currentSpot = null;
+				$scope.areaInvalid = false;
 				// break;
 			case "spot":
-
+				$scope.spotInvalid = false;
 				break;
 		}
 	};
@@ -677,4 +695,4 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 
 }
 
-Cloobster.Spot.$inject = ['$scope', '$http', '$routeParams', '$location', '$filter', 'login', 'Business', 'Area', 'Spot', 'Menu', 'Documents', 'lang', '$log', 'errorHandler', 'helper'];
+Cloobster.Spot.$inject = ['$scope', '$http', '$routeParams', '$location', '$filter', 'login', 'Business', 'Area', 'Spot', 'Menu', 'Documents', 'lang', '$log', 'errorHandler', 'helper','validator'];

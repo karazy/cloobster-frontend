@@ -920,3 +920,39 @@ Cloobster.services.factory('helper', function() {
 
   return helperFunctions;
 });
+
+/** 
+* 	@constructor
+* 	Factory function for the 'validator' service.
+*		Contains methods 
+* 
+* 	@author Nils Weiher
+*/
+Cloobster.services.factory('validator', function() {
+
+	var validator = {
+		/*
+		* @param model
+		*	The object to validate
+		* @param requiredFields
+		*	Object containing the required fields
+		* @return
+		*	True if valid model
+		*/
+		validateModel : function(model, requiredFields) {
+			for(var field in requiredFields) {
+				if(requiredFields[field] === true) {
+					if(!model[field] || !model[field].length > 0) {
+						return false;
+					}
+				}
+			}
+
+			return true;
+		}
+	}
+
+	return validator;
+});
+
+

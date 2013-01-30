@@ -1364,6 +1364,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Aktiv: Gäste können einchecken",
 			"EN" :  "Active: Guests can check in"
 		},
+		"areas.placeholder.name" : {
+			"DE" :  "Name *",
+			"EN" :  "Name *"
+		},
 		"areas.editor.name" : {
 			"DE" :  "Name des Servicebereichs",
 			"EN" :  "Name of service area"
@@ -1371,6 +1375,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"areas.editor.name.tooltip" : {
 			"DE" :  "Name editieren",
 			"EN" :  "Edit name"
+		},
+		"areas.placeholder.description" : {
+			"DE" :  "Beschreibung",
+			"EN" :  "Description"
 		},
 		"areas.editor.description" : {
 			"DE" :  "Beschreibung des Servicebereichs",
@@ -1446,6 +1454,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"spots.editor.name" : {
 			"DE" : "Name",
 			"EN" : "Name"
+		},
+		"spots.placeholder.name" : {
+			"DE" :  "Name *",
+			"EN" :  "Name *"
 		},
 		"spots.editor.barcode" : {
 			"DE" : "Barcode",

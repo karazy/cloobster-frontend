@@ -9,7 +9,7 @@
 * 	View and manage menus, products, choices per restaurant.
 * 	@constructor
 */
-Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, Business, Menu, Product, Choice, langService, $log, handleError) {
+Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, Business, Menu, Product, Choice, langService, $log, handleError, validator) {
 
 	var activeBusinessId = null,
 		choicesResource = null,
@@ -221,7 +221,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$log.log("save menu ");
 		var order = 0;
 
-		if(!$scope.validateModel($scope.currentMenu, requiredMenuFields)) {
+		if(!validator.validateModel($scope.currentMenu, requiredMenuFields)) {
 			$scope.menuInvalid = true;
 			return;
 		}
@@ -350,7 +350,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 		var product = $scope.currentProduct;
 
-		if(!$scope.validateModel(product, requiredProductFields)) {
+		if(!validator.validateModel(product, requiredProductFields)) {
 			$scope.productInvalid = true;
 			return;
 		}
@@ -619,7 +619,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	$scope.saveChoice = function() {
 
-		if(!$scope.validateModel($scope.currentChoice, requiredChoiceFields)) {
+		if(!validator.validateModel($scope.currentChoice, requiredChoiceFields)) {
 			$scope.choiceInvalid = true;
 			return;
 		}
@@ -917,28 +917,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		}
 	};
 
-	/**
-	* @private
-	* 
-	* @param model
-	*	The object to validate
-	* @param requiredFields
-	*	Object containing the required fields
-	* @return
-	*	True if valid model
-	*/
-	$scope.validateModel = function(model, requiredFields) {
-		for(var field in requiredFields) {
-			if(requiredFields[field] === true) {
-				if(!model[field] || !model[field].length > 0) {
-					return false;
-				}
-			}
-		}
-
-		return true;
-	}
-
 	//end utility
 
 	$scope.setLocationAndLoadMenu = function(menuId) {
@@ -977,4 +955,4 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	});
 }
 
-Cloobster.Menu.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'Business', 'Menu', 'Product', 'Choice', 'lang', '$log', 'errorHandler'];
+Cloobster.Menu.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'Business', 'Menu', 'Product', 'Choice', 'lang', '$log', 'errorHandler', 'validator'];

@@ -71,12 +71,19 @@
 				<div class="data-container-block">
 					<!-- <div class=" common-wrapper common-wrapper-detail-list" > -->
 
-						<div simple-property-editor editor-title="areas.editor.name" editor-property="currentArea.name" editor-on-save="saveArea()" editor-max-length="20" editor-required>
-							<h5 class="edit" tooltip="areas.editor.name.tooltip">{{currentArea.name}} <i class="icon-edit icon-black"></i></h5>
+						<div simple-property-editor editor-title="areas.editor.name" editor-property="currentArea.name" editor-on-save="saveArea()" editor-max-length="20" editor-required editor-placeholder="areas.placeholder.name">
+							<h5 class="edit" tooltip="areas.editor.name.tooltip">
+							<span l="areas.placeholder.name" ng-hide="currentArea.name" ng-class="{'text-error' : areaInvalid, 'simple-property-placeholder' : !areaInvalid}">e. g. Room service*</span>
+							{{currentArea.name}} <i class="icon-edit icon-black"></i></h5>
 						</div>
-						<div simple-property-editor editor-title="areas.editor.description" editor-property="currentArea.description" editor-on-save="saveArea()" editor-type="textarea">
-							<p class="edit" tooltip="areas.editor.description.tooltip">{{currentArea.description}} <i class="icon-edit icon-black"></i></p>
+						<div simple-property-editor editor-title="areas.editor.description" editor-property="currentArea.description" editor-on-save="saveArea()" editor-type="textarea" editor-placeholder="areas.placeholder.description">
+							<p class="edit" tooltip="areas.editor.description.tooltip">
+								<span l="areas.placeholder.description" ng-hide="currentArea.description" class="simple-property-placeholder">Description</span>
+								{{currentArea.description}} <i class="icon-edit icon-black"></i></p>
 						</div>
+						<div ng-show="areaInvalid" class="text-error">
+			    		<span l="validation.field.required">* Please fill out all required fields.</span>
+			    	</div>
 						<div class="row-fluid" ng-show="currentArea.id">
 							<button class="btn btn-success span6" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="currentArea.active && currentArea.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
 
@@ -230,8 +237,14 @@
 				<h4 class="data-container-title" l="areas.spot.detail.title">Edit Spot</h4>
 				<div class="data-container-block">
 					<div simple-property-editor editor-title="spots.editor.name" editor-property="currentSpot.name" editor-on-save="saveSpot()" editor-required editor-max-length="20">
-							<h5 class="edit" tooltip="spots.editor.name.tooltip">{{currentSpot.name}} <i class="icon-edit icon-black"></i></h5>
+							<h5 class="edit" tooltip="spots.editor.name.tooltip">
+							<span l="areas.placeholder.name" ng-hide="currentSpot.name" ng-class="{'text-error' : spotInvalid, 'simple-property-placeholder' : !spotInvalid}">Name *</span>
+							{{currentSpot.name}} <i class="icon-edit icon-black"></i></h5>
 						</div>
+						<div ng-show="spotInvalid" class="text-error">
+			    		<span l="validation.field.required">* Please fill out all required fields.</span>
+			    	</div>
+
 			    		<img ng-show="currentSpot.qrImageUrl" ng-src="{{currentSpot.qrImageUrl}}" alt="Spot Barcode"/>
 			    		<p>{{currentSpot.barcode}}</p>
 			    		<div class="row-fluid" ng-show="currentSpot.id">
