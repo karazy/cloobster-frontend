@@ -1,43 +1,46 @@
 <div class="row-fluid">
-    <div class="span3" ng-controller="CloobsterAdmin.Functions">
-      <div class="well">
-        <h2>Admin Functions</h2>
-        <h6 class="nav-header">Datastore Functions</h6>
-        <p>
-        	<button type="button" class="btn btn-small" ng-click="upgradeLocations()" ng-bind="upgradeLocationsText" ng-disabled="upgradeLocationsDisabled" ng-init="upgradeLocationsText='Create Welcome Area/Spot and Basic Subscriptions'"></button>
+  <div class="span3" ng-controller="CloobsterAdmin.Functions">
+    <div class="well">
+      <h2>Admin Functions</h2>
+      <h6 class="nav-header">Datastore Upgrade Functions</h6>
+      <p>
+      	<button type="button" class="btn btn-small" ng-click="upgradeLocations()" ng-bind="upgradeLocationsText" ng-disabled="upgradeLocationsDisabled" ng-init="upgradeLocationsText='Create Welcome Area/Spot and Basic Subscriptions'"></button>
+      </p>
+      <p>
+      	<button type="button" class="btn btn-small" ng-click="upgradeAreas()" ng-bind="upgradeAreas.text" ng-disabled="upgradeAreas.disabled" ng-init="upgradeAreas.text='Add Master Spots'"></button>
+      </p>
+      <h6 class="nav-header">Datastore Developer Functions</h6>
+      <div ng-hide="deleteFunctionsDisabled">
+      	<p>
+      		<button type="button" class="btn btn-small" ng-click="createTestData()" ng-bind="createTestDataText" ng-disabled="createTestDataDisabled" ng-init="	createTestDataText='Create Test Data'"></button>
+      	</p>
+      	<p>
+      		<button type="button" class="btn btn-small" ng-click="deleteTestData()" ng-bind="deleteTestDataText" ng-disabled="deleteTestDataDisabled" ng-init="	deleteTestDataText='Delete Test Data'"></button>
+      	</p>
+        <p ng-hide="showDeleteAll">
+        	<button type="button" class="btn btn-small btn-danger" ng-click="showDeleteAll=true;confirmDeleteAllText='Confirm Delete'">Delete All Content</button>
         </p>
-        <div ng-hide="deleteFunctionsDisabled">
-        	<p>
-        		<button type="button" class="btn btn-small" ng-click="createTestData()" ng-bind="createTestDataText" ng-disabled="createTestDataDisabled" ng-init="	createTestDataText='Create Test Data'"></button>
-        	</p>
-        	<p>
-        		<button type="button" class="btn btn-small" ng-click="deleteTestData()" ng-bind="deleteTestDataText" ng-disabled="deleteTestDataDisabled" ng-init="	deleteTestDataText='Delete Test Data'"></button>
-        	</p>
-	        <p ng-hide="showDeleteAll">
-	        	<button type="button" class="btn btn-small btn-danger" ng-click="showDeleteAll=true;confirmDeleteAllText='Confirm Delete'">Delete All Content</button>
-	        </p>
-	        <p ng-show="showDeleteAll">
-	        	<button type="button" class="btn btn-small" ng-click="showDeleteAll=false">Cancel</button><button type="button" class="btn btn-small btn-danger" ng-click="deleteAllData()" ng-bind="confirmDeleteAllText" ng-disabled="confirmDeleteAllDisabled"></button>
-	        </p>
-	        <p ng-hide="showDeleteLive">
-	        	<button type="button" class="btn btn-small btn-danger" ng-click="showDeleteLive=true;confirmDeleteLiveText='Confirm Delete'">Delete Live Content</button>
-	        </p>
-	        <p ng-show="showDeleteLive">
-	        	<button type="button" class="btn btn-small" ng-click="showDeleteLive=false">Cancel</button><button type="button" class="btn btn-small btn-danger" ng-click="deleteLiveData()" ng-bind="confirmDeleteLiveText" ng-disabled="confirmDeleteLiveDisabled"></button>
-	        </p>
-        </div>
-        <p ng-show="deleteFunctionsDisabled">Delete functions disabled in production environment.</p>
-        <h6 class="nav-header">Account Functions</h6>
-        <p>
-        	<button type="button" class="btn btn-small" ng-click="createDummieAccounts()" ng-bind="createDummieAccountsText" ng-disabled="createDummieAccountsDisabled" ng-init="createDummieAccountsText='Create Dummie Accounts'"></button>
+        <p ng-show="showDeleteAll">
+        	<button type="button" class="btn btn-small" ng-click="showDeleteAll=false">Cancel</button><button type="button" class="btn btn-small btn-danger" ng-click="deleteAllData()" ng-bind="confirmDeleteAllText" ng-disabled="confirmDeleteAllDisabled"></button>
         </p>
-        <h6 class="nav-header">Cockpit Functions</h6>
-        <p>
-        	<button type="button" class="btn btn-small" ng-click="sendCockpitUpdateMessage()" ng-bind="sendCockpitUpdateMessageText" ng-disabled="sendCockpitUpdateMessageDisabled" ng-init="sendCockpitUpdateMessageText='Send Cockpit Update'"></button>
+        <p ng-hide="showDeleteLive">
+        	<button type="button" class="btn btn-small btn-danger" ng-click="showDeleteLive=true;confirmDeleteLiveText='Confirm Delete'">Delete Live Content</button>
+        </p>
+        <p ng-show="showDeleteLive">
+        	<button type="button" class="btn btn-small" ng-click="showDeleteLive=false">Cancel</button><button type="button" class="btn btn-small btn-danger" ng-click="deleteLiveData()" ng-bind="confirmDeleteLiveText" ng-disabled="confirmDeleteLiveDisabled"></button>
+        </p>
+      </div>
+      <p ng-show="deleteFunctionsDisabled">Developer functions disabled in production environment.</p>
+      <h6 class="nav-header">Account Functions</h6>
+      <p>
+      </p>
+      <h6 class="nav-header">Cockpit Functions</h6>
+      <p>
+      	<button type="button" class="btn btn-small" ng-click="sendCockpitUpdateMessage()" ng-bind="sendCockpitUpdateMessageText" ng-disabled="sendCockpitUpdateMessageDisabled" ng-init="sendCockpitUpdateMessageText='Send Cockpit Update'"></button>
 
-        </p>
-      </div><!--/.well -->
-    </div><!--/span-->
+      </p>
+    </div><!--/.well -->
+  </div><!--/span-->
 
 	<div class="span9">
 		<div class="row-fluid" id="importbusiness" ng-init="importUrl='/admin/s/businesses'" ng-controller="CloobsterAdmin.Import">
