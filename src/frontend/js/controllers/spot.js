@@ -170,6 +170,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			$scope.currentArea.$save(
 				function() { 
 					$scope.areas.push($scope.currentArea);
+					$scope.loadArea($scope.currentArea);
 				},
 				// Error callback
 				handleError

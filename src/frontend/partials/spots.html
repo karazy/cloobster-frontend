@@ -210,12 +210,12 @@
 						A welcome spot represents your entire location. People can use it to check-in, view your informations and services. But can't do stuff like ordering products.</p>
 				</div>
 				<ul class="nav-pills-checkbox data-container-block data-container-small data-container-scrollable" id="spotsList">
-				        <li ng-repeat="spot in filteredSpots = (spots | filter:spotsQuery) | orderBy:['name'] " >	        					        	
+				        <li ng-repeat="spot in filteredSpots = (spots | filter:spotsQuery) | orderBy:['-master', 'name'] " >	        					        	
 				        	<div ng-class="{active: currentSpot.id == spot.id}" ng-click="loadSpot(spot, $event)">
 				        		<div>
 				        			<input type="checkbox" ng-model="spot.checked">
 				        		</div>
-			        			<div>{{spot.name}} <i class="icon-ban-circle icon-black" ng-hide="spot.active"></i></div>
+			        			<div><span ng-bind="spot.name" ng-hide="spot.master"></span><b ng-bind="spot.name" ng-show="spot.master"></b> <i class="icon-ban-circle icon-black" ng-hide="spot.active"></i></div>
 			        			<!-- <a ></a> -->
 			        		</div>
 			        	</li>
@@ -237,37 +237,36 @@
 				<h4 class="data-container-title" l="areas.spot.detail.title">Edit Spot</h4>
 				<div class="data-container-block">
 					<div simple-property-editor editor-title="spots.editor.name" editor-property="currentSpot.name" editor-on-save="saveSpot()" editor-required editor-max-length="20">
-							<h5 class="edit" tooltip="spots.editor.name.tooltip">
-							<span l="areas.placeholder.name" ng-hide="currentSpot.name" ng-class="{'text-error' : spotInvalid, 'simple-property-placeholder' : !spotInvalid}">Name *</span>
-							{{currentSpot.name}} <i class="icon-edit icon-black"></i></h5>
-						</div>
-						<div ng-show="spotInvalid" class="text-error">
-			    		<span l="validation.field.required">* Please fill out all required fields.</span>
-			    	</div>
+						<h5 class="edit" tooltip="spots.editor.name.tooltip">
+						<span l="areas.placeholder.name" ng-hide="currentSpot.name" ng-class="{'text-error' : spotInvalid, 'simple-property-placeholder' : !spotInvalid}">Name *</span>
+						{{currentSpot.name}} <i class="icon-edit icon-black"></i></h5>
+					</div>
+					<div ng-show="spotInvalid" class="text-error">
+		    		<span l="validation.field.required">* Please fill out all required fields.</span>
+		    	</div>
+	    		<img ng-show="currentSpot.qrImageUrl" ng-src="{{currentSpot.qrImageUrl}}" alt="Spot Barcode"/>
+	    		<p>{{currentSpot.barcode}}</p>
+	    		<div class="row-fluid" ng-show="currentSpot.id">
+	    			<p ng-show="currentSpot.master" l="spot.master.description">This is the "master" Spot for this area, it cannot be deleted, unless you delete the Area.</p>
+	    			<button class="btn btn-success span6" type="button" ng-click="toggleSpotActive()" ng-model="currentSpot.active" ng-show="currentSpot.active && currentSpot.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
+		  			<button class="btn btn-danger span6" style="margin-left: 0px !important;" type="button" ng-click="toggleSpotActive()" ng-model="currentSpot.active" ng-show="!currentSpot.active && currentSpot.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
 
-			    		<img ng-show="currentSpot.qrImageUrl" ng-src="{{currentSpot.qrImageUrl}}" alt="Spot Barcode"/>
-			    		<p>{{currentSpot.barcode}}</p>
-			    		<div class="row-fluid" ng-show="currentSpot.id">
-			    			<button class="btn btn-success span6" type="button" ng-click="toggleSpotActive()" ng-model="currentSpot.active" ng-show="currentSpot.active && currentSpot.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
-
-			    			<button class="btn btn-danger span6" style="margin-left: 0px !important;" type="button" ng-click="toggleSpotActive()" ng-model="currentSpot.active" ng-show="!currentSpot.active && currentSpot.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
-
-				    		<button class="btn span6" data-toggle="modal" data-target="#deleteSpotModal" ng-show="!currentSpot.welcome"><i class="icon-trash"></i></button>
-				    		<!-- Modal delete dialog. -->
-				    		<div class="modal hide" id="deleteSpotModal">
-							 	<div class="modal-header">
-							    	<button type="button" class="close" data-dismiss="modal">×</button>
-							    	<h3 l="spot.action.delete">Delete Spot</h3>
-								</div>
-								<div class="modal-body alert-error">
-							    	<p><span l="spot.action.delete.text">{{currentSpot.name}} will be deleted!<br/>Already printed barcodes can't be reused afterwards!</span></p>
-							    </div>  
-							  	<div class="modal-footer">
-							  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
-							    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteSpot(currentSpot)" l="common.delete">Delete</button>
-								</div>
+		    		<button class="btn span6" data-toggle="modal" data-target="#deleteSpotModal" ng-show="!currentSpot.welcome && !currentSpot.master"><i class="icon-trash"></i></button>
+		    		<!-- Modal delete dialog. -->
+		    		<div class="modal hide" id="deleteSpotModal">
+						 	<div class="modal-header">
+						    	<button type="button" class="close" data-dismiss="modal">×</button>
+						    	<h3 l="spot.action.delete">Delete Spot</h3>
 							</div>
-				    	</div>
+							<div class="modal-body alert-error">
+						    	<p><span l="spot.action.delete.text">{{currentSpot.name}} will be deleted!<br/>Already printed barcodes can't be reused afterwards!</span></p>
+						    </div>  
+						  	<div class="modal-footer">
+						  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
+						    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteSpot(currentSpot)" l="common.delete">Delete</button>
+							</div>
+						</div>
+		    	</div>
 				</div>
 			</div>
 		</div>
