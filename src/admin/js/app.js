@@ -5,8 +5,8 @@ var Karazy = {
 		environment : "${karazy.environment}"
 };
 
-/* Cloobster namespace. Create if not exists.*/
-var CloobsterAdmin =  {};
+/* CloobsterAdmin namespace. Create if not exists.*/
+var CloobsterAdmin =  window.CloobsterAdmin || {};
 
 // Declare app level module which depends on filters, and services
 CloobsterAdmin.module = angular.module('CloobsterAdmin', ['CloobsterAdmin.services','CloobsterAdmin.resources', 'CloobsterAdmin.directives', 'CloobsterAdmin.filters']).

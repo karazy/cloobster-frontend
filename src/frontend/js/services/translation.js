@@ -109,8 +109,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Select a user name."
 		},
 		"registration.form.login.error.pattern" : {
-			"DE" : 'Ihr Benutzername muss zwischen 4-30 Zeichen lang sein. Es sind nur Kleinbuchstanen und "_" "-" "." erlaubt.',
-			"EN" : 'Your username must consist of 4-30 characters. Only lowercase and "_" "-" "." are permittet.'
+			"DE" : 'Ihr Benutzername muss zwischen 4-30 Zeichen lang sein. Es sind nur Kleinbuchstaben, "_", "-" und "." erlaubt.',
+			"EN" : 'Your username must consist of 4-30 characters. Only lowercase letters, "_", "-", and "." are permittet.'
 		},
 		"registration.form.email" : {
 			"DE" : "E-Mail*",
