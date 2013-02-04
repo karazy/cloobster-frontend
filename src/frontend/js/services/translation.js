@@ -1648,17 +1648,16 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" :  "To edit info page, please select info page from list or add a new page."
 		},
 		"infopage.placeholder.title" : {
-			"DE" :  "Z.B. Frühstückszeiten",
-			"EN" :  "e.g. breakfast hours"
+			"DE" :  "Titel *",
+			"EN" :  "Title *"
 		},
 		"infopage.placeholder.shortText" : {
-			"DE" :  "Kurze Information! z.B. von 8:00 - 10:00",
-			"EN" :  "Short text! E.g. 08:00 AM - 10.00 AM"
+			"DE" :  "Kurze Information",
+			"EN" :  "Short Text"
 		},
 		"infopage.placeholder.html" : {
-			"DE" :  "Ausführliche Information!<br/> z.B. Zu unserem reichhaltigen Frühstück dürfen wir sie zu folgenden Zeiten begrüßen"+
-			"<ul><li>Mo- Fr von 8:00 - 10:00</li><li>Sa- So 8:00 - 12:00</li></ul>",
-			"EN" :  "Long text! E.g. We offer breakfast between..."
+			"DE" :  "Ausführliche Information",
+			"EN" :  "Long Text"
 		},
 		//documents partial
 		"documents.title" : {
