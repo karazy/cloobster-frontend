@@ -71,6 +71,9 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		if($scope.currentLanguage) {
 			params.lang = $scope.currentLanguage.code;
 		}
+
+		// This will blank the current info page leading to a flickering of the screen.
+		// To only display the new data after loading set the currentInfoPage in the success callback.
 		$scope.currentInfoPage = $scope.infoPageResource.get(params, function() {
 			$scope.imageResource = InfoPage.buildImageResource(activeBusinessId, page.id);	
 		},	handleError);	
