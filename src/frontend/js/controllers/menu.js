@@ -935,7 +935,10 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	$scope.deleteProductImage = function() {
 		if($scope.productImageResource) {
-			$scope.productImageResource.remove(null,null, angular.noop, handleError);	
+			var product = $scope.currentProduct;
+			$scope.productImageResource.remove(null,null, function() {
+				product.image = null;
+			}, handleError);	
 		}
 	};
 

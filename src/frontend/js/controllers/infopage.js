@@ -65,9 +65,15 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	*
 	*/
 	$scope.loadInfoPage =  function(page) {
-		$scope.currentInfoPage = page;
+		var params = {'id': page.id};
 
-		$scope.imageResource = InfoPage.buildImageResource(activeBusinessId, page.id);
+		
+		if($scope.currentLanguage) {
+			params.lang = $scope.currentLanguage.code;
+		}
+		$scope.currentInfoPage = $scope.infoPageResource.get(params, function() {
+			$scope.imageResource = InfoPage.buildImageResource(activeBusinessId, page.id);	
+		},	handleError);	
 	}
 
 	/**
@@ -123,10 +129,16 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	$scope.switchLanguage = function() {
 		if($scope.currentLanguage) {
 			$http.defaults.headers.common['Content-Language'] = $scope.currentLanguage.code;	
-			$scope.loadInfoPages(activeBusinessId, $scope.currentLanguage.code);
+			//$scope.loadInfoPages(activeBusinessId, $scope.currentLanguage.code);
+			if($scope.currentInfoPage) {
+				$scope.loadInfoPage($scope.currentInfoPage, $scope.currentLanguage.code);
+			}
 		} else {
 			delete $http.defaults.headers.common['Content-Language'];
-			$scope.loadInfoPages(activeBusinessId);
+			//$scope.loadInfoPages(activeBusinessId);
+			if($scope.currentInfoPage) {
+				$scope.loadInfoPage($scope.currentInfoPage);
+			}
 		}
 
 		$scope.resetSearchField();
