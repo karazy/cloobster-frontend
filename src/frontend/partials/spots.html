@@ -246,8 +246,8 @@
 		    	</div>
 	    		<img ng-show="currentSpot.qrImageUrl" ng-src="{{currentSpot.qrImageUrl}}" alt="Spot Barcode"/>
 	    		<p>{{currentSpot.barcode}}</p>
-	    		<div class="row-fluid" ng-show="currentSpot.id">
-	    			<p ng-show="currentSpot.master" l="spot.master.description">This is the "master" Spot for this area, it cannot be deleted, unless you delete the Area.</p>
+	    		<p ng-show="currentSpot.master" l="spot.master.description">This is the "master" Spot for this area, it cannot be deleted, unless you delete the Area.</p>
+	    		<div class="row-fluid" ng-show="currentSpot.id">	    			
 	    			<button class="btn btn-success span6" type="button" ng-click="toggleSpotActive()" ng-model="currentSpot.active" ng-show="currentSpot.active && currentSpot.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
 		  			<button class="btn btn-danger span6" style="margin-left: 0px !important;" type="button" ng-click="toggleSpotActive()" ng-model="currentSpot.active" ng-show="!currentSpot.active && currentSpot.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
 
