@@ -235,6 +235,7 @@ ul.payment-method-list li {
 
 .data-container-block {
   padding: 0.5em; 
+  word-break: break-word;
 }
 
 .data-container-block [simple-property-editor] {
