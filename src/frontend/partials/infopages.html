@@ -40,9 +40,11 @@
 			<div class="data-container-with-title">
 				<h4 class="data-container-title" l="infopage.container.title">Infopage</h4>
 				<div class="data-container-block">
-					<select name="lang_select" class="pull-right" ng-model="currentLanguage" ng-change="switchLanguage()" ng-options="lang.lang for lang in langcodes | filter:isSelectedLanguage">
-					  <option value="" selected l="common.default.language">- default language -</option>
-					</select>
+					<div class="alert alert-success pull-right" style="padding-right: 10px;">
+						<select name="lang_select" style="margin-bottom: 0px;" ng-model="currentLanguage" ng-change="switchLanguage()" ng-options="lang.lang for lang in langcodes | filter:isSelectedLanguage">
+						  <option value="" selected l="common.default.language">- default language -</option>
+						</select>
+					</div>
 					<div simple-property-editor editor-title="infopage.title" editor-property="currentInfoPage.title" editor-on-save="saveInfoPage()" editor-placeholder="infopage.placeholder.title" editor-required>
 						<h5 class="edit" tooltip="infopage.title">
 							<span l="infopage.placeholder.title" ng-hide="currentInfoPage.title" class="simple-property-placeholder">Title *</span>
