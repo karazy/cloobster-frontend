@@ -219,7 +219,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	$scope.saveMenu = function() {
 		$log.log("save menu ");
-		var order = 0;
 
 		if(!validator.validateModel($scope.currentMenu, requiredMenuFields)) {
 			$scope.menuInvalid = true;
@@ -343,6 +342,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	function saveProductSuccess(product) {
 		$scope.products.push(product);
 		$scope.currentMenu.productIds.push(product.id);
+		$scope.saveMenu();
 	}
 
 	$scope.saveProduct = function() {

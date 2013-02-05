@@ -129,6 +129,15 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		}
 	}
 
+	$scope.deleteInfoPageImage = function() {
+		if($scope.imageResource) {
+			var infoPage = $scope.currentInfoPage;
+			$scope.imageResource.remove(null,null, function() {
+				infoPage.image = null;
+			}, handleError);	
+		}
+	};
+
 	$scope.switchLanguage = function() {
 		if($scope.currentLanguage) {
 			$http.defaults.headers.common['Content-Language'] = $scope.currentLanguage.code;	
