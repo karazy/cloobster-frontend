@@ -369,9 +369,12 @@
 		        <td>{{account.companyId}}</td>
 		        <td>{{account.id}}</td>
 		        <td>
-		        	<button class="btn btn-danger" ng-click="setAccountActive(false)" ng-show="account.active" ng-disabled="setAccountActiveProgress">
-		        		<i class="icon-ban-circle icon-white"></i><span ng-show="setAccountActiveProgress"> Updating ...</span><span ng-hide="setAccountActiveProgress"> Deactivate</span>
-		        	</button>
+		        	<span simple-confirm-dialog dialog-on-confirm="setAccountActive(false)" ng-show="account.active" dialog-title="account.deactivate.title" dialog-text="account.deactivate.text" dialog-confirm-button="common.confirm">
+								<button ng-show="account.active" class="btn btn-danger" ng-disabled="setAccountActiveProgress">
+		        			<i class="icon-ban-circle icon-white"></i><span ng-show="setAccountActiveProgress"> Updating ...</span><span ng-hide="setAccountActiveProgress"> Deactivate</span>
+		        		</button>
+							</span>
+		        	
 		        	<button class="btn btn-success" ng-click="setAccountActive(true)" ng-show="!account.active" ng-disabled="setAccountActiveProgress" ng-init="activateAccountText='Activate'">
 		        		<i class="icon-ok icon-white"></i><span ng-show="setAccountActiveProgress"> Updating ...</span><span ng-hide="setAccountActiveProgress"> Activate</span>
 		        	</button>

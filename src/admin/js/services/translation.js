@@ -134,6 +134,14 @@ angular.module("CloobsterAdmin.translations", [], ["$provide", function($provide
 		"subscription.cancel.text" : {
 			"DE" :  "Wollen Sie diese Anfrage ablehnen?",
 			"EN" : "Do you want to cancel this request?"
+		},
+		"account.deactivate.text" : {
+			"DE" : "Wollen sie das Konto deaktivieren?",
+			"EN" : "Do you want to deactivate the account?"
+		},
+		"account.deactivate.title" : {
+			"DE" : "Konto Deaktivieren",
+			"EN" : "Deactivate Account"
 		}
 	}
 	$provide.value("translation", map);
