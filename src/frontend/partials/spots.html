@@ -85,11 +85,14 @@
 			    		<span l="validation.field.required">* Please fill out all required fields.</span>
 			    	</div>
 						<div class="row-fluid" ng-show="currentArea.id">
-							<button class="btn btn-success span6" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="currentArea.active && currentArea.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
+							<!-- Active toggle buttons -->
+							<button class="btn btn-success span4" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="currentArea.active && currentArea.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
+		    			<button class="btn btn-danger span6" style="margin-left: 0px !important;" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="!currentArea.active && currentArea.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
+							<!-- Barcode required toggle buttons -->
+							<button class="btn btn-warning span4" type="button" style="margin-left: 1px !important;" ng-click="currentArea.barcodeRequired = false;saveArea()" ng-show="currentArea.barcodeRequired && currentArea.id"><i class="icon-qrcode icon-white"></i> <span l="areas.editor.barcoderequired.true">Barcode required</span></button>
+		    			<button class="btn span4" style="margin-left: 1px !important;" type="button" ng-click="currentArea.barcodeRequired = true;saveArea()" ng-show="!currentArea.barcodeRequired && currentArea.id"><i class="icon-qrcode"></i> <span l="areas.editor.barcoderequired.false">No Barcode required</span></button>
 
-			    			<button class="btn btn-danger span6" style="margin-left: 0px !important;" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="!currentArea.active && currentArea.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
-
-							<button class="btn span6" data-toggle="modal" data-target="#deleteAreaModal" ng-show="!currentArea.welcome"><i class="icon-trash"></i></button>
+							<button class="btn span4" data-toggle="modal" data-target="#deleteAreaModal" ng-show="!currentArea.welcome"><i class="icon-trash"></i></button>
 						</div>
 						<div class="modal hide" id="deleteAreaModal">
 						 	<div class="modal-header">
@@ -365,4 +368,3 @@
     	<button type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="generatedSpotsDocumentName.length > 100 || getCheckedSpotsCount() == 0" ng-click="generatePdfForCheckedSpots(generatedSpotsDocumentName)" l="common.generate">Generate</button>
 	</div>
 </div>
-
