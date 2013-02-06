@@ -138,7 +138,9 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		}
 	};
 
-	$scope.switchLanguage = function() {
+	$scope.switchLanguage = function(lang) {
+		$scope.currentLanguage = lang;
+
 		if($scope.currentLanguage) {
 			$http.defaults.headers.common['Content-Language'] = $scope.currentLanguage.code;	
 			//$scope.loadInfoPages(activeBusinessId, $scope.currentLanguage.code);
@@ -153,8 +155,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 			}
 		}
 
-		$scope.resetSearchField();
-		
+		$scope.resetSearchField();		
 	}
 
 	$scope.isSelectedLanguage = function(langToFilter) {
@@ -175,7 +176,9 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	*/
 	$scope.resetSearchField = function() {
 		//reset search field
-		$scope.infopagesQuery.title = "";
+		if($scope.infopagesQuery)  {
+			$scope.infopagesQuery.title = "";
+		}		
 	}
 
 	/** 

@@ -1981,8 +1981,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "All"
 		},
 		"common.default.language" : {
-			"DE" :  "- Standardsprache -",
-			"EN" : "- default language -"
+			"DE" :  "Standardsprache",
+			"EN" : "default language"
 		},
 		"common.action" : {
 			"DE" :  "Aktion",
