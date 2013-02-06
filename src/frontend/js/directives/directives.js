@@ -283,6 +283,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 			editorTitleKey: '@',
 			editorOnSave: '&',
 			editorOnCancel: '&',
+			editorOnDelete: '&',
 			editorImageResource: '=',
 			editorImageId: '@',
 			simpleImageEditor: '=',
@@ -311,6 +312,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 							 		'<input type="file" name="files[]" accept="image/jpeg,image/png,image/gif"></input>'+
 							 		'<input type="hidden" value="{{editorImageId}}">'+
 						 		'</span>'+
+						 		'<button class="btn" type="button" ng-click="deleteImage()" ng-hide="selectionActive || fileupload || !imageUrl || !deleteImage"><i class="icon-trash icon-black"></i></button>'+
 						 		'<p ng-show="selectedFiles"><span l="fileupload.image.label">Selected file: </span><span ng-bind="selectedFiles"></span></p>'+
 						 		'<img ng-src="{{imageUrl}}" style="max-width: 800px; display: block; clear: both; padding-top: 10px;">'+
 					 		'</div>'+
@@ -329,8 +331,8 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 							'<button type="button" class="btn" ng-click="cancel()" data-dismiss="modal" l="common.cancel">Close</button>'+
 							'<button type="submit" ng-hide="selectionActive" ng-disabled="isSaveDisabled()" class="btn btn-primary">'+
 								'<span l="common.save" ng-hide="fileUploading">Save</span><span ng-show="fileUploading" l="fileupload.button.submit.saving"></span>'+
-							'</button>'+
-							'<button type="button" class="btn btn-primary" ng-click="crop()" ng-show="selectionActive" ng-disabled="fileCropping" l="fileupload.button.crop">Crop image</button>'
+							'</button>'+							
+							'<button type="button" class="btn btn-primary" ng-click="crop()" ng-show="selectionActive" ng-disabled="fileCropping" l="fileupload.button.crop">Crop image</button>'+
 						'</div>'+
 					'</form>'+
 				'</div>';
@@ -348,7 +350,8 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        		uploadObject, //returned from file upload initialization
 		        		imgAreaSelect, // holds instance of image cropping tool
 		        		aspectRatio = iAttrs['editorRatio'], // get the preset ratios for image selection from the "editor-ratios" attribute.
-		        		editorCropText = iAttrs['editorCropText'];
+		        		editorCropText = iAttrs['editorCropText'],
+		        		deleteImage = iAttrs['editorOnDelete'];
 
 		        	/** Initialize private scope variables */
 		        	function resetScope () {
@@ -562,6 +565,12 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 			        		uploadObject.upload();
 		        		}
 		        	}
+
+		        	/** Delete button click handler. */
+		        	scope.deleteImage = (deleteImage) ? function() {
+		        		scope.editorOnDelete();
+		        		dialog.modal('hide');
+		        	} : null;
 
 		        	/** Cancel button click handler */
 		        	scope.cancel = function() {
