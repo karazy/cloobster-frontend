@@ -40,11 +40,19 @@
 			<div class="data-container-with-title">
 				<h4 class="data-container-title" l="infopage.container.title">Infopage</h4>
 				<div class="data-container-block">
-					<div class="alert alert-success pull-right" style="padding-right: 10px;">
-						<select name="lang_select" style="margin-bottom: 0px;" ng-model="currentLanguage" ng-change="switchLanguage()" ng-options="lang.lang for lang in langcodes | filter:isSelectedLanguage">
-						  <option value="" selected l="common.default.language">- default language -</option>
-						</select>
-					</div>
+					<ul class="nav nav-pills pull-right" style="margin-bottom: 0px; padding-right: 10px;">
+					<li class="dropdown">
+					  <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="border: 1px solid orange;">{{currentLanguage.lang}}<span ng-hide="currentLanguage" l="common.default.language">default language</span><b class="caret"></b></a>
+					  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+					  	<li>
+					  		<a l="common.default.language" ng-click="switchLanguage2(null)">default language</a>
+					  	</li>
+					    <li ng-repeat="lang in langcodes | filter:isSelectedLanguage" ng-class="{active: currentInfoPage.id == page.id}">
+			        		<a ng-click="switchLanguage(lang)">{{lang.lang}}</a>
+			        	</li>
+					  </ul>
+					</li>
+					</ul>
 					<div simple-property-editor editor-title="infopage.title" editor-property="currentInfoPage.title" editor-on-save="saveInfoPage()" editor-placeholder="infopage.placeholder.title" editor-required>
 						<h5 class="edit" tooltip="infopage.title">
 							<span l="infopage.placeholder.title" ng-hide="currentInfoPage.title" class="simple-property-placeholder">Title *</span>
@@ -53,7 +61,8 @@
 					</div>
 					<div ng-show="currentInfoPage.id">			
 						<div class="row-fluid">
-							<div  class="span8" simple-image-editor="currentInfoPage.image" editor-title-key="infopage.image" editor-image-id="image" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" editor-image-resource="imageResource">
+							<div  class="span8" simple-image-editor="currentInfoPage.image" editor-title-key="infopage.image" editor-image-id="image" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" 
+							editor-on-delete="deleteInfoPageImage()" editor-image-resource="imageResource">
 								<div ng-show="currentInfoPage.image.url">
 									<img  ng-src="{{currentInfoPage.image.url}}=s96" alt="click to edit" />
 									<p l="common.image.edit">Click image to edit</p>
@@ -62,9 +71,9 @@
 									<i class="icon-picture icon-white"></i> <span l="infopage.image">Add Image</span>
 								</button>
 							</div>
-							<div class="span2" ng-show="currentInfoPage.image.url">
+						<!-- 	<div class="span2" ng-show="currentInfoPage.image.url">
 									<button class="btn" type="button" ng-click="deleteInfoPageImage()"><i class="icon-trash icon-black"></i></button>
-							</div>
+							</div> -->
 						</div>
 					</div>
 					<div simple-property-editor editor-title="infopage.shortText" editor-property="currentInfoPage.shortText" editor-on-save="saveInfoPage()" editor-placeholder="infopage.placeholder.shortText" editor-type="textarea">
