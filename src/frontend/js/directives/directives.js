@@ -312,6 +312,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 							 		'<input type="file" name="files[]" accept="image/jpeg,image/png,image/gif"></input>'+
 							 		'<input type="hidden" value="{{editorImageId}}">'+
 						 		'</span>'+
+						 		//image delete button, hide when no delete function is provided, file is uploading, no image exists or selection is active!
 						 		'<button class="btn" type="button" ng-click="deleteImage()" ng-hide="selectionActive || fileupload || !imageUrl || !deleteImage"><i class="icon-trash icon-black"></i></button>'+
 						 		'<p ng-show="selectedFiles"><span l="fileupload.image.label">Selected file: </span><span ng-bind="selectedFiles"></span></p>'+
 						 		'<img ng-src="{{imageUrl}}" style="max-width: 800px; display: block; clear: both; padding-top: 10px;">'+
