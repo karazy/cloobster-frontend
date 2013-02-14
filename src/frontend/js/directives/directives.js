@@ -488,7 +488,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        	*/
 		        	function fileAddedCallback (fileName) {
 		        		scope.selectedFiles = fileName;
-		        		scope.fileAdded = true;		        
+		        		scope.fileAdded = true;
 		        		scope.$digest();
 		        		scope.save();
 		        	}

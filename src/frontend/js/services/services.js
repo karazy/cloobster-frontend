@@ -647,46 +647,48 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 		* It needs a previously optained fileUpeloadUrl for setup.
 		*/
 		function initUploadPlugin(fileInput, resource, fileAddCallback, fileUploadCallback, fileUploadProgressCallback) {
+			// Destroy first to make sure we dont double the initialisation
+			jQuery(fileInput).fileupload('destroy');
+			$('#foo').unbind('fileuploadadd');
 			jQuery(fileInput).fileupload({
 				fail: function(e, data) {
-	    			$log.error('Upload failed. Error thrown: '+data.errorThrown + ', status: '+ data.textStatus);
+    			$log.error('Upload failed. Error thrown: '+data.errorThrown + ', status: '+ data.textStatus);
 
-	    			fileUploadCallback(false, data);	    			
-	    		},
-	    		done: function (e, data) {
-	    			//data properties: name, blobKey, url
-	    			var images = data.result;
-	    			//create logo resource object
-	    			resource.blobKey = images[0].blobKey;
-	    			resource.url = images[0].url;
+    			fileUploadCallback(false, data);	    			
+    		},
+    		done: function (e, data) {
+    			//data properties: name, blobKey, url
+    			var images = data.result;
+    			//create logo resource object
+    			resource.blobKey = images[0].blobKey;
+    			resource.url = images[0].url;
 
-	    			addedFile = null;
+    			addedFile = null;
 
-	    			fileUploadCallback(true, data);
-		       	},
-		       	progress: function(e, data) {
-		       		(fileUploadProgressCallback || angular.noop)(data);
-		       	}
+    			fileUploadCallback(true, data);
+       	},
+       	progress: function(e, data) {
+       		(fileUploadProgressCallback || angular.noop)(data);
+       	},
+		    add: function (e, data) {
+        	addedFile = data;
+        	fileAddCallback(data.files[0].name);
+        }
 			});
 
-	        jQuery(fileInput).fileupload('option', {
-	            url: fileUploadUrl,
-	            maxFileSize: 10000000,
-	            autoUpload: false,
-	            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-	            process: [
-	                {
-	                    action: 'load',
-	                    fileTypes: /^image\/(gif|jpeg|png)$/,
-	                    maxFileSize: 20000000 // 20MB
-	                }
-	            ]
-	        });
-
-	        jQuery(fileInput).bind('fileuploadadd', function (e, data) {
-	        	addedFile = data;
-	        	fileAddCallback(data.files[0].name);
-	        });
+      jQuery(fileInput).fileupload('option', {
+          url: fileUploadUrl,
+          maxFileSize: 10000000,
+          autoUpload: false,
+          acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+          process: [
+              {
+                  action: 'load',
+                  fileTypes: /^image\/(gif|jpeg|png)$/,
+                  maxFileSize: 20000000 // 20MB
+              }
+          ]
+      });
 		};
 
 		uploadService = {

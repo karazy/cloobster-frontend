@@ -2047,8 +2047,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Saving..."
 		},
 		"fileupload.uploading" : {
-			"DE" : "Uploading ...",
-			"EN" : "Hochladen ..."
+			"DE" : "Hochladen ...",
+			"EN" : "Uploading ..."
 		},
 		"fileupload.image.description" : {
 			"DE" : "Wählen Sie eine Bilddatei zum Hochladen. Überprüfen Sie, dass sie nicht größer als 3MB ist und vom Typ GIF, PNG oder JPEG.",
