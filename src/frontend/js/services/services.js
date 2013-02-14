@@ -703,7 +703,8 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 			*		Called when upload has finished.
 			*/
 			getFileUploadObject : function(fileInput, resource, fileAddCallback, fileUploadCallback, fileUploadProgressCallback) {
-
+				var userAbort = false,
+						uploadRequest = null;
 				initUploadPlugin(fileInput, resource, fileAddCallback, fileUploadCallback, fileUploadProgressCallback);
 
 				return {
@@ -711,21 +712,36 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 					* Triggers file upload.
 					*/
 					upload: function() {
+						userAbort = false;
 						//if file has beed added to queue, upload it
 						if(addedFile) {
 							requestFileUploadInformation().then(function() {
 								// We have the upload url, start the upload.
-								jQuery(fileInput).fileupload('option','url', fileUploadUrl);
-								addedFile.submit();
+								if(!userAbort) {
+									jQuery(fileInput).fileupload('option','url', fileUploadUrl);
+									uploadRequest = addedFile.submit();
+								}
+								else {
+									fileUploadCallback(false, {'errorThrown': 'abort'});
+								}
 							}, function(data) {
 								// Get upload url failed.
 								fileUploadCallback(false, data);
 							});
 							
 						};
+					},
+					/**
+					*  Cancel fileupload in progress.
+					*
+					*/
+					cancel: function() {
+						userAbort = true;
+						if(uploadRequest) {
+							uploadRequest.abort();
+						}
 					}
 				};
-
 			},
 			requestImageCrop : function(blobKey, leftX, topY, rightX, bottomY) {
 				return $http.put(appConfig['serviceUrl'] + '/uploads/images/'+ blobKey,

@@ -293,7 +293,6 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 			var html = '<div class="toggler" ng-transclude></div>'+
 				'<div class="modal hide">'+
 					'<div class="modal-header">'+
-				  		'<button type="button" class="close" ng-click="cancel()" data-dismiss="modal">×</button>'+
 				   		'<h3>{{getTitle()}}</h3>'+
 					'</div>'+
 					'<form name="simpleImageForm" novalidate ng-submit="save()" class="upload-image-form">'+
@@ -306,15 +305,13 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 							'</div>'+
 							'<div class="upload-area" ng-hide="selectionActive">'+								
 								'<p l="fileupload.image.description"> Choose a GIF, PNG or JPEG file with a size less than 3 Mb.</p>'+
-							 	'<span class="btn btn-success fileinput-button">'+
-							 		'<i class="icon-plus icon-white"></i>'+
-		                    		'<span l="fileupload.button.add">Add image...</span>'+
-							 		'<input type="file" name="files[]" accept="image/jpeg,image/png,image/gif"></input>'+
-							 		'<input type="hidden" value="{{editorImageId}}">'+
-						 		'</span>'+
 						 		//image delete button, hide when no delete function is provided, file is uploading, no image exists or selection is active!
-						 		'<button class="btn" type="button" ng-click="deleteImage()" ng-hide="selectionActive || fileupload || !imageUrl || !deleteImage"><i class="icon-trash icon-black"></i></button>'+
+						 		'<button class="btn" type="button" ng-click="deleteImage()" ng-hide="selectionActive || fileUploading || !imageUrl || !deleteImage"><i class="icon-trash icon-black"></i></button>'+
 						 		'<p ng-show="selectedFiles"><span l="fileupload.image.label">Selected file: </span><span ng-bind="selectedFiles"></span></p>'+
+						 		'<p ng-show="fileUploading">'+langService.translate('fileupload.uploading')+'</p>'+
+						 		'<div class="progress progress-success" ng-show="fileUploading">'+
+									'<div class="bar" ng-style="barStyle"></div>'+
+								'</div>'+
 						 		'<img ng-src="{{imageUrl}}" style="max-width: 800px; display: block; clear: both; padding-top: 10px;">'+
 					 		'</div>'+
 					 		'<div class="crop-area" ng-show="selectionActive">'+
@@ -322,17 +319,15 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 					 			'<img class="active-image" ng-src="{{activeImage.url}}"></img><br>'+
 					 			'<p ng-show="imgSelection"><span l="fileupload.crop.area">Selected area:</span> {{imgSelection.width}} x {{imgSelection.height}}</p>'+
 					 		'</div>'+
-					 		'<p>'+
-						 		'<div class="progress progress-success" ng-show="fileUploading">'+
-									'<div class="bar" ng-style="barStyle"></div>'+
-								'</div>'+
-							'</p>'+
 						'</div>'+
 						'<div class="modal-footer" style="clear:both;">'+
 							'<button type="button" class="btn" ng-click="cancel()" data-dismiss="modal" l="common.cancel">Close</button>'+
-							'<button type="submit" ng-hide="selectionActive" ng-disabled="isSaveDisabled()" class="btn btn-primary">'+
-								'<span l="common.save" ng-hide="fileUploading">Save</span><span ng-show="fileUploading" l="fileupload.button.submit.saving"></span>'+
-							'</button>'+							
+						 	'<span class="btn btn-success fileinput-button" ng-hide="selectionActive">'+
+						 		'<i class="icon-plus icon-white"></i>'+
+            		'<span l="fileupload.button.add">Add image...</span>'+
+						 		'<input type="file" name="files[]" accept="image/jpeg,image/png,image/gif"></input>'+
+						 		'<input type="hidden" value="{{editorImageId}}">'+
+					 		'</span>'+
 							'<button type="button" class="btn btn-primary" ng-click="crop()" ng-show="selectionActive" ng-disabled="fileCropping" l="fileupload.button.crop">Crop image</button>'+
 						'</div>'+
 					'</form>'+
@@ -399,18 +394,16 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        	};
 
 					/** Called from upload service when upload is finished and updates U */
-					function fileUploadedCallback(success, errorText) {
+					function fileUploadedCallback(success, data) {
 						var imageResource = scope.editorImageResource,
 							activeImage = null;
 
 						if(success) {
-
 			        		activeImage = new imageResource({
 			    				id: scope.editorImageId,
 			    				blobKey: imageResource.blobKey,
 			    				url: imageResource.url
 	    					});
-
 
 	    					scope.activeImage = activeImage;
 	    					scope.imageUrl = activeImage.url;
@@ -421,7 +414,6 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		    					return;
 	    					}
 
-
 	    					if(editorCropText) {
 	    						setupCropping();
 	    						scope.selectionActive = true;
@@ -431,9 +423,16 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 	    					}
 		
 						} else {
-							scope.errorMessage = langService.translate("fileupload.submit.error");
-							scope.error = true;
-							scope.barStyle.width = '0%';
+							if(data.errorThrown === 'abort') {
+								// User cancelled the upload close the dialog
+								dialog.modal('hide');
+							}
+							else {
+								// We have an error from the server.
+								scope.errorMessage = langService.translate("fileupload.submit.error");
+								scope.error = true;
+								scope.barStyle.width = '0%';	
+							}				
 						}
 
 						scope.fileUploading = false;
@@ -491,7 +490,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        		scope.selectedFiles = fileName;
 		        		scope.fileAdded = true;		        
 		        		scope.$digest();
-		        		
+		        		scope.save();
 		        	}
 
 		        	/** Delete the last uploaded image on the server. */
@@ -516,14 +515,14 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        	* Send crop request to server and save image after success.
 		        	*/
 		        	scope.crop = function() {
-						var selection = imgAreaSelect.getSelection(),
-	        				imgWidth = imageElement.width(),
-	        				imgHeight = imageElement.height();
-	        			
-						disableCropping();
-						scope.userSaved = true;
+								var selection = imgAreaSelect.getSelection(),
+		        				imgWidth = imageElement.width(),
+		        				imgHeight = imageElement.height();
+			        			
+								disableCropping();
+								scope.userSaved = true;
 
-						scope.barStyle.width = '0%';
+								scope.barStyle.width = '0%';
 	        			scope.fileCropping = true;
 
 	        			uploadService.requestImageCrop(scope.activeImage.blobKey,
@@ -535,6 +534,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 	        					scope.barStyle.width = '50%';
 	        					scope.fileCropping = false;
 	        					scope.error = false;
+
 	        					if(scope.userCancelled) {
 	        						deleteActiveUpload();
 	        						return;
@@ -576,7 +576,12 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        	/** Cancel button click handler */
 		        	scope.cancel = function() {
 		        		scope.userCancelled = true;
-		        		deleteActiveUpload();
+		        		if(scope.fileUploading) {
+		        			// Abort the upload
+		        			uploadObject.cancel();
+		        		}
+		        		else
+		        			deleteActiveUpload();
 		        	}
 
 		        	/**
@@ -607,6 +612,10 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        			//init file upload plugin for this dialog
 	        				uploadObject = uploadService.getFileUploadObject(uploadInput, scope.editorImageResource, fileAddedCallback, fileUploadedCallback, fileUploadProgressCallback);
 
+	   							dialog.modal({
+	   								'keyboard': false,
+	   								'backdrop': 'static'	   		
+	   							});
 	   							dialog.modal('show');
 
 							if(editorCropText) {
