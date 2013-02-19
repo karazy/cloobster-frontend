@@ -322,7 +322,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 						'</div>'+
 						'<div class="modal-footer" style="clear:both;">'+
 							'<button type="button" class="btn" ng-click="cancel()" data-dismiss="modal" l="common.cancel">Close</button>'+
-						 	'<span class="btn btn-success fileinput-button" style="float: none;" ng-hide="selectionActive">'+
+						 	'<span class="btn btn-success fileinput-button" style="float: none;" ng-hide="selectionActive || fileUploading">'+
 						 		'<i class="icon-plus icon-white"></i>'+
             					'<span l="fileupload.button.add">Add image...</span>'+
 						 		'<input type="file" name="files[]" accept="image/jpeg,image/png,image/gif"></input>'+
