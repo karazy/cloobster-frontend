@@ -1344,9 +1344,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		//spots partial
 		"areas.description" : {
 			"DE" :  "Für jede \"cloobster location\" können Sie mehrere \"Servicebereiche\" anlegen(z.B. \"Bar\", \"Zimmer\", \"Spa\", \"Konferenzraum\", etc.).<br>"
-			+"Jeder Servicebereich beinhaltet verschiedene Spots (Barcode für den Check-in).",
+			+"Jeder Servicebereich beinhaltet verschiedene Spots (Barcode für den Check-in). Ein Spot repräsentiert einen konkreten Standort (z. B. Zimmer 101).",
 			"EN" : "For each \"cloobster location\" you can add several \"service areas\" (like \"Bar\", \"Rooms\", \"Spa\", \"Conference Area\", etc.).<br>"+
-				"Each service area has different spots (barcode for check-in)."
+				"Each service area has different spots (barcode for check-in). A spot represents a real location (e.g. room 101)."
 		},
 		"areas.list.title" : {
 			"DE" :  "Servicebereiche",
@@ -1604,6 +1604,29 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" :  "<span class='label label-important'>Basic</span> Currently you are using a basic subscription. You can add service areas and spots <br/>but customers can't order"+
 					" or use the VIP Call.<br/>" +
 			 		"<a href='https://www.cloobster.com' target='_blank'>Learn more</a> or <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>."
+		},
+		"areas.editor.barcoderequired.help" : {
+			"DE" :  "<h4>Bei Spotwechsel gilt</h4>"+
+			"<b>Barcode nötig:</b> Barcode des Spots muss gescannt werden<br/><b>Kein Barcode nötig:</b> Spot wird über eine Liste ausgewählt<br/>"+
+			"\"Barcode nötig\" ist sicherer, erfordert aber für jeden Spot individuelle Aufsteller.",
+			"EN" : "<h4>A spot switch requires</h4>"+
+				"<b>Barcode required:</b> spot barcode needs to be scanned<br/><b>No barcode required:</b> spot will be chosen from list<br/>"+
+				"\"Barcode required\" is more secure, but requires an individual stand-up display per spot."
+		},
+		"areas.editor.barcoderequired.true" : {
+			"DE" :  "Barcode nötig",
+			"EN" : "Barcode required"
+		},
+		"areas.editor.barcoderequired.false" : {
+			"DE" :  "Kein Barcode nötig",
+			"EN" : "No barcode required"
+		},
+		"spot.master.description" : {
+			"DE" :  "Der Masterspot dient als Einstiegspunkt für einen Servicebereich. Gäste "+
+					"können hier einchecken, müssen zum bestellen aber einen konkreten Spot angeben. Beispielsweise kann für den Zimmerbereich "+
+					"lediglich der Masterspot an Gäste ausgegeben werden um nicht viele individuelle Aufsteller (Kein Barcode aktivieren!) verteilen zu müssen.",
+			"EN" : "This is the \"master\" spot for this area. The master spot serves as an entry point. To be able to order a guest has to choose "+
+				"his real spot. For example you can hand out the master spot for rooms and don't need to provide individual stan-up displays for all of them (disable barcode required!)."
 		},
 		//infopage partial
 		"infopages.description" : {

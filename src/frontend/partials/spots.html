@@ -89,10 +89,11 @@
 							<button class="btn btn-success span4" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="currentArea.active && currentArea.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
 			    			<button class="btn btn-danger span4" style="margin-left: 0px !important;" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="!currentArea.active && currentArea.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
 								<!-- Barcode required toggle buttons -->
-							<button class="btn btn-warning span4" type="button"ng-click="currentArea.barcodeRequired = false;saveArea()" ng-show="currentArea.barcodeRequired && currentArea.id"><i class="icon-qrcode icon-white"></i> <span l="areas.editor.barcoderequired.true">Barcode required</span></button>
-			    			<button class="btn span4"type="button" ng-click="currentArea.barcodeRequired = true;saveArea()" ng-show="!currentArea.barcodeRequired && currentArea.id"><i class="icon-qrcode"></i> <span l="areas.editor.barcoderequired.false">No Barcode required</span></button>
+							<button class="btn btn-warning span6" type="button"ng-click="currentArea.barcodeRequired = false;saveArea()" ng-show="currentArea.barcodeRequired && currentArea.id"><i class="icon-qrcode icon-white"></i> <span l="areas.editor.barcoderequired.true">Barcode required</span><i class="icon-question-sign icon-white pull-right barcodeRequiredHelp"></i></button>
+			    			<button class="btn span6"type="button" ng-click="currentArea.barcodeRequired = true;saveArea()" ng-show="!currentArea.barcodeRequired && currentArea.id"><i class="icon-qrcode"></i> <span l="areas.editor.barcoderequired.false">No Barcode required</span><i class="icon-question-sign pull-right barcodeRequiredHelp"></i></button>
+			    			<!-- <p class="span1"><i class="icon-question-sign" id="barcodeRequiredHelp"></i></p> -->
 		    				<!-- Delete area button  -->
-							<button class="btn span4" data-toggle="modal" data-target="#deleteAreaModal" ng-show="!currentArea.welcome"><i class="icon-trash"></i></button>
+							<button class="btn span2" data-toggle="modal" data-target="#deleteAreaModal" ng-show="!currentArea.welcome"><i class="icon-trash"></i></button>
 						</div>
 						<div class="modal hide" id="deleteAreaModal">
 						 	<div class="modal-header">

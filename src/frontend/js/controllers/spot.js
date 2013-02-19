@@ -693,6 +693,15 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		return helperFn.getFieldInputClass(input);
 	}
 
+	//initialize general symbol help
+	jQuery('.barcodeRequiredHelp').popover({
+		placement: 'right',
+		title: langService.translate("common.help"),
+		trigger: 'hover',
+		html: true,
+		content: langService.translate("areas.editor.barcoderequired.help")
+	});
+
 
 }
 

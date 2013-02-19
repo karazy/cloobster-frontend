@@ -1,5 +1,5 @@
 CloobsterAdmin.Functions = function($scope, $http) {
-	$scope.deleteFunctionsDisabled = (Karazy.environment === "dev")? false : true;
+	$scope.deleteFunctionsDisabled = (Karazy.environment == "dev")? false : true;
 	$scope.confirmDeleteAllDisabled = false;
 	$scope.confirmDeleteLiveDisabled = false;
 
