@@ -2110,6 +2110,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Please enter a valid email."
 		},
 		//login_form partial
+		"login.message" : {
+			"DE" : "Zugang mit Ihrem Geschäftskundenkonto.",
+			"EN" : "Access with your business account."
+		},
 		"login.password.forgot" : {
 			"DE" :  "Passwort vergessen?",
 			"EN" : "Forgot password?"
