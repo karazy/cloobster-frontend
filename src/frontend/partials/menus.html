@@ -175,7 +175,7 @@
 									<img  ng-src="{{currentProduct.image.url}}=s96" alt="click to edit" />
 									<p l="common.image.edit">Click image to edit</p>
 								</div>
-								<div ng-show="!currentProduct.image">
+								<div ng-show="!currentProduct.image && currentProduct.id">
 									<button  class="btn btn-primary" style="width: 100%"><i class="icon-picture icon-white"></i> <span l="common.image.add">Add Image</span></button>
 								</div>
 						</div>					 

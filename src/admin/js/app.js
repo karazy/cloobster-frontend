@@ -2,7 +2,7 @@
 
 /* Config parameters */
 var Karazy = {
-	environment : "${karazy.environment}"
+	environment : "prod"
 };
 
 /* CloobsterAdmin namespace. Create if not exists.*/
