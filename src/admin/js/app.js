@@ -2,8 +2,7 @@
 
 /* Config parameters */
 var Karazy = {
-		// environment : "${karazy.environment}"
-    environment: 'dev'
+	environment : "${karazy.environment}"
 };
 
 /* CloobsterAdmin namespace. Create if not exists.*/
@@ -11,7 +10,10 @@ var CloobsterAdmin =  window.CloobsterAdmin || {};
 
 // Declare app level module which depends on filters, and services
 CloobsterAdmin.module = angular.module('CloobsterAdmin', ['CloobsterAdmin.services','CloobsterAdmin.resources', 'CloobsterAdmin.directives', 'CloobsterAdmin.filters']).
-  config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+  config(['$routeProvider', '$locationProvider','$httpProvider', function($routeProvider, $locationProvider,$httpProvider) {
+    // Set API Version header
+    $httpProvider.defaults.headers.common['cloobster-api'] = '2';
+
   	$locationProvider.hashPrefix = '!';
   	$routeProvider.when('/main', {templateUrl: 'partials/main.html'});
     $routeProvider.when('/dummydata', {templateUrl: 'partials/dummydata.html'});

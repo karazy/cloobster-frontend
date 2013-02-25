@@ -11,7 +11,7 @@ Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster
     // Here you set the service url that the Cloobster services use.
     //configProvider.setServiceUrl('https://eatsense-test.appspot.com');
     
-    $httpProvider.defaults.headers.common['cloobster-api'] = '1';
+    $httpProvider.defaults.headers.common['cloobster-api'] = '2';
 
   	$routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: Cloobster.Login});
     $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: Cloobster.Login});
