@@ -44,8 +44,6 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.businessToDelete = null;
 	/** Property which is currently edited. */
 	$scope.activeProperty = null;
-	/** When true user can edit the business profile. */
-	$scope.editMode = false;
 	/** True if file upload is active. */
 	$scope.activeFileUpload = null;
 	/** Contains the information about a new business. */
@@ -273,24 +271,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		$location.url("/businesses");
 	}
 
-	/**
-	* Switches between view and edit mode.
-	*/
-	$scope.toggleEditMode = function() {
-		$scope.editMode = !$scope.editMode;
-	}
-
-	/**
-	* Returns "edit" when edit mode is active.
-	*/
-	$scope.getEditModeClass = function() {
-		return ($scope.editMode) ? "edit" : "";
-	}
-
 	$scope.editImageData = function(title, value, property) {
-		if(!$scope.editMode) {
-			return;
-		}
 
 		$scope.activeProperty = {
 			'title' : title,
@@ -320,10 +301,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	* Save active business.
 	*/
 	$scope.saveBusiness = function() {
-		if($scope.editMode) {
-			$log.log("saveBusiness " + $scope.activeBusiness.id);
-			$scope.activeBusiness.$update(null, null, handleError);	
-		}
+		$log.log("saveBusiness " + $scope.activeBusiness.id);
+		$scope.activeBusiness.$update(null, null, handleError);	
 	};
 
 	/**
@@ -424,11 +403,6 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	*	Id of theme to set as active.
 	*/
 	$scope.activateTheme = function(themeId) {
-		
-		if (!$scope.editMode) {
-			return;
-		};
-
 		if(!themeId) {
 			$log.warn('No theme given.');
 		};
