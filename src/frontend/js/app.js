@@ -6,7 +6,7 @@ var Cloobster = Cloobster || {};
 Cloobster.services = angular.module('Cloobster.services', ['ngResource', "Cloobster.translations", "Cloobster.languages"]);
 
 // Declare app level module which depends on filters, and services
-Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster.directives', 'Cloobster.filters', 'ngSanitize']).
+Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster.directives', 'Cloobster.filters', 'ngSanitize', 'ui.directives']).
   config(['$routeProvider','configProvider', '$httpProvider', function($routeProvider,configProvider, $httpProvider) {
     // Here you set the service url that the Cloobster services use.
     //configProvider.setServiceUrl('https://eatsense-test.appspot.com');

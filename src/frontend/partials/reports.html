@@ -9,20 +9,66 @@
 	<div class="row-fluid">
 		<div class="span2">
 			<div class="data-container-with-title">
-				<h4 class="data-container-title" l="reports.types.title">Reports</h4>
+				<h4 class="data-container-title" l="reports.types.title">Report Type</h4>
 				<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable">
-				<!-- 	<li>
-						<a ng-click="showReport('numberofcheckins')" l="reports.type.numerofcheckins">Number of Check-Ins</a>
-					</li>
-					<li>
-						<a ng-click="showReport('numberofcheckins')" l="reports.type.numerofcheckins">Number of Check-Ins</a>
-					</li> -->
-
 			        <li ng-repeat="report in reportTypes" ng-class="{active: currentReport.type == report.type}">
-			        	<a ng-click="loadReport(report)">{{report.title}}</a>
+			        	<a ng-click="showReport(report)">{{report.title}}</a>
 			        </li>
 			    </ul>
 			</div>
 		</div>
+		<div class="span10">
+			<div class="data-container-with-title" ng-show="currentReport">
+				<h4 class="data-container-title" l="reports.parameters.title">Report Parameter</h4>
+				<div class="data-container-block">
+					<div class="input-prepend">
+						<span class="add-on" l="reports.parameter.startdate">Start date</span>
+					 	<input ui-date  class="span2" size="16" type="text" ng-model="fromDate" id="dp-from">
+						</div>
+					</div>
+					<div class="data-container-block">
+						<div class="input-prepend">
+							<span class="add-on" l="reports.parameter.enddate">End date</span>
+						 	<input ui-date class="span2" size="16" type="text" ng-model="toDate">
+						</div>
+					</div>
+					<select ng-model="currentArea" ng-options="a.id as a.name for a in areas"></select>	
+				<div class="row-fluid data-container-block">
+					<button class="span3 btn btn-primary" ng-click="loadReport()">Report anzeigen</button>
+					<button class="span3 btn btn-primary" ng-click="">Report XLS generieren</button>
+				</div>
+			</div>
+
+			<div class="data-container-with-title" ng-show="currentReport">
+				<h4 class="data-container-title" l="reports.parameters.title">Report</h4>
+				<div class="data-container-block">
+					<table class="table">
+  						<tr>
+  							<th>Location</th>
+  							<th>Service Area</th>
+  							<th>Number</th>
+  							<th>Day</th>
+  							<th>Month</th>
+  							<th>Year</th>
+  						</tr>
+  						<tr ng-repeat="data in reportData">
+  							<td>{{data.areaName}}</td>
+  							<td>{{data.areaName}}</td>
+  							<td>{{data.count}}</td>
+  						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
+
+<!-- areaId: 522
+areaName: "Restaurant"
+count: 1
+date: 1361816282791
+id: "486:522:DAY:2013-02-25:orders-placed"
+kpi: "orders-placed"
+locationId: 486
+locationName: "Cloobster Club"
+periodType: "DAY" -->
