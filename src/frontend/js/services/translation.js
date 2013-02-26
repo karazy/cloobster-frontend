@@ -2073,6 +2073,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Hochladen ...",
 			"EN" : "Uploading ..."
 		},
+		"fileupload.cropping" : {
+			"DE" : "Zuschneiden ...",
+			"EN" : "Cropping ..."
+		},
 		"fileupload.image.description" : {
 			"DE" : "Wählen Sie eine Bilddatei zum Hochladen. Überprüfen Sie, dass sie nicht größer als 3MB ist und vom Typ GIF, PNG oder JPEG.",
 			"EN" : "Please select a file. Ensure the file is less than 3 MB in size and the format is GIF, PNG, or JPEG."
@@ -2080,6 +2084,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"fileupload.submit.error" : {
 			"DE" : "Beim Hochladen ist ein Fehler aufgetreten. Überprüfen Sie, dass die Datei nicht größer als 3 MB ist und vom Typ GIF, PNG oder JPEG.",
 			"EN" : "An error occurred during upload. Please check file size (< 3 MB) and format (GIF, PNG, JPEG)."
+		},
+		"fileupload.save.error" : {
+			"DE" : "Beim Speichern des Bildes ist ein Fehler aufgetreten. Bitte überprüfen sie Ihre Internetverbindung und versuchen sie es erneut.",
+			"EN" : "An error occurred during saving of the image. Please check your connection and try again."
 		},
 		"fileupload.crop.error" : {
 			"DE" : "Beim Zuschneiden ist ein Fehler aufgetreten. Überprüfen sie die Auswahl und probieren sie es noch einmal.",
