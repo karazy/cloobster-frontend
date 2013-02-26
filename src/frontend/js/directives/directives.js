@@ -380,6 +380,10 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log',func
 
 		        	resetScope();
 
+		        	if(!scope.editorImageResource) {
+		        		$log.error('simpleImageEditor: editorImageResource not set');
+		        	}
+
 		        	/** Gets localized title. Returns key of no title was found. */
 		        	scope.getTitle = function() {
 		        		return langService.translate(scope.editorTitleKey) || scope.editorTitleKey;

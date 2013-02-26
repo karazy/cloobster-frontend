@@ -342,6 +342,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	function saveProductSuccess(product) {
 		$scope.products.push(product);
 		$scope.currentMenu.productIds.push(product.id);
+		$scope.productImageResource = Product.buildImageResource(activeBusinessId, product.id);
 		$scope.saveMenu();
 	}
 
