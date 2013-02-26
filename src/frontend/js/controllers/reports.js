@@ -64,7 +64,7 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, loginServi
 				'kpi' : $scope.currentReport.type,
 				'areaId': $scope.currentArea.id,
 				'fromDate' : $scope.fromDate.getTime(),
-				'toDate' : $scope.toDate.getTime(),
+				'toDate' : $scope.toDate.getTime()
 			}
 		})
 		  .success(function(data, status, headers, config) {
