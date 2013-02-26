@@ -150,9 +150,6 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		  	$log.error('Reports.visualize: no day rows created!');
 		  	return;
 		  }
-          
-          
-          //Date, Area, Count
 
           angular.forEach($scope.reportData, function(report, index) {
           	tempDate = $filter('date')(new Date(report.date), $scope.dateFormat);
@@ -180,8 +177,14 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
           hAxis: {title: langService.translate("reports.chart.haxis")}
         };
 
-        chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        if(dateRows.length < 8) {
+	        chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+	        chart.draw(data, options);
+        } else {
+        	chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         	chart.draw(data, options);
+        }
+        
 		}
 	}
 
