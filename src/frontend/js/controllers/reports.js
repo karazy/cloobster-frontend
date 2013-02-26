@@ -162,6 +162,8 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
           				angular.forEach($scope.areas, function(area, index) {
           					if(report.areaName == area.name) {
           						row[area.index+1] = report.count;
+          					} else {
+          						row[area.index+1] = 0;
           					}
           				});
           			}
@@ -177,7 +179,7 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
           hAxis: {title: langService.translate("reports.chart.haxis")}
         };
 
-        if(dateRows.length < 8) {
+        if(dateRows.length <= 8) {
 	        chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
 	        chart.draw(data, options);
         } else {
