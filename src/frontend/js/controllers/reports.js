@@ -132,7 +132,7 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		  	dateRows,
 		  	tempDate;
 
-          data.addColumn('string', 'Date');
+          data.addColumn('date', 'Date');
 
 			if(!$scope.currentArea) {
 				dateRows = generateRowsArray($scope.fromDate, $scope.toDate, ($scope.areas.length + 1));
@@ -150,21 +150,22 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		  	$log.error('Reports.visualize: no day rows created!');
 		  	return;
 		  }
-          
-          
-          //Date, Area, Count
 
           angular.forEach($scope.reportData, function(report, index) {
           	tempDate = $filter('date')(new Date(report.date), $scope.dateFormat);
           	$log.log('Reports.visualize: tempate='+tempDate);
           	angular.forEach(dateRows, function(row, index) {
-          		if(row[0] == tempDate) {
+          		var tmpDate2 = $filter('date')(row[0], $scope.dateFormat);
+          		$log.log('Reports.visualize: tmpDate2='+tmpDate2);
+          		if(tmpDate2 == tempDate) {
           			if($scope.currentArea) {
           				row[1] = report.count;
           			} else {
           				angular.forEach($scope.areas, function(area, index) {
           					if(report.areaName == area.name) {
           						row[area.index+1] = report.count;
+          					} else {
+          						row[area.index+1] = 0;
           					}
           				});
           			}
@@ -180,8 +181,14 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
           hAxis: {title: langService.translate("reports.chart.haxis")}
         };
 
-        chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        if(dateRows.length <= 8) {
+	        chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+	        chart.draw(data, options);
+        } else {
+        	chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         	chart.draw(data, options);
+        }
+        
 		}
 	}
 
@@ -204,7 +211,8 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 
 		while(from.getTime() <= to.getTime()) {
 			arr = new Array(numberOfColumns);
-			arr[0] = $filter('date')(from, $scope.dateFormat);
+			// arr[0] = $filter('date')(from, $scope.dateFormat);
+			arr[0] = new Date(from);
 			rows.push(arr);
 			from.setDate(from.getDate() + 1);
 		}
