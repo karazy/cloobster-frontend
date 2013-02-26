@@ -132,7 +132,7 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		  	dateRows,
 		  	tempDate;
 
-          data.addColumn('string', 'Date');
+          data.addColumn('date', 'Date');
 
 			if(!$scope.currentArea) {
 				dateRows = generateRowsArray($scope.fromDate, $scope.toDate, ($scope.areas.length + 1));
@@ -155,7 +155,9 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
           	tempDate = $filter('date')(new Date(report.date), $scope.dateFormat);
           	$log.log('Reports.visualize: tempate='+tempDate);
           	angular.forEach(dateRows, function(row, index) {
-          		if(row[0] == tempDate) {
+          		var tmpDate2 = $filter('date')(row[0], $scope.dateFormat);
+          		$log.log('Reports.visualize: tmpDate2='+tmpDate2);
+          		if(tmpDate2 == tempDate) {
           			if($scope.currentArea) {
           				row[1] = report.count;
           			} else {
@@ -209,7 +211,8 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 
 		while(from.getTime() <= to.getTime()) {
 			arr = new Array(numberOfColumns);
-			arr[0] = $filter('date')(from, $scope.dateFormat);
+			// arr[0] = $filter('date')(from, $scope.dateFormat);
+			arr[0] = new Date(from);
 			rows.push(arr);
 			from.setDate(from.getDate() + 1);
 		}
