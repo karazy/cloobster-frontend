@@ -6,9 +6,12 @@
 * Uses the datepicker from http://www.eyecon.ro/bootstrap-datepicker/
 */
 Cloobster.Reports =  function($scope, $http, $routeParams, $location, loginService, langService, $log, handleError, InfoPage, Business, langcodes, Area) {
-	//checkins, feedback, orders, vip calls
+	
+	// var visualizationLoaded = false;
+
 	/**
 	* List of avail report types.
+	* checkins, feedback, orders, vip calls ...
 	*/
 	$scope.reportTypes = [
 		{	
@@ -35,17 +38,21 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, loginServi
 
 	$scope.fromDate = null;
 	$scope.toDate = null;
-	$scope.dateFormat = "dd.mm.yyyy";
 
-		/** Area resource. */
+	/** Area resource. */
 	$scope.areasResource = null;
 	/** Areas assigned*/
 	$scope.areas = null;
 	/** Currently selected area. */
 	$scope.currentArea = null;
+	/** configuration for datepicker */
+	 $scope.dateOptions = {
+        dateFormat: 'yy-mm-dd'
+    };
 
 	$scope.showReport = function(type) {
-		$scope.currentReport = type;
+		$scope.currentReport = type;		
+		$scope.reportData = null;
 	}
 
 	$scope.loadReport = function() {
@@ -64,6 +71,7 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, loginServi
 		    // this callback will be called asynchronously
 		    // when the response is available
 		    $scope.reportData = data;
+		    $scope.visualize();
 		  })
 		  .error(function(data, status, headers, config) {
 		    // called asynchronously if an error occurs
@@ -95,7 +103,44 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, loginServi
 		//create areas resource
 		$scope.areasResource = Area.buildResource(businessId);
 		//load spots
-		$scope.areas = $scope.areasResource.query(angular.noop,	handleError);
+		$scope.areas = $scope.areasResource.query(function() {
+			if($scope.areas && $scope.areas.length > 0) {
+				$scope.currentArea = $scope.areas[0];
+			}
+		},	handleError);
+	}
+
+	$scope.visualize = function() {
+	  // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart'], callback: drawChart});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      // google.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+          var data = new google.visualization.DataTable(),
+          	  options,
+          	  chart;
+
+          data.addColumn('date', 'Date');
+          data.addColumn('number', 'Count');
+
+          angular.forEach($scope.reportData, function(report, index) {
+          	data.addRow([new Date(report.date), report.count]);
+          });
+
+        options = {
+          title: $scope.currentReport.title,
+          hAxis: {title: langService.translate("reports.chart.haxis")}
+        };
+
+        chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        	chart.draw(data, options);
+		}
 	}
 
 	function initDates() {
@@ -103,8 +148,8 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, loginServi
 			fromDate = new Date();
 
 		$scope.toDate = toDate;
-
-		fromDate.setDate(fromDate.getDate() - 30);
+		//show last week
+		fromDate.setDate(fromDate.getDate() - 7);
 
 		$scope.fromDate = fromDate;
 	}

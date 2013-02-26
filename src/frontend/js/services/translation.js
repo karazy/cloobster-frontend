@@ -1930,6 +1930,79 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Wählen oder erstellen Sie eine Location bevor Sie mit Schritt 2-4 fortfahren.",
 			"EN" : "Choose or create a location before proceeding with step 2-4."
 		},
+		//report partial
+		"reports.description" : {
+			"DE" :  "Auswertung der wichtigsten Systemkennzahlen...",
+			"EN" : ""
+		},
+		"reports.types.title" : {
+			"DE" :  "Reporttyp",
+			"EN" : "Report type"
+		},
+		"reports.parameters.title" : {
+			"DE" :  "Report Parameter",
+			"EN" : "Report parameters"
+		},
+		"reports.parameter.startdate" : {
+			"DE" :  "Startdatum",
+			"EN" : "start date"
+		},
+		"reports.parameter.enddate" : {
+			"DE" :  "Enddatum",
+			"EN" : "end date"
+		},
+		"reports.report.title" : {
+			"DE" :  "Report",
+			"EN" : "Report"
+		},
+		"reports.type.checkins" : {
+			"DE" :  "Anzahl Check-Ins",
+			"EN" : "Check-in count"
+		},
+		"reports.type.orders" : {
+			"DE" :  "Anzahl Bestellungen",
+			"EN" : "Orders count"
+		},
+		"reports.type.customerrequests" : {
+			"DE" :  "Anzahl Service Calls",
+			"EN" : "Service Call count"
+		},
+		"reports.type.feedback" : {
+			"DE" :  "Anzahl Feedback",
+			"EN" : "Feedback count"
+		},
+		"reports.chart.haxis" : {
+			"DE" :  "Datum",
+			"EN" : "Date"
+		},
+		"reports.report.servicearea" : {
+			"DE" :  "Servicebereich",
+			"EN" : "Service area"
+		},
+		"reports.report.count" : {
+			"DE" :  "Anzahl",
+			"EN" : "Count"
+		},
+		"reports.report.day" : {
+			"DE" :  "Tag",
+			"EN" : "Day"
+		},
+		"reports.report.month" : {
+			"DE" :  "Monat",
+			"EN" : "Month"
+		},
+		"reports.report.year" : {
+			"DE" :  "Jahr",
+			"EN" : "Year"
+		},
+		"reports.action.show" : {
+			"DE" :  "Report anzeigen",
+			"EN" : "Show report"
+		},
+		"reports.action.export.xls" : {
+			"DE" :  "Report als XLS exportieren",
+			"EN" : "Export report as XLS"
+		},
 		//general
 		"common.warning.title" : {
 			"DE" : "Achtung!",
