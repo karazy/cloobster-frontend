@@ -32,7 +32,9 @@
 						<span class="add-on" l="reports.parameter.enddate">End date</span>
 					 	<input ui-date="dateOptions" type="text" ng-model="toDate">
 					</div>
-					<select ng-model="currentArea" ng-options="a.name for a in areas"></select>
+					<select ng-model="currentArea" ng-options="a.name for a in areas">
+						<option value="" l="reports.parameter.allareas">All Areas</option>
+					</select>
 					</form>
 				</div>	
 				<div class="row-fluid data-container-block">
@@ -57,7 +59,7 @@
 			<div class="row-fluid data-container-with-title" ng-show="currentReport && reportData">
 				<h4 class="data-container-title" l="reports.report.title">Report</h4>
 				<!-- report data -->
-				<div class="span6">
+				<div class="span4">
 					<div class="">
 						<div class="data-container-block">
 							<table class="table table-striped">
@@ -84,7 +86,7 @@
 					</div>
 				</div>
 				<!-- report chart -->
-				<div class="span4">
+				<div class="span6">
 					<div id="chart_div"></div>
 				</div>
 			</div>

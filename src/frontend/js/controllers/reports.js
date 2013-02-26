@@ -5,7 +5,7 @@
 * 
 * Uses the datepicker from http://www.eyecon.ro/bootstrap-datepicker/
 */
-Cloobster.Reports =  function($scope, $http, $routeParams, $location, loginService, langService, $log, handleError, InfoPage, Business, langcodes, Area) {
+Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, loginService, langService, $log, handleError, InfoPage, Business, langcodes, Area) {
 	
 	// var visualizationLoaded = false;
 
@@ -45,9 +45,11 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, loginServi
 	$scope.areas = null;
 	/** Currently selected area. */
 	$scope.currentArea = null;
+	$scope.dateFormat = 'yyyy-MM-dd';
 	/** configuration for datepicker */
 	 $scope.dateOptions = {
-        dateFormat: 'yy-mm-dd'
+        dateFormat: 'yy-mm-dd',
+        maxDate: new Date()
     };
 
 	$scope.showReport = function(type) {
@@ -55,14 +57,16 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, loginServi
 		$scope.reportData = null;
 	}
 
-	$scope.loadReport = function() {
+	$scope.loadReport = function() {		
+		var areaId = ($scope.currentArea) ? $scope.currentArea.id : 0;
+
 		//GET /b/businesses/{id}/reports?kpi=Z&areaId=Y&fromDate=1&toDate=2
 		$http({
 			method: 'GET', 
 			url: '/b/businesses/'+$scope.activeBusinessId+'/reports',
 			params: {
 				'kpi' : $scope.currentReport.type,
-				'areaId': $scope.currentArea.id,
+				'areaId': areaId,
 				'fromDate' : $scope.fromDate.getTime(),
 				'toDate' : $scope.toDate.getTime(),
 			}
@@ -120,18 +124,56 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, loginServi
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
       // draws it.
-      function drawChart() {
+  	function drawChart() {
 
-          var data = new google.visualization.DataTable(),
-          	  options,
-          	  chart;
+      	var data = new google.visualization.DataTable(),
+  	 		options,
+		  	chart,
+		  	dateRows,
+		  	tempDate;
 
-          data.addColumn('date', 'Date');
-          data.addColumn('number', 'Count');
+          data.addColumn('string', 'Date');
+
+			if(!$scope.currentArea) {
+				dateRows = generateRowsArray($scope.fromDate, $scope.toDate, ($scope.areas.length + 1));
+				angular.forEach($scope.areas, function(area, index) {
+					//add an index
+					area['index'] = index;
+					data.addColumn('number', area.name);
+				});	
+          } else {
+          	dateRows = generateRowsArray($scope.fromDate, $scope.toDate, 2);
+          	data.addColumn('number', $scope.currentArea.name);
+          }
+
+           if(!dateRows) {
+		  	$log.error('Reports.visualize: no day rows created!');
+		  	return;
+		  }
+          
+          
+          //Date, Area, Count
 
           angular.forEach($scope.reportData, function(report, index) {
-          	data.addRow([new Date(report.date), report.count]);
+          	tempDate = $filter('date')(new Date(report.date), $scope.dateFormat);
+          	$log.log('Reports.visualize: tempate='+tempDate);
+          	angular.forEach(dateRows, function(row, index) {
+          		if(row[0] == tempDate) {
+          			if($scope.currentArea) {
+          				row[1] = report.count;
+          			} else {
+          				angular.forEach($scope.areas, function(area, index) {
+          					if(report.areaName == area.name) {
+          						row[area.index+1] = report.count;
+          					}
+          				});
+          			}
+          			
+          		}
+          	});
           });
+          //add all rows
+          data.addRows(dateRows);
 
         options = {
           title: $scope.currentReport.title,
@@ -142,6 +184,34 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, loginServi
         	chart.draw(data, options);
 		}
 	}
+
+	function generateRowsArray(fromDate, toDate, numberOfColumns) {
+		var rows = [],
+			arr,
+			from,
+			to;
+
+		if(!fromDate) {
+			return;
+		}
+
+		if(!toDate) {
+			return;
+		}
+
+		from = new Date(fromDate.getTime());
+		to = new Date(toDate.getTime());
+
+		while(from.getTime() <= to.getTime()) {
+			arr = new Array(numberOfColumns);
+			arr[0] = $filter('date')(from, $scope.dateFormat);
+			rows.push(arr);
+			from.setDate(from.getDate() + 1);
+		}
+
+		return rows;
+	}
+
 
 	function initDates() {
 		var toDate = new Date(),
@@ -169,4 +239,4 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, loginServi
 		}
 	});
 }
-Cloobster.Reports.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', 'errorHandler', 'InfoPage', 'Business', 'langcodes', 'Area'];
+Cloobster.Reports.$inject = ['$scope', '$http', '$routeParams', '$location', '$filter', 'login', 'lang', '$log', 'errorHandler', 'InfoPage', 'Business', 'langcodes', 'Area'];
