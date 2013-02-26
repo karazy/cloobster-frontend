@@ -7,6 +7,7 @@
 		</div>
 	</div>
 	<div class="row-fluid">
+		<!-- Report selection list -->
 		<div class="span2">
 			<div class="data-container-with-title">
 				<h4 class="data-container-title" l="reports.types.title">Report Type</h4>
@@ -18,8 +19,9 @@
 			</div>
 		</div>
 		<div class="span10">
-			<div class="data-container-with-title" ng-show="currentReport">
-				<h4 class="data-container-title" l="reports.parameters.title">Report Parameter</h4>
+			<!-- report configuration -->
+			<div class="data-container-with-title data-container-150" ng-show="currentReport">
+				<h4 class="data-container-title" l="reports.parameters.title">Report parameter</h4>
 				<div class="data-container-block">
 					<form class="form-inline">
 					<div class="input-prepend">
@@ -30,7 +32,7 @@
 						<span class="add-on" l="reports.parameter.enddate">End date</span>
 					 	<input ui-date="dateOptions" type="text" ng-model="toDate">
 					</div>
-					<select ng-model="currentArea" ng-options="a.id as a.name for a in areas"></select>
+					<select ng-model="currentArea" ng-options="a.name for a in areas"></select>
 					</form>
 				</div>	
 				<div class="row-fluid data-container-block">
@@ -44,8 +46,17 @@
 					</div>
 				</div>
 			</div>
+			<!-- report configuration empty placeholder -->
+			<div class="row-fluid data-container-with-title data-container-150 data-container-inactive" ng-hide="currentReport">
+				<h4 class="data-container-title" l="reports.parameters.title">Report parameter</h4>
+				<div class="data-container-block">
+					<p l="reports.parameters.empty.description">Report parameter configuration. First select a report type from the list on the left.</p>
+				</div>
+			</div>
+			<!-- report -->
 			<div class="row-fluid data-container-with-title" ng-show="currentReport && reportData">
 				<h4 class="data-container-title" l="reports.report.title">Report</h4>
+				<!-- report data -->
 				<div class="span6">
 					<div class="">
 						<div class="data-container-block">
@@ -64,18 +75,27 @@
 			  							<td>{{data.areaName}}</td>
 			  							<td>{{data.count}}</td>
 			  							<td>{{data.date | date:'dd'}}</td>
-			  							<td>{{data.count | date:'M'}}</td>
-			  							<td>{{data.count | date:'yyyy'}}</td>
+			  							<td>{{data.date | date:'M'}}</td>
+			  							<td>{{data.date | date:'yyyy'}}</td>
 			  						</tr>
 			  					</tbody>
 							</table>
 						</div>
 					</div>
 				</div>
+				<!-- report chart -->
 				<div class="span4">
 					<div id="chart_div"></div>
 				</div>
 			</div>
+			<!-- report empty placeholder -->
+			<div class="row-fluid data-container-with-title data-container-small data-container-inactive" ng-hide="currentReport && reportData">
+				<h4 class="data-container-title" l="reports.report.title">Report</h4>
+				<div class="data-container-block">
+					<p l="reports.report.empty.description">Contains the report. Select a type and parameters and click show report.</p>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </div>

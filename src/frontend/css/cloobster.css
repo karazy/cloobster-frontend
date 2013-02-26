@@ -218,6 +218,10 @@ ul.payment-method-list li {
   height: 200px;
 }
 
+.data-container-150 {
+  height: 150px;
+}
+
 .data-container-tiny {
   height: 100px;
 }
