@@ -271,7 +271,7 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', '$log
 	return config;
 }]);
 
-Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', function(uploadService, langService, $log) {
+Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log',function(uploadService, langService, $log) {
 	var inputType, //type of the input to generate in form
 		required, //if present marks a required field
 		//directive configuration
@@ -305,10 +305,13 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 							'</div>'+
 							'<div class="upload-area" ng-hide="selectionActive">'+								
 								'<p l="fileupload.image.description"> Choose a GIF, PNG or JPEG file with a size less than 3 Mb.</p>'+
-						 		//image delete button, hide when no delete function is provided, file is uploading, no image exists or selection is active!
-						 		'<button class="btn" type="button" ng-click="deleteImage()" ng-hide="selectionActive || fileUploading || !imageUrl || !deleteImage"><i class="icon-trash icon-black"></i></button>'+
+						 		
 						 		'<p ng-show="selectedFiles"><span l="fileupload.image.label">Selected file: </span><span ng-bind="selectedFiles"></span></p>'+
-						 		'<p ng-show="fileUploading">'+langService.translate('fileupload.uploading')+'</p>'+
+						 		'<p ng-show="fileUploading || fileSaving"> '+
+						 			'<img src="img/ajax-loader.gif" style="margin-right: 5px;"></img>'+
+						 			'<span ng-show="fileSaving">'+langService.translate('fileupload.button.submit.saving')+'</span>'+
+						 			'<span ng-show="fileUploading">'+langService.translate('fileupload.uploading')+'</span>'+
+						 		'</p>'+
 						 		'<div class="progress progress-success" ng-show="fileUploading">'+
 									'<div class="bar" ng-style="barStyle"></div>'+
 								'</div>'+
@@ -318,9 +321,16 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 					 			'<p>'+langService.translate(attrs.editorCropText)+'</p>'+
 					 			'<img class="active-image" ng-src="{{activeImage.url}}"></img><br>'+
 					 			'<p ng-show="imgSelection"><span l="fileupload.crop.area">Selected area:</span> {{imgSelection.width}} x {{imgSelection.height}}</p>'+
+					 			'<p ng-show="fileCropping || fileSaving">'+
+					 				'<img src="img/ajax-loader.gif" style="margin-right: 5px;"></img>'+
+					 				'<span ng-show="fileSaving">'+langService.translate('fileupload.button.submit.saving')+'</span>'+
+					 				'<span ng-show="fileCropping">'+langService.translate('fileupload.cropping')+'</span>'+
+					 			'</p>'+
 					 		'</div>'+
 						'</div>'+
 						'<div class="modal-footer" style="clear:both;">'+
+							//image delete button, hide when no delete function is provided, file is uploading, no image exists or selection is active!
+							'<button class="btn" type="button" ng-click="deleteImage()" ng-hide="selectionActive || fileUploading || !imageUrl || !deleteImage"><i class="icon-trash icon-black"></i></button>'+
 							'<button type="button" class="btn" ng-click="cancel()" data-dismiss="modal" l="common.cancel">Close</button>'+
 						 	'<span class="btn btn-success fileinput-button" style="float: none;" ng-hide="selectionActive || fileUploading">'+
 						 		'<i class="icon-plus icon-white"></i>'+
@@ -339,38 +349,43 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        },
 		        post: function postLink(scope, iElement, iAttrs, controller) {
 		        	var dialog = iElement.find('div.modal'),
-		        		dialogBody = dialog.find('div.modal-body'),
-		        		fileList = iElement.find('.selected-files'),
-		        		uploadInput = iElement.find('form[name=simpleImageForm]'),
-		        		imageElement = iElement.find('img.active-image'),
-		        		uploadObject, //returned from file upload initialization
-		        		imgAreaSelect, // holds instance of image cropping tool
-		        		aspectRatio = iAttrs['editorRatio'], // get the preset ratios for image selection from the "editor-ratios" attribute.
-		        		editorCropText = iAttrs['editorCropText'],
-		        		deleteImage = iAttrs['editorOnDelete'];
+			        		dialogBody = dialog.find('div.modal-body'),
+			        		fileList = iElement.find('.selected-files'),
+			        		uploadInput = iElement.find('form[name=simpleImageForm]'),
+			        		imageElement = iElement.find('img.active-image'),
+			        		uploadObject, //returned from file upload initialization
+			        		imgAreaSelect, // holds instance of image cropping tool
+			        		aspectRatio = iAttrs['editorRatio'], // get the preset ratios for image selection from the "editor-ratios" attribute.
+			        		editorCropText = iAttrs['editorCropText'],
+			        		deleteImage = iAttrs['editorOnDelete'];
 
 		        	/** Initialize private scope variables */
 		        	function resetScope () {
-						scope.fileAdded = false;
-						scope.fileUploading = false;
-						scope.fileCropping = false;
-						scope.selectionActive = false;
-						scope.activeImage = null;
-						scope.barStyle= { width: '0%'};
-						scope.error = false;
-						scope.selectedFiles = null;
-						scope.errorMessage = "";
-						scope.userSaved = false;
-						if(scope.simpleImageEditor) {
-							scope.imageUrl = scope.simpleImageEditor['url'];
-						}
-						else {
-							scope.imageUrl = null;
-						}
-						scope.userCancelled = false;
+								scope.fileAdded = false;
+								scope.fileUploading = false;
+								scope.fileSaving = false;
+								scope.fileCropping = false;
+								scope.selectionActive = false;
+								scope.activeImage = null;
+								scope.barStyle= { width: '0%'};
+								scope.error = false;
+								scope.selectedFiles = null;
+								scope.errorMessage = "";
+								scope.userSaved = false;
+								if(scope.simpleImageEditor) {
+									scope.imageUrl = scope.simpleImageEditor['url'];
+								}
+								else {
+									scope.imageUrl = null;
+								}
+								scope.userCancelled = false;
 		        	}
 
 		        	resetScope();
+
+		        	if(!scope.editorImageResource) {
+		        		$log.error('simpleImageEditor: editorImageResource not set');
+		        	}
 
 		        	/** Gets localized title. Returns key of no title was found. */
 		        	scope.getTitle = function() {
@@ -389,7 +404,8 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 
 		        	/** Called from upload service during upload progress. */
 		        	function fileUploadProgressCallback(data) {
-		        		scope.barStyle.width = parseInt(data.loaded / data.total * 100, 10) + '%';
+		        		// Only got to 95% save the last 5% for the save request.
+		        		scope.barStyle.width = parseInt(data.loaded / data.total * 99, 10) + '%';
 		        		scope.$digest();
 		        	};
 
@@ -431,7 +447,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 								// We have an error from the server.
 								scope.errorMessage = langService.translate("fileupload.submit.error");
 								scope.error = true;
-								scope.barStyle.width = '0%';	
+								scope.barStyle.width = '0%';
 							}				
 						}
 
@@ -504,11 +520,22 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        	/** Save the uploaded image as the new image for this business. */
 		        	function saveImageAndClose() {
 		        		var activeImage = scope.activeImage;		        		
-		        		activeImage.$save(function() {
+		        		scope.fileSaving = true;
+		        		activeImage.$save(
+		        			// Success
+		        			function() {
+		        				scope.fileSaving = false;
 		        				scope.barStyle.width = '100%';
 		        				scope.editorOnSave({ "image" : activeImage});
 				        		dialog.modal('hide');
-							});
+									},
+									 // Error
+		        			function() {
+										deleteActiveUpload();
+										resetScope();
+										scope.error = true;
+										scope.errorMessage = langService.translate("fileupload.save.error");
+									});
 		        	};
 
 		        	/*
