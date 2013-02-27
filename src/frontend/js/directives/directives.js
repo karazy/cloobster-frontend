@@ -305,12 +305,12 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log',func
 							'</div>'+
 							'<div class="upload-area" ng-hide="selectionActive">'+								
 								'<p l="fileupload.image.description"> Choose a GIF, PNG or JPEG file with a size less than 3 Mb.</p>'+
-						 		//image delete button, hide when no delete function is provided, file is uploading, no image exists or selection is active!
-						 		'<button class="btn" type="button" ng-click="deleteImage()" ng-hide="selectionActive || fileUploading || !imageUrl || !deleteImage"><i class="icon-trash icon-black"></i></button>'+
+						 		
 						 		'<p ng-show="selectedFiles"><span l="fileupload.image.label">Selected file: </span><span ng-bind="selectedFiles"></span></p>'+
 						 		'<p ng-show="fileUploading || fileSaving"> '+
+						 			'<img src="img/ajax-loader.gif" style="margin-right: 5px;"></img>'+
 						 			'<span ng-show="fileSaving">'+langService.translate('fileupload.button.submit.saving')+'</span>'+
-						 			'<span ng-show="fileUploading">'+langService.translate('fileupload.uploading')+'</span><img src="img/ajax-loader.gif"></img>'+
+						 			'<span ng-show="fileUploading">'+langService.translate('fileupload.uploading')+'</span>'+
 						 		'</p>'+
 						 		'<div class="progress progress-success" ng-show="fileUploading">'+
 									'<div class="bar" ng-style="barStyle"></div>'+
@@ -322,12 +322,15 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log',func
 					 			'<img class="active-image" ng-src="{{activeImage.url}}"></img><br>'+
 					 			'<p ng-show="imgSelection"><span l="fileupload.crop.area">Selected area:</span> {{imgSelection.width}} x {{imgSelection.height}}</p>'+
 					 			'<p ng-show="fileCropping || fileSaving">'+
+					 				'<img src="img/ajax-loader.gif" style="margin-right: 5px;"></img>'+
 					 				'<span ng-show="fileSaving">'+langService.translate('fileupload.button.submit.saving')+'</span>'+
-					 				'<span ng-show="fileCropping">'+langService.translate('fileupload.cropping')+'</span><img src="img/ajax-loader.gif"></img>'+
+					 				'<span ng-show="fileCropping">'+langService.translate('fileupload.cropping')+'</span>'+
 					 			'</p>'+
 					 		'</div>'+
 						'</div>'+
 						'<div class="modal-footer" style="clear:both;">'+
+							//image delete button, hide when no delete function is provided, file is uploading, no image exists or selection is active!
+							'<button class="btn" type="button" ng-click="deleteImage()" ng-hide="selectionActive || fileUploading || !imageUrl || !deleteImage"><i class="icon-trash icon-black"></i></button>'+
 							'<button type="button" class="btn" ng-click="cancel()" data-dismiss="modal" l="common.cancel">Close</button>'+
 						 	'<span class="btn btn-success fileinput-button" style="float: none;" ng-hide="selectionActive || fileUploading">'+
 						 		'<i class="icon-plus icon-white"></i>'+
