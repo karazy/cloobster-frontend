@@ -56,7 +56,7 @@
 				</div>
 			</div>
 			<!-- report -->
-			<div class="row-fluid data-container-with-title" ng-show="currentReport && reportData">
+			<div class="row-fluid data-container-with-title" ng-show="currentReport && reportData && reportData != 'noresult'">
 				<h4 class="data-container-title" l="reports.report.title">Report</h4>
 				<!-- report data -->
 				<div class="span4">
@@ -79,7 +79,7 @@
 			  							<td>{{data.date | date:'dd'}}</td>
 			  							<td>{{data.date | date:'M'}}</td>
 			  							<td>{{data.date | date:'yyyy'}}</td>
-			  						</tr>
+			  						</tr>			  						
 			  					</tbody>
 							</table>
 						</div>
@@ -88,6 +88,13 @@
 				<!-- report chart -->
 				<div class="span6">
 					<div id="chart_div"></div>
+				</div>
+			</div>
+			<!-- report no results placeholder -->
+			<div class="row-fluid data-container-with-title data-container-small" ng-show="currentReport && reportData == 'noresult'">
+				<h4 class="data-container-title" l="reports.report.title">Report</h4>
+				<div class="data-container-block">
+					<h4 l="reports.report.noresult">No results found</h4>
 				</div>
 			</div>
 			<!-- report empty placeholder -->

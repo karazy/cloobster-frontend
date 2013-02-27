@@ -96,7 +96,12 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		})
 		  .success(function(data, status, headers, config) {
 		    $scope.reportData = data;
-		    $scope.visualize();
+		    if($scope.reportData.length == 0) {
+		    	$scope.reportData = 'noresult';
+		    } else {
+		    	$scope.visualize();	
+		    }
+		    
 		  })
 		  .error(handleError);
 	}
@@ -139,8 +144,8 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 	}
 
 	/**
-	*
-	*
+	* Draws the report chart based on the report data.
+	* Uses google chart api.
 	*/
 	$scope.visualize = function() {
 	  // Load the Visualization API and the piechart package.
@@ -165,7 +170,7 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 			if(!$scope.currentArea) {
 				dateRows = generateRowsArray($scope.fromDate, $scope.toDate, ($scope.areas.length + 1));
 				angular.forEach($scope.areas, function(area, index) {
-					//add an index
+					//add an index to each area
 					area['index'] = index;
 					data.addColumn('number', area.name);
 				});	
@@ -178,17 +183,20 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		  	$log.error('Reports.visualize: no dateRows created!');
 		  	return;
 		  }
-
+		  //for each report entity
           angular.forEach($scope.reportData, function(report, index) {
           	tempDate = $filter('date')(new Date(report.date), $scope.dateFormat);
           	$log.log('Reports.visualize: tempate='+tempDate);
+          	//and for each date row
           	angular.forEach(dateRows, function(row, index) {
           		var tmpDate2 = $filter('date')(row[0], $scope.dateFormat);
           		$log.log('Reports.visualize: tmpDate2='+tmpDate2);
+          		//add the reports counter value to this row if the dates match
           		if(tmpDate2 == tempDate) {
           			if($scope.currentArea) {
           				row[1] = report.count;
           			} else {
+          				//overwrite all other fields with 0 except another value already exists
           				angular.forEach($scope.areas, function(area, index) {
           					if(report.areaName == area.name) {
           						row[area.index+1] = report.count;
@@ -208,8 +216,8 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
           title: $scope.currentReport.title,
           hAxis: {title: langService.translate("reports.chart.haxis")}
         };
-
-        if(dateRows.length <= 8) {
+        //switch between line and column charts
+        if(dateRows.length <= 8 || $scope.reportData.length < 8) {
 	        chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
 	        chart.draw(data, options);
         } else {

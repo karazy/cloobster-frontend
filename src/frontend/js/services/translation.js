@@ -2003,6 +2003,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Report als XLS exportieren",
 			"EN" : "Export report as XLS"
 		},
+		"reports.report.noresult" : {
+			"DE" :  "Keine Datensätze gefunden im angegebenen Zeitraum.",
+			"EN" : "No results found for given date range."
+		},
 		//general
 		"common.warning.title" : {
 			"DE" : "Achtung!",
