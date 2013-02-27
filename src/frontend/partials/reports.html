@@ -13,7 +13,7 @@
 				<h4 class="data-container-title" l="reports.types.title">Report Type</h4>
 				<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable">
 			        <li ng-repeat="report in reportTypes" ng-class="{active: currentReport.type == report.type}">
-			        	<a ng-click="showReport(report)">{{report.title}}</a>
+			        	<a ng-click="selectReportType(report)">{{report.title}}</a>
 			        </li>
 			    </ul>
 			</div>

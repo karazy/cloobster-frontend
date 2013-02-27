@@ -2,12 +2,12 @@
 'use strict';
 
 /**
-* 
-* Uses the datepicker from http://www.eyecon.ro/bootstrap-datepicker/
+* Controller handles loading and displaying of cloobster reports.
+* Uses google chart api.
 */
 Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, loginService, langService, $log, handleError, InfoPage, Business, langcodes, Area) {
 	
-	// var visualizationLoaded = false;
+	var activeBusinessId = null;
 
 	/**
 	* List of avail report types.
@@ -35,35 +35,58 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 	$scope.currentReport = null;
 	/** Contains the data of retrieved report. */
 	$scope.reportData = null;
-
+	/** Start date to generate report for. */
 	$scope.fromDate = null;
+	/** End date to generate report for. */
 	$scope.toDate = null;
-
 	/** Area resource. */
 	$scope.areasResource = null;
-	/** Areas assigned*/
+	/** Avail areas.*/
 	$scope.areas = null;
 	/** Currently selected area. */
 	$scope.currentArea = null;
+	/** Date format to use. */
 	$scope.dateFormat = 'yyyy-MM-dd';
 	/** configuration for datepicker */
-	 $scope.dateOptions = {
+	$scope.dateOptions = {
         dateFormat: 'yy-mm-dd',
         maxDate: new Date()
     };
 
-	$scope.showReport = function(type) {
+    /**
+    * Selects a report type.
+    * Resets loaded reportData.
+    * @param {Object} a report type as defined in $scope.reportTypes
+    */
+	$scope.selectReportType = function(type) {
 		$scope.currentReport = type;		
 		$scope.reportData = null;
 	}
-
+	/**
+	* Load report data from server. Store it in $scope.reportData.
+	* /b/businesses/{id}/reports?kpi=Z&areaId=Y&fromDate=1&toDate=2
+	*/
 	$scope.loadReport = function() {		
 		var areaId = ($scope.currentArea) ? $scope.currentArea.id : 0;
 
-		//GET /b/businesses/{id}/reports?kpi=Z&areaId=Y&fromDate=1&toDate=2
+		if(!$scope.currentReport) {
+			$log.error("Reports.loadReport: no currentReport exists");
+			return;
+		}
+
+		if(!$scope.fromDate) {
+			$log.error("Reports.loadReport: no fromDate exists");
+			return;
+		}
+
+		if(!$scope.toDate) {
+			$log.error("Reports.loadReport: no toDate exists");
+			return;
+		}
+
 		$http({
 			method: 'GET', 
-			url: '/b/businesses/'+$scope.activeBusinessId+'/reports',
+			url: '/b/businesses/'+activeBusinessId+'/reports',
 			params: {
 				'kpi' : $scope.currentReport.type,
 				'areaId': areaId,
@@ -72,17 +95,18 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 			}
 		})
 		  .success(function(data, status, headers, config) {
-		    // this callback will be called asynchronously
-		    // when the response is available
 		    $scope.reportData = data;
 		    $scope.visualize();
 		  })
-		  .error(function(data, status, headers, config) {
-		    // called asynchronously if an error occurs
-		    // or server returns response with an error status.
-		  });
+		  .error(handleError);
 	}
 
+	/**
+	* Load areas assigned to given businessId.
+	* Retrieved areas are stored in $scpe.areas
+	* @param {Long} businessId
+	*	Business to load areas for.
+	*/
 	$scope.loadAreas = function(businessId) {
 		var account,
 			subscriptionResource;
@@ -114,6 +138,10 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		},	handleError);
 	}
 
+	/**
+	*
+	*
+	*/
 	$scope.visualize = function() {
 	  // Load the Visualization API and the piechart package.
       google.load('visualization', '1.0', {'packages':['corechart'], callback: drawChart});
@@ -147,7 +175,7 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
           }
 
            if(!dateRows) {
-		  	$log.error('Reports.visualize: no day rows created!');
+		  	$log.error('Reports.visualize: no dateRows created!');
 		  	return;
 		  }
 
@@ -164,7 +192,7 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
           				angular.forEach($scope.areas, function(area, index) {
           					if(report.areaName == area.name) {
           						row[area.index+1] = report.count;
-          					} else {
+          					} else if(!row[area.index+1]){
           						row[area.index+1] = 0;
           					}
           				});
@@ -192,6 +220,20 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		}
 	}
 
+	/**
+	* @private
+	* Generates a array of rows based on the date range fromDate - toDate.
+	* Used in @see Cloobster.Reports.visualize
+    * @param {Date} fromDate
+    *	Date to start from
+    * @param {Date} toDate
+    *	Date to end
+    * @param {Number} numberOfColumns
+    * 	size of array each row consists of
+    * @return
+    * 2-dim. array: rows[dayRange][numberOfColumns],
+    *	where rows[N][0] is set to the specific day of this range
+	*/
 	function generateRowsArray(fromDate, toDate, numberOfColumns) {
 		var rows = [],
 			arr,
@@ -206,12 +248,16 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 			return;
 		}
 
+		if(fromDate > toDate) {
+			$log.log('Reports.generateRowsArray: fromDate must not be greater than toDate').
+			return;
+		}
+
 		from = new Date(fromDate.getTime());
 		to = new Date(toDate.getTime());
 
-		while(from.getTime() <= to.getTime()) {
+		while(from <= to) {
 			arr = new Array(numberOfColumns);
-			// arr[0] = $filter('date')(from, $scope.dateFormat);
 			arr[0] = new Date(from);
 			rows.push(arr);
 			from.setDate(from.getDate() + 1);
@@ -220,7 +266,12 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		return rows;
 	}
 
-
+	/**
+	* @private
+	* Init the from and to date fields.
+	* fromDate = today
+	* startDate = today - 7 days
+	*/
 	function initDates() {
 		var toDate = new Date(),
 			fromDate = new Date();
@@ -228,7 +279,6 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		$scope.toDate = toDate;
 		//show last week
 		fromDate.setDate(fromDate.getDate() - 7);
-
 		$scope.fromDate = fromDate;
 	}
 
@@ -239,7 +289,7 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		var businessId = $routeParams.businessId || "";
 
 		if(newValue == true && businessId) {
-			$scope.activeBusinessId = businessId;
+			activeBusinessId = businessId;
 			initDates();
 			$scope.loadAreas(businessId);
 		} else if(newValue == false) {

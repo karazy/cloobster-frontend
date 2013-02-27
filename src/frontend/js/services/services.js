@@ -648,7 +648,12 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 		*/
 		function initUploadPlugin(fileInput, resource, fileAddCallback, fileUploadCallback, fileUploadProgressCallback) {
 			// Destroy first to make sure we dont double the initialisation
-			jQuery(fileInput).fileupload('destroy');
+			try {
+				jQuery(fileInput).fileupload('destroy');	
+			} catch(e) {
+				$log.log('Services.initUploadPlugin: failed to destroy fileupload' + e);
+			}
+			
 			$('#foo').unbind('fileuploadadd');
 			jQuery(fileInput).fileupload({
 				fail: function(e, data) {
