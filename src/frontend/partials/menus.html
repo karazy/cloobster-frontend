@@ -99,7 +99,12 @@
 						<a ng-click="showAllProducts()"><i class="icon-plus-sign icon-black"></i> <span l="menus.products.list.existing">Existing product...</span></a>
 					</li> -->
 		       	 	<li ng-repeat="product in products" class="menu-products-item sortable" ng-class="{active: currentProduct.id == product.id}">
-			        	<a ng-click="loadProduct(product)"><i class="icon-move icon-black" tooltip="general.sortable"></i> {{product.name}} <i class="icon-ban-circle icon-black" ng-hide="product.active"></i> <i class="icon-star icon-black" ng-show="product.special"></i></a>
+			        	<a ng-click="loadProduct(product)">
+			        		<i class="icon-move icon-black" tooltip="general.sortable"></i> {{product.name}} 
+			        		<i class="icon-ban-circle icon-black" ng-hide="product.active"></i> 
+			        		<i class="icon-star icon-black" ng-show="product.special"></i>
+			        		<i class="icon-eye-close icon-black" ng-show="product.hideInDashboard"></i>
+			        	</a>
 			        </li>
 	    		</ul>
 	    	</div>
@@ -137,7 +142,15 @@
 	    <div class="span3" ng-show="currentProduct">
 		    <div class="data-container-with-title">
 		    	<h4 class="data-container-title" l="product.container.title">Product edit</h4>
-		    	<div ng-show="currentProduct.special" style="position: absolute; top:2px; right: 2px;"><span class="badge badge-warning" l="menus.product.special.badge">special offer</span></div>
+		    	<div style="position: absolute; top:2px; right: 2px;">
+					<!-- <div ng-show="currentProduct.special" > -->
+						<span ng-show="currentProduct.special" class="badge badge-warning pull-right" style="margin-left: 3px;" l="menus.product.special.badge">special offer</span>
+		<!-- 			</div><
+		    		<div ng-show="!currentProduct.active" > -->
+		    			<span ng-show="!currentProduct.active" class="badge badge-important pull-right" l="menus.product.inactive.badge">inactive</span>
+		    		<!-- </div> -->
+		    	</div>
+		    	
 		    	<div class="data-container-block">
 		    		<div simple-property-editor editor-title="product.editor.name" editor-property="currentProduct.name" editor-on-save="saveProduct()" editor-required editor-placeholder="product.placeholder.name">
 			    		<h5 class="edit" tooltip="product.editor.name.tooltip">
@@ -179,22 +192,31 @@
 									<button  class="btn btn-primary" style="width: 100%"><i class="icon-picture icon-white"></i> <span l="common.image.add">Add Image</span></button>
 								</div>
 						</div>					 
-						<!-- <button class="btn span2" ng-click="deleteProductImage(currentProduct.image)" ng-disabled="!currentProduct.image" ng-show="currentProduct.image"><i class="icon-trash icon-black"></i></button> -->
 					</div>
 					<!-- </div> -->
 					<!-- Action buttons -->
-			    	<div class="row-fluid">
-			    		<button class="btn btn-success span6" type="button" ng-click="toggleProductActive()" ng-model="currentProduct.active" ng-show="currentProduct.active && currentProduct.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
+			    	<div class="btn-toolbar">
+			    		<!-- <button class="btn btn-success span4" type="button" ng-click="toggleProductActive()" ng-model="currentProduct.active" ng-show="currentProduct.active && currentProduct.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
 
-			    		<button class="btn btn-danger span6" style="margin-left: 0px !important;"  type="button" ng-click="toggleProductActive()" ng-model="currentProduct.active" ng-show="!currentProduct.active && currentProduct.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
+			    		<button class="btn btn-danger span4" style="margin-left: 0px !important;"  type="button" ng-click="toggleProductActive()" ng-model="currentProduct.active" ng-show="!currentProduct.active && currentProduct.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button> -->
 
-			    		<!-- special offer buttons -->
-				    	<button class="btn btn-warning span2" type="button" ng-click="toggleProductSpecial()" ng-model="currentProduct.special" ng-show="currentProduct.special && currentProduct.id" tooltip="menus.product.special.tooltip"><i class="icon-star icon-white"></i> <span></span></button>
-			    		<button class="btn span2" type="button" ng-click="toggleProductSpecial()" ng-model="currentProduct.special" ng-show="!currentProduct.special && currentProduct.id" tooltip="menus.product.special.tooltip"><i class="icon-star icon-black"></i> <span></span></button>
-
-			    		<div class="btn-group span2">
+			    		<!-- action buttons -->
+			    		<div class="btn-group" ng-show="currentProduct.id">
+			    			<!-- active button -->
+			    			<button class="btn" ng-class="{'btn-success' : currentProduct.active, 'btn-danger' : !currentProduct.active}" type="button" ng-click="toggleProductActive()" ng-model="currentProduct.active" tooltip="menus.product.active.tooltip">
+			    				<i class="icon-white" ng-class="{'icon-ok' : currentProduct.active, 'icon-ban-circle' : !currentProduct.active}"></i>
+			    			</button>
+			    			<button class="btn" ng-class="{'btn-warning' : currentProduct.special == true}" type="button" ng-click="toggleProductSpecial()" ng-model="currentProduct.special" tooltip="menus.product.special.tooltip">
+			    				<i class="icon-star icon-black"></i>
+			    			</button>
+			    			<!-- hide from dashboard-->
+			    			<button class="btn" type="button" ng-click="toggleProductDashboard();" ng-model="currentProduct.hideInDashboard" tooltip="menus.product.hideindashboard.tooltip">
+			    				<i class="icon-black" ng-class="{'icon-eye-close' : currentProduct.hideInDashboard, 'icon-eye-open' : !currentProduct.hideInDashboard}"></i>
+			    			</button>
+			    		</div>
+			    		<!-- move button -->
+			    		<div class="btn-group">
 				    		<button class="btn btn-primary dropdown-toggle" style="width:100%;"  data-toggle="dropdown" ng-show="currentProduct.id" tooltip="menus.product.action.move.tooltip">
-				    			<!-- <span l="menus.product.action.move" tooltip="menus.product.action.move.tooltip">Move to ...</span> -->
 				    			<span class="icon-move icon-white"></span>
 				    		</button>			    		
 				        	<ul class="dropdown-menu">
@@ -205,8 +227,11 @@
 				        		</li>
 		    				</ul>
 				    	</div>				    	
-
-			    		<button class="btn span2" data-toggle="modal" data-target="#deleteProductModal" ng-show="currentProduct.id"><i class="icon-trash"></i></button>
+				    	<div class="btn-group">
+			    			<button class="btn" data-toggle="modal" data-target="#deleteProductModal" ng-show="currentProduct.id">
+			    				<i class="icon-trash"></i>
+			    			</button>
+			    		</div>
 			    		<!-- Modal delete dialog. -->
 			    		<div class="modal hide" id="deleteProductModal">
 						 	<div class="modal-header">
