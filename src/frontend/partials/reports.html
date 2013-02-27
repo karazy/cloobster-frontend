@@ -26,7 +26,7 @@
 					<form class="form-inline">
 					<div class="input-prepend">
 						<span class="add-on" l="reports.parameter.startdate">Start date</span>
-					 	<input ui-date="dateOptions"  type="text" ng-model="fromDate" id="dp-from">
+					 	<input ui-date="dateOptions"  type="text" ng-model="fromDate">
 					</div>
 					<div class="input-prepend">
 						<span class="add-on" l="reports.parameter.enddate">End date</span>
@@ -83,7 +83,7 @@
 				<!-- report data -->
 				<div class="span4">
 					<div class="">
-						<div class="data-container-block">
+						<div class="data-container-block data-container-scrollable" style="max-height: 500px;">
 							<table class="table table-striped">
 								<thead>
 			  						<tr>

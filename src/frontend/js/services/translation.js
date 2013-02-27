@@ -953,9 +953,21 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Spezialangebot",
 			"EN" : "special offer"
 		},
+		"menus.product.inactive.badge" : {
+			"DE" :  "Inaktiv",
+			"EN" : "Inactive"
+		},
 		"menus.product.special.tooltip" : {
 			"DE" :  "Spezialangebot (de)aktivieren. Diese werden gesondert im App Startscreen hervorgehoben.",
 			"EN" : "(de)activate special offer. They will be highlighted on the app home screen."
+		},
+		"menus.product.active.tooltip" : {
+			"DE" :  "Produkt aktiveren/deaktivieren.",
+			"EN" : "Activate/deactivate product."
+		},
+		"menus.product.hideindashboard.tooltip" : {
+			"DE" :  "Auge geschlossen: Produkt auf App Dashboard NIE anzeigen.",
+			"EN" : "Eye closed: NEVEr show product on app dashboard."
 		},
 		"menus.products.link.description" : {
 			"DE" : "Klicken Sie auf eine bestehendes Produkt, um dieses zu kopieren und der aktuellen Kategorie hinzuzufügen. Optional können Auswahlmöglichkeiten <strong>verknüpft</strong> oder <strong>kopiert</strong> werden. <i class='icon-question-sign'></i>",
@@ -975,15 +987,19 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 						"<dt><i class='icon-edit icon-black'></i></dt>"+
 					  "<dd>Bearbeiten</dd>"+
 					  "<dt><i class='icon-ok icon-black'></i></dt>"+
-					  "<dd>Aktives Produkt</dd>"+
+					  "<dd>Aktives Produkt (kann bestellt werden)</dd>"+
 					  "<dt><i class='icon-ban-circle icon-black'></i></dt>"+
-					  "<dd>Inaktives Produkt</dd>"+
+					  "<dd>Inaktives Produkt (kann NICHT bestellt werden)</dd>"+
 					  "<dt><i class='icon-move icon-black'></i></dt>"+
 					  "<dd>Per Drag&Drop verschieben</dd>"+
 					  "<dt><i class='icon-trash icon-black'></i></dt>"+
 					  "<dd>Löschen</dd>"+
 					  "<dt><i class='icon-star icon-black'></i></dt>"+
 					  "<dd>Spezialangebot</dd>"+
+					  "<dt><i class='icon-eye-open icon-black'></i></dt>"+
+					  "<dd>Sichtbar auf App Dashboard</dd>"+
+					  "<dt><i class='icon-eye-close icon-black'></i></dt>"+
+					  "<dd>Nicht sichtbar auf App Dashboard</dd>"+
 					"</dl>",
 			"EN" :  "<dl>"+
 						"<dt><i class='icon-edit icon-black'></i></dt>"+
@@ -998,6 +1014,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 					  "<dd>delete</dd>"+
 					  "<dt><i class='icon-star icon-black'></i></dt>"+
 					  "<dd>special offer</dd>"+
+					  "<dt><i class='icon-eye-open icon-black'></i></dt>"+
+					  "<dd>Visible in app dashboard</dd>"+
+					  "<dt><i class='icon-eye-close icon-black'></i></dt>"+
+					  "<dd>Not visible in app dashboard</dd>"+
 					"</dl>"
 		},			
 		"menus.products.orphaned.title" : {
