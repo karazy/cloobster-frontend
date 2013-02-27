@@ -120,18 +120,6 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 			$log.log('Not logged in! Failed to load areas.');
 			return;
 		}
-		// activeBusinessId = businessId;
-
-		// account =  loginService.getAccount();
-
-		// subscriptionResource = Business.buildSubscriptionResource(activeBusinessId);
-
-		// $scope.activeBusiness = Business.buildResource(account.id).get(
-		// 	{'id' : activeBusinessId, 'countSpots' : true},
-		// 	function() {
-		// 		$scope.activeSubscription = subscriptionResource.get({'id' : $scope.activeBusiness.activeSubscriptionId});
-		// 	}
-		// );
 
 		//create areas resource
 		$scope.areasResource = Area.buildResource(businessId);
@@ -151,13 +139,7 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 	  // Load the Visualization API and the piechart package.
       google.load('visualization', '1.0', {'packages':['corechart'], callback: drawChart});
 
-      // Set a callback to run when the Google Visualization API is loaded.
-      // google.setOnLoadCallback(drawChart);
-
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-  	function drawChart() {
+  		function drawChart() {
 
       	var data = new google.visualization.DataTable(),
   	 		options,
