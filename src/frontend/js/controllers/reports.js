@@ -106,6 +106,76 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		  .error(handleError);
 	}
 
+	function postDocument (data) {
+		var newDocument = {
+			name: $scope.currentReport.type + ' Report',
+			type: 'xls',
+			entity: 'net.eatsense.counter.Counter',
+			representation: 'report'
+		};
+
+		newDocument.names = [];
+
+		for (var i = data.length - 1; i >= 0; i--) {
+			newDocument.names.push(data[i].id);
+		}
+
+		$http.post('/b/businesses/'+activeBusinessId+'/documents', newDocument)
+			.success(function() {
+				$log.info('Success posting document.');
+				$scope.exportRequested = true;
+			})
+			.error(handleError);
+	}
+
+	/**
+	* Send request to generate document based on the selected data.
+	*/
+	$scope.generateReport = function() {
+		var areaId = ($scope.currentArea) ? $scope.currentArea.id : 0;
+
+		if(!$scope.currentReport) {
+			$log.error("Reports.loadReport: no currentReport exists");
+			return;
+		}
+
+		if(!$scope.fromDate) {
+			$log.error("Reports.loadReport: no fromDate exists");
+			return;
+		}
+
+		if(!$scope.toDate) {
+			$log.error("Reports.loadReport: no toDate exists");
+			return;
+		}
+
+		$http({
+			method: 'GET', 
+			url: '/b/businesses/'+activeBusinessId+'/reports',
+			params: {
+				'kpi' : $scope.currentReport.type,
+				'areaId': areaId,
+				'fromDate' : $scope.fromDate.getTime(),
+				'toDate' : $scope.toDate.getTime()
+			}
+		})
+		  .success(function(data, status, headers, config) {
+		    
+		    if(data.length == 0) {
+		    	$scope.reportData = 'noresult';
+		    } else {
+		    	postDocument(data);
+		    }
+		    
+		  })
+		  .error(handleError);	
+	};
+
+	$scope.gotoDocuments = function() {
+		$scope.exportRequested = false;
+		$location.url('/businesses/'+activeBusinessId+'/documents');
+	};
+
 	/**
 	* Load areas assigned to given businessId.
 	* Retrieved areas are stored in $scpe.areas
