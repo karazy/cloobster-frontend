@@ -163,6 +163,7 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		    
 		    if(data.length == 0) {
 		    	$scope.reportData = 'noresult';
+		    	$scope.exportError = true;
 		    } else {
 		    	postDocument(data);
 		    }
@@ -172,8 +173,13 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 	};
 
 	$scope.gotoDocuments = function() {
-		$scope.exportRequested = false;
+		$scope.resetExportStatus();
 		$location.url('/businesses/'+activeBusinessId+'/documents');
+	};
+
+	$scope.resetExportStatus = function() {
+		$scope.exportRequested = false;
+		$scope.exportError = false;
 	};
 
 	/**
