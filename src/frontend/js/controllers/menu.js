@@ -450,6 +450,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 	*/
 	$scope.showAllProductsList = function() {
 		$scope.allProductsList = $scope.productsResource.query(null, null, null, handleError);
+		//reset search filter
+		$scope.allProductsQuery = {}
 
 		manageViewHiearchy("all-products-list");
 	}
@@ -460,6 +462,40 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 	*/
 	$scope.checkProducts = function() {
 		listUtil.checkElements($scope.allProductsList, $scope.allProductsQuery);
+	}
+
+	$scope.toggleProductSpecialFilter = function() {
+		if(!$scope.allProductsQuery) {
+			$scope.allProductsQuery = {
+				'special' : true
+			}
+			return;
+		}
+
+		if($scope.allProductsQuery.special == true) {
+			delete $scope.allProductsQuery.special;
+		} else {
+			$scope.allProductsQuery.special = true;
+		}
+
+		listUtil.checkElements($scope.allProductsList, null, true);
+	}
+
+	$scope.toggleProductHideInDashboardFilter = function() {
+		if(!$scope.allProductsQuery) {
+			$scope.allProductsQuery = {
+				'hideInDashboard' : true
+			}
+			return;
+		}
+
+		if($scope.allProductsQuery.hideInDashboard == true) {
+			delete $scope.allProductsQuery.hideInDashboard;
+		} else {
+			$scope.allProductsQuery.hideInDashboard = true;
+		}
+
+		listUtil.checkElements($scope.allProductsList, null, true);
 	}
 
 	/**

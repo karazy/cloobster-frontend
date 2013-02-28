@@ -888,10 +888,54 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"menu.container.title" : {
 			"DE" : "Kategorie editieren",
 			"EN" : "Edit category"
-		},		
+		},
+		"menu.speciallist.header" : {
+			"DE" :  "Spezielle Listen",
+			"EN" : "Special lists"
+		},
 		"menus.list.orphaned" : {
 			"DE" : "Verwaiste Produkte",
 			"EN" : "Orphaned products"
+		},
+		"menus.list.allproducts" : {
+			"DE" :  "Alle Produkte",
+			"EN" : "All products"
+		},
+		"menus.list.allproducts.description" : {
+			"DE" :  "Liste aller Produkte. Diese können gefiltert werden.",
+			"EN" : ""
+		},
+		"products.filter.special.tooltip" : {
+			"DE" :  "Nur Spezialprodukte anzeigen",
+			"EN" : "Display only special products"
+		},
+		"products.filter.hideindashboard.tooltip" : {
+			"DE" :  "Vom Dashboard ausgeblendete Produkte anzeigen",
+			"EN" : "Display products hidden in dashboard"
+		},
+		"products.action.setactive" : {
+			"DE" :  "aktiv setzen",
+			"EN" : "set active"
+		},
+		"products.action.setinactive" : {
+			"DE" :  "inaktiv setzen",
+			"EN" : "set inactive"
+		},
+		"products.action.setspecial" : {
+			"DE" :  "als Spezial setzen",
+			"EN" : "set as special"
+		},
+		"products.action.setnotspecial" : {
+			"DE" :  "Spezial entfernen",
+			"EN" : "remove special"
+		},
+		"products.action.sethideindashboard" : {
+			"DE" :  "vom dashbard ausblenden",
+			"EN" : "hide in dashbard"
+		},
+		"products.action.setshowindashboard" : {
+			"DE" :  "auf dashboard anzeigen",
+			"EN" : "set visible in dashboard"
 		},
 		"menus.list.orphaned.tooltip" : {
 			"DE" : "Nicht zugewiesene Produkte anzeigen",
@@ -1021,7 +1065,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 					"</dl>"
 		},			
 		"menus.products.orphaned.title" : {
-			"DE" : "Verwaiste Produkte",
+			"DE" : "Nicht zugewiesene Produkte",
 			"EN" : "Orphaned products"
 		},
 		"menus.products.orphaned.description" : {

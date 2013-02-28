@@ -986,7 +986,7 @@ Cloobster.services.factory('validator', function() {
 * 	@author Frederik Reifschneider
 *
 */
-Cloobster.services.factory('listUtil', function() {
+Cloobster.services.factory('listUtil', ['$filter', function($filter) {
 
 	var listFunctions = {
 		/**
@@ -996,8 +996,10 @@ Cloobster.services.factory('listUtil', function() {
 		*	List of objects to check/uncheck
 		* @param {Object} filter (optional)
 		*  e.g. someProduct.name= 'XYZ' where someProduct is a product object and list gets filtered by name value
+		* @param {Boolean} uncheck (optional)
+		*	True to force uncheck on all elements
 		*/
-		checkElements: function(list, filter) {
+		checkElements: function(list, filter, uncheck) {
 			var filtered = null,
 				setChecked;
 
@@ -1012,19 +1014,25 @@ Cloobster.services.factory('listUtil', function() {
 				filtered = list;
 			}
 			
+			if(!uncheck) {
+				setChecked = jQuery.grep(filtered, function(element) {
+					return element.checked;
+				}).length < filtered.length;
 
-			setChecked = jQuery.grep(filtered, function(element) {
-				return element.checked;
-			}).length < filtered.length;
 
+				angular.forEach(filtered, function(element, index) {
+					element.checked = setChecked;		
+				});
+			} else {
+				angular.forEach(filtered, function(element, index) {
+					element.checked = false;		
+				});
+			}
 
-			angular.forEach(filtered, function(element, index) {
-				element.checked = setChecked;		
-			});
 		}
 	}	
 
 	return listFunctions;
-});
+}]);
 
 
