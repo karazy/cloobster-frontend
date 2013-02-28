@@ -105,7 +105,11 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		  })
 		  .error(handleError);
 	}
-
+	/**
+	* Send create document request.
+	*
+	*	@param {Array.<Object>} data Array of report objects
+	*/
 	function postDocument (data) {
 		var newDocument = {
 			name: $scope.currentReport.type + ' Report',
@@ -135,17 +139,17 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		var areaId = ($scope.currentArea) ? $scope.currentArea.id : 0;
 
 		if(!$scope.currentReport) {
-			$log.error("Reports.loadReport: no currentReport exists");
+			$log.error("Reports.generateReport: no currentReport exists");
 			return;
 		}
 
 		if(!$scope.fromDate) {
-			$log.error("Reports.loadReport: no fromDate exists");
+			$log.error("Reports.generateReport: no fromDate exists");
 			return;
 		}
 
 		if(!$scope.toDate) {
-			$log.error("Reports.loadReport: no toDate exists");
+			$log.error("Reports.generateReport: no toDate exists");
 			return;
 		}
 
@@ -159,10 +163,10 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 				'toDate' : $scope.toDate.getTime()
 			}
 		})
-		  .success(function(data, status, headers, config) {
-		    
+		  .success(function(data, status, headers, config) {		    
 		    if(data.length == 0) {
 		    	$scope.reportData = 'noresult';
+		    	$scope.exportError = true;
 		    } else {
 		    	postDocument(data);
 		    }
@@ -171,9 +175,20 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		  .error(handleError);	
 	};
 
+	/**
+	* Switch to Documents partial.
+	*/
 	$scope.gotoDocuments = function() {
-		$scope.exportRequested = false;
+		$scope.resetExportStatus();
 		$location.url('/businesses/'+activeBusinessId+'/documents');
+	};
+
+	/**
+	* Reset the Export dialog status.
+	*/
+	$scope.resetExportStatus = function() {
+		$scope.exportRequested = false;
+		$scope.exportError = false;
 	};
 
 	/**

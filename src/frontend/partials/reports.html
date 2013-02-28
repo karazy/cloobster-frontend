@@ -43,29 +43,28 @@
 							<button class="btn btn-primary" ng-click="loadReport()"><i class="icon-th icon-white"></i><span l="reports.action.show">Show report</span></button>
 						</div>
 						<div class="btn-group">
-							<button class="btn btn-primary" data-toggle="modal" data-target="#exportModal" ng-click="exportRequested=false">
+							<button class="btn btn-primary" data-toggle="modal" data-target="#exportModal" ng-click="resetExportStatus()">
 								<i class="icon-file icon-white"></i><span l="reports.action.export.xls">Export XLS report</span>
 							</button>
-							<!-- Modal confirm export dialog. -->
-			    		<div class="modal hide" id="exportModal">
-							 	<div class="modal-header">
-							    	<button type="button" class="close" data-dismiss="modal">×</button>
-							    	<h4 l="reports.action.export.dialog.title" ng-hide="exportRequested">Confirm Excel export</h4>
-							    	<h4 l="reports.action.export.dialog.requested.title" ng-show="exportRequested">Excel export requested</h4>
-								</div>
-								<div class="modal-body">
-						    	<p l="reports.action.export.dialog.text" ng-hide="exportRequested">Do you want to export the selected data to an Excel file?</p>
-						    	<p l="reports.action.export.dialog.export-complete" ng-show="exportRequested">Your request is being processed and the file will be available under Documents soon.</p>
-							  </div>
-							  <div class="modal-footer" ng-show="exportRequested">
-						  		<button type="button" class="btn" data-dismiss="modal" ng-click="exportRequested=false" l="common.ok">Okay</button>
-						    	<button type="button" class="btn btn-primary" ng-click="gotoDocuments()" l="nav.documents">Open Documents</button>
-								</div>
-						  	<div class="modal-footer" ng-hide="exportRequested">
-						  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
-						    	<button type="button" class="btn btn-primary" ng-click="generateReport()" l="reports.action.export.xls">Generate</button>
-								</div>
-							</div>
+						</div>
+					</div>
+					<!-- Modal confirm export dialog. -->
+	    		<div class="modal hide" id="exportModal">
+					 	<div class="modal-header">
+					    	<button type="button" class="close" data-dismiss="modal">×</button>
+					    	<h4 l="reports.action.export.dialog.title" ng-hide="exportRequested">Confirm Excel export</h4>
+					    	<h4 l="reports.action.export.dialog.requested.title" ng-show="exportRequested">Excel export requested</h4>
+						</div>
+						<div class="modal-body">
+				    	<p l="reports.action.export.dialog.text" ng-hide="exportRequested">Do you want to export the selected data to an Excel file?</p>
+				    	<p l="reports.action.export.dialog.export-complete" ng-show="exportRequested">Your request is being processed and the file will be available under Documents soon.</p>
+				    	<p class="text-error" l="reports.report.noresult" ng-show="exportError && reportData == 'noresult'">No results found</p>
+					  </div>
+					  <div class="modal-footer" >
+				  		<button type="button" ng-show="exportError || exportRequested" class="btn" data-dismiss="modal" ng-click="exportRequested=false" l="common.ok">Okay</button>
+				    	<button type="button" class="btn btn-primary" ng-click="gotoDocuments()" ng-show="exportRequested" l="nav.documents" data-dismiss="modal">Open Documents</button>
+				  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel" ng-hide="exportRequested || exportError">Cancel</button>
+				    	<button type="button" class="btn btn-primary" ng-click="generateReport()" l="reports.action.export.xls" ng-hide="exportRequested || exportError">Generate</button>
 						</div>
 					</div>
 				</div>
