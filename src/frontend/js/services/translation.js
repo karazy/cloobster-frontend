@@ -1569,10 +1569,6 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Selektierte löschen",
 			"EN" :  "Delete selected spots"
 		},
-		"spots.masscheck.tooltip" : {
-			"DE" :  "Alle anwählen/abwählen",
-			"EN" :  "Select/deselect all"
-		},
 		"spots.filtered.status" : {
 			"DE" :  "Spots gefiltert {{filteredSpots.length}} | markiert {{getCheckedSpotsCount()}}",
 			"EN" :  "Spots filtered {{filteredSpots.length}} | selected {{getCheckedSpotsCount()}}"
@@ -2131,6 +2127,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"validation.field.required" : {
 			"DE" :  "* Bitte füllen Sie die Pflichtfelder aus.",
 			"EN" : "* Please fill out required fields."
+		},
+		"common.masscheck.tooltip" : {
+			"DE" :  "Alle anwählen/abwählen",
+			"EN" :  "Select/deselect all"
 		},
 		//breadcrumb
 		"breadcrumb.home" : {

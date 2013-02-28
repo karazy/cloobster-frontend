@@ -232,7 +232,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		
 		$scope.currentSpot = spotItem;
 		manageViewHiearchy("spot");
-	};
+	}
 
 
 	$scope.saveSpot = function() {		

@@ -9,7 +9,7 @@
 * 	View and manage menus, products, choices per restaurant.
 * 	@constructor
 */
-Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, Business, Menu, Product, Choice, langService, $log, handleError, validator) {
+Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, loginService, Business, Menu, Product, Choice, langService, $log, handleError, validator, listUtil) {
 
 	var activeBusinessId = null,
 		choicesResource = null,
@@ -314,8 +314,19 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	//End Menu logic
 
 	//Start Product logic
-	$scope.loadProduct = function(productItem) {
+	$scope.loadProduct = function(productItem, $event) {
 		$log.log("load product " + productItem.id);
+
+		if($event) {
+			//checkbox clicked. Do nothing.
+			if(jQuery($event.srcElement).is("input")) {
+				return;
+			}
+
+			if(jQuery($event.originalEvent.srcElement).is("input")) {
+				return;
+			}
+		}
 
 		manageViewHiearchy("product");
 		
@@ -439,6 +450,90 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	*/
 	$scope.showAllProductsList = function() {
 		$scope.allProductsList = $scope.productsResource.query(null, null, null, handleError);
+
+		manageViewHiearchy("all-products-list");
+	}
+
+	/**
+	* Check/Uncheck products regarding the search filter.
+	* If less then all filtered spots are checked, check all of them. Otherwise uncheck all.
+	*/
+	$scope.checkProducts = function() {
+		listUtil.checkElements($scope.allProductsList, $scope.allProductsQuery);
+	}
+
+	/**
+	* Sets a properties value for all checked products.
+	* @param {String} prop
+	*	property to set
+	* @param {String|Boolean|Number} value
+	*	value to set property to
+	*/
+	$scope.setCheckedProductsProperty = function(prop, value) {
+		var ids = [],
+			//used in forEach to match returned elements with local ones
+			foundElement,
+			params;
+
+		if(!$scope.allProductsList && $scope.allProductsList.length > 0) {
+			$log.log('Menu.setCheckedProductsProperty: $scope.allProductsList does not exist or is empty.');
+			return;
+		}
+
+		if(!$scope.productsResource) {
+			$log.log('Menu.setCheckedProductsProperty: $scope.productsResource does not exist.');
+			return;	
+		}
+
+		if(!prop) {
+			$log.log('Menu.setCheckedProductsProperty: prop not given');
+			return;
+		}
+
+		if(!value) {
+			$log.log('Menu.setCheckedProductsProperty: value not given');
+			return;
+		}
+
+
+		angular.forEach($scope.allProductsList, function(element, index) {
+			if(element.checked) {
+				ids.push(element.id);	
+			}			
+		});
+
+		//No elements selected
+		if(ids.length == 0) {
+			return;	
+		}
+		//setup request params 
+		params = {
+			'ids' : ids
+		}
+
+		params[prop] = value;
+
+		$scope.productsResource.process(
+			params, 
+			function(response) {
+				//update status on success
+				angular.forEach($scope.allProductsList, function(element, index) {
+					foundElement = jQuery.grep(response, function(spotFromResponse) {
+						return spotFromResponse.id == element.id;
+					});
+
+					if(foundElement.length > 1) {
+						$log.warn('Menu.setCheckedProductsProperty: more than one returned spot matches with local ones!');
+					} else if(!foundElement || foundElement.length == 0) {
+						$log.warn('Menu.setCheckedProductsProperty: no matching spot found');
+					} else {
+						//replace old spot with updated
+						$scope.allProductsList[index] = foundElement[0];
+					}	
+				});
+			},
+			handleError
+		);
 
 		manageViewHiearchy("all-products-list");
 	}
@@ -980,4 +1075,4 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	});
 }
 
-Cloobster.Menu.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'Business', 'Menu', 'Product', 'Choice', 'lang', '$log', 'errorHandler', 'validator'];
+Cloobster.Menu.$inject = ['$scope', '$http', '$routeParams', '$location', '$filter', 'login', 'Business', 'Menu', 'Product', 'Choice', 'lang', '$log', 'errorHandler', 'validator', 'listUtil'];

@@ -978,4 +978,53 @@ Cloobster.services.factory('validator', function() {
 	return validator;
 });
 
+/**
+* @constructor
+* Factory function for 'listUtil' service.
+* Contains convienient methods to handle lists
+* 
+* 	@author Frederik Reifschneider
+*
+*/
+Cloobster.services.factory('listUtil', function() {
+
+	var listFunctions = {
+		/**
+		* Check/Uncheck elements regarding the given search filter.
+		* If less then all filtered spots are checked, check all of them. Otherwise uncheck all.
+		* @param {Array<Object>} list
+		*	List of objects to check/uncheck
+		* @param {Object} filter (optional)
+		*  e.g. someProduct.name= 'XYZ' where someProduct is a product object and list gets filtered by name value
+		*/
+		checkElements: function(list, filter) {
+			var filtered = null,
+				setChecked;
+
+			if(!list && list.length > 0) {
+				$log.log('Cloobster.services.listUtil.checkElements: list does not exist or is empty.');
+				return;
+			}
+			
+			if(filter) {
+				filtered = $filter('filter')(list, filter);	
+			} else {
+				filtered = list;
+			}
+			
+
+			setChecked = jQuery.grep(filtered, function(element) {
+				return element.checked;
+			}).length < filtered.length;
+
+
+			angular.forEach(filtered, function(element, index) {
+				element.checked = setChecked;		
+			});
+		}
+	}	
+
+	return listFunctions;
+});
+
 

@@ -272,7 +272,14 @@ angular.module('Cloobster.services').factory('Product', ['cloobsterResource', fu
 						* @name Cloobster.services.Product#$update
 						* Like a save but uses PUT instead of POST. Feels more restful.
 						*/
-						'update': { method: 'PUT'}
+						'update': { method: 'PUT'},
+						/*
+						* @name Cloobster.services.Product#$process
+						* Used to update collections of products.
+						* @return
+						*	Array of products with updated values.
+						*/
+						'process': { method: 'PUT', isArray:true},
 				}
 
 				)
