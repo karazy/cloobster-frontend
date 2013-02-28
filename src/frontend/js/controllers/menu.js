@@ -437,6 +437,16 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	*
 	* Lists all available products for current business.
 	*/
+	$scope.showAllProductsList = function() {
+		$scope.allProductsList = $scope.productsResource.query(null, null, null, handleError);
+
+		manageViewHiearchy("all-products-list");
+	}
+
+	/**
+	*
+	* Lists all available products for current business.
+	*/
 	$scope.showAllProducts = function() {
 		$scope.allProducts = $scope.productsResource.query(null, null, null, handleError);
 
@@ -868,12 +878,13 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		switch (state) {
 			case "menus":
 				$scope.currentMenu = null;
-				$scope.products = null;
+				$scope.products = null;			
 			case "menu":
+				$scope.allProductsList = null;
 				$scope.menuInvalid = false;
 				$scope.currentProduct = null;
 				$scope.orphanedProducts = null;
-				$scope.organizeMenusContext = null;
+				$scope.organizeMenusContext = null;			
 			case "product":
 				$scope.currentChoice = null;
 				$scope.productInvalid = false;
@@ -885,7 +896,17 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			case "all-choices":
 				$scope.currentChoice = null;
 				break;
+			case "all-products-list":
+				$scope.orphanedProducts = null;
+				$scope.currentMenu = null;
+				$scope.products = null;
+				$scope.allProducts = null;
+				$scope.currentProduct = null;
+				$scope.currentChoice = null;
+				$scope.organizeMenusContext = null;
+				break;
 			case "orphaned-products":
+				$scope.allProductsList = null;
 				$scope.currentMenu = null;
 				$scope.products = null;
 				$scope.allProducts = null;

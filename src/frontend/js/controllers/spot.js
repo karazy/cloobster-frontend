@@ -224,6 +224,10 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			return;
 		}
 
+		if(jQuery($event.originalEvent.srcElement).is("input")) {
+			return;
+		}
+
 		$log.log("load spot " + spotItem.id);
 		
 		$scope.currentSpot = spotItem;
