@@ -39,6 +39,19 @@
 	    	<h4 class="data-container-title" l="menus.list.allproducts">All Products</h4>
 	    	<div class="data-container-block data-container-seperator">
 		    	<p l="menus.list.allproducts.description">List of all products</p>
+		    	<div class="accordion" id="accordion2">
+					  <div class="accordion-group">
+					    <div class="accordion-heading">
+					      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+					        <i class="icon-question-sign icon-black"></i> <span l="common.help">Help</span>
+					      </a>
+					    </div>
+					    <div id="collapseOne" class="accordion-body collapsed collapse">
+					      <div class="accordion-inner" l="menus.list.allproducts.help">
+					      </div>
+					    </div>
+					  </div>
+					</div>
 				<div class="btn-toolbar">						
 					<div class="btn-group">						
 						<button  class="btn" ng-click="checkProducts()" tooltip="common.masscheck.tooltip">
@@ -322,7 +335,7 @@
 			    				<i class="icon-white" ng-class="{'icon-ok' : currentProduct.active, 'icon-ban-circle' : !currentProduct.active}"></i>
 			    			</button>
 			    			<button class="btn" ng-class="{'btn-warning' : currentProduct.special == true}" type="button" ng-click="toggleProductSpecial()" ng-model="currentProduct.special" tooltip="menus.product.special.tooltip">
-			    				<i class="icon-star icon-black"></i>
+			    				<i class="icon-star icon-black" ng-class="{'icon-star' : currentProduct.special, 'icon-star-empty' : !currentProduct.special}"></i>
 			    			</button>
 			    			<!-- hide from dashboard-->
 			    			<button class="btn" type="button" ng-click="toggleProductDashboard();" ng-model="currentProduct.hideInDashboard" tooltip="menus.product.hideindashboard.tooltip">
