@@ -902,7 +902,13 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "All products"
 		},
 		"menus.list.allproducts.description" : {
-			"DE" :  "Liste aller Produkte. Diese können gefiltert werden.",
+			"DE" :  "<p>Liste aller Produkte. Die Liste kann gefiltert und es können Massenoperationen auf Produkten angewandt werden.</p>"+
+					"<i class='icon-ok icon-black'></i> Produkt aktiv<br/>"+
+					"<i class='icon-ban-circle icon-black'></i> Produkt inaktiv<br/>"+
+					"<i class='icon-star icon-black'></i> Produkt ist Spezial<br/>"+
+					"<i class='icon-star-empty icon-black'></i> Produkt nicht Spezial<br/>"+
+					"<i class='icon-eye-open icon-black'></i> Produkt wird auf App Dashboard angezeigt<br/>"+
+					"<i class='icon-eye-close icon-black'></i> Produkt wird auf App Dashboard verborgen",
 			"EN" : ""
 		},
 		"products.filter.special.tooltip" : {

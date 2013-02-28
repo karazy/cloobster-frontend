@@ -326,6 +326,14 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 			if(jQuery($event.originalEvent.srcElement).is("input")) {
 				return;
 			}
+
+			if(jQuery($event.originalEvent.srcElement).is("button")) {
+				return;
+			}
+			//clicked on icon in <i> of button
+			if(jQuery($event.originalEvent.srcElement).is("i") && jQuery($event.originalEvent.srcElement.parentElement).is("button")) {
+				return;
+			}
 		}
 
 		manageViewHiearchy("product");
@@ -357,22 +365,22 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 		$scope.saveMenu();
 	}
 
-	$scope.saveProduct = function() {
+	$scope.saveProduct = function(product) {
 		$log.log("save product");
 
-		var product = $scope.currentProduct;
+		var productToSave = product || $scope.currentProduct;
 
-		if(!validator.validateModel(product, requiredProductFields)) {
+		if(!validator.validateModel(productToSave, requiredProductFields)) {
 			$scope.productInvalid = true;
 			return;
 		}
 
 		$scope.productInvalid = false;
 
-		if(product && product.id) {
-			product.$update(null, null, handleError);
+		if(productToSave && productToSave.id) {
+			productToSave.$update(null, null, handleError);
 		} else {
-			product.$save(saveProductSuccess, handleError);
+			productToSave.$save(saveProductSuccess, handleError);
 		}
 	}
 
@@ -729,18 +737,33 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 	* Toggle active state of menu.
 	* Executes a save afterwards.
 	*/
-	$scope.toggleProductActive = function() {
-		$scope.currentProduct.active = !$scope.currentProduct.active;
-		$scope.saveProduct();
+	$scope.toggleProductActive = function(product) {
+		var productToToggle = product || $scope.currentProduct;
+
+		productToToggle.active = !productToToggle.active;
+		$scope.saveProduct(productToToggle);
 	}
 
 	/**
 	* Toggle sepcial flag of product.
 	* Executes a save afterwards.
 	*/
-	$scope.toggleProductSpecial = function() {
-		$scope.currentProduct.special = !$scope.currentProduct.special;
-		$scope.saveProduct();
+	$scope.toggleProductSpecial = function(product) {
+		var productToToggle = product || $scope.currentProduct;
+
+		productToToggle.special = !productToToggle.special;
+		$scope.saveProduct(productToToggle);
+	}
+
+	/**
+	* Toggle sepcial flag of product.
+	* Executes a save afterwards.
+	*/
+	$scope.toggleProductDashboard = function(product) {
+		var productToToggle = product || $scope.currentProduct;
+		
+		productToToggle.hideInDashboard = !productToToggle.hideInDashboard;
+		$scope.saveProduct(productToToggle);
 	}
 
 	//End Product logic
