@@ -534,7 +534,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 			return;
 		}
 
-		if(!value) {
+		if(angular.isUndefined(value)) {
 			$log.log('Menu.setCheckedProductsProperty: value not given');
 			return;
 		}

@@ -279,7 +279,7 @@ angular.module('Cloobster.services').factory('Product', ['cloobsterResource', fu
 						* @return
 						*	Array of products with updated values.
 						*/
-						'process': { method: 'PUT', isArray:true},
+						'process': { method: 'PUT', isArray:true}
 				}
 
 				)

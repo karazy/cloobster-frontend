@@ -986,7 +986,7 @@ Cloobster.services.factory('validator', function() {
 * 	@author Frederik Reifschneider
 *
 */
-Cloobster.services.factory('listUtil', ['$filter', function($filter) {
+Cloobster.services.factory('listUtil', ['$filter','$log', function($filter,$log) {
 
 	var listFunctions = {
 		/**

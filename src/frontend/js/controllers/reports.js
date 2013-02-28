@@ -324,7 +324,7 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		}
 
 		if(fromDate > toDate) {
-			$log.log('Reports.generateRowsArray: fromDate must not be greater than toDate').
+			$log.log('Reports.generateRowsArray: fromDate must not be greater than toDate');
 			return;
 		}
 
