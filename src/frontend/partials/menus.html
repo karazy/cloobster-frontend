@@ -22,7 +22,7 @@
 			        <li ng-repeat="menu in menus | orderBy:['title'] " ng-class="{active: currentMenu.id == menu.id}">	        	
 			        	<a ng-click="loadMenu(menu)">{{menu.title}} <i class="icon-ban-circle icon-black" ng-hide="menu.active"></i></a>			        	
 			        </li>
-			        <li class="nav-header" l="menu.speciallists">Special lists</li>
+			        <li class="nav-header" l="menu.speciallist.header">Special lists</li>
 			        <li ng-class="{active: allProductsList.length > 0 && !currentMenu}">
 			        	<a ng-click="showAllProductsList()" l="menus.list.allproducts">All Products</a>
 			        </li>			        
