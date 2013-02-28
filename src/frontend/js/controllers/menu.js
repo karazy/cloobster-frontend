@@ -472,6 +472,31 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 		listUtil.checkElements($scope.allProductsList, $scope.allProductsQuery);
 	}
 
+	/**
+	* Toggle active filter on/off on all products.
+	*
+	*/
+	$scope.toggleProductActiveFilter = function() {
+		if(!$scope.allProductsQuery) {
+			$scope.allProductsQuery = {
+				'active' : false
+			}
+			return;
+		}
+
+		if($scope.allProductsQuery.active === false) {
+			delete $scope.allProductsQuery.active;
+		} else {
+			$scope.allProductsQuery.active = false;
+		}
+
+		listUtil.checkElements($scope.allProductsList, null, true);
+	}
+
+	/**
+	* Toggle special filter on/off on all products.
+	*
+	*/
 	$scope.toggleProductSpecialFilter = function() {
 		if(!$scope.allProductsQuery) {
 			$scope.allProductsQuery = {
@@ -489,6 +514,10 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 		listUtil.checkElements($scope.allProductsList, null, true);
 	}
 
+	/**
+	* Toggle hideInDashboard filter on/off on all products.
+	*
+	*/
 	$scope.toggleProductHideInDashboardFilter = function() {
 		if(!$scope.allProductsQuery) {
 			$scope.allProductsQuery = {

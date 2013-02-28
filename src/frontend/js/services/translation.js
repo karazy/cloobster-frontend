@@ -914,9 +914,13 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 					"<i class='icon-eye-close icon-black'></i> Produkt wird auf App Dashboard verborgen",
 			"EN" : ""
 		},
+		"products.filter.active.tooltip" : {
+			"DE" :  "Inaktive Produkte anzeigen",
+			"EN" : "Show inactive products"
+		},
 		"products.filter.special.tooltip" : {
-			"DE" :  "Nur Spezialprodukte anzeigen",
-			"EN" : "Display only special products"
+			"DE" :  "Spezialprodukte anzeigen",
+			"EN" : "Display special products"
 		},
 		"products.filter.hideindashboard.tooltip" : {
 			"DE" :  "Vom Dashboard ausgeblendete Produkte anzeigen",
