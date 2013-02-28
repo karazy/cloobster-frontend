@@ -1704,8 +1704,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		//infopage partial
 		"infopages.description" : {
 			"DE" :  "Hier können Sie Informationen zur aktuellen Location anlegen. Dies können zum Beispiel Informationen<br/>"+
-			"über Blumenservice, Frühstückszeiten, Kontaktdaten und so weiter sein.",
-			"EN" : "Information pages for your locations (e.g. business hours, available services, tips)."
+			"über Blumenservice, Frühstückszeiten, Kontaktdaten und so weiter sein. Infoseiten werden zufällig auf dem App Dashboard angezeigt.<br/>"+
+				"Dies können Sie explizit für einzelne Seiten deaktivieren.",
+			"EN" : "Information pages for your locations (e.g. business hours, available services, tips).<br/>Infopages will be displayed randomly in"+
+				"app dashboard. You can disable this explicitly for unique pages." 
 		},
 		"infopages.list.title" : {
 			"DE" :  "Info-Seiten",
@@ -1754,6 +1756,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"infopage.placeholder.html" : {
 			"DE" :  "Ausführliche Information",
 			"EN" :  "Long Text"
+		},
+		"infopage.hideindashboard.true" : {
+			"DE" :  "Infoseite wird nie auf dem App Dashboard angezeigt",
+			"EN" : "Infopage will never be shown in app dashboard"
 		},
 		//documents partial
 		"documents.title" : {

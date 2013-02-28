@@ -18,6 +18,10 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	$scope.infopages = null;
 	/* holds the currently selected page */
 	$scope.currentInfoPage = null;
+	/** This is the infoPage selected in the list. Difference to currentInfoPage is that 
+ 	 * currentInfoPage gets loaded on list selection because of language.
+	 */
+	$scope.selectedInfoPage = null;
 	/** Template resource used to create concrete image resources. */
 	$scope.imageResource = null;
 	/** Active business. */
@@ -62,7 +66,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	}
 
 	/**
-	*
+	* Load given infopage in needed language from server and store it in $scope.currentInfoPage
 	*/
 	$scope.loadInfoPage =  function(page) {
 		var params = {'id': page.id};
@@ -71,6 +75,8 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		if($scope.currentLanguage) {
 			params.lang = $scope.currentLanguage.code;
 		}
+		//hold a reference to the selected item, because of language we load it from server again
+		$scope.selectedInfoPage = page;
 
 		// This will blank the current info page leading to a flickering of the screen.
 		// To only display the new data after loading set the currentInfoPage in the success callback.
@@ -179,6 +185,24 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		if($scope.infopagesQuery)  {
 			$scope.infopagesQuery.title = "";
 		}		
+	}
+
+	/**
+	* Toggle hideInDashboard flag of product.
+	* Executes a save afterwards.
+	*/
+	$scope.toggleHideInDashboard = function(infopage) {
+		var objectToToggle = infopage || $scope.currentInfoPage;
+		
+		objectToToggle.hideInDashboard = !objectToToggle.hideInDashboard;
+
+		//due to currentInfoPage not related to the original infopage because of languages in the list
+		//we have to reflect the change in the list by explicitly setting it
+		if($scope.selectedInfoPage) {
+			$scope.selectedInfoPage.hideInDashboard = objectToToggle.hideInDashboard;
+		}
+
+		$scope.saveInfoPage();
 	}
 
 	/** 

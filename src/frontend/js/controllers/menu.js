@@ -759,7 +759,6 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 		if(found) {
 			$scope.loadProduct(found);	
 		}
-		
 	};
 
 	/**
