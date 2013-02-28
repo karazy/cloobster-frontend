@@ -133,14 +133,14 @@
 		        			</div>
 		        			<div class="btn-group" style="margin-left: 5px; margin-top: 2px;">
 				    			<!-- active button -->
-				    			<button class="btn" ng-class="{'btn-success' : product.active, 'btn-danger' : !product.active}" type="button" ng-click="toggleProductActive(product)" ng-model="product.active"> <!-- tooltip="menus.product.active.tooltip" -->
+				    			<button class="btn btn-small" ng-class="{'btn-success' : product.active, 'btn-danger' : !product.active}" type="button" ng-click="toggleProductActive(product)" ng-model="product.active"> <!-- tooltip="menus.product.active.tooltip" -->
 				    				<i class="icon-white" ng-class="{'icon-ok' : product.active, 'icon-ban-circle' : !product.active}"></i>
 				    			</button>
-				    			<button class="btn" ng-class="{'btn-warning' : product.special == true}" type="button" ng-click="toggleProductSpecial(product)" ng-model="product.special"> <!-- tooltip="menus.product.special.tooltip" -->
+				    			<button class="btn btn-small" ng-class="{'btn-warning' : product.special == true}" type="button" ng-click="toggleProductSpecial(product)" ng-model="product.special"> <!-- tooltip="menus.product.special.tooltip" -->
 				    				<i class="icon-star icon-black" ng-class="{'icon-star' : product.special, 'icon-star-empty' : !product.special}"></i>
 				    			</button>
 				    			<!-- hide from dashboard-->
-				    			<button class="btn" type="button" ng-click="toggleProductDashboard(product)" ng-model="product.hideInDashboard">
+				    			<button class="btn btn-small" type="button" ng-click="toggleProductDashboard(product)" ng-model="product.hideInDashboard">
 				    				<!-- tooltip="menus.product.hideindashboard.tooltip" -->
 				    				<i class="icon-black" ng-class="{'icon-eye-close' : product.hideInDashboard, 'icon-eye-open' : !product.hideInDashboard}"></i>
 				    			</button>
