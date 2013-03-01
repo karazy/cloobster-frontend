@@ -78,32 +78,30 @@
 			</div>
 			<!-- report -->
 			<div class="row-fluid data-container-with-title" ng-show="currentReport && reportData && reportData != 'noresult'">
-				<h4 class="data-container-title" l="reports.report.title">Report</h4>
-				<!-- report data -->
+				<h4 class="data-container-title" l="reports.report.title" ng-show="!currentReportParameters">Report</h4>
+				<h4 class="data-container-title" l="reports.report.title.params" ng-show="currentReportParameters">Report</h4>
 				<div class="span4">
-					<div class="">
-						<div class="data-container-block data-container-scrollable" style="max-height: 500px;">
-							<table class="table table-striped">
-								<thead>
-			  						<tr>
-			  							<th l="reports.report.servicearea">Service Area</th>
-			  							<th l="reports.report.count">Number</th>
-			  							<th l="reports.report.day">Day</th>
-			  							<th l="reports.report.month">Month</th>
-			  							<th l="reports.report.year">Year</th>
-			  						</tr>
-		  						</thead>
-		  						<tbody>
-			  						<tr ng-repeat="data in reportData">
-			  							<td>{{data.areaName}}</td>
-			  							<td>{{data.count}}</td>
-			  							<td>{{data.date | date:'dd'}}</td>
-			  							<td>{{data.date | date:'M'}}</td>
-			  							<td>{{data.date | date:'yyyy'}}</td>
-			  						</tr>			  						
-			  					</tbody>
-							</table>
-						</div>
+					<div class="data-container-block data-container-scrollable" style="max-height: 500px;">
+						<table class="table table-striped">
+							<thead>
+		  						<tr>
+		  							<th l="reports.report.servicearea">Service Area</th>
+		  							<th l="reports.report.count">Number</th>
+		  							<th l="reports.report.day">Day</th>
+		  							<th l="reports.report.month">Month</th>
+		  							<th l="reports.report.year">Year</th>
+		  						</tr>
+	  						</thead>
+	  						<tbody>
+		  						<tr ng-repeat="data in reportData">
+		  							<td>{{data.areaName}}</td>
+		  							<td>{{data.count}}</td>
+		  							<td>{{data.date | date:'dd'}}</td>
+		  							<td>{{data.date | date:'M'}}</td>
+		  							<td>{{data.date | date:'yyyy'}}</td>
+		  						</tr>			  						
+		  					</tbody>
+						</table>
 					</div>
 				</div>
 				<!-- report chart -->

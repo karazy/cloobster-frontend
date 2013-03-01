@@ -52,6 +52,8 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
         dateFormat: 'yy-mm-dd',
         maxDate: new Date()
     };
+    /** Contains the parameters used to generate the current report. Only used for displaying! */
+    $scope.currentReportParameters = null;
 
     /**
     * Selects a report type.
@@ -61,6 +63,7 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 	$scope.selectReportType = function(type) {
 		$scope.currentReport = type;		
 		$scope.reportData = null;
+		$scope.currentReportParameters = null;
 	}
 	/**
 	* Load report data from server. Store it in $scope.reportData.
@@ -82,6 +85,13 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		if(!$scope.toDate) {
 			$log.error("Reports.loadReport: no toDate exists");
 			return;
+		}
+
+		//create params object to display in ui
+		$scope.currentReportParameters = {
+			fromDate: new Date($scope.fromDate),
+			toDate: new Date($scope.toDate),
+			serviceArea: ($scope.currentArea) ? $scope.currentArea.name.toString() : langService.translate('reports.report.allareas')
 		}
 
 		$http({

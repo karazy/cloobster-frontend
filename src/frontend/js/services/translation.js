@@ -2040,6 +2040,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Report",
 			"EN" : "Report"
 		},
+		"reports.report.title.params" : {
+			"DE" :  "Report <small>für {{currentReportParameters.serviceArea}} von {{currentReportParameters.fromDate | date:'shortDate'}} bis {{currentReportParameters.toDate | date:'shortDate'}}</small>",
+			"EN" : "Report <small>for {{currentReportParameters.serviceArea}} from {{currentReportParameters.fromDate | date:'shortDate'}} to {{currentReportParameters.toDate | date:'shortDate'}}</small>"
+		},
 		"reports.report.empty.description" : {
 			"DE" :  "Hier wird der Report angezeigt. Bitte konfigurieren Sie zunächst die Reportparameter.",
 			"EN" : "Displays the report. Please configure the report parameters to proceed."
@@ -2115,6 +2119,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"reports.report.documents.open" : {
 			"DE" :  "Dokumente öffnen",
 			"EN" : "Go to documents"
+		},
+		"reports.report.allareas" : {
+			"DE" :  "alle Bereiche",
+			"EN" : "all areas"
 		},
 		//general
 		"common.warning.title" : {

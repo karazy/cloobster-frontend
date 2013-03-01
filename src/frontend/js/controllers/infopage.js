@@ -82,7 +82,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		// To only display the new data after loading set the currentInfoPage in the success callback.
 		$scope.currentInfoPage = $scope.infoPageResource.get(params, function() {
 			$scope.imageResource = InfoPage.buildImageResource(activeBusinessId, page.id);	
-		},	handleError);	
+		},	handleError);
 	}
 
 	/**
