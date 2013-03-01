@@ -108,6 +108,13 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	$scope.saveInfoPage = function() {
 		$log.log("save infopage");
 
+		if($scope.currentLanguage) {
+			$http.defaults.headers.common['Content-Language'] = $scope.currentLanguage.code;
+		}
+		else {
+			delete $http.defaults.headers.common['Content-Language'];
+		}
+
 		if($scope.currentInfoPage && $scope.currentInfoPage.id) {
 			if($scope.currentLanguage) {
 				$scope.currentInfoPage.$update(null, null, handleError);
@@ -168,9 +175,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	};
 
 	$scope.switchLanguage = function(lang) {
-		
 		if(lang) {
-			$http.defaults.headers.common['Content-Language'] = lang.code;	
 			//$scope.loadInfoPages(activeBusinessId, $scope.currentLanguage.code);
 			if($scope.currentInfoPage) {
 				$scope.loadInfoPage($scope.currentInfoPage, lang.code);
@@ -178,7 +183,6 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 			$scope.currentLanguage = lang;
 		} else {
 			$scope.currentLanguage = null;
-			delete $http.defaults.headers.common['Content-Language'];
 			//$scope.loadInfoPages(activeBusinessId);
 			if($scope.currentInfoPage) {
 				$scope.loadInfoPage($scope.currentInfoPage);
