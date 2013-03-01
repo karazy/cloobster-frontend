@@ -26,28 +26,32 @@
 			   		<!-- area menus -->
 			    	<div ng-show="currentArea.id">
 			    		<h4 class="data-container-title" l="areas.categories.list.title">Assigned categories</h4>
-			    		<div class="data-container-block data-container-tiny">
+			    		<div class="data-container-block data-container-seperator data-container-150">
 			    			<p l="areas.categories.list.description">List of product categories (e. .g beverages) available to customers checked in in this service area.</p>
 			    		</div>
-			    		<ul class="nav nav-pills nav-stacked organizable-list data-container-block data-container-large data-container-scrollable" id="assignedMenusList">
+			    		<div class="data-container-block data-container-large data-container-scrollable" style="background-color: #CEF6CE">
+			    			<ul class="nav nav-pills nav-stacked organizable-list" id="assignedMenusList" >
 					        <li ng-repeat="category in currentAreaCategories"> <!-- filter:filterNotAssignedCockpitBusinesses -->
 					        	<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{category.title}}</a>
 				        	</li>
 			    		</ul>
+			    		</div>			    		
 			    	</div>
 			   	</div>
 				<div class="span6 data-container-with-title">
 					<div>
 						<h4 class="data-container-title" l="areas.allcategories.list.title">All categories</h4>
-						<div class="data-container-block data-container-tiny">
+						<div class="data-container-block data-container-seperator data-container-150">
 							<p l="areas.allcategories.list.description">Drag & Drop to assign category to current service area.</p>
 							<span l="common.search">Search</span>: <input ng-model="allMenusListSearch.title">
 						</div>
-						<ul class="nav nav-pills nav-stacked organizable-list data-container-block data-container-large data-container-scrollable" id="allMenusList">
-							<li ng-repeat="category in menus | filter:filterAssignedMenus | filter:allMenusListSearch | orderBy:['title']">
-								<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{category.title}}</a>
-							</li>
-						</ul>
+						<div class="data-container-block data-container-large data-container-scrollable" style="background-color: #F6CED8">
+							<ul class="nav nav-pills nav-stacked organizable-list" id="allMenusList">
+								<li ng-repeat="category in menus | filter:filterAssignedMenus | filter:allMenusListSearch | orderBy:['title']">
+									<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{category.title}}</a>
+								</li>
+							</ul>
+						</div>
 					</div>					
 			   	</div>			   	
 		   </div>
