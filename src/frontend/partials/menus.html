@@ -183,9 +183,9 @@
 				<div class="data-container-block">
 					<div l="menu.container.hint" class="alert">Don't forget to assign this category to an area afterwards.</div>
 					<div simple-property-editor editor-title="menu.editor.title" editor-property="currentMenu.title" editor-on-save="saveMenu()" editor-placeholder="menus.placeholder.title" editor-required>
-					<h5 class="edit" tooltip="menus.editor.title.tooltip">
-						<span l="menus.placeholder.title" ng-hide="currentMenu.title" ng-class="{'text-error' : menuInvalid, 'simple-property-placeholder' : !menuInvalid}">e. g. main courses*</span>
-						{{currentMenu.title}} <i class="icon-edit icon-black"></i></h5>
+					<h4 class="edit" tooltip="menus.editor.title.tooltip">
+						<span l="menus.placeholder.title" ng-hide="currentMenu.title" ng-class="{'text-error' : menuInvalid, 'simple-property-placeholder' : !menuInvalid}">Title*</span>
+						{{currentMenu.title}} <i class="icon-edit icon-black"></i></h4>
 					</div>					
 					<div simple-property-editor editor-title="menu.editor.description" editor-property="currentMenu.description" editor-type="textarea" editor-placeholder="menus.placeholder.description" editor-on-save="saveMenu()">
 			    		<p class="edit" tooltip="menus.editor.description.tooltip">
@@ -288,10 +288,10 @@
 		    	
 		    	<div class="data-container-block">
 		    		<div simple-property-editor editor-title="product.editor.name" editor-property="currentProduct.name" editor-on-save="saveProduct()" editor-required editor-placeholder="product.placeholder.name">
-			    		<h5 class="edit" tooltip="product.editor.name.tooltip">
+			    		<h4 class="edit" tooltip="product.editor.name.tooltip">
 			    			<span l="product.placeholder.name" ng-hide="currentProduct.name" ng-class="{'text-error' : productInvalid, 'simple-property-placeholder' : !productInvalid}">Name*</span>
 			    			{{currentProduct.name}} <i class="icon-edit icon-black"></i>
-			    		</h5>
+			    		</h4>
 			    	</div>
 			    	<div simple-property-editor editor-title="product.editor.shortDesc" editor-property="currentProduct.shortDesc" editor-on-save="saveProduct()" editor-type="textarea" editor-placeholder="product.placeholder.shortDesc">
 			    		<p class="edit" tooltip="product.editor.shortDesc.tooltip">
@@ -437,10 +437,10 @@
 	    		<h4 class="data-container-title" l="choice.container.title">Choice edit</h4>    		
 		    	<div class="data-container-block">
 		    		<div simple-property-editor editor-title="choice.editor.text" editor-property="currentChoice.text" editor-on-save="saveChoice()" editor-placeholder="choice.placeholder.text" editor-required>
-		    		<h5 class="edit" tooltip="choice.editor.text.tooltip">
+		    		<h4 class="edit" tooltip="choice.editor.text.tooltip">
 		    			<span l="choice.placeholder.text" ng-hide="currentChoice.text" ng-class="{'text-error' : choiceInvalid, 'simple-property-placeholder' : !choiceInvalid}">Choice text*</span>
 		    			{{currentChoice.text}} <i class="icon-edit icon-black"></i>
-		    		</h5>
+		    		</h4>
 		    		</div>
 			    	<div simple-property-editor editor-type="number" editor-title="choice.editor.maxOccurence" editor-property="currentChoice.maxOccurence" editor-on-save="saveChoice()" editor-required editor-validate="value >= currentChoice.minOccurence || value == 0" editor-validate-text="choice.editor.maxOccurence.error">
 			    		<p class="edit" tooltip="choice.editor.maxOccurence.tooltip"><span l="menus.choices.field.maxOccurence">Guest has to chose max: {{currentChoice.maxOccurence}}</span> <i class="icon-edit icon-black"></i></p>

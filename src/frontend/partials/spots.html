@@ -72,9 +72,9 @@
 					<!-- <div class=" common-wrapper common-wrapper-detail-list" > -->
 
 						<div simple-property-editor editor-title="areas.editor.name" editor-property="currentArea.name" editor-on-save="saveArea()" editor-max-length="20" editor-required editor-placeholder="areas.placeholder.name">
-							<h5 class="edit" tooltip="areas.editor.name.tooltip">
+							<h4 class="edit" tooltip="areas.editor.name.tooltip">
 							<span l="areas.placeholder.name" ng-hide="currentArea.name" ng-class="{'text-error' : areaInvalid, 'simple-property-placeholder' : !areaInvalid}">e. g. Room service*</span>
-							{{currentArea.name}} <i class="icon-edit icon-black"></i></h5>
+							{{currentArea.name}} <i class="icon-edit icon-black"></i></h4>
 						</div>
 						<div simple-property-editor editor-title="areas.editor.description" editor-property="currentArea.description" editor-on-save="saveArea()" editor-type="textarea" editor-placeholder="areas.placeholder.description">
 							<p class="edit" tooltip="areas.editor.description.tooltip">
@@ -240,9 +240,9 @@
 				<h4 class="data-container-title" l="areas.spot.detail.title">Edit Spot</h4>
 				<div class="data-container-block">
 					<div simple-property-editor editor-title="spots.editor.name" editor-property="currentSpot.name" editor-on-save="saveSpot()" editor-required editor-max-length="20">
-						<h5 class="edit" tooltip="spots.editor.name.tooltip">
+						<h4 class="edit" tooltip="spots.editor.name.tooltip">
 						<span l="areas.placeholder.name" ng-hide="currentSpot.name" ng-class="{'text-error' : spotInvalid, 'simple-property-placeholder' : !spotInvalid}">Name *</span>
-						{{currentSpot.name}} <i class="icon-edit icon-black"></i></h5>
+						{{currentSpot.name}} <i class="icon-edit icon-black"></i></h4>
 					</div>
 					<div ng-show="spotInvalid" class="text-error">
 		    		<span l="validation.field.required">* Please fill out all required fields.</span>
