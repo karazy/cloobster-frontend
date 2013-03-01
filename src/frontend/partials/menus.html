@@ -13,9 +13,13 @@
 		<div class="row-fluid">
 			<div class="data-container-with-title span3">
 				<h4 class="data-container-title" l="menus.list.title">Categories</h4>
-				<div class="data-container-block data-container-seperator">
+				<div class="data-container-block data-container-seperator">					
 					<div class="row-fluid">
-	    				<button class="btn btn-primary span6" ng-click="createMenu()"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
+						<div class="input-append">
+    						<input l="menus.new.placeholder" class="span6" l-attribute="placeholder" type="text" placeholder="new category title" ng-model="newCategoryTitle">
+    						<button class="btn btn-primary" ng-disabled="!newCategoryTitle" ng-click="createMenu(newCategoryTitle)"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
+						</div>
+	    				<!-- <button class="btn btn-primary span6" ng-click="createMenu()"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button> -->
 	    			</div>
 	    		</div>
 				<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable" id="menuList">

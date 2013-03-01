@@ -184,7 +184,7 @@ ul.payment-method-list li {
 /* data container start */
 .data-container-floating { 
   border: 1px solid gray; 
-  border-radius: 0.5em;
+  border-radius: 3px;
   position: fixed;
   top: 75px;
   right: 50px;
@@ -196,7 +196,7 @@ ul.payment-method-list li {
 
 .data-container-with-title { 
   border: 1px solid gray; 
-  border-radius: 0.5em;
+  border-radius: 3px;
   margin: 15px 0 10px 0;
   position: relative;
   padding-top: 15px;

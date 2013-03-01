@@ -240,17 +240,21 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 		
 	};
 
-	$scope.createMenu = function() {
+	$scope.createMenu = function(title) {
 		$scope.currentMenu = new $scope.menusResource(defaultMenu);
 
-		// $scope.currentChoice = null;
-		// $scope.allChoices = null;
-		// $scope.allProducts = null;
-		// $scope.currentProduct = null;
-		manageViewHiearchy("menu");
+		//if title is given directly set and save it
+		if(title) {
+			$scope.currentMenu.title = title;
+			$scope.saveMenu();
+			//reset title
+			$scope.newCategoryTitle = null;
+		}
 
 		$scope.products = new Array();
 		$scope.choices = new Array();
+
+		manageViewHiearchy("menu");
 	};
 
 	$scope.updateMenuOrder = function(event, ui) {
