@@ -903,7 +903,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"menus.list.allproducts.description" : {
 			"DE" :  "<p>Liste aller Produkte. Die Liste kann gefiltert und es können Massenoperationen auf Produkten angewandt werden.</p>",
-			"EN" : ""
+			"EN" : "<p>List of all products. The list can be filtered and mass operations can be executed on products.</p>"
 		},
 		"menus.list.allproducts.help" : {
 			"DE" :  "<i class='icon-ok icon-black'></i> Produkt aktiv<br/>"+
@@ -912,7 +912,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 					"<i class='icon-star-empty icon-black'></i> Produkt nicht Spezial<br/>"+
 					"<i class='icon-eye-open icon-black'></i> Produkt wird auf App Dashboard angezeigt<br/>"+
 					"<i class='icon-eye-close icon-black'></i> Produkt wird auf App Dashboard verborgen",
-			"EN" : ""
+			"EN" : "<i class='icon-ok icon-black'></i> Product active<br/>"+
+					"<i class='icon-ban-circle icon-black'></i> Product inactive<br/>"+
+					"<i class='icon-star icon-black'></i> Produkt is special<br/>"+
+					"<i class='icon-star-empty icon-black'></i> Product is NOT sepcial<br/>"+
+					"<i class='icon-eye-open icon-black'></i> Product can be displayed on app dashboard<br/>"+
+					"<i class='icon-eye-close icon-black'></i> Product will never be shown on app dashboard"
 		},
 		"products.filter.active.tooltip" : {
 			"DE" :  "Inaktive Produkte anzeigen",
