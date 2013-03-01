@@ -2011,8 +2011,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		//report partial
 		"reports.description" : {
-			"DE" :  "Auswertung der wichtigsten Systemkennzahlen...",
-			"EN" : ""
+			"DE" :  "Hier können Sie die wichtigsten Kennzahlen (KPI) anschauen. Wählen Sie zunächst welche Kennzahl Sie anschauen möchten<br/>"+
+			"und anschließend den Zeitraum sowie den gewünschten Servicebereich.",
+			"EN" : "Here you'll find the most important performance figures (KPI). First select the KPI you want to see<br/>"+
+			"then define the date range and service area."
 		},
 		"reports.types.title" : {
 			"DE" :  "Reporttyp",
@@ -2021,6 +2023,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"reports.parameters.title" : {
 			"DE" :  "Report Parameter",
 			"EN" : "Report parameters"
+		},
+		"reports.parameters.empty.description" : {
+			"DE" :  "Konfigurieren Sie hier den Report. Bitte wählen Sie zunächst einen Reporttyp aus der Liste links.",
+			"EN" : "Configure the report. Please select a report type in the list on the left to proceed."
 		},
 		"reports.parameter.startdate" : {
 			"DE" :  "Startdatum",
@@ -2033,6 +2039,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"reports.report.title" : {
 			"DE" :  "Report",
 			"EN" : "Report"
+		},
+		"reports.report.empty.description" : {
+			"DE" :  "Hier wird der Report angezeigt. Bitte konfigurieren Sie zunächst die Reportparameter.",
+			"EN" : "Displays the report. Please configure the report parameters to proceed."
 		},
 		"reports.type.checkins" : {
 			"DE" :  "Anzahl Check-Ins",
@@ -2086,6 +2096,26 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Keine Datensätze gefunden im angegebenen Zeitraum.",
 			"EN" : "No results found for given date range."
 		},
+		"reports.action.export.dialog.title" : {
+			"DE" :  "Report exportieren",
+			"EN" : "Export report"
+		},
+		"reports.action.export.dialog.requested.title" : {
+			"DE" :  "Export wurde angestoßen",
+			"EN" : "Export has been requested"
+		},
+		"reports.action.export.dialog.text" : {
+			"DE" :  "Möchten Sie den Report als Excel Datei exportieren?",
+			"EN" : "Do you want to export the selected data to an Excel file?"
+		},
+		"reports.action.export.dialog.complete" : {
+			"DE" :  "Der Export wird verarbeitet und wird im Tab Dokumente bereitgestellt.",
+			"EN" : "Your request is being processed and the file will be available under Documents soon."
+		},
+		"reports.report.documents.open" : {
+			"DE" :  "Dokumente öffnen",
+			"EN" : "Go to documents"
+		},
 		//general
 		"common.warning.title" : {
 			"DE" : "Achtung!",
@@ -2106,6 +2136,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.cancel" : {
 			"DE" : "Abbrechen",
 			"EN" : "Cancel"
+		},
+		"common.close" : {
+			"DE" :  "Schliessen",
+			"EN" : "Close"
 		},
 		"common.add" : {
 			"DE" : "Hinzufügen",

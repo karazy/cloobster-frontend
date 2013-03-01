@@ -57,12 +57,12 @@
 						</div>
 						<div class="modal-body">
 				    	<p l="reports.action.export.dialog.text" ng-hide="exportRequested">Do you want to export the selected data to an Excel file?</p>
-				    	<p l="reports.action.export.dialog.export-complete" ng-show="exportRequested">Your request is being processed and the file will be available under Documents soon.</p>
+				    	<p l="reports.action.export.dialog.complete" ng-show="exportRequested">Your request is being processed and the file will be available under Documents soon.</p>
 				    	<p class="text-error" l="reports.report.noresult" ng-show="exportError && reportData == 'noresult'">No results found</p>
 					  </div>
 					  <div class="modal-footer" >
-				  		<button type="button" ng-show="exportError || exportRequested" class="btn" data-dismiss="modal" ng-click="exportRequested=false" l="common.ok">Okay</button>
-				    	<button type="button" class="btn btn-primary" ng-click="gotoDocuments()" ng-show="exportRequested" l="nav.documents" data-dismiss="modal">Open Documents</button>
+				  		<button type="button" ng-show="exportError || exportRequested" class="btn" data-dismiss="modal" ng-click="exportRequested=false" l="common.close">Okay</button>
+				    	<button type="button" class="btn btn-primary" ng-click="gotoDocuments()" ng-show="exportRequested" l="reports.report.documents.open" data-dismiss="modal">Open Documents</button>
 				  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel" ng-hide="exportRequested || exportError">Cancel</button>
 				    	<button type="button" class="btn btn-primary" ng-click="generateReport()" l="reports.action.export.xls" ng-hide="exportRequested || exportError">Generate</button>
 						</div>
@@ -129,13 +129,3 @@
 		</div>
 	</div>
 </div>
-
-<!-- areaId: 522
-areaName: "Restaurant"
-count: 1
-date: 1361816282791
-id: "486:522:DAY:2013-02-25:orders-placed"
-kpi: "orders-placed"
-locationId: 486
-locationName: "Cloobster Club"
-periodType: "DAY" -->
