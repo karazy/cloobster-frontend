@@ -57,12 +57,12 @@
 						</div>
 						<div class="modal-body">
 				    	<p l="reports.action.export.dialog.text" ng-hide="exportRequested">Do you want to export the selected data to an Excel file?</p>
-				    	<p l="reports.action.export.dialog.export-complete" ng-show="exportRequested">Your request is being processed and the file will be available under Documents soon.</p>
+				    	<p l="reports.action.export.dialog.complete" ng-show="exportRequested">Your request is being processed and the file will be available under Documents soon.</p>
 				    	<p class="text-error" l="reports.report.noresult" ng-show="exportError && reportData == 'noresult'">No results found</p>
 					  </div>
 					  <div class="modal-footer" >
-				  		<button type="button" ng-show="exportError || exportRequested" class="btn" data-dismiss="modal" ng-click="exportRequested=false" l="common.ok">Okay</button>
-				    	<button type="button" class="btn btn-primary" ng-click="gotoDocuments()" ng-show="exportRequested" l="nav.documents" data-dismiss="modal">Open Documents</button>
+				  		<button type="button" ng-show="exportError || exportRequested" class="btn" data-dismiss="modal" ng-click="exportRequested=false" l="common.close">Okay</button>
+				    	<button type="button" class="btn btn-primary" ng-click="gotoDocuments()" ng-show="exportRequested" l="reports.report.documents.open" data-dismiss="modal">Open Documents</button>
 				  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel" ng-hide="exportRequested || exportError">Cancel</button>
 				    	<button type="button" class="btn btn-primary" ng-click="generateReport()" l="reports.action.export.xls" ng-hide="exportRequested || exportError">Generate</button>
 						</div>
@@ -78,32 +78,30 @@
 			</div>
 			<!-- report -->
 			<div class="row-fluid data-container-with-title" ng-show="currentReport && reportData && reportData != 'noresult'">
-				<h4 class="data-container-title" l="reports.report.title">Report</h4>
-				<!-- report data -->
+				<h4 class="data-container-title" l="reports.report.title" ng-show="!currentReportParameters">Report</h4>
+				<h4 class="data-container-title" l="reports.report.title.params" ng-show="currentReportParameters">Report</h4>
 				<div class="span4">
-					<div class="">
-						<div class="data-container-block data-container-scrollable" style="max-height: 500px;">
-							<table class="table table-striped">
-								<thead>
-			  						<tr>
-			  							<th l="reports.report.servicearea">Service Area</th>
-			  							<th l="reports.report.count">Number</th>
-			  							<th l="reports.report.day">Day</th>
-			  							<th l="reports.report.month">Month</th>
-			  							<th l="reports.report.year">Year</th>
-			  						</tr>
-		  						</thead>
-		  						<tbody>
-			  						<tr ng-repeat="data in reportData">
-			  							<td>{{data.areaName}}</td>
-			  							<td>{{data.count}}</td>
-			  							<td>{{data.date | date:'dd'}}</td>
-			  							<td>{{data.date | date:'M'}}</td>
-			  							<td>{{data.date | date:'yyyy'}}</td>
-			  						</tr>			  						
-			  					</tbody>
-							</table>
-						</div>
+					<div class="data-container-block data-container-scrollable" style="max-height: 500px;">
+						<table class="table table-striped">
+							<thead>
+		  						<tr>
+		  							<th l="reports.report.servicearea">Service Area</th>
+		  							<th l="reports.report.count">Number</th>
+		  							<th l="reports.report.day">Day</th>
+		  							<th l="reports.report.month">Month</th>
+		  							<th l="reports.report.year">Year</th>
+		  						</tr>
+	  						</thead>
+	  						<tbody>
+		  						<tr ng-repeat="data in reportData">
+		  							<td>{{data.areaName}}</td>
+		  							<td>{{data.count}}</td>
+		  							<td>{{data.date | date:'dd'}}</td>
+		  							<td>{{data.date | date:'M'}}</td>
+		  							<td>{{data.date | date:'yyyy'}}</td>
+		  						</tr>			  						
+		  					</tbody>
+						</table>
 					</div>
 				</div>
 				<!-- report chart -->
@@ -129,13 +127,3 @@
 		</div>
 	</div>
 </div>
-
-<!-- areaId: 522
-areaName: "Restaurant"
-count: 1
-date: 1361816282791
-id: "486:522:DAY:2013-02-25:orders-placed"
-kpi: "orders-placed"
-locationId: 486
-locationName: "Cloobster Club"
-periodType: "DAY" -->

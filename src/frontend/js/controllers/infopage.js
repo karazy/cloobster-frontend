@@ -95,7 +95,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 			if(!languageCode) {
 				updateSelectedInfoPage(data);
 			}
-		},	handleError);	
+		},	handleError);
 	}
 
 	/**
