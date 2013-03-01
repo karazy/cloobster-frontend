@@ -240,7 +240,9 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
   	 		options,
 		  	chart,
 		  	dateRows,
-		  	tempDate;
+		  	tempDate,
+		  	minDate,
+		  	maxDate;
 
           data.addColumn('date', 'Date');
 
@@ -263,11 +265,11 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		  //for each report entity
           angular.forEach($scope.reportData, function(report, index) {
           	tempDate = $filter('date')(new Date(report.date), $scope.dateFormat);
-          	$log.log('Reports.visualize: tempate='+tempDate);
+          	// $log.log('Reports.visualize: tempate='+tempDate);
           	//and for each date row
           	angular.forEach(dateRows, function(row, index) {
           		var tmpDate2 = $filter('date')(row[0], $scope.dateFormat);
-          		$log.log('Reports.visualize: tmpDate2='+tmpDate2);
+          		// $log.log('Reports.visualize: tmpDate2='+tmpDate2);
           		//add the reports counter value to this row if the dates match
           		if(tmpDate2 == tempDate) {
           			if($scope.currentArea) {
@@ -289,9 +291,22 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
           //add all rows
           data.addRows(dateRows);
 
+        //calculate min max date boundaries, otherwise on colum charts some records are not visible
+      	minDate = new Date($scope.fromDate.getTime()),
+        maxDate = new Date($scope.toDate.getTime());
+		minDate.setDate(minDate.getDate() - 1);
+		maxDate.setDate(maxDate.getDate() + 1);
+
         options = {
           title: $scope.currentReport.title,
-          hAxis: {title: langService.translate("reports.chart.haxis")}
+          hAxis: {
+          	title: langService.translate("reports.chart.haxis"),
+          	viewWindowMode:'explicit',
+            viewWindow:{
+                max: maxDate,
+                min: minDate
+            }
+          }
         };
         //switch between line and column charts
         if(dateRows.length <= 8 || $scope.reportData.length < 8) {
