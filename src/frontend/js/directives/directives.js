@@ -741,6 +741,7 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','$timeout', fun
 		        	}, {
 		        		//config
 		        		resize_enabled: false,
+		        		forcePasteAsPlainText: true,
 		        		toolbar: [
 							// { name: 'document', items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
 							{ name: 'clipboard', items : [ 'Undo','Redo' ] },
