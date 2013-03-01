@@ -1166,8 +1166,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Delete <strong>{{currentProduct.name}}</strong>? This cannot be undone!"
 		},
 		"product.choices.container.title" : {
-			"DE" : "Optionen zum Produkt",
-			"EN" : "Product options"
+			"DE" : "Auswahl zu diesem Produkt",
+			"EN" : "Choices for this product"
 		},
 		"menus.choices.list.new" : {
 			"DE" : "Neu.",
@@ -1210,16 +1210,16 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "To view category details, please select a category from the list or add a new category."
 		},
 		"choice.container.title" :{
-			"DE" : "Option editieren",
-			"EN" : "Edit option"
+			"DE" : "Auswahl editieren",
+			"EN" : "Edit choice"
 		},
 		"menus.options.title" : {
 			"DE" : "Optionen",
 			"EN" : "Options"
 		},
 		"option.configuration.container.title" : {
-			"DE" : "Konfigurationen zur Option",
-			"EN" : "Configure options"
+			"DE" : "Optionen",
+			"EN" : "Options"
 		},
 		"menus.options.list.new" : {
 			"DE" : "Neue Option...",
@@ -1258,12 +1258,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "To view product details, please select a product from the list or add a new product."
 		},		
 		"choice.editor.text" : {
-			"DE" : "Auswahltext",
+			"DE" : "Auswahlname",
 			"EN" : "Choice text"
 		},
 		"choice.placeholder.text" : {
-			"DE" :  "Auswahltext *",
-			"EN" : "Choice text *"
+			"DE" :  "Auswahlname *",
+			"EN" : "Choice name *"
 		},
 		"choice.editor.maxOccurence" : {
 			"DE" : "Maximale Auswahl von Optionen",
@@ -1286,12 +1286,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Amount of options included"
 		},
 		"menus.choices.field.maxOccurence" : {
-			"DE" : "Gast muss max. auswählen {{currentChoice.maxOccurence}}",
-			"EN" : "Guest has to choose max. {{currentChoice.maxOccurence}}"
+			"DE" : "Gast kann max {{currentChoice.maxOccurence}} Option(en) auswählen",
+			"EN" : "Guest can choose max {{currentChoice.maxOccurence}} option(s)"
 		},
 		"menus.choices.field.minOccurence" : {
-			"DE" : "Gast muss min auswählen {{currentChoice.minOccurence}}",
-			"EN" : "Guest has to choose at min. {{currentChoice.minOccurence}}"
+			"DE" : "Gast muss min {{currentChoice.minOccurence}} Option(en) auswählen",
+			"EN" : "Guest has to choose min {{currentChoice.minOccurence}} option(s)"
 		},
 		"menus.choices.field.included" : {
 			"DE" : "Optionen inklusive: {{currentChoice.included}}",
@@ -1322,8 +1322,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "<strong>{{currentChoice.text}}</strong>  will be removed from this product."
 		},
 		"choice.editor.text.tooltip" : {
-			"DE" : "Auswahltext editieren",
-			"EN" : "Edit choice text"
+			"DE" : "Auswahlname editieren",
+			"EN" : "Edit choice name"
 		},
 		"choice.editor.price.tooltip" : {
 			"DE" : "Preis editieren",
@@ -1374,8 +1374,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "My option"
 		},
 		"menus.choices.field.overridePrice.label" : {
-			"DE" : "Preis pro Auswahlmöglichkeit",
-			"EN" : "Price per choice"
+			"DE" : "Preis pro Option",
+			"EN" : "Price per option"
 		},
 		"menus.choices.field.overridePrice.none" : {
 			"DE" : "Individueller Preis",
