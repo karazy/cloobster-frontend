@@ -29,7 +29,7 @@
 	    		</div>
 				<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable">
 			        <li ng-repeat="page in infopages | filter:infopagesQuery | orderBy:['title'] " ng-class="{active: currentInfoPage.id == page.id}">
-			        	<a ng-click="loadInfoPage(page)">{{page.title}} <i class="icon-eye-close" ng-show="page.hideInDashboard"></i></a>
+			        	<a ng-click="selectInfoPage(page)">{{page.title}} <i class="icon-eye-close" ng-show="page.hideInDashboard"></i></a>
 			        </li>
 			    </ul>
 			</div>
@@ -66,7 +66,7 @@
 					  <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="border: 1px solid orange;">{{currentLanguage.lang}}<span ng-hide="currentLanguage" l="common.default.language">default language</span><b class="caret"></b></a>
 					  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 					  	<li>
-					  		<a l="common.default.language" ng-click="switchLanguage2(null)">default language</a>
+					  		<a l="common.default.language" ng-click="switchLanguage(null)">default language</a>
 					  	</li>
 					    <li ng-repeat="lang in langcodes | filter:isSelectedLanguage" ng-class="{active: currentInfoPage.id == page.id}">
 			        		<a ng-click="switchLanguage(lang)">{{lang.lang}}</a>

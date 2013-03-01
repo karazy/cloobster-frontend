@@ -65,23 +65,36 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	
 	}
 
+	function updateSelectedInfoPage (newData) {
+		if($scope.selectedInfoPage && newData) {
+			angular.extend($scope.selectedInfoPage, newData);
+		}
+	}
+
+	$scope.selectInfoPage = function(page) {
+		$scope.selectedInfoPage = page;
+		$scope.currentInfoPage = page;
+
+		$scope.currentLanguage = null;
+	};
+
 	/**
 	* Load given infopage in needed language from server and store it in $scope.currentInfoPage
 	*/
-	$scope.loadInfoPage =  function(page) {
+	$scope.loadInfoPage =  function(page, languageCode) {
 		var params = {'id': page.id};
-
 		
-		if($scope.currentLanguage) {
-			params.lang = $scope.currentLanguage.code;
+		if(languageCode) {
+			params.lang = languageCode;
 		}
-		//hold a reference to the selected item, because of language we load it from server again
-		$scope.selectedInfoPage = page;
 
 		// This will blank the current info page leading to a flickering of the screen.
 		// To only display the new data after loading set the currentInfoPage in the success callback.
-		$scope.currentInfoPage = $scope.infoPageResource.get(params, function() {
-			$scope.imageResource = InfoPage.buildImageResource(activeBusinessId, page.id);	
+		$scope.currentInfoPage = $scope.infoPageResource.get(params, function(data) {
+			$scope.imageResource = InfoPage.buildImageResource(activeBusinessId, page.id);
+			if(!languageCode) {
+				updateSelectedInfoPage(data);
+			}
 		},	handleError);	
 	}
 
@@ -96,10 +109,20 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		$log.log("save infopage");
 
 		if($scope.currentInfoPage && $scope.currentInfoPage.id) {
-			$scope.currentInfoPage.$update(null, null, handleError);	
+			if($scope.currentLanguage) {
+				$scope.currentInfoPage.$update(null, null, handleError);
+			}
+			else {
+				// use callback here to update the infopage in the list because we updated the default language
+				$scope.currentInfoPage.$update(updateSuccess, handleError);	
+			}
 		} else {
 			$scope.currentInfoPage.$save(saveSuccess, handleError);
 		}
+
+		function updateSuccess(infopage) {
+			updateSelectedInfoPage(infopage);
+		};
 
 		function saveSuccess(infopage) {
 			$scope.infopages.push(infopage);
@@ -145,15 +168,16 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	};
 
 	$scope.switchLanguage = function(lang) {
-		$scope.currentLanguage = lang;
-
-		if($scope.currentLanguage) {
-			$http.defaults.headers.common['Content-Language'] = $scope.currentLanguage.code;	
+		
+		if(lang) {
+			$http.defaults.headers.common['Content-Language'] = lang.code;	
 			//$scope.loadInfoPages(activeBusinessId, $scope.currentLanguage.code);
 			if($scope.currentInfoPage) {
-				$scope.loadInfoPage($scope.currentInfoPage, $scope.currentLanguage.code);
+				$scope.loadInfoPage($scope.currentInfoPage, lang.code);
 			}
+			$scope.currentLanguage = lang;
 		} else {
+			$scope.currentLanguage = null;
 			delete $http.defaults.headers.common['Content-Language'];
 			//$scope.loadInfoPages(activeBusinessId);
 			if($scope.currentInfoPage) {
@@ -198,10 +222,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 
 		//due to currentInfoPage not related to the original infopage because of languages in the list
 		//we have to reflect the change in the list by explicitly setting it
-		if($scope.selectedInfoPage) {
-			$scope.selectedInfoPage.hideInDashboard = objectToToggle.hideInDashboard;
-		}
-
+		updateSelectedInfoPage(objectToToggle);
 		$scope.saveInfoPage();
 	}
 
