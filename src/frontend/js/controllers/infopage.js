@@ -76,6 +76,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		$scope.currentInfoPage = page;
 
 		$scope.currentLanguage = null;
+		$scope.imageResource = InfoPage.buildImageResource(activeBusinessId, page.id);
 	};
 
 	/**
