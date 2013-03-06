@@ -330,15 +330,15 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log',func
 						'</div>'+
 						'<div class="modal-footer" style="clear:both;">'+
 							//image delete button, hide when no delete function is provided, file is uploading, no image exists or selection is active!
-							'<button class="btn" type="button" ng-click="deleteImage()" ng-hide="selectionActive || fileUploading || !imageUrl || !deleteImage"><i class="icon-trash icon-black"></i></button>'+
+							'<button class="btn" type="button" ng-click="deleteImage()" ng-hide="selectionActive || fileUploading || fileSaving || !imageUrl || !deleteImage"><i class="icon-trash icon-black"></i></button>'+
 							'<button type="button" class="btn" ng-click="cancel()" data-dismiss="modal" l="common.cancel">Close</button>'+
-						 	'<span class="btn btn-success fileinput-button" style="float: none;" ng-hide="selectionActive || fileUploading">'+
+						 	'<span class="btn btn-success fileinput-button" style="float: none;" ng-hide="selectionActive || fileUploading || fileSaving">'+
 						 		'<i class="icon-plus icon-white"></i>'+
             					'<span l="fileupload.button.add">Add image...</span>'+
 						 		'<input type="file" name="files[]" accept="image/jpeg,image/png,image/gif"></input>'+
 						 		'<input type="hidden" value="{{editorImageId}}">'+
 					 		'</span>'+
-							'<button type="button" class="btn btn-primary" ng-click="crop()" ng-show="selectionActive" ng-disabled="fileCropping" l="fileupload.button.crop">Crop image</button>'+
+							'<button type="button" class="btn btn-primary" ng-click="crop()" ng-show="selectionActive" ng-disabled="fileCropping || fileSaving" l="fileupload.button.crop">Crop image</button>'+
 						'</div>'+
 					'</form>'+
 				'</div>';
