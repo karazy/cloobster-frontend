@@ -745,6 +745,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Eine E-Mail wird versendet, wenn Probleme mit dem Cockpit auftreten. Dazu gehören Verbindungsabbrüche oder unbeabsichtigtes schliessen des Cockpits.",
 			"EN" : "The system will send an e-mail, if it detects a connection problem or the client was closed accidently and is offline for more than 30 minutes."
 		},
+		"business.detail.cockpitsettings.inactivecheckinnotification" : {
+			"DE" : "Bei inaktiven CheckIns benachrichtigen",
+			"EN" : "CheckIn Inactivity Notification"
+		},
+		"business.detail.cockpitsettings.inactivecheckinnotification.description" : {
+			"DE" : "Offene Cockpits werden benachrichtigt, falls es CheckIns gibt die über 24 Stunden inaktiv waren.",
+			"EN" : "The system will notify open cockpits, if there have been checkins inactive for over 24 hours."
+		},
 		//profile partial
 		"profile.title" : {
 			"DE" : "Profil",
