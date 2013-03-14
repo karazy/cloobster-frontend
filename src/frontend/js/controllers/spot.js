@@ -60,6 +60,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 	$scope.currentAreaCategories = null;
 	/** Active Subscription. Used to check for basis mode. */
 	$scope.activeSubscription = null;
+	/** Has the user requested Spot PDF generation? */
+	$scope.generatePDFRequested = false;
 
 	//Drag&Drop for menus assignment
 	jQuery( "#assignedMenusList, #allMenusList" ).sortable({
@@ -552,8 +554,20 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 
 		docResource = new $scope.documentsResource(newDocument);
 
-		docResource.$save();
+		docResource.$save(function() {
+			$scope.generatePDFRequested = true;
+		}, handleError);
 	}
+
+	/**
+	* Switch to Documents partial.
+	*/
+	$scope.gotoDocuments = function() {
+		$scope.generatePDFRequested = false;
+		$location.url('/businesses/'+activeBusinessId+'/documents');
+	};
+
+
 
 	//end spots
 

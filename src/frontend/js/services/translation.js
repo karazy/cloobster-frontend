@@ -1663,6 +1663,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Inaktiv setzen",
 			"EN" :  "Make inactive"
 		},
+		"spots.action.generatepdf.requested" : {
+			"DE" :  "PDF-Datei generieren - Gestartet",
+			"EN" :  "Generate PDF file - Requested"
+		},
 		"spots.action.generatepdf" : {
 			"DE" :  "PDF-Datei generieren",
 			"EN" :  "Generate PDF file"
@@ -2408,8 +2412,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"error.general" : {
 			"DE" : "Es gibt ein Problem mit der Verbindung zum Service.",
-			"EN" : "There has been connection problem."
+			"EN" : "There has been a connection problem."
 		},
+		"error.appengine" : {
+	   "DE" : "Es liegt eine Serverstörung vor. Wir arbeiten an einer Lösung.",
+     "EN" : "The service has been temporarily interrupted. We are working on a solution."
+     },
 		"common.error.footer" : {
 			"DE" : "Falls dieser Fehler weiterhin besteht, konktaktieren sie <a href='mailto:support@cloobster.com'>support@cloobster.com</a>.",
 			"EN" : "If this error persists, contact <a href='mailto:support@cloobster.com'>support@cloobster.com</a>."
