@@ -92,6 +92,15 @@
         		</div>
 			</div>
 		</div>
+		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyPhone.$dirty, registrationForm.companyPhone.$invalid)">
+			<label for="companyPhone" l="registration.form.businessphone">Company phone*</label>
+			<div class="controls">
+				<input id="companyPhone" name='companyPhone' type='text' ng-model="account.company.phone" placeholder="phone" l-attribute="placeholder" l="registration.form.businessphone.placeholder" required>
+				<div class="help-inline" ng-show="registrationForm.companyPhone.$dirty && registrationForm.companyPhone.$invalid">
+      		<span ng-show="registrationForm.companyPhone.$error.required" l="registration.form.phone.phone.required">Provide a phone number, so we can call you back.</span>
+  			</div>
+    	</div>
+		</div>
 		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyAddress.$dirty, registrationForm.companyAddress.$invalid)">
 			<label class="control-label" for="companyAddress" l="registration.form.address">Address</label>
 			<div class="controls">
@@ -119,8 +128,7 @@
         		</div>
 			</div>
 		</div>		
-		<label for="companyPhone" l="registration.form.businessphone">Business phone</label>
-		<input id="companyPhone" name='company_phone' type='text' ng-model="account.company.phone" placeholder="(optional) phone" l-attribute="placeholder" l="registration.form.businessphone.placeholder">
+		
 		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyCountry.$dirty, registrationForm.companyCountry.$invalid)">
 			<label for="companyCountry" l="registration.form.country" >Country*</label>
 			<div class="controls">
@@ -133,7 +141,6 @@
 	    	</div>
     	</div>
         </fieldset>
-        </div>
         <div class='row-fluid'>
         	<p l="registration.form.requiredfield">* marks required fields</p>
         </div>

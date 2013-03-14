@@ -193,8 +193,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Please enter zip code."
 		},
 		"registration.form.businessphone" : {
-			"DE" : "Telefon geschäftlich",
-			"EN" : "Phone (business)"
+			"DE" : "Telefon geschäftlich *",
+			"EN" : "Phone (business) *"
 		},
 		"registration.form.country" : {
 			"DE" : "Land",
@@ -269,8 +269,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Log in to Facebook and link with cloobster."
 		},
 		"registration.form.account.label" : {
-			"DE" : "Meine Benutzerkontodaten",
-			"EN" : "My account data"
+			"DE" : "Meine Benutzerdaten",
+			"EN" : "My data"
 		},
 		"registration.form.action.reset" : {
 			"DE" : "Zurücksetzen",
