@@ -70,7 +70,7 @@
 					<input name='passwordRepeat' id="passwordRepeat" type='password' ng-model="passwordRepeat" required ng-change="matchPasswords()" placeholder="repeat your password" l-attribute="placeholder" l="registration.form.passwordrepeat.placeholder">
 					<div class="help-inline" ng-show="registrationForm.passwordRepeat.$dirty && registrationForm.passwordRepeat.$invalid">
 		          		<span ng-show="registrationForm.passwordRepeat.$error.match" l="registration.form.passwordrepeat.error.match">Passwords don't match.</span>
-	        		</div>
+      		</div>
 				</div>
 			</div>
 			<div class="control-group" ng-class="getFieldInputClass(registrationForm.phone.$dirty, registrationForm.phone.$invalid)">
@@ -81,15 +81,15 @@
 	        	</div>
 	        </div>
 		</fieldset>
-		<fieldset class='span4'>
+		<fieldset class='span8'>
 		<h2 class="help-block" l="registration.form.company.label">Your company data.</h2>
 		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyName.$dirty, registrationForm.companyName.$invalid)">
 			<label class="control-label" for="companyName" l="registration.form.company">Company*</label>
 			<div class="controls">
 				<input name='companyName' id="companyName" type='text' ng-model="account.company.name" required placeholder="company name" l-attribute="placeholder" l="registration.form.company.placeholder">				
 				<div class="help-inline" ng-show="registrationForm.companyName.$dirty && registrationForm.companyName.$invalid">
-	          		<span ng-show="registrationForm.companyName.$error.required" l="registration.form.company.error.required">Provide a company.</span>
-        		</div>
+      		<span ng-show="registrationForm.companyName.$error.required" l="registration.form.company.error.required">Provide a company.</span>
+    		</div>
 			</div>
 		</div>
 		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyPhone.$dirty, registrationForm.companyPhone.$invalid)">
@@ -115,8 +115,8 @@
 			<div class="controls">
 				<input name='companyPostcode' id="companyPostcode" type='text' ng-model="account.company.postcode" placeholder="postcode" l-attribute="placeholder" l="registration.form.postcode.placeholder" >
 				<div class="help-inline" ng-show="registrationForm.companyPostcode.$dirty && registrationForm.companyPostcode.$invalid">
-	          		<span ng-show="registrationForm.companyPostcode.$error.required" l="registration.form.postcode.error.required">Provide a postcode.</span>
-        		</div>
+	    		<span ng-show="registrationForm.companyPostcode.$error.required" l="registration.form.postcode.error.required">Provide a postcode.</span>
+    		</div>
 			</div>
 		</div>	
 		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyCity.$dirty, registrationForm.companyCity.$invalid)">
@@ -141,6 +141,7 @@
 	    	</div>
     	</div>
         </fieldset>
+      </div>
         <div class='row-fluid'>
         	<p l="registration.form.requiredfield">* marks required fields</p>
         </div>

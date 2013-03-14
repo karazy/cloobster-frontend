@@ -76,6 +76,7 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 		$scope.registrationForm.passwordRepeat.$dirty = true;
 		$scope.registrationForm.phone.$dirty = true;
 		$scope.registrationForm.companyName.$dirty = true;
+		$scope.registrationForm.companyPhone.$dirty = true;
 		$scope.registrationForm.acceptTerms.$dirty = true;
 
 
