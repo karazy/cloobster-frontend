@@ -146,7 +146,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"registration.form.passwordrepeat" : {
 			"DE" : "Passwort wiederholen*",
-			"EN" : "Repeast password*"
+			"EN" : "Repeat password*"
 		},
 		"registration.form.passwordrepeat.error.match" : {
 			"DE" : "Passwörter stimmen nicht überein.",
