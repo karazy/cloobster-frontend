@@ -24,9 +24,12 @@ CloobsterAdmin.module = angular.module('CloobsterAdmin', ['CloobsterAdmin.servic
     $routeProvider.otherwise({redirectTo: '/main'});
  }]);
 
-CloobsterAdmin.module.run(['$http', '$rootScope', function($http, $rootScope) {
+CloobsterAdmin.module.run(['$http', '$rootScope','$location', function($http, $rootScope, $location) {
   $http.get('/admin/user').success(function(response) {
     $rootScope.user = response;
+    if($rootScope.user.awesome == false) {
+      $location.url('/packages');
+    }
   });
 }]);
 
