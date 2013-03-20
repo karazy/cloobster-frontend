@@ -13,7 +13,11 @@
 				<h4 class="data-container-title" l="infopages.list.title">Infopages</h4>
 				<div class="data-container-block data-container-seperator">
 					<div class="row-fluid">
-	    				<button class="btn btn-primary span6" ng-click="createInfoPage()"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
+						<div class="input-append">
+						  <input  class="span8" id="newInfoPageTitle" type="text" l="infopage.placeholder.title" l-attribute="placeholder" ng-model="newInfoPageTitle">
+						  <button class="btn btn-primary" ng-click="createInfoPage()" ng-disabled="!newInfoPageTitle"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
+						</div>
+	    				
 	    			</div>
 	    			<form class="form-inline" style="margin: 7px 0;">
  						<div class="controls">

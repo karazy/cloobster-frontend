@@ -28,6 +28,8 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	$scope.activeBusiness = null;
 	/* The selected language in which to save data. */
 	$scope.currentLanguage = "";
+	/* The new InfoPage title */
+	$scope.newInfoPageTitle = "";
 	/** List of a languages. */
 	$scope.langcodes = langcodes;
 
@@ -103,8 +105,10 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	*
 	*/
 	$scope.createInfoPage = function() {
-		$scope.currentInfoPage = new $scope.infoPageResource();
-		$scope.currentInfoPage.type = 'STATIC';
+		if($scope.newInfoPageTitle) {
+			$scope.currentInfoPage = new $scope.infoPageResource({'title': $scope.newInfoPageTitle, 'type':'STATIC'});
+			$scope.saveInfoPage();
+		}
 	}
 
 	$scope.saveInfoPage = function() {
@@ -118,6 +122,11 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		}
 		else {
 			delete $http.defaults.headers.common['Content-Language'];
+		}
+
+		// Add http protocol prefix to url if none of http or https are present.
+		if($scope.currentInfoPage.hasOwnProperty('url') && $scope.currentInfoPage.url.lastIndexOf('http://', 0) != 0 && $scope.currentInfoPage.url.lastIndexOf('https://', 0) != 0) {
+			$scope.currentInfoPage.url = 'http://' + $scope.currentInfoPage.url;
 		}
 
 		if($scope.currentInfoPage && $scope.currentInfoPage.id) {
@@ -137,6 +146,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		};
 
 		function saveSuccess(infopage) {
+			$scope.newInfoPageTitle = '';
 			$scope.infopages.push(infopage);
 			$scope.selectedInfoPage = infopage;
 			$scope.imageResource = InfoPage.buildImageResource(activeBusinessId, infopage.id);
