@@ -1750,6 +1750,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Text bearbeiten",
 			"EN" :  "Edit text"
 		},
+		"infopage.url" : {
+			"DE" :  "Link bearbeiten",
+			"EN" :  "Edit link"
+		},
+		"infopage.url.validation" : {
+			"DE" :  "Bitte eine gültige Adresse eingeben (z.b. http://www.cloobster.com oder www.google.de).",
+			"EN" :  "Please enter a valid link (e.g. http://www.cloobster.com oder www.google.de)."
+		},
 		"infopages.dialog.delete.title" : {
 			"DE" :  "Info-Seite löschen",
 			"EN" :  "Delete info page"
@@ -1773,6 +1781,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"infopage.placeholder.html" : {
 			"DE" :  "Ausführliche Information",
 			"EN" :  "Long Text"
+		},
+		"infopage.placeholder.url" : {
+			"DE" :  "Externer Link",
+			"EN" :  "External Link"
 		},
 		"infopage.hideindashboard.true" : {
 			"DE" :  "Infoseite wird nie auf dem App Dashboard angezeigt",
