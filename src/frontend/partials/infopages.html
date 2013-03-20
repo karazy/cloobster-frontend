@@ -130,7 +130,7 @@
 						</p>
 					</div>
 					<div ng-show="currentInfoPage.type == 'LINK'">
-					<div simple-property-editor editor-title="infopage.url" editor-property="currentInfoPage.url" editor-on-save="saveInfoPage()" editor-placeholder="infopage.placeholder.url" editor-type="text" editor-pattern="/^(http\:\/\/|https\:\/\/)?([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z0-9][A-Za-z0-9\-]*$/" editor-pattern-text="infopage.url.validation">
+					<div simple-property-editor editor-title="infopage.url" editor-property="currentInfoPage.url" editor-on-save="saveInfoPage()" editor-placeholder="infopage.placeholder.url" editor-type="text">
 						<p class="edit" tooltip="infopage.url">
 							<span l="infopage.placeholder.url" ng-hide="currentInfoPage.url" class="simple-property-placeholder">External link url, e.g. http://cloobster.com/</span>{{currentInfoPage.url}} <i class="icon-edit icon-black"></i>
 						</p>
