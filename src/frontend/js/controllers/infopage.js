@@ -104,10 +104,14 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	*/
 	$scope.createInfoPage = function() {
 		$scope.currentInfoPage = new $scope.infoPageResource();
+		$scope.currentInfoPage.type = 'STATIC';
 	}
 
 	$scope.saveInfoPage = function() {
 		$log.log("save infopage");
+		if(!$scope.currentInfoPage) {
+			return;
+		}
 
 		if($scope.currentLanguage) {
 			$http.defaults.headers.common['Content-Language'] = $scope.currentLanguage.code;

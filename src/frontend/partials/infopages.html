@@ -29,7 +29,7 @@
 	    		</div>
 				<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable">
 			        <li ng-repeat="page in infopages | filter:infopagesQuery | orderBy:['title'] " ng-class="{active: currentInfoPage.id == page.id}">
-			        	<a ng-click="selectInfoPage(page)">{{page.title}} <i class="icon-eye-close" ng-show="page.hideInDashboard"></i></a>
+			        	<a ng-click="selectInfoPage(page)">{{page.title}} <i class="icon-eye-close" ng-show="page.hideInDashboard"></i> <i class="icon-globe" ng-show="page.type=='LINK'"></i></a>
 			        </li>
 			    </ul>
 			</div>
@@ -41,12 +41,23 @@
 				<h4 class="data-container-title" l="infopage.container.title">Infopage</h4>
 				<div class="data-container-block data-container-seperator">
 					<div class="row-fluid">
-						<button class="btn span4" ng-show="currentInfoPage.id" ng-click="toggleHideInDashboard()">
-							<i class="icon-eye-open icon-black" ng-class="{'icon-eye-close' : currentInfoPage.hideInDashboard}"></i> 
-							<!-- <span l="infopage.hideindashboard.false" ng-show="!currentInfoPage.hideInDashboard">Can be visible on app dashboard dashboard</span>
-							<span l="infopage.hideindashboard.true" ng-show="currentInfoPage.hideInDashboard">Never show on app dashboard</span> -->
-						</button>
-	    				<button class="btn span4" data-toggle="modal" data-target="#deleteInfoPageModal" ng-show="currentInfoPage.id"><i class="icon-trash"></i></button>
+						<div class="btn-group span6">
+						  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="">
+						    <span ng-show="currentInfoPage.type == 'STATIC'" l="infopage.type.static">Static Page</span>
+						    <span ng-show="currentInfoPage.type == 'LINK'" l="infopage.type.link">Link Page</span>
+						    <span class="caret"></span>
+						  </a>
+						  <ul class="dropdown-menu">
+						    <li><a l="infopage.type.link" ng-show="currentInfoPage.type == 'STATIC'" ng-click="currentInfoPage.type = 'LINK'">Link Page</a></li>
+						    <li><a l="infopage.type.static" ng-show="currentInfoPage.type == 'LINK'" ng-click="currentInfoPage.type = 'STATIC'">Static Page</a></li>
+						  </ul>
+							<button class="btn" ng-show="currentInfoPage.id" ng-click="toggleHideInDashboard()">
+								<i class="icon-eye-open icon-black" ng-class="{'icon-eye-close' : currentInfoPage.hideInDashboard}"></i> 
+								<!-- <span l="infopage.hideindashboard.false" ng-show="!currentInfoPage.hideInDashboard">Can be visible on app dashboard dashboard</span>
+								<span l="infopage.hideindashboard.true" ng-show="currentInfoPage.hideInDashboard">Never show on app dashboard</span> -->
+							</button>
+	    				<button class="btn" data-toggle="modal" data-target="#deleteInfoPageModal" ng-show="currentInfoPage.id"><i class="icon-trash"></i></button>
+	    			</div>
 			    		<!-- Modal delete dialog. -->
 			    		<div class="modal hide" id="deleteInfoPageModal">
 						 	<div class="modal-header">
@@ -59,7 +70,7 @@
 						  	<div class="modal-footer">
 						  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
 						    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteInfoPage(currentInfoPage)" l="common.delete">Delete</button>
-							</div>
+								</div>
 						</div>
 						<ul class="nav nav-pills pull-right" style="margin-bottom: 0px; padding-right: 10px;">
 					<li class="dropdown">
@@ -114,7 +125,14 @@
 							<span l="infopage.placeholder.shortText" ng-hide="currentInfoPage.shortText" class="simple-property-placeholder">Short information! e. g. from 8:00 am  - 10:00 am</span>{{currentInfoPage.shortText}} <i class="icon-edit icon-black"></i>
 						</p>
 					</div>
-					<div class="data-container-medium data-container-scrollable"  style="margin: 5px 0 5px 0;">
+					<div ng-show="currentInfoPage.type == 'LINK'">
+					<div simple-property-editor editor-title="infopage.url" editor-property="currentInfoPage.url" editor-on-save="saveInfoPage()" editor-placeholder="infopage.placeholder.url" editor-type="text" >
+						<p class="edit" tooltip="infopage.url">
+							<span l="infopage.placeholder.url" ng-hide="currentInfoPage.url" class="simple-property-placeholder">External link url, e.g. http://cloobster.com/</span>{{currentInfoPage.url}} <i class="icon-edit icon-black"></i>
+						</p>
+					</div>
+					</div>
+					<div class="data-container-medium data-container-scrollable"  style="margin: 5px 0 5px 0;" ng-show="currentInfoPage.type == 'STATIC'">
 						<div richtext-property-editor editor-title="infopage.html" editor-property="currentInfoPage.html" editor-on-save="saveInfoPage()" editor-placeholder="infopage.placeholder.html" editor-required>
 							<div class="edit" tooltip="infopage.html">
 								<span l="infopage.placeholder.html" ng-hide="currentInfoPage.html" class="simple-property-placeholder">Detailed information!</span>
