@@ -46,7 +46,7 @@
 				<div class="data-container-block data-container-seperator">
 					<div class="row-fluid">
 						<div class="btn-group span6">
-						  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="">
+						<!--   <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="">
 						    <span ng-show="currentInfoPage.type == 'STATIC'" l="infopage.type.static">Static Page</span>
 						    <span ng-show="currentInfoPage.type == 'LINK'" l="infopage.type.link">Link Page</span>
 						    <span class="caret"></span>
@@ -54,7 +54,7 @@
 						  <ul class="dropdown-menu">
 						    <li><a l="infopage.type.link" ng-show="currentInfoPage.type == 'STATIC'" ng-click="currentInfoPage.type = 'LINK';saveInfoPage()">Link Page</a></li>
 						    <li><a l="infopage.type.static" ng-show="currentInfoPage.type == 'LINK'" ng-click="currentInfoPage.type = 'STATIC';saveInfoPage()">Static Page</a></li>
-						  </ul>
+						  </ul> -->
 							<button class="btn" ng-show="currentInfoPage.id" ng-click="toggleHideInDashboard()">
 								<i class="icon-eye-open icon-black" ng-class="{'icon-eye-close' : currentInfoPage.hideInDashboard}"></i> 
 								<!-- <span l="infopage.hideindashboard.false" ng-show="!currentInfoPage.hideInDashboard">Can be visible on app dashboard dashboard</span>
@@ -129,14 +129,16 @@
 							<span l="infopage.placeholder.shortText" ng-hide="currentInfoPage.shortText" class="simple-property-placeholder">Short information! e. g. from 8:00 am  - 10:00 am</span>{{currentInfoPage.shortText}} <i class="icon-edit icon-black"></i>
 						</p>
 					</div>
-					<div ng-show="currentInfoPage.type == 'LINK'">
-					<div simple-property-editor editor-title="infopage.url" editor-property="currentInfoPage.url" editor-on-save="saveInfoPage()" editor-placeholder="infopage.placeholder.url" editor-type="text">
-						<p class="edit" tooltip="infopage.url">
-							<span l="infopage.placeholder.url" ng-hide="currentInfoPage.url" class="simple-property-placeholder">External link url, e.g. http://cloobster.com/</span>{{currentInfoPage.url}} <i class="icon-edit icon-black"></i>
-						</p>
+					<!-- ng-show="currentInfoPage.type == 'LINK'" -->
+					<div>
+						<div simple-property-editor editor-title="infopage.url" editor-property="currentInfoPage.url" editor-on-save="saveInfoPage()" editor-placeholder="infopage.placeholder.url" editor-type="text">
+							<p class="edit" tooltip="infopage.url">
+								<span l="infopage.placeholder.url" ng-hide="currentInfoPage.url" class="simple-property-placeholder">External link url, e.g. http://cloobster.com/</span>{{currentInfoPage.url}} <i class="icon-edit icon-black"></i>
+							</p>
+						</div>
 					</div>
-					</div>
-					<div class="data-container-medium data-container-scrollable"  style="margin: 5px 0 5px 0;" ng-show="currentInfoPage.type == 'STATIC'">
+					<!-- ng-show="currentInfoPage.type == 'STATIC'" -->
+					<div class="data-container-medium data-container-scrollable"  style="margin: 5px 0 5px 0;">
 						<div richtext-property-editor editor-title="infopage.html" editor-property="currentInfoPage.html" editor-on-save="saveInfoPage()" editor-placeholder="infopage.placeholder.html" editor-required>
 							<div class="edit" tooltip="infopage.html">
 								<span l="infopage.placeholder.html" ng-hide="currentInfoPage.html" class="simple-property-placeholder">Detailed information!</span>
