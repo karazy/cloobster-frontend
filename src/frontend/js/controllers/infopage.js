@@ -8,9 +8,12 @@
 * 	View and manage infopages for static information (e.g. contact information).
 * 	@constructor
 */
-Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginService, langService, $log, handleError, InfoPage, Business, langcodes) {
+Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginService, langService, $log, handleError, InfoPage, Business, langcodes, validator) {
 
-	var activeBusinessId;
+	var activeBusinessId,
+			requiredInfoPageFields = {
+				title: true
+			};
 
 	/** Resource for CRUD on info pages. */	
 	$scope.infoPageResource = null;
@@ -28,10 +31,10 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	$scope.activeBusiness = null;
 	/* The selected language in which to save data. */
 	$scope.currentLanguage = "";
-	/* The new InfoPage title */
-	$scope.newInfoPageTitle = "";
 	/** List of a languages. */
 	$scope.langcodes = langcodes;
+
+
 
 	/**
 	* Loads all infopages
@@ -105,15 +108,17 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	*
 	*/
 	$scope.createInfoPage = function() {
-		if($scope.newInfoPageTitle) {
-			$scope.currentInfoPage = new $scope.infoPageResource({'title': $scope.newInfoPageTitle, 'type':'STATIC'});
-			$scope.saveInfoPage();
-		}
+		$scope.currentInfoPage = new $scope.infoPageResource();
 	}
 
 	$scope.saveInfoPage = function() {
 		$log.log("save infopage");
 		if(!$scope.currentInfoPage) {
+			return;
+		}
+
+		if(!validator.validateModel($scope.currentInfoPage, requiredInfoPageFields)) {
+			$scope.infoPageInvalid = true;
 			return;
 		}
 
@@ -260,4 +265,4 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	});
 }
 
-Cloobster.InfoPage.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', 'errorHandler', 'InfoPage', 'Business', 'langcodes'];
+Cloobster.InfoPage.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', 'errorHandler', 'InfoPage', 'Business', 'langcodes','validator'];
