@@ -82,6 +82,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 
 		$scope.currentLanguage = null;
 		$scope.imageResource = InfoPage.buildImageResource(activeBusinessId, page.id);
+		$scope.infoPageInvalid = false;
 	};
 
 	/**
@@ -109,6 +110,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	*/
 	$scope.createInfoPage = function() {
 		$scope.currentInfoPage = new $scope.infoPageResource();
+		$scope.infoPageInvalid = false;
 	}
 
 	$scope.saveInfoPage = function() {
@@ -121,6 +123,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 			$scope.infoPageInvalid = true;
 			return;
 		}
+		$scope.infoPageInvalid = false;
 
 		if($scope.currentLanguage) {
 			$http.defaults.headers.common['Content-Language'] = $scope.currentLanguage.code;
@@ -151,7 +154,6 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		};
 
 		function saveSuccess(infopage) {
-			$scope.newInfoPageTitle = '';
 			$scope.infopages.push(infopage);
 			$scope.selectedInfoPage = infopage;
 			$scope.imageResource = InfoPage.buildImageResource(activeBusinessId, infopage.id);
