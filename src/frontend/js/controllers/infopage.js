@@ -41,7 +41,8 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	*/
 	$scope.loadInfoPages = function(businessId, language) {
 		var account,
-			params = {};
+			params = {},
+			businessLang;
 
 		if(!$scope.loggedIn) {
 			$log.log('Not logged in! Failed to load info pages.');
@@ -58,16 +59,22 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 
 		$scope.activeBusiness = Business.buildResource(account.id).get({'id' : activeBusinessId});
 
-		$scope.currentInfoPage = null;
+		// function businessLoaded() {
 
-		// $scope.activeBusiness = Business.buildResource(account.id).get({'id' : activeBusinessId});
+		// 	params['lang'] = $scope.activeBusiness.lang;
 
-		//create info page resource
-		$scope.infoPageResource = InfoPage.buildResource(activeBusinessId);
+		
+		// }
 
-		//load info pages
-		$scope.infopages = $scope.infoPageResource.query(params, angular.noop,	handleError);
-	
+			$scope.currentInfoPage = null;
+
+			// $scope.activeBusiness = Business.buildResource(account.id).get({'id' : activeBusinessId});
+
+			//create info page resource
+			$scope.infoPageResource = InfoPage.buildResource(activeBusinessId);
+
+			//load info pages
+			$scope.infopages = $scope.infoPageResource.query(params, angular.noop,	handleError);
 	}
 
 	function updateSelectedInfoPage (newData) {
@@ -78,7 +85,9 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 
 	$scope.selectInfoPage = function(page) {
 		$scope.selectedInfoPage = page;
-		$scope.currentInfoPage = page;
+		// $scope.currentInfoPage = page;
+
+		$scope.loadInfoPage(page, $scope.activeBusiness.lang);
 
 		$scope.currentLanguage = null;
 		$scope.imageResource = InfoPage.buildImageResource(activeBusinessId, page.id);
@@ -251,6 +260,43 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		//we have to reflect the change in the list by explicitly setting it
 		updateSelectedInfoPage(objectToToggle);
 		$scope.saveInfoPage();
+	}
+
+	/**
+	* Returns an infopage based on the current translation.
+	* @param {String} fieldName
+	*	Name of field to return
+	* @param {Boolean} useDefault (optional)
+	*	If true, uses default language value if none was found in translation.
+	* @return
+	*	Translated infopage
+	*/
+	$scope.translatedInfoPage = function(fieldName, useDefault) {
+		var tField;
+
+		if(!fieldName) {
+			$log.log('Infopage.translatedInfoPage: no fieldName provided');
+			return;
+		}
+
+		if(!$scope.currentInfoPage) {
+			$log.log('Infopage.translatedInfoPage: currentInfoPage does not exist');
+			return;
+		}
+
+		//no translations exist
+		if(!$scope.currentInfoPage.translations || !$scope.currentLanguage) {
+			return $scope.currentInfoPage[fieldName];
+		}
+
+		tField = $scope.currentInfoPage.translations[$scope.currentLanguage.code][fieldName];
+
+		if(!tField && useDefault) {
+			tField = $scope.currentInfoPage[fieldName];
+		}
+
+		return tField;
+
 	}
 
 	/** 

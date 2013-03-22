@@ -418,9 +418,9 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	//start language methods
 	
 	$scope.saveLanguageSelection = function() {
-		if(!$scope.activeBusiness.lang) {
+		// if(!$scope.activeBusiness.lang) {
 			$scope.activeBusiness.lang = [];
-		}
+		// }
 
 		angular.forEach($scope.langcodes, function(lang, key) {
 			if(lang.selected) {
