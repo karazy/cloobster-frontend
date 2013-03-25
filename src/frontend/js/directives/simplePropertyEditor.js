@@ -78,11 +78,11 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', 'langcodes', '$t
 							'</div>'+
 						'</div>'+
 						'<div ng-repeat="t in editorEntity.translations">'+
-							'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty[$index].$invalid)">'+
+							'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty{{t.lang}}.$invalid)">'+
 								'<div class="controls">'+
-									'<label>{{getLanguageTitle(t.code)}}</label>'+
-									createFormInput(attrs, '$index')+
-									'<i class="icon-remove icon-black" ng-click="clearInput($index)"></i>'+
+									'<label>{{getLanguageTitle(t.lang)}}</label>'+
+									createFormInput(attrs, 't.lang')+
+									'<i class="icon-remove icon-black" ng-click="clearInput(t.lang)"></i>'+
 							// '<input class="property-input" type="' + attrs.editorType + '" '+placeholder+' name="simpleProperty_$index" ng-model="editorValue"></input>';
 								'</div>'+
 							'</div>'+
@@ -109,7 +109,8 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', 'langcodes', '$t
 		        	var dialog = iElement.find('div.simple-property-editor'),
 		        		mask = iElement.find('div.simple-property-editor-mask'),
 		        		input = iElement.find('input.property-input, textarea.property-input'),
-		        		ctrl = scope.simplePropertyForm.simpleProperty;
+		        		ctrl = scope.simplePropertyForm.simpleProperty,
+		        		hasEditorEntity = iAttrs.hasOwnProperty('editorEntity');
 
 		        	if(iAttrs.hasOwnProperty('editorValidate')) {
 		        		ctrl.$parsers.push(function(value) {
@@ -129,8 +130,20 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', 'langcodes', '$t
 		        	scope.save = function () {
 		        		//only save when form is valid
 		        		if(scope.simplePropertyForm.$valid && !scope.saved) {
+
 		        			scope.saved = true;		        			
-		        			scope.editorProperty = scope.editorValue[0];
+
+		        			if(hasEditorEntity) {
+		        				// Set default language property
+		        				scope.editorEntity[scope.editorField] = scope.editorValue;
+		        				angular.forEach(scope.editorEntity.translations, function(translation, key){
+		        					// Set value of the field in the translation object
+  										translation[scope.editorField] = scope.editorTranslations[key];
+										});
+		        			}
+		        			else {
+		        				scope.editorProperty = scope.editorValue;
+		        			}		     
 		        			// angular.forEach
 		        			// Wrap this in a timeout, because the model change is not immediate.
 			        		$timeout(scope.editorOnSave);
@@ -149,14 +162,13 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', 'langcodes', '$t
 		        	/**
 		        	* Convenience method to clear the input field.
 		        	*/
-		        	scope.clearInput = function(index) {
-		        		var indexToClear = (typeof index == "number") ? index+1 : "";
-
-		        		if(typeof index == "number") {
-		        			scope['editorValue['+indexToClear+']'] = "";
-		        			iElement.find('input.property-input, textarea.property-input')[indexToClear].trigger("focus");
+		        	scope.clearInput = function(translation) {
+		        		if(translation) {
+		        			scope['editorTranslations'][translation] = "";
+		        			var attributeSelector = '[name="simpleProperty'+translation+'"]';
+		        			iElement.find('input'+attributeSelector+'.property-input, textarea'+attributeSelector+'.property-input').trigger("focus");
 		        		} else {
-		        			scope['editorValue[0]'] = "";
+		        			scope['editorValue'] = "";
 		        			input.trigger("focus");
 		        		}
 		        		
@@ -188,9 +200,24 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', 'langcodes', '$t
 						return code;
 		        	}
 		        	
-		        	iElement.find('div.toggler').bind('click', function() {   
+		        	iElement.find('div.toggler').bind('click', function() {
 		        		if(scope.editorEnabled == true || typeof scope.editorEnabled == 'undefined') {
-		        			scope.$apply('editorValue = []; editorValue[0] = editorProperty; editorRepeat="";saved=false');
+		        			scope.editorRepeat = "";
+		        			scope.saved = false;
+		        			if(hasEditorEntity) {
+		        				scope.editorValue = scope.editorEntity[scope.editorField];
+		        				scope.editorTranslations = {};
+		        				angular.forEach(scope.editorEntity.translations, function(translation, key){
+		        					// Set value of the field in the translation object
+  										scope.editorTranslations[key] = translation[scope.editorField];
+										});
+		        			}
+		        			else {
+		        				scope.editorValue = scope.editorProperty;
+		        			}
+
+		        			scope.$digest();
+
 		        			// dialog.modal('toggle');
 		        			var titleHeight,  
 		        				offsetTop, 
@@ -293,19 +320,19 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', 'langcodes', '$t
 	* @param attrs
 	*	Attributes object containing configuration.
 	*/
-	function createFormInput(attrs, index) {
-		var required = attrs.hasOwnProperty('editorRequired') ? "required='required'" : "",
+	function createFormInput(attrs, suffix) {
+		var required = attrs.hasOwnProperty('editorRequired') && !suffix ? "required='required'" : "",
 			pattern = attrs.hasOwnProperty('editorPattern') ? "ng-pattern='"+attrs.editorPattern+"'" : "",
 			repeat = attrs.hasOwnProperty('editorRepeat') ? "ng-change='matchInput()'" : "",
 			maxLength = attrs.hasOwnProperty('editorMaxLength') ? "maxlength='"+attrs.editorMaxLength+"'" : "",
 			placeholder = attrs.hasOwnProperty('editorPlaceholder') ? "placeholder='"+l(attrs.editorPlaceholder)+"'" : "",
 			type = 	attrs.hasOwnProperty('editorType') ? attrs.editorType : "text",
-			modelIndex = (index) ? "+" + index : "",
-			modelBinding = "editorValue[0]",
+			modelIndex = (suffix) ? "+" + suffix : "",
+			modelBinding = "editorValue",
 			inputHtml;
 
-		if(index) {
-			modelBinding = "editorValue[$index+1]";
+		if(suffix) {
+			modelBinding = "editorTranslations["+suffix+"]";
 		}
 
 		if(type == "textarea") {
