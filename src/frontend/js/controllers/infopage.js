@@ -296,7 +296,6 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		}
 
 		return tField;
-
 	}
 
 	/** 

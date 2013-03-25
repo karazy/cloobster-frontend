@@ -1,4 +1,4 @@
-Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', '$log', function(langService,$timeout, $log) {
+Cloobster.directives.directive('simplePropertyEditor', ['lang', 'langcodes', '$timeout', '$log', function(langService, langcodes, $timeout, $log) {
 	var inputType, //type of the input to generate in form
 		required, //if present marks a required field
 		//directive configuration
@@ -80,7 +80,7 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', '$log
 						'<div ng-repeat="t in editorEntity.translations">'+
 							'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty[$index].$invalid)">'+
 								'<div class="controls">'+
-									'<label>{{t.lang}}</label>'+
+									'<label>{{getLanguageTitle(t.code)}}</label>'+
 									createFormInput(attrs, '$index')+
 									'<i class="icon-remove icon-black" ng-click="clearInput($index)"></i>'+
 							// '<input class="property-input" type="' + attrs.editorType + '" '+placeholder+' name="simpleProperty_$index" ng-model="editorValue"></input>';
@@ -129,8 +129,9 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', '$log
 		        	scope.save = function () {
 		        		//only save when form is valid
 		        		if(scope.simplePropertyForm.$valid && !scope.saved) {
-		        			scope.saved = true;
-		        			scope.editorProperty = scope.editorValue;
+		        			scope.saved = true;		        			
+		        			scope.editorProperty = scope.editorValue[0];
+		        			// angular.forEach
 		        			// Wrap this in a timeout, because the model change is not immediate.
 			        		$timeout(scope.editorOnSave);
 			        		// dialog.modal('toggle');
@@ -149,19 +150,19 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', '$log
 		        	* Convenience method to clear the input field.
 		        	*/
 		        	scope.clearInput = function(index) {
-		        		var indexToClear = (typeof index == "number") ? index : "";
+		        		var indexToClear = (typeof index == "number") ? index+1 : "";
 
-		        		// if(typeof index == "number") {
-		        		// 	scope['editorValue'+indexToClear] = "";
-		        		// 	iElement.find('input.property-input, textarea.property-input')[indexToClear+1].trigger("focus");
-		        		// } else {
-		        		// 	scope['editorValue'] = "";
-		        		// 	input.trigger("focus");
-		        		// }
+		        		if(typeof index == "number") {
+		        			scope['editorValue['+indexToClear+']'] = "";
+		        			iElement.find('input.property-input, textarea.property-input')[indexToClear].trigger("focus");
+		        		} else {
+		        			scope['editorValue[0]'] = "";
+		        			input.trigger("focus");
+		        		}
 		        		
-		        		// if(scope['editorRepeat']) {
-		        		// 	scope['editorRepeat'] = "";
-		        		// }
+		        		if(scope['editorRepeat']) {
+		        			scope['editorRepeat'] = "";
+		        		}
 		        		
 		        	}
 
@@ -172,10 +173,24 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', '$log
 							scope.simplePropertyForm.repeatProperty.$setValidity("match", true);
 						}
 					}
+
+					scope.getLanguageTitle = function(code) {
+						if(!code) {
+							return;
+						}
+
+		        		angular.forEach(langcodes, function(lang, key) {
+		        			if(lang.code == code) {
+		        				return lang.lang;
+		        			}
+						});
+
+						return code;
+		        	}
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {   
 		        		if(scope.editorEnabled == true || typeof scope.editorEnabled == 'undefined') {
-		        			scope.$apply('editorValue = editorProperty;editorRepeat="";saved=false');
+		        			scope.$apply('editorValue = []; editorValue[0] = editorProperty; editorRepeat="";saved=false');
 		        			// dialog.modal('toggle');
 		        			var titleHeight,  
 		        				offsetTop, 
@@ -286,11 +301,11 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', '$log
 			placeholder = attrs.hasOwnProperty('editorPlaceholder') ? "placeholder='"+l(attrs.editorPlaceholder)+"'" : "",
 			type = 	attrs.hasOwnProperty('editorType') ? attrs.editorType : "text",
 			modelIndex = (index) ? "+" + index : "",
-			modelBinding = "editorValue",
+			modelBinding = "editorValue[0]",
 			inputHtml;
 
 		if(index) {
-			modelBinding = "editorValue[$index]";
+			modelBinding = "editorValue[$index+1]";
 		}
 
 		if(type == "textarea") {
