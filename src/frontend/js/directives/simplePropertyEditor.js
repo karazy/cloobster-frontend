@@ -1,4 +1,4 @@
-Cloobster.directives.directive('simplePropertyEditor', ['lang', 'langcodes', '$timeout', '$log', function(langService, langcodes, $timeout, $log) {
+Cloobster.directives.directive('simplePropertyEditor', ['lang', 'langcodesMap', '$timeout', '$log', function(langService, langcodesMap, $timeout, $log) {
 	var inputType, //type of the input to generate in form
 		required, //if present marks a required field
 		//directive configuration
@@ -187,18 +187,14 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', 'langcodes', '$t
 					}
 
 					scope.getLanguageTitle = function(code) {
-						if(!code) {
-							return;
-						}
-
-		        		angular.forEach(langcodes, function(lang, key) {
-		        			if(lang.code == code) {
-		        				return lang.lang;
-		        			}
-						});
-
-						return code;
-		        	}
+							if(!code) {
+								return;
+							}
+							if(langcodesMap[code])
+								return langcodesMap[code].lang;
+							else
+								return code;
+	        	}
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {
 		        		if(scope.editorEnabled == true || typeof scope.editorEnabled == 'undefined') {

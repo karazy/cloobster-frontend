@@ -8,7 +8,7 @@
 * 	View and manage infopages for static information (e.g. contact information).
 * 	@constructor
 */
-Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginService, langService, $log, handleError, InfoPage, Business, langcodes, validator) {
+Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginService, langService, $log, handleError, InfoPage, Business, langcodesMap, validator) {
 
 	var activeBusinessId,
 			requiredInfoPageFields = {
@@ -31,26 +31,30 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	$scope.activeBusiness = null;
 	/* The selected language in which to save data. */
 	$scope.currentLanguage = "";
-	/** List of a languages. */
-	$scope.langcodes = langcodes;
+	/** Map of all languages. */
+	$scope.langcodesMap = langcodesMap;
 
 
+	function loadInfoPages (language) {
+		var params = {};
+
+		if(language) {
+			params.lang = language;
+		}
+
+		//load info pages
+		$scope.infopages = $scope.infoPageResource.query(params, angular.noop,	handleError);
+	}
 
 	/**
-	* Loads all infopages
+	* Init Controller and load all infopages
 	*/
-	$scope.loadInfoPages = function(businessId, language) {
-		var account,
-			params = {},
-			businessLang;
+	function init(businessId, language) {
+		var account;
 
 		if(!$scope.loggedIn) {
 			$log.log('Not logged in! Failed to load info pages.');
 			return;
-		}
-
-		if(language) {
-			params.lang = language;
 		}
 
 		activeBusinessId = businessId;
@@ -59,22 +63,12 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 
 		$scope.activeBusiness = Business.buildResource(account.id).get({'id' : activeBusinessId});
 
-		// function businessLoaded() {
+		$scope.currentInfoPage = null;
 
-		// 	params['lang'] = $scope.activeBusiness.lang;
+		//create info page resource
+		$scope.infoPageResource = InfoPage.buildResource(activeBusinessId);
 
-		
-		// }
-
-			$scope.currentInfoPage = null;
-
-			// $scope.activeBusiness = Business.buildResource(account.id).get({'id' : activeBusinessId});
-
-			//create info page resource
-			$scope.infoPageResource = InfoPage.buildResource(activeBusinessId);
-
-			//load info pages
-			$scope.infopages = $scope.infoPageResource.query(params, angular.noop,	handleError);
+		loadInfoPages(language);
 	}
 
 	function updateSelectedInfoPage (newData) {
@@ -88,9 +82,6 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		// $scope.currentInfoPage = page;
 
 		$scope.loadInfoPage(page, $scope.activeBusiness.lang);
-
-		$scope.currentLanguage = null;
-		$scope.imageResource = InfoPage.buildImageResource(activeBusinessId, page.id);
 		$scope.infoPageInvalid = false;
 	};
 
@@ -206,19 +197,19 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		}
 	};
 
-	$scope.switchLanguage = function(lang) {
-		if(lang) {
-			//$scope.loadInfoPages(activeBusinessId, $scope.currentLanguage.code);
-			if($scope.currentInfoPage) {
+	$scope.switchLanguage = function(langcode) {
+		if(langcode) {
+			/*if($scope.currentInfoPage) {
 				$scope.loadInfoPage($scope.currentInfoPage, lang.code);
-			}
-			$scope.currentLanguage = lang;
+			}*/
+			$scope.currentLanguage = langcodesMap[langcode];
+			loadInfoPages(langcode);
 		} else {
 			$scope.currentLanguage = null;
-			//$scope.loadInfoPages(activeBusinessId);
-			if($scope.currentInfoPage) {
+			loadInfoPages();
+			/*if($scope.currentInfoPage) {
 				$scope.loadInfoPage($scope.currentInfoPage);
-			}
+			}*/
 		}
 
 		$scope.resetSearchField();		
@@ -274,13 +265,12 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	$scope.translatedInfoPage = function(fieldName, useDefault) {
 		var tField;
 
-		if(!fieldName) {
-			$log.log('Infopage.translatedInfoPage: no fieldName provided');
+		if(!$scope.currentInfoPage) {
 			return;
 		}
 
-		if(!$scope.currentInfoPage) {
-			$log.log('Infopage.translatedInfoPage: currentInfoPage does not exist');
+		if(!fieldName) {
+			$log.log('Infopage.translatedInfoPage: no fieldName provided');
 			return;
 		}
 
@@ -305,11 +295,11 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		var businessId = $routeParams.businessId || "";
 
 		if(newValue == true && businessId) {
-			$scope.loadInfoPages(businessId);
+			init(businessId);
 		} else if(newValue == false) {
 			$location.url('/');
 		}
 	});
 }
 
-Cloobster.InfoPage.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', 'errorHandler', 'InfoPage', 'Business', 'langcodes','validator'];
+Cloobster.InfoPage.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', 'errorHandler', 'InfoPage', 'Business', 'langcodesMap','validator'];
