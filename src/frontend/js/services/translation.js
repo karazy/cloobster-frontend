@@ -83,6 +83,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Dokumente",
 			"EN" : "Documents"
 		},
+		"businesses.headertabs.appconfig" : {
+			"DE" :  "App Konfiguration",
+			"EN" : "App Configuration"
+		},
 		//registration partial
 		"registration.title" : {
 			"DE" : "cloobster Registrierung",
@@ -2152,6 +2156,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"reports.report.allareas" : {
 			"DE" :  "alle Bereiche",
 			"EN" : "all areas"
+		},
+		//app config partial
+		"appconfig.tiles.list.title" : {
+			"DE" :  "Kacheln",
+			"EN" : "Tiles"
 		},
 		//general
 		"common.warning.title" : {

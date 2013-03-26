@@ -65,6 +65,9 @@
 			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/infopages',true), 'disabled': businesses.length==0}">
 				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/infopages','')}}" l="businesses.headertabs.infopages">Infopages</a>
 			</li>
+			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/appconfig',true), 'disabled': businesses.length==0}">
+				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/appconfig','')}}" l="businesses.headertabs.appconfig">App Config</a>
+			</li>
 			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/reports',true), 'disabled': businesses.length==0}">
 				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/reports','')}}" l="businesses.headertabs.reports">Reports</a>
 			</li>
