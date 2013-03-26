@@ -81,7 +81,7 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 	function setupDragAndDrop() {
 		//drag&drop functionality
 		jQuery( ".tile-container-templates .tile" ).draggable({
-			revert: true,
+			revert: "invalid",
 			containment: "document",
 			helper: "clone"
 		});
@@ -100,15 +100,30 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 	    }
 	    );
 	}
+	function createTile (template) {
+		if(!template) {
+			$log.error('No tile template supplied');
+			return;
+		}
+		var newTile = new dashboardItemsResource({'type': template.type});
+
+		function saveSuccess() {
+			$scope.dashboardItems.push(newTile);
+			$scope.selectTile(newTile);
+		}
+
+		newTile.$save(saveSuccess, handleError);
+	}
 
 	/**
-	* @private
 	* Drop event handler for tile configuration dropped in an empty slot.
 	*/
 	$scope.addTileToConfig = function(event, ui) {
 		//add tile to html
 		//make sure slot is blocked for other elements to drop on?
-
+		var tile = angular.element(ui.draggable[0]).scope().tile;
+		createTile(tile);
+		$scope.$digest();
 	}
 
 	/**
@@ -118,6 +133,26 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 	*/
 	$scope.removeTileFromConfig = function(tile) {
 
+	}
+
+	$scope.selectTile = function(tile) {
+		$scope.currentTile = tile;
+	};
+
+	$scope.deleteTile = function(tile) {
+
+		tile.$remove(function() {
+			if($scope.currentTile == tile) {
+				$scope.currentTile = null;
+			}
+			angular.forEach($scope.dashboardItems, function(item, index) {
+				// Remove item from array
+				if(item.id == tile.id) {
+					$scope.dashboardItems.splice(index, 1);
+					return false;
+				}
+			})
+		}, handleError);
 	}
 
 

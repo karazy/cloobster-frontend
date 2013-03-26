@@ -635,6 +635,10 @@ ul.options-list li:hover {
   z-index: 2;
 }
 
+.tile-active {
+  background-color: lightblue;
+}
+
 .tile-empty {
   float: left;
   height: 120px;
