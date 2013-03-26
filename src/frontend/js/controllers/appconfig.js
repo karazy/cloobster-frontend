@@ -8,11 +8,12 @@
 * 	Configure Dashboard, App Theme and Images
 * 	@constructor
 */
-Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginService, langService, $log, $timeout, handleError, Business) {
+Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginService, langService, $log, $timeout, handleError, Business, DashboardItem) {
+	var dashboardItemsResource;
 
-
-	$scope.tiles = [
-		{	
+	/** Tile configuration map */
+	$scope.tiles = {
+		"feedback": {	
 			//title displayed on tile
 			title: langService.translate("tiles.template.feedback") || "Feedback",
 			//type identifiying the actions
@@ -22,25 +23,54 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			//description to use in detail view
 			description: ""
 		},
-		{	
+		"products": {	
 			title: langService.translate("tiles.template.products") || "Products",
 			type: "products",
 			cls: "tile-products",
 			description: ""
 		},
-		{	
+		"infopages": {	
 			title: langService.translate("tiles.template.infopages") || "Infopages",
 			type: "infopages",
 			cls: "tile-infopages",
 			description: ""
 		},
-		{	
+		"actions": {	
+			title: langService.translate("tiles.template.actions") || "Service Call",
+			type: "actions",
+			cls: "",
+			description: ""
+		},
+		"infopagesall": {	
 			title: langService.translate("tiles.template.allinfopages") || "All Infopages",
-			type: "allinfopages",
+			type: "infopagesall",
 			cls: "tile-infopages",
 			description: ""
+		},
+		"productsall": {	
+			title: langService.translate("tiles.template.productsall") || "All Products",
+			type: "productsall",
+			cls: "tile-products",
+			description: ""
+		},
+		"productsspecial": {	
+			title: langService.translate("tiles.template.productsspecial") || "Special Products",
+			type: "productsspecial",
+			cls: "tile-products",
+			description: ""
 		}
-	];
+	};
+
+	function init (activeBusinessId) {
+		if(!activeBusinessId) {
+			$log.error("No activeBusinessId supplied");
+		}
+
+		dashboardItemsResource = DashboardItem.buildResource(activeBusinessId);
+
+		//load dashboard items
+		$scope.dashboardItems = dashboardItemsResource.query(null, angular.noop, handleError);
+	}
 
 	$timeout(setupDragAndDrop, 1000);
 
@@ -98,11 +128,11 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 		var businessId = $routeParams.businessId || "";
 
 		if(newValue == true && businessId) {
-			
+			init(businessId);
 		} else if(newValue == false) {
 			$location.url('/');
 		}
 	});
 }
 
-Cloobster.AppConfig.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', '$timeout', 'errorHandler', 'Business'];
+Cloobster.AppConfig.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', '$timeout', 'errorHandler', 'Business', 'DashboardItem'];

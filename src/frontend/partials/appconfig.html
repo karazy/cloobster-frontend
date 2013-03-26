@@ -44,7 +44,13 @@
 			<div class="data-container-with-title">
 				<h4 class="data-container-title" l="appconfig.tilesconfig.list.title">Dashboard Preview</h4>
 				<div class="tile-container-config data-container-block data-container-large">
-					<div class="tile-empty">
+					<div ng-repeat="item in dashboardItems" class="tile">
+						<div ng-class="tiles[item.type].cls">
+							<div class="tile-icon"></div>
+							<div class="tile-title">{{ tiles[item.type].title }}</div>
+						</div>
+					</div>
+					<div class="tile-empty" ng-hide="dashboardItems.length > 9">
 						<div class="tile-number">+</div>
 						<div l="appconfig.tile.empty">Drop a tile</div>						
 					</div>
