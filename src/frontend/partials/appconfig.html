@@ -28,9 +28,9 @@
 						</div>
 	    			</form>
 	    		</div> -->
-				<div class="tile-container data-container-block data-container-large data-container-scrollable">
-			        <div ng-repeat="tile in tiles">
-			        	<div class="tile {{tile.cls}}">
+				<div class="tile-container-templates data-container-block data-container-large">
+			        <div ng-repeat="tile in tiles" class="tile">
+			        	<div class="{{tile.cls}}">
 			        		<div class="tile-icon"></div>
 			        		<div class="tile-title">{{tile.title}}</div>
 			        	</div>
@@ -43,13 +43,23 @@
 		<div class="span3">
 			<div class="data-container-with-title">
 				<h4 class="data-container-title" l="appconfig.tilesconfig.list.title">Dashboard Preview</h4>
-				<div class="tile-container data-container-block data-container-large">
+				<div class="tile-container-config data-container-block data-container-large">
 					<div class="tile-empty">
+						<div class="tile-number">+</div>
+						<div l="appconfig.tile.empty">Drop a tile</div>						
+					</div>
+		<!-- 			<div class="tile-empty">
+						<div class="tile-number">2</div>
 						<div l="appconfig.tile.empty">Drop a tile</div>
 					</div>
 					<div class="tile-empty">
+						<div class="tile-number">3</div>
 						<div l="appconfig.tile.empty">Drop a tile</div>
 					</div>
+					<div class="tile-empty">
+						<div class="tile-number">4</div>
+						<div l="appconfig.tile.empty">Drop a tile</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

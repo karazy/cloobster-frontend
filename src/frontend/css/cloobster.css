@@ -632,6 +632,7 @@ ul.options-list li:hover {
   margin: 0 5px 5px 0;
   float: left;
   overflow: hidden;
+  z-index: 2;
 }
 
 .tile-empty {
@@ -662,7 +663,27 @@ ul.options-list li:hover {
   text-align: center;
 }
 
+.tile-number {
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: bold;
+  text-align: center;
+  color: #C3C3C3;
+}
+
+.tile-config-highlight {
+  background-color: yellow;
+}
+
 .tile-feedback .tile-icon {
   background-image: url('../img/tiles/feedback.png');  
+}
+
+.tile-products .tile-icon {
+  background-image: url('../img/tiles/menue_bag.png');  
+}
+
+.tile-infopages .tile-icon {
+  background-image: url('../img/tiles/info.png');  
 }
 
