@@ -2162,6 +2162,42 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Kacheln",
 			"EN" : "Tiles"
 		},
+		"tiles.template.feedback.description" : {
+			"DE" :  "",
+			"EN" : "Shortcut to quickly reach Feedback instead of the navigation menu."
+		},
+		"tiles.template.products.description" : {
+			"DE" :  "",
+			"EN" : "Shortcut to quickly reach Products instead of the navigation menu."
+		},
+		"tiles.template.infopages.description" : {
+			"DE" :  "",
+			"EN" : "Shortcut to quickly reach A - Z instead of the navigation menu."
+		},
+		"tiles.template.actions.description" : {
+			"DE" :  "",
+			"EN" : "Shortcut to quickly reach Actions instead of the navigation menu."
+		},
+		"tiles.template.infopagesall.description" : {
+			"DE" :  "",
+			"EN" : "Display a random infopage. Ignores pages flagged to be hidden on dashboard."
+		},
+		"tiles.template.infopagesselected.description" : {
+			"DE" :  "",
+			"EN" : "Displays a random infopage out of the ones you select. The hide on dashboard flag will be ignored."
+		},
+		"tiles.template.productsall.description" : {
+			"DE" :  "",
+			"EN" : "Display a random product. Ignores products flagged to be hidden on dashboard. Only products assigned to active area are shown."
+		},
+		"tiles.template.productsspecial.description" : {
+			"DE" :  "",
+			"EN" : "Display a random product marked as special. Ignores products flagged to be hidden on dashboard. Only products assigned to active area are shown."
+		},
+		"tiles.template.productsselected.description" : {
+			"DE" :  "",
+			"EN" : "Displays a random product out of the ones you select. The hide on dashboard flag will be ignored. Only products assigned to active area are shown."
+		},
 		//general
 		"common.warning.title" : {
 			"DE" : "Achtung!",

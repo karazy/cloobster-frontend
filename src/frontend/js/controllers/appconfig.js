@@ -22,49 +22,49 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			//class to add
 			cls: "tile-feedback",
 			//description to use in detail view
-			description: ""
+			description: langService.translate("tiles.template.feedback.description")
 		},
 		"products": {	
 			title: langService.translate("tiles.template.products") || "Products",
 			type: "products",
 			cls: "tile-products",
-			description: ""
+			description: langService.translate("tiles.template.products.description")
 		},
 		"infopages": {	
 			title: langService.translate("tiles.template.infopages") || "Infopages",
 			type: "infopages",
 			cls: "tile-infopages",
-			description: ""
+			description: langService.translate("tiles.template.infopages.description")
 		},
 		"actions": {	
 			title: langService.translate("tiles.template.actions") || "Service Call",
 			type: "actions",
 			cls: "",
-			description: ""
+			description: langService.translate("tiles.template.actions.description")
 		},
 		"infopagesall": {	
 			title: langService.translate("tiles.template.allinfopages") || "All Infopages",
 			type: "infopagesall",
 			cls: "tile-infopages",
-			description: ""
+			description: langService.translate("tiles.template.infopagesall.description")
 		},
 		"productsall": {	
 			title: langService.translate("tiles.template.productsall") || "All Products",
 			type: "productsall",
 			cls: "tile-products",
-			description: ""
+			description: langService.translate("tiles.template.productsall.description")
 		},
 		"productsspecial": {	
 			title: langService.translate("tiles.template.productsspecial") || "Special Products",
 			type: "productsspecial",
 			cls: "tile-products",
-			description: ""
+			description: langService.translate("tiles.template.productsspecial.description")
 		},
 		"productsselected": {	
 			title: langService.translate("tiles.template.productsselected") || "Selected Products",
 			type: "productsselected",
 			cls: "tile-products",
-			description: ""
+			description: langService.translate("tiles.template.productsselected.description")
 		}
 	};
 
