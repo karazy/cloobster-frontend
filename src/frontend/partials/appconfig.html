@@ -28,7 +28,10 @@
 						</div>
 	    			</form>
 	    		</div> -->
-				<div class="tile-container-templates data-container-block data-container-large">
+	    		<div class="data-container-block data-container-tiny data-container-seperator">
+	    			<p l="appconfig.tiles.list.description">List of all available tiles.</p>
+	    		</div>
+				<div class="tile-container-templates data-container-block data-container-500 data-container-scrollable">
 			        <div ng-repeat="tile in tiles" class="tile">
 			        	<div class="{{tile.cls}}">
 			        		<div class="tile-icon"></div>
@@ -43,6 +46,9 @@
 		<div class="span3">
 			<div class="data-container-with-title">
 				<h4 class="data-container-title" l="appconfig.tilesconfig.list.title">Dashboard Preview</h4>
+				<div class="data-container-block data-container-tiny data-container-seperator">
+	    			<p l="appconfig.tilesconfig.list.description">Shows a preview how your app dashboard will look like.</p>
+	    		</div>
 				<div class="tile-container-config data-container-block data-container-large">
 					<div id="tiles-sort-container">
 						<div ng-repeat="item in dashboardItems" class="tile" ng-class="{'tile-active': currentTile == item}">
