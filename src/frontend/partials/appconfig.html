@@ -43,13 +43,14 @@
 		</div>
 
 		<!-- second column: dashboard preview -->
-		<div class="span3" style="width: 350px;">
+		<div class="span3" style="width: 550px;">
 			<div class="data-container-with-title">
 				<h4 class="data-container-title" l="appconfig.tilesconfig.list.title">Dashboard preview</h4>
 				<div class="data-container-block data-container-tiny data-container-seperator">
 	    			<p l="appconfig.tilesconfig.list.description">Shows a preview how your app dashboard will look like. Just drop a tile from the list on the empty tile. Rearrange order by drag and drop.</p>
 	    		</div>
-				<div class="tile-container-config data-container-block" style="padding-left: 48px;">
+	    		<div class="smartphone-frame">	    		
+				<div class="tile-container-config data-container-block smartphone-content" style="padding-left: 48px;">
 					<div id="tiles-sort-container">
 						<div ng-repeat="item in dashboardItems" class="tile" ng-class="{'tile-active': currentTile == item}">
 							<div class="tile-delete" ng-click="confirmDelete(item)">X</div>							
@@ -64,7 +65,8 @@
 						<div l="appconfig.tile.empty">Drop a tile</div>
 					</div>
 				</div>
-				<div style="clear:both;">
+			<!-- 	<div style="clear:both;">
+				</div> -->
 				</div>
 			</div>
 			<!-- Modal tile delete dialog. -->
