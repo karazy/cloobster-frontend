@@ -28,7 +28,10 @@
 						</div>
 	    			</form>
 	    		</div> -->
-				<div class="tile-container-templates data-container-block data-container-large">
+	    		<div class="data-container-block data-container-tiny data-container-seperator">
+	    			<p l="appconfig.tiles.list.description">List of all available tiles.</p>
+	    		</div>
+				<div class="tile-container-templates data-container-block data-container-500 data-container-scrollable">
 			        <div ng-repeat="tile in tiles" class="tile">
 			        	<div class="{{tile.cls}}">
 			        		<div class="tile-icon"></div>
@@ -43,7 +46,10 @@
 		<div class="span3">
 			<div class="data-container-with-title">
 				<h4 class="data-container-title" l="appconfig.tilesconfig.list.title">Dashboard Preview</h4>
-				<div class="tile-container-config data-container-block data-container-large">
+				<div class="data-container-block data-container-tiny data-container-seperator">
+	    			<p l="appconfig.tilesconfig.list.description">Shows a preview how your app dashboard will look like.</p>
+	    		</div>
+				<div class="tile-container-config data-container-block data-container-500">
 					<div id="tiles-sort-container">
 						<div ng-repeat="item in dashboardItems" class="tile" ng-class="{'tile-active': currentTile == item}">
 							<div ng-class="tiles[item.type].cls" ng-click="selectTile(item)">
@@ -71,13 +77,13 @@
 				</div>
 			</div>
 		</div>
-		<!-- third column: tile details -->
-		<div class="span3" ng-show="currentTile">
-			<div class="data-container-with-title">
-				<h4 class="data-container-title" l="appconfig.tiledetail.title">Tile details</h4>
-				<div class="data-container-block data-container-large">
-					<h4>{{tiles[currentTile.type].title}}</h4>
-					<p>{{tiles[currentTile.type].description}}</p>
+			<!-- third column: tile details -->
+			<div class="span3" ng-show="currentTile">
+				<div class="data-container-with-title">
+					<h4 class="data-container-title" l="appconfig.tiledetail.title">Tile details</h4>
+					<div class="data-container-block data-container-large">
+						<h4>{{tiles[currentTile.type].title}}</h4>
+						<p>{{tiles[currentTile.type].description}}</p>
 					<button class="btn" data-toggle="modal" data-target="deleteTileModal"><i class="icon-trash"></i></button>
 					<!-- Modal delete dialog. -->
 	    		<div class="modal hide" id="deleteTileModal">
@@ -131,6 +137,15 @@
 	    		</ul>
     		</div>
 			</div>
+			<!-- third column: tile details placeholder -->
+		    <div ng-hide="currentTile" class="span3">
+		    	<div class="data-container-with-title data-container-small data-container-inactive">
+		    		<h4 class="data-container-title data-container-inactive" l="appconfig.tiledetail.title">Tile details</h4>
+		    		<div class="data-container-block">
+		    			<p l="appconfig.tiledetail.empty.description">Shows the selected tile details. Select a tile from dashboard preview.</p>
+		    		</div>
+		    	</div>
+		    </div>
 		</div>
 		</div>
 	</div>	
