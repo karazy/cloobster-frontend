@@ -8,9 +8,10 @@
 * 	Configure Dashboard, App Theme and Images
 * 	@constructor
 */
-Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginService, langService, $log, $timeout, handleError, Business, DashboardItem, listUtil, Product) {
+Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginService, langService, $log, $timeout, handleError, Business, DashboardItem, listUtil, Product, InfoPage) {
 	var dashboardItemsResource,
-			productsResource;
+			productsResource,
+			infoPagesResource;
 
 	/** Tile configuration map */
 	$scope.tiles = {
@@ -48,6 +49,12 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			cls: "tile-infopages",
 			description: langService.translate("tiles.template.infopagesall.description")
 		},
+		"infopagesselected": {	
+			title: langService.translate("tiles.template.infopagesselected") || "Selected Infopages",
+			type: "infopagesselected",
+			cls: "tile-infopages",
+			description: langService.translate("tiles.template.infopagesselected.description")
+		},
 		"productsall": {	
 			title: langService.translate("tiles.template.productsall") || "All Products",
 			type: "productsall",
@@ -78,6 +85,7 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 		dashboardItemsResource = DashboardItem.buildResource(activeBusinessId);
 
 		productsResource = Product.buildResource(activeBusinessId);
+		infoPagesResource = InfoPage.buildResource(activeBusinessId);
 
 		//load dashboard items
 		$scope.dashboardItems = dashboardItemsResource.query(null, angular.noop, handleError);
@@ -184,36 +192,50 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 
 	}
 
+	/**
+	* @private
+	* Helper function to populate list for tile entities selection
+	*/
+	function loadEntities (resource, listName) {
+		var tile = $scope.currentTile;
+		$scope[listName] = resource.query(null, function() {
+					var checked = {};
+					
+					if(tile.entityIds) {
+						// build map productId -> checked
+						angular.forEach(tile.entityIds, function(checkedItemId) {
+							checked[checkedItemId] = true;
+						});
+
+						angular.forEach($scope[listName], function(item) {
+							item.checked = checked[item.id];
+						});
+					}
+			}, handleError);
+	}
+
 	$scope.selectTile = function(tile) {
 		$scope.currentTile = tile;
 
 		if(tile.type == 'productsselected') {
-				$scope.allProductsList = productsResource.query(null, function() {
-					var checkedProducts = {};
-					
-					if(tile.entityIds) {
-						// build map productId -> checked
-						angular.forEach(tile.entityIds, function(checkedProductId) {
-							checkedProducts[checkedProductId] = true;
-						});
-
-						angular.forEach($scope.allProductsList, function(product) {
-							product.checked = checkedProducts[product.id];
-						});
-					}
-			}, handleError);
+			loadEntities(productsResource, 'allProductsList');
+		} else if(tile.type == 'infopagesselected') {
+			loadEntities(infoPagesResource, 'allInfoPages');
 		}
 	};
 
-	$scope.deleteTile = function(tile) {
-		var tileToDelete = tile || $scope.lastHoveredTile;
+	$scope.confirmDelete = function(tile) {
+		$scope.lastHoveredTile = tile;
+		$('#deleteHoverTileModal').modal('show');
+	};
 
-		if(!tileToDelete) {
+	$scope.deleteTile = function(tile) {
+		if(!tile) {
 			$log.log('AppConfig.deleteTile: no tile given');
 			return;
 		}
 
-		tileToDelete.$remove(function() {
+		tile.$remove(function() {
 			if($scope.currentTile == tile) {
 				$scope.currentTile = null;
 			}
@@ -227,11 +249,12 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 		}, handleError);
 	}
 
-	function updateTileEntitiesAndSave () {
-		if(!$scope.currentTile)
+	function updateTileEntitiesAndSave (itemList) {
+		if(!$scope.currentTile || !itemList)
 			return;
+
 		$scope.currentTile.entityIds = [];
-		angular.forEach($scope.allProductsList, function(item){
+		angular.forEach(itemList, function(item){
 			if(item.checked) {
 				$scope.currentTile.entityIds.push(item.id);
 			}
@@ -246,11 +269,24 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 	*/
 	$scope.checkProducts = function() {
 		listUtil.checkElements($scope.allProductsList, $scope.allProductsQuery);
-		updateTileEntitiesAndSave();
+		updateTileEntitiesAndSave($scope.allProductsList);
 	}
 
 	$scope.productChecked = function() {
-		updateTileEntitiesAndSave();
+		updateTileEntitiesAndSave($scope.allProductsList);
+	};
+
+	/**
+	* Check/Uncheck infopages regarding the search filter.
+	* If less then all filtered spots are checked, check all of them. Otherwise uncheck all.
+	*/
+	$scope.checkInfoPages = function() {
+		listUtil.checkElements($scope.allInfoPages, $scope.allInfoPagesQuery);
+		updateTileEntitiesAndSave($scope.allInfoPages);
+	}
+
+	$scope.infoPageChecked = function() {
+		updateTileEntitiesAndSave($scope.allInfoPages);
 	};
 
 	/** 
@@ -267,4 +303,4 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 	});
 }
 
-Cloobster.AppConfig.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', '$timeout', 'errorHandler', 'Business', 'DashboardItem','listUtil','Product'];
+Cloobster.AppConfig.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', '$timeout', 'errorHandler', 'Business', 'DashboardItem','listUtil','Product', 'InfoPage'];
