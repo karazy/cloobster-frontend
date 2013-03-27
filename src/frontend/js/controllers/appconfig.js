@@ -8,7 +8,7 @@
 * 	Configure Dashboard, App Theme and Images
 * 	@constructor
 */
-Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginService, langService, $log, $timeout, handleError, Business, DashboardItem) {
+Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginService, langService, $log, $timeout, handleError, Business, DashboardItem, listUtil) {
 	var dashboardItemsResource;
 
 	/** Tile configuration map */
@@ -175,6 +175,8 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 
 	$scope.selectTile = function(tile) {
 		$scope.currentTile = tile;
+
+		if(tile.type == 'productsselected')
 	};
 
 	$scope.deleteTile = function(tile) {
@@ -193,6 +195,14 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 		}, handleError);
 	}
 
+	/**
+	* Check/Uncheck products regarding the search filter.
+	* If less then all filtered spots are checked, check all of them. Otherwise uncheck all.
+	*/
+	$scope.checkProducts = function() {
+		listUtil.checkElements($scope.allProductsList, $scope.allProductsQuery);
+	}
+
 
 	/** 
 	 * Watches loggedIn status and initializes controller when status changes to true.
@@ -208,4 +218,4 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 	});
 }
 
-Cloobster.AppConfig.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', '$timeout', 'errorHandler', 'Business', 'DashboardItem'];
+Cloobster.AppConfig.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', '$timeout', 'errorHandler', 'Business', 'DashboardItem','listUtil'];
