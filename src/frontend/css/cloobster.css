@@ -726,10 +726,10 @@ ul.options-list li:hover {
 
 .smartphone-content {
   width: 300px;
-  height: 455px;
+  height: 448px;
   position: relative;
-  top: 146px;
-  left: 104px;
+  top: 148px;
+  left: 54px;
   overflow: scroll;
 }
 

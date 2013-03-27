@@ -112,7 +112,8 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 		jQuery( ".tile-container-templates .tile" ).draggable({
 			revert: "invalid",
 			containment: "document",
-			helper: "clone"
+			helper: "clone",
+			zIndex: 10
 		});
 
 	    jQuery( ".tile-empty" ).droppable(
