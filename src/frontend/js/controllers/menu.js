@@ -519,7 +519,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 	}
 
 	/**
-	* Toggle hideInDashboard filter on/off on all products.
+	* Toggle hideInDashboard filter on/undefined on all products.
 	*
 	*/
 	$scope.toggleProductHideInDashboardFilter = function() {
@@ -537,6 +537,39 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 		}
 
 		listUtil.checkElements($scope.allProductsList, null, true);
+	}
+
+	/**
+	* Toggle hideInDashboard filter off/undefined on all products.
+	*
+	*/
+	$scope.toggleProductVisibleOnDashboardFilter = function() {
+		if(!$scope.allProductsQuery) {
+			$scope.allProductsQuery = {
+				'hideInDashboard' : false
+			}
+			return;
+		}
+
+		if($scope.allProductsQuery.hideInDashboard === false) {
+			delete $scope.allProductsQuery.hideInDashboard;
+		} else {
+			$scope.allProductsQuery.hideInDashboard = false;
+		}
+
+		listUtil.checkElements($scope.allProductsList, null, true);
+	}
+
+	/**
+	* Helper method for all products list in menu partial.
+	* Checks if filter for shown on dashboard is set to === false
+	*/
+	$scope.isQueryVisibleOnDashboardActive = function() {
+		if(!$scope.allProductsQuery) {
+			return false;
+		}
+
+		return $scope.allProductsQuery.hideInDashboard === false;
 	}
 
 	/**

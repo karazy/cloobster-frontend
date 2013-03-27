@@ -939,6 +939,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Spezialprodukte anzeigen",
 			"EN" : "Display special products"
 		},
+		"products.filter.showindashboard.tooltip" : {
+			"DE" :  "Nur auf Dashboard sichtbare Produkte anzeigen.",
+			"EN" : "Display only products visible on dashboard."
+		},
 		"products.filter.hideindashboard.tooltip" : {
 			"DE" :  "Vom Dashboard ausgeblendete Produkte anzeigen",
 			"EN" : "Display products hidden in dashboard"
