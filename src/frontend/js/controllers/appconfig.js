@@ -67,6 +67,8 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			description: langService.translate("tiles.template.productsselected.description")
 		}
 	};
+	/** Holds the last tile whose hover delete button was clicked. */
+	$scope.lastHoveredTile = null;
 
 	function init (activeBusinessId) {
 		if(!activeBusinessId) {
@@ -204,8 +206,14 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 	};
 
 	$scope.deleteTile = function(tile) {
+		var tileToDelete = tile || $scope.lastHoveredTile;
 
-		tile.$remove(function() {
+		if(!tileToDelete) {
+			$log.log('AppConfig.deleteTile: no tile given');
+			return;
+		}
+
+		tileToDelete.$remove(function() {
 			if($scope.currentTile == tile) {
 				$scope.currentTile = null;
 			}
