@@ -2267,8 +2267,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Delete tile"
 		},
 		"tiles.dialog.delete.text" : {
-			"DE" :  "{{tiles[currentTile.type].title}} wird gelöscht!",
-			"EN" : "{{tiles[currentTile.type].title}} tile will be deleted!"
+			"DE" :  "Kachel wird entfernt!",
+			"EN" : "Tile will be removed!"
 		},
 		//general
 		"common.warning.title" : {
