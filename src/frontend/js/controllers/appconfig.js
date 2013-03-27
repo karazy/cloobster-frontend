@@ -147,11 +147,10 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			if(tmpTile) {
 				$scope.dashboardItems.push(tmpTile);
 				itemIds.push(tmpTile.id);
-				$log.log("set tile" + tmpTile.id + " index to " + (index));
 			}
 		});
 
-		dashboardItemsResource.update({'itemIds': itemIds}, angular.noop, handleError);
+		dashboardItemsResource.update({'itemIds': itemIds}, angular.noop, handleError);	
 	}
 
 	/**
