@@ -2162,9 +2162,65 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "all areas"
 		},
 		//app config partial
+		"appconfig.description" : {
+			"DE" :  "Konfigurieren Sie das Dashboard der App für Ihren individuellen Auftritt. Füge Sie Kacheln hinzu und arrangieren Sie diese per Drag & Drop.",
+			"EN" : "Customize the look of the dashboard. Add tiles and arrange them via drag & drop."
+		},
 		"appconfig.tiles.list.title" : {
-			"DE" :  "Kacheln",
-			"EN" : "Tiles"
+			"DE" :  "Kacheltypen",
+			"EN" : "Tile types"
+		},
+		"appconfig.tiles.list.description" : {
+			"DE" :  "Liste aller verfügbaren Kacheltypen. Fügen Sie diese einfach per Drag&Drop auf die leere Kachel rechts hinzu. Sie können maximal 10 Kacheln platzieren.",
+			"EN" : "List of all available tiles. Just add them via drag & drop on the empty tile to the right. You can add a maximum of 10 tiles."
+		},
+		"appconfig.tilesconfig.list.title" : {
+			"DE" :  "Dashboard Vorschau",
+			"EN" : "Dashboard preview"
+		},
+		"appconfig.tilesconfig.list.description" : {
+			"DE" :  "Vorschau des App Dashboards. Fügen Sie Kacheln aus der Liste links hinzu. Sortieren Sie diese anschließend per Drag & Drop.",
+			"EN" : "Shows a preview how your app dashboard will look like. Just drop a tile from the list on the empty tile. Rearrange order by drag and drop."
+		},
+		"appconfig.tile.empty" : {
+			"DE" :  "Kachel hier ablegen",
+			"EN" : "drop a tile"
+		},
+		"tiles.template.feedback" : {
+			"DE" :  "Feedback",
+			"EN" : "Feedback"
+		},
+		"tiles.template.products" : {
+			"DE" :  "Produkte",
+			"EN" : "Products"
+		},
+		"tiles.template.infopages" : {
+			"DE" :  "A - Z",
+			"EN" : "A - Z"
+		},
+		"tiles.template.actions" : {
+			"DE" :  "Aktionen",
+			"EN" : "Actions"
+		},
+		"tiles.template.allinfopages" : {
+			"DE" :  "Zufalls A - Z",
+			"EN" : "Random A - Z"
+		},
+		"tiles.template.infopagesselected" : {
+			"DE" :  "Ausgewählte A - Z",
+			"EN" : "Selected A - Z"
+		},
+		"tiles.template.productsall" : {
+			"DE" :  "Zufalls Produkte",
+			"EN" : "Random products"
+		},
+		"tiles.template.productsspecial" : {
+			"DE" :  "Zufällige spezial Produkte",
+			"EN" : "Random special products"
+		},
+		"tiles.template.productsselected" : {
+			"DE" :  "Ausgewählte Produkte",
+			"EN" : "Selected products"
 		},
 		"tiles.template.feedback.description" : {
 			"DE" :  "Shortcut um in den Feedbackbereich zu gelangen, statt über die seitliche Navigation.",
@@ -2201,6 +2257,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"tiles.template.productsselected.description" : {
 			"DE" :  "Zeigt ein zufälliges Produkt aus der Menge der selektierten. Explizites markieren ignoriert die \"verborgen auf Dashboard\" Einstellung.",
 			"EN" : "Displays a random product out of the ones you select. The hide on dashboard flag will be ignored. Only products assigned to active area are shown."
+		},
+		"appconfig.tiledetail.empty.description" : {
+			"DE" :  "Zeigt details einer Kachel an. Wählen Sie eine Kachel aus der Dashboard Vorschau.",
+			"EN" : "Shows the selected tile details. Select a tile from dashboard preview."
+		},
+		"tiles.dialog.delete.title" : {
+			"DE" :  "Kachel löschen",
+			"EN" : "Delete tile"
+		},
+		"tiles.dialog.delete.text" : {
+			"DE" :  "{{tiles[currentTile.type].title}} wird gelöscht!",
+			"EN" : "{{tiles[currentTile.type].title}} tile will be deleted!"
 		},
 		//general
 		"common.warning.title" : {
