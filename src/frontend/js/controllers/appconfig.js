@@ -8,8 +8,9 @@
 * 	Configure Dashboard, App Theme and Images
 * 	@constructor
 */
-Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginService, langService, $log, $timeout, handleError, Business, DashboardItem, listUtil) {
-	var dashboardItemsResource;
+Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginService, langService, $log, $timeout, handleError, Business, DashboardItem, listUtil, Product) {
+	var dashboardItemsResource,
+			productsResource;
 
 	/** Tile configuration map */
 	$scope.tiles = {
@@ -58,6 +59,12 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			type: "productsspecial",
 			cls: "tile-products",
 			description: ""
+		},
+		"productsselected": {	
+			title: langService.translate("tiles.template.productsselected") || "Selected Products",
+			type: "productsselected",
+			cls: "tile-products",
+			description: ""
 		}
 	};
 
@@ -67,6 +74,8 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 		}
 
 		dashboardItemsResource = DashboardItem.buildResource(activeBusinessId);
+
+		productsResource = Product.buildResource(activeBusinessId);
 
 		//load dashboard items
 		$scope.dashboardItems = dashboardItemsResource.query(null, angular.noop, handleError);
@@ -176,7 +185,22 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 	$scope.selectTile = function(tile) {
 		$scope.currentTile = tile;
 
-		if(tile.type == 'productsselected')
+		if(tile.type == 'productsselected') {
+				$scope.allProductsList = productsResource.query(null, function() {
+					var checkedProducts = {};
+					
+					if(tile.entityIds) {
+						// build map productId -> checked
+						angular.forEach(tile.entityIds, function(checkedProductId) {
+							checkedProducts[checkedProductId] = true;
+						});
+
+						angular.forEach($scope.allProductsList, function(product) {
+							product.checked = checkedProducts[product.id];
+						});
+					}
+			}, handleError);
+		}
 	};
 
 	$scope.deleteTile = function(tile) {
@@ -195,14 +219,31 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 		}, handleError);
 	}
 
+	function updateTileEntitiesAndSave () {
+		if(!$scope.currentTile)
+			return;
+		$scope.currentTile.entityIds = [];
+		angular.forEach($scope.allProductsList, function(item){
+			if(item.checked) {
+				$scope.currentTile.entityIds.push(item.id);
+			}
+		});
+
+		$scope.currentTile.$update(null, null, handleError);
+	}
+
 	/**
 	* Check/Uncheck products regarding the search filter.
 	* If less then all filtered spots are checked, check all of them. Otherwise uncheck all.
 	*/
 	$scope.checkProducts = function() {
 		listUtil.checkElements($scope.allProductsList, $scope.allProductsQuery);
+		updateTileEntitiesAndSave();
 	}
 
+	$scope.productChecked = function() {
+		updateTileEntitiesAndSave();
+	};
 
 	/** 
 	 * Watches loggedIn status and initializes controller when status changes to true.
@@ -218,4 +259,4 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 	});
 }
 
-Cloobster.AppConfig.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', '$timeout', 'errorHandler', 'Business', 'DashboardItem','listUtil'];
+Cloobster.AppConfig.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', '$timeout', 'errorHandler', 'Business', 'DashboardItem','listUtil','Product'];
