@@ -109,7 +109,7 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 	*/
 	function setupDragAndDrop() {
 		//drag&drop functionality
-		jQuery( ".tile-container-templates .tile" ).draggable({
+		jQuery( ".tile-container-templates .tile-template" ).draggable({
 			revert: "invalid",
 			containment: "document",
 			helper: "clone",
@@ -118,15 +118,17 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 
 	    jQuery( ".tile-empty" ).droppable(
 	    {
-	    	accept: ".tile",
+	    	accept: ".tile-template",
 	    	hoverClass: "tile-config-highlight",
 	      	drop: $scope.addTileToConfig
-	      // function( event, ui ) {
-	      //   $( this )
-	      //     .addClass( "ui-state-highlight" )
-	      //     .find( "p" )
-	      //       .html( "Dropped!" );
-	      // }
+	    }
+	    );
+
+	    jQuery( ".tile-container-config" ).droppable(
+	    {
+	    	accept: ".tile-template",
+	    	hoverClass: "tile-container-config-highlight",
+	      	drop: $scope.addTileToConfig
 	    }
 	    );
 	}

@@ -32,7 +32,7 @@
 	    			<p l="appconfig.tiles.list.description">List of all available tiles for the dashboard.</p>
 	    		</div>
 				<div class="tile-container-templates data-container-block data-container-500 data-container-scrollable">
-			        <div ng-repeat="tile in tiles" class="tile">
+			        <div ng-repeat="tile in tiles" class="tile-template">
 			        	<div class="{{tile.cls}}">
 			        		<div class="tile-icon"></div>
 			        		<div class="tile-title">{{tile.title}}</div>
@@ -50,7 +50,7 @@
 	    			<p l="appconfig.tilesconfig.list.description">Shows a preview how your app dashboard will look like. Just drop a tile from the list on the empty tile. Rearrange order by drag and drop.</p>
 	    		</div>
 	    		<div class="smartphone-frame">	    		
-				<div class="tile-container-config data-container-block smartphone-content" style="padding-left: 48px;">
+				<div class="tile-container-config data-container-block smartphone-content">
 					<div id="tiles-sort-container">
 						<div ng-repeat="item in dashboardItems" class="tile" ng-class="{'tile-active': currentTile == item}">
 							<div class="tile-delete" ng-click="confirmDelete(item)">X</div>							
