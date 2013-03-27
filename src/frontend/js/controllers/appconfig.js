@@ -70,9 +70,19 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 
 		//load dashboard items
 		$scope.dashboardItems = dashboardItemsResource.query(null, angular.noop, handleError);
+		$timeout(setupDragAndDrop,0);
+		setupSorting();
 	}
 
-	$timeout(setupDragAndDrop, 1000);
+	/**
+	* @private
+	* Initialize drag and drop functionality for tile configuration with jQuery UI.
+	*/
+	function setupSorting() {
+		jQuery('#tiles-sort-container').sortable({
+			update: updateTileOrder
+		});
+	};
 
 	/**
 	* @private
@@ -100,6 +110,11 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 	    }
 	    );
 	}
+
+	/**
+	* @private
+	* Helper function to create new tile resource from template and save on server.
+	*/
 	function createTile (template) {
 		if(!template) {
 			$log.error('No tile template supplied');
@@ -113,6 +128,30 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 		}
 
 		newTile.$save(saveSuccess, handleError);
+	}
+
+	/**
+	* @private
+	* Event handler called after the order of the tiles has been updated.
+	*/
+	function updateTileOrder (event, ui) {
+		var tiles = ui.item.parent().children(), //get all elements
+			tmpTile,
+			itemIds = [];
+
+		$scope.dashboardItems.splice(0, $scope.dashboardItems.length);
+
+		tiles.each(function(index, ele) {
+			//get corresponding tile
+			tmpTile = angular.element(ele).scope().item;
+			if(tmpTile) {
+				$scope.dashboardItems.push(tmpTile);
+				itemIds.push(tmpTile.id);
+				$log.log("set tile" + tmpTile.id + " index to " + (index));
+			}
+		});
+
+		dashboardItemsResource.update({'itemIds': itemIds}, angular.noop, handleError);
 	}
 
 	/**

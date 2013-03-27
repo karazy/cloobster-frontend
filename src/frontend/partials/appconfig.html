@@ -44,10 +44,12 @@
 			<div class="data-container-with-title">
 				<h4 class="data-container-title" l="appconfig.tilesconfig.list.title">Dashboard Preview</h4>
 				<div class="tile-container-config data-container-block data-container-large">
-					<div ng-repeat="item in dashboardItems" class="tile" ng-class="{'tile-active': currentTile == item}">
-						<div ng-class="tiles[item.type].cls" ng-click="selectTile(item)">
-							<div class="tile-icon"></div>
-							<div class="tile-title">{{ tiles[item.type].title }}</div>
+					<div id="tiles-sort-container">
+						<div ng-repeat="item in dashboardItems" class="tile" ng-class="{'tile-active': currentTile == item}">
+							<div ng-class="tiles[item.type].cls" ng-click="selectTile(item)">
+								<div class="tile-icon"></div>
+								<div class="tile-title">{{ tiles[item.type].title }}</div>
+							</div>
 						</div>
 					</div>
 					<div class="tile-empty" ng-hide="dashboardItems.length > 9">
