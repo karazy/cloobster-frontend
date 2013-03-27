@@ -39,7 +39,7 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 		"actions": {	
 			title: langService.translate("tiles.template.actions") || "Service Call",
 			type: "actions",
-			cls: "",
+			cls: "tile-actions",
 			description: langService.translate("tiles.template.actions.description")
 		},
 		"infopagesall": {	

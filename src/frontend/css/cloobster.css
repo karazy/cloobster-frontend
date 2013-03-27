@@ -691,3 +691,7 @@ ul.options-list li:hover {
   background-image: url('../img/tiles/info.png');  
 }
 
+.tile-actions .tile-icon {
+  background-image: url('../img/tiles/vip.png');  
+}
+
