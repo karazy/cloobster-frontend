@@ -2171,16 +2171,16 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Tile types"
 		},
 		"appconfig.tiles.list.description" : {
-			"DE" :  "Liste aller verfügbaren Kacheltypen. Fügen Sie diese einfach per Drag&Drop auf die leere Kachel rechts hinzu. Sie können maximal 10 Kacheln platzieren.",
-			"EN" : "List of all available tiles. Just add them via drag & drop on the empty tile to the right. You can add a maximum of 10 tiles."
+			"DE" :  "Liste aller verfügbaren Kacheltypen. Fügen Sie diese einfach per <b>Drag&Drop</b> auf die leere Kachel rechts hinzu. Sie können maximal 10 Kacheln platzieren.",
+			"EN" : "List of all available tiles. Just add them via <b>drag & drop</b> on the empty tile to the right. You can add a maximum of 10 tiles."
 		},
 		"appconfig.tilesconfig.list.title" : {
 			"DE" :  "Dashboard Vorschau",
 			"EN" : "Dashboard preview"
 		},
 		"appconfig.tilesconfig.list.description" : {
-			"DE" :  "Vorschau des App Dashboards. Fügen Sie Kacheln aus der Liste links hinzu. Sortieren Sie diese anschließend per Drag & Drop.",
-			"EN" : "Shows a preview how your app dashboard will look like. Just drop a tile from the list on the empty tile. Rearrange order by drag and drop."
+			"DE" :  "Vorschau des App Dashboards. Fügen Sie Kacheln aus der Liste links hinzu. Sortieren Sie diese anschließend per <b>Drag & Drop</b>. Kachel <b>anklicken</b> für weitere Details.",
+			"EN" : "Shows a preview how your app dashboard will look like. Just drop a tile from the list on the empty tile. Rearrange order by <b>drag and drop</b>. <b>Click</b> tile for more details."
 		},
 		"appconfig.tile.empty" : {
 			"DE" :  "Kachel hier ablegen",
