@@ -2163,39 +2163,39 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Tiles"
 		},
 		"tiles.template.feedback.description" : {
-			"DE" :  "",
+			"DE" :  "Shortcut um in den Feedbackbereich zu gelangen, statt über die seitliche Navigation.",
 			"EN" : "Shortcut to quickly reach Feedback instead of the navigation menu."
 		},
 		"tiles.template.products.description" : {
-			"DE" :  "",
+			"DE" :  "Shortcut um in den Produktbereich zu gelangen, statt über die seitliche Navigation.",
 			"EN" : "Shortcut to quickly reach Products instead of the navigation menu."
 		},
 		"tiles.template.infopages.description" : {
-			"DE" :  "",
+			"DE" :  "Shortcut um in den A - Z Bereich zu gelangen, statt über die seitliche Navigation.",
 			"EN" : "Shortcut to quickly reach A - Z instead of the navigation menu."
 		},
 		"tiles.template.actions.description" : {
-			"DE" :  "",
+			"DE" :  "Shortcut um in den Aktionsbereich zu gelangen, statt über die seitliche Navigation.",
 			"EN" : "Shortcut to quickly reach Actions instead of the navigation menu."
 		},
 		"tiles.template.infopagesall.description" : {
-			"DE" :  "",
+			"DE" :  "Zeigt eine zufällige Infoseite. Seiten die markiert sind als verborgen auf dem Dashboard werden nicht angezeigt. ",
 			"EN" : "Display a random infopage. Ignores pages flagged to be hidden on dashboard."
 		},
 		"tiles.template.infopagesselected.description" : {
-			"DE" :  "",
+			"DE" :  "Zeigt eine zufällige Infoseite aus der Menge der selektierten. Explizites markieren ignoriert die \"verborgen auf Dashboard\" Einstellung.",
 			"EN" : "Displays a random infopage out of the ones you select. The hide on dashboard flag will be ignored."
 		},
 		"tiles.template.productsall.description" : {
-			"DE" :  "",
+			"DE" :  "Zeigt ein zufälliges Produkt. Produkte die markiert sind als verborgen auf dem Dashboard werden nicht angezeigt.",
 			"EN" : "Display a random product. Ignores products flagged to be hidden on dashboard. Only products assigned to active area are shown."
 		},
 		"tiles.template.productsspecial.description" : {
-			"DE" :  "",
+			"DE" :  "Zeigt ein zufälliges Produkt welches als Special markiert ist. Produkte die markiert sind als verborgen auf dem Dashboard werden nicht angezeigt.",
 			"EN" : "Display a random product marked as special. Ignores products flagged to be hidden on dashboard. Only products assigned to active area are shown."
 		},
 		"tiles.template.productsselected.description" : {
-			"DE" :  "",
+			"DE" :  "Zeigt ein zufälliges Produkt aus der Menge der selektierten. Explizites markieren ignoriert die \"verborgen auf Dashboard\" Einstellung.",
 			"EN" : "Displays a random product out of the ones you select. The hide on dashboard flag will be ignored. Only products assigned to active area are shown."
 		},
 		//general
