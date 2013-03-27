@@ -2186,6 +2186,26 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Kachel hier ablegen",
 			"EN" : "drop a tile"
 		},
+		"appconfig.tiledetail.title" : {
+			"DE" :  "Kacheldetails",
+			"EN" : "Tile details"
+		},
+		"appconfig.tiledetail.empty.description" : {
+			"DE" :  "Zeigt die Details einer Kachel. Wähle Sie eine aus der Dashboard Vorschau.",
+			"EN" : "Shows the selected tile details. Select a tile from dashboard preview."
+		},
+		"appconfig.tiledetail.productlist.title" : {
+			"DE" :  "Produktliste",
+			"EN" : "Product list"
+		},
+		"appconfig.infopages.title" : {
+			"DE" :  "A-Z Einträge",
+			"EN" : "Infopage entries"
+		},
+		"appconfig.list.dataselection.description" : {
+			"DE" :  "Wählen Sie die Datensätze für diese Kachel aus. Einer der Datensätze wird dann zufällig auf dem Dashboard angezeigt.",
+			"EN" : "Select the data entries for this tile. One of those entires will be displayed randomly on the dashboard."
+		},
 		"tiles.template.feedback" : {
 			"DE" :  "Feedback",
 			"EN" : "Feedback"

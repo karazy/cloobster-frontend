@@ -84,7 +84,7 @@
 			<!-- third column: tile details -->
 			<div class="span3" ng-show="currentTile">
 				<div class="data-container-with-title">
-					<h4 class="data-container-title" l="appconfig.tiledetail.productlist.title">All Products</h4>
+					<h4 class="data-container-title" l="appconfig.tiledetail.title">Tile details</h4>
 					<div class="data-container-block data-container-small">
 						<h4>{{tiles[currentTile.type].title}}</h4>
 						<p>{{tiles[currentTile.type].description}}</p>
@@ -92,84 +92,86 @@
     				</div>	    	
 				</div>
 				<div class="data-container-with-title" ng-show="currentTile.type == 'productsselected'">
-					<h4 class="data-container-title" l="appconfig.tiledetail.title">Tile details</h4>
-				<!-- products list for type productsselected -->
-	    		<div class="data-container-block data-container-seperator">
-			    	<p l="menus.list.allproducts.description">List of all products</p>
-					<div class="btn-toolbar">
-						<div class="btn-group">						
-							<button  class="btn" ng-click="checkProducts()" tooltip="common.masscheck.tooltip">
-								<i class="icon-check icon-black"></i>
-							</button>						
+					<h4 class="data-container-title" l="appconfig.productlist.title">Product list</h4>
+					<!-- products list for type productsselected -->
+		    		<div class="data-container-block data-container-seperator">
+				    	<p l="menus.list.allproducts.description">List of all products</p>
+						<div class="btn-toolbar">
+							<div class="btn-group">						
+								<button  class="btn" ng-click="checkProducts()" tooltip="common.masscheck.tooltip">
+									<i class="icon-check icon-black"></i>
+								</button>						
+							</div>
 						</div>
-					</div>
-					<div class="btn-group">
-						<div class="input-prepend">
-	    					<span class="add-on"><i class="icon-search icon-black"></i>
-	    					</span>
-	    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="allProductsQuery.name">
-	    					<i class="icon-remove icon-black" ng-click="allProductsQuery.name = ''">
-							</i> 
-						</div>
+						<div class="btn-group">
+							<div class="input-prepend">
+		    					<span class="add-on"><i class="icon-search icon-black"></i>
+		    					</span>
+		    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="allProductsQuery.name">
+		    					<i class="icon-remove icon-black" ng-click="allProductsQuery.name = ''">
+								</i> 
+							</div>
+			    		</div>
+			    	</div>
+			    	<div class="data-container-block data-container-large data-container-scrollable" >
+			    		<ul class="nav nav-pills-checkbox nav-stacked">
+			       	 	<li ng-repeat="product in allProductsList | filter:allProductsQuery | orderBy:['name']" class="product-item">
+			       	 		<div>
+				        		<div>
+				        			<input type="checkbox" ng-model="product.checked" ng-change="productChecked()">
+				        		</div>
+			        			<div>
+			        				<span ng-bind="product.name"></span>
+			        				<i class="icon-ban-circle" ng-show="!product.active"></i>
+			        				<i class="icon-star" ng-show="product.special"></i>
+			        				<i class="icon-eye-close" ng-show="product.hideInDashboard"></i>
+			        			</div>
+		        			</div>
+				        </li>
+			    		</ul>
 		    		</div>
 		    	</div>
-		    	<div class="data-container-block data-container-large data-container-scrollable" >
-		    		<ul class="nav nav-pills-checkbox nav-stacked">
-		       	 	<li ng-repeat="product in allProductsList | filter:allProductsQuery | orderBy:['name']" class="product-item">
-		       	 		<div>
-			        		<div>
-			        			<input type="checkbox" ng-model="product.checked" ng-change="productChecked()">
-			        		</div>
-		        			<div>
-		        				<span ng-bind="product.name"></span>
-		        				<i class="icon-ban-circle" ng-show="!product.active"></i>
-		        				<i class="icon-star" ng-show="product.special"></i>
-		        				<i class="icon-eye-close" ng-show="product.hideInDashboard"></i>
+		    	<div class="data-container-with-title" ng-show="currentTile.type == 'infopagesselected'">
+						<h4 class="data-container-title" l="appconfig.infopages.title">Infopage entries</h4>
+						<!-- infopages list for type infopagesselected -->
+		    		<div class="data-container-block data-container-seperator">
+				    	<p l="appconfig.list.dataselection.description">Select the data entries for this tile. One of those entires will be displayed randomly on the dashboard.</p>
+						<div class="btn-toolbar">
+							<div class="btn-group">						
+								<button  class="btn" ng-click="checkInfoPages()" tooltip="common.masscheck.tooltip">
+									<i class="icon-check icon-black"></i>
+								</button>
+							</div>
+						</div>
+						<div class="btn-group">
+							<div class="input-prepend">
+		    					<span class="add-on"><i class="icon-search icon-black"></i>
+		    					</span>
+		    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="allInfoPagesQuery.title">
+		    					<i class="icon-remove icon-black" ng-click="allInfoPagesQuery.title = ''">
+								</i> 
+							</div>
+			    		</div>
+			    	</div>
+			    	<div class="data-container-block data-container-large data-container-scrollable" >
+			    		<ul class="nav nav-pills-checkbox nav-stacked">
+			       	 	<li ng-repeat="infopage in allInfoPages | filter:allInfoPagesQuery | orderBy:['title']" class="product-item">
+			       	 		<div>
+				        		<div>
+				        			<input type="checkbox" ng-model="infopage.checked" ng-change="infoPageChecked()">
+				        		</div>
+			        			<div>
+			        				<span ng-bind="infopage.title"></span>
+			        				<i class="icon-eye-close" ng-show="infopage.hideInDashboard"></i>
+			        			</div>
 		        			</div>
-	        			</div>
-			        </li>
-		    		</ul>
-	    		</div>
-	    	</div>
-	    	<div class="data-container-with-title" ng-show="currentTile.type == 'infopagesselected'">
-					<h4 class="data-container-title" l="appconfig.tiledetail.title">Tile details</h4>
-					<!-- products list for type infopagesselected -->
-	    		<div class="data-container-block data-container-seperator">
-			    	<p l="appconfig.list.allinfopages.description">List of all infopages</p>
-					<div class="btn-toolbar">
-						<div class="btn-group">						
-							<button  class="btn" ng-click="checkInfoPages()" tooltip="common.masscheck.tooltip">
-								<i class="icon-check icon-black"></i>
-							</button>
-						</div>
-					</div>
-					<div class="btn-group">
-						<div class="input-prepend">
-	    					<span class="add-on"><i class="icon-search icon-black"></i>
-	    					</span>
-	    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="allInfoPagesQuery.title">
-	    					<i class="icon-remove icon-black" ng-click="allInfoPagesQuery.title = ''">
-							</i> 
-						</div>
+				        </li>
+			    		</ul>
 		    		</div>
-		    	</div>
-		    	<div class="data-container-block data-container-large data-container-scrollable" >
-		    		<ul class="nav nav-pills-checkbox nav-stacked">
-		       	 	<li ng-repeat="infopage in allInfoPages | filter:allInfoPagesQuery | orderBy:['title']" class="product-item">
-		       	 		<div>
-			        		<div>
-			        			<input type="checkbox" ng-model="infopage.checked" ng-change="infoPageChecked()">
-			        		</div>
-		        			<div>
-		        				<span ng-bind="infopage.title"></span>
-		        				<i class="icon-eye-close" ng-show="infopage.hideInDashboard"></i>
-		        			</div>
-	        			</div>
-			        </li>
-		    		</ul>
-	    		</div>
-	    	</div>
-				<!-- third column: tile details placeholder -->
+		    	</div>			
+			</div>
+
+			<!-- third column: tile details placeholder -->
 		    <div ng-hide="currentTile" class="span3">
 		    	<div class="data-container-with-title data-container-small data-container-inactive">
 		    		<h4 class="data-container-title data-container-inactive" l="appconfig.tiledetail.title">Tile details</h4>
@@ -178,7 +180,6 @@
 		    		</div>
 		    	</div>
 		    </div>
-			</div>
 
 			<!-- Modal tile delete dialog. -->
     		<div class="modal hide" id="deleteTileModal">
