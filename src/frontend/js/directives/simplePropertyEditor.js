@@ -62,7 +62,7 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', 'langcodesMap', 
 				'<div class="simple-property-editor" style="display:none; position:absolute; background-color:white;">'+
 				'<h5 class="editor-title" l="{{editorTitle}}">Edit property</h5>'+
 				'<form name="simplePropertyForm" novalidate ng-submit="save()" class="edit-property-form">'+
-					'<div class="">'+
+					'<div class="edit-property-form-inputs">'+
 						//bind default entity
 					 	'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty.$invalid)">'+
 					 		'<div class="controls">'+
