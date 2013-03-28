@@ -84,8 +84,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Documents"
 		},
 		"businesses.headertabs.appconfig" : {
-			"DE" :  "App Konfiguration",
-			"EN" : "App Configuration"
+			"DE" :  "App Dashboard",
+			"EN" : "App Dashboard"
 		},
 		//registration partial
 		"registration.title" : {
@@ -561,8 +561,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "New payment"
 		},
 		"business.detail.section.app" : {
-			"DE" :  "App Konfiguration",
-			"EN" : "App configuration"
+			"DE" :  "App Dashboard",
+			"EN" : "App Dashboard"
 		},
 		"business.detail.section.app.description" : {
 			"DE" :  "Konfigurieren Sie das Aussehen der cloobster App, um es an Ihre CI anzupassen.",
@@ -2186,6 +2186,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Kachel hier ablegen",
 			"EN" : "drop a tile"
 		},
+		"appconfig.tile.maximum" : {
+			"DE" :  "Max 10 Kachel erreicht.",
+			"EN" : "Max 10 tiles reached."
+		},
 		"appconfig.tiledetail.title" : {
 			"DE" :  "Kacheldetails",
 			"EN" : "Tile details"
@@ -2199,7 +2203,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Product list"
 		},
 		"appconfig.infopages.title" : {
-			"DE" :  "A-Z Einträge",
+			"DE" :  "Infoseiten Einträge",
 			"EN" : "Infopage entries"
 		},
 		"appconfig.list.dataselection.description" : {
@@ -2215,32 +2219,32 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Products"
 		},
 		"tiles.template.infopages" : {
-			"DE" :  "A - Z",
-			"EN" : "A - Z"
+			"DE" :  "Infoseiten",
+			"EN" : "Infopages"
 		},
 		"tiles.template.actions" : {
 			"DE" :  "Aktionen",
 			"EN" : "Actions"
 		},
 		"tiles.template.allinfopages" : {
-			"DE" :  "Zufalls A - Z",
-			"EN" : "Random A - Z"
+			"DE" :  "Zufalls Infoseite",
+			"EN" : "Random infopage"
 		},
 		"tiles.template.infopagesselected" : {
-			"DE" :  "Ausgewählte A - Z",
-			"EN" : "Selected A - Z"
+			"DE" :  "Ausgewählte Infoseite",
+			"EN" : "Selected infopage"
 		},
 		"tiles.template.productsall" : {
-			"DE" :  "Zufalls Produkte",
-			"EN" : "Random products"
+			"DE" :  "Zufalls Produkt",
+			"EN" : "Random product"
 		},
 		"tiles.template.productsspecial" : {
-			"DE" :  "Zufällige spezial Produkte",
-			"EN" : "Random special products"
+			"DE" :  "Zufälliges spezial Produkt",
+			"EN" : "Random special product"
 		},
 		"tiles.template.productsselected" : {
-			"DE" :  "Ausgewählte Produkte",
-			"EN" : "Selected products"
+			"DE" :  "Ausgewähltes Produkt",
+			"EN" : "Selected product"
 		},
 		"tiles.template.feedback.description" : {
 			"DE" :  "Shortcut um in den Feedbackbereich zu gelangen, statt über die seitliche Navigation.",

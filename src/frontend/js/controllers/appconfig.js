@@ -113,22 +113,29 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			revert: "invalid",
 			containment: "document",
 			helper: "clone",
-			zIndex: 10
+			zIndex: 100
+
 		});
 
-	    jQuery( ".tile-empty" ).droppable(
-	    {
-	    	accept: ".tile-template",
-	    	hoverClass: "tile-config-highlight",
-	      	drop: $scope.addTileToConfig
-	    }
-	    );
+	    // jQuery( ".tile-empty" ).droppable(
+	    // {
+	    // 	accept: ".tile-template",
+	    // 	hoverClass: "tile-config-highlight",
+	    //   	drop: $scope.addTileToConfig
+	    // }
+	    // );
 
 	    jQuery( ".tile-container-config" ).droppable(
 	    {
 	    	accept: ".tile-template",
-	    	hoverClass: "tile-container-config-highlight",
-	      	drop: $scope.addTileToConfig
+	    	activeClass: "drop-active",
+	      	drop: $scope.addTileToConfig,
+	      	activate: function() {
+				jQuery('.smartphone-frame .mask').show();
+			},
+			deactivate: function() {
+				jQuery('.smartphone-frame .mask').hide();
+			}
 	    }
 	    );
 	}
@@ -181,6 +188,10 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 	$scope.addTileToConfig = function(event, ui) {
 		//add tile to html
 		//make sure slot is blocked for other elements to drop on?
+		if($scope.dashboardItems.length > 9) {
+			return;
+		}
+
 		var tile = angular.element(ui.draggable[0]).scope().tile;
 		createTile(tile);
 		$scope.$digest();

@@ -49,8 +49,17 @@
 				<div class="data-container-block data-container-tiny data-container-seperator">
 	    			<p l="appconfig.tilesconfig.list.description">Shows a preview how your app dashboard will look like. Just drop a tile from the list on the empty tile. Rearrange order by drag and drop.</p>
 	    		</div>
-	    		<div class="smartphone-frame">	    		
-				<div class="tile-container-config data-container-block smartphone-content">
+	    		<div class="smartphone-frame">
+    			<div class="mask">
+    				<div ng-hide="dashboardItems.length > 9">
+						<div class="">+</div>
+						<div l="appconfig.tile.empty">Drop a tile</div>
+					</div>
+					<div ng-show="dashboardItems.length > 9">
+						<div l="appconfig.tile.maximum">Maximum amount of tiles reached.</div>
+					</div>
+				</div>
+				<div class="tile-container-config data-container-block smartphone-content">					
 					<div id="tiles-sort-container">
 						<div ng-repeat="item in dashboardItems" class="tile" ng-class="{'tile-active': currentTile == item}">
 							<div class="tile-delete" ng-click="confirmDelete(item)">X</div>							

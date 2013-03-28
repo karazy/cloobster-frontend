@@ -665,6 +665,8 @@ ul.options-list li:hover {
   overflow: hidden;
   color: black;
   text-align: center;
+  box-sizing: border-box;
+  padding: 0 3px;
 }
 
 .tile-number {
@@ -739,4 +741,35 @@ ul.options-list li:hover {
 .tile-container-config-highlight {
   border: 2px dashed red !important;
 }
+
+.mask {
+  top: 0;
+  left: 0;
+  /* must be lower than dragable */
+  z-index: 99;
+  background-color: #000;
+  opacity: .4;
+  display: none;
+  height: 1000px;
+  width: 100%;
+  position: absolute;
+  color: white;
+  text-align: center;
+  font-size: 50px;
+  line-height: 50px; 
+  top: 277px;
+  left: 84px;
+  width: 281px;
+  height: 464px;
+}
+
+.mask > div {
+  top: 150px;
+  position: relative;
+}
+
+.drop-active .mask {
+  display: block;
+}
+
 
