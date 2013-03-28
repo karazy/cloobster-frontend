@@ -4,6 +4,12 @@
 	<div class="row-fluid">
 		<div class="span8">
 			<p l="appconfig.description">Here you can customize the look of the app.</p>
+			<div class="alert alert-block" ng-show="activeBusiness.basic">
+			 	 <div l="appconfig.subscription.basic.description">
+			 		<span class="label label-important">Basic</span> You have a basic subscription. You can create areas and spots. But customers won't be able to order or place VIP calls. 
+			 		<a href="https://www.cloobster.com" target="_blank">Learn more</a> or <a href="#/businesses/{{activeBusiness.id}}">upgrade</a>.
+			 	</div>
+			</div>
 		</div>
 	</div>
 	<div class="row-fluid">
@@ -62,7 +68,7 @@
 				<div class="tile-container-config data-container-block smartphone-content">					
 					<div id="tiles-sort-container">
 						<div ng-repeat="item in dashboardItems" class="tile" ng-class="{'tile-active': currentTile == item}">
-							<div class="tile-delete" ng-click="confirmDelete(item)">X</div>							
+							<div class="tile-delete" ng-click="confirmDelete(item)" ng-hide="activeBusiness.basic">X</div>							
 							<div ng-class="tiles[item.type].cls" ng-click="selectTile(item)">
 								<div class="tile-icon"></div>
 								<div class="tile-title">{{ tiles[item.type].title }}</div>
@@ -101,7 +107,7 @@
 					<div class="data-container-block data-container-small">
 						<h4>{{tiles[currentTile.type].title}}</h4>
 						<p>{{tiles[currentTile.type].description}}</p>
-						<button class="btn" data-toggle="modal" data-target="#deleteTileModal"><i class="icon-trash"></i></button>
+						<button class="btn" data-toggle="modal" data-target="#deleteTileModal" ng-hide="activeBusiness.basic"><i class="icon-trash"></i></button>
     				</div>	    	
 				</div>
 				<div class="data-container-with-title" ng-show="currentTile.type == 'productsselected'">
