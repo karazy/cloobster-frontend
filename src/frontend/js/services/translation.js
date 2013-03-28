@@ -2166,6 +2166,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Konfigurieren Sie das Dashboard der App für Ihren individuellen Auftritt. Füge Sie Kacheln hinzu und arrangieren Sie diese per Drag & Drop.",
 			"EN" : "Customize the look of the dashboard. Add tiles and arrange them via drag & drop."
 		},
+		"appconfig.subscription.basic.description" : {
+			"DE" :  "<span class='label label-important'>Basis</span> Sie verwenden ein Basis Paket. Die Konfiguration eines individuellen Dashboards ist nur nach einem Upgrade des Pakets möglich.<br>" +
+			 		"<a href='https://www.cloobster.com' target='_blank'>Mehr Information</a> oder <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>.",
+			"EN" :  "<span class='label label-important'>Basic</span> Currently you are using a basic subscription. Customisation of the dashboard is only usable after an upgrade to your subscription.<br>" +
+			 		"<a href='https://www.cloobster.com' target='_blank'>Learn more</a> or <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>."
+		},
 		"appconfig.tiles.list.title" : {
 			"DE" :  "Kacheltypen",
 			"EN" : "Tile types"

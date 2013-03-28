@@ -87,10 +87,17 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 		productsResource = Product.buildResource(activeBusinessId);
 		infoPagesResource = InfoPage.buildResource(activeBusinessId);
 
+		$scope.activeBusiness = Business.buildResource(loginService.getAccount().id).get({'id': activeBusinessId}, function(business) {
+			if(!business.basic) {
+				setupDragAndDrop();
+				setupSorting();
+			}
+		}, handleError);
+
 		//load dashboard items
 		$scope.dashboardItems = dashboardItemsResource.query(null, angular.noop, handleError);
-		$timeout(setupDragAndDrop,0);
-		setupSorting();
+
+
 	}
 
 	/**
