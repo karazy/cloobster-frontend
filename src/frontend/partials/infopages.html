@@ -141,7 +141,7 @@
 					</div>
 					<!-- ng-show="currentInfoPage.type == 'STATIC'" -->
 					<div class="data-container-medium data-container-scrollable"  style="margin: 5px 0 5px 0;">
-						<div richtext-property-editor editor-title="infopage.html" editor-property="currentInfoPage.html" editor-on-save="saveInfoPage()" editor-placeholder="infopage.placeholder.html" editor-required>
+						<div richtext-property-editor editor-title="infopage.html" editor-entity="currentInfoPage" editor-field="html" editor-on-save="saveInfoPage()" editor-placeholder="infopage.placeholder.html" editor-required>
 							<div class="edit" tooltip="infopage.html">
 								<span l="infopage.placeholder.html" ng-hide="currentInfoPage.html" class="simple-property-placeholder">Detailed information!</span>
 								<div ng-bind-html-unsafe="translatedInfoPage('html', true)">

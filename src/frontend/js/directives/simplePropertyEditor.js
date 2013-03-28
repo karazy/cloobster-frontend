@@ -323,22 +323,18 @@ Cloobster.directives.directive('simplePropertyEditor', ['lang', 'langcodesMap', 
 			maxLength = attrs.hasOwnProperty('editorMaxLength') ? "maxlength='"+attrs.editorMaxLength+"'" : "",
 			placeholder = attrs.hasOwnProperty('editorPlaceholder') ? "placeholder='"+l(attrs.editorPlaceholder)+"'" : "",
 			type = 	attrs.hasOwnProperty('editorType') ? attrs.editorType : "text",
-			modelIndex = (suffix) ? "+" + suffix : "",
-			modelBinding = "editorValue",
+			inputName = (suffix) ?  ("{{'simpleProperty'+"+ suffix + "}}") : "simpleProperty",
+			modelBinding = (suffix) ? ("editorTranslations["+suffix+"]") : "editorValue",
 			inputHtml;
 
-		if(suffix) {
-			modelBinding = "editorTranslations["+suffix+"]";
-		}
-
 		if(type == "textarea") {
-			inputHtml = '<textarea class="property-input" rows="4" cols="100" name="{{' +"'simpleProperty'" + modelIndex + '}}" ng-model="' + modelBinding + '"' + maxLength +' '+required+' '+pattern+' '+placeholder+'></textarea>';
+			inputHtml = '<textarea class="property-input" rows="4" cols="100" name="'+ inputName + '" ng-model="' + modelBinding + '" ' + maxLength +' '+required+' '+pattern+' '+placeholder+'></textarea>';
 		} else {
-			if(type != "email" && type != "password" && type != "number") {
+			if(type != "email" && type != "password" && type != "number" && type != "url") {
 				type = "text";
 			}
 
-			inputHtml = '<input class="property-input" type="'+type+'" '+placeholder+' name="{{' +"'simpleProperty'" + modelIndex + '}}" ng-model="' + modelBinding + '"'  + maxLength +' '+required+' '+pattern+' '+repeat+'></input>';
+			inputHtml = '<input class="property-input" type="'+type+'" '+placeholder+' name="'+ inputName + '" ng-model="' + modelBinding + '" '  + maxLength +' '+required+' '+pattern+' '+repeat+'></input>';
 		}
 
 		return inputHtml;
