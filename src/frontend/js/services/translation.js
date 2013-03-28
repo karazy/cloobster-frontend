@@ -83,6 +83,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Dokumente",
 			"EN" : "Documents"
 		},
+		"businesses.headertabs.appconfig" : {
+			"DE" :  "App Dashboard",
+			"EN" : "App Dashboard"
+		},
 		//registration partial
 		"registration.title" : {
 			"DE" : "cloobster Registrierung",
@@ -557,8 +561,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "New payment"
 		},
 		"business.detail.section.app" : {
-			"DE" :  "App Konfiguration",
-			"EN" : "App configuration"
+			"DE" :  "App Dashboard",
+			"EN" : "App Dashboard"
 		},
 		"business.detail.section.app.description" : {
 			"DE" :  "Konfigurieren Sie das Aussehen der cloobster App, um es an Ihre CI anzupassen.",
@@ -934,6 +938,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"products.filter.special.tooltip" : {
 			"DE" :  "Spezialprodukte anzeigen",
 			"EN" : "Display special products"
+		},
+		"products.filter.showindashboard.tooltip" : {
+			"DE" :  "Nur auf Dashboard sichtbare Produkte anzeigen.",
+			"EN" : "Display only products visible on dashboard."
 		},
 		"products.filter.hideindashboard.tooltip" : {
 			"DE" :  "Vom Dashboard ausgeblendete Produkte anzeigen",
@@ -2152,6 +2160,145 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"reports.report.allareas" : {
 			"DE" :  "alle Bereiche",
 			"EN" : "all areas"
+		},
+		//app config partial
+		"appconfig.description" : {
+			"DE" :  "Konfigurieren Sie das Dashboard der App für Ihren individuellen Auftritt. Füge Sie Kacheln hinzu und arrangieren Sie diese per Drag & Drop.",
+			"EN" : "Customize the look of the dashboard. Add tiles and arrange them via drag & drop."
+		},
+		"appconfig.subscription.basic.description" : {
+			"DE" :  "<span class='label label-important'>Basis</span> Sie verwenden ein Basis Paket. Die Konfiguration eines individuellen Dashboards ist nur nach einem Upgrade des Pakets möglich.<br>" +
+			 		"<a href='https://www.cloobster.com' target='_blank'>Mehr Information</a> oder <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>.",
+			"EN" :  "<span class='label label-important'>Basic</span> Currently you are using a basic subscription. Customisation of the dashboard is only usable after an upgrade to your subscription.<br>" +
+			 		"<a href='https://www.cloobster.com' target='_blank'>Learn more</a> or <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>."
+		},
+		"appconfig.tiles.list.title" : {
+			"DE" :  "Kacheltypen",
+			"EN" : "Tile types"
+		},
+		"appconfig.tiles.list.description" : {
+			"DE" :  "Liste aller verfügbaren Kacheltypen. Fügen Sie diese einfach per <b>Drag&Drop</b> auf die leere Kachel rechts hinzu. Sie können maximal 10 Kacheln platzieren.",
+			"EN" : "List of all available tiles. Just add them via <b>drag & drop</b> on the empty tile to the right. You can add a maximum of 10 tiles."
+		},
+		"appconfig.tilesconfig.list.title" : {
+			"DE" :  "Dashboard Vorschau",
+			"EN" : "Dashboard preview"
+		},
+		"appconfig.tilesconfig.list.description" : {
+			"DE" :  "Vorschau des App Dashboards. Fügen Sie Kacheln aus der Liste links hinzu. Sortieren Sie diese anschließend per <b>Drag & Drop</b>. Kachel <b>anklicken</b> für weitere Details.",
+			"EN" : "Shows a preview how your app dashboard will look like. Just drop a tile from the list on the empty tile. Rearrange order by <b>drag and drop</b>. <b>Click</b> tile for more details."
+		},
+		"appconfig.tile.empty" : {
+			"DE" :  "Kachel hier ablegen",
+			"EN" : "drop a tile"
+		},
+		"appconfig.tile.maximum" : {
+			"DE" :  "Max 10 Kachel erreicht.",
+			"EN" : "Max 10 tiles reached."
+		},
+		"appconfig.tiledetail.title" : {
+			"DE" :  "Kacheldetails",
+			"EN" : "Tile details"
+		},
+		"appconfig.tiledetail.empty.description" : {
+			"DE" :  "Zeigt die Details einer Kachel. Wähle Sie eine aus der Dashboard Vorschau.",
+			"EN" : "Shows the selected tile details. Select a tile from dashboard preview."
+		},
+		"appconfig.tiledetail.productlist.title" : {
+			"DE" :  "Produktliste",
+			"EN" : "Product list"
+		},
+		"appconfig.infopages.title" : {
+			"DE" :  "Infoseiten Einträge",
+			"EN" : "Infopage entries"
+		},
+		"appconfig.list.dataselection.description" : {
+			"DE" :  "Wählen Sie die Datensätze für diese Kachel aus. Einer der Datensätze wird dann zufällig auf dem Dashboard angezeigt.",
+			"EN" : "Select the data entries for this tile. One of those entires will be displayed randomly on the dashboard."
+		},
+		"tiles.template.feedback" : {
+			"DE" :  "Feedback",
+			"EN" : "Feedback"
+		},
+		"tiles.template.products" : {
+			"DE" :  "Produkte",
+			"EN" : "Products"
+		},
+		"tiles.template.infopages" : {
+			"DE" :  "Infoseiten",
+			"EN" : "Infopages"
+		},
+		"tiles.template.actions" : {
+			"DE" :  "Aktionen",
+			"EN" : "Actions"
+		},
+		"tiles.template.allinfopages" : {
+			"DE" :  "Zufalls Infoseite",
+			"EN" : "Random infopage"
+		},
+		"tiles.template.infopagesselected" : {
+			"DE" :  "Ausgewählte Infoseite",
+			"EN" : "Selected infopage"
+		},
+		"tiles.template.productsall" : {
+			"DE" :  "Zufalls Produkt",
+			"EN" : "Random product"
+		},
+		"tiles.template.productsspecial" : {
+			"DE" :  "Zufälliges spezial Produkt",
+			"EN" : "Random special product"
+		},
+		"tiles.template.productsselected" : {
+			"DE" :  "Ausgewähltes Produkt",
+			"EN" : "Selected product"
+		},
+		"tiles.template.feedback.description" : {
+			"DE" :  "Shortcut um in den Feedbackbereich zu gelangen, statt über die seitliche Navigation.",
+			"EN" : "Shortcut to quickly reach Feedback instead of the navigation menu."
+		},
+		"tiles.template.products.description" : {
+			"DE" :  "Shortcut um in den Produktbereich zu gelangen, statt über die seitliche Navigation.",
+			"EN" : "Shortcut to quickly reach Products instead of the navigation menu."
+		},
+		"tiles.template.infopages.description" : {
+			"DE" :  "Shortcut um in den A - Z Bereich zu gelangen, statt über die seitliche Navigation.",
+			"EN" : "Shortcut to quickly reach A - Z instead of the navigation menu."
+		},
+		"tiles.template.actions.description" : {
+			"DE" :  "Shortcut um in den Aktionsbereich zu gelangen, statt über die seitliche Navigation.",
+			"EN" : "Shortcut to quickly reach Actions instead of the navigation menu."
+		},
+		"tiles.template.infopagesall.description" : {
+			"DE" :  "Zeigt eine zufällige Infoseite. Seiten die markiert sind als verborgen auf dem Dashboard werden nicht angezeigt. ",
+			"EN" : "Display a random infopage. Ignores pages flagged to be hidden on dashboard."
+		},
+		"tiles.template.infopagesselected.description" : {
+			"DE" :  "Zeigt eine zufällige Infoseite aus der Menge der selektierten. Explizites markieren ignoriert die \"verborgen auf Dashboard\" Einstellung.",
+			"EN" : "Displays a random infopage out of the ones you select. The hide on dashboard flag will be ignored."
+		},
+		"tiles.template.productsall.description" : {
+			"DE" :  "Zeigt ein zufälliges Produkt. Produkte die markiert sind als verborgen auf dem Dashboard werden nicht angezeigt.",
+			"EN" : "Display a random product. Ignores products flagged to be hidden on dashboard. Only products assigned to active area are shown."
+		},
+		"tiles.template.productsspecial.description" : {
+			"DE" :  "Zeigt ein zufälliges Produkt welches als Special markiert ist. Produkte die markiert sind als verborgen auf dem Dashboard werden nicht angezeigt.",
+			"EN" : "Display a random product marked as special. Ignores products flagged to be hidden on dashboard. Only products assigned to active area are shown."
+		},
+		"tiles.template.productsselected.description" : {
+			"DE" :  "Zeigt ein zufälliges Produkt aus der Menge der selektierten. Explizites markieren ignoriert die \"verborgen auf Dashboard\" Einstellung.",
+			"EN" : "Displays a random product out of the ones you select. The hide on dashboard flag will be ignored. Only products assigned to active area are shown."
+		},
+		"appconfig.tiledetail.empty.description" : {
+			"DE" :  "Zeigt details einer Kachel an. Wählen Sie eine Kachel aus der Dashboard Vorschau.",
+			"EN" : "Shows the selected tile details. Select a tile from dashboard preview."
+		},
+		"tiles.dialog.delete.title" : {
+			"DE" :  "Kachel löschen",
+			"EN" : "Delete tile"
+		},
+		"tiles.dialog.delete.text" : {
+			"DE" :  "Kachel wird entfernt!",
+			"EN" : "Tile will be removed!"
 		},
 		//general
 		"common.warning.title" : {

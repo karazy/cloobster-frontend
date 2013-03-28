@@ -37,6 +37,7 @@ Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster
     $routeProvider.when('/accounts/setup/:token', {templateUrl: 'partials/activate_account.html', controller: Cloobster.Accounts});    
     $routeProvider.when('/howto', {templateUrl: 'partials/howto.html', controller: Cloobster.Navigation});
     $routeProvider.when('/businesses/:businessId/reports', {templateUrl: 'partials/reports.html', controller: Cloobster.Reports});
+    $routeProvider.when('/businesses/:businessId/appconfig', {templateUrl: 'partials/appconfig.html', controller: Cloobster.AppConfig});
     // $routeProvider.when('/', {templateUrl: 'partials/login.html', controller: Cloobster.Login});
     
     $routeProvider.otherwise({redirectTo: '/home'});

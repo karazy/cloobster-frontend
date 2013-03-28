@@ -23,6 +23,16 @@ CloobsterAdmin.Functions = function($scope, $http) {
 			});
 	};
 
+	$scope.createDashboards = function() {
+		$scope.createDashboards.text = "Upgrading ...";
+		$scope.createDashboards.disabled = true;
+		$http.put('/admin/s/dataupgrades/defaultdashboards', {}).success(function(data) {
+				$scope.createDashboards.text = "Task started.";
+			}).error(function (data, status) {
+				$scope.createDashboards.text = status + " error.";
+			});	
+	};
+
 	$scope.upgradeLocations = function() {
 		$scope.upgradeLocationsText = "Upgrading ...";
 		$scope.upgradeLocationsDisabled = true;

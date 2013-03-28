@@ -4,6 +4,9 @@
       <h2>Admin Functions</h2>
       <h6 class="nav-header">Datastore Upgrade Functions</h6>
       <p>
+      	<button type="button" class="btn btn-small" ng-click="createDashboards()" ng-bind="createDashboards.text" ng-disabled="createDashboards.disabled" ng-init="createDashboards.text='Add Default Dashboard'"></button>
+      </p>
+      <p>
       	<button type="button" class="btn btn-small" ng-click="upgradeLocations()" ng-bind="upgradeLocationsText" ng-disabled="upgradeLocationsDisabled" ng-init="upgradeLocationsText='Create Welcome Area/Spot and Basic Subscriptions'"></button>
       </p>
       <p>
