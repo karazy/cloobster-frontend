@@ -154,6 +154,7 @@
 		<copy todir="build/${frontenddir}">
 			<fileset id="indexfiles" dir="src/${frontenddir}/" >
 				<include name="index.prod.html"/>
+				<include name="frontend/index.html"/>
 			</fileset>
 			<fileset id="partialfiles" dir="src/${frontenddir}/" >
 				<include name="partials/**/*"/>
