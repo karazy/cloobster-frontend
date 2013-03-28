@@ -727,12 +727,12 @@ ul.options-list li:hover {
 }
 
 .smartphone-content {
-  width: 281px;
+  width: 300px;
   height: 464px;
   position: relative;
   top: 147px;
   left: 84px;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding-left: 15px;
   border: 2px solid transparent;
   box-sizing: border-box;
