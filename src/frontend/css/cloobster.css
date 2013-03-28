@@ -130,6 +130,12 @@ h1.edit:hover, h2.edit:hover {
   margin: 0;
 }
 
+.edit-property-form-inputs {
+  max-height: 400px;
+  overflow: auto;
+  margin-bottom: 5px;
+}
+
 .upload-image-form {
   margin: 0;
 }
