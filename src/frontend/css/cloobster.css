@@ -303,6 +303,22 @@ ul.payment-method-list li {
   display:none;
 }
 
+.richtext-property-editor-big {
+  width: 950px;
+  margin-left: -475px;
+}
+
+.richtext-property-editor-big-left {
+  width: 440px;
+  float: left;
+  margin-top: 40px;
+}
+
+.richtext-property-editor-big-right {
+  width: 440px;
+  float: right;
+}
+
 .product-wrapper {
   border: 1px solid gray;
   border-radius: 0.5em;  

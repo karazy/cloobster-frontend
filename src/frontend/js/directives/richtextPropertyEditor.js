@@ -22,28 +22,33 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','langcodesMap',
 				editorEntityAttr = attrs.hasOwnProperty('editorEntity') ? attrs.editorEntity : null,
 				html = 
 				'<div class="toggler" ng-transclude></div>'+
-				'<div class="modal hide">'+
+				'<div class="modal hide" ng-class="{\'richtext-property-editor-big\' : editorEntity.translations}">'+
 				  '<div class="modal-header">'+
 				   ' <button type="button" class="close" data-dismiss="modal">×</button>'+
 				    '<h3 l="{{editorTitle}}">Edit property</h3>'+
 				 '</div>'+
 				'<form name="simplePropertyForm" novalidate ng-submit="save()" class="edit-property-form">'+
 					'<div class="modal-body">'+
-						'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty.$invalid)">'+
-					 		'<div class="controls">'+
-					 			'<textarea class="property-input" style="float:left;" rows="12" cols="300" ng-model="editorValue"></textarea>'+
-								'<div class="help-inline" ng-show="simplePropertyForm.simpleProperty.$dirty && simplePropertyForm.simpleProperty.$invalid">'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.required">'+ l('propertyeditor.error.required') +'</span>'+
+						'<div ng-class="{\'richtext-property-editor-big-left\' : editorEntity.translations}">'+
+							'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty.$invalid)">'+
+						 		'<div class="controls">'+
+						 			'<textarea class="property-input" style="float:left;" rows="12" cols="300" ng-model="editorValue"></textarea>'+
+									'<div class="help-inline" ng-show="simplePropertyForm.simpleProperty.$dirty && simplePropertyForm.simpleProperty.$invalid">'+
+										'<span ng-show="simplePropertyForm.simpleProperty.$error.required">'+ l('propertyeditor.error.required') +'</span>'+
+									'</div>'+
 								'</div>'+
 							'</div>'+
 						'</div>';
 				if(editorFieldAttr && editorEntityAttr) {
-					html +=	'<select ng-model="currentLang" ng-options="langcode as langcodesMap[langcode].lang for (langcode, translation) in editorEntity.translations">'+
-									'<option value="">-- choose lang --</option>'+
-    							'</select><br>'+
-						'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.propertyTranslation.$invalid)">'+
-					 		'<div class="controls">'+
-					 			'<textarea class="translation-input" style="float:left;" rows="12" cols="300"></textarea>'+
+					html +=	
+						'<div ng-class="{\'richtext-property-editor-big-right\' : editorEntity.translations}" ng-show="editorEntity.translations">'+
+							'<select ng-model="currentLang" ng-options="langcode as langcodesMap[langcode].lang for (langcode, translation) in editorEntity.translations">'+
+										'<option value="">-- choose lang --</option>'+
+	    							'</select><br>'+
+							'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.propertyTranslation.$invalid)">'+
+						 		'<div class="controls">'+
+						 			'<textarea class="translation-input" style="float:left;" rows="12" cols="300"></textarea>'+
+								'</div>'+
 							'</div>'+
 						'</div>';
 					};
