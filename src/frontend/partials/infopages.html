@@ -5,19 +5,22 @@
 		<div class="span8">
 			<p l="infopages.description">Here you can provide additional information for your customer like ermergency, contact information etc.</p>
 		</div>
-		<ul class="nav nav-pills span4" style="margin-bottom: 0px; padding-right: 10px;">
-					<li class="dropdown">
-					  <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="border: 1px solid orange;">{{currentLanguage.lang}}<span ng-hide="currentLanguage" l="common.default.language">default language</span><b class="caret"></b></a>
-					  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-					  	<li>
-					  		<a l="common.default.language" ng-click="switchLanguage(null)">default language</a>
-					  	</li>
-					    <li ng-repeat="langcode in activeBusiness.lang"  ng-class="{active: currentLanguage.code == langcode}">
-			        		<a ng-click="switchLanguage(langcode)">{{langcodesMap[langcode].lang}}</a>
-			        	</li>
-					  </ul>
-					</li>
-					</ul>
+		<div class="span4">		
+			<span l="common.language.display">Display language</span>:
+		<ul class="nav nav-pills" style="margin-bottom: 0px; padding-right: 10px;">
+		<li class="dropdown">
+		  <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="border: 1px solid orange;">{{currentLanguage.lang}}<span ng-hide="currentLanguage" l="common.default.language">default language</span><b class="caret"></b></a>
+		  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+		  	<li>
+		  		<a l="common.default.language" ng-click="switchLanguage(null)">default language</a>
+		  	</li>
+		    <li ng-repeat="langcode in activeBusiness.lang"  ng-class="{active: currentLanguage.code == langcode}">
+        		<a ng-click="switchLanguage(langcode)">{{langcodesMap[langcode].lang}}</a>
+        	</li>
+		  </ul>
+		</li>
+		</ul>
+		</div>
 					
 	</div>
 	<div class="row-fluid">

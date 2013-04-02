@@ -2413,6 +2413,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Alle anwählen/abwählen",
 			"EN" :  "Select/deselect all"
 		},
+		"common.language.display" : {
+			"DE" :  "Anzeigesprache",
+			"EN" : "Display language"
+		},
 		//breadcrumb
 		"breadcrumb.home" : {
 			"DE" : "Home",
