@@ -635,8 +635,13 @@ ul.options-list li:hover {
   z-index: 2;
 }
 
+/* static tiles like feedback have another background color to distinguise the, */
+.tile-static {
+  background-color: #e9e9e9;
+}
+
 .tile-active {
-  background-color: lightblue;
+  background-color: lightblue !important;
 }
 
 .tile-empty {
