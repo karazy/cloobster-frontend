@@ -109,7 +109,13 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	*
 	*/
 	$scope.createInfoPage = function() {
-		$scope.currentInfoPage = new $scope.infoPageResource();
+		var newPage = { 'translations' : {} };
+		// Init embedded translations object
+		for (var i = $scope.activeBusiness.lang.length - 1; i >= 0; i--) {
+			newPage.translations[$scope.activeBusiness.lang[i]] = {};
+			newPage.translations[$scope.activeBusiness.lang[i]].lang = $scope.activeBusiness.lang[i];
+		};
+		$scope.currentInfoPage = new $scope.infoPageResource(newPage);
 		$scope.infoPageInvalid = false;
 	}
 
