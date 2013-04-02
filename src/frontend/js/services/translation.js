@@ -56,8 +56,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Locations"
 		},
 		"businesses.headertabs.locationsettings" : {
-			"DE" :  "Location Einstellungen",
-			"EN" : "Location Settings"
+			"DE" :  "Einstellungen",
+			"EN" : "Settings"
 		},
 		"businesses.headertabs.categories" : {
 			"DE" :  "Produkte",
@@ -2229,28 +2229,28 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Infopages"
 		},
 		"tiles.template.actions" : {
-			"DE" :  "Aktionen",
-			"EN" : "Actions"
+			"DE" :  "Service Call",
+			"EN" : "Service Call"
 		},
 		"tiles.template.allinfopages" : {
-			"DE" :  "Zufalls Infoseite",
-			"EN" : "Random infopage"
+			"DE" :  "Infoseite: Zufall",
+			"EN" : "Infopage: Random"
 		},
 		"tiles.template.infopagesselected" : {
-			"DE" :  "Ausgewählte Infoseite",
-			"EN" : "Selected infopage"
+			"DE" :  "Infoseite: Ausgewählt",
+			"EN" : "Infopage: Selected"
 		},
 		"tiles.template.productsall" : {
-			"DE" :  "Zufalls Produkt",
-			"EN" : "Random product"
+			"DE" :  "Produkte: Zufall",
+			"EN" : "Products: Random"
 		},
 		"tiles.template.productsspecial" : {
-			"DE" :  "Zufälliges spezial Produkt",
-			"EN" : "Random special product"
+			"DE" :  "Produkte: Angebote",
+			"EN" : "Products: Random"
 		},
 		"tiles.template.productsselected" : {
-			"DE" :  "Ausgewähltes Produkt",
-			"EN" : "Selected product"
+			"DE" :  "Produkte: Ausgewählt",
+			"EN" : "Products: Selected"
 		},
 		"tiles.template.feedback.description" : {
 			"DE" :  "Shortcut um in den Feedbackbereich zu gelangen, statt über die seitliche Navigation.",
