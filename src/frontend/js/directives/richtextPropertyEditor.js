@@ -192,7 +192,7 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','langcodesMap',
 		        			// setting the value of the richtext editor to
 		        			// the content for the new selected language.
 		        			scope.editorTranslations[oldValue] = translationEditor.val();
-		        			translationEditor.val(scope.editorTranslations[newValue]);
+		        			translationEditor.val(scope.editorTranslations[newValue] ? scope.editorTranslations[newValue] : "");
 		        		}
 		        	}
 
@@ -231,7 +231,7 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','langcodesMap',
   										}  											
 										});
 		        				// set the content of the richtext editor to the currently selected translation
-										translationEditor.val(scope.editorTranslations[scope.currentLang]);
+										translationEditor.val(scope.editorTranslations[scope.currentLang] ? scope.editorTranslations[scope.currentLang] : "");
 
 		        			}
 		        			else {
