@@ -41,17 +41,16 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','langcodesMap',
 						'</div>';
 				if(editorFieldAttr && editorEntityAttr) {
 					html +=	
-						'<div ng-class="{\'richtext-property-editor-big-right\' : editorEntity.translations}" ng-show="editorEntity.translations">'+
-							'<select ng-model="currentLang" ng-options="langcode as langcodesMap[langcode].lang for (langcode, translation) in editorEntity.translations">'+
-										'<option value="">-- choose lang --</option>'+
-	    							'</select><br>'+
-							'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.propertyTranslation.$invalid)">'+
-						 		'<div class="controls">'+
-						 			'<textarea class="translation-input" style="float:left;" rows="12" cols="300"></textarea>'+
-								'</div>'+
+					'<div ng-class="{\'richtext-property-editor-big-right\' : editorEntity.translations}" ng-show="editorEntity.translations">'+
+						'<select ng-model="currentLang" ng-options="langcode as langcodesMap[langcode].lang for (langcode, translation) in editorEntity.translations">'+
+    					'</select><br>'+
+						'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.propertyTranslation.$invalid)">'+
+					 		'<div class="controls">'+
+					 			'<textarea class="translation-input" style="float:left;" rows="12" cols="300"></textarea>'+
 							'</div>'+
-						'</div>';
-					};
+						'</div>'+
+					'</div>';
+				};
 				html+='</div>'+
 					'<div class="modal-footer">'+
 						'<button type="button" class="btn" ng-click="cancel()" data-dismiss="modal">'+l('common.cancel')+'</button>'+
@@ -138,17 +137,19 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','langcodesMap',
 		        			
 
 		        			if(editorEntityAttr) {
-		        				//grab the value of richtext editor
+		        				//grab the value of richtext editor for the default language
 		        				scope.editorEntity[scope.editorField] = editor.val();
+		        				//grab the value of richtext editor for the current selected language and save in the scope
 		        				scope.editorTranslations[scope.currentLang] = translationEditor.val();
 
-		        				// set all values on the original entity
+		        				// set all translated field values on the original entity from their isolated scope values
 		        				angular.forEach(scope.editorEntity.translations, function(translation, key){
 		        					translation[scope.editorField] = scope.editorTranslations[key];
 		        				});
 		        			}
 		        			else {
-		        				//grab the value of richtext editor
+		        				// no translated entity supplied
+		        				//  just grab the value of richtext editor
 		        				scope.editorProperty = editor.val();	
 		        			}		        			
 		        			// Wrap this in a timeout, because the model change is not immediate.
@@ -186,7 +187,10 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','langcodesMap',
 
 		        	function switchLanguage(newValue, oldValue) {
 		        		if(oldValue) {
-		        			console.log('oldlanguage '+ oldValue);
+		        			// switch the language of the translated field.
+		        			// saving the value for the previous selected language and
+		        			// setting the value of the richtext editor to
+		        			// the content for the new selected language.
 		        			scope.editorTranslations[oldValue] = translationEditor.val();
 		        			translationEditor.val(scope.editorTranslations[newValue]);
 		        		}
@@ -194,6 +198,8 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','langcodesMap',
 
 		        	dialog.on("hide", function() {
 		        		if(deregisterWatch) {
+		        			// release the watch on the currentLang value
+		        			// after hiding the modal, no use in keeping it around
 		        			deregisterWatch();
 		        			deregisterWatch = null;
 		        		}
@@ -201,34 +207,43 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','langcodesMap',
 		        	
 		        	iElement.find('div.toggler').bind('click', function() { 
 		        		if(scope.editorEnabled == true || typeof scope.editorEnabled == 'undefined') {
+
+		        			// watch the currentLang value to react to a switch for the currently
+		        			// displayed language in the translated richtext field
 									deregisterWatch = scope.$watch('currentLang', switchLanguage);
 		        			scope.clearInput();
 		        			scope.$digest();
+
 		        			if(editorEntityAttr) {
+		        				// we have an entity supplied with translations embeddeed
+		        				// grab the default value for the supplied field
 		        				scope.editorValue = scope.editorEntity[scope.editorField];
+
 		        				scope.editorTranslations = {};		        			
+		        				// copy all translation values for the field
 		        				angular.forEach(scope.editorEntity.translations, function(translation, key){
-		        					// Set value of the field in the translation object
+		        					// Set value of the field on the translation object in the isolated scope of the directive
   										scope.editorTranslations[key] = translation[scope.editorField];
-  										if(!scope.currentLang) {
+
+  										// select the first available language
+  										if(!scope.currentLang) {  											
   											scope.currentLang = key;
   										}  											
 										});
-
+		        				// set the content of the richtext editor to the currently selected translation
 										translationEditor.val(scope.editorTranslations[scope.currentLang]);
 
 		        			}
 		        			else {
+		        				// old way of assigning properties, without embedded translations
 		        				scope.editorValue = scope.editorProperty;		        				
 		        			}
+
 		        			scope.saved = false;		        			
 									dialog.modal('toggle');
-									console.log("currentLang=" + scope.currentLang);
 									// Set focus to editor.
 		        			editor.ckeditorGet().focus();
-		        			scope.$digest();
-		        			console.log("currentLang=" + scope.currentLang);
-		        						        	
+		        			scope.$digest();		        						        	
 		        		}
 							});
 
