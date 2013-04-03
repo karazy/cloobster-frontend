@@ -708,10 +708,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"business.detail.subscription.upgrade.description" : {
 			"DE" :  '<span class="label label-important">Basis</span> Momentan haben Sie ein Basis Paket.<br/>'+ 
 			'Wechseln Sie auf ein anderes Paket um alle cloobster Funktionen zu nutzen. '+ 
-			'<a href="https://www.cloobster.com" target="_blank">Mehr Information</a>',
+			'<a href="http://www.cloobster.com" target="_blank">Mehr Information</a>',
 			"EN" : '<span class="label label-important">Basic</span> Currently you are using a basic subscription.<br/>'+ 
 			'Upgrade to another cloobster subscription to gain access to all funtions. '+ 
-			'<a href="https://www.cloobster.com" target="_blank">Learn more</a>'
+			'<a href="http://www.cloobster.com" target="_blank">Learn more</a>'
 		},
 		"subscription.basic" : {
 			"DE" :  "Basis",
@@ -1698,10 +1698,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"areas.subscription.basic.description" : {
 			"DE" :  "<span class='label label-important'>Basis</span> Sie verwenden ein Basis Paket. Sie können ganz normal Servicebereiche und Spots anlegen.<br/>Kunden können jedoch weder bestellen (nur ihre Produkte & Dienstleistungen einsehen)"+
 					" und keinen VIP Call benutzen.<br/>" +
-			 		"<a href='https://www.cloobster.com' target='_blank'>Mehr Information</a> oder <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>.",
+			 		"<a href='http://www.cloobster.com' target='_blank'>Mehr Information</a> oder <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>.",
 			"EN" :  "<span class='label label-important'>Basic</span> Currently you are using a basic subscription. You can add service areas and spots <br/>but customers can't order"+
 					" or use the VIP Call.<br/>" +
-			 		"<a href='https://www.cloobster.com' target='_blank'>Learn more</a> or <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>."
+			 		"<a href='http://www.cloobster.com' target='_blank'>Learn more</a> or <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>."
 		},
 		"areas.editor.barcoderequired.help" : {
 			"DE" :  "<h4>Bei Spotwechsel gilt</h4>"+
@@ -2168,9 +2168,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"appconfig.subscription.basic.description" : {
 			"DE" :  "<span class='label label-important'>Basis</span> Sie verwenden ein Basis Paket. Die Konfiguration eines individuellen Dashboards ist nur nach einem Upgrade des Pakets möglich.<br>" +
-			 		"<a href='https://www.cloobster.com' target='_blank'>Mehr Information</a> oder <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>.",
+			 		"<a href='http://www.cloobster.com' target='_blank'>Mehr Information</a> oder <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>.",
 			"EN" :  "<span class='label label-important'>Basic</span> Currently you are using a basic subscription. Customisation of the dashboard is only usable after an upgrade to your subscription.<br>" +
-			 		"<a href='https://www.cloobster.com' target='_blank'>Learn more</a> or <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>."
+			 		"<a href='http://www.cloobster.com' target='_blank'>Learn more</a> or <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>."
 		},
 		"appconfig.tiles.list.title" : {
 			"DE" :  "Kacheltypen",
