@@ -25,28 +25,28 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			//description to use in detail view
 			description: langService.translate("tiles.template.feedback.description"),
 			//a tile that just acts as a shorthand to navigation menus, used to add additional styles
-			static: true
+			"static": true
 		},
 		"products": {	
 			title: langService.translate("tiles.template.products") || "Products",
 			type: "products",
 			cls: "tile-products",
 			description: langService.translate("tiles.template.products.description"),
-			static: true
+			"static": true
 		},
 		"infopages": {	
 			title: langService.translate("tiles.template.infopages") || "Infopages",
 			type: "infopages",
 			cls: "tile-infopages",
 			description: langService.translate("tiles.template.infopages.description"),
-			static: true
+			"static": true
 		},
 		"actions": {	
 			title: langService.translate("tiles.template.actions") || "Service Call",
 			type: "actions",
 			cls: "tile-actions",
 			description: langService.translate("tiles.template.actions.description"),
-			static: true
+			"static": true
 		},
 		"infopagesall": {	
 			title: langService.translate("tiles.template.allinfopages") || "All Infopages",
