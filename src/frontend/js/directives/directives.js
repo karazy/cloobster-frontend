@@ -8,7 +8,7 @@
 */
 Cloobster.directives = angular.module('Cloobster.directives', []);
 
-Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log',function(uploadService, langService, $log) {
+Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$interpolate',function(uploadService, langService, $log, $interpolate) {
 	var inputType, //type of the input to generate in form
 		required, //if present marks a required field
 		//directive configuration
@@ -23,6 +23,8 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log',func
 			editorOnDelete: '&',
 			editorImageResource: '=',
 			editorImageId: '@',
+			editorMinWidth: '@',
+			editorMinHeight: '@',
 			simpleImageEditor: '=',
 			editorEnabled: '='
 		},
@@ -94,7 +96,9 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log',func
 			        		imgAreaSelect, // holds instance of image cropping tool
 			        		aspectRatio = iAttrs['editorRatio'], // get the preset ratios for image selection from the "editor-ratios" attribute.
 			        		editorCropText = iAttrs['editorCropText'],
-			        		deleteImage = iAttrs['editorOnDelete'];
+			        		deleteImage = iAttrs['editorOnDelete'],
+			        		minImageHeight = iAttrs['editorMinHeight'],
+			        		minImageWidth = iAttrs['editorMinWidth'];
 
 		        	/** Initialize private scope variables */
 		        	function resetScope () {
@@ -242,8 +246,28 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log',func
 		        	function fileAddedCallback (fileName) {
 		        		scope.selectedFiles = fileName;
 		        		scope.fileAdded = true;
-		        		scope.$digest();
-		        		scope.save();
+       					scope.$digest();		
+
+		        		// Start check for image dimensions
+		        		if(minImageHeight || minImageWidth) {
+		        			if(uploadObject.checkImageDimensions(function(success) {		        			
+		        				if(success) {
+		        					// image passed the check
+		        					scope.save();
+		        				}
+		        				else {
+		        					scope.error = true;
+		        					// interpolate optional expressions (like dimensions)
+											scope.errorMessage = $interpolate(langService.translate("fileupload.error.dimensions"))(scope);
+											scope.fileAdded = false;
+											scope.selectedFiles = null;
+											scope.$digest();
+		        				}
+		        			}, minImageWidth, minImageHeight) == false) {
+		        				// no check was done, because of incompatible browser
+		        				scope.save();
+		        			}
+		        		}		        	
 		        	}
 
 		        	/** Delete the last uploaded image on the server. */

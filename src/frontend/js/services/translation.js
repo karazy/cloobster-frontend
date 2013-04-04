@@ -2475,6 +2475,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Beim Zuschneiden ist ein Fehler aufgetreten. Überprüfen sie die Auswahl und probieren sie es noch einmal.",
 			"EN" : "An error occurred while cropping image. Please check selection and try again."
 		},
+		"fileupload.error.dimensions" : {
+			"DE" : "Das Bild muss mindestens die Abmessungen {{editorMinWidth}} x {{editorMinHeight}} Pixel haben.",
+			"EN" : "The image must at least have the dimensions {{editorMinWidth}} x {{editorMinHeight}} pixel."
+		},
 		"fileupload.error.size" : {
 			"DE" : "Maximal erlaubte Dateigröße beträgt 3 MB.",
 			"EN" : "Maximum file size is 3 MB."

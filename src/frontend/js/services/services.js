@@ -677,7 +677,7 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
        	},
 		    add: function (e, data) {
         	addedFile = data;
-        	fileAddCallback(data.files[0].name);
+        	fileAddCallback(data.files[0].name, data.files[0]);
         }
 			});
 
@@ -739,6 +739,48 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 						};
 					},
 					/**
+					*  Use File API (if supported) to check dimensions of added file.
+					*
+					*/
+					checkImageDimensions: function(callback, minWidth, minHeight) {
+						if(!callback) {
+							return;
+						}
+						minHeight = parseInt(minHeight) || 0;
+						minWidth = parseInt(minWidth) || 0;
+
+						if(minWidth == 0 && minHeight == 0) {
+							// No constraints to check
+							return;
+						}
+
+						if(addedFile && window.FileReader) {
+							var fr = new FileReader;
+
+							fr.onload = function() { // file is loaded
+							    var img = new Image;
+
+							    img.onload = function() {
+							      if(img.width < minWidth || img.height < minHeight) {
+							      	callback(false);
+							      }
+							      else {
+							      	callback(true);
+							      }
+							    };
+
+							    img.src = fr.result; // is the data URL because called with readAsDataURL
+							};
+
+							fr.readAsDataURL(addedFile.files[0]);
+							// Return true to see that we have a check in progress.
+							return true;
+						}
+						else {
+							return false;
+						}
+					},
+					/**
 					*  Cancel fileupload in progress.
 					*
 					*/
@@ -750,6 +792,7 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 					}
 				};
 			},
+
 			requestImageCrop : function(blobKey, leftX, topY, rightX, bottomY) {
 				return $http.put(appConfig['serviceUrl'] + '/uploads/images/'+ blobKey,
 					{'leftX': leftX, 'topY': topY, 'rightX': rightX, 'bottomY': bottomY});
