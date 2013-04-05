@@ -32,7 +32,7 @@
 			    		<div class="data-container-block data-container-large data-container-scrollable" style="background-color: #CEF6CE">
 			    			<ul class="nav nav-pills nav-stacked organizable-list" id="assignedMenusList" >
 					        <li ng-repeat="category in currentAreaCategories"> <!-- filter:filterNotAssignedCockpitBusinesses -->
-					        	<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{category.title}}</a>
+					        	<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{category.title}} <i class="icon-ban-circle icon-black" ng-hide="category.active"></i></a>
 				        	</li>
 			    		</ul>
 			    		</div>			    		
@@ -48,7 +48,7 @@
 						<div class="data-container-block data-container-large data-container-scrollable" style="background-color: #F6CED8">
 							<ul class="nav nav-pills nav-stacked organizable-list" id="allMenusList">
 								<li ng-repeat="category in menus | filter:filterAssignedMenus | filter:allMenusListSearch | orderBy:['title']">
-									<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{category.title}}</a>
+									<a><i class="icon-move icon-black" tooltip="areas.categories.moveable.tooltip"></i> {{category.title}} <i class="icon-ban-circle icon-black" ng-hide="category.active"></i></a>
 								</li>
 							</ul>
 						</div>
