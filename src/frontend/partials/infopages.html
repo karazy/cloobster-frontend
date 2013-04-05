@@ -115,7 +115,7 @@
 					<div ng-show="currentInfoPage.id">			
 						<div class="row-fluid">
 							<div  class="span8" simple-image-editor="currentInfoPage.image" editor-title-key="infopage.image" editor-image-id="image" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)" 
-							editor-on-delete="deleteInfoPageImage()" editor-image-resource="imageResource" editor-min-width="600" editor-min-height="400">
+							editor-on-delete="deleteInfoPageImage()" editor-image-resource="imageResource">
 								<div ng-show="currentInfoPage.image.url">
 									<img  ng-src="{{currentInfoPage.image.url}}=s96" alt="click to edit" />
 									<p l="common.image.edit">Click image to edit</p>
