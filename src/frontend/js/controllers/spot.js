@@ -639,6 +639,27 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		movedCategory = true;
 	};
 
+	$scope.addAllCategories = function() {
+		// Clear all categories
+		$scope.currentArea.menuIds.splice(0, $scope.currentArea.menuIds.length);
+		$scope.currentAreaCategories.splice(0, $scope.currentAreaCategories.length);
+
+		angular.forEach($scope.menus, function(menu) {
+			$scope.currentArea.menuIds.push(menu.id);
+			$scope.currentAreaCategories.push(menu);
+		});
+
+		$scope.saveArea();
+	}
+
+	$scope.removeAllCategories = function() {
+		// Clear all categories
+		$scope.currentArea.menuIds.splice(0, $scope.currentArea.menuIds.length);
+		$scope.currentAreaCategories.splice(0, $scope.currentAreaCategories.length);
+
+		$scope.saveArea();
+	}
+
 	$scope.updateCategoryOrder = function(event, ui) {
 		var liElements = ui.item.parent().children(), //get all li elements
 			tmpCategory = null,

@@ -1521,6 +1521,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 				"Die Reihenfolge der Kategorien regelt auch die Darstellungsreihenfolge in der App (mittels Drag&Drop die Reihenfolge ändern).",
 			"EN" :  "List of product categories (e.g. beverages) available to customers checked in to this service area. Order of areas also reflects display order inside the app."
 		},
+		"areas.categories.removeall" : {
+			"DE" :  "Alle Entfernen",
+			"EN" :  "Remove All"
+		},
+		"areas.allcategories.addall" : {
+			"DE" :  "Alle Hinzufügen",
+			"EN" :  "Add All"
+		},
 		"areas.allcategories.list.title" : {
 			"DE" :  "Verfügbare Kategorien",
 			"EN" :  "Available categories"

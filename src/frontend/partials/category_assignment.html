@@ -28,6 +28,7 @@
 			    		<h4 class="data-container-title" l="areas.categories.list.title">Assigned categories</h4>
 			    		<div class="data-container-block data-container-seperator data-container-150">
 			    			<p l="areas.categories.list.description">List of product categories (e. .g beverages) available to customers checked in in this service area.</p>
+			    			<p><button type="button" class="btn" ng-click="removeAllCategories()"><i class="icon-minus"></i> <span l="areas.categories.removeall">Remove All</span></button></p>
 			    		</div>
 			    		<div class="data-container-block data-container-large data-container-scrollable" style="background-color: #CEF6CE">
 			    			<ul class="nav nav-pills nav-stacked organizable-list" id="assignedMenusList" >
@@ -43,7 +44,9 @@
 						<h4 class="data-container-title" l="areas.allcategories.list.title">All categories</h4>
 						<div class="data-container-block data-container-seperator data-container-150">
 							<p l="areas.allcategories.list.description">Drag & Drop to assign category to current service area.</p>
+							<p><button type="button" class="btn" ng-click="addAllCategories()"><i class="icon-plus"></i> <span l="areas.allcategories.addall">Add All</span></button></p>
 							<span l="common.search">Search</span>: <input ng-model="allMenusListSearch.title">
+
 						</div>
 						<div class="data-container-block data-container-large data-container-scrollable" style="background-color: #F6CED8">
 							<ul class="nav nav-pills nav-stacked organizable-list" id="allMenusList">
