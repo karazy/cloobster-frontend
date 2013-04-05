@@ -270,7 +270,11 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 		        				// no check was done, because of incompatible browser
 		        				scope.save();
 		        			}
-		        		}		        	
+		        		}
+		        		else {
+		        			// No dimension requirements set, just continue to save
+		        			scope.save();
+		        		}
 		        	}
 
 		        	/** Delete the last uploaded image on the server. */
