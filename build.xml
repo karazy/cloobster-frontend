@@ -80,6 +80,7 @@
 			<filelist id="adminlibfiles" dir="src/${admindir}/lib" >
 				<file name="bootstrap.min.js" />
 				<file name="angular-resource-1.0.1.min.js" />
+				<file name="angular-ui.min.js" />
 			</filelist>
 		</copy>
 	</target>
@@ -122,11 +123,13 @@
 			</fileset>
 			<fileset id="imgfiles" dir="src/${admindir}/" >
 				<include name="img/**/*"/>
+				<include name="css/images/**/*"/>
 			</fileset>
 			<filelist id="cssfiles" dir="src/${admindir}/">
 				<file name="css/bootstrap.min.css"/>
 				<file name="css/bootstrap-responsive.min.css"/>
 				<file name="css/admin.css"/>
+				<file name="css/jquery-ui-1.10.1.custom.min.css"/>
 			</filelist>
 		</copy>
 		<move file="build/${admindir}/index.prod.html" tofile="build/${admindir}/index.html" />
