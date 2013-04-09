@@ -16,6 +16,9 @@
   		<li ng-class="{active : activeTab == 'accounts'}">
   			<a ng-click="activeTab = 'accounts'">Accounts</a>
   		</li>
+  		<li ng-class="{active : activeTab == 'reports'}">
+  			<a ng-click="activeTab = 'reports'">Reports</a>
+  		</li>
 	</ul>
 
 	<!-- Companies tab -->
@@ -381,5 +384,7 @@
 		    </tbody>
 			</table>
 		</div>
+	</div>
+	<div class="row-fluid" ng-show="activeTab == 'reports'" ng-include="'partials/reports.html'">
 	</div>
 </div>

@@ -9,7 +9,7 @@ var Karazy = {
 var CloobsterAdmin =  window.CloobsterAdmin || {};
 
 // Declare app level module which depends on filters, and services
-CloobsterAdmin.module = angular.module('CloobsterAdmin', ['CloobsterAdmin.services','CloobsterAdmin.resources', 'CloobsterAdmin.directives', 'CloobsterAdmin.filters']).
+CloobsterAdmin.module = angular.module('CloobsterAdmin', ['CloobsterAdmin.services','CloobsterAdmin.resources', 'CloobsterAdmin.directives', 'CloobsterAdmin.filters','ui.directives']).
   config(['$routeProvider', '$locationProvider','$httpProvider', function($routeProvider, $locationProvider,$httpProvider) {
     // Set API Version header
     $httpProvider.defaults.headers.common['cloobster-api'] = '2';
