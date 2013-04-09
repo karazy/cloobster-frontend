@@ -370,22 +370,22 @@
 			    			<button class="btn" data-toggle="modal" data-target="#deleteProductModal" ng-show="currentProduct.id">
 			    				<i class="icon-trash"></i>
 			    			</button>
-			    		</div>
-			    		<!-- Modal delete dialog. -->
-			    		<div class="modal hide" id="deleteProductModal">
-						 	<div class="modal-header">
-						    	<button type="button" class="close" data-dismiss="modal">×</button>
-						    	<h4 l="menus.product.dialog.delete.title">Delete Product</h4>
-							</div>
-							<div class="modal-body alert-error">
-						    	<p><span l="menus.product.dialog.delete.text">{{currentProduct.name}} will be deleted!<br/>This can't be undone.</span></p>
-						    </div>  
-						  	<div class="modal-footer">
-						  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
-						    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteProduct(currentProduct)" l="common.delete">Delete</button>
-							</div>
-						</div>			    	
+			    		</div>			    				    
 			    	</div>
+			    	<!-- Modal delete dialog. Must be outside of btn-toolbar -->
+		    		<div class="modal hide" id="deleteProductModal">
+					 	<div class="modal-header">
+					    	<button type="button" class="close" data-dismiss="modal">×</button>
+					    	<h4 l="menus.product.dialog.delete.title">Delete Product</h4>
+						</div>
+						<div class="modal-body alert-error">
+					    	<p><span l="menus.product.dialog.delete.text">{{currentProduct.name}} will be deleted!<br/>This can't be undone.</span></p>
+					    </div>  
+					  	<div class="modal-footer">
+					  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
+					    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteProduct(currentProduct)" l="common.delete">Delete</button>
+						</div>
+					</div>	
 			    </div>		   
 		    </div>
 
