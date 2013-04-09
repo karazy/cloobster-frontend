@@ -38,7 +38,7 @@
 			    </ul>
 			</div>
 
-		<!-- all products list -->
+		<!-- special all products list -->
 		<div class="span3 product-wrapper data-container-with-title" ng-show="allProductsList.length > 0">
 	    	<h4 class="data-container-title" l="menus.list.allproducts">All Products</h4>
 	    	<div class="data-container-block data-container-seperator">
@@ -66,15 +66,15 @@
 						<button  class="btn" ng-click="toggleProductActiveFilter()" ng-model="allProductsQuery.active" tooltip="products.filter.active.tooltip" ng-class="{'btn-warning': allProductsQuery.active == false}">
 							<i class="icon-ban-circle icon-black"></i>
 						</button>
-						<button  class="btn" ng-click="toggleProductSpecialFilter()" ng-model="allProductsQuery.special" tooltip="products.filter.special.tooltip" ng-class="{'btn-warning': allProductsQuery.special}">
-							<i class="icon-star icon-black"></i>
-						</button>
 						<button  class="btn" ng-click="toggleProductVisibleOnDashboardFilter()" ng-model="allProductsQuery.hideInDashboard" tooltip="products.filter.showindashboard.tooltip" ng-class="{'btn-warning': isQueryVisibleOnDashboardActive()}">
 							<i class="icon-eye-open icon-black"></i>
 						</button>	
 						<button  class="btn" ng-click="toggleProductHideInDashboardFilter()" ng-model="allProductsQuery.hideInDashboard" tooltip="products.filter.hideindashboard.tooltip" ng-class="{'btn-warning': allProductsQuery.hideInDashboard}">
 							<i class="icon-eye-close icon-black"></i>
-						</button>						
+						</button>
+						<button  class="btn" ng-click="toggleProductSpecialFilter()" ng-model="allProductsQuery.special" tooltip="products.filter.special.tooltip" ng-class="{'btn-warning': allProductsQuery.special}">
+							<i class="icon-star icon-black"></i>
+						</button>				
 					</div>
 					<div class="btn-group">
 					  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
@@ -143,14 +143,15 @@
 				    			<button class="btn btn-small" ng-class="{'btn-success' : product.active, 'btn-danger' : !product.active}" type="button" ng-click="toggleProductActive(product)" ng-model="product.active"> <!-- tooltip="menus.product.active.tooltip" -->
 				    				<i class="icon-white" ng-class="{'icon-ok' : product.active, 'icon-ban-circle' : !product.active}"></i>
 				    			</button>
-				    			<button class="btn btn-small" ng-class="{'btn-warning' : product.special == true}" type="button" ng-click="toggleProductSpecial(product)" ng-model="product.special"> <!-- tooltip="menus.product.special.tooltip" -->
-				    				<i class="icon-star icon-black" ng-class="{'icon-star' : product.special, 'icon-star-empty' : !product.special}"></i>
-				    			</button>
 				    			<!-- hide from dashboard-->
-				    			<button class="btn btn-small" type="button" ng-click="toggleProductDashboard(product)" ng-model="product.hideInDashboard">
+				    			<button class="btn btn-small" type="button" ng-click="toggleProductDashboard(product)" ng-model="product.hideInDashboard" ng-class="{'btn-success' : !product.hideInDashboard}">
 				    				<!-- tooltip="menus.product.hideindashboard.tooltip" -->
-				    				<i class="icon-black" ng-class="{'icon-eye-close' : product.hideInDashboard, 'icon-eye-open' : !product.hideInDashboard}"></i>
+				    				<i class="icon-black" ng-class="{'icon-eye-close' : product.hideInDashboard, 'icon-eye-open icon-white' : !product.hideInDashboard}"></i>
 				    			</button>
+				    			<!-- special flag -->
+				    			<button class="btn btn-small" ng-class="{'btn-success' : product.special == true}" type="button" ng-click="toggleProductSpecial(product)" ng-model="product.special"> <!-- tooltip="menus.product.special.tooltip" -->
+				    				<i class="icon-star icon-black" ng-class="{'icon-star icon-white' : product.special, 'icon-star-empty' : !product.special}"></i>
+				    			</button>				    			
 				    		</div>
 	        			</div>
 			        </li>
@@ -369,22 +370,22 @@
 			    			<button class="btn" data-toggle="modal" data-target="#deleteProductModal" ng-show="currentProduct.id">
 			    				<i class="icon-trash"></i>
 			    			</button>
-			    		</div>
-			    		<!-- Modal delete dialog. -->
-			    		<div class="modal hide" id="deleteProductModal">
-						 	<div class="modal-header">
-						    	<button type="button" class="close" data-dismiss="modal">×</button>
-						    	<h4 l="menus.product.dialog.delete.title">Delete Product</h4>
-							</div>
-							<div class="modal-body alert-error">
-						    	<p><span l="menus.product.dialog.delete.text">{{currentProduct.name}} will be deleted!<br/>This can't be undone.</span></p>
-						    </div>  
-						  	<div class="modal-footer">
-						  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
-						    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteProduct(currentProduct)" l="common.delete">Delete</button>
-							</div>
-						</div>			    	
+			    		</div>			    				    
 			    	</div>
+			    	<!-- Modal delete dialog. Must be outside of btn-toolbar -->
+		    		<div class="modal hide" id="deleteProductModal">
+					 	<div class="modal-header">
+					    	<button type="button" class="close" data-dismiss="modal">×</button>
+					    	<h4 l="menus.product.dialog.delete.title">Delete Product</h4>
+						</div>
+						<div class="modal-body alert-error">
+					    	<p><span l="menus.product.dialog.delete.text">{{currentProduct.name}} will be deleted!<br/>This can't be undone.</span></p>
+					    </div>  
+					  	<div class="modal-footer">
+					  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
+					    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteProduct(currentProduct)" l="common.delete">Delete</button>
+						</div>
+					</div>	
 			    </div>		   
 		    </div>
 
