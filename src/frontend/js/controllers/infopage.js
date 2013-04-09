@@ -144,7 +144,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		}
 
 		// Add http protocol prefix to url if none of http or https are present.
-		if($scope.currentInfoPage['url'] != null && $scope.currentInfoPage.url.lastIndexOf('http://', 0) != 0 && $scope.currentInfoPage.url.lastIndexOf('https://', 0) != 0) {
+		if($scope.currentInfoPage['url'] && $scope.currentInfoPage.url.lastIndexOf('http://', 0) != 0 && $scope.currentInfoPage.url.lastIndexOf('https://', 0) != 0) {
 			$scope.currentInfoPage.url = 'http://' + $scope.currentInfoPage.url;
 		}
 
