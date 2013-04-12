@@ -211,6 +211,8 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 
 		    $scope.feedbackReportData = data;
 		    calculateAverageFeedbackRatings();
+
+		    //$scope.visualizeFeedback();
 		  })
 		  .error(handleError);
 	};
@@ -414,6 +416,106 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 	        chart.draw(data, options);
         } else {
         	chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        	chart.draw(data, options);
+        }
+        
+		}
+	}
+
+		/**
+	* Draws the report chart based on the report data.
+	* Uses google chart api.
+	*/
+	$scope.visualizeFeedback = function() {
+	  // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart'], callback: drawChart});
+
+  		function drawChart() {
+
+      	var data = new google.visualization.DataTable(),
+  	 		options,
+		  	chart,
+		  	dateRows,
+		  	feedbackRows
+		  	tempDate,
+		  	minDate,
+		  	maxDate;
+
+          data.addColumn('date', 'Date');
+
+			if($scope.selectedFeedbackForm && $scope.selectedFeedbackForm.questions && $scope.selectedFeedbackForm.questions.length > 0) {
+				dateRows = generateRowsArray($scope.fromDate, $scope.toDate, ($scope.selectedFeedbackForm.questions.length + 1));
+				angular.forEach($scope.selectedFeedbackForm.questions, function(q, index) {
+					//add an index to each question
+					q['index'] = index;
+					data.addColumn('number', q.question);
+				});	
+          } else {
+          	$log.log('Reports.visualizeFeedback: no questions exist')
+          	return;
+          }
+
+          if(!dateRows) {
+		  	$log.error('Reports.visualizeFeedback: no dateRows created!');
+		  	return;
+		  }
+
+		  angular.forEach($scope.feedbackReportData, function(feedback, index) {
+
+		  });
+
+		  //for each feedback entity
+          angular.forEach($scope.feedbackReportData, function(report, index) {
+          	tempDate = $filter('date')(new Date(report.date), $scope.dateFormat);
+          	// $log.log('Reports.visualize: tempate='+tempDate);
+          	//and for each date row
+          	angular.forEach(dateRows, function(row, index) {
+          		var tmpDate2 = $filter('date')(row[0], $scope.dateFormat);
+          		// $log.log('Reports.visualize: tmpDate2='+tmpDate2);
+          		//add the reports counter value to this row if the dates match
+          		if(tmpDate2 == tempDate) {
+          			if($scope.currentArea) {
+          				row[1] = report.count;
+          			} else {
+          				//overwrite all other fields with 0 except another value already exists
+          				angular.forEach($scope.areas, function(area, index) {
+          					if(report.areaName == area.name) {
+          						row[area.index+1] = report.count;
+          					} else if(!row[area.index+1]){
+          						row[area.index+1] = 0;
+          					}
+          				});
+          			}
+          			
+          		}
+          	});
+          });
+          //add all rows
+          data.addRows(dateRows);
+
+        //calculate min max date boundaries, otherwise on colum charts some records are not visible
+      	minDate = new Date($scope.fromDate.getTime()),
+        maxDate = new Date($scope.toDate.getTime());
+		minDate.setDate(minDate.getDate() - 1);
+		maxDate.setDate(maxDate.getDate() + 1);
+
+        options = {
+          title: $scope.selectedFeedbackForm.title,
+          hAxis: {
+          	// title: langService.translate("reports.chart.haxis"),
+          	viewWindowMode:'explicit',
+            viewWindow:{
+                max: maxDate,
+                min: minDate
+            }
+          }
+        };
+        //switch between line and column charts
+        if(dateRows.length <= 8 || $scope.reportData.length < 8) {
+	        chart = new google.visualization.ColumnChart(document.getElementById('chart_div_feedback'));
+	        chart.draw(data, options);
+        } else {
+        	chart = new google.visualization.LineChart(document.getElementById('chart_div_feedback'));
         	chart.draw(data, options);
         }
         
