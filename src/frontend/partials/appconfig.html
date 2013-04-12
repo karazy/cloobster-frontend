@@ -38,7 +38,7 @@
 	    			<p l="appconfig.tiles.list.description">List of all available tiles for the dashboard.</p>
 	    		</div>
 				<div class="tile-container-templates data-container-block data-container-500 data-container-scrollable">
-			        <div ng-repeat="tile in tiles | filter:{tile.hide : false}" class="tile-template" ng-class="{'tile-static' : tile.static}">
+			        <div ng-repeat="tile in tiles" class="tile-template" ng-class="{'tile-static' : tile.static}">
 			        	<div class="{{tile.cls}}">
 			        		<div class="tile-icon"></div>
 			        		<div class="tile-title">{{tile.title}}</div>

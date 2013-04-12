@@ -25,9 +25,7 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			//description to use in detail view
 			description: langService.translate("tiles.template.feedback.description"),
 			//a tile that just acts as a shorthand to navigation menus, used to add additional styles
-			"static": true,
-			//toggles visibility in avail tiles column
-			"hide": false
+			"static": true
 		},
 		"products": {	
 			title: langService.translate("tiles.template.products") || "Products",
@@ -76,16 +74,14 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			type: "productsspecial",
 			cls: "tile-products",
 			description: langService.translate("tiles.template.productsspecial.description"),
-			"static": false,
-			"hide": true
+			"static": false
 		},
 		"productsselected": {	
 			title: langService.translate("tiles.template.productsselected") || "Selected Products",
 			type: "productsselected",
 			cls: "tile-products",
 			description: langService.translate("tiles.template.productsselected.description"),
-			"static": false,
-			"hide": true
+			"static": false
 		}
 	};
 	/** Holds the last tile whose hover delete button was clicked. */
