@@ -212,7 +212,7 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		    $scope.feedbackReportData = data;
 		    calculateAverageFeedbackRatings();
 
-		    //$scope.visualizeFeedback();
+		    $scope.visualizeFeedback();
 		  })
 		  .error(handleError);
 	};
@@ -422,7 +422,7 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		}
 	}
 
-		/**
+	/**
 	* Draws the report chart based on the report data.
 	* Uses google chart api.
 	*/
@@ -436,62 +436,62 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
   	 		options,
 		  	chart,
 		  	dateRows,
-		  	feedbackRows
+		  	feedbackRows,
+		  	arraySize,
+		  	tempArray,
 		  	tempDate,
+		  	groupedData,
+		  	groupedColumns,
 		  	minDate,
 		  	maxDate;
 
           data.addColumn('date', 'Date');
+          groupedColumns = new Array();
 
 			if($scope.selectedFeedbackForm && $scope.selectedFeedbackForm.questions && $scope.selectedFeedbackForm.questions.length > 0) {
-				dateRows = generateRowsArray($scope.fromDate, $scope.toDate, ($scope.selectedFeedbackForm.questions.length + 1));
+				// dateRows = generateRowsArray($scope.fromDate, $scope.toDate, ($scope.selectedFeedbackForm.questions.length + 1));
 				angular.forEach($scope.selectedFeedbackForm.questions, function(q, index) {
 					//add an index to each question
-					q['index'] = index;
+					// q['index'] = index;
 					data.addColumn('number', q.question);
+					groupedColumns.push({
+			  		  	'column': index + 1,
+			  		  	'aggregation': google.visualization.data.avg,
+			  		  	'type': 'number'
+		  		  	});
 				});	
           } else {
           	$log.log('Reports.visualizeFeedback: no questions exist')
           	return;
           }
 
-          if(!dateRows) {
-		  	$log.error('Reports.visualizeFeedback: no dateRows created!');
-		  	return;
-		  }
+		  arraySize = $scope.selectedFeedbackForm.questions.length + 1;
 
+		  feedbackRows = new Array();		  
+		  //create feedback array
 		  angular.forEach($scope.feedbackReportData, function(feedback, index) {
-
+		  	tempArray = new Array(arraySize);
+		  	tempArray[0] = new Date(feedback.date);
+		  	angular.forEach(feedback.answers, function(answer, index) {
+		  		//+1 to rating because it starts from 0
+		  		tempArray[index + 1] = answer.rating + 1;
+		  	});
+		  	feedbackRows.push(tempArray);		  	
 		  });
+		  
+		  data.addRows(feedbackRows);
 
-		  //for each feedback entity
-          angular.forEach($scope.feedbackReportData, function(report, index) {
-          	tempDate = $filter('date')(new Date(report.date), $scope.dateFormat);
-          	// $log.log('Reports.visualize: tempate='+tempDate);
-          	//and for each date row
-          	angular.forEach(dateRows, function(row, index) {
-          		var tmpDate2 = $filter('date')(row[0], $scope.dateFormat);
-          		// $log.log('Reports.visualize: tmpDate2='+tmpDate2);
-          		//add the reports counter value to this row if the dates match
-          		if(tmpDate2 == tempDate) {
-          			if($scope.currentArea) {
-          				row[1] = report.count;
-          			} else {
-          				//overwrite all other fields with 0 except another value already exists
-          				angular.forEach($scope.areas, function(area, index) {
-          					if(report.areaName == area.name) {
-          						row[area.index+1] = report.count;
-          					} else if(!row[area.index+1]){
-          						row[area.index+1] = 0;
-          					}
-          				});
-          			}
-          			
-          		}
-          	});
-          });
-          //add all rows
-          data.addRows(dateRows);
+		  groupedData = google.visualization.data.group(data, [
+		  {
+  		  	column: 0,
+  		  	modifier: function(value) {
+  		  		var aggregateDate = new Date(value.setHours(0,0,0,0));
+  		  		$log.log("Reports.visualizeFeedback: aggregate feedback for " + aggregateDate);
+  		  		return aggregateDate;
+  		  		// return new Data(value);
+  		  	},
+  		  	'type': 'date'
+  		  }], groupedColumns);
 
         //calculate min max date boundaries, otherwise on colum charts some records are not visible
       	minDate = new Date($scope.fromDate.getTime()),
@@ -511,12 +511,12 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
           }
         };
         //switch between line and column charts
-        if(dateRows.length <= 8 || $scope.reportData.length < 8) {
+        if(feedbackRows.length <= 8 || $scope.feedbackReportData.length < 8) {
 	        chart = new google.visualization.ColumnChart(document.getElementById('chart_div_feedback'));
-	        chart.draw(data, options);
+	        chart.draw(groupedData, options);
         } else {
         	chart = new google.visualization.LineChart(document.getElementById('chart_div_feedback'));
-        	chart.draw(data, options);
+        	chart.draw(groupedData, options);
         }
         
 		}
