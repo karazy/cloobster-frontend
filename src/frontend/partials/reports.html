@@ -70,7 +70,7 @@
 		  							<td>{{data.date | date:'shortDate'}}</td>
 		  							<!-- <td>{{data.date | date:'M'}}</td> -->
 		  							<!-- <td>{{data.date | date:'yyyy'}}</td> -->
-		  							<td>{{data.comment}}</td>
+		  							<td style="max-width: 150px;">{{data.comment}}</td>
 		  							<td>{{data.email}}</td>
 		  							<td ng-repeat="answer in data.answers">{{answer.rating + 1}}</td>
 		  						</tr>			  						
