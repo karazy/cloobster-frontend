@@ -2285,7 +2285,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Displays a random infopage out of the ones you select. The hide on dashboard flag will be ignored."
 		},
 		"tiles.template.productsall.description" : {
-			"DE" :  "Zeigt ein zufälliges Produkt. Produkte die markiert sind als verborgen auf dem Dashboard werden nicht angezeigt.",
+			"DE" :  "Zeigt ein zufälliges Produkt (keine Specials!). Produkte die markiert sind als verborgen auf dem Dashboard werden nicht angezeigt.",
 			"EN" : "Display a random product. Ignores products flagged to be hidden on dashboard. Only products assigned to active area are shown."
 		},
 		"tiles.template.productsspecial.description" : {

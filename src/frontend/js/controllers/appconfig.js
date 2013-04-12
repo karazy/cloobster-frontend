@@ -25,7 +25,9 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			//description to use in detail view
 			description: langService.translate("tiles.template.feedback.description"),
 			//a tile that just acts as a shorthand to navigation menus, used to add additional styles
-			"static": true
+			"static": true,
+			//toggles visibility in avail tiles column
+			"hide": false
 		},
 		"products": {	
 			title: langService.translate("tiles.template.products") || "Products",
@@ -52,31 +54,38 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			title: langService.translate("tiles.template.allinfopages") || "All Infopages",
 			type: "infopagesall",
 			cls: "tile-infopages",
-			description: langService.translate("tiles.template.infopagesall.description")
+			description: langService.translate("tiles.template.infopagesall.description"),
+			"static": false
 		},
 		"infopagesselected": {	
 			title: langService.translate("tiles.template.infopagesselected") || "Selected Infopages",
 			type: "infopagesselected",
 			cls: "tile-infopages",
-			description: langService.translate("tiles.template.infopagesselected.description")
+			description: langService.translate("tiles.template.infopagesselected.description"),
+			"static": false
 		},
 		"productsall": {	
 			title: langService.translate("tiles.template.productsall") || "All Products",
 			type: "productsall",
 			cls: "tile-products",
-			description: langService.translate("tiles.template.productsall.description")
+			description: langService.translate("tiles.template.productsall.description"),
+			"static": false
 		},
 		"productsspecial": {	
 			title: langService.translate("tiles.template.productsspecial") || "Special Products",
 			type: "productsspecial",
 			cls: "tile-products",
-			description: langService.translate("tiles.template.productsspecial.description")
+			description: langService.translate("tiles.template.productsspecial.description"),
+			"static": false,
+			"hide": true
 		},
 		"productsselected": {	
 			title: langService.translate("tiles.template.productsselected") || "Selected Products",
 			type: "productsselected",
 			cls: "tile-products",
-			description: langService.translate("tiles.template.productsselected.description")
+			description: langService.translate("tiles.template.productsselected.description"),
+			"static": false,
+			"hide": true
 		}
 	};
 	/** Holds the last tile whose hover delete button was clicked. */
@@ -169,7 +178,7 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 		}
 
 		newTile.$save(saveSuccess, handleError);
-	}
+	}	
 
 	/**
 	* @private
@@ -210,6 +219,26 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 	}
 
 	/**
+	* Updates existing tile.
+	*/
+	$scope.updateTile = function() {
+		
+		if(!$scope.currentTile) {
+			$log.log("AppConfig.updateTile: no current tile selected");
+			return;
+		}
+
+		if(!$scope.currentTile.id) {
+			$log.log("AppConfig.updateTile: cant update new tile");
+			return;
+		}
+
+		$scope.selectTile($scope.currentTile);
+
+		$scope.currentTile.$update(null, null, handleError);
+	}
+
+	/**
 	* Removes given tile from the configuration.
 	* @param {Object} tile
 	*	Tile to remove
@@ -240,6 +269,10 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			}, handleError);
 	}
 
+	/**
+	* Sets given tile as $scope.currentTile
+	* @param {Object} tile to set
+	*/
 	$scope.selectTile = function(tile) {
 		$scope.currentTile = tile;
 
@@ -247,6 +280,10 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			loadEntities(productsResource, 'allProductsList');
 		} else if(tile.type == 'infopagesselected') {
 			loadEntities(infoPagesResource, 'allInfoPages');
+		} else {
+			//delete entity ids for all other types
+			//will exist when changing a tile type via radio button
+			delete $scope.currentTile.entityIds;
 		}
 	};
 
@@ -314,6 +351,26 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 	$scope.infoPageChecked = function() {
 		updateTileEntitiesAndSave($scope.allInfoPages);
 	};
+
+	/**
+	* Toggle visibility of tile selection type via radio button for products.
+	*/
+	$scope.showProductTileToggle = function() {
+		if(!$scope.currentTile) {
+			return false;
+		}
+		return $scope.currentTile.type == "productsselected" || $scope.currentTile.type == "productsall" || $scope.currentTile.type == "productsspecial";
+	}
+
+	/**
+	* Toggle visibility of tile selection type via radio button for infopages.
+	*/
+	$scope.showInfopageTileToggle = function() {
+		if(!$scope.currentTile) {
+			return false;
+		}
+		return $scope.currentTile.type == "infopagesall" || $scope.currentTile.type == "infopagesselected";
+	}
 
 	/** 
 	 * Watches loggedIn status and initializes controller when status changes to true.
