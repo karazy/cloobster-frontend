@@ -38,7 +38,7 @@
 	    			<p l="appconfig.tiles.list.description">List of all available tiles for the dashboard.</p>
 	    		</div>
 				<div class="tile-container-templates data-container-block data-container-500 data-container-scrollable">
-			        <div ng-repeat="tile in tiles" class="tile-template" ng-class="{'tile-static' : tile.static}">
+			        <div ng-repeat="tile in tiles | filter:{tile.hide : false}" class="tile-template" ng-class="{'tile-static' : tile.static}">
 			        	<div class="{{tile.cls}}">
 			        		<div class="tile-icon"></div>
 			        		<div class="tile-title">{{tile.title}}</div>
@@ -107,8 +107,27 @@
 					<div class="data-container-block data-container-small">
 						<h4>{{tiles[currentTile.type].title}}</h4>
 						<p>{{tiles[currentTile.type].description}}</p>
+						<div ng-show="showProductTileToggle()">
+							<label class="radio">
+								<input type="radio" name="productiletype" ng-model="currentTile.type" value="productsall" ng-change="updateTile()"><span l="tiles.template.productsall">Random</span><br/>
+							</label>
+							<label class="radio">
+								<input type="radio" name="productiletype" value="productsspecial" ng-model="currentTile.type" ng-change="updateTile()"><span l="tiles.template.productsspecial">Random special</span><br/>
+							</label>
+							<label class="radio">
+								<input type="radio" name="productiletype" value="productsselected" ng-model="currentTile.type" ng-change="updateTile()"><span l="tiles.template.productsselected">Selected</span><br/>
+							</label>
+						</div>
+						<div ng-show="showInfopageTileToggle()">
+							<label class="radio">
+								<input type="radio" name="infopagetiletype" ng-model="currentTile.type" value="infopagesall" ng-change="updateTile()"><span l="tiles.template.allinfopages">Random</span><br/>
+							</label>
+							<label class="radio">
+								<input type="radio" name="infopagetiletype" value="infopagesselected" ng-model="currentTile.type" ng-change="updateTile()"><span l="tiles.template.infopagesselected">Selected</span><br/>
+							</label>
+						</div>
 						<button class="btn" data-toggle="modal" data-target="#deleteTileModal" ng-hide="activeBusiness.basic"><i class="icon-trash"></i></button>
-    				</div>	    	
+    				</div>
 				</div>
 				<div class="data-container-with-title" ng-show="currentTile.type == 'productsselected'">
 					<h4 class="data-container-title" l="appconfig.productlist.title">Product list</h4>
