@@ -26,7 +26,7 @@ CloobsterAdmin.Functions = function($scope, $http) {
 	$scope.aggregateCounters = function() {
 		$scope.aggregateCounters.text = "Starting Task ...";
 		$scope.aggregateCounters.disabled = true;
-		$http.put('/admin/s/dataupgrades/defaultdashboards', {}).success(function(data) {
+		$http.put('/admin/s/dataupgrades/sumdailycounters', {}).success(function(data) {
 				$scope.aggregateCounters.text = "Task started.";
 			}).error(function (data, status) {
 				$scope.aggregateCounters.text = status + " error.";
