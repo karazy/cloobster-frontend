@@ -43,6 +43,8 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 	$scope.currentReport = null;
 	/** Contains the data of retrieved report. */
 	$scope.reportData = null;
+	/** Contains the data of retrieved feedback. */
+	$scope.feedbackReportData = null;
 	/** Start date to generate report for. */
 	$scope.fromDate = null;
 	/** End date to generate report for. */
@@ -171,21 +173,28 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 	* /b/businesses/{id}/feedback?formId=X&fromDate=1&toDate=2
 	*/
 	$scope.loadFeedbackReport = function() {
-		var params = {};
+		var params = {},
+			toDateFullDay;
 
 		if(!$scope.showAllData) {
+			//use full day 23:59:59:9999 since feedback gets stored with timestamp
+			toDateFullDay = new Date($scope.toDate.getTime());
+			toDateFullDay.setHours(23);
+			toDateFullDay.setMinutes(59, 59, 999);
+
+
 			//create params object to display in ui
 			if($scope.fromDate) {
 				params.fromDate = $scope.fromDate.getTime();
 			}
 			if($scope.toDate) {
-				params.toDate = $scope.toDate.getTime();
+				params.toDate = toDateFullDay.getTime();
 			}
 
 			//create params object to display in ui
 			$scope.currentReportParameters = {
 				fromDate: new Date($scope.fromDate),
-				toDate: new Date($scope.toDate),
+				toDate: new Date(toDateFullDay.getTime()),
 				showAllData: false
 			}
 		}
