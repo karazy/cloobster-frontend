@@ -2137,6 +2137,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Jahr",
 			"EN" : "Year"
 		},
+		"reports.report.comment" : {
+			"DE" :  "Kommentar",
+			"EN" : "Comment"
+		},
+		"reports.report.email" : {
+			"DE" :  "E-Mail",
+			"EN" : "Email"
+		},
 		"reports.action.show" : {
 			"DE" :  "Report anzeigen",
 			"EN" : "Show report"
@@ -2172,6 +2180,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"reports.report.allareas" : {
 			"DE" :  "alle Bereiche",
 			"EN" : "all areas"
+		},
+		"reports.parameter.getall" : {
+			"DE" :  "Zeige alle Daten",
+			"EN" : "Show all data"
+		},
+		"reports.feedback.form.title" : {
+			"DE" :  "Formulartitel:",
+			"EN" : "Form title:"
+		},
+		"reports.feedback.average" : {
+			"DE" :  "Durschnitt",
+			"EN" : "Average"
 		},
 		//app config partial
 		"appconfig.description" : {
