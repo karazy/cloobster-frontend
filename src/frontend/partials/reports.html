@@ -19,8 +19,71 @@
 			</div>
 		</div>
 		<div class="span10">
+			<!-- feedback report configuration -->
+			<div class="data-container-with-title data-container-150" ng-show="currentReport.type == 'feedbackreport'">
+				<h4 class="data-container-title" l="reports.parameters.title">Report parameter</h4>
+			<div class="data-container-block">
+					<form class="form-inline">
+					<div class="input-prepend">
+						<span class="add-on" l="reports.parameter.startdate">Start date</span>
+					 	<input ui-date="dateOptions"  type="text" ng-model="fromDate" ng-disabled="showAllData">
+					</div>
+					<div class="input-prepend">
+						<span class="add-on" l="reports.parameter.enddate">End date</span>
+					 	<input ui-date="dateOptions" type="text" ng-model="toDate" ng-disabled="showAllData">
+					</div>
+					<label class="checkbox">
+            <input name="getAll" type="checkbox" ng-model="showAllData"> <span l="reports.parameter.getall">Show All Data</span></input>
+          </label>
+					</form>
+					
+				</div>
+				<div class="row-fluid data-container-block">
+						<button class="btn btn-primary" ng-click="loadFeedbackReport()"><i class="icon-th icon-white"></i><span l="reports.action.show">Show report</span></button>
+					</div>
+			</div>
+
+			<!-- feedback report -->
+			<div class="row-fluid data-container-with-title" ng-show="currentReport && feedbackReportData && feedbackReportData != 'noresult'">
+				<h4 class="data-container-title" >Report</h4>
+				<div class="span10">
+					<div class="data-container-block data-container-scrollable" style="max-height: 500px;">
+						<p>Report for form:</p>
+						<h5>{{selectedFeedbackForm.title}}</h5>
+
+						<table class="table table-striped">
+							<thead>
+		  						<tr>
+		  							<th l="reports.report.day">Day</th>
+		  							<th l="reports.report.month">Month</th>
+		  							<th l="reports.report.year">Year</th>
+		  							<th l="reports.report.email">E-Mail</th>
+		  							<th ng-repeat="question in selectedFeedbackForm.questions">{{question.question}}</th>
+		  						</tr>
+	  						</thead>
+	  						<tbody>
+	  							<tr>
+	  								<td colspan="4" l="reports.feedback.average"><em>Average:</em> </td>
+	  								<td ng-repeat="average in averageFeedbackRatings">{{average + 1}}</td>
+	  							</tr>
+		  						<tr ng-repeat="data in feedbackReportData">
+		  							<td>{{data.date | date:'dd'}}</td>
+		  							<td>{{data.date | date:'M'}}</td>
+		  							<td>{{data.date | date:'yyyy'}}</td>
+		  							<td>{{data.email}}</td>
+		  							<td ng-repeat="answer in data.answers">{{answer.rating + 1}}</td>
+		  						</tr>			  						
+		  					</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+
+
+
 			<!-- report configuration -->
-			<div class="data-container-with-title data-container-150" ng-show="currentReport">
+			<div class="data-container-with-title data-container-150" ng-show="currentReport && currentReport.type != 'feedbackreport'">
 				<h4 class="data-container-title" l="reports.parameters.title">Report parameter</h4>
 				<div class="data-container-block">
 					<form class="form-inline">
@@ -117,7 +180,7 @@
 				</div>
 			</div>
 			<!-- report empty placeholder -->
-			<div class="row-fluid data-container-with-title data-container-small data-container-inactive" ng-hide="currentReport && reportData">
+			<div class="row-fluid data-container-with-title data-container-small data-container-inactive" ng-hide="currentReport && (reportData || feedbackReportData)">
 				<h4 class="data-container-title" l="reports.report.title">Report</h4>
 				<div class="data-container-block">
 					<p l="reports.report.empty.description">Contains the report. Select a type and parameters and click show report.</p>

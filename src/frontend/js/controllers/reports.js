@@ -29,6 +29,14 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		{	
 			title: langService.translate("reports.type.feedback") || "Feedback",
 			type: 'feedback'
+		},
+		{	
+			title: langService.translate("reports.type.turnover") || "Turnover",
+			type: 'turnover'
+		},
+		{	
+			title: langService.translate("reports.type.feedbackreport") || "Feedback Report",
+			type: 'feedbackreport'
 		}
 	];
 	/** The current selected report type */
@@ -64,7 +72,18 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		$scope.currentReport = type;		
 		$scope.reportData = null;
 		$scope.currentReportParameters = null;
+		$scope.feedbackReportData = null;
+
+		if(type.type == 'feedbackreport') {
+			$http.get('/b/businesses/'+activeBusinessId+'/feedbackforms',{params: {'active': true}}).success(function(data) {
+				$scope.selectedFeedbackForm = $scope.activeFeedbackForm = data[0];
+			}).error(handleError);
+			$http.get('/b/businesses/'+activeBusinessId+'/feedbackforms').success(function(data) {
+				$scope.feedbackForms = data;
+			}).error(handleError);
+		}
 	}
+
 	/**
 	* Load report data from server. Store it in $scope.reportData.
 	* /b/businesses/{id}/reports?kpi=Z&areaId=Y&fromDate=1&toDate=2
@@ -109,12 +128,84 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		    if($scope.reportData.length == 0) {
 		    	$scope.reportData = 'noresult';
 		    } else {
+		    	// Calculate major currency value from returned minor value for turnover
+		    	if($scope.currentReport.type == 'turnover') {
+		    		for (var i = $scope.reportData.length - 1; i >= 0; i--) {
+		    			if($scope.reportData[i].count != 0)
+		    				$scope.reportData[i].count = $scope.reportData[i].count / 100;
+		    		}	
+		    	}		    	
 		    	$scope.visualize();	
 		    }
 		    
 		  })
 		  .error(handleError);
 	}
+
+	function calculateAverageFeedbackRatings() {
+		if(!$scope.feedbackReportData || $scope.feedbackReportData.length == 0) 
+			return;
+		var ratingSums = [];
+
+		// init sum array with zeroes
+		for (var i = $scope.selectedFeedbackForm.questions.length - 1; i >= 0; i--) {
+			ratingSums[i] = 0;
+		};
+
+		$scope.averageFeedbackRatings = [];
+		// sum up all ratings
+		for (var i = $scope.feedbackReportData.length - 1; i >= 0; i--) {
+			for (var j = $scope.feedbackReportData[i].answers.length - 1; j >= 0; j--) {
+				ratingSums[j] += $scope.feedbackReportData[i].answers[j].rating;
+			};
+		};
+
+		// divide by total
+		for (var i = ratingSums.length - 1; i >= 0; i--) {
+			$scope.averageFeedbackRatings[i] = ratingSums[i] / $scope.feedbackReportData.length;
+		};
+	};
+
+	/**
+	* Load feedback data from server. Store it in $scope.feedbackReportData.
+	* /b/businesses/{id}/feedback?formId=X&fromDate=1&toDate=2
+	*/
+	$scope.loadFeedbackReport = function() {
+		var params = {};
+
+		if(!$scope.showAllData) {
+			//create params object to display in ui
+			if($scope.fromDate) {
+				params.fromDate = $scope.fromDate.getTime();
+			}
+			if($scope.toDate) {
+				params.toDate = $scope.toDate.getTime();
+			}
+
+			//create params object to display in ui
+			$scope.currentReportParameters = {
+				fromDate: new Date($scope.fromDate),
+				toDate: new Date($scope.toDate),
+				showAllData: false
+			}
+		}
+		else {
+			$scope.currentReportParameters = {showAllData: true};	
+		}
+		
+		$http({
+			method: 'GET', 
+			url: '/b/businesses/'+activeBusinessId+'/feedback',
+			params: params
+		})
+		  .success(function(data, status, headers, config) {
+
+		    $scope.feedbackReportData = data;
+		    calculateAverageFeedbackRatings();
+		  })
+		  .error(handleError);
+	};
+
 	/**
 	* Send create document request.
 	*

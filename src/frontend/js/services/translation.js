@@ -2109,6 +2109,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Anzahl Feedback",
 			"EN" : "Feedback count"
 		},
+		"reports.type.turnover" : {
+			"DE" :  "Umsatz",
+			"EN" : "Turnover amount"
+		},
 		"reports.chart.haxis" : {
 			"DE" :  "Datum",
 			"EN" : "Date"
