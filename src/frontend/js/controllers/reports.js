@@ -510,8 +510,8 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
         //calculate min max date boundaries, otherwise on colum charts some records are not visible
       	minDate = new Date($scope.fromDate.getTime()),
         maxDate = new Date($scope.toDate.getTime());
-		minDate.setDate(minDate.getDate() - 1);
-		maxDate.setDate(maxDate.getDate() + 1);
+		minDate.setDate(minDate.getDate() - 2);
+		maxDate.setDate(maxDate.getDate() + 2);
 
         options = {
           title: langService.translate("reports.feedback.chart.title") || "Weekly aggregation of Feedback",
