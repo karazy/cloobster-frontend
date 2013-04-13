@@ -441,11 +441,11 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
       	var data = new google.visualization.DataTable(),
   	 		options,
 		  	chart,
-		  	dateRows,
+		  	// dateRows,
 		  	feedbackRows,
 		  	arraySize,
 		  	tempArray,
-		  	tempDate,
+		  	// tempDate,
 		  	groupedData,
 		  	groupedColumns,
 		  	minDate,
@@ -455,11 +455,9 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
           groupedColumns = new Array();
 
 			if($scope.selectedFeedbackForm && $scope.selectedFeedbackForm.questions && $scope.selectedFeedbackForm.questions.length > 0) {
-				// dateRows = generateRowsArray($scope.fromDate, $scope.toDate, ($scope.selectedFeedbackForm.questions.length + 1));
 				angular.forEach($scope.selectedFeedbackForm.questions, function(q, index) {
-					//add an index to each question
-					// q['index'] = index;
 					data.addColumn('number', q.question);
+					//show only cloumns checked in frontend
 					if(q.checked) {
 						groupedColumns.push({
 				  		  	'column': index + 1,
@@ -507,23 +505,29 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
   		  	'type': 'date'
   		  }], groupedColumns);
 
-        //calculate min max date boundaries, otherwise on colum charts some records are not visible
-      	minDate = new Date($scope.fromDate.getTime()),
-        maxDate = new Date($scope.toDate.getTime());
-		minDate.setDate(minDate.getDate() - 2);
-		maxDate.setDate(maxDate.getDate() + 2);
 
         options = {
-          title: langService.translate("reports.feedback.chart.title") || "Weekly aggregation of Feedback",
-          hAxis: {
-          	// title: langService.translate("reports.chart.haxis"),
+          title: langService.translate("reports.feedback.chart.title") || "Weekly aggregation of Feedback"
+        };
+
+        //skip setting viewwindow, often some columns are not visible
+        //min max could only be optained by iterating over the data and looking for highes/lowest values
+        if(!$scope.showAllData) {
+        	//calculate min max date boundaries, otherwise on colum charts some records are not visible
+	      	minDate = new Date($scope.fromDate.getTime()),
+	        maxDate = new Date($scope.toDate.getTime());
+			minDate.setDate(minDate.getDate() - 2);
+			maxDate.setDate(maxDate.getDate() + 2);
+
+        	options['hAxis'] = {
           	viewWindowMode:'explicit',
-            viewWindow:{
+            viewWindow: {
                 max: maxDate,
                 min: minDate
             }
           }
-        };
+        }
+
         //switch between line and column charts
         if(feedbackRows.length <= 8 || $scope.feedbackReportData.length < 8) {
 	        chart = new google.visualization.ColumnChart(document.getElementById('chart_div_feedback'));
