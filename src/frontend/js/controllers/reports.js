@@ -212,6 +212,12 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		    $scope.feedbackReportData = data;
 		    calculateAverageFeedbackRatings();
 
+		    //add checked flag for chart column selection
+
+		    angular.forEach($scope.selectedFeedbackForm.questions, function(q, index) {
+		    	q.checked = true;
+		    });
+
 		    $scope.visualizeFeedback();
 		  })
 		  .error(handleError);
@@ -454,11 +460,14 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 					//add an index to each question
 					// q['index'] = index;
 					data.addColumn('number', q.question);
-					groupedColumns.push({
-			  		  	'column': index + 1,
-			  		  	'aggregation': google.visualization.data.avg,
-			  		  	'type': 'number'
-		  		  	});
+					if(q.checked) {
+						groupedColumns.push({
+				  		  	'column': index + 1,
+				  		  	'aggregation': google.visualization.data.avg,
+				  		  	'type': 'number'
+		  		  		});
+					}
+					
 				});	
           } else {
           	$log.log('Reports.visualizeFeedback: no questions exist')

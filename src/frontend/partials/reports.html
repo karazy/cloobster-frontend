@@ -63,7 +63,15 @@
 	  						</thead>
 	  						<tbody>
 	  							<tr>
-	  								<td colspan="3" l="reports.feedback.average"><em>Average:</em> </td>
+	  								<td colspan="3" l="reports.feedback.chart.selection">
+	  									<em>Chart selection</em>
+	  								</td>
+	  								<td ng-repeat="question in selectedFeedbackForm.questions">
+	  									<input type="checkbox" ng-model="question.checked" ng-change="visualizeFeedback()">
+	  								</td>
+	  							</tr>
+	  							<tr>
+	  								<td colspan="3" l="reports.feedback.average"><em>Average</em> </td>
 	  								<td ng-repeat="average in averageFeedbackRatings">{{average + 1 | number:2}}</td>
 	  							</tr>
 		  						<tr ng-repeat="data in feedbackReportData">
