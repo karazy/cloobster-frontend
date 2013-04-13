@@ -2193,6 +2193,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Durschnitt",
 			"EN" : "Average"
 		},
+		"reports.feedback.chart.title" : {
+			"DE" :  "Wöchentliche durschnittliche Feedbackwerte",
+			"EN" : "Weekly average feedback results"
+		},
 		//app config partial
 		"appconfig.description" : {
 			"DE" :  "Konfigurieren Sie das Dashboard der App für Ihren individuellen Auftritt. Füge Sie Kacheln hinzu und arrangieren Sie diese per Drag & Drop.",

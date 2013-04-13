@@ -486,8 +486,13 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
   		  	column: 0,
   		  	modifier: function(value) {
   		  		var aggregateDate = new Date(value.setHours(0,0,0,0));
-  		  		$log.log("Reports.visualizeFeedback: aggregate feedback for " + aggregateDate);
-  		  		return aggregateDate;
+  		  		var startDay = 1; //0=sunday, 1=monday etc.
+				var d = aggregateDate.getDay(); //get the current day
+				var weekStart = new Date(aggregateDate.valueOf() - (d<=0 ? 7-startDay:d-startDay)*86400000); //rewind to start day
+				var weekEnd = new Date(weekStart.valueOf() + 6*86400000); 
+  		  		
+  		  		$log.log("Reports.visualizeFeedback: aggregate feedback for " + weekEnd);
+  		  		return weekEnd;
   		  		// return new Data(value);
   		  	},
   		  	'type': 'date'
@@ -500,7 +505,7 @@ Cloobster.Reports =  function($scope, $http, $routeParams, $location, $filter, l
 		maxDate.setDate(maxDate.getDate() + 1);
 
         options = {
-          title: $scope.selectedFeedbackForm.title,
+          title: langService.translate("reports.feedback.chart.title") || "Weekly aggregation of Feedback",
           hAxis: {
           	// title: langService.translate("reports.chart.haxis"),
           	viewWindowMode:'explicit',
