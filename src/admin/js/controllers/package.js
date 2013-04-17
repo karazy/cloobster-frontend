@@ -346,7 +346,8 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 
 		$http.post('/admin/m/locations',{'copyId': $scope.locationToCopy.id, 'ownerAccountId': $scope.targetAccount.id})
 			.success(function() {	
-				$scope.startCopyLocation.disabled = false;			
+				$scope.startCopyLocation.disabled = false;
+				$('#copyLocationModal').modal('hide');
 			});
 
 	};

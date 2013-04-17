@@ -47,8 +47,7 @@
 					</div>
 					<div class="modal-body">
 						<p ng-hide="targetAccount">Choose Account.</p>
-						<p ng-show="targetAccount">Copy to "{{targetAccount.login}}" account?</p>
-
+						<p class="text-warning" ng-show="targetAccount">Really copy location and all data to "{{targetAccount.login}}" account?</p>
 						<form class="form-inline span12" style="margin: 7px 0;">
 							<div class="controls">
 							<div class="input-prepend">
@@ -59,8 +58,8 @@
 							<i class="icon-remove icon-black" ng-click="accountSearchText = ''"></i>
 							</div>
 						</form>	
-
-						<table class="table table-hover table-condensed">
+						<div class="data-container-block data-container-medium data-container-scrollable">
+						<table class="table table-hover table-condensed ">
 							<thead>
 								<tr>
 									<th>Login</th>
@@ -76,6 +75,7 @@
 			        	</tr>
 		        	</tbody>
 		    		</table>
+		    		</div>
 				  </div>
 				  <div class="modal-footer" >
 			  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
@@ -116,15 +116,18 @@
 									<div class="span2">{{l.url}}</div>
 								</div>
 								<div class="row-fluid" id="details_{{l.id}}" style="display: none; margin-top:10px;">
+									<p>
+										<button type="button" class="btn" data-toggle="modal" data-target="#copyLocationModal" ng-click="setLocationToCopy(l)">Copy Location to Account ...</button>
+									</p>
 									<form class="form-inline">
 										<select ng-model="l.tempSubscription" ng-options="s.name for s in packages">
 											<option value="">-- chose subscription --</option>
 										</select>
 										<span simple-confirm-dialog dialog-on-confirm="setActivePackageForLocation(l)" dialog-title="subscription.setactive.title" dialog-text="subscription.setactive.text" dialog-confirm-button="common.confirm">
 										<button class="btn btn-primary" ng-click="">Set active Package</button>
-										</span>
+										</span>										
 									</form>
-									<button type="button" class="btn pull-left" data-toggle="modal" data-target="#copyLocationModal" ng-click="setLocationToCopy(l)">Copy Location to Account ...</button>
+									
 
 									<div style="margin-top: 5px;">
 										<h4 ng-show="l.subscriptions.length > 0">Subscriptions</h4>
