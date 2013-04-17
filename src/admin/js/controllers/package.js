@@ -326,6 +326,30 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 		});
 	}
 
+	$scope.setLocationToCopy = function(locationToCopy) {
+		if(!locationToCopy) {
+			return;
+		}
+		$scope.targetAccount = null;
+		$scope.locationToCopy = locationToCopy;		
+		$scope.startCopyLocation.disabled = false;
+	};
+
+	$scope.setTargetAccount = function(account) {
+		$scope.targetAccount = account;
+	};
+
+	$scope.startCopyLocation = function() {
+		if(!$scope.locationToCopy || !$scope.targetAccount)
+			return;
+		$scope.startCopyLocation.disabled = true;
+
+		$http.post('/admin/m/locations',{'copyId': $scope.locationToCopy.id, 'ownerAccountId': $scope.targetAccount.id})
+			.success(function() {	
+				$scope.startCopyLocation.disabled = false;			
+			});
+
+	};
 
 	//General Functions
 

@@ -20,7 +20,7 @@ CloobsterAdmin.module = angular.module('CloobsterAdmin', ['CloobsterAdmin.servic
     $routeProvider.when('/templates', {templateUrl: 'partials/templates.html', controller: CloobsterAdmin.Templates});
     $routeProvider.when('/trash', {templateUrl: 'partials/trash.html', controller: CloobsterAdmin.TrashCan});
     $routeProvider.when('/configuration', {templateUrl: 'partials/configuration.html'});
-    $routeProvider.when('/packages', {templateUrl: 'partials/packages.html', controller:CloobsterAdmin.Package});
+    $routeProvider.when('/management', {templateUrl: 'partials/management.html', controller:CloobsterAdmin.Package});
     $routeProvider.otherwise({redirectTo: '/main'});
  }]);
 
@@ -28,7 +28,7 @@ CloobsterAdmin.module.run(['$http', '$rootScope','$location', function($http, $r
   $http.get('/admin/user').success(function(response) {
     $rootScope.user = response;
     if($rootScope.user.awesome == false) {
-      $location.url('/packages');
+      $location.url('/management');
     }
   });
 }]);
@@ -55,7 +55,3 @@ CloobsterAdmin.module.directive('alert', function(){
       }
     };
   });
-
-
-
-

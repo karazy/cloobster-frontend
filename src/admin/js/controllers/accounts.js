@@ -1,9 +1,9 @@
 /* Cloobster namespace. Create if not exists.*/
 window.CloobsterAdmin =  window.CloobsterAdmin || {};
 
-CloobsterAdmin.Accounts = function($scope, $http) {
+CloobsterAdmin.Accounts = function($rootScope, $scope, $http) {
 	$http.get('admin/m/accounts').success(function(data) {
-		$scope.accounts = data;
+		 $rootScope.accounts = data;
 	});
 
 	$scope.setAccountActive = function(active) {
@@ -23,4 +23,4 @@ CloobsterAdmin.Accounts = function($scope, $http) {
 		});
 	}
 }
-CloobsterAdmin.Accounts.$inject = ['$scope', '$http'];
+CloobsterAdmin.Accounts.$inject = ['$rootScope','$scope', '$http'];
