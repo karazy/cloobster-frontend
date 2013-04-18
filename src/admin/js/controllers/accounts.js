@@ -1,10 +1,27 @@
 /* Cloobster namespace. Create if not exists.*/
 window.CloobsterAdmin =  window.CloobsterAdmin || {};
 
-CloobsterAdmin.Accounts = function($rootScope, $scope, $http) {
-	$http.get('admin/m/accounts').success(function(data) {
-		 $rootScope.accounts = data;
-	});
+CloobsterAdmin.Accounts = function($rootScope, $scope, $http, Account) {
+	$rootScope.accounts = Account.query();
+
+	$scope.createNewAccount = function() {
+		$scope.newAccount = new Account();
+	}
+	
+	$scope.saveNewAccount = function() {
+		if(!$scope.newAccount)
+			return;
+		$scope.saveNewAccount.disabled = true;
+		$scope.saveNewAccount.error = null;
+		$scope.newAccount.$save(null, function() {
+			//succcess callback
+			$scope.saveNewAccount.disabled = false;
+		}, function(data, status) {
+			// error callback
+			$scope.saveNewAccount.error = data;
+			$scope.saveNewAccount.disabled = false;
+		});
+	};
 
 	$scope.setAccountActive = function(active) {
 		var scope = this;
@@ -23,4 +40,4 @@ CloobsterAdmin.Accounts = function($rootScope, $scope, $http) {
 		});
 	}
 }
-CloobsterAdmin.Accounts.$inject = ['$rootScope','$scope', '$http'];
+CloobsterAdmin.Accounts.$inject = ['$rootScope','$scope', '$http', 'Account'];

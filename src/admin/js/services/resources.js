@@ -90,3 +90,14 @@ CloobsterAdmin.resources.factory('TrashEntry', ['$resource', function($resource)
       }
     );
 }]);
+
+CloobsterAdmin.resources.factory('Account', ['$resource', function($resource){
+    return $resource('admin/m/accounts/:id',
+      {
+        'id': '@id'
+      },
+      {
+        update: {method:'PUT'}
+      }
+    );
+}]);
