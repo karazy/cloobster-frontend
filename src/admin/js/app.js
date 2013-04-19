@@ -21,6 +21,7 @@ CloobsterAdmin.module = angular.module('CloobsterAdmin', ['CloobsterAdmin.servic
     $routeProvider.when('/trash', {templateUrl: 'partials/trash.html', controller: CloobsterAdmin.TrashCan});
     $routeProvider.when('/configuration', {templateUrl: 'partials/configuration.html'});
     $routeProvider.when('/management', {templateUrl: 'partials/management.html', controller:CloobsterAdmin.Package});
+    $routeProvider.when('/management/:activeTab', {templateUrl: 'partials/management.html', controller:CloobsterAdmin.Package});
     $routeProvider.otherwise({redirectTo: '/main'});
  }]);
 
@@ -39,15 +40,26 @@ CloobsterAdmin.module.directive('alert', function(){
       replace: true,
       transclude: false,
       scope: { alert:'=' },
-      template: '<div class="alert alert-block fade in" ng-class="alert.type" ng-show="alert.show">'+
+      template: '<div class="alert alert-block fade in" ng-class="alert.type" ng-show="alert.visible">'+
+            '<button type="button" class="close" ng-click="dismissAlert()">&times;</button>'+
 	  				'<h4 class="alert-heading" ng-bind="alert.title">Error!</h4>'+
 	  				'<span ng-bind="alert.message"></span>'+
-	  				'<p><button type="button" class="btn" ng-click="dismissAlert()" data-dismiss="alert" ng-bind="alert.buttonText"></button></p>'+
+	  				'<p ng-show="alert.buttonText"><button type="button" class="btn" ng-click="dismissAlert()" data-dismiss="alert" ng-bind="alert.buttonText"></button></p>'+
 				'</div>',
       // The linking function will add behavior to the template
       link: function(scope, element, attrs) {
-      	scope.dismissAlert = function() {
-          scope.alert.show = false;
+        scope.alert = {};
+        scope.alert.show = function(type, title, message, buttonText, continueFn) {
+          scope.alert.type = type;
+          scope.alert.visible = true;
+          scope.alert.message = message;
+          scope.alert.title = title;
+          scope.alert.buttonText = buttonText;
+          scope.alert.continueFn =  continueFn;
+        };
+
+      	scope.alert.dismiss = scope.dismissAlert = function() {
+          scope.alert.visible = false;
       		if(angular.isFunction(scope.alert.continueFn)) {
       			scope.alert.continueFn();
       		}

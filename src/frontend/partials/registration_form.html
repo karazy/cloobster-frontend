@@ -18,22 +18,22 @@
 				<label for="fullname" class="control-label" l="registration.form.fullname">Name*</label>
 				<div class="controls">
 					<input name="fullname" id="fullname" type='text' ng-model="account.name" required ng-minlength="3" placeholder="your name" l-attribute="placeholder" l="registration.form.fullname.placeholder">	
-					 <div class="help-inline" ng-show="registrationForm.fullname.$dirty && registrationForm.fullname.$invalid">
-		          		<span ng-show="registrationForm.fullname.$error.required" l="registration.form.fullname.error.required">Tell us your name.</span>
-		          		<span ng-show="registrationForm.fullname.$error.minlength" l="registration.form.fullname.error.minlength">Name must be a least 3 characters long.</span>
-		        	</div>
-	        	</div>
+					<div class="help-inline" ng-show="registrationForm.fullname.$dirty && registrationForm.fullname.$invalid">
+        		<span ng-show="registrationForm.fullname.$error.required" l="registration.form.fullname.error.required">Tell us your name.</span>
+        		<span ng-show="registrationForm.fullname.$error.minlength" l="registration.form.fullname.error.minlength">Name must be a least 3 characters long.</span>
         	</div>
+      	</div>
+    	</div>
         	<div class="control-group" ng-class="getFieldInputClass(registrationForm.login.$dirty, registrationForm.login.$invalid)">
 	        	<label for="login" class="control-label" l="registration.form.login">Login*</label>
 	        	<div class="controls">
-					<input name="login" id="login" type="text" ng-model="account.login" required ng-pattern="/^[a-z0-9_\.-]{4,30}$/" placeholder="login name" l-attribute="placeholder" l="registration.form.login.placeholder">
-					<div class="help-inline" ng-show="registrationForm.login.$dirty && registrationForm.login.$invalid">
-		          		<span ng-show="registrationForm.login.$error.required" l="registration.form.login.error.required">Provide a username.</span>
-		          		<span ng-show="registrationForm.login.$error.pattern" l="registration.form.login.error.pattern">4 - 30 characters. Only lower case, digits, "_" "-" "." are allowed.</span>
-		        	</div>
-				</div>
-			</div>
+							<input name="login" id="login" type="text" ng-model="account.login" required ng-pattern="/^[a-z0-9_\.-]{4,30}$/" placeholder="login name" l-attribute="placeholder" l="registration.form.login.placeholder">
+							<div class="help-inline" ng-show="registrationForm.login.$dirty && registrationForm.login.$invalid">
+		        		<span ng-show="registrationForm.login.$error.required" l="registration.form.login.error.required">Provide a username.</span>
+		        		<span ng-show="registrationForm.login.$error.pattern" l="registration.form.login.error.pattern">4 - 30 characters. Only lower case, digits, "_" "-" "." are allowed.</span>
+		  				</div>
+						</div>
+					</div>
 			<div class="control-group" ng-class="getFieldInputClass(registrationForm.email.$dirty, registrationForm.email.$invalid)">
 				<label class="control-label" for="email" l="registration.form.email">Email*</label>
 				<div class="controls">

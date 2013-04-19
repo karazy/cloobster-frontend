@@ -1,7 +1,7 @@
 /** @module CloobsterAdmin */
 'use strict';
 
-CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Location, LocationSubscription) {
+CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Location, LocationSubscription,$routeParams) {
 
 	//available template subscriptions
 	$scope.packages = null;
@@ -378,4 +378,4 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 
 }
 
-CloobsterAdmin.Package.$inject = ['$scope', '$http', '$log', 'Subscription', 'Company', 'Location', 'LocationSubscription'];
+CloobsterAdmin.Package.$inject = ['$scope', '$http', '$log', 'Subscription', 'Company', 'Location', 'LocationSubscription','$routeParams'];

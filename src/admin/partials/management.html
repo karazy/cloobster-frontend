@@ -385,6 +385,80 @@
 	<div class="row-fluid" ng-show="activeTab == 'accounts'" >
 		<div class="span12 data-container-with-title" style="padding-left: 10px; padding-right: 10px;" ng-controller="CloobsterAdmin.Accounts">
 			<h4 class="data-container-title">Cloobster Accounts</h4>
+			<button type="button" class="btn btn-primary" ng-click="createNewAccount()" data-toggle="modal" data-target="#newAccountModal"><i class="icon-plus icon-white"></i> New Company Account ...</button>
+			<div class="modal hide" id="newAccountModal">
+				<form class="form-horizontal" name="createAccountForm" ng-submit="saveNewAccount()" novalidate>
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">×</button>
+					  <h4>Enter new Account information ...</h4>
+					</div>
+					<div class="modal-body" >
+						<div class="control-group" ng-class="getFieldInputClass(createAccountForm.fullname.$dirty, createAccountForm.fullname.$invalid)">
+							<label for="fullname" class="control-label" l="registration.form.fullname">Name*</label>
+							<div class="controls">
+								<input name="fullname" id="fullname" type='text' ng-model="newAccount.name" required ng-minlength="3" placeholder="account name" l-attribute="placeholder" l="registration.form.fullname.placeholder">	
+								<div class="help-inline" ng-show="createAccountForm.fullname.$dirty && createAccountForm.fullname.$invalid">
+		          		<span ng-show="createAccountForm.fullname.$error.required" l="registration.form.fullname.error.required">Enter account name.</span>
+		          		<span ng-show="createAccountForm.fullname.$error.minlength" l="registration.form.fullname.error.minlength">Name must be a least 3 characters long.</span>
+	        			</div>
+	        		</div>
+        		</div>
+  					<div class="control-group" ng-class="getFieldInputClass(createAccountForm.email.$dirty, createAccountForm.email.$invalid)">
+							<label class="control-label" for="email" l="registration.form.email">Email*</label>
+							<div class="controls">
+								<input name='email' id="email" type='email' ng-model="newAccount.email" required placeholder="email" l-attribute="placeholder" l="registration.form.email.placeholder">
+								 <div class="help-inline" ng-show="createAccountForm.email.$dirty && createAccountForm.email.$invalid">
+			          		<span ng-show="createAccountForm.email.$error.required" l="registration.form.email.error.required">Enter account e-mail.</span>
+			          		<span ng-show="createAccountForm.email.$error.email" l="registration.form.email.error.email">Invalid email.</span>
+			        	</div>
+			        </div>
+	        	</div>
+	        	<div class="control-group" ng-class="getFieldInputClass(createAccountForm.login.$dirty, createAccountForm.login.$invalid)">
+		        	<label for="login" class="control-label" l="registration.form.login">Login*</label>
+		        	<div class="controls">
+								<input name="login" id="login" type="text" ng-model="newAccount.login" required ng-pattern="/^[a-z0-9_\.-]{4,30}$/" placeholder="login name" l-attribute="placeholder" l="registration.form.login.placeholder">
+								<div class="help-inline" ng-show="createAccountForm.login.$dirty && createAccountForm.login.$invalid">
+			        		<span ng-show="createAccountForm.login.$error.required" l="registration.form.login.error.required">Enter account username.</span>
+			        		<span ng-show="createAccountForm.login.$error.pattern" l="registration.form.login.error.pattern">4 - 30 characters. Only lower case, digits, "_" "-" "." are allowed.</span>
+			  				</div>
+							</div>
+						</div>
+						<div class="control-group" ng-class="getFieldInputClass(createAccountForm.password.$dirty, createAccountForm.password.$invalid)">
+							<label for="password" class="control-label" l="registration.form.password" style="margin-bottom: 0px;">Password*</label>							
+							<div class="controls">
+								<input name="password" id="password" type="password" ng-model="newAccount.password" required ng-pattern="/^(?=[!-~]*$)(?=.*([^A-Za-z0-9]|\d))(?=.*[a-zA-Z]).*$/" ng-change="matchPasswords()" placeholder="new password" l-attribute="placeholder" l="registration.form.password.placeholder">
+								<div class="help-inline" ng-show="createAccountForm.password.$dirty && createAccountForm.password.$invalid">
+					          		<span ng-show="createAccountForm.password.$error.required" l="registration.form.password.error.required">Provide a password.</span>
+					          		<span ng-show="createAccountForm.password.$error.pattern" l="registration.form.password.error.pattern">Min. 6 characters. Must contain a letter and a number or one special character.</span>
+					        	</div>
+							</div>
+						</div>
+						<div class="control-group" ng-class="getFieldInputClass(createAccountForm.passwordRepeat.$dirty, createAccountForm.passwordRepeat.$invalid)">
+							<label class="control-label" for="passwordRepeat" l="registration.form.passwordrepeat">Repeat password*</label>
+							<div class="controls">
+								<input name='passwordRepeat' id="passwordRepeat" type='password' ng-model="passwordRepeat" required ng-change="matchPasswords()" placeholder="repeat new password" l-attribute="placeholder" l="registration.form.passwordrepeat.placeholder">
+								<div class="help-inline" ng-show="createAccountForm.passwordRepeat.$dirty && createAccountForm.passwordRepeat.$invalid">
+					          		<span ng-show="createAccountForm.passwordRepeat.$error.match" l="registration.form.passwordrepeat.error.match">Passwords don't match.</span>
+			      		</div>
+							</div>
+						</div>
+						<div class="control-group" ng-class="getFieldInputClass(createAccountForm.companyName.$dirty, createAccountForm.companyName.$invalid)">
+							<label class="control-label" for="companyName" l="registration.form.company">Company*</label>
+							<div class="controls">
+								<input name='companyName' id="companyName" type='text' ng-model="newAccount.company.name" required placeholder="company name" l-attribute="placeholder" l="registration.form.company.placeholder">				
+								<div class="help-inline" ng-show="createAccountForm.companyName.$dirty && createAccountForm.companyName.$invalid">
+				      		<span ng-show="createAccountForm.companyName.$error.required" l="registration.form.company.error.required">Provide a company.</span>
+				    		</div>
+							</div>
+						</div>
+						<div import-alert alert="alert"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn" data-dismiss="modal">Cancel</button>
+						<button type="submit" class="btn btn-primary" ng-disabled="createAccountForm.$invalid || saveNewAccount.disabled">Create Account</button>
+					</div>
+				</form>
+			</div>
 			<form class="form-inline span12" style="margin: 7px 0;">
 				<div class="controls">
 				<div class="input-prepend">
@@ -409,7 +483,7 @@
 		      </tr>
 		    </thead>
 		    <tbody>
-		      <tr ng-repeat="account in accounts| filter:searchText |orderBy:'role'" >
+		      <tr ng-repeat="account in accounts| filter:searchText |orderBy:['role','login']" >
 		        <td>{{account.email}}</td>
 		        <td>{{account.login}}</td>
 		        <td>{{account.name}}</td>
