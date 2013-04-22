@@ -1,5 +1,15 @@
-CloobsterAdmin.Functions = function($scope, $http) {
+CloobsterAdmin.Functions = function($scope, $http, $rootScope) {
 	$scope.deleteFunctionsDisabled = (Karazy.environment == "dev")? false : true;
+	
+	$rootScope.$watch('user.environment', function(newVal) {
+		if(newVal === 'dev') {
+			$scope.deleteFunctionsDisabled = false;
+		}
+		else {
+			$scope.deleteFunctionsDisabled = true;	
+		}
+	});
+
 	$scope.confirmDeleteAllDisabled = false;
 	$scope.confirmDeleteLiveDisabled = false;
 
@@ -94,4 +104,4 @@ CloobsterAdmin.Functions = function($scope, $http) {
 	};
 }
 
-CloobsterAdmin.Functions.$inject = ['$scope', '$http'];
+CloobsterAdmin.Functions.$inject = ['$scope', '$http','$rootScope'];
