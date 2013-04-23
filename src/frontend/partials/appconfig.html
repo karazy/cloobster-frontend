@@ -153,7 +153,7 @@
 			    	</div>
 			    	<div class="data-container-block data-container-large data-container-scrollable" >
 			    		<ul class="nav nav-pills-checkbox nav-stacked">
-			       	 	<li ng-repeat="product in allProductsList | filter:allProductsQuery | orderBy:['name']" class="product-item">
+			       	 	<li ng-repeat="product in allProductsList | filter:{'active':true} | filter:allProductsQuery | orderBy:['name']" class="product-item">
 			       	 		<div>
 				        		<div>
 				        			<input type="checkbox" ng-model="product.checked" ng-change="productChecked()">
