@@ -519,6 +519,28 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 	}
 
 	/**
+	* Toggle noOrder filter on/off on all products.
+	*
+	*/
+	$scope.toggleProductNoOrderFilter = function() {
+		if(!$scope.allProductsQuery) {
+			$scope.allProductsQuery = {
+				'noOrder' : true
+			}
+			return;
+		}
+
+		if($scope.allProductsQuery.noOrder == true) {
+			delete $scope.allProductsQuery.noOrder;
+		} else {
+			$scope.allProductsQuery.noOrder = true;
+		}
+
+		listUtil.checkElements($scope.allProductsList, null, true);
+	}
+	
+
+	/**
 	* Toggle hideInDashboard filter on/undefined on all products.
 	*
 	*/
@@ -810,7 +832,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 	}
 
 	/**
-	* Toggle sepcial flag of product.
+	* Toggle special flag of product.
 	* Executes a save afterwards.
 	*/
 	$scope.toggleProductSpecial = function(product) {
@@ -819,6 +841,17 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 		productToToggle.special = !productToToggle.special;
 		$scope.saveProduct(productToToggle);
 	}
+
+	/**
+	* Toggle noOrder flag of product.
+	* Executes a save afterwards.
+	*/
+	$scope.toggleProductNoOrder = function(product) {
+		var productToToggle = product || $scope.currentProduct;
+
+		productToToggle.noOrder = !productToToggle.noOrder;
+		$scope.saveProduct(productToToggle);
+	}	
 
 	/**
 	* Toggle sepcial flag of product.

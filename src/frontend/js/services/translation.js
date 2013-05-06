@@ -923,13 +923,17 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 					"<i class='icon-star icon-black'></i> Produkt ist Spezial<br/>"+
 					"<i class='icon-star-empty icon-black'></i> Produkt nicht Spezial<br/>"+
 					"<i class='icon-eye-open icon-black'></i> Produkt wird auf App Dashboard angezeigt<br/>"+
-					"<i class='icon-eye-close icon-black'></i> Produkt wird auf App Dashboard verborgen",
+					"<i class='icon-eye-close icon-black'></i> Produkt wird auf App Dashboard verborgen<br/>"+
+					"<i class='icon-info-sign icon-black'></i> Wenn Aktiv so kann der Benutzer das Produkt nur anschauen, aber nicht bestellen<br/>"+
+					"<i class='icon-shopping-cart icon-black'></i>Benutzer kann Produkt bestellen",
 			"EN" : "<i class='icon-ok icon-black'></i> Product active<br/>"+
 					"<i class='icon-ban-circle icon-black'></i> Product inactive<br/>"+
 					"<i class='icon-star icon-black'></i> Produkt is special<br/>"+
 					"<i class='icon-star-empty icon-black'></i> Product is NOT sepcial<br/>"+
 					"<i class='icon-eye-open icon-black'></i> Product can be displayed on app dashboard<br/>"+
-					"<i class='icon-eye-close icon-black'></i> Product will never be shown on app dashboard"
+					"<i class='icon-eye-close icon-black'></i> Product will never be shown on app dashboard<br/>"+
+					"<i class='icon-eye-close icon-black'></i> If active user can only view but not order the product<br/>"+
+					"<i class='icon-shopping-cart icon-black'></i>User can order product",
 		},
 		"products.filter.active.tooltip" : {
 			"DE" :  "Inaktive Produkte anzeigen",
@@ -1039,9 +1043,17 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Spezialangebot (de)aktivieren. Diese werden gesondert im App Startscreen hervorgehoben.",
 			"EN" : "(de)activate special offer. They will be highlighted on the app home screen."
 		},
+		"menus.product.noorder.tooltip" : {
+			"DE" :  "Infoprodukt (de)aktivieren. Infoprodukte können nicht bestellt werden.",
+			"EN" : "(De)Activate info product. User can't order info products."
+		},
+		"menus.product.noorder.badge" : {
+			"DE" :  "Nur Anzeige",
+			"EN" : "Only display"
+		},
 		"menus.product.active.tooltip" : {
-			"DE" :  "Produkt aktiveren/deaktivieren.",
-			"EN" : "Activate/deactivate product."
+			"DE" :  "Produkt aktiveren/deaktivieren. Achtung! Produkt ist nicht für Benutzer verfügbar.",
+			"EN" : "Activate/deactivate product. Attention! Product is not available for user."
 		},
 		"menus.product.hideindashboard.tooltip" : {
 			"DE" :  "Auge geschlossen: Produkt auf App Dashboard NIE anzeigen.",
