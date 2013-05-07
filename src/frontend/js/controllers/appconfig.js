@@ -25,63 +25,73 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			//description to use in detail view
 			description: langService.translate("tiles.template.feedback.description"),
 			//a tile that just acts as a shorthand to navigation menus, used to add additional styles
-			"static": true
+			"static": true,
+			//feature this tile belongs to
+			"feature" : "feedback"
 		},
 		"products": {	
 			title: langService.translate("tiles.template.products") || "Products",
 			type: "products",
 			cls: "tile-products",
 			description: langService.translate("tiles.template.products.description"),
-			"static": true
+			"static": true,
+			"feature" : "products"
 		},
 		"infopages": {	
 			title: langService.translate("tiles.template.infopages") || "Infopages",
 			type: "infopages",
 			cls: "tile-infopages",
 			description: langService.translate("tiles.template.infopages.description"),
-			"static": true
+			"static": true,
+			"feature" : "infopages"
 		},
 		"actions": {	
 			title: langService.translate("tiles.template.actions") || "Service Call",
 			type: "actions",
 			cls: "tile-actions",
 			description: langService.translate("tiles.template.actions.description"),
-			"static": true
+			"static": true,
+			"feature" : "requests-call"
 		},
 		"infopagesall": {	
 			title: langService.translate("tiles.template.allinfopages") || "All Infopages",
 			type: "infopagesall",
 			cls: "tile-infopages",
 			description: langService.translate("tiles.template.infopagesall.description"),
-			"static": false
+			"static": false,
+			"feature" : "infopages"
 		},
 		"infopagesselected": {	
 			title: langService.translate("tiles.template.infopagesselected") || "Selected Infopages",
 			type: "infopagesselected",
 			cls: "tile-infopages",
 			description: langService.translate("tiles.template.infopagesselected.description"),
-			"static": false
+			"static": false,
+			"feature" : "infopages"
 		},
 		"productsall": {	
 			title: langService.translate("tiles.template.productsall") || "All Products",
 			type: "productsall",
 			cls: "tile-products",
 			description: langService.translate("tiles.template.productsall.description"),
-			"static": false
+			"static": false,
+			"feature" : "products"
 		},
 		"productsspecial": {	
 			title: langService.translate("tiles.template.productsspecial") || "Special Products",
 			type: "productsspecial",
 			cls: "tile-products",
 			description: langService.translate("tiles.template.productsspecial.description"),
-			"static": false
+			"static": false,
+			"feature" : "products"
 		},
 		"productsselected": {	
 			title: langService.translate("tiles.template.productsselected") || "Selected Products",
 			type: "productsselected",
 			cls: "tile-products",
 			description: langService.translate("tiles.template.productsselected.description"),
-			"static": false
+			"static": false,
+			"feature" : "products"
 		}
 	};
 	/** Holds the last tile whose hover delete button was clicked. */
@@ -377,6 +387,21 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 		}
 
 		$scope.activeBusiness.$update(null, null, handleError);			
+	}
+
+	/**
+	* Indicates if a certain feature is enabled (true) or disabled (false).
+	*/
+	$scope.isFeatureDisabled = function(feature) {
+		if(!$scope.activeBusiness || !$scope.activeBusiness.features) {
+			return false;
+		}	
+
+		if($scope.activeBusiness.features.hasOwnProperty(feature)) {
+			return !$scope.activeBusiness.features[feature];
+		}
+
+		return false;
 	}
 
 	/** 
