@@ -1,7 +1,7 @@
 /**
 * An on/off switch based on https://github.com/nostalgiaz/bootstrap-switch and wrapped in a directive.
 */
-Cloobster.directives.directive('switchButton', ['lang', '$log', function(langService, $log) {
+Cloobster.directives.directive('switchButton', ['lang', '$log', '$timeout', function(langService, $log, $timeout) {
 	var //directive configuration
 		config = {
 		restrict: 'A',
@@ -19,7 +19,7 @@ Cloobster.directives.directive('switchButton', ['lang', '$log', function(langSer
 			html = 
 			'<div style="width: 250px; margin-right: 10px; float:left;">'+
 				'<div class="switch switch-small" data-on="primary" data-off="danger">'+
-				    '<input type="checkbox" ng-model="switchButton"/>'+
+				    '<input type="checkbox" />'+
 				'</div> <span l="{{switchLabelKey}}"></span>'+
 			'</div>';
 
@@ -30,16 +30,19 @@ Cloobster.directives.directive('switchButton', ['lang', '$log', function(langSer
 		        	
 		        },
 		        post: function postLink(scope, iElement, iAttrs, controller) {
-		        	var dialog = iElement.find('.simple-confirm-dialog');
+		        	var switchEle = iElement.find('.switch');
 
-		        	iElement.find('.switch').bootstrapSwitch();
-		        	iElement.find('.switch').on('switch-change', function (e, data) {
+		        	switchEle.bootstrapSwitch();
+		        	switchEle.on('switch-change', function (e, data) {
 				        scope.switchButton = data.value;
-				        scope.onSwitch();
+				        scope.$digest();
+				        $timeout(scope.onSwitch);
 					}); 
 
 					scope.$watch('switchButton', function(newVal, oldVal) {
-						iElement.find('.switch').bootstrapSwitch('setState', newVal);
+						// switchEle.data('animated', false);
+						switchEle.bootstrapSwitch('setState', newVal, true);
+						// switchEle.data('animated', true);
 					});
 
 		        }
