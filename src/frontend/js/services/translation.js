@@ -2224,8 +2224,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		//app config partial
 		"appconfig.description" : {
-			"DE" :  "Konfigurieren Sie das Dashboard der App für Ihren individuellen Auftritt. Füge Sie Kacheln hinzu und arrangieren Sie diese per Drag & Drop.",
-			"EN" : "Customize the look of the dashboard. Add tiles and arrange them via drag & drop."
+			"DE" :  "Konfigurieren Sie die App. Gestalten Sie das Dashboard für Ihren individuellen Auftritt. Schalten Sie Features ein oder aus.",
+			"EN" : "Customize the look of the app. Add dashboard tiles for your individuell appearance. Turn features on or off."
 		},
 		"appconfig.subscription.basic.description" : {
 			"DE" :  "<span class='label label-important'>Basis</span> Sie verwenden ein Basis Paket. Die Konfiguration eines individuellen Dashboards ist nur nach einem Upgrade des Pakets möglich.<br>" +
