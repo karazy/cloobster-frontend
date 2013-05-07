@@ -391,6 +391,15 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			$location.url('/');
 		}
 	});
+
+	//init bootstrapSwitch
+	// $('.switch')['bootstrapSwitch']();
+	// $('.switch').on('switch-change', function (e, data) {
+ //    	var $el = $(data.el),
+ //        value = data.value;
+
+ //    	console.log(e + data);
+	// });
 }
 
 Cloobster.AppConfig.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', '$timeout', 'errorHandler', 'Business', 'DashboardItem','listUtil','Product', 'InfoPage'];

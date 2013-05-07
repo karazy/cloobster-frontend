@@ -2352,6 +2352,38 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Kachel wird entfernt!",
 			"EN" : "Tile will be removed!"
 		},
+		"appconfig.features.title" : {
+			"DE" :  "Features",
+			"EN" : "Features"
+		},
+		"appconfig.features.description" : {
+			"DE" :  "Funktionen (de)aktivieren in der App",
+			"EN" : "Configure features you want to be available in the app."
+		},
+		"appconfig.features.products" : {
+			"DE" :  "Produkte",
+			"EN" : "Products"
+		},
+		"appconfig.features.infopages" : {
+			"DE" :  "Infoseiten",
+			"EN" : "Infopages"
+		},
+		"appconfig.features.feedback" : {
+			"DE" :  "Feedback",
+			"EN" : "Feedback"
+		},
+		"appconfig.features.requestscall" : {
+			"DE" :  "Service Call",
+			"EN" : "Service Call"
+		},
+		"appconfig.features.facebookpost" : {
+			"DE" :  "Facebook Post",
+			"EN" : "Facebook Post"
+		},
+		"appconfig.features.contact" : {
+			"DE" :  "Kontaktinformation",
+			"EN" : "Contact information"
+		},
 		//general
 		"common.warning.title" : {
 			"DE" : "Achtung!",
