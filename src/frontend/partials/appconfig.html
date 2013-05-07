@@ -13,6 +13,36 @@
 		</div>
 	</div>
 	<div class="row-fluid">
+		<div class="span3">
+			<div class="data-container-with-title">
+				<h4 class="data-container-title" l="appconfig.features.title">Features</h4>
+				<div class="data-container-block data-container-seperator">
+	    			<p l="appconfig.features.description">Configure features you want to be available in the app.</p>
+	    		</div>
+				<div class="data-container-block">
+					<div class="switch" data-on="primary" data-off="info">
+					    <input type="checkbox" ng-model="activeBusiness.features.products" ng-change="saveBusiness()" checked /> <span l="appconfig.features.products">Products</span>
+					</div>
+					<div class="switch" data-on="primary" data-off="info">
+					    <input type="checkbox" ng-model="activeBusiness.features.infopages" ng-change="saveBusiness()" checked /> <span l="appconfig.features.infopages">Infopages</span>
+					</div>
+					<div class="switch" data-on="primary" data-off="info">
+					    <input type="checkbox" ng-model="activeBusiness.features.feedback" ng-change="saveBusiness()" checked /> <span l="appconfig.features.feedback">Feedback</span>
+					</div>
+					<div class="switch" data-on="primary" data-off="info">
+					    <input type="checkbox" ng-model="activeBusiness.features['requests-call']" ng-change="saveBusiness()" checked /> <span l="appconfig.features.requests-call">Requests</span>
+					</div>
+					<div class="switch" data-on="primary" data-off="info">
+					    <input type="checkbox" ng-model="activeBusiness.features['facebook-post']" ng-change="saveBusiness()" checked /> <span l="appconfig.features.facebook-post">Facebook Post</span>
+					</div>
+					<div class="switch" data-on="primary" data-off="info">
+					    <input type="checkbox" ng-model="activeBusiness.features.contact" ng-change="saveBusiness()" checked /> <span l="appconfig.features.contact">Contact Information</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid">
 		<!-- first column: available tiles -->
 		<div class="span3">
 			<div class="data-container-with-title">

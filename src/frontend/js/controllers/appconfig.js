@@ -107,7 +107,7 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 		$scope.dashboardItems = dashboardItemsResource.query(null, angular.noop, handleError);
 
 
-	}
+	}	
 
 	/**
 	* @private
@@ -365,6 +365,18 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			return false;
 		}
 		return $scope.currentTile.type == "infopagesall" || $scope.currentTile.type == "infopagesselected";
+	}
+
+	/**
+	* Save business.
+	*/
+	$scope.saveBusiness = function() {
+		if(!$scope.activeBusiness) {
+			$log.error("AppConfig.saveBusiness: no activeBusiness exists");
+			return;
+		}
+
+		$scope.activeBusiness.$update(null, null, handleError);			
 	}
 
 	/** 
