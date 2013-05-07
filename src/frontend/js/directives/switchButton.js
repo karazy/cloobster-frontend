@@ -17,7 +17,7 @@ Cloobster.directives.directive('switchButton', ['lang', '$log', '$timeout', func
 			var html;
 
 			html = 
-			'<div style="width: 250px; margin-right: 10px; float:left;">'+
+			'<div style="margin-right: 10px; float:left;">'+
 				'<div class="switch switch-small" data-on="primary" data-off="danger">'+
 				    '<input type="checkbox" />'+
 				'</div> <span l="{{switchLabelKey}}"></span>'+

@@ -334,15 +334,15 @@
 				<div class="data-element">
 					<div class="key" l="business.detail.cockpitsettings.offlinealert">Offline E-Mail Alert</div>
 					<div class="value">
-	    			<button class="btn btn-success" type="button"  ng-click="activeBusiness.offlineEmailAlertActive = false; saveBusiness()" ng-show="activeBusiness.offlineEmailAlertActive" ><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
-	    			<button class="btn btn-danger" type="button"  ng-click="activeBusiness.offlineEmailAlertActive = true; saveBusiness()" ng-hide="activeBusiness.offlineEmailAlertActive"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button> <span l="business.detail.cockpitsettings.offlinealert.description">The system will send an e-mail, if it detects a connection problem or the client was closed accidently and is offline for more than 30 minutes.</span>
+						<div switch-button="activeBusiness.offlineEmailAlertActive" on-switch="saveBusiness()"></div>
+	    				<span l="business.detail.cockpitsettings.offlinealert.description">The system will send an e-mail, if it detects a connection problem or the client was closed accidently and is offline for more than 30 minutes.</span>
 					</div>
 				</div>
 				<div class="data-element">
 					<div class="key" l="business.detail.cockpitsettings.inactivecheckinnotification">Inactive CheckIn Notification</div>
 					<div class="value">
-	    			<button class="btn btn-success" type="button"  ng-click="activeBusiness.inactiveCheckInNotificationActive = false; saveBusiness()" ng-show="activeBusiness.inactiveCheckInNotificationActive" ><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
-	    			<button class="btn btn-danger" type="button"  ng-click="activeBusiness.inactiveCheckInNotificationActive = true; saveBusiness()" ng-hide="activeBusiness.inactiveCheckInNotificationActive"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button> <span l="business.detail.cockpitsettings.inactivecheckinnotification.description">The system will notify open cockpits, if there have been checkins inactive for a long period of time.</span>
+						<div switch-button="activeBusiness.inactiveCheckInNotificationActive" on-switch="saveBusiness()"></div>
+						<span l="business.detail.cockpitsettings.inactivecheckinnotification.description">The system will notify open cockpits, if there have been checkins inactive for a long period of time.</span>
 					</div>
 				</div>
 				<div class="data-element">

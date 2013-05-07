@@ -84,8 +84,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Documents"
 		},
 		"businesses.headertabs.appconfig" : {
-			"DE" :  "App Dashboard",
-			"EN" : "App Dashboard"
+			"DE" :  "App",
+			"EN" : "App"
 		},
 		//registration partial
 		"registration.title" : {
@@ -742,8 +742,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Notifications"
 		},
 		"business.detail.cockpitsettings.offlinealert" : {
-			"DE" : "Cockpit Verbindungsabbrüche",
-			"EN" : "Cockpit Connection Loss"
+			"DE" : "Verbindungs- abbrüche",
+			"EN" : "Connection Loss"
 		},
 		"business.detail.cockpitsettings.offlinealert.description" : {
 			"DE" :  "Eine E-Mail wird versendet, wenn Probleme mit dem Cockpit auftreten. Dazu gehören Verbindungsabbrüche oder unbeabsichtigtes schliessen des Cockpits.",
