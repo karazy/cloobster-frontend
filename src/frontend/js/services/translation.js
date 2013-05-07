@@ -738,24 +738,33 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Do you want to cancel your request?"
 		},
 		"business.detail.section.cockpit" : {
-			"DE" :  "Cockpit Einstellungen",
-			"EN" : "Cockpit Settings"
+			"DE" :  "Benachrichtigungen",
+			"EN" : "Notifications"
 		},
 		"business.detail.cockpitsettings.offlinealert" : {
-			"DE" :  "E-Mail Benachrichtigung",
-			"EN" : "Offline E-Mail Alert"
+			"DE" : "Cockpit Verbindungsabbrüche",
+			"EN" : "Cockpit Connection Loss"
 		},
 		"business.detail.cockpitsettings.offlinealert.description" : {
 			"DE" :  "Eine E-Mail wird versendet, wenn Probleme mit dem Cockpit auftreten. Dazu gehören Verbindungsabbrüche oder unbeabsichtigtes schliessen des Cockpits.",
 			"EN" : "The system will send an e-mail, if it detects a connection problem or the client was closed accidently and is offline for more than 30 minutes."
 		},
 		"business.detail.cockpitsettings.inactivecheckinnotification" : {
-			"DE" : "Bei inaktiven CheckIns benachrichtigen",
-			"EN" : "CheckIn Inactivity Notification"
+			"DE" : "Inaktiven Checkins",
+			"EN" : "Inactive Checkins"
 		},
 		"business.detail.cockpitsettings.inactivecheckinnotification.description" : {
-			"DE" : "Offene Cockpits werden benachrichtigt, falls es CheckIns gibt die über 24 Stunden inaktiv waren.",
-			"EN" : "The system will notify open cockpits, if there have been checkins inactive for over 24 hours."
+			"DE" : "Offene Cockpits werden benachrichtigt, falls es CheckIns gibt die über 48 Stunden inaktiv waren.",
+			"EN" : "The system will notify open cockpits, if there have been checkins inactive for over 48 hours."
+		},
+
+		"business.detail.cockpitsettings.ordermailnotification" : {
+			"DE" : "Eingehende Bestellungen (E-Mail)",
+			"EN" : "Incoming Orders (e-mail)"
+		},
+		"business.detail.cockpitsettings.ordermailnotification.description" : {
+			"DE" : "Eine E-Mail wird bei Eingang von neuen Bestellungen an die eingetragene Addresse geschickt.",
+			"EN" : "An e-mail will be send to the configured address for incoming orders."
 		},
 		//profile partial
 		"profile.title" : {

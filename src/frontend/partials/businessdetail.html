@@ -345,6 +345,13 @@
 	    			<button class="btn btn-danger" type="button"  ng-click="activeBusiness.inactiveCheckInNotificationActive = true; saveBusiness()" ng-hide="activeBusiness.inactiveCheckInNotificationActive"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button> <span l="business.detail.cockpitsettings.inactivecheckinnotification.description">The system will notify open cockpits, if there have been checkins inactive for a long period of time.</span>
 					</div>
 				</div>
+				<div class="data-element">
+					<div class="key" l="business.detail.cockpitsettings.ordermailnotification">Notification On New Orders</div>
+					<div class="value">
+						<div switch-button="activeBusiness.incomingOrderNotificationEnabled" on-switch="saveBusiness()"></div>
+						<span l="business.detail.cockpitsettings.ordermailnotification.description">The system will send an e-mail to the configured address on new incoming orders.</span>
+					</div>
+				</div>
 			</div>
 		</div>
 		
