@@ -56,8 +56,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Locations"
 		},
 		"businesses.headertabs.locationsettings" : {
-			"DE" :  "Location Einstellungen",
-			"EN" : "Location Settings"
+			"DE" :  "Einstellungen",
+			"EN" : "Settings"
 		},
 		"businesses.headertabs.categories" : {
 			"DE" :  "Produkte",
@@ -68,8 +68,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "User Accounts"
 		},
 		"businesses.headertabs.activation" : {
-			"DE" :  "Kategorien zuweisen",
-			"EN" : "Assign categories"
+			"DE" :  "Produkte zuweisen",
+			"EN" : "Assign products"
 		},
 		"businesses.headertabs.areas" : {
 			"DE" :  "Spots",
@@ -82,6 +82,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"businesses.headertabs.documents" : {
 			"DE" :  "Dokumente",
 			"EN" : "Documents"
+		},
+		"businesses.headertabs.appconfig" : {
+			"DE" :  "App",
+			"EN" : "App"
 		},
 		//registration partial
 		"registration.title" : {
@@ -109,8 +113,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Select a user name."
 		},
 		"registration.form.login.error.pattern" : {
-			"DE" : 'Ihr Benutzername muss zwischen 4-30 Zeichen lang sein. Es sind nur Kleinbuchstanen und "_" "-" "." erlaubt.',
-			"EN" : 'Your username must consist of 4-30 characters. Only lowercase and "_" "-" "." are permittet.'
+			"DE" : 'Ihr Benutzername muss zwischen 4-30 Zeichen lang sein. Es sind nur Kleinbuchstaben, "_", "-" und "." erlaubt.',
+			"EN" : 'Your username must consist of 4-30 characters. Only lowercase letters, "_", "-", and "." are permittet.'
 		},
 		"registration.form.email" : {
 			"DE" : "E-Mail*",
@@ -146,7 +150,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"registration.form.passwordrepeat" : {
 			"DE" : "Passwort wiederholen*",
-			"EN" : "Repeast password*"
+			"EN" : "Repeat password*"
 		},
 		"registration.form.passwordrepeat.error.match" : {
 			"DE" : "Passwörter stimmen nicht überein.",
@@ -193,8 +197,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Please enter zip code."
 		},
 		"registration.form.businessphone" : {
-			"DE" : "Telefon geschäftlich",
-			"EN" : "Phone (business)"
+			"DE" : "Telefon geschäftlich *",
+			"EN" : "Phone (business) *"
 		},
 		"registration.form.country" : {
 			"DE" : "Land",
@@ -269,8 +273,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Log in to Facebook and link with cloobster."
 		},
 		"registration.form.account.label" : {
-			"DE" : "Meine Benutzerkontodaten",
-			"EN" : "My account data"
+			"DE" : "Meine Benutzerdaten",
+			"EN" : "My data"
 		},
 		"registration.form.action.reset" : {
 			"DE" : "Zurücksetzen",
@@ -436,6 +440,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Hier können Sie das Profil der aktiven Location pflegen.<br/>Außerdem können Sie hier die Oberfläche der App konfigurieren.",
 			"EN" : "Edit properties of current location.<br/>Configure corporate identity for app."
 		},
+		"business.help.paymentmethod.popover" : {
+			"DE" :  "Legen Sie hier fest, welche Möglichkeiten der Gast hat, den Check-In abzuschliessen (Z. B. auf Hotelrechnung, Bar).",
+			"EN" : "Here you can define the options a customer has to complete the check-in (e.g. hotel bill, cash)."
+		},
 		"business.action.edit.enable" : {
 			"DE" : "Location editieren",
 			"EN" : "Enable edit mode"
@@ -479,6 +487,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"business.detail.logo.button" : {
 			"DE" : "Logo hinzufügen",
 			"EN" : "Add logo"
+		},
+		"business.detail.section.pictures" : {
+			"DE" :  "Profilbilder hochladen",
+			"EN" : "Upload profile pictures"
 		},
 		"business.detail.picture1.button" : {
 			"DE" : "Profilbild 1 hinzufügen",
@@ -549,8 +561,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "New payment"
 		},
 		"business.detail.section.app" : {
-			"DE" :  "App Konfiguration",
-			"EN" : "App configuration"
+			"DE" :  "App Dashboard",
+			"EN" : "App Dashboard"
 		},
 		"business.detail.section.app.description" : {
 			"DE" :  "Konfigurieren Sie das Aussehen der cloobster App, um es an Ihre CI anzupassen.",
@@ -696,10 +708,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"business.detail.subscription.upgrade.description" : {
 			"DE" :  '<span class="label label-important">Basis</span> Momentan haben Sie ein Basis Paket.<br/>'+ 
 			'Wechseln Sie auf ein anderes Paket um alle cloobster Funktionen zu nutzen. '+ 
-			'<a href="https://www.cloobster.com" target="_blank">Mehr Information</a>',
+			'<a href="http://www.cloobster.com" target="_blank">Mehr Information</a>',
 			"EN" : '<span class="label label-important">Basic</span> Currently you are using a basic subscription.<br/>'+ 
 			'Upgrade to another cloobster subscription to gain access to all funtions. '+ 
-			'<a href="https://www.cloobster.com" target="_blank">Learn more</a>'
+			'<a href="http://www.cloobster.com" target="_blank">Learn more</a>'
 		},
 		"subscription.basic" : {
 			"DE" :  "Basis",
@@ -724,6 +736,35 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"business.detail.subscription.cancel.text" : {
 			"DE" :  "Möchten Sie die Anfrage widerrufen?",
 			"EN" : "Do you want to cancel your request?"
+		},
+		"business.detail.section.cockpit" : {
+			"DE" :  "Benachrichtigungen",
+			"EN" : "Notifications"
+		},
+		"business.detail.cockpitsettings.offlinealert" : {
+			"DE" : "Verbindungs- abbrüche",
+			"EN" : "Connection Loss"
+		},
+		"business.detail.cockpitsettings.offlinealert.description" : {
+			"DE" :  "Eine E-Mail wird versendet, wenn Probleme mit dem Cockpit auftreten. Dazu gehören Verbindungsabbrüche oder unbeabsichtigtes schliessen des Cockpits.",
+			"EN" : "The system will send an e-mail, if it detects a connection problem or the client was closed accidently and is offline for more than 30 minutes."
+		},
+		"business.detail.cockpitsettings.inactivecheckinnotification" : {
+			"DE" : "Inaktiven Checkins",
+			"EN" : "Inactive Checkins"
+		},
+		"business.detail.cockpitsettings.inactivecheckinnotification.description" : {
+			"DE" : "Offene Cockpits werden benachrichtigt, falls es CheckIns gibt die über 48 Stunden inaktiv waren.",
+			"EN" : "The system will notify open cockpits, if there have been checkins inactive for over 48 hours."
+		},
+
+		"business.detail.cockpitsettings.ordermailnotification" : {
+			"DE" : "Eingehende Bestellungen (E-Mail)",
+			"EN" : "Incoming Orders (e-mail)"
+		},
+		"business.detail.cockpitsettings.ordermailnotification.description" : {
+			"DE" : "Eine E-Mail wird bei Eingang von neuen Bestellungen an die eingetragene Addresse geschickt.",
+			"EN" : "An e-mail will be send to the configured address for incoming orders."
 		},
 		//profile partial
 		"profile.title" : {
@@ -860,27 +901,93 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"menus.list.title" : {
 			"DE" : "Kategorien",
 			"EN" : "Categories"
-		},
+		},		
 		"menu.container.hint" : {
-			"DE" :  "Bitte vergessen Sie nicht, die Kategorie im Tab <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"Kategorien zuweisen\"</a> einem Servicebereich zuzuweisen.",
-			"EN" : "Don't forget to <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"assign\"</a>assign this category to a service area afterwards."
+			"DE" :  "Bitte vergessen Sie nicht, die Kategorie im Tab <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"Produkte zuweisen\"</a> einem Servicebereich zuzuweisen.",
+			"EN" : "Don't forget to <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"product assign\"</a>assign this category to a service area afterwards."
 		},
 		"menu.container.title" : {
 			"DE" : "Kategorie editieren",
 			"EN" : "Edit category"
-		},		
+		},
+		"menu.speciallist.header" : {
+			"DE" :  "Spezielle Listen",
+			"EN" : "Special lists"
+		},
 		"menus.list.orphaned" : {
 			"DE" : "Verwaiste Produkte",
 			"EN" : "Orphaned products"
 		},
+		"menus.list.allproducts" : {
+			"DE" :  "Alle Produkte",
+			"EN" : "All products"
+		},
+		"menus.list.allproducts.description" : {
+			"DE" :  "<p>Liste aller Produkte. Die Liste kann gefiltert und es können Massenoperationen auf Produkten angewandt werden.</p>",
+			"EN" : "<p>List of all products. The list can be filtered and mass operations can be executed on products.</p>"
+		},
+		"menus.list.allproducts.help" : {
+			"DE" :  "<i class='icon-ok icon-black'></i> Produkt aktiv<br/>"+
+					"<i class='icon-ban-circle icon-black'></i> Produkt inaktiv<br/>"+
+					"<i class='icon-star icon-black'></i> Produkt ist Spezial<br/>"+
+					"<i class='icon-star-empty icon-black'></i> Produkt nicht Spezial<br/>"+
+					"<i class='icon-eye-open icon-black'></i> Produkt wird auf App Dashboard angezeigt<br/>"+
+					"<i class='icon-eye-close icon-black'></i> Produkt wird auf App Dashboard verborgen<br/>"+
+					"<i class='icon-info-sign icon-black'></i> Wenn Aktiv so kann der Benutzer das Produkt nur anschauen, aber nicht bestellen<br/>"+
+					"<i class='icon-shopping-cart icon-black'></i>Benutzer kann Produkt bestellen",
+			"EN" : "<i class='icon-ok icon-black'></i> Product active<br/>"+
+					"<i class='icon-ban-circle icon-black'></i> Product inactive<br/>"+
+					"<i class='icon-star icon-black'></i> Produkt is special<br/>"+
+					"<i class='icon-star-empty icon-black'></i> Product is NOT sepcial<br/>"+
+					"<i class='icon-eye-open icon-black'></i> Product can be displayed on app dashboard<br/>"+
+					"<i class='icon-eye-close icon-black'></i> Product will never be shown on app dashboard<br/>"+
+					"<i class='icon-eye-close icon-black'></i> If active user can only view but not order the product<br/>"+
+					"<i class='icon-shopping-cart icon-black'></i>User can order product"
+		},
+		"products.filter.active.tooltip" : {
+			"DE" :  "Inaktive Produkte anzeigen",
+			"EN" : "Show inactive products"
+		},
+		"products.filter.special.tooltip" : {
+			"DE" :  "Spezialprodukte anzeigen",
+			"EN" : "Display special products"
+		},
+		"products.filter.showindashboard.tooltip" : {
+			"DE" :  "Nur auf Dashboard sichtbare Produkte anzeigen.",
+			"EN" : "Display only products visible on dashboard."
+		},
+		"products.filter.hideindashboard.tooltip" : {
+			"DE" :  "Vom Dashboard ausgeblendete Produkte anzeigen",
+			"EN" : "Display products hidden in dashboard"
+		},
+		"products.action.setactive" : {
+			"DE" :  "aktiv setzen",
+			"EN" : "set active"
+		},
+		"products.action.setinactive" : {
+			"DE" :  "inaktiv setzen",
+			"EN" : "set inactive"
+		},
+		"products.action.setspecial" : {
+			"DE" :  "als Spezial setzen",
+			"EN" : "set as special"
+		},
+		"products.action.setnotspecial" : {
+			"DE" :  "Spezial entfernen",
+			"EN" : "remove special"
+		},
+		"products.action.sethideindashboard" : {
+			"DE" :  "vom dashbard ausblenden",
+			"EN" : "hide in dashbard"
+		},
+		"products.action.setshowindashboard" : {
+			"DE" :  "auf dashboard anzeigen",
+			"EN" : "set visible in dashboard"
+		},
 		"menus.list.orphaned.tooltip" : {
 			"DE" : "Nicht zugewiesene Produkte anzeigen",
 			"EN" : "Show non-assigned products."
-		},
-		// "menus.menu.field.active" : {
-		// 	"DE" : "Kategorie dem Gast anzeigen",
-		// 	"EN" : "Show category to guest."
-		// },
+		},		
 		"menus.menu.field.activate" : {
 			"DE" : "Aktiv",
 			"EN" : "Active"
@@ -933,6 +1040,34 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "-Kopie",
 			"EN" : "-copy"
 		},
+		"menus.product.special.badge" : {
+			"DE" :  "Spezialangebot",
+			"EN" : "special offer"
+		},
+		"menus.product.inactive.badge" : {
+			"DE" :  "Inaktiv",
+			"EN" : "Inactive"
+		},
+		"menus.product.special.tooltip" : {
+			"DE" :  "Spezialangebot (de)aktivieren. Diese werden gesondert im App Startscreen hervorgehoben.",
+			"EN" : "(de)activate special offer. They will be highlighted on the app home screen."
+		},
+		"menus.product.noorder.tooltip" : {
+			"DE" :  "Infoprodukt (de)aktivieren. Infoprodukte können nicht bestellt werden.",
+			"EN" : "(De)Activate info product. User can't order info products."
+		},
+		"menus.product.noorder.badge" : {
+			"DE" :  "Nur Anzeige",
+			"EN" : "Only display"
+		},
+		"menus.product.active.tooltip" : {
+			"DE" :  "Produkt aktiveren/deaktivieren. Achtung! Produkt ist nicht für Benutzer verfügbar.",
+			"EN" : "Activate/deactivate product. Attention! Product is not available for user."
+		},
+		"menus.product.hideindashboard.tooltip" : {
+			"DE" :  "Auge geschlossen: Produkt auf App Dashboard NIE anzeigen.",
+			"EN" : "Eye closed: NEVEr show product on app dashboard."
+		},
 		"menus.products.link.description" : {
 			"DE" : "Klicken Sie auf eine bestehendes Produkt, um dieses zu kopieren und der aktuellen Kategorie hinzuzufügen. Optional können Auswahlmöglichkeiten <strong>verknüpft</strong> oder <strong>kopiert</strong> werden. <i class='icon-question-sign'></i>",
 			"EN" : "Click on existing product to copy it and add to current category."+
@@ -946,8 +1081,46 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 				"<b>linking</b> - changes to choices of copied product also changes them for original product (vice versa). They are linked.<br/>"+
 				"<b>copy</b> - changes to choices of copied product have no effect on original product (vice versa). They are independent."
 		},
+		"menus.help.symbols.popover" : {
+			"DE" :  "<dl>"+
+						"<dt><i class='icon-edit icon-black'></i></dt>"+
+					  "<dd>Bearbeiten</dd>"+
+					  "<dt><i class='icon-ok icon-black'></i></dt>"+
+					  "<dd>Aktives Produkt (kann bestellt werden)</dd>"+
+					  "<dt><i class='icon-ban-circle icon-black'></i></dt>"+
+					  "<dd>Inaktives Produkt (kann NICHT bestellt werden)</dd>"+
+					  "<dt><i class='icon-move icon-black'></i></dt>"+
+					  "<dd>Per Drag&Drop verschieben</dd>"+
+					  "<dt><i class='icon-trash icon-black'></i></dt>"+
+					  "<dd>Löschen</dd>"+
+					  "<dt><i class='icon-star icon-black'></i></dt>"+
+					  "<dd>Spezialangebot</dd>"+
+					  "<dt><i class='icon-eye-open icon-black'></i></dt>"+
+					  "<dd>Sichtbar auf App Dashboard</dd>"+
+					  "<dt><i class='icon-eye-close icon-black'></i></dt>"+
+					  "<dd>Nicht sichtbar auf App Dashboard</dd>"+
+					"</dl>",
+			"EN" :  "<dl>"+
+						"<dt><i class='icon-edit icon-black'></i></dt>"+
+					  "<dd>edit</dd>"+
+					  "<dt><i class='icon-ok icon-black'></i></dt>"+
+					  "<dd>active product</dd>"+
+					  "<dt><i class='icon-ban-circle icon-black'></i></dt>"+
+					  "<dd>inactive product</dd>"+
+					  "<dt><i class='icon-move icon-black'></i></dt>"+
+					  "<dd>rearrange by drag&drop</dd>"+
+					  "<dt><i class='icon-trash icon-black'></i></dt>"+
+					  "<dd>delete</dd>"+
+					  "<dt><i class='icon-star icon-black'></i></dt>"+
+					  "<dd>special offer</dd>"+
+					  "<dt><i class='icon-eye-open icon-black'></i></dt>"+
+					  "<dd>Visible in app dashboard</dd>"+
+					  "<dt><i class='icon-eye-close icon-black'></i></dt>"+
+					  "<dd>Not visible in app dashboard</dd>"+
+					"</dl>"
+		},			
 		"menus.products.orphaned.title" : {
-			"DE" : "Verwaiste Produkte",
+			"DE" : "Nicht zugewiesene Produkte",
 			"EN" : "Orphaned products"
 		},
 		"menus.products.orphaned.description" : {
@@ -966,6 +1139,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Beschreibung editieren",
 			"EN" : "Edit description"
 		},
+		"menus.placeholder.title" : {
+			"DE" :  "Titel *",
+			"EN" : "Title *"
+		},
+		"menus.placeholder.description" : {
+			"DE" :  "Beschreibung",
+			"EN" : "Description"
+		},
 		"product.editor.name.tooltip" : {
 			"DE" : "Name editieren",
 			"EN" : "Edit name"
@@ -981,6 +1162,26 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"product.editor.price.tooltip" : {
 			"DE" : "Preis editieren",
 			"EN" : "Edit price"
+		},
+		"product.editor.image.description" : {
+			"DE" : "Das Produktbild muss für die beste Darstellung am Gerät auf ein passendes Seitenverhältnis zugeschnitten werden.",
+			"EN" : "For the best result on the device, the product image has to be cut to a fitting aspect ratio."
+		},
+		"product.placeholder.name" : {
+			"DE" :  "Name *",
+			"EN" : "Name *"
+		},
+		"product.placeholder.shortDesc" : {
+			"DE" :  "Kurze Beschreibung",
+			"EN" : "Short description"
+		},
+		"product.placeholder.longDesc" : {
+			"DE" :  "Lange Beschreibung",
+			"EN" : "Long description"
+		},
+		"product.placeholder.price" : {
+			"DE" :  "Preis*",
+			"EN" : "Price*"
 		},
 		"menus.product.field.active" : {
 			"DE" : "Produkt dem Gast anzeigen",
@@ -1007,8 +1208,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Delete <strong>{{currentProduct.name}}</strong>? This cannot be undone!"
 		},
 		"product.choices.container.title" : {
-			"DE" : "Optionen zum Produkt",
-			"EN" : "Product options"
+			"DE" : "Auswahl zu diesem Produkt",
+			"EN" : "Choices for this product"
 		},
 		"menus.choices.list.new" : {
 			"DE" : "Neu.",
@@ -1051,16 +1252,16 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "To view category details, please select a category from the list or add a new category."
 		},
 		"choice.container.title" :{
-			"DE" : "Option editieren",
-			"EN" : "Edit option"
+			"DE" : "Auswahl editieren",
+			"EN" : "Edit choice"
 		},
 		"menus.options.title" : {
 			"DE" : "Optionen",
 			"EN" : "Options"
 		},
 		"option.configuration.container.title" : {
-			"DE" : "Konfigurationen zur Option",
-			"EN" : "Configure options"
+			"DE" : "Optionen",
+			"EN" : "Options"
 		},
 		"menus.options.list.new" : {
 			"DE" : "Neue Option...",
@@ -1083,8 +1284,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Price"
 		},
 		"product.editor.price.validation" : {
-			"DE" : "Muss ein gültiger Preis sein (z.B. 9.95, oder 5).",
-			"EN" : "Ente a valid price (e. g. 9.95, or 5)."
+			"DE" : "Muss eine Zahl sein und falls nötig einen Punkt als Dezimaltrennzeichen haben. (z.B. 9.95, oder 5)",
+			"EN" : "Must be a number and if needed use a colon as decimal mark. (e. g. 9.95, or 5)"
 		},
 		"product.editor.shortDesc" : {
 			"DE" : "Kurz Beschreibung",
@@ -1099,8 +1300,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "To view product details, please select a product from the list or add a new product."
 		},		
 		"choice.editor.text" : {
-			"DE" : "Auswahltext",
+			"DE" : "Auswahlname",
 			"EN" : "Choice text"
+		},
+		"choice.placeholder.text" : {
+			"DE" :  "Auswahlname *",
+			"EN" : "Choice name *"
 		},
 		"choice.editor.maxOccurence" : {
 			"DE" : "Maximale Auswahl von Optionen",
@@ -1123,12 +1328,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Amount of options included"
 		},
 		"menus.choices.field.maxOccurence" : {
-			"DE" : "Gast muss max. auswählen {{currentChoice.maxOccurence}}",
-			"EN" : "Guest has to choose max. {{currentChoice.maxOccurence}}"
+			"DE" : "Gast kann max {{currentChoice.maxOccurence}} Option(en) auswählen",
+			"EN" : "Guest can choose max {{currentChoice.maxOccurence}} option(s)"
 		},
 		"menus.choices.field.minOccurence" : {
-			"DE" : "Gast muss min auswählen {{currentChoice.minOccurence}}",
-			"EN" : "Guest has to choose at min. {{currentChoice.minOccurence}}"
+			"DE" : "Gast muss min {{currentChoice.minOccurence}} Option(en) auswählen",
+			"EN" : "Guest has to choose min {{currentChoice.minOccurence}} option(s)"
 		},
 		"menus.choices.field.included" : {
 			"DE" : "Optionen inklusive: {{currentChoice.included}}",
@@ -1159,8 +1364,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "<strong>{{currentChoice.text}}</strong>  will be removed from this product."
 		},
 		"choice.editor.text.tooltip" : {
-			"DE" : "Auswahltext editieren",
-			"EN" : "Edit choice text"
+			"DE" : "Auswahlname editieren",
+			"EN" : "Edit choice name"
 		},
 		"choice.editor.price.tooltip" : {
 			"DE" : "Preis editieren",
@@ -1186,6 +1391,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Preis für Option editieren",
 			"EN" : "Edit option price"
 		},
+		"option.placeholder.name" : {
+			"DE" :  "Optionsname *",
+			"EN" : "Option name *"
+		},
+		"option.placeholder.price" : {
+			"DE" :  "Optionspreise *",
+			"EN" : "Option price *"
+		},
 		"menu.new.default.title" : {
 			"DE" : "Meine Kategorie",
 			"EN" : "My category"
@@ -1203,8 +1416,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "My option"
 		},
 		"menus.choices.field.overridePrice.label" : {
-			"DE" : "Preis pro Auswahlmöglichkeit",
-			"EN" : "Price per choice"
+			"DE" : "Preis pro Option",
+			"EN" : "Price per option"
 		},
 		"menus.choices.field.overridePrice.none" : {
 			"DE" : "Individueller Preis",
@@ -1250,9 +1463,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		//spots partial
 		"areas.description" : {
 			"DE" :  "Für jede \"cloobster location\" können Sie mehrere \"Servicebereiche\" anlegen(z.B. \"Bar\", \"Zimmer\", \"Spa\", \"Konferenzraum\", etc.).<br>"
-			+"Jeder Servicebereich beinhaltet verschiedene Spots (Barcode für den Check-in).",
+			+"Jeder Servicebereich beinhaltet verschiedene Spots (Barcode für den Check-in). Ein Spot repräsentiert einen konkreten Standort (z. B. Zimmer 101).",
 			"EN" : "For each \"cloobster location\" you can add several \"service areas\" (like \"Bar\", \"Rooms\", \"Spa\", \"Conference Area\", etc.).<br>"+
-				"Each service area has different spots (barcode for check-in)."
+				"Each service area has different spots (barcode for check-in). A spot represents a real location (e.g. room 101)."
 		},
 		"areas.list.title" : {
 			"DE" :  "Servicebereiche",
@@ -1270,6 +1483,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Aktiv: Gäste können einchecken",
 			"EN" :  "Active: Guests can check in"
 		},
+		"areas.placeholder.name" : {
+			"DE" :  "Name *",
+			"EN" :  "Name *"
+		},
 		"areas.editor.name" : {
 			"DE" :  "Name des Servicebereichs",
 			"EN" :  "Name of service area"
@@ -1277,6 +1494,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"areas.editor.name.tooltip" : {
 			"DE" :  "Name editieren",
 			"EN" :  "Edit name"
+		},
+		"areas.placeholder.description" : {
+			"DE" :  "Beschreibung",
+			"EN" :  "Description"
 		},
 		"areas.editor.description" : {
 			"DE" :  "Beschreibung des Servicebereichs",
@@ -1317,9 +1538,17 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" :  "Assigned categories"
 		},
 		"areas.categories.list.description" : {
-			"DE" :  "Liste der Produktkategorien (z.B. Getränke), auf die der Gast Zugriff hat, wenn er in diesem Bereich eingecheckt ist."+
-				"Die Anzeigereihenfolge kann hier ebenfalls per Drag&Drop geregelt werden.",
-			"EN" :  "List of product categories (e.g. beverages) available to customers checked in to this service area."
+			"DE" :  "Liste der Produktkategorien (z.B. Getränke), auf die der Gast Zugriff hat, wenn er in diesem Bereich eingecheckt ist. "+
+				"Die Reihenfolge der Kategorien regelt auch die Darstellungsreihenfolge in der App (mittels Drag&Drop die Reihenfolge ändern).",
+			"EN" :  "List of product categories (e.g. beverages) available to customers checked in to this service area. Order of areas also reflects display order inside the app."
+		},
+		"areas.categories.removeall" : {
+			"DE" :  "Alle Entfernen",
+			"EN" :  "Remove All"
+		},
+		"areas.allcategories.addall" : {
+			"DE" :  "Alle Hinzufügen",
+			"EN" :  "Add All"
 		},
 		"areas.allcategories.list.title" : {
 			"DE" :  "Verfügbare Kategorien",
@@ -1352,6 +1581,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"spots.editor.name" : {
 			"DE" : "Name",
 			"EN" : "Name"
+		},
+		"spots.placeholder.name" : {
+			"DE" :  "Name *",
+			"EN" :  "Name *"
 		},
 		"spots.editor.barcode" : {
 			"DE" : "Barcode",
@@ -1443,10 +1676,6 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Selektierte löschen",
 			"EN" :  "Delete selected spots"
 		},
-		"spots.masscheck.tooltip" : {
-			"DE" :  "Alle anwählen/abwählen",
-			"EN" :  "Select/deselect all"
-		},
 		"spots.filtered.status" : {
 			"DE" :  "Spots gefiltert {{filteredSpots.length}} | markiert {{getCheckedSpotsCount()}}",
 			"EN" :  "Spots filtered {{filteredSpots.length}} | selected {{getCheckedSpotsCount()}}"
@@ -1471,6 +1700,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Inaktiv setzen",
 			"EN" :  "Make inactive"
 		},
+		"spots.action.generatepdf.requested" : {
+			"DE" :  "PDF-Datei generieren - Gestartet",
+			"EN" :  "Generate PDF file - Requested"
+		},
 		"spots.action.generatepdf" : {
 			"DE" :  "PDF-Datei generieren",
 			"EN" :  "Generate PDF file"
@@ -1494,16 +1727,41 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"areas.subscription.basic.description" : {
 			"DE" :  "<span class='label label-important'>Basis</span> Sie verwenden ein Basis Paket. Sie können ganz normal Servicebereiche und Spots anlegen.<br/>Kunden können jedoch weder bestellen (nur ihre Produkte & Dienstleistungen einsehen)"+
 					" und keinen VIP Call benutzen.<br/>" +
-			 		"<a href='https://www.cloobster.com' target='_blank'>Mehr Information</a> oder <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>.",
+			 		"<a href='http://www.cloobster.com' target='_blank'>Mehr Information</a> oder <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>.",
 			"EN" :  "<span class='label label-important'>Basic</span> Currently you are using a basic subscription. You can add service areas and spots <br/>but customers can't order"+
 					" or use the VIP Call.<br/>" +
-			 		"<a href='https://www.cloobster.com' target='_blank'>Learn more</a> or <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>."
+			 		"<a href='http://www.cloobster.com' target='_blank'>Learn more</a> or <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>."
+		},
+		"areas.editor.barcoderequired.help" : {
+			"DE" :  "<h4>Bei Spotwechsel gilt</h4>"+
+			"<b>Barcode nötig:</b> Barcode des Spots muss gescannt werden<br/><b>Kein Barcode nötig:</b> Spot wird über eine Liste ausgewählt<br/>"+
+			"\"Barcode nötig\" ist sicherer, erfordert aber für jeden Spot individuelle Aufsteller.",
+			"EN" : "<h4>A spot switch requires</h4>"+
+				"<b>Barcode required:</b> spot barcode needs to be scanned<br/><b>No barcode required:</b> spot will be chosen from list<br/>"+
+				"\"Barcode required\" is more secure, but requires an individual stand-up display per spot."
+		},
+		"areas.editor.barcoderequired.true" : {
+			"DE" :  "Barcode nötig",
+			"EN" : "Barcode required"
+		},
+		"areas.editor.barcoderequired.false" : {
+			"DE" :  "Kein Barcode nötig",
+			"EN" : "No barcode required"
+		},
+		"spot.master.description" : {
+			"DE" :  "Der Masterspot dient als Einstiegspunkt für einen Servicebereich. Gäste "+
+					"können hier einchecken, müssen zum bestellen aber einen konkreten Spot angeben. Beispielsweise kann für den Zimmerbereich "+
+					"lediglich der Masterspot an Gäste ausgegeben werden um nicht viele individuelle Aufsteller (Kein Barcode aktivieren!) verteilen zu müssen.",
+			"EN" : "This is the \"master\" spot for this area. The master spot serves as an entry point. To be able to order a guest has to choose "+
+				"his real spot. For example you can hand out the master spot for rooms and don't need to provide individual stan-up displays for all of them (disable barcode required!)."
 		},
 		//infopage partial
 		"infopages.description" : {
 			"DE" :  "Hier können Sie Informationen zur aktuellen Location anlegen. Dies können zum Beispiel Informationen<br/>"+
-			"über Blumenservice, Frühstückszeiten, Kontaktdaten und so weiter sein.",
-			"EN" : "Information pages for your locations (e.g. business hours, available services, tips)."
+			"über Blumenservice, Frühstückszeiten, Kontaktdaten und so weiter sein. Infoseiten werden zufällig auf dem App Dashboard angezeigt.<br/>"+
+				"Dies können Sie explizit für einzelne Seiten deaktivieren.",
+			"EN" : "Information pages for your locations (e.g. business hours, available services, tips).<br/>Infopages will be displayed randomly in"+
+				"app dashboard. You can disable this explicitly for unique pages." 
 		},
 		"infopages.list.title" : {
 			"DE" :  "Info-Seiten",
@@ -1529,6 +1787,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Text bearbeiten",
 			"EN" :  "Edit text"
 		},
+		"infopage.url" : {
+			"DE" :  "Link bearbeiten",
+			"EN" :  "Edit link"
+		},
+		"infopage.url.validation" : {
+			"DE" :  "Bitte eine gültige Adresse eingeben (z.b. http://www.cloobster.com oder www.google.de).",
+			"EN" :  "Please enter a valid link (e.g. http://www.cloobster.com oder www.google.de)."
+		},
 		"infopages.dialog.delete.title" : {
 			"DE" :  "Info-Seite löschen",
 			"EN" :  "Delete info page"
@@ -1542,17 +1808,24 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" :  "To edit info page, please select info page from list or add a new page."
 		},
 		"infopage.placeholder.title" : {
-			"DE" :  "Z.B. Frühstückszeiten",
-			"EN" :  "e.g. breakfast hours"
+			"DE" :  "Titel *",
+			"EN" :  "Title *"
 		},
 		"infopage.placeholder.shortText" : {
-			"DE" :  "Kurze Information! z.B. von 8:00 - 10:00",
-			"EN" :  "Short text! E.g. 08:00 AM - 10.00 AM"
+			"DE" :  "Kurze Information",
+			"EN" :  "Short Text"
 		},
 		"infopage.placeholder.html" : {
-			"DE" :  "Ausführliche Information!<br/> z.B. Zu unserem reichhaltigen Frühstück dürfen wir sie zu folgenden Zeiten begrüßen"+
-			"<ul><li>Mo- Fr von 8:00 - 10:00</li><li>Sa- So 8:00 - 12:00</li></ul>",
-			"EN" :  "Long text! E.g. We offer breakfast between..."
+			"DE" :  "Ausführliche Information",
+			"EN" :  "Long Text"
+		},
+		"infopage.placeholder.url" : {
+			"DE" :  "Externer Link",
+			"EN" :  "External Link"
+		},
+		"infopage.hideindashboard.true" : {
+			"DE" :  "Infoseite wird nie auf dem App Dashboard angezeigt",
+			"EN" : "Infopage will never be shown in app dashboard"
 		},
 		//documents partial
 		"documents.title" : {
@@ -1802,6 +2075,328 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Wählen oder erstellen Sie eine Location bevor Sie mit Schritt 2-4 fortfahren.",
 			"EN" : "Choose or create a location before proceeding with step 2-4."
 		},
+		//report partial
+		"reports.description" : {
+			"DE" :  "Hier können Sie die wichtigsten Kennzahlen (KPI) anschauen. Wählen Sie zunächst welche Kennzahl Sie anschauen möchten<br/>"+
+			"und anschließend den Zeitraum sowie den gewünschten Servicebereich.",
+			"EN" : "Here you'll find the most important performance figures (KPI). First select the KPI you want to see<br/>"+
+			"then define the date range and service area."
+		},
+		"reports.types.title" : {
+			"DE" :  "Reporttyp",
+			"EN" : "Report type"
+		},
+		"reports.parameters.title" : {
+			"DE" :  "Report Parameter",
+			"EN" : "Report parameters"
+		},
+		"reports.parameters.empty.description" : {
+			"DE" :  "Konfigurieren Sie hier den Report. Bitte wählen Sie zunächst einen Reporttyp aus der Liste links.",
+			"EN" : "Configure the report. Please select a report type in the list on the left to proceed."
+		},
+		"reports.parameter.startdate" : {
+			"DE" :  "Startdatum",
+			"EN" : "start date"
+		},
+		"reports.parameter.enddate" : {
+			"DE" :  "Enddatum",
+			"EN" : "end date"
+		},
+		"reports.report.title" : {
+			"DE" :  "Report",
+			"EN" : "Report"
+		},
+		"reports.report.title.params" : {
+			"DE" :  "Report <small>für {{currentReportParameters.serviceArea}} von {{currentReportParameters.fromDate | date:'shortDate'}} bis {{currentReportParameters.toDate | date:'shortDate'}}</small>",
+			"EN" : "Report <small>for {{currentReportParameters.serviceArea}} from {{currentReportParameters.fromDate | date:'shortDate'}} to {{currentReportParameters.toDate | date:'shortDate'}}</small>"
+		},
+		"reports.report.empty.description" : {
+			"DE" :  "Hier wird der Report angezeigt. Bitte konfigurieren Sie zunächst die Reportparameter.",
+			"EN" : "Displays the report. Please configure the report parameters to proceed."
+		},
+		"reports.type.checkins" : {
+			"DE" :  "Anzahl Check-Ins",
+			"EN" : "Check-in count"
+		},
+		"reports.type.orders" : {
+			"DE" :  "Anzahl Bestellungen",
+			"EN" : "Orders count"
+		},
+		"reports.type.customerrequests" : {
+			"DE" :  "Anzahl Service Calls",
+			"EN" : "Service Call count"
+		},
+		"reports.type.feedback" : {
+			"DE" :  "Anzahl Feedback",
+			"EN" : "Feedback count"
+		},
+		"reports.type.turnover" : {
+			"DE" :  "Umsatz",
+			"EN" : "Turnover amount"
+		},
+		"reports.chart.haxis" : {
+			"DE" :  "Datum",
+			"EN" : "Date"
+		},
+		"reports.report.servicearea" : {
+			"DE" :  "Servicebereich",
+			"EN" : "Service area"
+		},
+		"reports.report.count" : {
+			"DE" :  "Anzahl",
+			"EN" : "Count"
+		},
+		"reports.report.day" : {
+			"DE" :  "Tag",
+			"EN" : "Day"
+		},
+		"reports.report.month" : {
+			"DE" :  "Monat",
+			"EN" : "Month"
+		},
+		"reports.report.year" : {
+			"DE" :  "Jahr",
+			"EN" : "Year"
+		},
+		"reports.report.comment" : {
+			"DE" :  "Kommentar",
+			"EN" : "Comment"
+		},
+		"reports.report.email" : {
+			"DE" :  "E-Mail",
+			"EN" : "Email"
+		},
+		"reports.action.show" : {
+			"DE" :  "Report anzeigen",
+			"EN" : "Show report"
+		},
+		"reports.action.export.xls" : {
+			"DE" :  "Report als XLS exportieren",
+			"EN" : "Export report as XLS"
+		},
+		"reports.report.noresult" : {
+			"DE" :  "Keine Datensätze gefunden im angegebenen Zeitraum.",
+			"EN" : "No results found for given date range."
+		},
+		"reports.action.export.dialog.title" : {
+			"DE" :  "Report exportieren",
+			"EN" : "Export report"
+		},
+		"reports.action.export.dialog.requested.title" : {
+			"DE" :  "Export wurde angestoßen",
+			"EN" : "Export has been requested"
+		},
+		"reports.action.export.dialog.text" : {
+			"DE" :  "Möchten Sie den Report als Excel Datei exportieren?",
+			"EN" : "Do you want to export the selected data to an Excel file?"
+		},
+		"reports.action.export.dialog.complete" : {
+			"DE" :  "Der Export wird verarbeitet und wird im Tab Dokumente bereitgestellt.",
+			"EN" : "Your request is being processed and the file will be available under Documents soon."
+		},
+		"reports.report.documents.open" : {
+			"DE" :  "Dokumente öffnen",
+			"EN" : "Go to documents"
+		},
+		"reports.report.allareas" : {
+			"DE" :  "alle Bereiche",
+			"EN" : "all areas"
+		},
+		"reports.parameter.getall" : {
+			"DE" :  "Zeige alle Daten",
+			"EN" : "Show all data"
+		},
+		"reports.feedback.form.title" : {
+			"DE" :  "Formulartitel:",
+			"EN" : "Form title:"
+		},
+		"reports.feedback.average" : {
+			"DE" :  "Durschnitt",
+			"EN" : "Average"
+		},
+		"reports.feedback.chart.title" : {
+			"DE" :  "Wöchentliche durschnittliche Feedbackwerte",
+			"EN" : "Weekly average feedback results"
+		},
+		"reports.feedback.chart.selection" : {
+			"DE" :  "Chart Auswahl",
+			"EN" : "Chart selection"
+		},
+		//app config partial
+		"appconfig.description" : {
+			"DE" :  "Konfigurieren Sie die App. Gestalten Sie das Dashboard für Ihren individuellen Auftritt. Schalten Sie Features ein oder aus.",
+			"EN" : "Customize the look of the app. Add dashboard tiles for your individuell appearance. Turn features on or off."
+		},
+		"appconfig.subscription.basic.description" : {
+			"DE" :  "<span class='label label-important'>Basis</span> Sie verwenden ein Basis Paket. Die Konfiguration eines individuellen Dashboards ist nur nach einem Upgrade des Pakets möglich.<br>" +
+			 		"<a href='http://www.cloobster.com' target='_blank'>Mehr Information</a> oder <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>.",
+			"EN" :  "<span class='label label-important'>Basic</span> Currently you are using a basic subscription. Customisation of the dashboard is only usable after an upgrade to your subscription.<br>" +
+			 		"<a href='http://www.cloobster.com' target='_blank'>Learn more</a> or <a href='#/businesses/{{activeBusiness.id}}'>upgrade</a>."
+		},
+		"appconfig.tiles.list.title" : {
+			"DE" :  "Kacheltypen",
+			"EN" : "Tile types"
+		},
+		"appconfig.tiles.list.description" : {
+			"DE" :  "Liste aller verfügbaren Kacheltypen. Fügen Sie diese einfach per <b>Drag&Drop</b> auf die leere Kachel rechts hinzu. Sie können maximal 20 Kacheln platzieren.",
+			"EN" : "List of all available tiles. Just add them via <b>drag & drop</b> on the empty tile to the right. You can add a maximum of 20 tiles."
+		},
+		"appconfig.tilesconfig.list.title" : {
+			"DE" :  "Dashboard Vorschau",
+			"EN" : "Dashboard preview"
+		},
+		"appconfig.tilesconfig.list.description" : {
+			"DE" :  "Vorschau des App Dashboards. Fügen Sie Kacheln aus der Liste links hinzu. Sortieren Sie diese anschließend per <b>Drag & Drop</b>. Kachel <b>anklicken</b> für weitere Details.",
+			"EN" : "Shows a preview how your app dashboard will look like. Just drop a tile from the list on the empty tile. Rearrange order by <b>drag and drop</b>. <b>Click</b> tile for more details."
+		},
+		"appconfig.tile.empty" : {
+			"DE" :  "Kachel hier ablegen",
+			"EN" : "drop a tile"
+		},
+		"appconfig.tile.maximum" : {
+			"DE" :  "Max 20 Kachel erreicht.",
+			"EN" : "Max 20 tiles reached."
+		},
+		"appconfig.tiledetail.title" : {
+			"DE" :  "Kacheldetails",
+			"EN" : "Tile details"
+		},
+		"appconfig.tiledetail.empty.description" : {
+			"DE" :  "Zeigt die Details einer Kachel. Wähle Sie eine aus der Dashboard Vorschau.",
+			"EN" : "Shows the selected tile details. Select a tile from dashboard preview."
+		},
+		"appconfig.tiledetail.productlist.title" : {
+			"DE" :  "Produktliste",
+			"EN" : "Product list"
+		},
+		"appconfig.infopages.title" : {
+			"DE" :  "Infoseiten Einträge",
+			"EN" : "Infopage entries"
+		},
+		"appconfig.list.dataselection.description" : {
+			"DE" :  "Wählen Sie die Datensätze für diese Kachel aus. Einer der Datensätze wird dann zufällig auf dem Dashboard angezeigt.",
+			"EN" : "Select the data entries for this tile. One of those entires will be displayed randomly on the dashboard."
+		},
+		"tiles.template.feedback" : {
+			"DE" :  "Feedback",
+			"EN" : "Feedback"
+		},
+		"tiles.template.products" : {
+			"DE" :  "Produkte",
+			"EN" : "Products"
+		},
+		"tiles.template.infopages" : {
+			"DE" :  "Infoseiten",
+			"EN" : "Infopages"
+		},
+		"tiles.template.actions" : {
+			"DE" :  "Service Call",
+			"EN" : "Service Call"
+		},
+		"tiles.template.allinfopages" : {
+			"DE" :  "Infoseite: Zufall",
+			"EN" : "Infopage: Random"
+		},
+		"tiles.template.infopagesselected" : {
+			"DE" :  "Infoseite: Ausgewählt",
+			"EN" : "Infopage: Selected"
+		},
+		"tiles.template.productsall" : {
+			"DE" :  "Produkte: Zufall",
+			"EN" : "Products: Random"
+		},
+		"tiles.template.productsspecial" : {
+			"DE" :  "Produkte: Angebote",
+			"EN" : "Products: Random"
+		},
+		"tiles.template.productsselected" : {
+			"DE" :  "Produkte: Ausgewählt",
+			"EN" : "Products: Selected"
+		},
+		"tiles.template.feedback.description" : {
+			"DE" :  "Shortcut um in den Feedbackbereich zu gelangen, statt über die seitliche Navigation.",
+			"EN" : "Shortcut to quickly reach Feedback instead of the navigation menu."
+		},
+		"tiles.template.products.description" : {
+			"DE" :  "Shortcut um in den Produktbereich zu gelangen, statt über die seitliche Navigation.",
+			"EN" : "Shortcut to quickly reach Products instead of the navigation menu."
+		},
+		"tiles.template.infopages.description" : {
+			"DE" :  "Shortcut um in den A - Z Bereich zu gelangen, statt über die seitliche Navigation.",
+			"EN" : "Shortcut to quickly reach A - Z instead of the navigation menu."
+		},
+		"tiles.template.actions.description" : {
+			"DE" :  "Shortcut um in den Aktionsbereich zu gelangen, statt über die seitliche Navigation.",
+			"EN" : "Shortcut to quickly reach Actions instead of the navigation menu."
+		},
+		"tiles.template.infopagesall.description" : {
+			"DE" :  "Zeigt eine zufällige Infoseite. Seiten die markiert sind als verborgen auf dem Dashboard werden nicht angezeigt. ",
+			"EN" : "Display a random infopage. Ignores pages flagged to be hidden on dashboard."
+		},
+		"tiles.template.infopagesselected.description" : {
+			"DE" :  "Zeigt eine zufällige Infoseite aus der Menge der selektierten. Explizites markieren ignoriert die \"verborgen auf Dashboard\" Einstellung.",
+			"EN" : "Displays a random infopage out of the ones you select. The hide on dashboard flag will be ignored."
+		},
+		"tiles.template.productsall.description" : {
+			"DE" :  "Zeigt ein zufälliges Produkt (keine Specials!). Produkte die markiert sind als verborgen auf dem Dashboard werden nicht angezeigt.",
+			"EN" : "Display a random product. Ignores products flagged to be hidden on dashboard. Only products assigned to active area are shown."
+		},
+		"tiles.template.productsspecial.description" : {
+			"DE" :  "Zeigt ein zufälliges Produkt welches als Special markiert ist. Produkte die markiert sind als verborgen auf dem Dashboard werden nicht angezeigt.",
+			"EN" : "Display a random product marked as special. Ignores products flagged to be hidden on dashboard. Only products assigned to active area are shown."
+		},
+		"tiles.template.productsselected.description" : {
+			"DE" :  "Zeigt ein zufälliges Produkt aus der Menge der selektierten. Explizites markieren ignoriert die \"verborgen auf Dashboard\" Einstellung.",
+			"EN" : "Displays a random product out of the ones you select. The hide on dashboard flag will be ignored. Only products assigned to active area are shown."
+		},
+		"appconfig.tiledetail.empty.description" : {
+			"DE" :  "Zeigt details einer Kachel an. Wählen Sie eine Kachel aus der Dashboard Vorschau.",
+			"EN" : "Shows the selected tile details. Select a tile from dashboard preview."
+		},
+		"tiles.dialog.delete.title" : {
+			"DE" :  "Kachel löschen",
+			"EN" : "Delete tile"
+		},
+		"tiles.dialog.delete.text" : {
+			"DE" :  "Kachel wird entfernt!",
+			"EN" : "Tile will be removed!"
+		},
+		"appconfig.features.title" : {
+			"DE" :  "Features",
+			"EN" : "Features"
+		},
+		"appconfig.features.description" : {
+			"DE" :  "Funktionen (de)aktivieren in der App",
+			"EN" : "Configure features you want to be available in the app."
+		},
+		"appconfig.features.products" : {
+			"DE" :  "Produkte",
+			"EN" : "Products"
+		},
+		"appconfig.features.productsorder" : {
+			"DE" :  "Bestellfunktion",
+			"EN" : "Order function"
+		},
+		"appconfig.features.infopages" : {
+			"DE" :  "Infoseiten",
+			"EN" : "Infopages"
+		},
+		"appconfig.features.feedback" : {
+			"DE" :  "Feedback",
+			"EN" : "Feedback"
+		},
+		"appconfig.features.requestscall" : {
+			"DE" :  "Service Call",
+			"EN" : "Service Call"
+		},
+		"appconfig.features.facebookpost" : {
+			"DE" :  "Facebook Post",
+			"EN" : "Facebook Post"
+		},
+		"appconfig.features.contact" : {
+			"DE" :  "Kontaktinformation",
+			"EN" : "Contact information"
+		},
 		//general
 		"common.warning.title" : {
 			"DE" : "Achtung!",
@@ -1822,6 +2417,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.cancel" : {
 			"DE" : "Abbrechen",
 			"EN" : "Cancel"
+		},
+		"common.close" : {
+			"DE" :  "Schliessen",
+			"EN" : "Close"
 		},
 		"common.add" : {
 			"DE" : "Hinzufügen",
@@ -1867,13 +2466,17 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Bild anklicken um zu editieren",
 			"EN" : "Click image to edit"
 		},
+		"common.image.add" : {
+			"DE" :  "Bild hinzufügen",
+			"EN" :  "Add picture"
+		},
 		"common.all" : {
 			"DE" :  "Alle",
 			"EN" : "All"
 		},
 		"common.default.language" : {
-			"DE" :  "- Standardsprache -",
-			"EN" : "- default language -"
+			"DE" :  "Standardsprache",
+			"EN" : "default language"
 		},
 		"common.action" : {
 			"DE" :  "Aktion",
@@ -1899,6 +2502,22 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Ziehen, um zu sortieren",
 			"EN" : "Drag to sort"
 		},		
+		"validation.field.required" : {
+			"DE" :  "* Bitte füllen Sie die Pflichtfelder aus.",
+			"EN" : "* Please fill out required fields."
+		},
+		"common.masscheck.tooltip" : {
+			"DE" :  "Alle anwählen/abwählen",
+			"EN" :  "Select/deselect all"
+		},
+		"common.language.display" : {
+			"DE" :  "Anzeigesprache",
+			"EN" : "Display language"
+		},
+		"common.disabled" : {
+			"DE" :  "Deaktiviert",
+			"EN" : "Disabled"
+		},
 		//breadcrumb
 		"breadcrumb.home" : {
 			"DE" : "Home",
@@ -1933,17 +2552,37 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Speichere ...",
 			"EN" : "Saving..."
 		},
+		"fileupload.uploading" : {
+			"DE" : "Hochladen ...",
+			"EN" : "Uploading ..."
+		},
+		"fileupload.cropping" : {
+			"DE" : "Zuschneiden ...",
+			"EN" : "Cropping ..."
+		},
 		"fileupload.image.description" : {
 			"DE" : "Wählen Sie eine Bilddatei zum Hochladen. Überprüfen Sie, dass sie nicht größer als 3MB ist und vom Typ GIF, PNG oder JPEG.",
 			"EN" : "Please select a file. Ensure the file is less than 3 MB in size and the format is GIF, PNG, or JPEG."
+		},
+		"fileupload.dimensions.description" : {
+			"DE" : "Minimale Abmessungen: ",
+			"EN" : "Minimal dimensions: "
 		},
 		"fileupload.submit.error" : {
 			"DE" : "Beim Hochladen ist ein Fehler aufgetreten. Überprüfen Sie, dass die Datei nicht größer als 3 MB ist und vom Typ GIF, PNG oder JPEG.",
 			"EN" : "An error occurred during upload. Please check file size (< 3 MB) and format (GIF, PNG, JPEG)."
 		},
+		"fileupload.save.error" : {
+			"DE" : "Beim Speichern des Bildes ist ein Fehler aufgetreten. Bitte überprüfen sie Ihre Internetverbindung und versuchen sie es erneut.",
+			"EN" : "An error occurred during saving of the image. Please check your connection and try again."
+		},
 		"fileupload.crop.error" : {
 			"DE" : "Beim Zuschneiden ist ein Fehler aufgetreten. Überprüfen sie die Auswahl und probieren sie es noch einmal.",
 			"EN" : "An error occurred while cropping image. Please check selection and try again."
+		},
+		"fileupload.error.dimensions" : {
+			"DE" : "Das Bild muss mindestens die Abmessungen {{editorMinWidth}} x {{editorMinHeight}} Pixel haben.",
+			"EN" : "The image must at least have the dimensions {{editorMinWidth}} x {{editorMinHeight}} pixel."
 		},
 		"fileupload.error.size" : {
 			"DE" : "Maximal erlaubte Dateigröße beträgt 3 MB.",
@@ -1970,6 +2609,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Please enter a valid email."
 		},
 		//login_form partial
+		"login.message" : {
+			"DE" : "Zugang mit Ihrem Geschäftskundenkonto.",
+			"EN" : "Access with your business account."
+		},
 		"login.password.forgot" : {
 			"DE" :  "Passwort vergessen?",
 			"EN" : "Forgot password?"
@@ -2041,8 +2684,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		"error.general" : {
 			"DE" : "Es gibt ein Problem mit der Verbindung zum Service.",
-			"EN" : "There has been connection problem."
+			"EN" : "There has been a connection problem."
 		},
+		"error.appengine" : {
+	   "DE" : "Es liegt eine Serverstörung vor. Wir arbeiten an einer Lösung.",
+     "EN" : "The service has been temporarily interrupted. We are working on a solution."
+     },
 		"common.error.footer" : {
 			"DE" : "Falls dieser Fehler weiterhin besteht, konktaktieren sie <a href='mailto:support@cloobster.com'>support@cloobster.com</a>.",
 			"EN" : "If this error persists, contact <a href='mailto:support@cloobster.com'>support@cloobster.com</a>."

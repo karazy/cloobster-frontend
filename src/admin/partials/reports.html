@@ -1,0 +1,38 @@
+<div class="span12 data-container-with-title" style="padding-left: 10px; padding-right: 10px;" ng-controller="CloobsterAdmin.Reports">
+	<form class="form-inline">
+		<div class="input-prepend">
+			<span class="add-on" l="reports.parameter.startdate">Start date</span>
+		 	<input ui-date="dateOptions"  type="text" ng-model="fromDate">
+		</div>
+		<div class="input-prepend">
+			<span class="add-on" l="reports.parameter.enddate">End date</span>
+		 	<input ui-date="dateOptions" type="text" ng-model="toDate">
+		</div>
+		<button class="btn btn-primary" ng-click="loadReport()"><i class="icon-th icon-white"></i><span l="reports.action.show">Show report</span></button>
+		<div ng-show="loadReport.progress"><div class="loading-indicator"></div>Loading ... </div>
+	</form>
+	<table class="table">
+		<thead>
+		  <tr>
+		    <th>Company</th>
+		    <th>Location</th>
+		    <th>CheckIns</th>
+		    <th>Orders</th>
+		    <th>Service Calls</th>
+		    <th>Feedback Count</th>
+		    <th>Turnover Amount</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr ng-repeat="report in reports| orderBy:'companyName'" >
+		    <td>{{report.companyName}}</td>
+		    <td>{{report.locationName}}</td>
+		    <td>{{report.checkInCount}}</td>
+		    <td>{{report.orderCount}}</td>
+		    <td>{{report.serviceCallCount}}</td>
+		    <td>{{report.feedbackCount}}</td>
+		    <td>{{report.turnoverAmount}}</td>
+		  </tr>
+		</tbody>
+	</table>
+</div>

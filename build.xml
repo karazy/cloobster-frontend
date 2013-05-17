@@ -80,6 +80,7 @@
 			<filelist id="adminlibfiles" dir="src/${admindir}/lib" >
 				<file name="bootstrap.min.js" />
 				<file name="angular-resource-1.0.1.min.js" />
+				<file name="angular-ui.min.js" />
 			</filelist>
 		</copy>
 	</target>
@@ -95,21 +96,23 @@
 		<copy todir="build/${frontenddir}/lib">
 			<filelist id="frontendlibfiles" dir="src/${frontenddir}/lib" >
 				<file name="jquery/jquery.ui.widget.js" />
-				<file name="jquery/jquery-ui-1.8.21.custom.min.js" />
+				<file name="jquery/jquery-ui-1.10.1.custom.min.js" />
 				<file name="jquery/jquery.iframe-transport.js" />
 				<file name="jquery/jquery.fileupload.js" />
 				<file name="jquery/jquery.fileupload-fp.js" />
 				<file name="jquery/jquery.fileupload-ui.js" />
 				<file name="jquery/jquery.imgareaselect.pack.js" />
 				<file name="bootstrap/bootstrap.min.js" />
+				<file name="bootstrap/bootstrapSwitch.js" />
 				<file name="angular/angular-resource-1.0.1.min.js" />
 				<file name="angular/angular-sanitize-1.0.1.min.js" />
+				<file name="angular-ui-0.4.0/build/angular-ui.min.js" />
 			</filelist>
 		</copy>
 		<copy todir="build/${frontenddir}/lib/ckeditor">
 			<fileset dir="src/${frontenddir}/lib/ckeditor">
 			</fileset>
-		</copy>
+		</copy>	
 	</target>
 	<target name="copyresources-admin">
 		<copy todir="build/${admindir}">
@@ -121,11 +124,13 @@
 			</fileset>
 			<fileset id="imgfiles" dir="src/${admindir}/" >
 				<include name="img/**/*"/>
+				<include name="css/images/**/*"/>
 			</fileset>
 			<filelist id="cssfiles" dir="src/${admindir}/">
 				<file name="css/bootstrap.min.css"/>
 				<file name="css/bootstrap-responsive.min.css"/>
 				<file name="css/admin.css"/>
+				<file name="css/jquery-ui-1.10.1.custom.min.css"/>
 			</filelist>
 		</copy>
 		<move file="build/${admindir}/index.prod.html" tofile="build/${admindir}/index.html" />
@@ -153,6 +158,7 @@
 		<copy todir="build/${frontenddir}">
 			<fileset id="indexfiles" dir="src/${frontenddir}/" >
 				<include name="index.prod.html"/>
+				<include name="frontend/index.html"/>
 			</fileset>
 			<fileset id="partialfiles" dir="src/${frontenddir}/" >
 				<include name="partials/**/*"/>
@@ -162,13 +168,18 @@
 			</fileset>
 			<filelist id="cssfiles" dir="src/${frontenddir}/">
 				<file name="css/bootstrap.min.css"/>
+				<file name="css/bootstrapSwitch.css"/>
 				<file name="css/bootstrap-responsive.min.css"/>
 				<file name="css/cloobster.css"/>
 				<file name="css/jquery.fileupload-ui.css"/>
+				<file name="css/jquery-ui-1.10.1.custom.min.css"/>
 				<file name="css/imgareaselect-default.css"/>
 				<file name="css/border-h.gif"/>
 				<file name="css/border-v.gif"/>
 			</filelist>
+			<fileset id="cssimgfiles" dir="src/${frontenddir}/" >
+				<include name="css/images/*"/>
+			</fileset>
 		</copy>
 		<move file="build/${frontenddir}/index.prod.html" tofile="build/${frontenddir}/index.html" />
 	</target>

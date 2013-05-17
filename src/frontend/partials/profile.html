@@ -141,7 +141,7 @@
 						<div class="value">{{company.postcode}}</div>
 					</div>
 				</div>
-				<div simple-property-editor editor-title="profile.company.phone.editor.title" editor-property="company.phone" editor-on-save="saveCompany()" editor-enabled="editModeCompany">
+				<div simple-property-editor editor-title="profile.company.phone.editor.title" editor-property="company.phone" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
 					<div class="data-element" ng-class="getEditModeClass('company')" >
 						<div class="key" l="profile.company.phone">Business phone</div>
 						<div class="value">{{company.phone}}</div>

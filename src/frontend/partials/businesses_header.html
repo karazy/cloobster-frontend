@@ -45,7 +45,7 @@
 	<div class="span12">
 		<ul class="nav nav-tabs">
 			<li ng-class="{'active': isActive('/howto',true)}">
-				<a href="#/howto" l="businesses.headertabs.howto">Howto</a>
+				<a href="#/howto" l="businesses.headertabs.howto" style="background-color: rgba(223, 107, 32, .5); color: white;" ng-class="'active-howto-tab'">Howto</a>
 			</li>
 			<li ng-class="{'active': isActive('/businesses',true)}">
 				<a href="#/businesses" l="businesses.headertabs.locations">Locations</a>
@@ -64,6 +64,12 @@
 			</li>
 			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/infopages',true), 'disabled': businesses.length==0}">
 				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/infopages','')}}" l="businesses.headertabs.infopages">Infopages</a>
+			</li>
+			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/appconfig',true), 'disabled': businesses.length==0}">
+				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/appconfig','')}}" l="businesses.headertabs.appconfig">App Config</a>
+			</li>
+			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/reports',true), 'disabled': businesses.length==0}">
+				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/reports','')}}" l="businesses.headertabs.reports">Reports</a>
 			</li>
 			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/documents',true), 'disabled': businesses.length==0}">
 				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/documents','')}}" l="businesses.headertabs.documents">Documents</a>

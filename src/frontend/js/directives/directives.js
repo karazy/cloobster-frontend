@@ -8,270 +8,7 @@
 */
 Cloobster.directives = angular.module('Cloobster.directives', []);
 
-Cloobster.directives.directive('simplePropertyEditor', ['lang','$timeout', '$log', function(langService,$timeout, $log) {
-	var inputType, //type of the input to generate in form
-		required, //if present marks a required field
-		//directive configuration
-		config = {
-		restrict: 'A',
-		replace: false,
-		transclude: true,
-		scope: {
-			editorTitle: '@',
-			editorPatternText: '@',
-			editorOnSave: '&',
-			editorProperty: '=',
-			editorEnabled: '=',
-			editorValidate: '&',
-			editorValidateText: '@',
-			editorPlaceholder: '@'
-		},
-		compile: function(element, attrs, transclude) {
-			var required = attrs.hasOwnProperty('editorRequired') ? "required='required'" : "",
-				pattern = attrs.hasOwnProperty('editorPattern') ? "ng-pattern='"+attrs.editorPattern+"'" : "",
-				html = 
-				'<div class="toggler" ng-transclude></div>'+
-				'<div class="simple-property-editor-mask"></div>'+			
-				'<div class="simple-property-editor" style="display:none; position:absolute; background-color:white;">'+
-				'<h5 class="editor-title" l="{{editorTitle}}">Edit property</h5>'+
-				'<form name="simplePropertyForm" novalidate ng-submit="save()" class="edit-property-form">'+
-					'<div class="">'+
-					 	'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty.$invalid)">'+
-					 		'<div class="controls">'+
-					 			createFormInput(attrs)+
-					 			'<i class="icon-remove icon-black" ng-click="clearInput()"></i>'+
-								'<div class="help-inline" ng-show="simplePropertyForm.simpleProperty.$dirty && simplePropertyForm.simpleProperty.$invalid">'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.required">'+ l('propertyeditor.error.required') +'</span>'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.number">'+ l('propertyeditor.error.number') +'</span>'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.pattern" l="{{editorPatternText}}">No valid value.</span>'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.custom" l="{{editorValidateText}}">No valid value.</span>'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.email" >+'+ l('propertyeditor.error.email')+'</span>'+									
-								'</div>'+
-							'</div>'+
-						'</div>'+
-						createRepeatInput(attrs)+
-					'</div>'+
-					'<div class="row-fluid">'+
-						'<button type="button" ng-click="closeDialog()" class="btn span6" data-dismiss="modal">'+l('common.cancel')+'</button>'+
-						'<button type="submit" class="btn btn-primary span6" ng-disabled="simplePropertyForm.$invalid">'+l('common.save')+'</button>'+
-					'</div>'+
-					'</form>'+
-				'</div>';
-			
-			element.append(html);
-
-			return {
-		        pre: function preLink(scope, iElement, iAttrs, controller) { 
-		        	
-		        },
-		        post: function postLink(scope, iElement, iAttrs, controller) {
-		        	var dialog = iElement.find('div.simple-property-editor'),
-		        		mask = iElement.find('div.simple-property-editor-mask'),
-		        		input = iElement.find('input.property-input, textarea.property-input'),
-		        		ctrl = scope.simplePropertyForm.simpleProperty;
-
-		        	if(iAttrs.hasOwnProperty('editorValidate')) {
-		        		ctrl.$parsers.push(function(value) {
-			        		if(scope.editorValidate) {
-			        			if(scope.editorValidate({'value' : value})) {
-			        				ctrl.$setValidity('custom', true);
-			        				return value;
-			        			}
-			        			else {
-			        				ctrl.$setValidity('custom', false);
-			        				return undefined;
-			        			}	
-			        		}
-			        	});	
-		        	}
-		        	
-		        	scope.save = function () {
-		        		//only save when form is valid
-		        		if(scope.simplePropertyForm.$valid && !scope.saved) {
-		        			scope.saved = true;
-		        			scope.editorProperty = scope.editorValue;
-		        			// Wrap this in a timeout, because the model change is not immediate.
-			        		$timeout(scope.editorOnSave);
-			        		// dialog.modal('toggle');
-
-			        		mask.hide();
-		        			dialog.hide();
-		        		}
-		        	}
-
-		        	scope.closeDialog = function() {
-		        		mask.hide();
-		        		dialog.hide();
-		        	}
-
-		        	/**
-		        	* Convenience method to clear the input field.
-		        	*/
-		        	scope.clearInput = function() {
-		        		scope.editorValue = "";
-		        		if(scope['editorRepeat']) {
-		        			scope['editorRepeat'] = "";
-		        		}
-		        		input.trigger("focus");
-		        	}
-
-		        	scope.matchInput = function() {
-						if(scope.simplePropertyForm.simpleProperty.$viewValue !== scope.simplePropertyForm.repeatProperty.$viewValue) {
-							scope.simplePropertyForm.repeatProperty.$setValidity("match", false);
-						} else {
-							scope.simplePropertyForm.repeatProperty.$setValidity("match", true);
-						}
-					}
-		        	
-		        	iElement.find('div.toggler').bind('click', function() {   
-		        		if(scope.editorEnabled == true || typeof scope.editorEnabled == 'undefined') {
-		        			scope.$apply('editorValue = editorProperty;editorRepeat="";saved=false');
-		        			// dialog.modal('toggle');
-		        			var titleHeight,  
-		        				offsetTop, 
-		        				maskHeight, 
-		        				maskWidth,
-		        				dataElementValue,
-		        				dataElementValueLeft;
-		        			
-		        			offsetTop = iElement.find('div.toggler').offset().top - iElement.find('div.toggler').offsetParent().offset().top;
-		        			titleHeight = iElement.find('h5.editor-title').css('lineHeight');
-		        			titleHeight = titleHeight.replace('px','');
-		        			dataElementValue = iElement.find('div.value');
-
-		        			maskHeight = $(document).height();
-        					maskWidth = $(window).width();
-		        			 //Set height and width to mask to fill up the whole screen
-        					mask.css({'width':maskWidth,'height':maskHeight}); 
-        					mask.show();
-
-        					//if editor is used on a data-element use value div to calculate left!
-        					//TODO 14.12.2012 this should be optimized to avoid dependencies to html
-        					//maybe make it configurable.
-        					try {
-        						if(dataElementValue && dataElementValue.length == 1) {
-        							dataElementValueLeft = dataElementValue.offset().left - dataElementValue.offsetParent().offset().left;
-        							dialog.css('left', dataElementValueLeft);
-        						}	
-        					} catch(e) {
-        						$log.error('simplePropertyEditor: failed to calculate left');
-        					}
-        					
-
-		        			dialog.css('top', offsetTop - titleHeight - 25);
-		        			dialog.show();
-
-		        			input.trigger("focus");
-		        		}
-					});
-
-					mask.bind('click', function() {
-						scope.closeDialog();
-					});
-
-					dialog.bind('keyup', function(event) {
-						//hide dialog on escape
-						if(event.which == 27) {
-							scope.closeDialog();	
-						}						
-					});
-
-		        	scope.getFieldInputClass = getFieldInputClass;		        	
-
-		        }
-		      }
-		}
-	};
-
-	function l(key) {
-		return langService.translate(key) || key;
-	}
-
-	/**
-	* Creates a form input control group for repeated input.
-	* @param attrs
-	*	Attributes object containing configuration.
-	*/
-	function createRepeatInput(attrs) {
-		var required = attrs.hasOwnProperty('editorRequired') ? "required='required'" : "",
-			repeat = attrs.hasOwnProperty('editorRepeat'),
-			pattern = attrs.hasOwnProperty('editorPattern') ? "ng-pattern='"+attrs.editorPattern+"'" : "",
-			type = 	attrs.hasOwnProperty('editorType') ? attrs.editorType : "text",
-			inputHtml;
-		
-		if(!repeat)
-			return '';
-
-		if(type == "textarea") {
-			inputHtml = '';
-		} else {
-			if(type != "email" && type != "password" && type != "number") {
-				type = "text";
-			}
-
-			inputHtml = '<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.repeatProperty.$invalid)">'+
-		 		'<div class="controls">'+
-		 			'<input type="'+type+'" name="repeatProperty" ng-model="editorRepeat" l-attribute="placeholder" l="propertyeditor.repeat.placeholder" required ng-change="matchInput()"></input>'+
-					'<div class="help-inline" ng-show="simplePropertyForm.repeatProperty.$dirty && simplePropertyForm.repeatProperty.$invalid">'+
-						'<span ng-show="simplePropertyForm.repeatProperty.$error.required">'+ l('propertyeditor.error.required') +'</span>'+
-						'<span ng-show="simplePropertyForm.repeatProperty.$error.match">'+ l('propertyeditor.error.match') +'</span>'+
-					'</div>'+
-				'</div>'+
-			'</div>';
-		}
-
-		return inputHtml;
-	}
-
-	/**
-	* Creates an html input tag based on the given configuration.
-	* @param attrs
-	*	Attributes object containing configuration.
-	*/
-	function createFormInput(attrs) {
-		var required = attrs.hasOwnProperty('editorRequired') ? "required='required'" : "",
-			pattern = attrs.hasOwnProperty('editorPattern') ? "ng-pattern='"+attrs.editorPattern+"'" : "",
-			repeat = attrs.hasOwnProperty('editorRepeat') ? "ng-change='matchInput()'" : "",
-			maxLength = attrs.hasOwnProperty('editorMaxLength') ? "maxlength='"+attrs.editorMaxLength+"'" : "",
-			placeholder = attrs.hasOwnProperty('editorPlaceholder') ? "placeholder='"+l(attrs.editorPlaceholder)+"'" : "",
-			type = 	attrs.hasOwnProperty('editorType') ? attrs.editorType : "text",
-			inputHtml;
-
-		if(type == "textarea") {
-			inputHtml = '<textarea class="property-input" rows="4" cols="100" name="simpleProperty" ng-model="editorValue"' + maxLength +' '+required+' '+pattern+' '+placeholder+'></textarea>';
-		} else {
-			if(type != "email" && type != "password" && type != "number") {
-				type = "text";
-			}
-
-			inputHtml = '<input class="property-input" type="'+type+'" '+placeholder+' name="simpleProperty" ng-model="editorValue"' + maxLength +' '+required+' '+pattern+' '+repeat+'></input>';
-		}
-
-		return inputHtml;
-	}
-
-	/*
-	* Get css class for field highlighting.
-	* 
-	* @param {boolean}  
-	* @returns error if invalid
-	*		  success if !invalid
-	*         empty string otherwise
-	*/
-	function getFieldInputClass(invalid) {
-		if(invalid) {
-			return "error";
-		} else if (!invalid) {
-			return "success";
-		} else {
-			return "";
-		}
-	};
-
-	return config;
-}]);
-
-Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', function(uploadService, langService, $log) {
+Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$interpolate',function(uploadService, langService, $log, $interpolate) {
 	var inputType, //type of the input to generate in form
 		required, //if present marks a required field
 		//directive configuration
@@ -283,8 +20,11 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 			editorTitleKey: '@',
 			editorOnSave: '&',
 			editorOnCancel: '&',
+			editorOnDelete: '&',
 			editorImageResource: '=',
 			editorImageId: '@',
+			editorMinWidth: '@',
+			editorMinHeight: '@',
 			simpleImageEditor: '=',
 			editorEnabled: '='
 		},
@@ -292,7 +32,6 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 			var html = '<div class="toggler" ng-transclude></div>'+
 				'<div class="modal hide">'+
 					'<div class="modal-header">'+
-				  		'<button type="button" class="close" ng-click="cancel()" data-dismiss="modal">×</button>'+
 				   		'<h3>{{getTitle()}}</h3>'+
 					'</div>'+
 					'<form name="simpleImageForm" novalidate ng-submit="save()" class="upload-image-form">'+
@@ -304,33 +43,44 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 								'<p l="common.error.footer">If this error persists, contact <a href="mailto:support@cloobster.com">support@cloobster.com</a></p>'+
 							'</div>'+
 							'<div class="upload-area" ng-hide="selectionActive">'+								
-								'<p l="fileupload.image.description"> Choose a GIF, PNG or JPEG file with a size less than 3 Mb.</p>'+
-							 	'<span class="btn btn-success fileinput-button">'+
-							 		'<i class="icon-plus icon-white"></i>'+
-		                    		'<span l="fileupload.button.add">Add image...</span>'+
-							 		'<input type="file" name="files[]" accept="image/jpeg,image/png,image/gif"></input>'+
-							 		'<input type="hidden" value="{{editorImageId}}">'+
-						 		'</span>'+
-						 		'<p ng-show="selectedFiles"><span l="fileupload.image.label">Selected file: </span><span ng-bind="selectedFiles"></span></p>'+
+								'<p l="fileupload.image.description"> Choose a GIF, PNG or JPEG file with a size less than 3 Mb.</p>';
+						 		if(attrs['editorMinWidth'] || attrs['editorMinHeight']) {
+						 			html+= '<p><span l="fileupload.dimensions.description"></span>{{editorMinWidth || "*"}} x {{editorMinHeight || "*"}}</p>';
+						 		}
+
+						 		html +='<p ng-show="selectedFiles"><span l="fileupload.image.label">Selected file: </span><span ng-bind="selectedFiles"></span></p>'+
+						 		'<p ng-show="fileUploading || fileSaving"> '+
+						 			'<img src="img/ajax-loader.gif" style="margin-right: 5px;"></img>'+
+						 			'<span ng-show="fileSaving">'+langService.translate('fileupload.button.submit.saving')+'</span>'+
+						 			'<span ng-show="fileUploading">'+langService.translate('fileupload.uploading')+'</span>'+
+						 		'</p>'+
+						 		'<div class="progress progress-success" ng-show="fileUploading">'+
+									'<div class="bar" ng-style="barStyle"></div>'+
+								'</div>'+
 						 		'<img ng-src="{{imageUrl}}" style="max-width: 800px; display: block; clear: both; padding-top: 10px;">'+
 					 		'</div>'+
 					 		'<div class="crop-area" ng-show="selectionActive">'+
 					 			'<p>'+langService.translate(attrs.editorCropText)+'</p>'+
 					 			'<img class="active-image" ng-src="{{activeImage.url}}"></img><br>'+
 					 			'<p ng-show="imgSelection"><span l="fileupload.crop.area">Selected area:</span> {{imgSelection.width}} x {{imgSelection.height}}</p>'+
+					 			'<p ng-show="fileCropping || fileSaving">'+
+					 				'<img src="img/ajax-loader.gif" style="margin-right: 5px;"></img>'+
+					 				'<span ng-show="fileSaving">'+langService.translate('fileupload.button.submit.saving')+'</span>'+
+					 				'<span ng-show="fileCropping">'+langService.translate('fileupload.cropping')+'</span>'+
+					 			'</p>'+
 					 		'</div>'+
-					 		'<p>'+
-						 		'<div class="progress progress-success" ng-show="fileUploading">'+
-									'<div class="bar" ng-style="barStyle"></div>'+
-								'</div>'+
-							'</p>'+
 						'</div>'+
 						'<div class="modal-footer" style="clear:both;">'+
+							//image delete button, hide when no delete function is provided, file is uploading, no image exists or selection is active!
+							'<button class="btn" type="button" ng-click="deleteImage()" ng-hide="selectionActive || fileUploading || fileSaving || !imageUrl || !deleteImage"><i class="icon-trash icon-black"></i></button>'+
 							'<button type="button" class="btn" ng-click="cancel()" data-dismiss="modal" l="common.cancel">Close</button>'+
-							'<button type="submit" ng-hide="selectionActive" ng-disabled="isSaveDisabled()" class="btn btn-primary">'+
-								'<span l="common.save" ng-hide="fileUploading">Save</span><span ng-show="fileUploading" l="fileupload.button.submit.saving"></span>'+
-							'</button>'+
-							'<button type="button" class="btn btn-primary" ng-click="crop()" ng-show="selectionActive" ng-disabled="fileCropping" l="fileupload.button.crop">Crop image</button>'
+						 	'<span class="btn btn-success fileinput-button" style="float: none;" ng-hide="selectionActive || fileUploading || fileSaving">'+
+						 		'<i class="icon-plus icon-white"></i>'+
+            					'<span l="fileupload.button.add">Add image...</span>'+
+						 		'<input type="file" name="files[]" accept="image/jpeg,image/png,image/gif"></input>'+
+						 		'<input type="hidden" value="{{editorImageId}}">'+
+					 		'</span>'+
+							'<button type="button" class="btn btn-primary" ng-click="crop()" ng-show="selectionActive" ng-disabled="fileCropping || fileSaving" l="fileupload.button.crop">Crop image</button>'+
 						'</div>'+
 					'</form>'+
 				'</div>';
@@ -341,37 +91,45 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        },
 		        post: function postLink(scope, iElement, iAttrs, controller) {
 		        	var dialog = iElement.find('div.modal'),
-		        		dialogBody = dialog.find('div.modal-body'),
-		        		fileList = iElement.find('.selected-files'),
-		        		uploadInput = iElement.find('form[name=simpleImageForm]'),
-		        		imageElement = iElement.find('img.active-image'),
-		        		uploadObject, //returned from file upload initialization
-		        		imgAreaSelect, // holds instance of image cropping tool
-		        		aspectRatio = iAttrs['editorRatio'], // get the preset ratios for image selection from the "editor-ratios" attribute.
-		        		editorCropText = iAttrs['editorCropText'];
+			        		dialogBody = dialog.find('div.modal-body'),
+			        		fileList = iElement.find('.selected-files'),
+			        		uploadInput = iElement.find('form[name=simpleImageForm]'),
+			        		imageElement = iElement.find('img.active-image'),
+			        		uploadObject, //returned from file upload initialization
+			        		imgAreaSelect, // holds instance of image cropping tool
+			        		aspectRatio = iAttrs['editorRatio'], // get the preset ratios for image selection from the "editor-ratios" attribute.
+			        		editorCropText = iAttrs['editorCropText'],
+			        		deleteImage = iAttrs['editorOnDelete'],
+			        		minImageHeight = iAttrs['editorMinHeight'],
+			        		minImageWidth = iAttrs['editorMinWidth'];
 
 		        	/** Initialize private scope variables */
 		        	function resetScope () {
-						scope.fileAdded = false;
-						scope.fileUploading = false;
-						scope.fileCropping = false;
-						scope.selectionActive = false;
-						scope.activeImage = null;
-						scope.barStyle= { width: '0%'};
-						scope.error = false;
-						scope.selectedFiles = null;
-						scope.errorMessage = "";
-						scope.userSaved = false;
-						if(scope.simpleImageEditor) {
-							scope.imageUrl = scope.simpleImageEditor['url'];
-						}
-						else {
-							scope.imageUrl = null;
-						}
-						scope.userCancelled = false;
+								scope.fileAdded = false;
+								scope.fileUploading = false;
+								scope.fileSaving = false;
+								scope.fileCropping = false;
+								scope.selectionActive = false;
+								scope.activeImage = null;
+								scope.barStyle= { width: '0%'};
+								scope.error = false;
+								scope.selectedFiles = null;
+								scope.errorMessage = "";
+								scope.userSaved = false;
+								if(scope.simpleImageEditor) {
+									scope.imageUrl = scope.simpleImageEditor['url'];
+								}
+								else {
+									scope.imageUrl = null;
+								}
+								scope.userCancelled = false;
 		        	}
 
 		        	resetScope();
+
+		        	if(!scope.editorImageResource) {
+		        		$log.error('simpleImageEditor: editorImageResource not set');
+		        	}
 
 		        	/** Gets localized title. Returns key of no title was found. */
 		        	scope.getTitle = function() {
@@ -390,23 +148,22 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 
 		        	/** Called from upload service during upload progress. */
 		        	function fileUploadProgressCallback(data) {
-		        		scope.barStyle.width = parseInt(data.loaded / data.total * 100, 10) + '%';
+		        		// Only got to 95% save the last 5% for the save request.
+		        		scope.barStyle.width = parseInt(data.loaded / data.total * 99, 10) + '%';
 		        		scope.$digest();
 		        	};
 
 					/** Called from upload service when upload is finished and updates U */
-					function fileUploadedCallback(success, errorText) {
+					function fileUploadedCallback(success, data) {
 						var imageResource = scope.editorImageResource,
 							activeImage = null;
 
 						if(success) {
-
 			        		activeImage = new imageResource({
 			    				id: scope.editorImageId,
 			    				blobKey: imageResource.blobKey,
 			    				url: imageResource.url
 	    					});
-
 
 	    					scope.activeImage = activeImage;
 	    					scope.imageUrl = activeImage.url;
@@ -417,7 +174,6 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		    					return;
 	    					}
 
-
 	    					if(editorCropText) {
 	    						setupCropping();
 	    						scope.selectionActive = true;
@@ -427,9 +183,16 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 	    					}
 		
 						} else {
-							scope.errorMessage = langService.translate("fileupload.submit.error");
-							scope.error = true;
-							scope.barStyle.width = '0%';
+							if(data.errorThrown === 'abort') {
+								// User cancelled the upload close the dialog
+								dialog.modal('hide');
+							}
+							else {
+								// We have an error from the server.
+								scope.errorMessage = langService.translate("fileupload.submit.error");
+								scope.error = true;
+								scope.barStyle.width = '0%';
+							}				
 						}
 
 						scope.fileUploading = false;
@@ -485,9 +248,33 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        	*/
 		        	function fileAddedCallback (fileName) {
 		        		scope.selectedFiles = fileName;
-		        		scope.fileAdded = true;		        
-		        		scope.$digest();
-		        		
+		        		scope.fileAdded = true;
+       					scope.$digest();		
+
+		        		// Start check for image dimensions
+		        		if(minImageHeight || minImageWidth) {
+		        			if(uploadObject.checkImageDimensions(function(success) {		        			
+		        				if(success) {
+		        					// image passed the check
+		        					scope.save();
+		        				}
+		        				else {
+		        					scope.error = true;
+		        					// interpolate optional expressions (like dimensions)
+											scope.errorMessage = $interpolate(langService.translate("fileupload.error.dimensions"))(scope);
+											scope.fileAdded = false;
+											scope.selectedFiles = null;
+											scope.$digest();
+		        				}
+		        			}, minImageWidth, minImageHeight) == false) {
+		        				// no check was done, because of incompatible browser
+		        				scope.save();
+		        			}
+		        		}
+		        		else {
+		        			// No dimension requirements set, just continue to save
+		        			scope.save();
+		        		}
 		        	}
 
 		        	/** Delete the last uploaded image on the server. */
@@ -501,25 +288,36 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        	/** Save the uploaded image as the new image for this business. */
 		        	function saveImageAndClose() {
 		        		var activeImage = scope.activeImage;		        		
-		        		activeImage.$save(function() {
+		        		scope.fileSaving = true;
+		        		activeImage.$save(
+		        			// Success
+		        			function() {
+		        				scope.fileSaving = false;
 		        				scope.barStyle.width = '100%';
 		        				scope.editorOnSave({ "image" : activeImage});
 				        		dialog.modal('hide');
-							});
+									},
+									 // Error
+		        			function() {
+										deleteActiveUpload();
+										resetScope();
+										scope.error = true;
+										scope.errorMessage = langService.translate("fileupload.save.error");
+									});
 		        	};
 
 		        	/*
 		        	* Send crop request to server and save image after success.
 		        	*/
 		        	scope.crop = function() {
-						var selection = imgAreaSelect.getSelection(),
-	        				imgWidth = imageElement.width(),
-	        				imgHeight = imageElement.height();
-	        			
-						disableCropping();
-						scope.userSaved = true;
+								var selection = imgAreaSelect.getSelection(),
+		        				imgWidth = imageElement.width(),
+		        				imgHeight = imageElement.height();
+			        			
+								disableCropping();
+								scope.userSaved = true;
 
-						scope.barStyle.width = '0%';
+								scope.barStyle.width = '0%';
 	        			scope.fileCropping = true;
 
 	        			uploadService.requestImageCrop(scope.activeImage.blobKey,
@@ -531,6 +329,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 	        					scope.barStyle.width = '50%';
 	        					scope.fileCropping = false;
 	        					scope.error = false;
+
 	        					if(scope.userCancelled) {
 	        						deleteActiveUpload();
 	        						return;
@@ -563,10 +362,21 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 		        		}
 		        	}
 
+		        	/** Delete button click handler. */
+		        	scope.deleteImage = (deleteImage) ? function() {
+		        		scope.editorOnDelete();
+		        		dialog.modal('hide');
+		        	} : null;
+
 		        	/** Cancel button click handler */
 		        	scope.cancel = function() {
 		        		scope.userCancelled = true;
-		        		deleteActiveUpload();
+		        		if(scope.fileUploading) {
+		        			// Abort the upload
+		        			uploadObject.cancel();
+		        		}
+		        		else
+		        			deleteActiveUpload();
 		        	}
 
 		        	/**
@@ -591,20 +401,26 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 					});
 		        	
 		        	iElement.find('div.toggler').bind('click', function() {
+		        		var modalBodyHeight;
+
 		        		if(scope.editorEnabled === true || typeof scope.editorEnabled == "undefined") {
 		        			//init file upload plugin for this dialog
 	        				uploadObject = uploadService.getFileUploadObject(uploadInput, scope.editorImageResource, fileAddedCallback, fileUploadedCallback, fileUploadProgressCallback);
 
+	   							dialog.modal({
+	   								'keyboard': false,
+	   								'backdrop': 'static'	   		
+	   							});
+	   							dialog.modal('show');
+
 							if(editorCropText) {
-								dialogBody.css('height',function () { 
-								    	return ($(window).height() * .8) + 'px';
-								    });
+								modalBodyHeight = ($(window).height() * .8) + 'px';
+								dialogBody.css('height', modalBodyHeight);
 
-								dialogBody.css('max-height', function() { return $(this).height()});
+								dialogBody.css('max-height', modalBodyHeight);
 								// Expand the dialog to 80% width and 80% height of window.								
-
+								dialog.css('width', '80%');
 								dialog.css({
-						    		'width': '80%',
 								    // 'height': function () { 
 								    // 	return ($(window).height() * .8) + 'px';
 								    // },								    
@@ -617,7 +433,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 								});
 								
 							}
-							dialog.modal('show');
+							
 		        		}
 					});
 
@@ -628,174 +444,6 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log', fun
 	return config;
 }]);
 
-Cloobster.directives.directive('richtextPropertyEditor', ['lang','$timeout', function(langService,$timeout) {
-	var inputType, //type of the input to generate in form
-		required, //if present marks a required field
-		//directive configuration
-		config = {
-		restrict: 'A',
-		replace: false,
-		transclude: true,
-		scope: {
-			editorTitle: '@',
-			editorOnSave: '&',
-			editorProperty: '=',
-			editorEnabled: '=',
-			editorValidate: '&',
-			editorValidateText: '@'
-		},
-		compile: function(element, attrs, transclude) {
-			var required = attrs.hasOwnProperty('editorRequired') ? "required='required'" : "",				
-				html = 
-				'<div class="toggler" ng-transclude></div>'+
-				'<div class="modal hide">'+
-				  '<div class="modal-header">'+
-				   ' <button type="button" class="close" data-dismiss="modal">×</button>'+
-				    '<h3 l="{{editorTitle}}">Edit property</h3>'+
-				 '</div>'+
-				'<form name="simplePropertyForm" novalidate ng-submit="save()" class="edit-property-form">'+
-					'<div class="modal-body">'+
-					 	'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty.$invalid)">'+
-					 		'<div class="controls">'+
-					 			'<textarea style="float:left;" rows="12" cols="300" ng-model="editorValue"></textarea>'+
-					 			// '<i class="icon-remove icon-black" ng-click="clearInput()"></i>'+
-								'<div class="help-inline" ng-show="simplePropertyForm.simpleProperty.$dirty && simplePropertyForm.simpleProperty.$invalid">'+
-									'<span ng-show="simplePropertyForm.simpleProperty.$error.required">'+ l('propertyeditor.error.required') +'</span>'+							
-								'</div>'+
-							'</div>'+
-						'</div>'+
-					'</div>'+
-					'<div class="modal-footer">'+
-						'<button type="button" class="btn" ng-click="cancel()" data-dismiss="modal">'+l('common.cancel')+'</button>'+
-						'<button type="submit" class="btn btn-primary" ng-disabled="simplePropertyForm.$invalid">'+l('common.save')+'</button>'+
-					'</div>'+
-					'</form>'+
-				'</div>';
-			
-			element.append(html);
-
-			return {
-		        pre: function preLink(scope, iElement, iAttrs, controller) { 
-		        	
-		        },
-		        post: function postLink(scope, iElement, iAttrs, controller) {
-		        	var dialog = iElement.find('div.modal'),
-		        		input = iElement.find('input.property-input, textarea.property-input'),
-		        		editorTextarea = iElement.find('textarea'),
-		        		ctrl = scope.simplePropertyForm.simpleProperty,
-		        		editor;
-		        		
-
-					//init editor		        	
-		        	editor = editorTextarea.ckeditor(function() {
-		        		//callback after editor is succesfully loaded
-
-		        	}, {
-		        		//config
-		        		resize_enabled: false,
-		        		toolbar: [
-							// { name: 'document', items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
-							{ name: 'clipboard', items : [ 'Undo','Redo' ] },
-							// { name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },
-							// { name: 'forms', items : [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 
-						 //        'HiddenField' ] },
-							// '/',
-							{ name: 'basicstyles', items : [ 'Bold', 'Underline', 'RemoveFormat' ] },
-							{ name: 'paragraph', items : [ 'NumberedList','BulletedList', //'Outdent','Indent'
-							'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'] },
-							// { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
-							// { name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe' ] },
-							// '/',
-							{ name: 'styles', items : [ 'Format'] }
-							// { name: 'colors', items : [ 'TextColor','BGColor' ] },
-							// { name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] }
-						]
-		        	});
-
-		        	if(iAttrs.hasOwnProperty('editorValidate')) {
-		        		ctrl.$parsers.push(function(value) {
-			        		if(scope.editorValidate) {
-			        			if(scope.editorValidate({'value' : value})) {
-			        				ctrl.$setValidity('custom', true);
-			        				return value;
-			        			}
-			        			else {
-			        				ctrl.$setValidity('custom', false);
-			        				return undefined;
-			        			}	
-			        		}
-			        	});	
-		        	}
-		        	
-		        	scope.save = function () {
-		        		//only save when form is valid
-		        		if(scope.simplePropertyForm.$valid && !scope.saved) {
-		        			scope.saved = true;
-		        			//grab the value of richtext editor
-		        			scope.editorProperty = editor.val();
-		        			// Wrap this in a timeout, because the model change is not immediate.
-			        		$timeout(scope.editorOnSave);
-			        		dialog.modal('toggle');
-		        		}
-		        	}
-
-		        	/**
-		        	* User canceled edit. Reset the value of the texteditor.
-		        	*/
-		        	scope.cancel = function() {
-		        		editor.val(scope.editorProperty);
-		        	}
-
-		        	/**
-		        	* Convenience method to clear the input field.
-		        	*/
-		        	scope.clearInput = function() {
-		        		scope.editorValue = "";
-		        	}
-		        	
-		        	iElement.find('div.toggler').bind('click', function() {		   
-		        		if(scope.editorEnabled == true || typeof scope.editorEnabled == 'undefined') {
-		        			scope.clearInput();
-		        			scope.$digest();
-		        			scope.$apply('editorValue = editorProperty;saved=false;');		        			
-							dialog.modal('toggle');
-							// Set focus to editor.
-		        			editor.ckeditorGet().focus();
-		        		}
-					});
-
-		        	scope.getFieldInputClass = getFieldInputClass;
-
-		        }
-		      }
-		}
-	};
-
-	function l(key) {
-		return langService.translate(key) || key;
-	}
-
-
-	/*
-	* Get css class for field highlighting.
-	* 
-	* @param {boolean}  
-	* @returns error if invalid
-	*		  success if !invalid
-	*         empty string otherwise
-	*/
-	function getFieldInputClass(invalid) {
-		if(invalid) {
-			return "error";
-		} else if (!invalid) {
-			return "success";
-		} else {
-			return "";
-		}
-	};
-
-	return config;
-}]);
 
 /**
 * Used to translate UI texts.

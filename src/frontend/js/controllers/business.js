@@ -44,8 +44,6 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.businessToDelete = null;
 	/** Property which is currently edited. */
 	$scope.activeProperty = null;
-	/** When true user can edit the business profile. */
-	$scope.editMode = false;
 	/** True if file upload is active. */
 	$scope.activeFileUpload = null;
 	/** Contains the information about a new business. */
@@ -62,6 +60,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.langcodes = langcodes;
 	/** Filter object for language selection dialog. */
 	$scope.languageQuery = {};
+
 
 	/**
 	* Returns all businesses
@@ -86,6 +85,11 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	* Load all available subscriptions.
 	*/
 	$scope.loadSubscriptions = function() {
+		// Delete previous subscriptions, needed because we sometimes refresh them
+		if($scope.subscriptions && $scope.subscriptions.length != 0) {
+			$scope.subscriptions.splice(0, $scope.subscriptions.length);	
+		}
+		
 		$scope.subscriptions = Subscription.query(angular.noop, handleError);
 	}
 
@@ -267,24 +271,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		$location.url("/businesses");
 	}
 
-	/**
-	* Switches between view and edit mode.
-	*/
-	$scope.toggleEditMode = function() {
-		$scope.editMode = !$scope.editMode;
-	}
-
-	/**
-	* Returns "edit" when edit mode is active.
-	*/
-	$scope.getEditModeClass = function() {
-		return ($scope.editMode) ? "edit" : "";
-	}
-
 	$scope.editImageData = function(title, value, property) {
-		if(!$scope.editMode) {
-			return;
-		}
 
 		$scope.activeProperty = {
 			'title' : title,
@@ -314,10 +301,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	* Save active business.
 	*/
 	$scope.saveBusiness = function() {
-		if($scope.editMode) {
-			$log.log("saveBusiness " + $scope.activeBusiness.id);
-			$scope.activeBusiness.$update(null, null, handleError);	
-		}
+		$log.log("saveBusiness " + $scope.activeBusiness.id);
+		$scope.activeBusiness.$update(null, null, handleError);	
 	};
 
 	/**
@@ -418,11 +403,6 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	*	Id of theme to set as active.
 	*/
 	$scope.activateTheme = function(themeId) {
-		
-		if (!$scope.editMode) {
-			return;
-		};
-
 		if(!themeId) {
 			$log.warn('No theme given.');
 		};
@@ -438,9 +418,9 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	//start language methods
 	
 	$scope.saveLanguageSelection = function() {
-		if(!$scope.activeBusiness.lang) {
+		// if(!$scope.activeBusiness.lang) {
 			$scope.activeBusiness.lang = [];
-		}
+		// }
 
 		angular.forEach($scope.langcodes, function(lang, key) {
 			if(lang.selected) {
@@ -546,6 +526,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 					$scope.cancelPendingSubscriptionError = true;
 					$scope.activeBusiness.pendingSubscriptionId = null;
 					$scope.pendingSubscription = null;
+					// Reload the business and subscriptions to get actual data
+					$scope.loadBusiness($routeParams['businessId']);
 				}				
 			} else {
 				handleError(response);
@@ -618,6 +600,15 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		} else if(newValue == false) {
 			$location.url('/');
 		}
+	});
+
+	//initialize payment method symbol help
+	jQuery('#paymentMethodLabel').popover({
+		placement: 'right',
+		title: langService.translate("common.help"),
+		trigger: 'hover',
+		html: true,
+		content: langService.translate("business.help.paymentmethod.popover")
 	});
 
 

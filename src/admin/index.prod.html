@@ -25,6 +25,7 @@
     }
   </style>
   <link rel="stylesheet" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/jquery-ui-1.10.1.custom.min.css"/>
   <link rel="stylesheet" href="css/admin.css"/>
 </head>
 <body>
@@ -40,7 +41,7 @@
         <div class="nav-collapse">
           <ul class="nav">
             <!-- class="active" -->
-            <li ng-class="getActive('/packges')"><a href="#/packages">Management</a></li>
+            <li ng-class="getActive('/management')"><a href="#/management">Management</a></li>
             <li ng-class="getActive('/main')" ng-hide="!user.awesome"><a href="#/main">Setup</a></li>
             <li ng-class="getActive('/configuration')" ng-hide="!user.awesome"><a href="#/configuration">Configuration</a></li>            
             <li ng-class="getActive('/templates')" ng-hide="!user.awesome"><a href="#/templates">E-Mail Templates</a></li>
@@ -57,9 +58,11 @@
     <div ng-view></div>
   </div> <!-- /container -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
   <script src="lib/bootstrap.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
   <script src="lib/angular-resource-1.0.1.min.js"></script>
+  <script type="text/javascript" src="lib/angular-ui.min.js"></script>
   <script src="app-all.min.js"></script>  
 </body>
 </html>

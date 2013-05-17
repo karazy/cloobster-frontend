@@ -10,18 +10,26 @@
 * 	@constructor
 */
 
-Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, loginService, Business, Area, Spot, Menu, Documents, langService, $log, handleError, helperFn) {
+Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, loginService, Business, Area, Spot, Menu, Documents, langService, $log, handleError, helperFn, validator) {
 		//default information when adding a new barcode
 	var defaultSpot = {
-			name: langService.translate("barcode.new.default.name") || "New Spot",
+			//name: langService.translate("barcode.new.default.name") || "New Spot",
+			name: "",
 			barcode : "",
 			qrImageUrl: null,
 			active: true
 		},
+		requiredSpotFields = {
+			name: true
+		},
 		defaultArea = {
-			name: langService.translate("area.new.default.name") || "My Service Area",
+			//name: langService.translate("area.new.default.name") || "My Service Area",
+			name: "",
 			active: true,
 			menuIds: []
+		},
+		requiredAreaFields = {
+			name: true
 		},
 		//Id of active business
 		activeBusinessId = null,
@@ -52,6 +60,8 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 	$scope.currentAreaCategories = null;
 	/** Active Subscription. Used to check for basis mode. */
 	$scope.activeSubscription = null;
+	/** Has the user requested Spot PDF generation? */
+	$scope.generatePDFRequested = false;
 
 	//Drag&Drop for menus assignment
 	jQuery( "#assignedMenusList, #allMenusList" ).sortable({
@@ -149,6 +159,11 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 	};
 
 	$scope.saveArea = function() {
+		if(!validator.validateModel($scope.currentArea, requiredAreaFields)) {
+			$scope.areaInvalid = true;
+			return;
+		}
+
 		if($scope.currentArea && $scope.currentArea.id) {
 			$log.log("update area " + $scope.currentArea.id);
 			$scope.currentArea.$update(angular.noop, handleError);
@@ -157,6 +172,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			$scope.currentArea.$save(
 				function() { 
 					$scope.areas.push($scope.currentArea);
+					$scope.loadArea($scope.currentArea);
 				},
 				// Error callback
 				handleError
@@ -210,14 +226,22 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			return;
 		}
 
+		if(jQuery($event.originalEvent.srcElement).is("input")) {
+			return;
+		}
+
 		$log.log("load spot " + spotItem.id);
 		
 		$scope.currentSpot = spotItem;
 		manageViewHiearchy("spot");
-	};
+	}
 
 
 	$scope.saveSpot = function() {		
+		if(!validator.validateModel($scope.currentSpot, requiredSpotFields)) {
+			$scope.spotInvalid = true;
+			return;
+		}
 		if($scope.currentSpot && $scope.currentSpot.id) {
 			$log.log("update spot " + $scope.currentSpot.id);
 			$scope.currentSpot.$update(angular.noop, handleError);			
@@ -530,8 +554,20 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 
 		docResource = new $scope.documentsResource(newDocument);
 
-		docResource.$save();
+		docResource.$save(function() {
+			$scope.generatePDFRequested = true;
+		}, handleError);
 	}
+
+	/**
+	* Switch to Documents partial.
+	*/
+	$scope.gotoDocuments = function() {
+		$scope.generatePDFRequested = false;
+		$location.url('/businesses/'+activeBusinessId+'/documents');
+	};
+
+
 
 	//end spots
 
@@ -603,6 +639,27 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		movedCategory = true;
 	};
 
+	$scope.addAllCategories = function() {
+		// Clear all categories
+		$scope.currentArea.menuIds.splice(0, $scope.currentArea.menuIds.length);
+		$scope.currentAreaCategories.splice(0, $scope.currentAreaCategories.length);
+
+		angular.forEach($scope.menus, function(menu) {
+			$scope.currentArea.menuIds.push(menu.id);
+			$scope.currentAreaCategories.push(menu);
+		});
+
+		$scope.saveArea();
+	}
+
+	$scope.removeAllCategories = function() {
+		// Clear all categories
+		$scope.currentArea.menuIds.splice(0, $scope.currentArea.menuIds.length);
+		$scope.currentAreaCategories.splice(0, $scope.currentAreaCategories.length);
+
+		$scope.saveArea();
+	}
+
 	$scope.updateCategoryOrder = function(event, ui) {
 		var liElements = ui.item.parent().children(), //get all li elements
 			tmpCategory = null,
@@ -647,9 +704,10 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 				// break;
 			case "area":
 				$scope.currentSpot = null;
+				$scope.areaInvalid = false;
 				// break;
 			case "spot":
-
+				$scope.spotInvalid = false;
 				break;
 		}
 	};
@@ -674,7 +732,16 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		return helperFn.getFieldInputClass(input);
 	}
 
+	//initialize general symbol help
+	jQuery('.barcodeRequiredHelp').popover({
+		placement: 'right',
+		title: langService.translate("common.help"),
+		trigger: 'hover',
+		html: true,
+		content: langService.translate("areas.editor.barcoderequired.help")
+	});
+
 
 }
 
-Cloobster.Spot.$inject = ['$scope', '$http', '$routeParams', '$location', '$filter', 'login', 'Business', 'Area', 'Spot', 'Menu', 'Documents', 'lang', '$log', 'errorHandler', 'helper'];
+Cloobster.Spot.$inject = ['$scope', '$http', '$routeParams', '$location', '$filter', 'login', 'Business', 'Area', 'Spot', 'Menu', 'Documents', 'lang', '$log', 'errorHandler', 'helper','validator'];

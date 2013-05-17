@@ -9,26 +9,33 @@
 * 	View and manage menus, products, choices per restaurant.
 * 	@constructor
 */
-Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, Business, Menu, Product, Choice, langService, $log, handleError) {
+Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, loginService, Business, Menu, Product, Choice, langService, $log, handleError, validator, listUtil) {
 
 	var activeBusinessId = null,
 		choicesResource = null,
 		/** Default values for new menus.*/
 		defaultMenu = {
-			title: langService.translate("menu.new.default.title") || "My new Menu",
+			// title: langService.translate("menu.new.default.title") || "My new Menu",
 			active: true
+		},
+		/** Required menu fields. */
+		requiredMenuFields = {
+			title: true
 		},
 		/** Default values for new products. */
 		defaultProduct = {
-			name: langService.translate("product.new.default.name") || "My new Product",
+			// name: langService.translate("product.new.default.name") || "My new Product",
 			price: 0,
 			shortDesc: "",
 			longDesc: "",
-			active: false
+			active: true
+		},
+		requiredProductFields = {
+			name: true
 		},
 		/** Default values for new choices. */
 		defaultChoice = {
-			text: langService.translate("choice.new.default.text") || "My new choice",
+			// text: langService.translate("choice.new.default.text") || "My new choice",
 			minOccurence: 0,
 			maxOccurence: 0,
 			price: 0,
@@ -36,10 +43,16 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			overridePrice: "NONE",
 			options: new Array()
 		},
+		requiredChoiceFields = {
+			text: true
+		},
 		/** Default values for new options. */
 		defaultOption = {
 			name: langService.translate("option.new.default.name") || "My new option",
 			price: 0
+		},
+		requiredOptionFields = {
+			name: true
 		};
 
 	/** Menu Resource. */
@@ -68,6 +81,8 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	$scope.linkedProductsForChoice = null;
 	/** Holds all necessary innformation during menu organization. */
 	$scope.organizeMenusContext = false;
+	/** Image resource for product images */
+	$scope.productImageResource = null;
 
 	//Start Menu logic
 
@@ -204,7 +219,12 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 
 	$scope.saveMenu = function() {
 		$log.log("save menu ");
-		var order = 0;
+
+		if(!validator.validateModel($scope.currentMenu, requiredMenuFields)) {
+			$scope.menuInvalid = true;
+			return;
+		}
+		
 
 		if($scope.currentMenu && $scope.currentMenu.id) {
 			$scope.currentMenu.$update(null, null, handleError);	
@@ -212,23 +232,29 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 			$scope.currentMenu.$save(saveMenuSuccess, handleError);
 		}
 
+		$scope.menuInvalid = false;
+
 		function saveMenuSuccess(menu) {
 			$scope.menus.push(menu);
 		}
 		
 	};
 
-	$scope.createMenu = function() {
+	$scope.createMenu = function(title) {
 		$scope.currentMenu = new $scope.menusResource(defaultMenu);
 
-		// $scope.currentChoice = null;
-		// $scope.allChoices = null;
-		// $scope.allProducts = null;
-		// $scope.currentProduct = null;
-		manageViewHiearchy("menu");
+		//if title is given directly set and save it
+		if(title) {
+			$scope.currentMenu.title = title;
+			$scope.saveMenu();
+			//reset title
+			$scope.newCategoryTitle = null;
+		}
 
 		$scope.products = new Array();
 		$scope.choices = new Array();
+
+		manageViewHiearchy("menu");
 	};
 
 	$scope.updateMenuOrder = function(event, ui) {
@@ -292,14 +318,34 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	//End Menu logic
 
 	//Start Product logic
-	$scope.loadProduct = function(productItem) {
+	$scope.loadProduct = function(productItem, $event) {
 		$log.log("load product " + productItem.id);
+
+		if($event) {
+			//checkbox clicked. Do nothing.
+			if(jQuery($event.srcElement).is("input")) {
+				return;
+			}
+
+			if(jQuery($event.originalEvent.srcElement).is("input")) {
+				return;
+			}
+
+			if(jQuery($event.originalEvent.srcElement).is("button")) {
+				return;
+			}
+			//clicked on icon in <i> of button
+			if(jQuery($event.originalEvent.srcElement).is("i") && jQuery($event.originalEvent.srcElement.parentElement).is("button")) {
+				return;
+			}
+		}
 
 		manageViewHiearchy("product");
 		
 
 		$scope.currentProduct = productItem;
 		$scope.choices = choicesResource.query({"productId": productItem.id},null,null,handleError);
+		$scope.productImageResource = Product.buildImageResource(activeBusinessId, productItem.id);
 	};
 
 	$scope.createProduct = function() {
@@ -319,17 +365,26 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	function saveProductSuccess(product) {
 		$scope.products.push(product);
 		$scope.currentMenu.productIds.push(product.id);
+		$scope.productImageResource = Product.buildImageResource(activeBusinessId, product.id);
+		$scope.saveMenu();
 	}
 
-	$scope.saveProduct = function() {
+	$scope.saveProduct = function(product) {
 		$log.log("save product");
 
-		var product = $scope.currentProduct;
+		var productToSave = product || $scope.currentProduct;
 
-		if(product && product.id) {
-			product.$update(null, null, handleError);
+		if(!validator.validateModel(productToSave, requiredProductFields)) {
+			$scope.productInvalid = true;
+			return;
+		}
+
+		$scope.productInvalid = false;
+
+		if(productToSave && productToSave.id) {
+			productToSave.$update(null, null, handleError);
 		} else {
-			product.$save(saveProductSuccess, handleError);
+			productToSave.$save(saveProductSuccess, handleError);
 		}
 	}
 
@@ -400,6 +455,220 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		manageViewHiearchy("moved-product");
 	
 	};
+
+	/**
+	*
+	* Lists all available products for current business.
+	*/
+	$scope.showAllProductsList = function() {
+		$scope.allProductsList = $scope.productsResource.query(null, null, null, handleError);
+		//reset search filter
+		$scope.allProductsQuery = {}
+
+		manageViewHiearchy("all-products-list");
+	}
+
+	/**
+	* Check/Uncheck products regarding the search filter.
+	* If less then all filtered spots are checked, check all of them. Otherwise uncheck all.
+	*/
+	$scope.checkProducts = function() {
+		listUtil.checkElements($scope.allProductsList, $scope.allProductsQuery);
+	}
+
+	/**
+	* Toggle active filter on/off on all products.
+	*
+	*/
+	$scope.toggleProductActiveFilter = function() {
+		if(!$scope.allProductsQuery) {
+			$scope.allProductsQuery = {
+				'active' : false
+			}
+			return;
+		}
+
+		if($scope.allProductsQuery.active === false) {
+			delete $scope.allProductsQuery.active;
+		} else {
+			$scope.allProductsQuery.active = false;
+		}
+
+		listUtil.checkElements($scope.allProductsList, null, true);
+	}
+
+	/**
+	* Toggle special filter on/off on all products.
+	*
+	*/
+	$scope.toggleProductSpecialFilter = function() {
+		if(!$scope.allProductsQuery) {
+			$scope.allProductsQuery = {
+				'special' : true
+			}
+			return;
+		}
+
+		if($scope.allProductsQuery.special == true) {
+			delete $scope.allProductsQuery.special;
+		} else {
+			$scope.allProductsQuery.special = true;
+		}
+
+		listUtil.checkElements($scope.allProductsList, null, true);
+	}
+
+	/**
+	* Toggle noOrder filter on/off on all products.
+	*
+	*/
+	$scope.toggleProductNoOrderFilter = function() {
+		if(!$scope.allProductsQuery) {
+			$scope.allProductsQuery = {
+				'noOrder' : true
+			}
+			return;
+		}
+
+		if($scope.allProductsQuery.noOrder == true) {
+			delete $scope.allProductsQuery.noOrder;
+		} else {
+			$scope.allProductsQuery.noOrder = true;
+		}
+
+		listUtil.checkElements($scope.allProductsList, null, true);
+	}
+	
+
+	/**
+	* Toggle hideInDashboard filter on/undefined on all products.
+	*
+	*/
+	$scope.toggleProductHideInDashboardFilter = function() {
+		if(!$scope.allProductsQuery) {
+			$scope.allProductsQuery = {
+				'hideInDashboard' : true
+			}
+			return;
+		}
+
+		if($scope.allProductsQuery.hideInDashboard == true) {
+			delete $scope.allProductsQuery.hideInDashboard;
+		} else {
+			$scope.allProductsQuery.hideInDashboard = true;
+		}
+
+		listUtil.checkElements($scope.allProductsList, null, true);
+	}
+
+	/**
+	* Toggle hideInDashboard filter off/undefined on all products.
+	*
+	*/
+	$scope.toggleProductVisibleOnDashboardFilter = function() {
+		if(!$scope.allProductsQuery) {
+			$scope.allProductsQuery = {
+				'hideInDashboard' : false
+			}
+			return;
+		}
+
+		if($scope.allProductsQuery.hideInDashboard === false) {
+			delete $scope.allProductsQuery.hideInDashboard;
+		} else {
+			$scope.allProductsQuery.hideInDashboard = false;
+		}
+
+		listUtil.checkElements($scope.allProductsList, null, true);
+	}
+
+	/**
+	* Helper method for all products list in menu partial.
+	* Checks if filter for shown on dashboard is set to === false
+	*/
+	$scope.isQueryVisibleOnDashboardActive = function() {
+		if(!$scope.allProductsQuery) {
+			return false;
+		}
+
+		return $scope.allProductsQuery.hideInDashboard === false;
+	}
+
+	/**
+	* Sets a properties value for all checked products.
+	* @param {String} prop
+	*	property to set
+	* @param {String|Boolean|Number} value
+	*	value to set property to
+	*/
+	$scope.setCheckedProductsProperty = function(prop, value) {
+		var ids = [],
+			//used in forEach to match returned elements with local ones
+			foundElement,
+			params;
+
+		if(!$scope.allProductsList && $scope.allProductsList.length > 0) {
+			$log.log('Menu.setCheckedProductsProperty: $scope.allProductsList does not exist or is empty.');
+			return;
+		}
+
+		if(!$scope.productsResource) {
+			$log.log('Menu.setCheckedProductsProperty: $scope.productsResource does not exist.');
+			return;	
+		}
+
+		if(!prop) {
+			$log.log('Menu.setCheckedProductsProperty: prop not given');
+			return;
+		}
+
+		if(angular.isUndefined(value)) {
+			$log.log('Menu.setCheckedProductsProperty: value not given');
+			return;
+		}
+
+
+		angular.forEach($scope.allProductsList, function(element, index) {
+			if(element.checked) {
+				ids.push(element.id);	
+			}			
+		});
+
+		//No elements selected
+		if(ids.length == 0) {
+			return;	
+		}
+		//setup request params 
+		params = {
+			'ids' : ids
+		}
+
+		params[prop] = value;
+
+		$scope.productsResource.process(
+			params, 
+			function(response) {
+				//update status on success
+				angular.forEach($scope.allProductsList, function(element, index) {
+					foundElement = jQuery.grep(response, function(spotFromResponse) {
+						return spotFromResponse.id == element.id;
+					});
+
+					if(foundElement.length > 1) {
+						$log.warn('Menu.setCheckedProductsProperty: more than one returned spot matches with local ones!');
+					} else if(!foundElement || foundElement.length == 0) {
+						$log.warn('Menu.setCheckedProductsProperty: no matching spot found');
+					} else {
+						//replace old spot with updated
+						$scope.allProductsList[index] = foundElement[0];
+					}	
+				});
+			},
+			handleError
+		);
+
+		manageViewHiearchy("all-products-list");
+	}
 
 	/**
 	*
@@ -549,16 +818,50 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		if(found) {
 			$scope.loadProduct(found);	
 		}
-		
 	};
 
 	/**
 	* Toggle active state of menu.
 	* Executes a save afterwards.
 	*/
-	$scope.toggleProductActive = function() {
-		$scope.currentProduct.active = !$scope.currentProduct.active;
-		$scope.saveProduct();
+	$scope.toggleProductActive = function(product) {
+		var productToToggle = product || $scope.currentProduct;
+
+		productToToggle.active = !productToToggle.active;
+		$scope.saveProduct(productToToggle);
+	}
+
+	/**
+	* Toggle special flag of product.
+	* Executes a save afterwards.
+	*/
+	$scope.toggleProductSpecial = function(product) {
+		var productToToggle = product || $scope.currentProduct;
+
+		productToToggle.special = !productToToggle.special;
+		$scope.saveProduct(productToToggle);
+	}
+
+	/**
+	* Toggle noOrder flag of product.
+	* Executes a save afterwards.
+	*/
+	$scope.toggleProductNoOrder = function(product) {
+		var productToToggle = product || $scope.currentProduct;
+
+		productToToggle.noOrder = !productToToggle.noOrder;
+		$scope.saveProduct(productToToggle);
+	}	
+
+	/**
+	* Toggle sepcial flag of product.
+	* Executes a save afterwards.
+	*/
+	$scope.toggleProductDashboard = function(product) {
+		var productToToggle = product || $scope.currentProduct;
+		
+		productToToggle.hideInDashboard = !productToToggle.hideInDashboard;
+		$scope.saveProduct(productToToggle);
 	}
 
 	//End Product logic
@@ -578,6 +881,14 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	}
 
 	$scope.saveChoice = function() {
+
+		if(!validator.validateModel($scope.currentChoice, requiredChoiceFields)) {
+			$scope.choiceInvalid = true;
+			return;
+		}
+
+		$scope.choiceInvalid = false;
+
 		if($scope.currentChoice && $scope.currentChoice.id) {
 			$scope.currentChoice.$update(null, null, handleError);	
 		} else {
@@ -797,6 +1108,14 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		content: langService.translate("menus.products.link.description.popover")
 	});
 
+	//initialize general symbol help
+	jQuery('#symbolLegend').popover({
+		placement: 'right',
+		title: langService.translate("common.help"),
+		trigger: 'hover',
+		html: true,
+		content: langService.translate("menus.help.symbols.popover")
+	});
 
 	//End Choice logic
 
@@ -811,35 +1130,35 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		switch (state) {
 			case "menus":
 				$scope.currentMenu = null;
-				$scope.products = null;
-				// $scope.currentProduct = null;
-				// $scope.currentChoice = null;
-				// $scope.allChoices = null;
-				// $scope.allProducts = null;
-				// $scope.orphanedProducts = null;
-				// break;
+				$scope.products = null;			
 			case "menu":
+				$scope.allProductsList = null;
+				$scope.menuInvalid = false;
 				$scope.currentProduct = null;
-				// $scope.currentChoice = null;
-				// $scope.allChoices = null;
-				// $scope.allProducts = null;
 				$scope.orphanedProducts = null;
-				$scope.organizeMenusContext = null;
-				// break;
+				$scope.organizeMenusContext = null;			
 			case "product":
 				$scope.currentChoice = null;
-				// $scope.allChoices = null;
+				$scope.productInvalid = false;
 				$scope.allProducts = null;
-				// break;
 			case "choice":
 				$scope.allChoices = null;
-				// $scope.allProducts = null;
+				$scope.choiceInvalid = false;
 				break;
 			case "all-choices":
 				$scope.currentChoice = null;
-				// $scope.allProducts = null;
+				break;
+			case "all-products-list":
+				$scope.orphanedProducts = null;
+				$scope.currentMenu = null;
+				$scope.products = null;
+				$scope.allProducts = null;
+				$scope.currentProduct = null;
+				$scope.currentChoice = null;
+				$scope.organizeMenusContext = null;
 				break;
 			case "orphaned-products":
+				$scope.allProductsList = null;
 				$scope.currentMenu = null;
 				$scope.products = null;
 				$scope.allProducts = null;
@@ -879,6 +1198,31 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 		$location.path($location.path() + "/" + menuId);		
 	};
 
+	// Product image methods
+
+	$scope.setProductImage = function(image) {
+		$scope.currentProduct.image = {
+			url: image.url,
+			blobKey: image.blobKey
+		};
+	}
+
+	$scope.deleteProductImage = function() {
+		if($scope.productImageResource) {
+			var product = $scope.currentProduct;
+			$scope.productImageResource.remove(null,null, function() {
+				product.image = null;
+			}, handleError);	
+		}
+	};
+
+	$scope.discardImage = function(image) {
+		if(image && image.blobKey) {
+			$http['delete']('/uploads/images/' + image.blobKey)
+			.error(handleError);
+		}
+	}
+
 	$scope.$watch('loggedIn', function(newVal, oldVal) {
 		var menuId = $routeParams.menuId || "",
 			businessId = $routeParams.businessId || "";
@@ -888,4 +1232,4 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, loginService, 
 	});
 }
 
-Cloobster.Menu.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'Business', 'Menu', 'Product', 'Choice', 'lang', '$log', 'errorHandler'];
+Cloobster.Menu.$inject = ['$scope', '$http', '$routeParams', '$location', '$filter', 'login', 'Business', 'Menu', 'Product', 'Choice', 'lang', '$log', 'errorHandler', 'validator', 'listUtil'];

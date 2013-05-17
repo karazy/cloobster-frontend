@@ -58,7 +58,7 @@
 				Keine Elemente
 			</div> -->
 			<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable">
-		        <li ng-repeat="area in areas | orderBy:['name'] " ng-class="{active: currentArea.id == area.id}">	        	
+		        <li ng-repeat="area in areas | orderBy:['-welcome','name'] " ng-class="{active: currentArea.id == area.id}">	        	
 		        	<a ng-click="loadArea(area)">{{area.name}}  <i class="icon-ban-circle icon-black" ng-hide="area.active"></i></a>
 		        </li>
 		    </ul>	
@@ -71,18 +71,29 @@
 				<div class="data-container-block">
 					<!-- <div class=" common-wrapper common-wrapper-detail-list" > -->
 
-						<div simple-property-editor editor-title="areas.editor.name" editor-property="currentArea.name" editor-on-save="saveArea()" editor-max-length="20" editor-required>
-							<h5 class="edit" tooltip="areas.editor.name.tooltip">{{currentArea.name}} <i class="icon-edit icon-black"></i></h5>
+						<div simple-property-editor editor-title="areas.editor.name" editor-property="currentArea.name" editor-on-save="saveArea()" editor-max-length="20" editor-required editor-placeholder="areas.placeholder.name">
+							<h4 class="edit" tooltip="areas.editor.name.tooltip">
+							<span l="areas.placeholder.name" ng-hide="currentArea.name" ng-class="{'text-error' : areaInvalid, 'simple-property-placeholder' : !areaInvalid}">e. g. Room service*</span>
+							{{currentArea.name}} <i class="icon-edit icon-black"></i></h4>
 						</div>
-						<div simple-property-editor editor-title="areas.editor.description" editor-property="currentArea.description" editor-on-save="saveArea()" editor-type="textarea">
-							<p class="edit" tooltip="areas.editor.description.tooltip">{{currentArea.description}} <i class="icon-edit icon-black"></i></p>
+						<div simple-property-editor editor-title="areas.editor.description" editor-property="currentArea.description" editor-on-save="saveArea()" editor-type="textarea" editor-placeholder="areas.placeholder.description">
+							<p class="edit" tooltip="areas.editor.description.tooltip">
+								<span l="areas.placeholder.description" ng-hide="currentArea.description" class="simple-property-placeholder">Description</span>
+								{{currentArea.description}} <i class="icon-edit icon-black"></i></p>
 						</div>
+						<div ng-show="areaInvalid" class="text-error">
+			    		<span l="validation.field.required">* Please fill out all required fields.</span>
+			    	</div>
 						<div class="row-fluid" ng-show="currentArea.id">
-							<button class="btn btn-success span6" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="currentArea.active && currentArea.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
-
-			    			<button class="btn btn-danger span6" style="margin-left: 0px !important;" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="!currentArea.active && currentArea.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
-
-							<button class="btn span6" data-toggle="modal" data-target="#deleteAreaModal" ng-show="!currentArea.welcome"><i class="icon-trash"></i></button>
+							<!-- Active toggle buttons -->
+							<button class="btn btn-success span4" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="currentArea.active && currentArea.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
+			    			<button class="btn btn-danger span4" style="margin-left: 0px !important;" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="!currentArea.active && currentArea.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
+								<!-- Barcode required toggle buttons -->
+							<button class="btn btn-warning span6" type="button"ng-click="currentArea.barcodeRequired = false;saveArea()" ng-show="currentArea.barcodeRequired && currentArea.id"><i class="icon-qrcode icon-white"></i> <span l="areas.editor.barcoderequired.true">Barcode required</span><i class="icon-question-sign icon-white pull-right barcodeRequiredHelp"></i></button>
+			    			<button class="btn span6"type="button" ng-click="currentArea.barcodeRequired = true;saveArea()" ng-show="!currentArea.barcodeRequired && currentArea.id"><i class="icon-qrcode"></i> <span l="areas.editor.barcoderequired.false">No Barcode required</span><i class="icon-question-sign pull-right barcodeRequiredHelp"></i></button>
+			    			<!-- <p class="span1"><i class="icon-question-sign" id="barcodeRequiredHelp"></i></p> -->
+		    				<!-- Delete area button  -->
+							<button class="btn span2" data-toggle="modal" data-target="#deleteAreaModal" ng-show="!currentArea.welcome"><i class="icon-trash"></i></button>
 						</div>
 						<div class="modal hide" id="deleteAreaModal">
 						 	<div class="modal-header">
@@ -121,7 +132,7 @@
 					<!-- </div> -->
 					<div class="btn-toolbar">						
 						<div class="btn-group">						
-							<button  class="btn" ng-click="checkSpots()" tooltip="spots.masscheck.tooltip">
+							<button  class="btn" ng-click="checkSpots()" tooltip="common.masscheck.tooltip">
 								<i class="icon-check icon-black"></i>
 							</button>						
 						</div>
@@ -203,13 +214,12 @@
 						A welcome spot represents your entire location. People can use it to check-in, view your informations and services. But can't do stuff like ordering products.</p>
 				</div>
 				<ul class="nav-pills-checkbox data-container-block data-container-small data-container-scrollable" id="spotsList">
-				        <li ng-repeat="spot in filteredSpots = (spots | filter:spotsQuery) | orderBy:['name'] " >	        					        	
+				        <li ng-repeat="spot in filteredSpots = (spots | filter:spotsQuery) | orderBy:['-master', 'name'] " >	        					        	
 				        	<div ng-class="{active: currentSpot.id == spot.id}" ng-click="loadSpot(spot, $event)">
 				        		<div>
 				        			<input type="checkbox" ng-model="spot.checked">
 				        		</div>
-			        			<div>{{spot.name}} <i class="icon-ban-circle icon-black" ng-hide="spot.active"></i></div>
-			        			<!-- <a ></a> -->
+			        			<div><span ng-bind="spot.name" ng-hide="spot.master"></span><b ng-bind="spot.name" ng-show="spot.master"></b> <i class="icon-ban-circle icon-black" ng-hide="spot.active"></i></div>
 			        		</div>
 			        	</li>
 		    	</ul>
@@ -230,31 +240,36 @@
 				<h4 class="data-container-title" l="areas.spot.detail.title">Edit Spot</h4>
 				<div class="data-container-block">
 					<div simple-property-editor editor-title="spots.editor.name" editor-property="currentSpot.name" editor-on-save="saveSpot()" editor-required editor-max-length="20">
-							<h5 class="edit" tooltip="spots.editor.name.tooltip">{{currentSpot.name}} <i class="icon-edit icon-black"></i></h5>
-						</div>
-			    		<img ng-show="currentSpot.qrImageUrl" ng-src="{{currentSpot.qrImageUrl}}" alt="Spot Barcode"/>
-			    		<p>{{currentSpot.barcode}}</p>
-			    		<div class="row-fluid" ng-show="currentSpot.id">
-			    			<button class="btn btn-success span6" type="button" ng-click="toggleSpotActive()" ng-model="currentSpot.active" ng-show="currentSpot.active && currentSpot.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
+						<h4 class="edit" tooltip="spots.editor.name.tooltip">
+						<span l="areas.placeholder.name" ng-hide="currentSpot.name" ng-class="{'text-error' : spotInvalid, 'simple-property-placeholder' : !spotInvalid}">Name *</span>
+						{{currentSpot.name}} <i class="icon-edit icon-black"></i></h4>
+					</div>
+					<div ng-show="spotInvalid" class="text-error">
+		    		<span l="validation.field.required">* Please fill out all required fields.</span>
+		    	</div>
+	    		<img ng-show="currentSpot.qrImageUrl" ng-src="{{currentSpot.qrImageUrl}}" alt="Spot Barcode"/>
+	    		<p>{{currentSpot.barcode}}</p>
+	    		<p ng-show="currentSpot.master" l="spot.master.description">This is the "master" Spot for this area, it cannot be deleted, unless you delete the Area.</p>
+	    		<div class="row-fluid" ng-show="currentSpot.id">	    			
+	    			<button class="btn btn-success span6" type="button" ng-click="toggleSpotActive()" ng-model="currentSpot.active" ng-show="currentSpot.active && currentSpot.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
+		  			<button class="btn btn-danger span6" style="margin-left: 0px !important;" type="button" ng-click="toggleSpotActive()" ng-model="currentSpot.active" ng-show="!currentSpot.active && currentSpot.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
 
-			    			<button class="btn btn-danger span6" style="margin-left: 0px !important;" type="button" ng-click="toggleSpotActive()" ng-model="currentSpot.active" ng-show="!currentSpot.active && currentSpot.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
-
-				    		<button class="btn span6" data-toggle="modal" data-target="#deleteSpotModal" ng-show="!currentSpot.welcome"><i class="icon-trash"></i></button>
-				    		<!-- Modal delete dialog. -->
-				    		<div class="modal hide" id="deleteSpotModal">
-							 	<div class="modal-header">
-							    	<button type="button" class="close" data-dismiss="modal">×</button>
-							    	<h3 l="spot.action.delete">Delete Spot</h3>
-								</div>
-								<div class="modal-body alert-error">
-							    	<p><span l="spot.action.delete.text">{{currentSpot.name}} will be deleted!<br/>Already printed barcodes can't be reused afterwards!</span></p>
-							    </div>  
-							  	<div class="modal-footer">
-							  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
-							    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteSpot(currentSpot)" l="common.delete">Delete</button>
-								</div>
+		    		<button class="btn span6" data-toggle="modal" data-target="#deleteSpotModal" ng-show="!currentSpot.welcome && !currentSpot.master"><i class="icon-trash"></i></button>
+		    		<!-- Modal delete dialog. -->
+		    		<div class="modal hide" id="deleteSpotModal">
+						 	<div class="modal-header">
+						    	<button type="button" class="close" data-dismiss="modal">×</button>
+						    	<h3 l="spot.action.delete">Delete Spot</h3>
 							</div>
-				    	</div>
+							<div class="modal-body alert-error">
+						    	<p><span l="spot.action.delete.text">{{currentSpot.name}} will be deleted!<br/>Already printed barcodes can't be reused afterwards!</span></p>
+						    </div>  
+						  	<div class="modal-footer">
+						  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
+						    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteSpot(currentSpot)" l="common.delete">Delete</button>
+							</div>
+						</div>
+		    	</div>
 				</div>
 			</div>
 		</div>
@@ -320,6 +335,8 @@
   </div>
 </div>
 
+</div>
+
 <!-- Modal delete dialog start -->
 <div class="modal hide" id="deleteCheckedSpotsModal">
  	<div class="modal-header">
@@ -339,18 +356,43 @@
 <div class="modal hide" id="generatePdfCheckedSpotsModal">
  	<div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal">×</button>
-    	<h3 l="spots.action.generatepdf">Generate PDF</h3>
+    	<h3 l="spots.action.generatepdf" ng-hide="generatePDFRequested">Generate PDF</h3>
+    	<h3 l="spots.action.generatepdf.requested" ng-show="generatePDFRequested">Generate PDF - Request sent</h3>
+
 	</div>
 	<div class="modal-body alert-info">
-    	<p><span l="spots.action.generatepdf.description">Generate a PDF for the selected spots. You can watch the status of this job in the documents tab.<br/>
-    		When the job is finished you can download the PDF from there.<br/>You have selected <strong>{{getCheckedSpotsCount()}</strong> spots.</span></p>
+			<div ng-hide="generatePDFRequested">
+	    	<p><span l="spots.action.generatepdf.description">Generate a PDF for the selected spots. You can watch the status of this job in the documents tab.<br/>
+	    		When the job is finished you can download the PDF from there.<br/>You have selected <strong>{{getCheckedSpotsCount()}</strong> spots.</span></p>
     		<label for="generatedSpotsDocumentName" l="spots.generatepdf.documentname">Optional document name:</label>
     		<input type="text" id="generatedSpotsDocumentName" style="width: 80%;" ng-model="generatedSpotsDocumentName" placeholder="e.g. Barcodes Rooms 100 to 199" l-attribute="placeholder" l="spots.generatepdf.documentname.placeholder">
     		<p style="color:red;" ng-show="generatedSpotsDocumentName.length > 100" l="spots.generatepdf.documentname.maxlength">Maximum of 100 characters allowed.</p>
+    	</div>
+    	<div ng-show="generatePDFRequested">
+    		<p l="reports.action.export.dialog.complete" ng-show="generatePDFRequested">Your request is being processed and the file will be available under Documents soon.</p>
+    	</div>	
     </div>
   	<div class="modal-footer">
-  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
-    	<button type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="generatedSpotsDocumentName.length > 100 || getCheckedSpotsCount() == 0" ng-click="generatePdfForCheckedSpots(generatedSpotsDocumentName)" l="common.generate">Generate</button>
+  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel" ng-click="generatePDFRequested=false">Cancel</button>
+    	<button type="button" class="btn btn-primary" ng-disabled="generatedSpotsDocumentName.length > 100 || getCheckedSpotsCount() == 0" ng-click="generatePdfForCheckedSpots(generatedSpotsDocumentName)" l="common.generate" ng-hide="generatePDFRequested">Generate</button>
+    	<button type="button" class="btn btn-primary" ng-click="gotoDocuments()" ng-show="generatePDFRequested" l="reports.report.documents.open" data-dismiss="modal">Open Documents</button>
 	</div>
 </div>
-
+<!-- Modal confirm export dialog. -->
+<div class="modal hide" id="documentCreated">
+ 	<div class="modal-header">
+    	<button type="button" class="close" data-dismiss="modal">×</button>
+    	<h4 l="reports.action.export.dialog.title" ng-hide="exportRequested">Confirm Excel export</h4>
+    	<h4 l="reports.action.export.dialog.requested.title" ng-show="exportRequested">Excel export requested</h4>
+	</div>
+	<div class="modal-body">
+  	<p l="reports.action.export.dialog.text" ng-hide="exportRequested">Do you want to export the selected data to an Excel file?</p>
+  	<p l="reports.action.export.dialog.complete" ng-show="exportRequested">Your request is being processed and the file will be available under Documents soon.</p>
+  	<p class="text-error" l="reports.report.noresult" ng-show="exportError && reportData == 'noresult'">No results found</p>
+  </div>
+  <div class="modal-footer" >
+		<button type="button" ng-show="exportError || exportRequested" class="btn" data-dismiss="modal" ng-click="exportRequested=false" l="common.close">Okay</button>
+  	<button type="button" class="btn btn-primary" ng-click="gotoDocuments()" ng-show="exportRequested" l="reports.report.documents.open" data-dismiss="modal">Open Documents</button>
+		<button type="button" class="btn" data-dismiss="modal" l="common.cancel" ng-hide="exportRequested || exportError">Cancel</button>
+  	<button type="button" class="btn btn-primary" ng-click="generateReport()" l="reports.action.export.xls" ng-hide="exportRequested || exportError">Generate</button>
+	</div>

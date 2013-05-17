@@ -272,10 +272,26 @@ angular.module('Cloobster.services').factory('Product', ['cloobsterResource', fu
 						* @name Cloobster.services.Product#$update
 						* Like a save but uses PUT instead of POST. Feels more restful.
 						*/
-						'update': { method: 'PUT'}
+						'update': { method: 'PUT'},
+						/*
+						* @name Cloobster.services.Product#$process
+						* Used to update collections of products.
+						* @return
+						*	Array of products with updated values.
+						*/
+						'process': { method: 'PUT', isArray:true}
 				}
 
 				)
+		},
+		/**
+		*	Returns a InfoPage image resource used to save, update the image assigned to an InfoPage.
+		*/
+		buildImageResource: function(businessId, infoPageId) {
+			return $resource('/b/businesses/:bid/products/:id/image', {
+				'bid': businessId,
+				'id': infoPageId
+			});
 		}
 	}
 
@@ -625,4 +641,50 @@ angular.module('Cloobster.services').factory('Subscription',['cloobsterResource'
 		);
 
 	return Subscription;
+}]);
+
+/**
+* @constructor
+* Factory function that creates the 'DashboardItem' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Nils Weiher
+*/
+angular.module('Cloobster.services').factory('DashboardItem', ['cloobsterResource', function($resource) {
+
+	/**
+	*	@name Cloobster.services.DashboardItem
+	*	
+	*/
+	var DashboardItem = {
+
+		buildResource: function(businessId) {
+			return $resource('/b/businesses/:bid/dashboarditems/:id',
+				//params
+				{
+					'id' : '@id',
+					'bid' : businessId
+				},
+				//Custom actions can be called with $'methodname' on the Account.
+				{
+					/**
+					* @name Cloobster.services.DashboardItem#$query
+					* @override
+					* Overrides default query method by overriding businessId as default parameter
+					*/
+					'query':  {method:'GET', params: { 'bid' : businessId}, isArray:true},
+					/*
+					* @name Cloobster.services.DashboardItem#$update
+					* Like a save but uses PUT instead of POST.
+					*/
+					'update': { 
+						method: 'PUT'
+					}
+				}
+			)
+		}
+
+	}
+	return DashboardItem;
+
 }]);

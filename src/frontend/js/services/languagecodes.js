@@ -1128,7 +1128,16 @@ angular.module("Cloobster.languages", [], ["$provide", function($provide) {
 			"lang" : "Zulu", 
 			"code" :  "zu"
 		}
-	]
+	];
+	
+	$provide.factory("langcodesMap", function() {
+		var codeMap = {};
+		angular.forEach(map, function(value) {
+			codeMap[value.code] = value;
+		});
+
+		return codeMap;
+	});
 
 	$provide.value("langcodes", map);
 }]);

@@ -6,15 +6,18 @@ var Cloobster = Cloobster || {};
 Cloobster.services = angular.module('Cloobster.services', ['ngResource', "Cloobster.translations", "Cloobster.languages"]);
 
 // Declare app level module which depends on filters, and services
-Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster.directives', 'Cloobster.filters', 'ngSanitize']).
-  config(['$routeProvider','configProvider', function($routeProvider,configProvider) {
+Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster.directives', 'Cloobster.filters', 'ngSanitize', 'ui.directives']).
+  config(['$routeProvider','configProvider', '$httpProvider', function($routeProvider,configProvider, $httpProvider) {
     // Here you set the service url that the Cloobster services use.
     //configProvider.setServiceUrl('https://eatsense-test.appspot.com');
+    
+    $httpProvider.defaults.headers.common['cloobster-api'] = '2';
 
   	$routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: Cloobster.Login});
     $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: Cloobster.Login});
     $routeProvider.when('/login/forgot', {templateUrl: 'partials/passwordforgot.html', controller: Cloobster.Login});
   	$routeProvider.when('/about', {templateUrl: 'partials/about.html'});
+    $routeProvider.when('/support', {templateUrl: 'partials/support.html'});
   	$routeProvider.when('/registration', {templateUrl: 'partials/registration_form.html', controller: Cloobster.Registration});
     $routeProvider.when('/profile', {templateUrl: 'partials/profile.html', controller: Cloobster.Profile});
     $routeProvider.when('/accounts/customer/confirm/:emailToken', {templateUrl: 'partials/confirmemail.html', controller: Cloobster.ConfirmAccount, customer: true});
@@ -33,6 +36,8 @@ Cloobster.module = angular.module('Cloobster', ['Cloobster.services', 'Cloobster
     $routeProvider.when('/accounts', {templateUrl: 'partials/accounts.html', controller: Cloobster.Accounts});
     $routeProvider.when('/accounts/setup/:token', {templateUrl: 'partials/activate_account.html', controller: Cloobster.Accounts});    
     $routeProvider.when('/howto', {templateUrl: 'partials/howto.html', controller: Cloobster.Navigation});
+    $routeProvider.when('/businesses/:businessId/reports', {templateUrl: 'partials/reports.html', controller: Cloobster.Reports});
+    $routeProvider.when('/businesses/:businessId/appconfig', {templateUrl: 'partials/appconfig.html', controller: Cloobster.AppConfig});
     // $routeProvider.when('/', {templateUrl: 'partials/login.html', controller: Cloobster.Login});
     
     $routeProvider.otherwise({redirectTo: '/home'});

@@ -647,46 +647,53 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 		* It needs a previously optained fileUpeloadUrl for setup.
 		*/
 		function initUploadPlugin(fileInput, resource, fileAddCallback, fileUploadCallback, fileUploadProgressCallback) {
+			// Destroy first to make sure we dont double the initialisation
+			try {
+				jQuery(fileInput).fileupload('destroy');	
+			} catch(e) {
+				$log.log('Services.initUploadPlugin: failed to destroy fileupload' + e);
+			}
+			
+			$('#foo').unbind('fileuploadadd');
 			jQuery(fileInput).fileupload({
 				fail: function(e, data) {
-	    			$log.error('Upload failed. Error thrown: '+data.errorThrown + ', status: '+ data.textStatus);
+    			$log.error('Upload failed. Error thrown: '+data.errorThrown + ', status: '+ data.textStatus);
 
-	    			fileUploadCallback(false, data);	    			
-	    		},
-	    		done: function (e, data) {
-	    			//data properties: name, blobKey, url
-	    			var images = data.result;
-	    			//create logo resource object
-	    			resource.blobKey = images[0].blobKey;
-	    			resource.url = images[0].url;
+    			fileUploadCallback(false, data);	    			
+    		},
+    		done: function (e, data) {
+    			//data properties: name, blobKey, url
+    			var images = data.result;
+    			//create logo resource object
+    			resource.blobKey = images[0].blobKey;
+    			resource.url = images[0].url;
 
-	    			addedFile = null;
+    			addedFile = null;
 
-	    			fileUploadCallback(true, data);
-		       	},
-		       	progress: function(e, data) {
-		       		(fileUploadProgressCallback || angular.noop)(data);
-		       	}
+    			fileUploadCallback(true, data);
+       	},
+       	progress: function(e, data) {
+       		(fileUploadProgressCallback || angular.noop)(data);
+       	},
+		    add: function (e, data) {
+        	addedFile = data;
+        	fileAddCallback(data.files[0].name, data.files[0]);
+        }
 			});
 
-	        jQuery(fileInput).fileupload('option', {
-	            url: fileUploadUrl,
-	            maxFileSize: 10000000,
-	            autoUpload: false,
-	            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-	            process: [
-	                {
-	                    action: 'load',
-	                    fileTypes: /^image\/(gif|jpeg|png)$/,
-	                    maxFileSize: 20000000 // 20MB
-	                }
-	            ]
-	        });
-
-	        jQuery(fileInput).bind('fileuploadadd', function (e, data) {
-	        	addedFile = data;
-	        	fileAddCallback(data.files[0].name);
-	        });
+      jQuery(fileInput).fileupload('option', {
+          url: fileUploadUrl,
+          maxFileSize: 10000000,
+          autoUpload: false,
+          acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+          process: [
+              {
+                  action: 'load',
+                  fileTypes: /^image\/(gif|jpeg|png)$/,
+                  maxFileSize: 20000000 // 20MB
+              }
+          ]
+      });
 		};
 
 		uploadService = {
@@ -703,7 +710,8 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 			*		Called when upload has finished.
 			*/
 			getFileUploadObject : function(fileInput, resource, fileAddCallback, fileUploadCallback, fileUploadProgressCallback) {
-
+				var userAbort = false,
+						uploadRequest = null;
 				initUploadPlugin(fileInput, resource, fileAddCallback, fileUploadCallback, fileUploadProgressCallback);
 
 				return {
@@ -711,22 +719,80 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 					* Triggers file upload.
 					*/
 					upload: function() {
+						userAbort = false;
 						//if file has beed added to queue, upload it
 						if(addedFile) {
 							requestFileUploadInformation().then(function() {
 								// We have the upload url, start the upload.
-								jQuery(fileInput).fileupload('option','url', fileUploadUrl);
-								addedFile.submit();
+								if(!userAbort) {
+									jQuery(fileInput).fileupload('option','url', fileUploadUrl);
+									uploadRequest = addedFile.submit();
+								}
+								else {
+									fileUploadCallback(false, {'errorThrown': 'abort'});
+								}
 							}, function(data) {
 								// Get upload url failed.
 								fileUploadCallback(false, data);
 							});
 							
 						};
+					},
+					/**
+					*  Use File API (if supported) to check dimensions of added file.
+					*
+					*/
+					checkImageDimensions: function(callback, minWidth, minHeight) {
+						if(!callback) {
+							return;
+						}
+						minHeight = parseInt(minHeight) || 0;
+						minWidth = parseInt(minWidth) || 0;
+
+						if(minWidth == 0 && minHeight == 0) {
+							// No constraints to check
+							return;
+						}
+
+						if(addedFile && window.FileReader) {
+							var fr = new FileReader;
+
+							fr.onload = function() { // file is loaded
+							    var img = new Image;
+
+							    img.onload = function() {
+							      if(img.width < minWidth || img.height < minHeight) {
+							      	callback(false);
+							      }
+							      else {
+							      	callback(true);
+							      }
+							    };
+
+							    img.src = fr.result; // is the data URL because called with readAsDataURL
+							};
+
+							fr.readAsDataURL(addedFile.files[0]);
+							// Return true to see that we have a check in progress.
+							return true;
+						}
+						else {
+							return false;
+						}
+					},
+					/**
+					*  Cancel fileupload in progress.
+					*
+					*/
+					cancel: function() {
+						userAbort = true;
+						if(uploadRequest) {
+							uploadRequest.abort();
+						}
 					}
 				};
-
 			},
+
 			requestImageCrop : function(blobKey, leftX, topY, rightX, bottomY) {
 				return $http.put(appConfig['serviceUrl'] + '/uploads/images/'+ blobKey,
 					{'leftX': leftX, 'topY': topY, 'rightX': rightX, 'bottomY': bottomY});
@@ -920,3 +986,96 @@ Cloobster.services.factory('helper', function() {
 
   return helperFunctions;
 });
+
+/** 
+* 	@constructor
+* 	Factory function for the 'validator' service.
+*		Contains methods 
+* 
+* 	@author Nils Weiher
+*/
+Cloobster.services.factory('validator', function() {
+
+	var validator = {
+		/*
+		* @param model
+		*	The object to validate
+		* @param requiredFields
+		*	Object containing the required fields
+		* @return
+		*	True if valid model
+		*/
+		validateModel : function(model, requiredFields) {
+			for(var field in requiredFields) {
+				if(requiredFields[field] === true) {
+					if(!model[field] || !model[field].length > 0) {
+						return false;
+					}
+				}
+			}
+
+			return true;
+		}
+	}
+
+	return validator;
+});
+
+/**
+* @constructor
+* Factory function for 'listUtil' service.
+* Contains convienient methods to handle lists
+* 
+* 	@author Frederik Reifschneider
+*
+*/
+Cloobster.services.factory('listUtil', ['$filter','$log', function($filter,$log) {
+
+	var listFunctions = {
+		/**
+		* Check/Uncheck elements regarding the given search filter.
+		* If less then all filtered spots are checked, check all of them. Otherwise uncheck all.
+		* @param {Array<Object>} list
+		*	List of objects to check/uncheck
+		* @param {Object} filter (optional)
+		*  e.g. someProduct.name= 'XYZ' where someProduct is a product object and list gets filtered by name value
+		* @param {Boolean} uncheck (optional)
+		*	True to force uncheck on all elements
+		*/
+		checkElements: function(list, filter, uncheck) {
+			var filtered = null,
+				setChecked;
+
+			if(!list && list.length > 0) {
+				$log.log('Cloobster.services.listUtil.checkElements: list does not exist or is empty.');
+				return;
+			}
+			
+			if(filter) {
+				filtered = $filter('filter')(list, filter);	
+			} else {
+				filtered = list;
+			}
+			
+			if(!uncheck) {
+				setChecked = jQuery.grep(filtered, function(element) {
+					return element.checked;
+				}).length < filtered.length;
+
+
+				angular.forEach(filtered, function(element, index) {
+					element.checked = setChecked;		
+				});
+			} else {
+				angular.forEach(filtered, function(element, index) {
+					element.checked = false;		
+				});
+			}
+
+		}
+	}	
+
+	return listFunctions;
+}]);
+
+

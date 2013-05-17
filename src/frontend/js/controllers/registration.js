@@ -65,14 +65,28 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 	*/
 	$scope.save = function() {
 		account = new Account($scope.account);
+		$scope.registrationForm.$dirty = true;
+
+		//set required fields dirty
+		$scope.registrationForm.fullname.$dirty = true;
+		$scope.registrationForm.email.$dirty = true;
+		$scope.registrationForm.emailRepeat.$dirty = true;
+		$scope.registrationForm.login.$dirty = true;
+		$scope.registrationForm.password.$dirty = true;
+		$scope.registrationForm.passwordRepeat.$dirty = true;
+		$scope.registrationForm.phone.$dirty = true;
+		$scope.registrationForm.companyName.$dirty = true;
+		$scope.registrationForm.companyPhone.$dirty = true;
+		$scope.registrationForm.acceptTerms.$dirty = true;
+
+
 		if($scope.registrationForm.$valid) {
 				account.$register(function (account) { 
 				$scope.registered = true;
-			}, handleError);			
+			}, handleError);
 		} else {
 			$log.info("Can't submit form because it is not valid.");
 		}
-
 	};
 
 	/**

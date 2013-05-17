@@ -9,7 +9,8 @@
             <label class="checkbox">
                 <input name="rememberLogin" type="checkbox" ng-model="loginData.save"> <span l="login.remember">remember login</span></input>
             </label>
-        	<button type="submit" class="btn btn-primary" type="submit" ng-disabled="loginForm.$invalid">Login</button>
+        	<button type="submit" class="btn btn-primary" type="submit" ng-disabled="loginForm.$invalid">Login</button><br>
+            <small l="login.message">Login with your business account</small>
       	</form>
         <p>
             <small><a href="#/login/forgot" l="login.password.forgot">Forgot password?</a></small>
