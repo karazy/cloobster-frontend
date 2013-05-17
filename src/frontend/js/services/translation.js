@@ -942,7 +942,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 					"<i class='icon-eye-open icon-black'></i> Product can be displayed on app dashboard<br/>"+
 					"<i class='icon-eye-close icon-black'></i> Product will never be shown on app dashboard<br/>"+
 					"<i class='icon-eye-close icon-black'></i> If active user can only view but not order the product<br/>"+
-					"<i class='icon-shopping-cart icon-black'></i>User can order product",
+					"<i class='icon-shopping-cart icon-black'></i>User can order product"
 		},
 		"products.filter.active.tooltip" : {
 			"DE" :  "Inaktive Produkte anzeigen",
