@@ -2238,8 +2238,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Tile types"
 		},
 		"appconfig.tiles.list.description" : {
-			"DE" :  "Liste aller verfügbaren Kacheltypen. Fügen Sie diese einfach per <b>Drag&Drop</b> auf die leere Kachel rechts hinzu. Sie können maximal 10 Kacheln platzieren.",
-			"EN" : "List of all available tiles. Just add them via <b>drag & drop</b> on the empty tile to the right. You can add a maximum of 10 tiles."
+			"DE" :  "Liste aller verfügbaren Kacheltypen. Fügen Sie diese einfach per <b>Drag&Drop</b> auf die leere Kachel rechts hinzu. Sie können maximal 20 Kacheln platzieren.",
+			"EN" : "List of all available tiles. Just add them via <b>drag & drop</b> on the empty tile to the right. You can add a maximum of 20 tiles."
 		},
 		"appconfig.tilesconfig.list.title" : {
 			"DE" :  "Dashboard Vorschau",
@@ -2254,8 +2254,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "drop a tile"
 		},
 		"appconfig.tile.maximum" : {
-			"DE" :  "Max 10 Kachel erreicht.",
-			"EN" : "Max 10 tiles reached."
+			"DE" :  "Max 20 Kachel erreicht.",
+			"EN" : "Max 20 tiles reached."
 		},
 		"appconfig.tiledetail.title" : {
 			"DE" :  "Kacheldetails",
@@ -2372,6 +2372,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"appconfig.features.products" : {
 			"DE" :  "Produkte",
 			"EN" : "Products"
+		},
+		"appconfig.features.productsorder" : {
+			"DE" :  "Bestellfunktion",
+			"EN" : "Order function"
 		},
 		"appconfig.features.infopages" : {
 			"DE" :  "Infoseiten",
