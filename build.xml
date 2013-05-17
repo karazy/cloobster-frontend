@@ -103,6 +103,7 @@
 				<file name="jquery/jquery.fileupload-ui.js" />
 				<file name="jquery/jquery.imgareaselect.pack.js" />
 				<file name="bootstrap/bootstrap.min.js" />
+				<file name="bootstrap/bootstrapSwitch.js" />
 				<file name="angular/angular-resource-1.0.1.min.js" />
 				<file name="angular/angular-sanitize-1.0.1.min.js" />
 				<file name="angular-ui-0.4.0/build/angular-ui.min.js" />
@@ -167,6 +168,7 @@
 			</fileset>
 			<filelist id="cssfiles" dir="src/${frontenddir}/">
 				<file name="css/bootstrap.min.css"/>
+				<file name="css/bootstrapSwitch.css"/>
 				<file name="css/bootstrap-responsive.min.css"/>
 				<file name="css/cloobster.css"/>
 				<file name="css/jquery.fileupload-ui.css"/>
