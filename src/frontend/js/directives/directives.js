@@ -420,16 +420,17 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 								dialogBody.css('max-height', modalBodyHeight);
 								// Expand the dialog to 80% width and 80% height of window.								
 								dialog.css('width', '80%');
+								dialog.css('top', '5%');
 								dialog.css({
 								    // 'height': function () { 
 								    // 	return ($(window).height() * .8) + 'px';
 								    // },								    
 								    'margin-left': function () { 
 								    	return -($(this).width() / 2); 
-								   	},
-								   	'margin-top': function () { 
-								    	return -($(this).height() / 2); 
 								   	}
+								   	//,'margin-top': function () { 
+								    //	return -($(this).height() / 2); 
+								   	//}
 								});
 								
 							}
