@@ -1,0 +1,195 @@
+$iconSpritePath: "../images/glyphicons-halflings.png";
+$iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
+
+$text-color: #3F4326;
+
+@import 'sass-bootstrap/lib/bootstrap';
+
+html, body {
+    width:100%;
+    height:100%;
+    min-width: 800px;
+    padding-top: 2px;
+
+    background: -moz-linear-gradient(top,  rgba(176,212,232,1) 1%, rgba(125,185,232,0) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,rgba(176,212,232,1)), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(176,212,232,1) 1%,rgba(125,185,232,0) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(176,212,232,1) 1%,rgba(125,185,232,0) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(176,212,232,1) 1%,rgba(125,185,232,0) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(176,212,232,1) 1%,rgba(125,185,232,0) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b0d4e8', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
+	background-repeat: no-repeat;
+
+	color: $text-color;
+}
+
+.container-fluid {
+	padding: 0;
+}
+
+#bg {
+	background: -moz-linear-gradient(top,  rgba(176,212,232,1) 1%, rgba(125,185,232,0) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,rgba(176,212,232,1)), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(176,212,232,1) 1%,rgba(125,185,232,0) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(176,212,232,1) 1%,rgba(125,185,232,0) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(176,212,232,1) 1%,rgba(125,185,232,0) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(176,212,232,1) 1%,rgba(125,185,232,0) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b0d4e8', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
+
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	/*z-index: -1;*/
+	
+}
+
+.fullscreen {
+	height: 100%;
+	width: 100%;
+
+	color: $text-color;
+	position: relative;
+}
+
+.header {
+	margin-bottom: 50px;
+}
+
+.footer {
+	position: relative;
+}
+
+.images {
+	div {
+		float:left;
+		/*height: 500px;*/
+	}
+
+	.image-text {
+		color: $text-color;
+		padding-top: 250px;
+
+		&.left {
+			text-align: right;			
+		}
+
+		&.right {
+			text-align: left;
+		}
+	}
+	
+}
+
+.app-image {
+
+	width: 300px;
+	height: 500px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	position: relative;
+
+	&.left {
+		background-image: url('../images/app_screenshot.png');			
+	}
+
+	&.right {
+		background-image: url('../images/app_screenshot.png');		
+	}
+}
+
+.demo-spot {
+	/*margin-right: 100px;*/
+	/*position: relative;*/
+	/*right: 0;*/
+	/*bottom: 40px;*/
+	width: 116px;
+	padding: 0;
+	/*margin-left: auto;*/
+
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
+.star-badge {
+	height: 150px;
+	width: 150px;
+	background-image: url('../images/star-badge.png');
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	position: absolute;
+	left: -30px;
+	top: -30px;
+	cursor: pointer;
+}
+
+.demo-wrapper {
+	position: absolute;
+	right: -10px;
+	bottom: 10px;
+}
+
+.demo-arrow {
+	height: 150px;
+	width: 150px;
+	background-image: url('../images/demo-arrow.png');
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	position: relative;
+	top: -30px;
+	margin-left: auto;
+	margin-right: 135px;
+}
+
+.badges {
+	float: left;
+	/*margin-right: 10px;*/
+	a {
+		img {
+			width: 120px;
+			height: auto;
+			display: block;
+			margin-bottom: 5px;
+		}
+		
+	}
+}
+
+.push-bottom-wrapper {
+	position: relative;
+
+	
+}
+
+.push-bottom {
+	position: absolute;
+	bottom: 0px;
+}	
+
+.move-down {
+	width: 100px;
+	height: 50px;
+	background-color: $text-color;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	cursor: pointer;
+	text-align: center;
+	font-size: 30px;
+	line-height: 50px;
+	vertical-align: center;
+	color: white;
+}
+
+.agb {
+	font-size: 10px;
+	color: gray;
+}
+
+.clear {
+	clear: both;
+}
