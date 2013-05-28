@@ -279,8 +279,18 @@ html, body {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#637437', endColorstr='#96a774',GradientType=0 ); /* IE6-9 */
 
 
-	h3 {
+	h3, h5 {
 		color: $teaser-color;
+	}
+
+	h3 {
+		margin-top: 3px;
+		line-height: 25px;
+	}
+
+	h5 {
+		line-height: 15px;
+		margin-bottom: 0;
 	}
 
 	p {
