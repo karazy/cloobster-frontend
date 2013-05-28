@@ -103,11 +103,11 @@
 			      <div class="accordion-inner">
 
 			      	<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyPhone.$dirty, registrationForm.companyPhone.$invalid)">
-					<label for="companyPhone" l="registration.form.businessphone">Company phone*</label>
+					<label for="companyPhone" l="registration.form.businessphone">Company phone</label>
 					<div class="controls">
 						<input id="companyPhone" name='companyPhone' type='text' ng-model="account.company.phone" placeholder="phone" l-attribute="placeholder" l="registration.form.businessphone.placeholder">
 						<div class="help-inline" ng-show="registrationForm.companyPhone.$dirty && registrationForm.companyPhone.$invalid">
-		      		<span ng-show="registrationForm.companyPhone.$error.required" l="registration.form.phone.phone.required">Provide a phone number, so we can call you back.</span>
+		      		<!-- <span ng-show="registrationForm.companyPhone.$error.required" l="registration.form.phone.phone.required">Provide a phone number, so we can call you back.</span> -->
 		  			</div>
 		    	</div>
 				</div>
@@ -140,12 +140,12 @@
 				</div>		
 				
 				<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyCountry.$dirty, registrationForm.companyCountry.$invalid)">
-					<label for="companyCountry" l="registration.form.country" >Country*</label>
+					<label for="companyCountry" l="registration.form.country" >Country</label>
 					<div class="controls">
 						<!-- <select name='companyCountry' id="companyCountry" ng-model='account.company.country' required>
 				            <option value="DE">Deutschland</option>
 				        </select> -->
-				       	<select name='companyCountry' ng-model="account.company.country" id="companyCountry" ng-options="t.code as t.lang for t in langcodes">
+				       	<select name='companyCountry' ng-model="account.company.country" id="companyCountry" ng-options="t.code as t.name for t in countrycodes">
     					</select>
     					<!-- <option value="DE">Deutschland</option>
 						<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.propertyTranslation.$invalid)">

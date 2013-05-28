@@ -84,8 +84,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Documents"
 		},
 		"businesses.headertabs.appconfig" : {
-			"DE" :  "App",
-			"EN" : "App"
+			"DE" : "Look & Feel",
+			"EN" : "Look & Feel"
 		},
 		//registration partial
 		"registration.title" : {

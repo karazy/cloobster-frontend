@@ -15,7 +15,7 @@
 * 	@author Frederik Reifschneider
 * 	@author Nils Weiher
 */
-Cloobster.Registration = function($scope, $location, Account, facebookApi, $routeParams, loginService, $log, $http, handleError, langcodes) {
+Cloobster.Registration = function($scope, $location, Account, facebookApi, $routeParams, loginService, $log, $http, handleError, countrycodes) {
 	var emptyAccount = {
 			'name' : '',
 			'login' : '',
@@ -47,8 +47,8 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 	$scope.fbConnected = false;
 	//true if email is confirmed
 	$scope.emailConfirmed = false;	
-	//provide langcodes in scope
-	$scope.langcodes = langcodes;
+	//provide countrycodes in scope
+	$scope.countrycodes = countrycodes;
 
 	/**
 	* @inner
@@ -187,7 +187,7 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 	//set default values on load
 	$scope.cancel();
 }
-Cloobster.Registration.$inject = ['$scope', '$location', 'Account', 'facebookApi', '$routeParams', 'login', '$log', '$http', 'errorHandler'];
+Cloobster.Registration.$inject = ['$scope', '$location', 'Account', 'facebookApi', '$routeParams', 'login', '$log', '$http', 'errorHandler','countrycodes'];
 
 /**
 * Activates an account by sending an email token to the server.
@@ -263,5 +263,5 @@ Cloobster.PasswordReset = function($scope, loginService, $routeParams, handleErr
 	};
 }
 
-Cloobster.PasswordReset.$inject = ['$scope', 'login', '$routeParams', 'errorHandler', '$location', 'langcodes'];
+Cloobster.PasswordReset.$inject = ['$scope', 'login', '$routeParams', 'errorHandler', '$location'];
 
