@@ -794,7 +794,7 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
 			},
 
 			requestImageCrop : function(blobKey, leftX, topY, rightX, bottomY) {
-				return $http.put('/uploads/imagesurl',
+				return $http.put(appConfig['serviceUrl'] + '/uploads/images/'+ blobKey,
 					{'leftX': leftX, 'topY': topY, 'rightX': rightX, 'bottomY': bottomY});
 			},
 			deleteUpload: function(blobKey) {
