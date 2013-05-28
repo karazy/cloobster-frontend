@@ -14,13 +14,13 @@ $('#moveDown2').click(function() {
 $(document).ready(function() {
     setupScrollFading({
         fadeStart: 0,
-        fadeUntil: 300,
+        fadeUntil: 200,
         selector: '#moveDown'
     });
 
     setupScrollFading({
         fadeStart: $('body').height(),
-        fadeUntil: $('body').height()+100,
+        fadeUntil: $('body').height()+200,
         selector: '#moveDown2'
     });
 });
@@ -35,14 +35,19 @@ function setupScrollFading(config) {
 
     $(window).bind('scroll', function(){
         var offset = $('body').scrollTop(),
-            opacity = 0;
+            opacity = 0,
+            diff1, diff2;
 
         if( offset<=config.fadeStart ){
             opacity=1;
         }else if( offset<=config.fadeUntil ){
-            opacity=1-offset/config.fadeUntil;
+            diff = offset - config.fadeStart;
+            diff2 = config.fadeUntil - config.fadeStart;
+            // opacity=1-offset/config.fadeUntil;
+            opacity=1-diff/diff2;
         }
-        $(config.selector).css('opacity',opacity).html(opacity + 'o:' + offset +' fs:'+config.fadeStart+ ' fu:'+config.fadeUntil);
+        $(config.selector).css('opacity',opacity);
+        //.html(opacity + 'o:' + offset +' fs:'+config.fadeStart+ ' fu:'+config.fadeUntil);
     });
 }
 
