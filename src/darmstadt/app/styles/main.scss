@@ -193,3 +193,72 @@ html, body {
 .clear {
 	clear: both;
 }
+
+.app-provess {
+
+	li {
+		width: 20px;
+		height: 20px;
+		border: 1px solid black;
+		border-radius: 10px; 
+	}
+}
+
+.user-example {
+	clear: both;
+	margin-bottom: 10px;
+	overflow: hidden;
+
+	.user-image {
+		float: left;
+		margin-right: 10px;
+
+		img {
+			width: 75px;
+			height: auto;
+		}
+	}
+
+	.user-quote {
+		font-size: 12px;
+		font-style: italic;
+	}	
+
+	.user-name {
+		font-style: normal;
+	}	
+}
+
+.app-process {
+	clear: both;
+	margin-bottom: 20px;
+
+	.counter {
+		width: 30px;
+		height: 30px;
+		border-radius: 15px; 
+		background-color: $text-color;
+		text-align: center;
+		vertical-align: center;
+		font-size: 16px;
+		font-weight: bold;
+		color: white;
+		line-height: 30px;
+		float: left;
+		margin-right: 10px;
+	}
+
+	.text {
+		line-height: 30px;
+		vertical-align: center;
+	}
+}
+
+.hidden {
+	display: none;
+}
+
+#abgToggle {
+	font-size: 10px;
+}
+

@@ -22,3 +22,9 @@ $(window).bind('scroll', function(){
     fading.css('opacity',opacity);
     //.html(opacity);
 });
+
+$('#abgToggle').bind('click', function(event) {
+    $('.agb').toggle();
+    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+    return false;
+});
