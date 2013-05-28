@@ -236,8 +236,10 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','langcodesMap',
 		        			}
 		        			else {
 		        				// old way of assigning properties, without embedded translations
-		        				scope.editorValue = scope.editorProperty;		        				
+		        				scope.editorValue = scope.editorProperty;
 		        			}
+		        			
+		        			editor.val(scope.editorValue);
 
 		        			scope.saved = false;		        			
 									dialog.modal('toggle');
