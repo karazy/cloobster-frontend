@@ -48,8 +48,6 @@ html, body {
 .fullscreen {
 	height: 100%;
 	width: 100%;
-
-	color: $text-color;
 	position: relative;
 }
 
@@ -110,7 +108,7 @@ html, body {
 	/*margin-left: auto;*/
 
 	position: absolute;
-	right: 0;
+	/*right: 0;*/
 	bottom: 0;
 }
 
@@ -172,7 +170,7 @@ html, body {
 }	
 
 .move-down {
-	width: 100px;
+	width: 1000px;
 	height: 50px;
 	background-color: $text-color;
 	border-top-left-radius: 10px;
@@ -194,15 +192,6 @@ html, body {
 	clear: both;
 }
 
-.app-provess {
-
-	li {
-		width: 20px;
-		height: 20px;
-		border: 1px solid black;
-		border-radius: 10px; 
-	}
-}
 
 .user-example {
 	clear: both;
@@ -231,26 +220,32 @@ html, body {
 
 .app-process {
 	clear: both;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
+	$counterSize: 40px;
 
 	.counter {
-		width: 30px;
-		height: 30px;
-		border-radius: 15px; 
+		width: $counterSize;
+		height: $counterSize;
+		border-radius: $counterSize/2; 
 		background-color: $text-color;
 		text-align: center;
 		vertical-align: center;
-		font-size: 16px;
+		font-size: $counterSize/2;
 		font-weight: bold;
 		color: white;
-		line-height: 30px;
+		line-height: $counterSize;
 		float: left;
 		margin-right: 10px;
 	}
 
 	.text {
-		line-height: 30px;
+		line-height: $counterSize;
+		font-size: $counterSize/2;
 		vertical-align: center;
+	}
+
+	.subtext {
+		margin-left: $counterSize + 10px;
 	}
 }
 
