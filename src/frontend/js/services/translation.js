@@ -197,8 +197,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Please enter zip code."
 		},
 		"registration.form.businessphone" : {
-			"DE" : "Telefon geschäftlich *",
-			"EN" : "Phone (business) *"
+			"DE" : "Telefon Firma",
+			"EN" : "Phone (business)"
 		},
 		"registration.form.country" : {
 			"DE" : "Land",
@@ -325,6 +325,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"registration.success.title" : {
 			"DE" :  "cloobster Registrierung erfolgreich!",
 			"EN" :  "cloobster registration successful!"
+		},
+		"registrationForm.fields.optional" : {
+			"DE" :  "(optionale Angaben)",
+			"EN" : "(optional Information)"
 		},
 		//businesses partial
 		"businesses.title" : {

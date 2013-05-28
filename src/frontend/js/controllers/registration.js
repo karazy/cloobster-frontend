@@ -15,7 +15,7 @@
 * 	@author Frederik Reifschneider
 * 	@author Nils Weiher
 */
-Cloobster.Registration = function($scope, $location, Account, facebookApi, $routeParams, loginService, $log, $http, handleError) {
+Cloobster.Registration = function($scope, $location, Account, facebookApi, $routeParams, loginService, $log, $http, handleError, langcodes) {
 	var emptyAccount = {
 			'name' : '',
 			'login' : '',
@@ -47,6 +47,8 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 	$scope.fbConnected = false;
 	//true if email is confirmed
 	$scope.emailConfirmed = false;	
+	//provide langcodes in scope
+	$scope.langcodes = langcodes;
 
 	/**
 	* @inner
@@ -261,5 +263,5 @@ Cloobster.PasswordReset = function($scope, loginService, $routeParams, handleErr
 	};
 }
 
-Cloobster.PasswordReset.$inject = ['$scope', 'login', '$routeParams', 'errorHandler', '$location'];
+Cloobster.PasswordReset.$inject = ['$scope', 'login', '$routeParams', 'errorHandler', '$location', 'langcodes'];
 
