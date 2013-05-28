@@ -1,8 +1,7 @@
 <div class='registration_wrapper' ng-hide='registered'>
 	<div class="page-header">
 		<h1 l="registration.title">Cloobster Registration</h1>
-	</div>
-	<form class="well form-vertical" name='registrationForm' ng-submit="save()" novalidate>
+	</div>	
 <!-- 		<div class='row-fluid'>
 		<div class='span12'>
 		<input class="btn btn-primary" type="button" value="Use my Facebook account for registration and connect Cloobster"
@@ -12,7 +11,9 @@
 		</div>
 		</div> -->
 		<div class='row-fluid'>
-		<fieldset class='span4' style="border-right: 1px solid #CCC;">
+			<div class='span6'>
+				<form class="well form-vertical" name='registrationForm' ng-submit="save()" novalidate>
+		<fieldset>
 			<h2 class="help-block" l="registration.form.account.label">Your account data.</h2>
 			<div class="control-group" ng-class="getFieldInputClass(registrationForm.fullname.$dirty, registrationForm.fullname.$invalid)">
 				<label for="fullname" class="control-label" l="registration.form.fullname">Name*</label>
@@ -80,69 +81,90 @@
 		        	<span ng-show="registrationForm.phone.$error.required" l="registration.form.phone.error.required">Provide a phone number, so we can call you back.</span>
 	        	</div>
 	        </div>
+	        <!-- <h2 class="help-block" l="registration.form.company.label">Your company data.</h2> -->
+	        <div class="control-group" ng-class="getFieldInputClass(registrationForm.companyName.$dirty, registrationForm.companyName.$invalid)">
+				<label class="control-label" for="companyName" l="registration.form.company">Company*</label>
+				<div class="controls">
+					<input name='companyName' id="companyName" type='text' ng-model="account.company.name" required placeholder="company name" l-attribute="placeholder" l="registration.form.company.placeholder">				
+					<div class="help-inline" ng-show="registrationForm.companyName.$dirty && registrationForm.companyName.$invalid">
+	      		<span ng-show="registrationForm.companyName.$error.required" l="registration.form.company.error.required">Provide a company.</span>
+	    		</div>
+				</div>
+			</div>
+
+	        <div class="accordion" id="optionalFields">
+			  <div class="accordion-group">
+			    <div class="accordion-heading">
+			      <a class="accordion-toggle" data-toggle="collapse" data-parent="#optionalFields" href="#optionalFieldsCollapse" l="registrationForm.fields.optional">
+			        (optional fields)
+			      </a>
+			    </div>
+			    <div id="optionalFieldsCollapse" class="accordion-body collapse">
+			      <div class="accordion-inner">
+
+			      	<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyPhone.$dirty, registrationForm.companyPhone.$invalid)">
+					<label for="companyPhone" l="registration.form.businessphone">Company phone</label>
+					<div class="controls">
+						<input id="companyPhone" name='companyPhone' type='text' ng-model="account.company.phone" placeholder="phone" l-attribute="placeholder" l="registration.form.businessphone.placeholder">
+						<div class="help-inline" ng-show="registrationForm.companyPhone.$dirty && registrationForm.companyPhone.$invalid">
+		      		<!-- <span ng-show="registrationForm.companyPhone.$error.required" l="registration.form.phone.phone.required">Provide a phone number, so we can call you back.</span> -->
+		  			</div>
+		    	</div>
+				</div>
+				<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyAddress.$dirty, registrationForm.companyAddress.$invalid)">
+					<label class="control-label" for="companyAddress" l="registration.form.address">Address</label>
+					<div class="controls">
+						<input name='companyAddress' id="companyAddress" type='text' ng-model="account.company.address"  placeholder="company address" l-attribute="placeholder" l="registration.form.address.placeholder" >
+						<div class="help-inline" ng-show="registrationForm.companyAddress.$dirty && registrationForm.companyAddress.$invalid">
+			          		<span ng-show="registrationForm.companyAddress.$error.required" l="registration.form.address.error.required">Provide an address.</span>
+		        		</div>
+					</div>
+				</div>
+				<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyPostcode.$dirty, registrationForm.companyPostcode.$invalid)">
+					<label class="control-label" for="companyPostcode" l="registration.form.postcode" >Postcode</label>
+					<div class="controls">
+						<input name='companyPostcode' id="companyPostcode" type='text' ng-model="account.company.postcode" placeholder="postcode" l-attribute="placeholder" l="registration.form.postcode.placeholder" >
+						<div class="help-inline" ng-show="registrationForm.companyPostcode.$dirty && registrationForm.companyPostcode.$invalid">
+			    		<span ng-show="registrationForm.companyPostcode.$error.required" l="registration.form.postcode.error.required">Provide a postcode.</span>
+		    		</div>
+					</div>
+				</div>	
+				<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyCity.$dirty, registrationForm.companyCity.$invalid)">
+					<label class="control-label" for="companyCity" l="registration.form.city">City</label>
+					<div class="controls">
+						<input name='companyCity' id="companyCity" type='text' ng-model="account.company.city" placeholder="city" l-attribute="placeholder" l="registration.form.city.placeholder" >
+						<div class="help-inline" ng-show="registrationForm.companyCity.$dirty && registrationForm.companyCity.$invalid">
+			          		<span ng-show="registrationForm.companyCity.$error.required" l="registration.form.city.error.required">Provide a city.</span>
+		        		</div>
+					</div>
+				</div>		
+				
+				<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyCountry.$dirty, registrationForm.companyCountry.$invalid)">
+					<label for="companyCountry" l="registration.form.country" >Country</label>
+					<div class="controls">
+						<!-- <select name='companyCountry' id="companyCountry" ng-model='account.company.country' required>
+				            <option value="DE">Deutschland</option>
+				        </select> -->
+				       	<select name='companyCountry' ng-model="account.company.country" id="companyCountry" ng-options="t.code as t.name for t in countrycodes">
+    					</select>
+    					<!-- <option value="DE">Deutschland</option>
+						<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.propertyTranslation.$invalid)">
+					 		<div class="controls">'+
+					 			<textarea class="translation-input" style="float:left;" rows="12" cols="300"></textarea>
+							</div>
+						</div> -->
+			        	<div class="help-inline" ng-show="registrationForm.companyCountry.$dirty && registrationForm.companyCountry.$invalid">
+			          		<span ng-show="registrationForm.companyCountry.$error.required" l="registration.form.country.error.required">Provide a country.</span>
+		        		</div>
+			    	</div>
+		    	</div>
+			        
+			      </div>
+			    </div>
+			  </div>
+			</div>
 		</fieldset>
-		<fieldset class='span8'>
-		<h2 class="help-block" l="registration.form.company.label">Your company data.</h2>
-		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyName.$dirty, registrationForm.companyName.$invalid)">
-			<label class="control-label" for="companyName" l="registration.form.company">Company*</label>
-			<div class="controls">
-				<input name='companyName' id="companyName" type='text' ng-model="account.company.name" required placeholder="company name" l-attribute="placeholder" l="registration.form.company.placeholder">				
-				<div class="help-inline" ng-show="registrationForm.companyName.$dirty && registrationForm.companyName.$invalid">
-      		<span ng-show="registrationForm.companyName.$error.required" l="registration.form.company.error.required">Provide a company.</span>
-    		</div>
-			</div>
-		</div>
-		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyPhone.$dirty, registrationForm.companyPhone.$invalid)">
-			<label for="companyPhone" l="registration.form.businessphone">Company phone*</label>
-			<div class="controls">
-				<input id="companyPhone" name='companyPhone' type='text' ng-model="account.company.phone" placeholder="phone" l-attribute="placeholder" l="registration.form.businessphone.placeholder" required>
-				<div class="help-inline" ng-show="registrationForm.companyPhone.$dirty && registrationForm.companyPhone.$invalid">
-      		<span ng-show="registrationForm.companyPhone.$error.required" l="registration.form.phone.phone.required">Provide a phone number, so we can call you back.</span>
-  			</div>
-    	</div>
-		</div>
-		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyAddress.$dirty, registrationForm.companyAddress.$invalid)">
-			<label class="control-label" for="companyAddress" l="registration.form.address">Address</label>
-			<div class="controls">
-				<input name='companyAddress' id="companyAddress" type='text' ng-model="account.company.address"  placeholder="company address" l-attribute="placeholder" l="registration.form.address.placeholder" >
-				<div class="help-inline" ng-show="registrationForm.companyAddress.$dirty && registrationForm.companyAddress.$invalid">
-	          		<span ng-show="registrationForm.companyAddress.$error.required" l="registration.form.address.error.required">Provide an address.</span>
-        		</div>
-			</div>
-		</div>
-		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyPostcode.$dirty, registrationForm.companyPostcode.$invalid)">
-			<label class="control-label" for="companyPostcode" l="registration.form.postcode" >Postcode</label>
-			<div class="controls">
-				<input name='companyPostcode' id="companyPostcode" type='text' ng-model="account.company.postcode" placeholder="postcode" l-attribute="placeholder" l="registration.form.postcode.placeholder" >
-				<div class="help-inline" ng-show="registrationForm.companyPostcode.$dirty && registrationForm.companyPostcode.$invalid">
-	    		<span ng-show="registrationForm.companyPostcode.$error.required" l="registration.form.postcode.error.required">Provide a postcode.</span>
-    		</div>
-			</div>
-		</div>	
-		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyCity.$dirty, registrationForm.companyCity.$invalid)">
-			<label class="control-label" for="companyCity" l="registration.form.city">City</label>
-			<div class="controls">
-				<input name='companyCity' id="companyCity" type='text' ng-model="account.company.city" placeholder="city" l-attribute="placeholder" l="registration.form.city.placeholder" >
-				<div class="help-inline" ng-show="registrationForm.companyCity.$dirty && registrationForm.companyCity.$invalid">
-	          		<span ng-show="registrationForm.companyCity.$error.required" l="registration.form.city.error.required">Provide a city.</span>
-        		</div>
-			</div>
-		</div>		
-		
-		<div class="control-group" ng-class="getFieldInputClass(registrationForm.companyCountry.$dirty, registrationForm.companyCountry.$invalid)">
-			<label for="companyCountry" l="registration.form.country" >Country*</label>
-			<div class="controls">
-				<select name='companyCountry' id="companyCountry" ng-model='account.company.country' required>
-		            <option value="DE">Deutschland</option>
-		        </select>
-	        	<div class="help-inline" ng-show="registrationForm.companyCountry.$dirty && registrationForm.companyCountry.$invalid">
-	          		<span ng-show="registrationForm.companyCountry.$error.required" l="registration.form.country.error.required">Provide a country.</span>
-        		</div>
-	    	</div>
-    	</div>
-        </fieldset>
-      </div>
-        <div class='row-fluid'>
+		        <div class='row-fluid'>
         	<p l="registration.form.requiredfield">* marks required fields</p>
         </div>
         <div class='row-fluid'>
@@ -153,9 +175,9 @@
 						<label class="checkbox">
 							<input name='acceptTerms' id="acceptTerms" type='checkbox' ng-model="acceptTerms" required ><span l="registration.form.acceptterms">I have read and accept the terms of use.</span>
 						</label>					
-						<div class="help-inline" ng-show="registrationForm.acceptTerms.$dirty && registrationForm.acceptTerms.$invalid">
+						<!-- <div class="help-inline" ng-show="registrationForm.acceptTerms.$dirty && registrationForm.acceptTerms.$invalid"> -->
 			          		<!-- <span ng-show="registrationForm.acceptTerms.$error.required" l="registration.form.accept-terms.error.required">Must accept terms of use to continue.</span> -->
-		        		</div>
+		        		<!-- </div> -->
 					</div>				
 				</div>			
 	        <button type="button" ng-click="cancel()" class="btn" l="registration.form.action.reset">Reset</button>
@@ -164,6 +186,16 @@
       </div>
 
 	</form>
+		</div>
+		<!-- <fieldset class='span8'>
+		
+        </fieldset> -->
+      </div>
+
+      <div class='span6'>
+      	<!-- additional information-->
+      </div>
+
 </div>
 <div class='registration_message' ng-show='registered'>
 	<div class="page-header">

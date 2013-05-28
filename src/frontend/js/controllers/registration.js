@@ -15,7 +15,7 @@
 * 	@author Frederik Reifschneider
 * 	@author Nils Weiher
 */
-Cloobster.Registration = function($scope, $location, Account, facebookApi, $routeParams, loginService, $log, $http, handleError) {
+Cloobster.Registration = function($scope, $location, Account, facebookApi, $routeParams, loginService, $log, $http, handleError, countrycodes) {
 	var emptyAccount = {
 			'name' : '',
 			'login' : '',
@@ -47,6 +47,8 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 	$scope.fbConnected = false;
 	//true if email is confirmed
 	$scope.emailConfirmed = false;	
+	//provide countrycodes in scope
+	$scope.countrycodes = countrycodes;
 
 	/**
 	* @inner
@@ -185,7 +187,7 @@ Cloobster.Registration = function($scope, $location, Account, facebookApi, $rout
 	//set default values on load
 	$scope.cancel();
 }
-Cloobster.Registration.$inject = ['$scope', '$location', 'Account', 'facebookApi', '$routeParams', 'login', '$log', '$http', 'errorHandler'];
+Cloobster.Registration.$inject = ['$scope', '$location', 'Account', 'facebookApi', '$routeParams', 'login', '$log', '$http', 'errorHandler','countrycodes'];
 
 /**
 * Activates an account by sending an email token to the server.
