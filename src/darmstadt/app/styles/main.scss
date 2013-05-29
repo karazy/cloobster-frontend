@@ -5,7 +5,7 @@ $text-color: #3F4326;
 $teaser-color: #F79546;
 
 @import 'sass-bootstrap/lib/bootstrap';
-/*@import 'sass-bootstrap/lib/responsive';*/
+@import 'sass-bootstrap/lib/responsive';
 
 html, body {
     width:100%;
@@ -52,6 +52,10 @@ html, body {
 	width: 100%;
 	position: relative;
 	min-height: 800px;
+
+	@media (max-width: 767px) { 
+		min-height: 1400px;
+	}
 }
 
 .header {
@@ -64,12 +68,13 @@ html, body {
 
 .images {
 	div {
-		float:left;
+		
 	}
 
 	.image-text {
 		color: $text-color;
 		padding-top: 250px;
+		float:left;
 
 		&.left {
 			text-align: right;			
@@ -82,36 +87,79 @@ html, body {
 	
 }
 
+.dynamic-float {
+	@media (max-width: 979px) {
+		float: none;
+		display: block;
+		width: 100%;
+		margin-left: 0;
+	}
+}
+
 .app-image {
 
-	width: 300px;
-	height: 500px;
+	width: 220px;
+	height: 400px;
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-position: center;
 	position: relative;
+	float:left;	
 
 	&.left {
 		background-image: url('../images/app_screenshot.png');			
+		/*Prevent problems of IE8 with background-size*/
+		-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/app_screenshot.png', sizingMethod='scale')";
 	}
 
 	&.right {
-		background-image: url('../images/app_screenshot.png');		
+		background-image: url('../images/app_screenshot.png');
+		/*Prevent problems of IE8 with background-size*/
+		-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/app_screenshot.png', sizingMethod='scale')";		
 	}
+
+	@media (max-width: 979px) and (min-width: 768px) {
+		width: 220px;
+		height: 400px;
+	}
+
+	/* Large desktop */
+	@media (min-width: 1200px) { 
+		width: 300px;
+		height: 500px;
+	 }
+	 
+	/* Portrait tablet to landscape and desktop */
+	@media (min-width: 768px) and (max-width: 979px) {
+		/*width: 150px;
+		height: 300px;*/
+	}
+	 
+	/* Landscape phone to portrait tablet */
+	@media (max-width: 767px) { 
+
+	/*	width: 150px;
+		height: 300px;*/
+	 }
+	 
+	/* Landscape phones and down */
+	/*@media (max-width: 480px) { ... }*/
+}
+
+.demo-text {
+	text-align: right;
+	margin: 50px 30px 0 0;
+	float: left;
 }
 
 .demo-spot {
-	/*margin-right: 100px;*/
-	/*position: relative;*/
-	/*right: 0;*/
-	/*bottom: 40px;*/
 	width: 116px;
 	padding: 0;
-	/*margin-left: auto;*/
+	float: left;
 
-	position: absolute;
+	/*position: absolute;*/
 	/*right: 0;*/
-	bottom: 0;
+	/*bottom: 0;*/
 }
 
 .star-badge {
@@ -148,7 +196,8 @@ html, body {
 
 .badges {
 	float: left;
-	/*margin-right: 10px;*/
+	margin-top: 30px;
+
 	a {
 		img {
 			width: 120px;
@@ -187,11 +236,19 @@ html, body {
 	&:hover {
 		background-color: lighten($text-color, 30%);
 	}
+
+	@media (max-width: 979px) { 
+		display: none;
+	}
 }
 
 .agb {
 	font-size: 10px;
 	color: gray;
+
+	&.off {
+		display: none;
+	}
 }
 
 .clear {
@@ -253,10 +310,6 @@ html, body {
 	.subtext {
 		margin-left: $counterSize + 10px;
 	}
-}
-
-.hidden {
-	display: none;
 }
 
 #abgToggle {

@@ -1,11 +1,11 @@
 
-$('#moveDown, #starBadge').click(function() {
+$('#moveDown').click(function() {
 	$('html, body').animate({
 		scrollTop: $('body').height()//$(".footer").offset().top
 	}, 1000);
 });
 
-$('#moveDown2').click(function() {
+$('#moveDown2, #starBadge').click(function() {
     $('html, body').animate({
         scrollTop: $('body').height()*2
     }, 1000);
@@ -15,6 +15,8 @@ $(document).ready(function() {
     setupScrollFading({
         fadeStart: 0,
         fadeUntil: 200,
+        // fadeStart: $('.fullscreen').height(),
+        // fadeUntil: $('.fullscreen').height()+200,
         selector: '#moveDown'
     });
 
@@ -47,12 +49,12 @@ function setupScrollFading(config) {
             opacity=1-diff/diff2;
         }
         $(config.selector).css('opacity',opacity);
-        //.html(opacity + 'o:' + offset +' fs:'+config.fadeStart+ ' fu:'+config.fadeUntil);
+        // $(config.selector).html(opacity + ' o:' + offset +' fs:'+config.fadeStart+ ' fu:'+config.fadeUntil);
     });
 }
 
 $('#abgToggle').bind('click', function(event) {
     $('.agb').toggle();
-    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+    // $("html, body").animate({ scrollTop: $(document).height() }, 1000);
     return false;
 });
