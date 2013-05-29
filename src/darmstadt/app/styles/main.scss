@@ -44,7 +44,7 @@ h1, h2, h3, h4, h5, h6 {
 	height: 100%;
 /*	width: 100%;*/
 	position: relative;
-	min-height: 800px;
+	/*min-height: 800px;*/
 
 	@media (max-width: 767px) { 
 		min-height: auto;
@@ -163,8 +163,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .demo-text {
 	text-align: left;
-	margin-top: 50px;
-	/*float: left;*/
+	margin-top: 62px;
+	
+	@media (max-width: 979px) { 
+		margin-top: 32px;
+	}
 }
 
 .demo-spot {

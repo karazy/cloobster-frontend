@@ -15,8 +15,6 @@ $(document).ready(function() {
     setupScrollFading({
         fadeStart: 0,
         fadeUntil: 200,
-        // fadeStart: $('.fullscreen').height(),
-        // fadeUntil: $('.fullscreen').height()+200,
         selector: '#moveDown'
     });
 
