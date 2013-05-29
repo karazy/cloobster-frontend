@@ -67,7 +67,7 @@ h1, h2, h3, h4, h5, h6 {
 
 	.image-text {
 		color: $text-color;
-		padding-top: 240px;
+		padding-top: 200px;
 		width: 230px;
 		float:left;
 
@@ -83,13 +83,10 @@ h1, h2, h3, h4, h5, h6 {
 		&.right {
 			text-align: left;
 		}
-
-	/*	@media (max-width: 979px) {
-			float: none;
-			display: block;
-			width: 100%;
-			margin-left: 0;
-		}*/
+		
+		@media (min-width: 1200px) { 
+			padding-top: 230px;
+	 	}
 
 		@media (max-width: 979px) { 
 			padding-top: 100px;
@@ -99,19 +96,11 @@ h1, h2, h3, h4, h5, h6 {
 	
 }
 
-.dynamic-float {
-	/*@media (max-width: 979px) {
-		float: none;
-		display: block;
-		width: 100%;
-		margin-left: 0;
-	}*/
-}
 
 .app-image {
 
 	width: 220px;
-	height: 400px;
+	height: 370px;
 	background-repeat: no-repeat;
 	background-position: center;
 	position: relative;	
@@ -134,14 +123,14 @@ h1, h2, h3, h4, h5, h6 {
 
 
 	@media (max-width: 979px) and (min-width: 768px) {
-		width: 220px;
-		height: 400px;
+		/*width: 220px;
+		height: 370px;*/
 	}
 
 	/* Large desktop */
 	@media (min-width: 1200px) { 
 		width: 280px;
-		height: 500px;
+		height: 470px;
 	 }
 	 
 	/* Portrait tablet to landscape and desktop */
@@ -152,9 +141,8 @@ h1, h2, h3, h4, h5, h6 {
 	 
 	/* Landscape phone to portrait tablet */
 	@media (max-width: 767px) { 
-
-	/*	width: 150px;
-		height: 300px;*/
+		width: 180px;
+		height: 300px;
 	 }
 	 
 	/* Landscape phones and down */

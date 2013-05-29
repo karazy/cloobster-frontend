@@ -1,13 +1,13 @@
 
 $('#moveDown').click(function() {
 	$('html, body').animate({
-		scrollTop: $('body').height()//$(".footer").offset().top
+		scrollTop: $('#slide2').offset().top // $('body').height()//$(".footer").offset().top
 	}, 1000);
 });
 
 $('#moveDown2, #starBadge').click(function() {
     $('html, body').animate({
-        scrollTop: $('body').height()*2
+        scrollTop: $('#slide3').offset().top
     }, 1000);
 });
 
