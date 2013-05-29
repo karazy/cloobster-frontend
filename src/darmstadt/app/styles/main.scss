@@ -84,7 +84,14 @@ h1, h2, h3, h4, h5, h6 {
 			text-align: left;
 		}
 
-		@media (max-width: 767px) { 
+	/*	@media (max-width: 979px) {
+			float: none;
+			display: block;
+			width: 100%;
+			margin-left: 0;
+		}*/
+
+		@media (max-width: 979px) { 
 			padding-top: 100px;
 			width: 100px;
 		}
@@ -93,12 +100,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .dynamic-float {
-	@media (max-width: 979px) {
+	/*@media (max-width: 979px) {
 		float: none;
 		display: block;
 		width: 100%;
 		margin-left: 0;
-	}
+	}*/
 }
 
 .app-image {
@@ -156,7 +163,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .demo-text {
 	text-align: left;
-	margin: 50px 30px 0 0;
+	margin-top: 50px;
 	float: left;
 }
 
