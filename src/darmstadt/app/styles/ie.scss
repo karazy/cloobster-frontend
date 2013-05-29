@@ -1,0 +1,23 @@
+.app-image {
+
+	&.left {
+		background-image: none;			
+		/*Prevent problems of IE8 with background-size*/
+		-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/app_screenshot.png', sizingMethod='scale')";
+	}
+
+	&.right {
+		background-image: none;
+		/*Prevent problems of IE8 with background-size*/
+		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../images/app_screenshot.png', sizingMethod='scale');
+    	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../images/app_screenshot.png', sizingMethod='scale')";
+	}
+
+}
+
+.star-badge {
+	background-image: none;
+	/*Prevent problems of IE8 with background-size*/
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../images/star-badge.png', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../images/star-badge.png', sizingMethod='scale')";
+}
