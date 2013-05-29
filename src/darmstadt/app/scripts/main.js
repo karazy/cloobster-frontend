@@ -36,7 +36,7 @@ function setupScrollFading(config) {
     }
 
     $(window).bind('scroll', function(){
-        var offset = $('body').scrollTop(),
+        var offset = $(document).scrollTop(),
             opacity = 0,
             diff1, diff2;
 

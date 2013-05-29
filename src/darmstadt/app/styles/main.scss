@@ -3,6 +3,7 @@ $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 
 $text-color: #3F4326;
 $teaser-color: #F79546;
+$bg-color: #E6F1FB;
 
 @import 'sass-bootstrap/lib/bootstrap';
 @import 'sass-bootstrap/lib/responsive';
@@ -10,8 +11,9 @@ $teaser-color: #F79546;
 html, body {
     width:100%;
     height:100%;
-    min-width: 800px;
+    /*min-width: 800px;*/
     padding-top: 2px;
+    background-color: $bg-color !important;
 
     background: -moz-linear-gradient(top,  rgba(176,212,232,1) 1%, rgba(125,185,232,0) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,rgba(176,212,232,1)), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
@@ -22,7 +24,7 @@ html, body {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b0d4e8', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
 	background-repeat: no-repeat;
 
-	color: $text-color;
+	color: $text-color;	
 }
 
 .container-fluid {
@@ -100,7 +102,6 @@ html, body {
 
 	width: 220px;
 	height: 400px;
-	background-size: 100%;
 	background-repeat: no-repeat;
 	background-position: center;
 	position: relative;
@@ -108,15 +109,18 @@ html, body {
 
 	&.left {
 		background-image: url('../images/app_screenshot.png');			
-		/*Prevent problems of IE8 with background-size*/
-		-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/app_screenshot.png', sizingMethod='scale')";
 	}
 
 	&.right {
 		background-image: url('../images/app_screenshot.png');
-		/*Prevent problems of IE8 with background-size*/
-		-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/app_screenshot.png', sizingMethod='scale')";		
 	}
+
+	-webkit-background-size: 100% 100%;   /* Safari 3.0 */
+    -moz-background-size: 100% 100%;      /* Gecko 1.9.2 (Firefox 3.6) */
+	-o-background-size: 100% 100%;        /* Opera 9.5 */
+  	background-size: 100% 100%;           /* Gecko 2.0 (Firefox 4.0) and other CSS3-compliant browsers */
+
+
 
 	@media (max-width: 979px) and (min-width: 768px) {
 		width: 220px;
@@ -125,7 +129,7 @@ html, body {
 
 	/* Large desktop */
 	@media (min-width: 1200px) { 
-		width: 300px;
+		width: 280px;
 		height: 500px;
 	 }
 	 
@@ -263,7 +267,6 @@ html, body {
 
 	.user-image {
 		float: left;
-		margin-right: 10px;
 
 		img {
 			width: 75px;
@@ -274,6 +277,7 @@ html, body {
 	.user-quote {
 		font-size: 12px;
 		font-style: italic;
+		margin-left: 85px;
 	}	
 
 	.user-name {
