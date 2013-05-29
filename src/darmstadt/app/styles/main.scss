@@ -27,26 +27,8 @@ html, body {
 	color: $text-color;	
 }
 
-.container-fluid {
-	padding: 0;
-}
-
-#bg {
-	background: -moz-linear-gradient(top,  rgba(176,212,232,1) 1%, rgba(125,185,232,0) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,rgba(176,212,232,1)), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba(176,212,232,1) 1%,rgba(125,185,232,0) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba(176,212,232,1) 1%,rgba(125,185,232,0) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba(176,212,232,1) 1%,rgba(125,185,232,0) 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba(176,212,232,1) 1%,rgba(125,185,232,0) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b0d4e8', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
-
-	height: 100%;
-	width: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	/*z-index: -1;*/
-	
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
 }
 
 .fullscreen {
@@ -56,12 +38,13 @@ html, body {
 	min-height: 800px;
 
 	@media (max-width: 767px) { 
-		min-height: 1400px;
+		min-height: auto;
+		height: auto;
 	}
 }
 
 .header {
-	margin-bottom: 50px;
+	margin-bottom: 27px;
 }
 
 .footer {
@@ -75,11 +58,17 @@ html, body {
 
 	.image-text {
 		color: $text-color;
-		padding-top: 250px;
+		padding-top: 240px;
+		width: 230px;
 		float:left;
 
+		h4 {
+			font-weight: bold;
+		}
+
 		&.left {
-			text-align: right;			
+			text-align: right;	
+			float: right;			
 		}
 
 		&.right {
@@ -104,15 +93,16 @@ html, body {
 	height: 400px;
 	background-repeat: no-repeat;
 	background-position: center;
-	position: relative;
-	float:left;	
+	position: relative;	
 
 	&.left {
-		background-image: url('../images/app_screenshot.png');			
+		background-image: url('../images/app_screenshot.png');	
+		float: right;		
 	}
 
 	&.right {
 		background-image: url('../images/app_screenshot.png');
+		float:left;	
 	}
 
 	-webkit-background-size: 100% 100%;   /* Safari 3.0 */
@@ -151,7 +141,7 @@ html, body {
 }
 
 .demo-text {
-	text-align: right;
+	text-align: left;
 	margin: 50px 30px 0 0;
 	float: left;
 }
@@ -175,7 +165,7 @@ html, body {
 	background-position: center;
 	position: absolute;
 	left: -15px;
-	top: -15px;
+	top: 5px;
 	cursor: pointer;
 }
 
@@ -199,12 +189,12 @@ html, body {
 }
 
 .badges {
-	float: left;
-	margin-top: 30px;
+	float: right;
+	margin-top: 45px;
 
 	a {
 		img {
-			width: 120px;
+			width: 86px;
 			height: auto;
 			display: block;
 			margin-bottom: 5px;
@@ -225,20 +215,20 @@ html, body {
 }	
 
 .move-down {
-	width: 100px;
-	height: 50px;
-	background-color: $text-color;
+	width: 90px;
+	height: 40px;
+	background-color: lighten($text-color, 30%);
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	cursor: pointer;
 	text-align: center;
 	font-size: 30px;
-	line-height: 50px;
+	line-height: 40px;
 	vertical-align: center;
 	color: white;
 
 	&:hover {
-		background-color: lighten($text-color, 30%);
+		background-color: $text-color;
 	}
 
 	@media (max-width: 979px) { 
@@ -322,7 +312,6 @@ html, body {
 
 .teaser {
 	border-radius: 5px;
-	border: 1px solid blue;
 	padding: 5px;
 	margin-bottom: 10px;
 	text-align: center;
@@ -344,6 +333,7 @@ html, body {
 	h3 {
 		margin-top: 3px;
 		line-height: 25px;
+		font-size: 23px;
 	}
 
 	h5 {
