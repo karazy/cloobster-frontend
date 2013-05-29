@@ -164,7 +164,7 @@ h1, h2, h3, h4, h5, h6 {
 .demo-text {
 	text-align: left;
 	margin-top: 50px;
-	float: left;
+	/*float: left;*/
 }
 
 .demo-spot {
@@ -172,9 +172,9 @@ h1, h2, h3, h4, h5, h6 {
 	padding: 0;
 	float: left;
 
-	/*position: absolute;*/
-	/*right: 0;*/
-	/*bottom: 0;*/
+	@media (max-width: 979px) { 
+		width: 100px;
+	}
 }
 
 .star-badge {
