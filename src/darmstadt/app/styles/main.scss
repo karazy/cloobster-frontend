@@ -67,8 +67,9 @@ h1, h2, h3, h4, h5, h6 {
 
 	.image-text {
 		color: $text-color;
-		padding-top: 200px;
-		width: 230px;
+		padding-top: 180px;
+		/*width: 230px;*/
+		width: 125px;
 		float:left;
 
 		h4 {
@@ -83,13 +84,18 @@ h1, h2, h3, h4, h5, h6 {
 		&.right {
 			text-align: left;
 		}
-		
+
 		@media (min-width: 1200px) { 
 			padding-top: 230px;
 	 	}
 
 		@media (max-width: 979px) { 
+			h4 {
+				font-size: 14px;
+			}
+
 			padding-top: 100px;
+			font-size: 12px;
 			width: 100px;
 		}
 	}
@@ -310,7 +316,7 @@ h1, h2, h3, h4, h5, h6 {
 	.text {
 		line-height: $counterSize;
 		font-size: $counterSize/2;
-		vertical-align: center;
+		margin-left: 50px;
 	}
 
 	.subtext {
