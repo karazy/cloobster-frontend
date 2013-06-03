@@ -24,8 +24,21 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		},
 		defaultPaymentMethod = {
 			name: langService.translate("paymentmethod.new.default.name") || "New payment method"
-		};
-
+		},
+		/** Google Map options */
+		mapOptions = {
+			// center on Darmstadt for now
+    	center: new google.maps.LatLng(49.882247,8.652023),
+    	zoom: 8,
+    	mapTypeId: google.maps.MapTypeId.ROADMAP
+  	},
+  	/** reference to the Google Map */
+  	map,
+  	/** For geocoding searches */
+  	geocoder,
+  	/** Map marker*/
+  	marker;
+ 	
 	/** Resource for CRUD on businesses. */	
 	$scope.businessResource = null;
 	/** Template resource used to create concrete image resources. */
@@ -163,6 +176,12 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 			$scope.loadBusinessSubscriptions($scope.activeBusiness);
 			
+			// init map
+			initMap();
+			// Center Google Map
+			centerOnLocation($scope.activeBusiness);
+
+			registerAddressWatch();
 
 		}, handleError);
 	};
@@ -586,7 +605,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 			$scope.company = Company.buildResource().get({
 				'id': loginService.getAccount()['companyId']
-			},angular.noop, handleError);
+			}, angular.noop, handleError);
 
 			//load business details
 			if($routeParams['businessId']) {
@@ -611,6 +630,57 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		content: langService.translate("business.help.paymentmethod.popover")
 	});
 
+	// Watch the address of the active business for changes
+	function registerAddressWatch() {
+		$scope.$watch('activeBusiness.address + activeBusiness.postcode + activeBusiness.city', function(newValue, oldValue) {
+			if(newValue !== oldValue) {
+				centerOnLocation($scope.activeBusiness);
+			}
+		});
+	}
+
+ 	// Init Map
+ 	function initMap () {
+ 		map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+	  geocoder = new google.maps.Geocoder();
+
+	  // register click event
+	  google.maps.event.addListener(map, 'click', function(e) {
+    	placeMarker(e.latLng);
+  	});
+ 	}
+
+ 	// Place map marker on the specified position
+ 	function placeMarker(position) {
+ 		// remove previous marker
+ 		if(marker) {
+ 			marker.setMap(null);
+ 		}
+
+  	marker = new google.maps.Marker({
+  	  position: position,
+	    map: map
+  	});
+
+  	map.panTo(position);
+	}
+  
+  // Center the google map based on given location address
+	function centerOnLocation(location) {
+	  var address = location.address + ' ' + location.postcode + ' ' + location.city;
+	
+	  geocoder.geocode( { 'address': address}, function(results, status) {				  	
+	    if (status == google.maps.GeocoderStatus.OK) {
+	    	$scope.activeCoords = results[0].geometry.location;
+	    	map.setZoom(14);
+	    	map.setCenter(results[0].geometry.location);	      	
+
+	    	placeMarker(results[0].geometry.location);
+	    } else {
+	    	console.log('Cloobster.Business: Geocode was not successful for the following reason ' + status);
+	    }
+	  });
+	}
 
 };
 
