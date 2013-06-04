@@ -544,6 +544,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Postleitzahl",
 			"EN" : "Zip code"
 		},
+		"business.detail.coordinates" : {
+			"DE" : "Koordinaten",
+			"EN" : "Coordinates"
+		},
 		"business.detail.phone" : {
 			"DE" : "Telefon",
 			"EN" : "Phone"

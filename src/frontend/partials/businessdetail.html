@@ -123,12 +123,17 @@
 					</div>
 				</div>
 			</div>
-				</div>
+			</div>
+			<div class="data-element">
+				<div class="key" l="business.detail.coordinates">Koordinaten</div>
+				<div class="value">{{activeBusiness.geoLat | number:6}}, {{activeBusiness.geoLong | number:6}}</div>
 			</div>
 
-		
+			</div>
+
+			<div id="map-canvas" style="height: 500px"></div>
 		</div>
-		<div id="map-canvas" style="height: 500px"></div>
+		
 		<div class="data-container-block data-container-seperator" id="subscriptionBlock" name="subscriptionBlock">
 			
 			<h3 l="business.detail.section.subscription">Subscription Management</h3>
