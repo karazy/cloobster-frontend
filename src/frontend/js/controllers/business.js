@@ -716,7 +716,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	    			$scope.$digest();	
 	    		}
 	    		catch(e) {
-	    			console.log('Cloobster.Business.centerOnLocation: Skipped $scope.digest()');
+	    			$log.info('Cloobster.Business.centerOnLocation: Skipped $scope.digest()');
 	    		}
 	    		
 	    		$scope.saveBusiness();
@@ -726,7 +726,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	    	map.setCenter(results[0].geometry.location);
 	    	placeMarker(results[0].geometry.location);
 	    } else {
-	    	console.log('Cloobster.Business.centerOnLocation: Geocode was not successful for the following reason ' + status);
+	    	$log.error('Cloobster.Business.centerOnLocation: Geocode was not successful for the following reason ' + status);
 	    }
 	  });
 	}
