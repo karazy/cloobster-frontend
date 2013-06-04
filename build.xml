@@ -104,8 +104,8 @@
 				<file name="jquery/jquery.imgareaselect.pack.js" />
 				<file name="bootstrap/bootstrap.min.js" />
 				<file name="bootstrap/bootstrapSwitch.js" />
-				<file name="angular/angular-resource-1.0.1.min.js" />
-				<file name="angular/angular-sanitize-1.0.1.min.js" />
+				<file name="angular-1.0.7/angular-resource.min.js" />
+				<file name="angular-1.0.7/angular-sanitize.min.js" />
 				<file name="angular-ui-0.4.0/build/angular-ui.min.js" />
 			</filelist>
 		</copy>
