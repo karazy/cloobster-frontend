@@ -47,6 +47,12 @@
 					<div class="value">{{activeBusiness.email}}</div>
 				</div>
 			</div>
+			<div simple-property-editor editor-title="business.detail.phone" editor-property="activeBusiness.phone" editor-on-save="saveBusiness()"  editor-placeholder="registration.form.businessphone.placeholder">
+				<div class="data-element edit">
+					<div class="key" l="business.detail.phone">Phone</div>
+					<div class="value">{{activeBusiness.phone}}</div>
+				</div>
+			</div>
 			<div simple-property-editor editor-title="business.detail.address" editor-property="activeBusiness.address" editor-on-save="saveBusiness()"  editor-required editor-placeholder="registration.form.address.placeholder">
 				<div class="data-element edit">
 					<div class="key" l="business.detail.address">Address</div>
@@ -63,12 +69,6 @@
 				<div class="data-element edit">
 					<div class="key" l="business.detail.postcode">Postcode</div>
 					<div class="value">{{activeBusiness.postcode}}</div>
-				</div>
-			</div>
-			<div simple-property-editor editor-title="business.detail.phone" editor-property="activeBusiness.phone" editor-on-save="saveBusiness()"  editor-placeholder="registration.form.businessphone.placeholder">
-				<div class="data-element edit">
-					<div class="key" l="business.detail.phone">Phone</div>
-					<div class="value">{{activeBusiness.phone}}</div>
 				</div>
 			</div>
 				</div>
@@ -125,7 +125,7 @@
 			</div>
 			</div>
 			<div class="data-element">
-				<div class="key" l="business.detail.coordinates">Koordinaten</div>
+				<div class="key" id="coordinatesLabel"><span l="business.detail.coordinates">Koordinaten</span> <i class="icon-question-sign"></i></div>
 				<div class="value">{{activeBusiness.geoLat | number:6}}, {{activeBusiness.geoLong | number:6}}</div>
 			</div>
 

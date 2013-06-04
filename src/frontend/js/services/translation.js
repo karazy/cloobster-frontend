@@ -448,6 +448,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Legen Sie hier fest, welche Möglichkeiten der Gast hat, den Check-In abzuschliessen (Z. B. auf Hotelrechnung, Bar).",
 			"EN" : "Here you can define the options a customer has to complete the check-in (e.g. hotel bill, cash)."
 		},
+		"business.help.coordinates.popover" : {
+			"DE" : "Koordinaten werden aus der Addresse generiert, und können manuell per Klick auf die Karte unten angepasst werden.",
+			"EN" : "Coordinates are generated from the location address and can be manually modified by clicking on the map below."
+		},
 		"business.action.edit.enable" : {
 			"DE" : "Location editieren",
 			"EN" : "Enable edit mode"

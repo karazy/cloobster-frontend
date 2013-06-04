@@ -636,6 +636,15 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		content: langService.translate("business.help.paymentmethod.popover")
 	});
 
+	//initialize coordinates symbol help
+	jQuery('#coordinatesLabel').popover({
+		placement: 'right',
+		title: langService.translate("common.help"),
+		trigger: 'hover',
+		html: true,
+		content: langService.translate("business.help.coordinates.popover")
+	});
+
 	// Watch the address of the active business for changes
 	function registerAddressWatch() {
 		$scope.$watch('activeBusiness.address + activeBusiness.postcode + activeBusiness.city', function(newValue, oldValue) {
