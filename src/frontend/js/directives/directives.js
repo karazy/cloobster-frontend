@@ -92,6 +92,8 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 		        post: function postLink(scope, iElement, iAttrs, controller) {
 		        	var dialog = iElement.find('div.modal'),
 			        		dialogBody = dialog.find('div.modal-body'),
+			        		dialogHeader = dialog.find('div.modal-header'),
+			        		dialogFooter = dialog.find('div.modal-footer'),
 			        		fileList = iElement.find('.selected-files'),
 			        		uploadInput = iElement.find('form[name=simpleImageForm]'),
 			        		imageElement = iElement.find('img.active-image'),
@@ -408,13 +410,13 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 	        				uploadObject = uploadService.getFileUploadObject(uploadInput, scope.editorImageResource, fileAddedCallback, fileUploadedCallback, fileUploadProgressCallback);
 
 	   							dialog.modal({
-	   								'keyboard': false,
+	   								'keyboard': false,	
 	   								'backdrop': 'static'	   		
 	   							});
 	   							dialog.modal('show');
 
 							if(editorCropText) {
-								modalBodyHeight = ($(window).height() * .8) + 'px';
+								modalBodyHeight = (($(window).height() - dialogFooter.height() - dialogHeader.height())* .9) + 'px';
 								dialogBody.css('height', modalBodyHeight);
 
 								dialogBody.css('max-height', modalBodyHeight);
