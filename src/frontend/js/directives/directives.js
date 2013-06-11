@@ -416,7 +416,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 	   							dialog.modal('show');
 
 							if(editorCropText) {
-								modalBodyHeight = (($(window).height() - dialogFooter.height() - dialogHeader.height())* .9) + 'px';
+								modalBodyHeight = (($(window).height() - dialogFooter.outerHeight() - dialogHeader.outerHeight() - 0.2 * $(window).height())) + 'px';
 								dialogBody.css('height', modalBodyHeight);
 
 								dialogBody.css('max-height', modalBodyHeight);
