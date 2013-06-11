@@ -60,8 +60,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Settings"
 		},
 		"businesses.headertabs.categories" : {
-			"DE" :  "Produkte",
-			"EN" : "Products"
+			"DE" : "Angebote",
+			"EN" : "Offers"
 		},
 		"businesses.headertabs.accounts" : {
 			"DE" :  "Benutzerkonten",
@@ -2250,8 +2250,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Tile types"
 		},
 		"appconfig.tiles.list.description" : {
-			"DE" :  "Liste aller verfügbaren Kacheltypen. Fügen Sie diese einfach per <b>Drag&Drop</b> auf die leere Kachel rechts hinzu. Sie können maximal 20 Kacheln platzieren.",
-			"EN" : "List of all available tiles. Just add them via <b>drag & drop</b> on the empty tile to the right. You can add a maximum of 20 tiles."
+			"DE" : "Liste aller verfügbaren Kacheltypen. Fügen Sie diese einfach per <b>Drag&Drop</b> auf die leere Kachel rechts hinzu. Sie können maximal 10 Kacheln platzieren.",
+			"EN" : "List of all available tiles. Just add them via <b>drag & drop</b> on the empty tile to the right. You can add a maximum of 10 tiles."
 		},
 		"appconfig.tilesconfig.list.title" : {
 			"DE" :  "Dashboard Vorschau",
