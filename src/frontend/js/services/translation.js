@@ -360,8 +360,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Spots"
 		},
 		"businesses.action.menus" : {
-			"DE" : "Produkte",
-			"EN" : "Products"
+			"DE" : "Angebote",
+			"EN" : "Offers"
 		},
 		"businesses.action.documents" : {
 			"DE" :  "Dokumente",
