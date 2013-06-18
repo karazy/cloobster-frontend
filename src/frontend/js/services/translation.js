@@ -68,8 +68,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "User Accounts"
 		},
 		"businesses.headertabs.activation" : {
-			"DE" :  "Produkte zuweisen",
-			"EN" : "Assign products"
+			"DE" :  "Angebote zuweisen",
+			"EN" : "Assign offers"
 		},
 		"businesses.headertabs.areas" : {
 			"DE" :  "Spots",
@@ -915,8 +915,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Categories"
 		},		
 		"menu.container.hint" : {
-			"DE" :  "Bitte vergessen Sie nicht, die Kategorie im Tab <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"Produkte zuweisen\"</a> einem Servicebereich zuzuweisen.",
-			"EN" : "Don't forget to <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"product assign\"</a>assign this category to a service area afterwards."
+			"DE" :  "Bitte vergessen Sie nicht, die Kategorie im Tab <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"Angebote zuweisen\"</a> einem Servicebereich zuzuweisen.",
+			"EN" : "Don't forget to <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"Assign offers\"</a>assign this category to a service area afterwards."
 		},
 		"menu.container.title" : {
 			"DE" : "Kategorie editieren",
