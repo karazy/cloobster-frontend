@@ -57,7 +57,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 						 		'<div class="progress progress-success" ng-show="fileUploading">'+
 									'<div class="bar" ng-style="barStyle"></div>'+
 								'</div>'+
-						 		'<img ng-src="{{imageUrl}}" style="max-width: 800px; display: block; clear: both; padding-top: 10px;">'+
+						 		'<img ng-show="imageUrl" ng-src="{{imageUrl}}" style="max-width: 800px; display: block; clear: both; padding-top: 10px;">'+
 					 		'</div>'+
 					 		'<div class="crop-area" ng-show="selectionActive">'+
 					 			'<p>'+langService.translate(attrs.editorCropText)+'</p>'+
