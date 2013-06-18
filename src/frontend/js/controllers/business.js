@@ -24,8 +24,21 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		},
 		defaultPaymentMethod = {
 			name: langService.translate("paymentmethod.new.default.name") || "New payment method"
-		};
-
+		},
+		/** Google Map options */
+		mapOptions = {
+			// center on Darmstadt for now
+    	center: new google.maps.LatLng(49.882247,8.652023),
+    	zoom: 8,
+    	mapTypeId: google.maps.MapTypeId.ROADMAP
+  	},
+  	/** reference to the Google Map */
+  	map,
+  	/** For geocoding searches */
+  	geocoder,
+  	/** Map marker*/
+  	marker;
+ 	
 	/** Resource for CRUD on businesses. */	
 	$scope.businessResource = null;
 	/** Template resource used to create concrete image resources. */
@@ -163,6 +176,18 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 			$scope.loadBusinessSubscriptions($scope.activeBusiness);
 			
+			// init map
+			initMap($scope.activeBusiness);
+
+			if(!$scope.activeBusiness.geoLat && !$scope.activeBusiness.geoLong) {
+				centerOnLocation($scope.activeBusiness, true);				
+			}
+			else {
+				map.setZoom(14);
+			}
+
+			// Center Google Map
+			registerAddressWatch();
 
 		}, handleError);
 	};
@@ -586,7 +611,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 			$scope.company = Company.buildResource().get({
 				'id': loginService.getAccount()['companyId']
-			},angular.noop, handleError);
+			}, angular.noop, handleError);
 
 			//load business details
 			if($routeParams['businessId']) {
@@ -611,6 +636,100 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		content: langService.translate("business.help.paymentmethod.popover")
 	});
 
+	//initialize coordinates symbol help
+	jQuery('#coordinatesLabel').popover({
+		placement: 'right',
+		title: langService.translate("common.help"),
+		trigger: 'hover',
+		html: true,
+		content: langService.translate("business.help.coordinates.popover")
+	});
+
+	// Watch the address of the active business for changes
+	function registerAddressWatch() {
+		$scope.$watch('activeBusiness.address + activeBusiness.postcode + activeBusiness.city', function(newValue, oldValue) {
+			if(newValue !== oldValue) {
+				centerOnLocation($scope.activeBusiness, true);
+			}
+		});
+	}
+
+ 	// Init Map
+ 	function initMap (location) {
+ 		var hasGeoLocation = false;
+ 		if(location && location.geoLat && location.geoLong) {
+ 			// center map on geo location, if exists
+ 			mapOptions.center = new google.maps.LatLng(location.geoLat, location.geoLong); 			
+ 			hasGeoLocation = true;
+ 		}
+
+ 		map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+ 		map.setZoom(14);
+	  geocoder = new google.maps.Geocoder();
+
+	  // register click event
+	  google.maps.event.addListener(map, 'click', function(e) {
+    	placeMarker(e.latLng);
+    	setCoordsOnActiveBusiness(e.latLng);    	
+    	$scope.$digest();
+    	$scope.saveBusiness();
+  	});
+
+  	if(hasGeoLocation) {
+  		placeMarker(mapOptions.center);  		
+  	}
+ 	}
+
+ 	// Place map marker on the specified position
+ 	function placeMarker(position) {
+ 		// remove previous marker
+ 		if(marker) {
+ 			marker.setMap(null);
+ 		}
+
+  	marker = new google.maps.Marker({
+  	  position: position,
+	    map: map
+  	});
+
+  	map.panTo(position);
+
+	}
+
+	// Set geoLat and geoLong fields for the activeBusiness
+	function setCoordsOnActiveBusiness(latLng) {
+		if(latLng) {
+			$scope.activeBusiness.geoLat = latLng.lat();
+			$scope.activeBusiness.geoLong = latLng.lng();
+		}
+	}
+  
+  // Center the google map based on given location address
+	function centerOnLocation(location, setCoordsOnLocation) {
+	  var address = location.address + ' ' + location.postcode + ' ' + location.city;
+
+	  geocoder.geocode( { 'address': address}, function(results, status) {				  	
+	    if (status == google.maps.GeocoderStatus.OK) {
+	    	if(setCoordsOnLocation) {
+	    		setCoordsOnActiveBusiness(results[0].geometry.location);
+	    		try {
+	    			$scope.$digest();	
+	    		}
+	    		catch(e) {
+	    			$log.info('Cloobster.Business.centerOnLocation: Skipped $scope.digest()');
+	    		}
+	    		
+	    		$scope.saveBusiness();
+	    	}
+	    	$scope.activeCoords = results[0].geometry.location;
+	    	map.setZoom(14);
+	    	map.setCenter(results[0].geometry.location);
+	    	placeMarker(results[0].geometry.location);
+	    } else {
+	    	$log.error('Cloobster.Business.centerOnLocation: Geocode was not successful for the following reason ' + status);
+	    }
+	  });
+	}
 
 };
 

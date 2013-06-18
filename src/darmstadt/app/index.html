@@ -6,162 +6,278 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>cloobster - Dein Laden In Deiner Hand</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <link rel="stylesheet" href="styles/main.css">
+        <!--[if IE 7]> <link rel="stylesheet" href="styles/ie.css"> <![endif]-->
+        <!--[if IE 8]> <link rel="stylesheet" href="styles/ie.css"> <![endif]-->
         <!-- build:js scripts/vendor/modernizr.js -->
         <script src="bower_components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
     </head>
     <body>        
-        <div class="container" style="height: 100%;">
-            <div class="row fullscreen">
-                
-                <div class="span12">
-                    <div class="header">
-                        <h3>Bau Dir Deine App</h3>
-                        <h1>Dein Laden In Deiner Hand</h1>
-                        <h5>Infos ★ Angebote ★ Bestellen ★ Feedback ★ Facebook</h5>                    
+        <div class="container" style="height: 100%;" id="content">
+            <div class="row fullscreen">                
+                <div class="row" style="padding-top: 10px;"> 
+                    <div class="span12">
+                        <!-- <a href="http://www.cloobster.com"><img src="images/cloobster-brand.png"></img></a> -->
+                        <div class="pull-right">
+                            <a class="btn btn-primary" href="https://admin.cloobster.com#registration" target="_blank">Registrieren</a>
+                            <a class="btn btn-primary" href="https://admin.cloobster.com" target="_blank">Login</a>
+                        </div>
                     </div>
+                </div>
+
+                <div class="span12">                    
+                    <div class="row">
+                        <div class="offset2 span10 header">                        
+                        <h1>Dein Geschäft In Deiner Hand</h1>
+                        <h4>Die eigene App für Läden ★ Restaurants ★ Cafés ★ Hotels ★ Galerien ★ Agenturen</h4>                                          
+                    </div>
+                    </div>                    
                     <div class="images" style="position: relative">
-                        <div class="image-text left">
-                            <div>
-                                <h4>Inklusive</h4>
-                                Ein eigener<br/>QR Code
-                            </div>
+                        <div class="row">
+                        <div class="span6 dynamic-float">
+                            <div style="">
+                                <div class="app-image left">
+                                    <div class="star-badge" id="starBadge"></div>
+                                </div>
+                                <div class="image-text left">
+                                    <div>
+                                        <h4>Für<br/>Ladenbesitzer</h4>
+                                        <p>Alle Deine Infos und Angebote, Bewertungen, Facebook und Dein eigener QR Code.</p>
+                                       <!--  Alle Deine Infos<br/>
+                                        und Angebote.<br/>
+                                        Bewertungen,<br/>
+                                        Facebook und Dein<br/>
+                                        eigener QR Code. -->                                        
+                                    </div>
+                                </div>
+                             </div>
+                             <div class="clear"></div>
                         </div>
-                        <div class="app-image left">
-                            <div class="star-badge" id="starBadge"></div>
-                        </div>
-                        <div class="app-image right"></div>
-                        <div class="image-text right">
-                            <div>
-                                <h4>ToVisit</h4>
-                                Merk dir<br/>deine Lieblingsläden.
+
+                        <div class="span6 dynamic-float">
+                            <!-- <div class="clear"></div> -->
+                                <div>
+                                    <div class="app-image right"></div>
+                                    <div class="image-text right">
+                                        <div>
+                                            <h4>Für<br/>Ladenliebhaber</h4>
+                                            <!-- Erstelle eine ToVisit<br/> Liste und merke Dir wo<br/> Du unbedingteinmal <br/> hin möchtest. (coming <br> soon) -->
+                                            Erstelle eine ToVisit Liste und merke Dir, wo Du unbedingt einmal hin möchtest. (coming soon)
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="clear"></div>
                             </div>
                         </div>
                     </div>
                     <div class="clear"></div>
-                   <!--  <div class="demo-wrapper">
-                        <div class="demo-arrow"></div>
-                        <div class="demo-spot">
-                            <img src="images/demo_spot.png">
-                        </div>
-                    </div> -->
-                    <div class="move-down push-bottom" id="moveDown">
-                        ↓
+                    <div class="row">
+                           <div class="offset2 span10">
+                            <div class="row">
+                                <div class="span7">
+                                <div class="demo-spot">
+                                    <img src="images/demo_spot.png">
+                                </div>
+                                <div class="demo-text">
+                                    <h4>&#8592; Teste die App mit dem QR-Code</h4>
+                                    <h5>Infos ★ Angebote ★ Bestellen ★ Feedback ★ Facebook</h5>
+                                </div>
+                                </div>
+                                <div class="span3 badges">
+                                    <a href="https://play.google.com/store/apps/details?id=net.karazy.cloobster" target="blank"><img src="images/googleplay_button.png" alt="Hotel App" title="Hotel App">
+                                      </a>
+                                        <a href="https://itunes.apple.com/de/app/cloobster/id532351667?mt=8" target="blank"><img src="images/appstore_button.png" alt="Hotel App" title="Hotel App"></a>
+                                </div> 
+                            </div>
+                            </div>
+                            <div class="clear"></div>
                     </div>
                 </div>                
+                <div class="move-down push-bottom" id="moveDown">
+                ↓
             </div>
-            <div class="row footer" style="margin-top: 40px;">
-                <div class="span12">
-                   <div class="badges">
-                    <a href="https://play.google.com/store/apps/details?id=net.karazy.cloobster" target="blank"><img src="images/googleplay_button.png" alt="Hotel App" title="Hotel App">
-                      </a>
-                        <a href="https://itunes.apple.com/de/app/cloobster/id532351667?mt=8" target="blank"><img src="images/appstore_button.png" alt="Hotel App" title="Hotel App"></a>
-                   </div>
-                    <div class="push-bottom" style="margin-left:130px;">
-                        <h3>cloobster - Die App für</h3>
-                        <h5>Läden ★ Restaurants ★ Cafés ★ Hotels ★ Galerien ★ Agenturen</h5>
-                    </div>
-                    <div class="demo-spot">
-                        <img src="images/demo_spot.png">
-                    </div>
-                    <div class="clear"></div>
-               </div>               
-            </div>
+            </div>            
             <!-- Infos -->
-            <div class="row">                
-                <div class="span12">
-                    <h3>Die Laden App</h3>
+            <div class="row fullscreen">                
+                <div class="span12" id="slide2">
+                    <div class="row">
+                        <div class="offset2 span10 header" style="margin-top: 50px;">
+                            <h1>Bau Dir Deine App Selbst</h1>
+                            <h4 style="max-width: 515px;">Du hast ein Geschäft? In 4 Schritten zur eigenen App-Präsenz. Für den direkten Draht zum Kunden und mehr Umsatz.</h4>  
+                        </div>
+                    </div>
                     <div class="row">                
-                        <div class="span6">
+                        <div class="offset2 span4">
                             <div class="app-process">
                                 <div class="counter">1</div>
-                                <div class="text">Freischalten/Registrieren</div>
+                                <div class="text">Registriere Dein Geschäft</div>
                             </div>
                             <div class="app-process">
                                 <div class="counter">2</div>
-                                <div class="text">App gestalten</div>
+                                <div class="text">Gestalte Deine App</div>
                             </div>
                             <div class="app-process">
                                 <div class="counter">3</div>
-                                <div class="text">QR-Code plazieren</div>
+                                <div class="text">
+                                    Platziere Deinen QR Code                                 
+                                </div>
+                                <div class="subtext">
+                                    Auf Facebook, Schaufenster, Webseite, Flyer,<br/> Anzeigen, Visitenkarte...
+                                </div>
                             </div>
                             <div class="app-process">
                                 <div class="counter">4</div>
-                                <div class="text">Direkter Draht zum Kunden</div>
+                                <div class="text">Fertig...</div>
                             </div>
                         </div>
-                        <div class="span6">
+                        <div class="span4">
                             <div class="user-example">
                                 <div class="user-image">
                                     <img src="images/user/fred.jpg">
                                 </div>
-                                <div class="user-quote">"Alle Röstungen meiner lieblings Kaffeerösterei parat und endlich nicht mehr die Öffnungszeiten vergessen."
-                                    <div class="user-name">Frederik Reifschneider</div>
+                                <div class="user-quote">"Alle Röstungen meiner Lieblings-Kaffeerösterei parat und endlich nicht mehr die Öffnungszeiten vergessen."
+                                    <div class="user-name">Frederik</div>
                                 </div>
                             </div>
-                             <div class="user-example">
+                            <div class="user-example">
                                 <div class="user-image">
-                                    <img src="images/user/fred.jpg">
+                                    <img src="images/user/annika.jpg">
                                 </div>
-                                <div class="user-quote">"Alle Röstungen meiner lieblings Kaffeerösterei parat und endlich nicht mehr die Öffnungszeiten vergessen."
-                                    <div class="user-name">Frederik Reifschneider</div>
+                                <div class="user-quote">"Immer informiert über die ständig wechselnden Angebote in meinem Lieblingsbistro."
+                                    <div class="user-name">Annika</div>
                                 </div>
                             </div>
-                             <div class="user-example">
+                            <div class="user-example">
                                 <div class="user-image">
-                                    <img src="images/user/fred.jpg">
+                                    <img src="images/user/spo.jpg">
                                 </div>
-                                <div class="user-quote">"Alle Röstungen meiner lieblings Kaffeerösterei parat und endlich nicht mehr die Öffnungszeiten vergessen."
-                                    <div class="user-name">Frederik Reifschneider</div>
+                                <div class="user-quote">"Mit ToVisit coole Locations markieren und nicht mehr vergessen."
+                                    <div class="user-name">Sirko</div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                     <div class="row">
+                       <div class="offset2 span10" style="margin-top: 13px;">
+                            <div class="demo-spot">
+                                <img src="images/demo_spot.png">
+                            </div>
+                            <div class="demo-text">
+                                <h4>&#8592; Schau dir eine Demo App an.</h4>
+                                <h5>Läden ★ Restaurants ★ Cafés ★ Hotels ★ Galerien ★ Agenturen</h5>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    
+                </div>                                               
+                <div class="move-down push-bottom" id="moveDown2">
+                ↓
                 </div>
-            </div>
+            </div>            
             <!-- Gewinnspiel-->
+            <div class="row fullscreen">
+                <div class="span12" id="slide3">
+                    <div class="row">
+                        <div class="offset2 span10 header" style="margin-top: 50px;">
+                            <h1>Registrieren und gewinnen</h1>
+                            <h4>Mach dein Geschäft mobil und probiere deine App unverbindlich</h4>  
+                    </div>
+                </div>
+                <div class="row"> 
+                    <div class="offset2 span4">
+                         <!-- form start -->
+                <script type="text/javascript">var submitted=false;</script>
+                <iframe name="hidden_iframe" id="hidden_iframe"
+              style="display:none;" onload="if(submitted)
+              {window.location='http://www.cloobster.com/confirm.html';}"></iframe>
+              <form action="https://docs.google.com/a/karazy.net/spreadsheet/formResponse?formkey=dGU3NjBra3g3UVJybFVQWlBVZFVXaHc6MQ&amp;ifq" method="POST" id="ss-form" onsubmit="submitted=true;" target="hidden_iframe">
+                     <div class="texttab1">
+                        <input type="text" name="entry.1.single" value="" class="span4 ss-q-short required email" id="entry_1" placeholder="Email">
+                        <input type="text" name="entry.3.single" value="" class="span4 ss-q-short required" id="entry_3" placeholder="Telefon">
+                      </div>
+                      <div class="form-error" id="entry_1_error">
+                      </div>
+                      <div class="textarea1">
+                        <textarea name="entry.2.single" rows="3" cols="75" class="span4 ss-q-long required" id="entry_2" placeholder="Frage"></textarea>           
+                      </div>
+                      <div class="form-error" id="entry_2_error">
+                      </div>
+                      
+                      <input type="submit" name="submit" class="btn btn-primary btn-block" value="Anfragen">   
+                    <input type="hidden" name="pageNumber" value="0">
+                    <input type="hidden" name="backupCache" value="">
+                </form>
+                <!-- form end -->
+
+                    </div>
+
+                    <div class="span4">
+                        <div class="teaser">
+                            <h3>30 Tage kostenlos</h3>
+                            <p>Die App für 1 Monat lang ausprobieren.<br/>
+                                Keine Kündigung nötig.</p>
+                        </div>
+                        <div class="teaser">
+                            <h3>Best App Award</h3>
+                            <p>Gewinne 100€ für die beste App<br/>und 1 Jahr cloobster gratis.<br/>(2. + 3. Platz: 1 Jahr cloobster gratis)</p>
+                        </div>
+                        <a class="btn btn-primary btn-block" href="https://admin.cloobster.com" target="_blank">Kostenlos registrieren</a>                      
+                    </div>
+                </div>
+               
+                <div class="row">
+                    <div class="offset2 span8" style="margin-top:35px;">
+                        <h5>Teilnahmebedingungen Gewinnspiel</h5>
+                         <!-- <a href="" id="abgToggle">(anzeigen|verbergen)</a> -->
+                        <div class="agb">
+                            <ol>
+                                <li>Veranstalter dieses Gewinnspiels ist die Firma Karazy GmbH.</li>
+
+                                <li>Die Teilnahme ist kostenlos. Nach Ablauf des Gewinnspiels kann der Teilnehmer cloobster für 30 Tage kostenlos nutzen. Anschließend wird der Account deaktiviert. Eine weitere Nutzung ist für die regulären monatlichen Gebühren von 14,-€/Monat möglich. cloobster ist monatlich kündbar. Mit der Teilnahme an dem Gewinnspiel akzeptiert der Teilnehmer diese Teilnahmebedingungen.</li> 
+
+                                <li>Teilnahmeberechtigt sind Gewerbe und Personen aus Deutschland. Ist der Teilnehmer eine natürliche Person, so muss diese bei der Teilnahme mindestens 18 Jahre alt sind. Angestellte der Firma Karazy GmbH und andere an der Konzeption und Umsetzung dieses Gewinnspiels beteiligte Personen sind von der Teilnahme ausgeschlossen. Teilnehmer des Gewinnspiels ist das Gewerbe oder diejenige Person, der die eMail-Adresse gehört, die bei der Anmeldung zum Gewinnspiel angegeben worden ist. Es ist pro „Teilnehmer“ nur eine Teilnahme möglich. Eine regelwidrige oder wiederholte Teilnahme eines Teilnehmers an dem Gewinnspiel hat seinen Spielausschluss zur Folge.</li> 
+
+                                <li>Es werden nur die im Gewinnspiel beschriebenen Preise vergeben. Die Vergabe der Preise findet nur unter den Teilnehmern statt, die sich selbständig eine entsprechende App mit cloobster angelegt haben. Das Gewinnspiel endet am 30.06.2013.</li> 
+
+                                <li>Alle eingereichten “Apps” werden auf Facebook veröffentlich. Gewinner ist der Teilnehmer mit den meisten Likes. Der Gewinner eines Preises wird zeitnah unter Verwendung der bei der Anmeldung gemachten weiteren Angaben benachrichtigt. Der Gewinner hat den Erhalt der Gewinnbenachrichtigung unverzüglich, spätestens jedoch bis 31.08.2013 der Firma Karazy GmbH gegenüber zu bestätigen und die von der Firma Karazy GmbH benötigten Angaben zu machen. Andernfalls ist die Firma Karazy GmbH berechtigt, den Gewinn dem jeweils nächst Plazierten zukommen zu lassen. Mit der Annahme des Preises willigt der Gewinner ein, dass sein Name von der Firma Karazy GmbH und mit dieser verbundenen Unternehmen zu Werbezwecken ohne Vergütung verwendet werden darf.</li> 
+
+                                <li>Die Formalitäten zur Übergabe des Hauptgewinns werden mit dem Gewinner individuell geklärt.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div> 
+            </div> 
+            
+        </div>
+
+    <div id="footer">
+      <div class="container">
+        <!-- footer links -->
             <div class="row">
-                <div class="span12">
-                <h3>Darmstadt Gewinnspiel</h3>
-                <p>
-                    Wer baut die beste App Darmstadts?
-                    Einfach anmelden unter http:// .... App bauen Barcode and info@cloobster.com mailen
-                    und gewinnen. blablabla
-                    Hilfestellung nötig? info@cloobster.com oder TEL Nr?
-                </p>
-                <h3>Preise</h3>
-                1. Platz - 100€ und cloobster im Power Paket kostenlos verwenden<br/>
-                2. Platz cloobster kostenlos im Power Paket<br/>
-                3. Platz cloobster kostenlos im Lite Paket<br/>
-                4. alle Teilnehmer cloobster kostenlos für 2 Monate, danach Account deaktivieren oder 14€/Monat zahlen
+                <div class="offset2 span10">
+                    <div class="">
+                      <ul class="nav nav-pills" style="margin-top: 3px; margin-bottom: 5px;">
+                        <li><a href="http://www.cloobster.com/imprint.html">Impressum</a></li>
+                        <li><a href="http://www.cloobster.com/hotel-app-about.html">cloobster</a></li>
+                        <li><a href="http://www.cloobster.com/agb_business.html">Business AGB</a></li>
+                        <li><a href="http://www.cloobster.com/agb_user.html">Nutzer AGB</a></li>
+                        <li><a href="www.cloobster.com/app-fuer-hotels.html">Presse</a></li>
+                        <li><a href="http://www.diehotelapp.de" target="new">Blog</a></li>
+                        <li><a href="http://www.cloobster.com/contact.html">Kontakt</a></li>
+                      </ul>     
+                </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="span12">
-                <h4>Teilnahmebedingungen Gewinnspiel <a href="" id="abgToggle">(anzeigen|verbergen)</a></h4>
-                <div class="agb hidden">
-                    <ol>
-                        <li>Veranstalter dieses Gewinnspiels ist die Firma Karazy GmbH.</li>
-
-                        <li>Die Teilnahme ist kostenlos. Nach Ablauf des Gewinnspiels kann der Teilnehmer cloobster für 2 Monate kostenlos nutzen. Anschließend wird der Account deaktiviert. Eine weitere Nutzung ist für die regulären monatlichen Gebühren von 14,-€/Monat möglich. cloobster ist monatlich kündbar. Mit der Teilnahme an dem Gewinnspiel akzeptiert der Teilnehmer diese Teilnahmebedingungen.</li> 
-
-                        <li>Teilnahmeberechtigt sind Gewerbe und Personen mit Sitz in Darmstadt (Deutschland). Ist der Teilnehmer eine natürliche Person, so muss diese bei der Teilnahme mindestens 18 Jahre alt sind. Angestellte der Firma Karazy GmbH und andere an der Konzeption und Umsetzung dieses Gewinnspiels beteiligte Personen sind von der Teilnahme ausgeschlossen. Teilnehmer des Gewinnspiels ist das Gewerbe oder diejenige Person, der die eMail-Adresse gehört, die bei der Anmeldung zum Gewinnspiel angegeben worden ist. Es ist pro „Teilnehmer“ nur eine Teilnahme möglich. Eine regelwidrige oder wiederholte Teilnahme eines Teilnehmers an dem Gewinnspiel hat seinen Spielausschluss zur Folge.</li> 
-
-                        <li>Es werden nur die im Gewinnspiel näher beschriebenen Preise vergeben. Die Vergabe der Preise findet nur unter den Teilnehmern statt, die sich selbständig eine entsprechende App 
-                         mit cloobster angelegt und diese dann per Mail an info@cloobster.com eingereicht haben. Das Spiel endet am 30.06.2013.</li> 
-
-                        <li>Alle eingereichten “Apps” werden auf Facebook veröffentlich. Gewinner ist der Teilnehmer mit den meisten Likes. Der Gewinner eines Preises wird zeitnah unter Verwendung der bei der Anmeldung gemachten weiteren Angaben benachrichtigt. Der Gewinner hat den Erhalt der Gewinnbenachrichtigung unverzüglich, spätestens jedoch bis 31.08.2013 der Firma Karazy GmbH gegenüber zu bestätigen und die von der Firma Karazy GmbH benötigten Angaben zu machen. Andernfalls ist die Firma Karazy GmbH berechtigt, den Gewinn dem jeweils nächst Plazierten zukommen zu lassen. Mit der Annahme des Preises willigt der Gewinner ein, dass sein Name von der Firma Karazy GmbH und mit dieser verbundenen Unternehmen zu Werbezwecken ohne Vergütung verwendet werden darf.</li> 
-
-                        <li>Die Formalitäten zur Übergabe des Hauptgewinns werden mit dem Gewinner individuell geklärt.</li>
-                    </ol>
-                 </div>
-                </div>
-            </div>           
+      </div>
+    </div>
+        
         </div>
 
         <!-- <div id="bg"></div> -->
@@ -172,7 +288,7 @@
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            var _gaq=[['_setAccount','UA-38809424-1'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
             g.src='//www.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));

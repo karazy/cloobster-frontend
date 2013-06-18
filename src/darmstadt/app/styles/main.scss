@@ -2,14 +2,15 @@ $iconSpritePath: "../images/glyphicons-halflings.png";
 $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 
 $text-color: #3F4326;
+$teaser-color: #F79546;
+$bg-color: #E6F1FB;
 
 @import 'sass-bootstrap/lib/bootstrap';
+@import 'sass-bootstrap/lib/responsive';
 
 html, body {
-    width:100%;
     height:100%;
-    min-width: 800px;
-    padding-top: 2px;
+    background-color: $bg-color !important;
 
     background: -moz-linear-gradient(top,  rgba(176,212,232,1) 1%, rgba(125,185,232,0) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,rgba(176,212,232,1)), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
@@ -20,41 +21,39 @@ html, body {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b0d4e8', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
 	background-repeat: no-repeat;
 
-	color: $text-color;
+	color: $text-color;	
 }
 
-.container-fluid {
-	padding: 0;
+#content {
+	/*min-height: 100%;*/
+    /*height: auto !important;*/
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -30px;
 }
 
-#bg {
-	background: -moz-linear-gradient(top,  rgba(176,212,232,1) 1%, rgba(125,185,232,0) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,rgba(176,212,232,1)), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba(176,212,232,1) 1%,rgba(125,185,232,0) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba(176,212,232,1) 1%,rgba(125,185,232,0) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba(176,212,232,1) 1%,rgba(125,185,232,0) 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba(176,212,232,1) 1%,rgba(125,185,232,0) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b0d4e8', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
+#footer {
+  height: 30px;
+}
 
-	height: 100%;
-	width: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	/*z-index: -1;*/
-	
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
 }
 
 .fullscreen {
 	height: 100%;
-	width: 100%;
-
-	color: $text-color;
+/*	width: 100%;*/
 	position: relative;
+	/*min-height: 800px;*/
+
+	@media (max-width: 767px) { 
+		min-height: auto;
+		height: auto;
+	}
 }
 
 .header {
-	margin-bottom: 50px;
+	margin-bottom: 27px;
 }
 
 .footer {
@@ -63,67 +62,128 @@ html, body {
 
 .images {
 	div {
-		float:left;
-		/*height: 500px;*/
+		
 	}
 
 	.image-text {
 		color: $text-color;
-		padding-top: 250px;
+		padding-top: 180px;
+		/*width: 230px;*/
+		width: 125px;
+		float:left;
+
+		h4 {
+			font-weight: bold;
+		}
 
 		&.left {
-			text-align: right;			
+			text-align: right;	
+			float: right;			
 		}
 
 		&.right {
 			text-align: left;
 		}
+
+		@media (min-width: 1200px) { 
+			padding-top: 230px;
+	 	}
+
+		@media (max-width: 979px) { 
+			h4 {
+				font-size: 14px;
+			}
+
+			padding-top: 100px;
+			font-size: 12px;
+			width: 100px;
+		}
 	}
 	
 }
 
+
 .app-image {
 
-	width: 300px;
-	height: 500px;
-	background-size: 100%;
+	width: 220px;
+	height: 370px;
 	background-repeat: no-repeat;
 	background-position: center;
-	position: relative;
+	position: relative;	
 
 	&.left {
-		background-image: url('../images/app_screenshot.png');			
+		background-image: url('../images/app_screenshot.png');	
+		float: right;		
 	}
 
 	&.right {
-		background-image: url('../images/app_screenshot.png');		
+		background-image: url('../images/tovisit_screenshot.png');
+		float:left;	
+	}
+
+	-webkit-background-size: 100% 100%;   /* Safari 3.0 */
+    -moz-background-size: 100% 100%;      /* Gecko 1.9.2 (Firefox 3.6) */
+	-o-background-size: 100% 100%;        /* Opera 9.5 */
+  	background-size: 100% 100%;           /* Gecko 2.0 (Firefox 4.0) and other CSS3-compliant browsers */
+
+
+
+	@media (max-width: 979px) and (min-width: 768px) {
+		/*width: 220px;
+		height: 370px;*/
+	}
+
+	/* Large desktop */
+	@media (min-width: 1200px) { 
+		width: 280px;
+		height: 470px;
+	 }
+	 
+	/* Portrait tablet to landscape and desktop */
+	@media (min-width: 768px) and (max-width: 979px) {
+		/*width: 150px;
+		height: 300px;*/
+	}
+	 
+	/* Landscape phone to portrait tablet */
+	@media (max-width: 767px) { 
+		width: 180px;
+		height: 300px;
+	 }
+	 
+	/* Landscape phones and down */
+	/*@media (max-width: 480px) { ... }*/
+}
+
+.demo-text {
+	text-align: left;
+	margin-top: 62px;
+	
+	@media (max-width: 979px) { 
+		margin-top: 32px;
 	}
 }
 
 .demo-spot {
-	/*margin-right: 100px;*/
-	/*position: relative;*/
-	/*right: 0;*/
-	/*bottom: 40px;*/
 	width: 116px;
 	padding: 0;
-	/*margin-left: auto;*/
+	float: left;
 
-	position: absolute;
-	right: 0;
-	bottom: 0;
+	@media (max-width: 979px) { 
+		width: 100px;
+	}
 }
 
 .star-badge {
-	height: 150px;
-	width: 150px;
+	height: 100px;
+	width: 100px;
 	background-image: url('../images/star-badge.png');
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-position: center;
 	position: absolute;
-	left: -30px;
-	top: -30px;
+	left: -15px;
+	top: 5px;
 	cursor: pointer;
 }
 
@@ -147,11 +207,12 @@ html, body {
 }
 
 .badges {
-	float: left;
-	/*margin-right: 10px;*/
+	float: right;
+	margin-top: 45px;
+
 	a {
 		img {
-			width: 120px;
+			width: 86px;
 			height: auto;
 			display: block;
 			margin-bottom: 5px;
@@ -172,37 +233,40 @@ html, body {
 }	
 
 .move-down {
-	width: 100px;
-	height: 50px;
-	background-color: $text-color;
+	width: 90px;
+	height: 40px;
+	background-color: lighten($text-color, 30%);
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	cursor: pointer;
 	text-align: center;
 	font-size: 30px;
-	line-height: 50px;
+	line-height: 40px;
 	vertical-align: center;
 	color: white;
+
+	&:hover {
+		background-color: $text-color;
+	}
+
+	@media (max-width: 979px) { 
+		display: none;
+	}
 }
 
 .agb {
 	font-size: 10px;
 	color: gray;
+
+	&.off {
+		display: none;
+	}
 }
 
 .clear {
 	clear: both;
 }
 
-.app-provess {
-
-	li {
-		width: 20px;
-		height: 20px;
-		border: 1px solid black;
-		border-radius: 10px; 
-	}
-}
 
 .user-example {
 	clear: both;
@@ -211,7 +275,6 @@ html, body {
 
 	.user-image {
 		float: left;
-		margin-right: 10px;
 
 		img {
 			width: 75px;
@@ -222,6 +285,7 @@ html, body {
 	.user-quote {
 		font-size: 12px;
 		font-style: italic;
+		margin-left: 85px;
 	}	
 
 	.user-name {
@@ -232,33 +296,71 @@ html, body {
 .app-process {
 	clear: both;
 	margin-bottom: 20px;
+	$counterSize: 40px;
 
 	.counter {
-		width: 30px;
-		height: 30px;
-		border-radius: 15px; 
+		width: $counterSize;
+		height: $counterSize;
+		border-radius: $counterSize/2; 
 		background-color: $text-color;
 		text-align: center;
 		vertical-align: center;
-		font-size: 16px;
+		font-size: $counterSize/2;
 		font-weight: bold;
 		color: white;
-		line-height: 30px;
+		line-height: $counterSize;
 		float: left;
 		margin-right: 10px;
 	}
 
 	.text {
-		line-height: 30px;
-		vertical-align: center;
+		line-height: $counterSize;
+		font-size: $counterSize/2;
+		margin-left: 50px;
 	}
-}
 
-.hidden {
-	display: none;
+	.subtext {
+		margin-left: $counterSize + 10px;
+	}
 }
 
 #abgToggle {
 	font-size: 10px;
+}
+
+.teaser {
+	border-radius: 5px;
+	padding: 5px;
+	margin-bottom: 10px;
+	text-align: center;
+
+	background: rgb(99,116,55); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(99,116,55,1) 0%, rgba(150,167,116,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(99,116,55,1)), color-stop(100%,rgba(150,167,116,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(99,116,55,1) 0%,rgba(150,167,116,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(99,116,55,1) 0%,rgba(150,167,116,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(99,116,55,1) 0%,rgba(150,167,116,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(99,116,55,1) 0%,rgba(150,167,116,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#637437', endColorstr='#96a774',GradientType=0 ); /* IE6-9 */
+
+
+	h3, h5 {
+		color: $teaser-color;
+	}
+
+	h3 {
+		margin-top: 3px;
+		line-height: 25px;
+		font-size: 23px;
+	}
+
+	h5 {
+		line-height: 15px;
+		margin-bottom: 0;
+	}
+
+	p {
+		color: white;
+	}
 }
 

@@ -47,6 +47,12 @@
 					<div class="value">{{activeBusiness.email}}</div>
 				</div>
 			</div>
+			<div simple-property-editor editor-title="business.detail.phone" editor-property="activeBusiness.phone" editor-on-save="saveBusiness()"  editor-placeholder="registration.form.businessphone.placeholder">
+				<div class="data-element edit">
+					<div class="key" l="business.detail.phone">Phone</div>
+					<div class="value">{{activeBusiness.phone}}</div>
+				</div>
+			</div>
 			<div simple-property-editor editor-title="business.detail.address" editor-property="activeBusiness.address" editor-on-save="saveBusiness()"  editor-required editor-placeholder="registration.form.address.placeholder">
 				<div class="data-element edit">
 					<div class="key" l="business.detail.address">Address</div>
@@ -63,12 +69,6 @@
 				<div class="data-element edit">
 					<div class="key" l="business.detail.postcode">Postcode</div>
 					<div class="value">{{activeBusiness.postcode}}</div>
-				</div>
-			</div>
-			<div simple-property-editor editor-title="business.detail.phone" editor-property="activeBusiness.phone" editor-on-save="saveBusiness()"  editor-placeholder="registration.form.businessphone.placeholder">
-				<div class="data-element edit">
-					<div class="key" l="business.detail.phone">Phone</div>
-					<div class="value">{{activeBusiness.phone}}</div>
 				</div>
 			</div>
 				</div>
@@ -123,11 +123,17 @@
 					</div>
 				</div>
 			</div>
-				</div>
+			</div>
+			<div class="data-element">
+				<div class="key" id="coordinatesLabel"><span l="business.detail.coordinates">Koordinaten</span> <i class="icon-question-sign"></i></div>
+				<div class="value">{{activeBusiness.geoLat | number:6}}, {{activeBusiness.geoLong | number:6}}</div>
 			</div>
 
-		
+			</div>
+
+			<div id="map-canvas" style="height: 500px"></div>
 		</div>
+		
 		<div class="data-container-block data-container-seperator" id="subscriptionBlock" name="subscriptionBlock">
 			
 			<h3 l="business.detail.section.subscription">Subscription Management</h3>
@@ -210,7 +216,7 @@
 					App Header Image
 				</div>
 				<div class="value">
-				<div simple-image-editor="activeBusiness.images.appheader" editor-title-key="business.detail.app.header" editor-image-id="appheader" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)"  editor-image-resource="imageResource" editor-crop-text="business.detail.app.header.description" editor-ratio="3:1" editor-on-delete="deleteExistingImage('appheader')">
+				<div simple-image-editor="activeBusiness.images.appheader" editor-title-key="business.detail.app.header" editor-image-id="appheader" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)"  editor-image-resource="imageResource" editor-crop-text="business.detail.app.header.description" editor-ratio="2:1" editor-on-delete="deleteExistingImage('appheader')">
 					<div ng-show="activeBusiness.images.appheader.url">
 						<img  ng-src="{{activeBusiness.images.appheader.url}}=s96" alt="click to edit" />
 						<p  l="business.detail.picture.edit">Click image to edit</p>
