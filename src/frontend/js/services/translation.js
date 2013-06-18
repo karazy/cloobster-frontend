@@ -60,16 +60,16 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Settings"
 		},
 		"businesses.headertabs.categories" : {
-			"DE" :  "Produkte",
-			"EN" : "Products"
+			"DE" : "Angebote",
+			"EN" : "Offers"
 		},
 		"businesses.headertabs.accounts" : {
 			"DE" :  "Benutzerkonten",
 			"EN" : "User Accounts"
 		},
 		"businesses.headertabs.activation" : {
-			"DE" :  "Produkte zuweisen",
-			"EN" : "Assign products"
+			"DE" :  "Angebote zuweisen",
+			"EN" : "Assign offers"
 		},
 		"businesses.headertabs.areas" : {
 			"DE" :  "Spots",
@@ -360,8 +360,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Spots"
 		},
 		"businesses.action.menus" : {
-			"DE" : "Produkte",
-			"EN" : "Products"
+			"DE" : "Angebote",
+			"EN" : "Offers"
 		},
 		"businesses.action.documents" : {
 			"DE" :  "Dokumente",
@@ -447,6 +447,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"business.help.paymentmethod.popover" : {
 			"DE" :  "Legen Sie hier fest, welche Möglichkeiten der Gast hat, den Check-In abzuschliessen (Z. B. auf Hotelrechnung, Bar).",
 			"EN" : "Here you can define the options a customer has to complete the check-in (e.g. hotel bill, cash)."
+		},
+		"business.help.coordinates.popover" : {
+			"DE" : "Koordinaten werden aus der Addresse generiert, und können manuell per Klick auf die Karte unten angepasst werden.",
+			"EN" : "Coordinates are generated from the location address and can be manually modified by clicking on the map below."
 		},
 		"business.action.edit.enable" : {
 			"DE" : "Location editieren",
@@ -543,6 +547,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"business.detail.postcode" : {
 			"DE" : "Postleitzahl",
 			"EN" : "Zip code"
+		},
+		"business.detail.coordinates" : {
+			"DE" : "Koordinaten",
+			"EN" : "Coordinates"
 		},
 		"business.detail.phone" : {
 			"DE" : "Telefon",
@@ -907,8 +915,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Categories"
 		},		
 		"menu.container.hint" : {
-			"DE" :  "Bitte vergessen Sie nicht, die Kategorie im Tab <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"Produkte zuweisen\"</a> einem Servicebereich zuzuweisen.",
-			"EN" : "Don't forget to <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"product assign\"</a>assign this category to a service area afterwards."
+			"DE" :  "Bitte vergessen Sie nicht, die Kategorie im Tab <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"Angebote zuweisen\"</a> einem Servicebereich zuzuweisen.",
+			"EN" : "Don't forget to <a href='#/businesses/{{activeBusinessId}}/category_assignment'>\"Assign offers\"</a>assign this category to a service area afterwards."
 		},
 		"menu.container.title" : {
 			"DE" : "Kategorie editieren",
@@ -2242,8 +2250,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Tile types"
 		},
 		"appconfig.tiles.list.description" : {
-			"DE" :  "Liste aller verfügbaren Kacheltypen. Fügen Sie diese einfach per <b>Drag&Drop</b> auf die leere Kachel rechts hinzu. Sie können maximal 20 Kacheln platzieren.",
-			"EN" : "List of all available tiles. Just add them via <b>drag & drop</b> on the empty tile to the right. You can add a maximum of 20 tiles."
+			"DE" : "Liste aller verfügbaren Kacheltypen. Fügen Sie diese einfach per <b>Drag&Drop</b> auf die leere Kachel rechts hinzu. Sie können maximal 10 Kacheln platzieren.",
+			"EN" : "List of all available tiles. Just add them via <b>drag & drop</b> on the empty tile to the right. You can add a maximum of 10 tiles."
 		},
 		"appconfig.tilesconfig.list.title" : {
 			"DE" :  "Dashboard Vorschau",
