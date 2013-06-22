@@ -1767,6 +1767,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "This is the \"master\" spot for this area. The master spot serves as an entry point. To be able to order a guest has to choose "+
 				"his real spot. For example you can hand out the master spot for rooms and don't need to provide individual stan-up displays for all of them (disable barcode required!)."
 		},
+		"spot.cloobsterwidget" : {
+			"DE" :  "Snippet auswählen, kopieren und auf Website einfügen um bei installierter App einen cloobster Check-in zu ermöglichen.",
+			"EN" : "Copy and paste snippet on a website for direct cloobster Check-in at this spot when app is installed."
+		},		
 		//infopage partial
 		"infopages.description" : {
 			"DE" :  "Hier können Sie Informationen zur aktuellen Location anlegen. Dies können zum Beispiel Informationen<br/>"+
