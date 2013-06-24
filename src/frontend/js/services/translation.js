@@ -2092,6 +2092,34 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Choose or create a location before proceeding with step 2-4."
 		},
 		//wizard partial
+		"appwizard.title" : {
+			"DE" :  "Gestalten Sie Ihre App Präsenz in 5 Schritten",
+			"EN" : "Create your own app presence in 5 simple steps"
+		},
+		"appwizard.step1.title" : {
+			"DE" :  "Wie soll die Location heißen, in der Sie die App einsetzen werden.",
+			"EN" : "Whats the name of the location you'll want to use the app with?"
+		},
+		"appwizard.step1.description" : {
+			"DE" :  "Beispiel: Hotel Dobaublick, Zum Kuckuck, Kixx",
+			"EN" : "Example: Hotel XYZ"
+		},
+		"appwizard.step2.title" : {
+			"DE" :  "Beschreiben Sie die Location",
+			"EN" : "Describe your Location"
+		},
+		"appwizard.step3.logobutton" : {
+			"DE" :  "Logo auswählen",
+			"EN" : "Upload logo"
+		},
+		"appwizard.step3.mainpicbutton" : {
+			"DE" :  "",
+			"EN" : "Upload main picture"
+		},
+		"appwizard.step5.title" : {
+			"DE" :  "Wie ist der Link zu Ihrer Facebookseite?",
+			"EN" : "Link to your facebook page"
+		},
 		"appwizard.step4.title" : {
 			"DE" :  "Was möchten Sie Ihren Kunden anbieten?",
 			"EN" : "What do you want to offer your customers?"
@@ -2115,6 +2143,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"appwizard.step4.price" : {
 			"DE" :  "Preis",
 			"EN" : "Price"
+		},
+		"appwizard.generateapp" : {
+			"DE" :  "App jetzt generieren",
+			"EN" : "Generate App"
 		},
 		//report partial
 		"reports.description" : {
