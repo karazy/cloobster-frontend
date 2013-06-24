@@ -2100,6 +2100,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Titel Angebot 1",
 			"EN" : "Title offer 1"
 		},
+		"appwizard.step4.offer2.title" : {
+			"DE" :  "Titel Angebot 2",
+			"EN" : "Title offer 2"
+		},
+		"appwizard.step4.offer3.title" : {
+			"DE" :  "Titel Angebot 3",
+			"EN" : "Title offer 4"
+		},
 		"appwizard.step4.shortdesc" : {
 			"DE" :  "Kurzbeschreibung",
 			"EN" : "Short description"

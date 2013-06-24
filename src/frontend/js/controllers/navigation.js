@@ -13,6 +13,11 @@
 Cloobster.Navigation = function($scope, $location, loginService, Company,$routeParams,handleError,Business,$route,$log, $rootScope, Spot) {
 	var businessResource = null;
 
+	/* Holds data of wizard. */
+	$scope.wizard = {
+		offers : [{}, {}, {}]
+	};
+
 	$scope.cond = function(expression, trueValue, falseValue) {
 		return (expression ? trueValue : falseValue);
 	};
@@ -162,5 +167,18 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 		$scope.howtoMode = true;
 		$scope.howtoStep = $routeParams['howto'];
 	}
+
+	//wizard logic
+	$scope.generateApp = function() {
+		if(!$scope.wizard) {
+			//no wizard data
+			return;
+		}
+
+
+
+		//validate!
+	}
+
 };
 Cloobster.Navigation.$inject = ['$scope', '$location', 'login', 'Company','$routeParams','errorHandler','Business','$route','$log','$rootScope', 'Spot'];
