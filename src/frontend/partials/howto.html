@@ -1,19 +1,21 @@
 <div class="partial-wrapper">
 <div ng-include="'partials/businesses_header.html'">
 </div>
+<h1 l="appwizard.title">Create your own app presence in 5 simple steps</h1>
 <div class="row-fluid">
-	<div class="span12">
-		<h1 l="appwizard.title">Create your own app presence in 5 simple steps</h1>
+	<div class="span12">		
 		<div class="data-container-with-title no-border">			
 			<div class="data-container-block" style="margin-top:15px;">
 				<div class="step-wrapper">
 					<div class="step-counter">1</div>
 					<div class="step-content">
-						<div class="step-title" l="appwizard.step1.title">Whats the name of the location you'll want to use the app with?</div>
-						<div class="step-description"l="appwizard.step1.description">Example: Hotel XYZ</div>
+						<div class="step-section">
+							<div class="step-title" l="appwizard.step1.title">Whats the name of the location you'll want to use the app with?</div>
+							<div class="step-description"l="appwizard.step1.description">Example: Hotel XYZ</div>
+						</div>
 						<form class="form-inline">
 						
-						<input type="text" required ng-model="newBusiness.name">
+						<input type="text" required ng-model="wizard.newLocationName" class="fillspace">
 						<!-- <span simple-confirm-dialog dialog-title="business.new.title" dialog-text="business.new.text" dialog-on-confirm="addNewBusiness()" dialog-confirm-button="common.confirm" dialog-disabled="!newBusiness.name">
 							<button type="button" class="btn btn-primary" ng-disabled="!newBusiness.name"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
 						</span> -->
@@ -35,14 +37,20 @@
 					<div class="step-counter">2</div>
 					<div class="step-content">
 					<div class="step-title"><div l="appwizard.step2.title">Describe your location</div></div>
-						<textarea rows="4"></textarea>
+						<textarea rows="4" class="fillspace" ng-model="wizard.infopageDescription"></textarea>
 					</div>
 				</div>
 				<div class="step-wrapper">
 					<div class="step-counter">3</div>
 					<div class="step-content">
-						<button class="btn btn-primary" l="appwizard.step3.logobutton">Upload logo</button>
-						<button class="btn btn-primary" l="appwizard.step3.mainpicbutton">Upload main picture</button>
+						<div class="step-section">
+							<!-- <div class="control-group"> -->
+							 	<!-- <div class="btn-group"> -->
+									<button class="btn btn-primary span4" l="appwizard.step3.logobutton">Upload logo</button>
+									<button class="btn btn-primary span4" l="appwizard.step3.mainpicbutton">Upload main picture</button>
+								<!-- </div> -->
+							<!-- </div> -->
+						</div>
 					</div>
 				</div>
 				<div class="step-wrapper" ng-class="{'step-inactive' : !activeBusinessId}">
@@ -53,10 +61,20 @@
 						</div>
 					</div>
 					<div class="step-offer">
-						<input type="text" required l="appwizard.step4.offer1.title" l-attribute="placeholder" >
-						<input type="text" required l="appwizard.step4.offer1.shortdescription" l-attribute="placeholder" >
-						<input type="text" required l="appwizard.step4.offer1.price" l-attribute="placeholder" >
-						<button class="btn btn-primary" l="appwizard.step4.picbutton">Upload picture</button>
+						<div class="step-section">
+							 <div class="control-group">
+							 	<div class="controls controls-row">
+								<input type="text" class="span8" required l="appwizard.step4.offer1.title" l-attribute="placeholder" >
+								<button class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
+								</div>
+							</div>
+							 <div class="control-group">
+							 	<div class="controls controls-row">
+								<input type="text" class="span8" required l="appwizard.step4.shortdesc" l-attribute="placeholder" >
+								<input type="text" class="span4" required l="appwizard.step4.price" l-attribute="placeholder" >
+								</div>
+							</div>
+						</div>						
 					</div>
 				</div>
 				<div class="step-wrapper" ng-class="{'step-inactive' : !activeBusinessId}">
@@ -67,13 +85,21 @@
 						Link to your facebook page
 						</div>
 					</div>
-						<input type="text" required l="appwizard.step5.link" l-attribute="placeholder" >
-						<button class="btn btn-primary" l="appwizard.step5.picbutton">Upload picture</button>
+					<div class="step-section">
+						<div class="control-group">
+						 	<div class="controls controls-row">
+						 		<input type="text" class="span8" required l="appwizard.step5.link" l-attribute="placeholder" >
+								<button class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
+						 	</div>
+						</div>
+					</div>		
 					</div>
 				</div>
 				<div class="step-wrapper">
 					<div class="step-content">
-						<button class="btn btn-primary" l="appwizard.generateapp">Generate App</button>
+						<div class="step-section">
+							<button class="btn btn-primary span4" l="appwizard.generateapp">Generate App</button>
+						</div>
 					</div>
 				</div>
 				

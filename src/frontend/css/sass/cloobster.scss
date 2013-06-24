@@ -525,6 +525,8 @@ ul.options-list li:hover {
 
 /** howto partial */
 
+$step-element-maxwidth: 600px;
+
 .step-wrapper {
   position: relative;
   clear: both;
@@ -557,11 +559,31 @@ ul.options-list li:hover {
 
 .step-content {
   margin-left: 90px;
+  padding-top: 12px;
+
+  input.fillspace, textarea.fillspace {
+    width: 90%;
+    max-width: $step-element-maxwidth;
+  }
+
 }
 
 .step-counter input, .step-content textarea {
   width: 90%;
-  max-width: 500px;
+  max-width: $step-element-maxwidth;
+}
+
+.step-section {
+  margin-bottom: 8px;  
+  max-width: $step-element-maxwidth;
+
+  & > .step-title, & > .step-description{
+    margin-bottom: 0px;
+  }
+}
+
+.step-offer {
+  max-width: $step-element-maxwidth;
 }
 
 .step-title {
@@ -569,18 +591,12 @@ ul.options-list li:hover {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 8px; 
-  & > .step-description {
-    margin-bottom: 0px;
-  }
-}
 
-.step-title + .step-description {
-  margin-bottom: 0px;
 }
 
 .step-description {
   left: 60px;
-  max-width: 500px;
+  max-width: $step-element-maxwidth;
   margin-bottom: 8px;
   /*clear: both;*/
 }

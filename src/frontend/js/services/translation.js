@@ -2091,6 +2091,23 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Wählen oder erstellen Sie eine Location bevor Sie mit Schritt 2-4 fortfahren.",
 			"EN" : "Choose or create a location before proceeding with step 2-4."
 		},
+		//wizard partial
+		"appwizard.step4.title" : {
+			"DE" :  "Was möchten Sie Ihren Kunden anbieten?",
+			"EN" : "What do you want to offer your customers?"
+		},
+		"appwizard.step4.offer1.title" : {
+			"DE" :  "Titel Angebot 1",
+			"EN" : "Title offer 1"
+		},
+		"appwizard.step4.shortdesc" : {
+			"DE" :  "Kurzbeschreibung",
+			"EN" : "Short description"
+		},
+		"appwizard.step4.price" : {
+			"DE" :  "Preis",
+			"EN" : "Price"
+		},
 		//report partial
 		"reports.description" : {
 			"DE" :  "Hier können Sie die wichtigsten Kennzahlen (KPI) anschauen. Wählen Sie zunächst welche Kennzahl Sie anschauen möchten<br/>"+
