@@ -569,6 +569,9 @@ ul.options-list li:hover {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 8px; 
+  & > .step-description {
+    margin-bottom: 0px;
+  }
 }
 
 .step-title + .step-description {
