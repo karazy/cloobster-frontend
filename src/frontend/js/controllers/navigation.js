@@ -182,6 +182,10 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 		$scope.wizardForm.offer1Shortdesc.$dirty = true;
 		$scope.wizardForm.offer1Price.$dirty = true;
 
+		if($scope.wizardForm.$valid) {
+			//fire initial creation event
+			$scope.$broadcast('wizard-create-app', $scope.wizard);
+		}
 
 
 		//validate!
