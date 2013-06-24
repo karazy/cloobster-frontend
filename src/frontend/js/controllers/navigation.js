@@ -175,6 +175,13 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 			return;
 		}
 
+		$scope.wizardForm.$dirty = true;
+		$scope.wizardForm.newLocationName.$dirty = true;
+		$scope.wizardForm.infopageDescription.$dirty = true;
+		$scope.wizardForm.offer1Title.$dirty = true;
+		$scope.wizardForm.offer1Shortdesc.$dirty = true;
+		$scope.wizardForm.offer1Price.$dirty = true;
+
 
 
 		//validate!
