@@ -6,7 +6,7 @@
 	<div class="span12">		
 		<div class="data-container-with-title no-border">			
 			<div class="data-container-block" style="margin-top:15px;">
-				<form name='wizardForm' ng-submit="generateApp()" novalidate>
+				<form name='wizardForm' novalidate>
 				<div class="step-wrapper">
 					<div class="step-counter">1</div>
 					<div class="step-content">
@@ -147,7 +147,7 @@
 					<div class="step-content">
 						<div class="step-section">
 							<div class="text-error" ng-show="wizardForm.newLocationName.$dirty && wizardForm.newLocationName.$invalid" l="validation.field.required">Please fill out all required fields</div>
-							<button type="submit" class="btn btn-primary span4" style="margin-left:0;"><i class="icon-ok icon-white"></i> <span l="appwizard.generateapp">Generate App</span></button>
+							<button type="submit" ng-click="generateApp()" class="btn btn-primary span4" style="margin-left:0;"><i class="icon-ok icon-white"></i> <span l="appwizard.generateapp">Generate App</span></button>
 						</div>
 					</div>
 				</div>

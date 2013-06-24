@@ -8,7 +8,7 @@
 * 	View and manage infopages for static information (e.g. contact information).
 * 	@constructor
 */
-Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginService, langService, $log, handleError, InfoPage, Business, langcodesMap, validator) {
+Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginService, langService, $log, handleError, InfoPage, Business, langcodesMap, validator, $rootScope) {
 
 	var activeBusinessId,
 			requiredInfoPageFields = {
@@ -33,6 +33,10 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	$scope.currentLanguage = "";
 	/** Map of all languages. */
 	$scope.langcodesMap = langcodesMap;
+
+	$rootScope.$on("wizard-created-business", function(eventData, wizardData, locationId) {
+		addInfopageByWizard(wizardData, locationId);
+	});
 
 
 	function loadInfoPages (language) {
@@ -124,7 +128,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		$scope.infoPageInvalid = false;
 	}
 
-	$scope.saveInfoPage = function() {
+	$scope.saveInfoPage = function(callback) {
 		$log.log("save infopage");
 		if(!$scope.currentInfoPage) {
 			return;
@@ -299,6 +303,29 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		return tField;
 	}
 
+	function addInfopageByWizard(wizardData, locationId) {
+		if(!wizardData && !wizardData.infopageDescription) {
+			console.error('Wizard: cannot create infopage without data');
+			return;
+		}
+
+		if(!locationId) {
+			console.error('Wizard: cannot create infopage without location id');
+			return;
+		}
+
+		$scope.infoPageResource = InfoPage.buildResource(activeBusinessId);
+
+		$scope.createInfoPage();
+		$scope.currentInfoPage.title = "Beschreibung";
+		$scope.currentInfoPage.html = wizardData.infopageDescription;
+		$scope.currentInfoPage.$save(saveSuccess, handleError);
+
+		$rootScope.$broadcast('wizard-created-infopage');
+
+		// $scope.saveInfoPage();
+	}
+
 	/** 
 	 * Watches loggedIn status and initializes controller when status changes to true.
 	 */
@@ -313,4 +340,4 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	});
 }
 
-Cloobster.InfoPage.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', 'errorHandler', 'InfoPage', 'Business', 'langcodesMap','validator'];
+Cloobster.InfoPage.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', 'errorHandler', 'InfoPage', 'Business', 'langcodesMap','validator', '$rootScope'];

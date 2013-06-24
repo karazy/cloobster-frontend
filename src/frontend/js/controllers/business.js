@@ -74,6 +74,10 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	/** Filter object for language selection dialog. */
 	$scope.languageQuery = {};
 
+	$rootScope.$on("wizard-create-app", function(eventData, wizardData) {		
+		addBusinessByWizard(wizardData);
+	});
+
 
 	/**
 	* Returns all businesses
@@ -227,8 +231,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	*	Name for the new business
 	*/
 	$scope.addNewBusiness = function() {
-		var fields = ['name', 'city', 'address', 'postcode', 'phone', 'description', 'currency'],
-			isInvalid = false;
+		// var fields = ['name', 'city', 'address', 'postcode', 'phone', 'description', 'currency'],
+		// 	isInvalid = false;
 
 		if(!$scope.newBusiness.name) {
 			return;
@@ -242,48 +246,30 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		}, handleError);
 
 		return;
-		//old code
-		// if($scope.newBusinessForm.$valid) {
-		// 	$scope.newBusinessEntity = new $scope.businessResource({
-		// 		'name' : $scope.newBusiness.name,
-		// 		'city' : $scope.newBusiness.city,
-		// 		'address' : $scope.newBusiness.address,
-		// 		'postcode' : $scope.newBusiness.postcode,
-		// 		'phone' : $scope.newBusiness.phone,
-		// 		'description' : $scope.newBusiness.description,
-		// 		'currency' : $scope.newBusiness.currency
-		// 	});
-
-		// 	$("#addBusinessButton").button("loading");
-
-		// 	$scope.newBusinessEntity.$save(function() {
-		// 		//close switches to another url so businesses will be refreshed automatically 
-		// 		//and showing the new new business
-		// 		$("#addBusinessButton").button("reset");
-		// 		// refresh the active businesses in the background.
-		// 		Business.getActiveBusinesses(true);
-		// 		$scope.closeNewBusinessForm();
-		// 	},
-		// 	function(data,status,headers,config) {
-		// 		//Error handling
-		// 		$("#addBusinessButton").button("reset");
-		// 		handleError(data, status, headers, config);
-		// 	});
-		// } else {
-		// 	//mark form as dirty to show validation errors
-		// 	jQuery.each(fields, function(index, value) {
-		// 		if($scope.newBusinessForm[value] && !$scope.newBusinessForm[value].invalid) {
-		// 			//mark property as dirty to display error messages
-		// 			$scope.newBusinessForm[value].$dirty = true;
-		// 			isInvalid = true;
-		// 		}
-
-		// 		if(isInvalid) {
-		// 			$scope.newBusinessForm.$setDirty();
-		// 		}
-		// 	})			
-		// }
 	};
+
+	function addBusinessByWizard(wizardData) {
+		var resource,
+			entity;
+
+		if(!wizardData && !wizardData.newLocationName) {
+			console.error('Wizard: cannot save business without name');
+			return;
+		}
+
+		console.log('Wizard: generate business: ' + wizardData.newLocationName);
+
+		resource = Business.buildResource(loginService.getAccount().id);
+		entity = new resource({
+			"name": wizardData.newLocationName
+		});
+
+		entity.$save(function(response) {
+			// wizardData.locationId = entity.id;
+			$scope.$broadcast('update-businesses');
+			$rootScope.$broadcast('wizard-created-business', wizardData, entity.id);
+		}, handleError);
+	}
 
 	/**
 	* Closes the new business form and resets values.
