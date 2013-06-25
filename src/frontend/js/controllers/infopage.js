@@ -34,10 +34,11 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	/** Map of all languages. */
 	$scope.langcodesMap = langcodesMap;
 
-	$rootScope.$on("wizard-created-business", function(eventData, wizardData, locationId) {
-		addInfopageByWizard(wizardData, locationId);
-	});
-
+	if(!$rootScope.infopageWizardEvent) {
+		$rootScope.infopageWizardEvent = $rootScope.$on("wizard-created-business", function(eventData, wizardData, locationId) {
+			addInfopageByWizard(wizardData, locationId);
+		});
+	}
 
 	function loadInfoPages (language) {
 		var params = {};
@@ -121,7 +122,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 			for (var i = $scope.activeBusiness.lang.length - 1; i >= 0; i--) {
 				newPage.translations[$scope.activeBusiness.lang[i]] = {};
 				newPage.translations[$scope.activeBusiness.lang[i]].lang = $scope.activeBusiness.lang[i];
-			};	
+			};
 		}
 
 		$scope.currentInfoPage = new $scope.infoPageResource(newPage);
@@ -304,6 +305,9 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	}
 
 	function addInfopageByWizard(wizardData, locationId) {
+		var infopage,
+			resource;
+
 		if(!wizardData && !wizardData.infopageDescription) {
 			console.error('Wizard: cannot create infopage without data');
 			return;
@@ -313,17 +317,16 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 			console.error('Wizard: cannot create infopage without location id');
 			return;
 		}
+		
 
-		$scope.infoPageResource = InfoPage.buildResource(activeBusinessId);
+		resource = InfoPage.buildResource(locationId);
+		infopage = new resource({ 'translations' : {} });
 
-		$scope.createInfoPage();
-		$scope.currentInfoPage.title = "Beschreibung";
-		$scope.currentInfoPage.html = wizardData.infopageDescription;
-		$scope.currentInfoPage.$save(saveSuccess, handleError);
-
-		$rootScope.$broadcast('wizard-created-infopage');
-
-		// $scope.saveInfoPage();
+		infopage.title = "Über uns";
+		infopage.html = wizardData.infopageDescription;
+		infopage.$save(function() {
+			$rootScope.$broadcast('wizard-created-infopage');	
+		}, handleError);
 	}
 
 	/** 

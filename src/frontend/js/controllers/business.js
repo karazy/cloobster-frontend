@@ -74,9 +74,12 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	/** Filter object for language selection dialog. */
 	$scope.languageQuery = {};
 
-	$rootScope.$on("wizard-create-app", function(eventData, wizardData) {		
-		addBusinessByWizard(wizardData);
-	});
+	if(!$rootScope.businessWizardEvent) {
+		$rootScope.businessWizardEvent = $rootScope.$on("wizard-create-app", function(eventData, wizardData) {		
+			addBusinessByWizard(wizardData);
+		});	
+	}
+	
 
 
 	/**
@@ -266,8 +269,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 		entity.$save(function(response) {
 			// wizardData.locationId = entity.id;
-			$scope.$broadcast('update-businesses');
 			$rootScope.$broadcast('wizard-created-business', wizardData, entity.id);
+			$scope.$broadcast('update-businesses');			
 		}, handleError);
 	}
 

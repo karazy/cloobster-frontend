@@ -10,7 +10,7 @@
 * 	View and manage profiles.
 * 	@constructor
 */
-Cloobster.Navigation = function($scope, $location, loginService, Company,$routeParams,handleError,Business,$route,$log, $rootScope, Spot) {
+Cloobster.Navigation = function($scope, $location, loginService, Company,$routeParams,handleError,Business,$route,$log, $rootScope, Spot, $injector, InfoPage) {
 	var businessResource = null;
 
 	/* Holds data of wizard. */
@@ -190,4 +190,4 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 	}
 
 };
-Cloobster.Navigation.$inject = ['$scope', '$location', 'login', 'Company','$routeParams','errorHandler','Business','$route','$log','$rootScope', 'Spot'];
+Cloobster.Navigation.$inject = ['$scope', '$location', 'login', 'Company','$routeParams','errorHandler','Business','$route','$log','$rootScope', 'Spot', '$injector', 'InfoPage'];
