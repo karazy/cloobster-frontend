@@ -29,8 +29,14 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		mapOptions = {
 			// center on Darmstadt for now
     	center: new google.maps.LatLng(49.882247,8.652023),
+    	scrollwheel: false,
+    	zoomControl: true,
+    	streetViewControl: false,
     	zoom: 8,
-    	mapTypeId: google.maps.MapTypeId.ROADMAP
+    	mapTypeId: google.maps.MapTypeId.ROADMAP,
+    	zoomControlOptions: {
+		    style: google.maps.ZoomControlStyle.SMALL
+		}
   	},
   	/** reference to the Google Map */
   	map,
@@ -183,7 +189,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 				centerOnLocation($scope.activeBusiness, true);				
 			}
 			else {
-				map.setZoom(14);
+				map.setZoom(16);
 			}
 
 			// Center Google Map
