@@ -1,8 +1,8 @@
 <div class="partial-wrapper">
 <div ng-include="'partials/businesses_header.html'">
 </div>
-<h1 l="appwizard.title">Create your own app presence in 5 simple steps</h1>
-<div class="row-fluid">
+<h1 l="appwizard.title" ng-hide="wizard.complete">Create your own app presence in 5 simple steps</h1>
+<div class="row-fluid" ng-hide="wizard.complete">
 	<div class="span8">		
 		<div class="data-container-with-title no-border">			
 			<div class="data-container-block" style="margin-top:15px;">
@@ -53,7 +53,7 @@
 					<div class="step-content">
 						<div class="step-section">
 
-						 	<div simple-image-editor="wizardData.images.logo" editor-title-key="appwizard.step3.logobutton" editor-image-id="logo" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)"  editor-image-resource="imageResource" editor-crop-text="business.detail.app.header.description" editor-on-delete="deleteExistingImage('logo')">
+						 	<div simple-image-editor="wizardData.images.logo" editor-title-key="appwizard.step3.logobutton" editor-image-id="logo" editor-on-save="setWizardImage(image, 'logo')" editor-on-cancel="discardWizardImage(image)"  editor-image-resource="imageResource" editor-crop-text="business.detail.app.header.description" editor-on-delete="deleteExistingImage('logo')" editor-no-persist="true">
 								<div ng-show="wizardData.images.logo.url">
 									<img  ng-src="{{wizardData.images.logo.url}}=s96" alt="click to edit" />
 									<p  l="business.detail.picture.edit">Click image to edit</p>
@@ -142,7 +142,7 @@
 					<div class="step-section">
 						<div class="control-group">
 						 	<div class="controls controls-row">
-						 		<input type="text" class="span8" ng-model="wizard.fburl">
+						 		<input type="text" class="span8" ng-model="wizard.fbUrl">
 								<button class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
 						 	</div>
 						</div>
@@ -154,6 +154,8 @@
 						<div class="step-section">
 							<div class="text-error" ng-show="wizardForm.newLocationName.$dirty && wizardForm.newLocationName.$invalid" l="validation.field.required">Please fill out all required fields</div>
 							<button type="submit" ng-click="generateApp()" class="btn btn-primary span4" style="margin-left:0;"><i class="icon-ok icon-white"></i> <span l="appwizard.generateapp">Generate App</span></button>
+
+							<button type="button" ng-click="fillWithDummyData()" class="btn btn-primary span4" style="margin-left:0; margin-top: 10px; clear: both;"><i class="icon-font icon-white"></i> Dummy Data</span></button>
 						</div>
 					</div>
 				</div>
@@ -173,15 +175,26 @@
 				</form>
 			</div>			
 		</div>
-	</div>	
+	</div>		
 	<div class="span4">
 		<div class="data-container-with-title no-border">
 			<div class="app-help-image"></div>
 		</div>
 	</div>	
 </div>
+<div class="row-fluid" ng-show="wizard.complete">
+	<div class="span12">	
+		<div class="hero-unit">
+			<p l="wizard.complete.text1">Your app is ready!</p>
 
+			<img ng-show="welcomeSpots[0].qrImageUrl" ng-src="{{welcomeSpots[0].qrImageUrl}}" alt="Welcome Spot Barcode" class="welcome-spot"/>
+
+			<button ng-click="editLocation()" l="wizard.continuebutton" class="btn btn-primary btn-large">Continue editing</button>
+		</div>
+	</div>
 </div>
+</div>
+
 <div ng-controller="Cloobster.InfoPage">
 </div>
 <div ng-controller="Cloobster.Business">

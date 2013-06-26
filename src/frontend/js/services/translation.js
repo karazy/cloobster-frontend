@@ -2148,6 +2148,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "App jetzt generieren",
 			"EN" : "Generate App"
 		},
+		"appwizard.infopage.title" : {
+			"DE" :  "Über uns",
+			"EN" : "About us"
+		},
 		//report partial
 		"reports.description" : {
 			"DE" :  "Hier können Sie die wichtigsten Kennzahlen (KPI) anschauen. Wählen Sie zunächst welche Kennzahl Sie anschauen möchten<br/>"+

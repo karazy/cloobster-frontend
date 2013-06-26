@@ -10,12 +10,14 @@
 * 	View and manage wizard.
 * 	@constructor
 */
-Cloobster.Wizard = function($scope, $location, loginService, Company, $routeParams, handleError, Business, $route, $log, $rootScope, Spot, $injector, InfoPage, Menu, Product) {
+Cloobster.Wizard = function($scope, $location, loginService, Company, $routeParams, handleError, Business, $route, $log, $rootScope, Spot, $injector, InfoPage, Menu, Product, randomUtil, langService) {
 	var businessResource = null;
 
 	/* Holds data of wizard. */
 	$scope.wizard = {
-		offers : [{}, {}, {}]
+		offers : [{}, {}, {}],
+		complete: false,
+		progress: {}
 	};
 
 	$scope.imageResource =	Business.buildImageResource();
@@ -127,14 +129,14 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 	/**
 	* Load welcome spot for active business.
 	*/
-	$scope.loadWelcomeSpot = function() {
+	// $scope.loadWelcomeSpot = function() {
 
-		if(!$scope.spotResource) {
-			$scope.spotResource = Spot.buildResource($rootScope.activeBusinessId);
-		}
+	// 	if(!$scope.spotResource) {
+	// 		$scope.spotResource = Spot.buildResource($rootScope.activeBusinessId);
+	// 	}
 
-		$scope.welcomeSpots = $scope.spotResource.query({'bid' : $rootScope.activeBusinessId, 'welcome' : true});
-	}
+	// 	$scope.welcomeSpots = $scope.spotResource.query({'bid' : $rootScope.activeBusinessId, 'welcome' : true});
+	// }
 
 	if($location.url() == "/howto") {
 		//if activeBusinessId changes reload welcome spot
@@ -191,6 +193,7 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 		}
 
 		function locationCreated(location) {
+			loadWelcomeSpot(location);
 			addInfopageByWizard($scope.wizard, location);
 			addProductsByWizard($scope.wizard, location);
 		}
@@ -210,14 +213,14 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 
 		resource = Business.buildResource(loginService.getAccount().id);
 		entity = new resource({
-			"name": wizardData.newLocationName
+			"name": wizardData.newLocationName,
+			"fbUrl": wizardData.fbUrl
 		});
 
 		entity.$save(function(response) {
-			// wizardData.locationId = entity.id;
-			// $rootScope.$broadcast('wizard-created-business', wizardData, entity.id);
 			$scope.$broadcast('update-businesses');		
-			$scope.createdBusiness = entity;
+			// $scope.createdLocation = entity;
+			$scope.wizard.progress.location = true;
 			callback(entity);
 		}, handleError);
 	}
@@ -241,11 +244,11 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 		resource = InfoPage.buildResource(location.id);
 		infopage = new resource({ 'translations' : {} });
 
-		infopage.title = "Über uns";
+		infopage.title = langService.translate("wizard.infopage.title");
 		infopage.html = wizardData.infopageDescription;
 		infopage.$save(function() {
-			$rootScope.$broadcast('wizard-created-infopage');	
-		}, handleError);
+			$scope.wizard.progress.infopages = true;
+		}, handleError);		
 	}
 
 	function addProductsByWizard(wizardData, location) {
@@ -275,7 +278,7 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 		menu.$save(saveProducts, handleError);
 
 		function saveProducts() {
-			angular.forEach(wizardData.offers, function(offer, key) {
+			angular.forEach(wizardData.offers, function(offer, index) {
 
 				if(offer.title && offer.shortDesc && offer.price) {
 					product = new pResource({
@@ -288,16 +291,76 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 					});	
 
 					product.choices = new Array();
-					product.$save();
+					product.$save(function() {
+						if(index == wizardData.offers.length - 1) {
+							$scope.wizard.progress.products = true;
+						}
+					}, handleError);
+				} else {
+					if(index == wizardData.offers.length - 1) {
+						$scope.wizard.progress.products = true;
+					}
 				}
 		
 			});
 		}
+	}
 
-		
-		
+	function resetWizard() {
 
 	}
 
+	function loadWelcomeSpot (location) {
+		
+		if(!location) {
+			console.error('Wizard: cannot load spot without location');
+			return;
+		}
+
+		if(!$scope.spotResource) {
+			$scope.spotResource = Spot.buildResource($rootScope.activeBusinessId);
+		}
+
+		$scope.welcomeSpots = $scope.spotResource.query({'bid' : location.id, 'welcome' : true});
+	}
+
+	$scope.setWizardImage = function(image, type) {
+		if(!$scope.wizard.images) {
+			$scope.wizard.images = new Array();
+		}
+
+		$scope.wizard.images[type] = image;
+	}
+
+	$scope.discardWizardImage = function(image, type) {
+		if(!$scope.wizard.images) {
+			return;
+		}
+
+		$scope.wizard.images[type] = null;
+		//delete image from blobstore
+	}
+
+	$scope.$watch('wizard.progress', function(newVal, oldVal) {
+		if(newVal.location && newVal.products && newVal.infopages) {
+			$scope.wizard.complete = true;
+		}
+	}, true);
+
+	$scope.fillWithDummyData = function() {
+		$scope.wizard.newLocationName = randomUtil.genRndString(15);
+		$scope.wizard.infopageDescription = randomUtil.genRndString(100);
+		$scope.wizard.offers[0].title = randomUtil.genRndString(5);
+		$scope.wizard.offers[0].shortDesc = randomUtil.genRndString(30);
+		$scope.wizard.offers[0].price = randomUtil.genRndNumber(0, 1000);
+		$scope.wizard.offers[1].title = randomUtil.genRndString(5);
+		$scope.wizard.offers[1].shortDesc = randomUtil.genRndString(30);
+		$scope.wizard.offers[1].price = randomUtil.genRndNumber(0, 1000);
+		$scope.wizard.offers[2].title = randomUtil.genRndString(5);
+		$scope.wizard.offers[2].shortDesc = randomUtil.genRndString(30);
+		$scope.wizard.offers[2].price = randomUtil.genRndNumber(0, 1000);
+		$scope.wizard.fbUrl = "https://www.facebook.com/Cloobster";
+	}
+
 };
-Cloobster.Wizard.$inject = ['$scope', '$location', 'login', 'Company', '$routeParams', 'errorHandler', 'Business', '$route', '$log', '$rootScope', 'Spot', '$injector', 'InfoPage', 'Menu', 'Product'];
+Cloobster.Wizard.$inject = ['$scope', '$location', 'login', 'Company', '$routeParams', 'errorHandler', 'Business', '$route', '$log', '$rootScope', 'Spot', '$injector', 'InfoPage', 'Menu', 'Product', 'randomUtil', 'lang'];

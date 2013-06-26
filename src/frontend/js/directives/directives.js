@@ -26,7 +26,8 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 			editorMinWidth: '@',
 			editorMinHeight: '@',
 			simpleImageEditor: '=',
-			editorEnabled: '='
+			editorEnabled: '=',
+			editorNoPersist: '='
 		},
 		compile: function(element, attrs, transclude) {
 			var html = '<div class="toggler" ng-transclude></div>'+
@@ -291,21 +292,31 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 		        	function saveImageAndClose() {
 		        		var activeImage = scope.activeImage;		        		
 		        		scope.fileSaving = true;
-		        		activeImage.$save(
-		        			// Success
-		        			function() {
-		        				scope.fileSaving = false;
-		        				scope.barStyle.width = '100%';
-		        				scope.editorOnSave({ "image" : activeImage});
-				        		dialog.modal('hide');
-									},
-									 // Error
-		        			function() {
-										deleteActiveUpload();
-										resetScope();
-										scope.error = true;
-										scope.errorMessage = langService.translate("fileupload.save.error");
-									});
+		        		//save image to assigned object
+		        		if(!scope.editorNoPersist) {
+							activeImage.$save(
+				    			// Success
+				    			function() {
+				    				scope.fileSaving = false;
+				    				scope.barStyle.width = '100%';
+				    				scope.editorOnSave({ "image" : activeImage});
+					        		dialog.modal('hide');
+										},
+										 // Error
+				    			function() {
+									deleteActiveUpload();
+									resetScope();
+									scope.error = true;
+									scope.errorMessage = langService.translate("fileupload.save.error");
+							});
+		        		} else {
+		        			//this is just an image upload without persisting information in datastore
+		        			scope.fileSaving = false;
+		    				scope.barStyle.width = '100%';
+		    				scope.editorOnSave({ "image" : activeImage});
+			        		dialog.modal('hide');
+		        		}
+		        		
 		        	};
 
 		        	/*

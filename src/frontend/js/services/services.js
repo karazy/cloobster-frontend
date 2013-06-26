@@ -1078,4 +1078,44 @@ Cloobster.services.factory('listUtil', ['$filter','$log', function($filter,$log)
 	return listFunctions;
 }]);
 
+/**
+* @constructor
+* Factory function for 'randomUtil' service.
+* Contains convienient to generate random strings for testing purpose.
+* 
+* 	@author Frederik Reifschneider
+*
+*/
+Cloobster.services.factory('randomUtil', function() {
+	var randomFns = {
+		/**
+		* Generate a random string of given length.
+		* String consists of letters and numbers.
+		*/
+		genRndString: function(length) {
+			var _length = length || 10,
+				_text = "",
+				possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+	    	for( var i=0; i < length; i++ ) {
+	    		_text += possible.charAt(Math.floor(Math.random() * possible.length));	
+	    	}
+	        
+	    	return _text;
+		},
+		/**
+		* Generates a random integer for given range.
+		* @return 
+		*	a random integer 
+		*/
+		genRndNumber: function(min, max) {
+			var _number = Math.random() * (max - min) + min;
+
+			return Math.floor(_number);
+		}
+	}
+
+	return randomFns;
+});
+
 
