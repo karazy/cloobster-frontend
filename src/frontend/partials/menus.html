@@ -244,7 +244,7 @@
 	    		<div class="data-container-block data-container-seperator">
 	    			<div class="row-fluid">
 		    			<button class="btn btn-primary span6" ng-click="createProduct()"><i class="icon-plus-sign icon-white"></i> <span l="menus.products.list.new">New</span></button>
-		    			<button class="btn btn-primary span6" ng-click="showAllProducts()"><i class="icon-folder-open icon-white"></i> <span l="common.copy">Copy</span></button>
+		    			<button class="btn btn-primary span6" ng-click="showAllProducts()"><i class="icon-share-alt icon-white"></i> <span l="common.copy">Copy</span></button>
 	    			</div>
 	    		</div>
 	    		
@@ -280,15 +280,29 @@
 	    	<h4 class="data-container-title" l="menu.products.container.link.title">All Products</h4>
 	    	<div class="data-container-block data-container-seperator">
 	    		<p l="menus.products.link.description" id="menusLinkHelp">Select an existing product to copy it and assign to active menu.</p>
-	    		<span l="menus.products.link.search">Search:</span><input ng-model="productCopyQuery.name">
+		        <div class="btn-group">
+					<div class="input-prepend">
+    					<span class="add-on"><i class="icon-search icon-black"></i>
+    					</span>
+    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="productCopyQuery.name">
+    					<i class="icon-remove icon-black" ng-click="productCopyQuery.name = ''">
+						</i> 
+					</div>
+	    		</div>
 	    	</div>	    	
     		<ul class="nav nav-pills nav-stacked data-container-block data-container-small data-container-scrollable">
 	       	 	<li ng-repeat="product in allProducts | filter:productCopyQuery" class="product-item dropdown">
 		        	<a class="dropdown-toggle" data-toggle="dropdown">{{product.name}}<b class="caret"></b></a>
 		        	<ul class="dropdown-menu">
-		        		<a ng-click="copyProduct(product)" l="menus.products.link.action.copy">Copy Product</a>
-		        		<a ng-click="copyProduct(product, 'link')" l="menus.products.link.action.copylink">Copy Product & Link Choices</a>
-		        		<a ng-click="copyProduct(product, 'copy')" l="menus.products.link.action.deepcopy">Copy Product & Copy Choices</a>
+		        		<li>
+		        			<a ng-click="copyProduct(product)" l="menus.products.link.action.copy">Copy Product</a>
+		        		</li>
+		        		<li>
+		        			<a ng-click="copyProduct(product, 'link')" l="menus.products.link.action.copylink">Copy Product & Link Choices</a>
+		        		</li>
+		        		<li>
+		        			<a ng-click="copyProduct(product, 'copy')" l="menus.products.link.action.deepcopy">Copy Product & Copy Choices</a>
+		        		</li>		        			        			        		
     				</ul>
 		        </li>
     		</ul>
@@ -417,7 +431,7 @@
 		    	<div class="data-container-block data-container-seperator">
 		    		<div class="row-fluid">
 		    			<button class="btn btn-primary span6" ng-click="createChoice()"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
-		    			<button class="btn btn-primary span6" ng-click="showAllChoices()"><i class="icon-folder-open icon-white"></i> <span l="common.copy">Copy</span></button>
+		    			<button class="btn btn-primary span6" ng-click="showAllChoices()"><i class="icon-share-alt icon-white"></i> <span l="common.copy">Copy</span></button>
 	    			</div>
 	    		</div>
 		    	 <div class="data-container-block data-container-small data-container-scrollable" ng-show="currentProduct.id">	    		
@@ -446,14 +460,26 @@
 	    	<h4 class="data-container-title" l="choices.container.link.title">All Choices</h4>
 	    	<div class="data-container-block data-container-seperator">
 	    		<p l="menus.choices.link.description">Select an existing choice to add it to the current product.</p>
-	    		<span l="menus.choices.link.search">Search:</span><input ng-model="choiceLinkQuery.text">
+	    		<div class="btn-group">
+					<div class="input-prepend">
+    					<span class="add-on"><i class="icon-search icon-black"></i>
+    					</span>
+    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="choiceLinkQuery.text">
+    					<i class="icon-remove icon-black" ng-click="choiceLinkQuery.text = ''">
+						</i> 
+					</div>
+	    		</div>
 	    	</div>
     		<ul class="nav nav-pills nav-stacked data-container-block data-container-small data-container-scrollable">
 	       	 	<li ng-repeat="choice in allChoices | filter:filterOnlyChoiceParents | filter:filterOnlyNotLinkedChoices | filter:choiceLinkQuery" class="product-choice-item dropdown">
 		        	<a class="dropdown-toggle"  data-toggle="dropdown">{{choice.text}}<b class="caret"></b></a>
 		        	<ul class="dropdown-menu">
-		        		<a ng-click="copyChoice(choice)" l="menus.choices.link.action.copy">Copy</a>
-		        		<a ng-click="linkChoice(choice)" l="menus.choices.link.action.link">Link</a>
+		        		<li>
+		        			<a ng-click="copyChoice(choice)" l="menus.choices.link.action.copy">Copy</a>
+		        		</li>
+		        		<li>
+		        			<a ng-click="linkChoice(choice)" l="menus.choices.link.action.link">Link</a>
+		        		</li>		        			        		
     				</ul>
 		        </li>
     		</ul>
