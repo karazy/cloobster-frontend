@@ -183,15 +183,33 @@
 	</div>	
 </div>
 <div class="row-fluid" ng-show="wizard.complete">
-	<div class="span12">	
-		<div class="hero-unit">
-			<p l="wizard.complete.text1">Your app is ready!</p>
-
-			<img ng-show="welcomeSpots[0].qrImageUrl" ng-src="{{welcomeSpots[0].qrImageUrl}}" alt="Welcome Spot Barcode" class="welcome-spot"/>
-
-			<button ng-click="editLocation()" l="wizard.continuebutton" class="btn btn-primary btn-large">Continue editing</button>
+	<div class="span2"></div>
+	<div class="span8">	
+		<div class="hero-unit">			
+			<h3 l="wizard.complete.text1">Your app is ready!</h3>
+			<div class="row-fluid">
+				<div class="span8">
+					<img ng-show="welcomeSpots[0].qrImageUrl" ng-src="{{welcomeSpots[0].qrImageUrl}}" alt="Welcome Spot Barcode" class=""
+					style= "margin-left: auto; margin-right: auto; display: block"/>
+					<h3 l="wizard.complete.text2">You can directly start using this qr code.</h3>
+				</div>
+				<div class="span4">
+					<img src="../img/app_screenshot.png" alt="cloobster app" width="100%"/>
+					<!-- <div class="app-help-image"></div> -->
+				</div>
+			</div>
+			<!-- <div>
+				<img ng-show="welcomeSpots[0].qrImageUrl" ng-src="{{welcomeSpots[0].qrImageUrl}}" alt="Welcome Spot Barcode" class=""/>
+				<p l="wizard.complete.text2">You can directly start using this qr code.</p>
+			</div>
+			<div class="app-help-image"></div> -->
+			<div>
+				<button ng-click="showLocationDetails()" l="wizard.continuebutton" class="btn btn-primary btn-large">Continue editing</button>
+			</div>
+			
 		</div>
 	</div>
+	<div class="span2"></div>
 </div>
 </div>
 

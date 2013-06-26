@@ -204,7 +204,7 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 		var resource,
 			entity;
 
-		if(!wizardData && !wizardData.newLocationName) {
+		if(!wizardData || !wizardData.newLocationName) {
 			console.error('Wizard: cannot save business without name');
 			return;
 		}
@@ -219,7 +219,7 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 
 		entity.$save(function(response) {
 			$scope.$broadcast('update-businesses');		
-			// $scope.createdLocation = entity;
+			$scope.createdLocation = entity;
 			$scope.wizard.progress.location = true;
 			callback(entity);
 		}, handleError);
@@ -230,12 +230,12 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 		var infopage,
 			resource;
 
-		if(!wizardData && !wizardData.infopageDescription) {
+		if(!wizardData || !wizardData.infopageDescription) {
 			console.error('Wizard: cannot create infopage without data');
 			return;
 		}
 
-		if(!location && !location.id) {
+		if(!location || !location.id) {
 			console.error('Wizard: cannot create infopage without location id');
 			return;
 		}
@@ -244,7 +244,7 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 		resource = InfoPage.buildResource(location.id);
 		infopage = new resource({ 'translations' : {} });
 
-		infopage.title = langService.translate("wizard.infopage.title");
+		infopage.title = langService.translate("appwizard.infopage.title");
 		infopage.html = wizardData.infopageDescription;
 		infopage.$save(function() {
 			$scope.wizard.progress.infopages = true;
@@ -262,7 +262,7 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 			return;
 		}
 
-		if(!location && !location.id) {
+		if(!location || !location.id) {
 			console.error('Wizard: cannot create products without location id');
 			return;
 		}
@@ -339,6 +339,13 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 
 		$scope.wizard.images[type] = null;
 		//delete image from blobstore
+	}
+
+	$scope.showLocationDetails = function() {
+		if(!$scope.createdLocation || !$scope.createdLocation.id) {
+			return;
+		}
+		$location.url("/businesses/"+$scope.createdLocation.id);
 	}
 
 	$scope.$watch('wizard.progress', function(newVal, oldVal) {

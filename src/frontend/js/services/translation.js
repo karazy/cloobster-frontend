@@ -2152,6 +2152,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Über uns",
 			"EN" : "About us"
 		},
+		"wizard.complete.text1" : {
+			"DE" :  "Ihre App wurde generiert. Sie können Sie mit dem QR Code unten	testen. Einfach	cloobster herunterladen oder Code mit Barcoo scannen.",
+			"EN" : ""
+		},
+		"wizard.complete.text2" : {
+			"DE" :  "Den QR Code können Sie übrigens schon jetzt benutzen und auf Flyer, Aufsteller, Facebook, Webseite veröﬀentlichen.",
+			"EN" : ""
+		},
+		"appwizard.continuebutton" : {
+			"DE" :  "App weiter bearbeiten",
+			"EN" : "Continue editing"
+		},
 		//report partial
 		"reports.description" : {
 			"DE" :  "Hier können Sie die wichtigsten Kennzahlen (KPI) anschauen. Wählen Sie zunächst welche Kennzahl Sie anschauen möchten<br/>"+
