@@ -1360,8 +1360,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Linked choices"
 		},
 		"menus.choices.field.linkedproducts" : {
-			"DE" : "Wird verwendet in ...",
-			"EN" : "Used in ..."
+			"DE" : "Verwendet in",
+			"EN" : "Used in"
 		},
 		"menus.choices.field.linkedproducts.help" : {
 			"DE" : "Listet alle Produkte auf,<br/> die diese Auswahlmöglichkeit verwenden.",
