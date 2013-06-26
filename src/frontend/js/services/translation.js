@@ -2113,7 +2113,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Upload logo"
 		},
 		"appwizard.step3.mainpicbutton" : {
-			"DE" :  "",
+			"DE" :  "Hauptbild auswählen",
 			"EN" : "Upload main picture"
 		},
 		"appwizard.step5.title" : {

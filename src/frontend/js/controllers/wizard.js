@@ -18,6 +18,8 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 		offers : [{}, {}, {}]
 	};
 
+	$scope.imageResource =	Business.buildImageResource();
+
 	$scope.cond = function(expression, trueValue, falseValue) {
 		return (expression ? trueValue : falseValue);
 	};

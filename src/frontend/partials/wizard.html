@@ -52,12 +52,17 @@
 					<div class="step-counter">3</div>
 					<div class="step-content">
 						<div class="step-section">
-							<!-- <div class="control-group"> -->
-							 	<!-- <div class="btn-group"> -->
-									<button class="btn btn-primary span4" l="appwizard.step3.logobutton">Upload logo</button>
-									<button class="btn btn-primary span4" l="appwizard.step3.mainpicbutton">Upload main picture</button>
-								<!-- </div> -->
-							<!-- </div> -->
+
+						 	<div simple-image-editor="wizardData.images.logo" editor-title-key="appwizard.step3.logobutton" editor-image-id="logo" editor-on-save="setImage(image)" editor-on-cancel="discardImage(image)"  editor-image-resource="imageResource" editor-crop-text="business.detail.app.header.description" editor-on-delete="deleteExistingImage('logo')">
+								<div ng-show="wizardData.images.logo.url">
+									<img  ng-src="{{wizardData.images.logo.url}}=s96" alt="click to edit" />
+									<p  l="business.detail.picture.edit">Click image to edit</p>
+								</div>
+								<button ng-show="!wizardData.images.logo" class="btn btn-primary span4" l="appwizard.step3.logobutton">Upload logo</button>
+							</div>
+								
+								<button class="btn btn-primary span4" l="appwizard.step3.mainpicbutton">Upload main picture</button>
+
 						</div>
 					</div>
 				</div>
