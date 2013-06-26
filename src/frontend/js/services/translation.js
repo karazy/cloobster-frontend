@@ -1077,8 +1077,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Activate/deactivate product. Attention! Product is not available for user."
 		},
 		"menus.product.hideindashboard.tooltip" : {
-			"DE" :  "Auge geschlossen: Produkt auf App Dashboard NIE anzeigen.",
-			"EN" : "Eye closed: NEVEr show product on app dashboard."
+			"DE" :  "Auge geschlossen: Produkt bei Zufallskacheln auf App Dashboard NIE anzeigen.",
+			"EN" : "Eye closed: NEVER show product in a random tile on app dashboard."
 		},
 		"menus.products.link.description" : {
 			"DE" : "Klicken Sie auf eine bestehendes Produkt, um dieses zu kopieren und der aktuellen Kategorie hinzuzufügen. Optional können Auswahlmöglichkeiten <strong>verknüpft</strong> oder <strong>kopiert</strong> werden. <i class='icon-question-sign'></i>",

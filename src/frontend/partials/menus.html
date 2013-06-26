@@ -348,10 +348,6 @@
 			    	<div ng-show="productInvalid" class="text-error">
 			    		<span l="validation.field.required">* Please fill out all required fields.</span>
 			    	</div>	
-			    	<!-- <div class="activation-checkbox">		    		
-			    		<input type="checkbox" id="productActiveCb" ng-model="currentProduct.active" ng-change="saveProduct()"></input>
-			    		<label l="menus.product.field.active" for="productActiveCb">Active: Show product for guest</label>
-			    	</div> -->
 			    	<div class="row-fluid">
 				    	<div simple-image-editor="currentProduct.image" editor-title-key="common.image.add" editor-image-id="image" editor-on-save="setProductImage(image)" editor-on-cancel="discardImage(image)" editor-image-resource="productImageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" style="margin: 0 0 10px;" class="span6" editor-on-delete="deleteProductImage()">
 								<div ng-show="currentProduct.image.url">
@@ -366,27 +362,22 @@
 					<!-- </div> -->
 					<!-- Action buttons -->
 			    	<div class="btn-toolbar">
-			    		<!-- <button class="btn btn-success span4" type="button" ng-click="toggleProductActive()" ng-model="currentProduct.active" ng-show="currentProduct.active && currentProduct.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
-
-			    		<button class="btn btn-danger span4" style="margin-left: 0px !important;"  type="button" ng-click="toggleProductActive()" ng-model="currentProduct.active" ng-show="!currentProduct.active && currentProduct.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button> -->
-
-			    		<!-- action buttons -->
 			    		<div class="btn-group" ng-show="currentProduct.id">
 			    			<!-- active button -->
 			    			<button class="btn" ng-class="{'btn-success' : currentProduct.active, 'btn-danger' : !currentProduct.active}" type="button" ng-click="toggleProductActive()" ng-model="currentProduct.active" tooltip="menus.product.active.tooltip">
 			    				<i class="icon-white" ng-class="{'icon-ok' : currentProduct.active, 'icon-ban-circle' : !currentProduct.active}"></i>
 			    			</button>
 			    			<!-- special -->
-			    			<button class="btn" ng-class="{'btn-warning' : currentProduct.special == true}" type="button" ng-click="toggleProductSpecial()" ng-model="currentProduct.special" tooltip="menus.product.special.tooltip">
-			    				<i class="icon-star icon-black" ng-class="{'icon-star' : currentProduct.special, 'icon-star-empty' : !currentProduct.special}"></i>
+			    			<button class="btn" ng-class="{'btn-success' : currentProduct.special == true}" type="button" ng-click="toggleProductSpecial()" ng-model="currentProduct.special" tooltip="menus.product.special.tooltip">
+			    				<i class="icon-star icon-black" ng-class="{'icon-star icon-white' : currentProduct.special, 'icon-star-empty' : !currentProduct.special}"></i>
 			    			</button>
 			    			<!-- noOrder -->
-			    			<button class="btn" ng-class="{'btn-warning' : currentProduct.noOrder == true}" type="button" ng-click="toggleProductNoOrder()" ng-model="currentProduct.noOrder" tooltip="menus.product.noorder.tooltip">
-			    				<i class="icon-shopping-cart icon-black" ng-class="{'icon-info-sign' : currentProduct.noOrder, 'icon-shopping-cart' : !currentProduct.noOrder}"></i>
+			    			<button class="btn" ng-class="{'btn-success' : !currentProduct.noOrder}" type="button" ng-click="toggleProductNoOrder()" ng-model="currentProduct.noOrder" tooltip="menus.product.noorder.tooltip">
+			    				<i class="icon-shopping-cart icon-black" ng-class="{'icon-info-sign' : currentProduct.noOrder, 'icon-shopping-cart icon-white' : !currentProduct.noOrder}"></i>
 			    			</button>
 			    			<!-- hide from dashboard-->
-			    			<button class="btn" type="button" ng-click="toggleProductDashboard();" ng-model="currentProduct.hideInDashboard" tooltip="menus.product.hideindashboard.tooltip">
-			    				<i class="icon-black" ng-class="{'icon-eye-close' : currentProduct.hideInDashboard, 'icon-eye-open' : !currentProduct.hideInDashboard}"></i>
+			    			<button class="btn" type="button" ng-class="{'btn-success' : !currentProduct.hideInDashboard}" ng-click="toggleProductDashboard();" ng-model="currentProduct.hideInDashboard" tooltip="menus.product.hideindashboard.tooltip">
+			    				<i class="icon-black" ng-class="{'icon-eye-close' : currentProduct.hideInDashboard, 'icon-eye-open icon-white' : !currentProduct.hideInDashboard}"></i>
 			    			</button>
 			    		</div>
 			    		<!-- move button -->
@@ -517,29 +508,6 @@
 				    		<p class="edit"><span l="menus.choices.field.price">Price: {{currentChoice.price | kcurrency:activeBusiness.currency}}</span> <i class="icon-edit icon-black"></i></p>
 				    	</div>
 			    	</div>
-	<!-- Removed parent management due to removal of parent in future refactoring.
-	 		    	<div ng-hide="isParent(currentChoice.id)">
-				    	<span class="nullable">
-				    		<label for="choiceParentSelect" l="menus.choices.field.parentselect.label">Select Parent:</label>
-				    		<select ng-model="currentChoice.parent" ng-options="c.id as c.text for c in choices | filter:excludeChoice" ng-change="saveChoice()" id="choiceParentSelect" tooltip="menus.choices.parentselect.tooltip">
-		          				<option value="" l="menus.choices.field.parentselect.nullparent">-- chose parent --</option>
-		        			</select>
-		        		</span>
-			    	</div>
-			    	<div>
-				    	<div ng-show="isParent(currentChoice.id)" class="btn-group" style="margin: 0 0 0.5em 0;">
-				    		<button class="btn dropdown-toggle"  data-toggle="dropdown" tooltip="menus.choices.linkedchoices.tooltip">
-				    			<span l="menus.choices.field.linkedchoices">Linked Choices</span>
-				    			<span class="caret"></span>
-				    		</button>
-				        	<ul class="dropdown-menu">
-				        		<li>
-				        			<a ng-repeat="choice in choices | filter:{parent : currentChoice.id}" ng-click="loadChoice(choice)">{{choice.text}}
-				        			</a>
-				        		</li>
-		    				</ul>
-				    	</div>
-			    	</div> -->
 			    	<div class="row-fluid">
 				    	<div ng-show="linkedProductsForChoice.length > 1" class="btn-group span6" style="margin: 0 0 0.5em 0;">
 				    		<button class="btn dropdown-toggle" style="width: 100%;"  data-toggle="dropdown" tooltip="menus.choices.field.linkedproducts.help">
