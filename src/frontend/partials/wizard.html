@@ -3,7 +3,7 @@
 </div>
 <h1 l="appwizard.title">Create your own app presence in 5 simple steps</h1>
 <div class="row-fluid">
-	<div class="span12">		
+	<div class="span8">		
 		<div class="data-container-with-title no-border">			
 			<div class="data-container-block" style="margin-top:15px;">
 				<form name='wizardForm' novalidate>
@@ -64,66 +64,67 @@
 				<div class="step-wrapper" ng-class="{'step-inactive' : !activeBusinessId}">
 					<div class="step-counter">4</div>
 					<div class="step-content">
-					<div class="step-title">						
-						<div l="appwizard.step4.title">What do you want to offer your customers?
+						<div class="step-title">						
+							<div l="appwizard.step4.title">What do you want to offer your customers?
+							</div>
 						</div>
-					</div>
-					<div class="step-section">
-						 <div class="control-group">
-						 	<div class="controls controls-row">
-								<input type="text" class="span8" required l="appwizard.step4.offer1.title" l-attribute="placeholder" ng-model="wizard.offers[0].title" name="offer1Title">								
+						<div class="step-section">
+							 <div class="control-group">
+							 	<div class="controls controls-row">
+									<input type="text" class="span8" required l="appwizard.step4.offer1.title" l-attribute="placeholder" ng-model="wizard.offers[0].title" name="offer1Title">								
+									<button class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
+									<div style="clear: both;">
+										<span class="inline-help" ng-show="wizardForm.offer1Title.$dirty && wizardForm.offer1Title.$invalid" l="registration.form.requiredfield">Please provide a value.</span>
+									</div>							
+								</div>
+							</div>
+							 <div class="control-group">
+							 	<div class="controls controls-row">
+									<input type="text" class="span8" ng-model="wizard.offers[0].shortdesc" name="offer1Shortdesc" ng-disabled="!wizard.offers[0].title" required l="appwizard.step4.shortdesc" l-attribute="placeholder" >
+									<input type="text" ng-pattern="/^[0-9]+([.][0-9]+)?$/" class="span4" ng-model="wizard.offers[0].price" name="offer1Price" ng-disabled="!wizard.offers[0].title" required l="appwizard.step4.price" l-attribute="placeholder" >
+									<div style="clear: both;">
+										<span class="inline-help" ng-show="wizardForm.offer1Shortdesc.$dirty && wizardForm.offer1Shortdesc.$invalid" l="registration.form.requiredfield">Please provide a value.</span>
+										<span class="inline-help pull-right" ng-show="wizardForm.offer1Price.$dirty && wizardForm.offer1Price.$error.required" l="registration.form.requiredfield">Please provide a value.</span>
+										<span class="inline-help pull-right" style="max-width: 300px; text-align: right;" ng-show="wizardForm.offer1Price.$dirty && wizardForm.offer1Price.$error.pattern" l="product.editor.price.validation">Please provide a valid price.</span>			
+									</div>	
+								</div>
+							</div>
+						</div>
+						<div class="step-section">
+							 <div class="control-group">
+							 	<div class="controls controls-row">
+								<input type="text" class="span8" l="appwizard.step4.offer2.title" l-attribute="placeholder" ng-model="wizard.offers[1].title" name="offer2Title">
 								<button class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
-								<div style="clear: both;">
-									<span class="inline-help" ng-show="wizardForm.offer1Title.$dirty && wizardForm.offer1Title.$invalid" l="registration.form.requiredfield">Please provide a value.</span>
-								</div>							
+								</div>
+							</div>
+							 <div class="control-group">
+							 	<div class="controls controls-row">
+									<input type="text" class="span8" ng-model="wizard.offers[1].shortdesc" ng-disabled="!wizard.offers[1].title" l="appwizard.step4.shortdesc" name="offer2Shortdesc" l-attribute="placeholder" >
+									<input type="text" ng-pattern="/^[0-9]+([.][0-9]+)?$/" class="span4" ng-model="wizard.offers[1].price" name="offer2Price" ng-disabled="!wizard.offers[1].title" l="appwizard.step4.price" l-attribute="placeholder" >
+									<div style="clear: both;">
+										<span class="inline-help pull-right" style="max-width: 300px; text-align: right;" ng-show="wizardForm.offer2Price.$dirty && wizardForm.offer2Price.$error.pattern" l="product.editor.price.validation">Please provide a valid price.</span>			
+									</div>	
+								</div>
 							</div>
 						</div>
-						 <div class="control-group">
-						 	<div class="controls controls-row">
-								<input type="text" class="span8" ng-model="wizard.offers[0].shortdesc" name="offer1Shortdesc" ng-disabled="!wizard.offers[0].title" required l="appwizard.step4.shortdesc" l-attribute="placeholder" >
-								<input type="text" ng-pattern="/^[0-9]+([.][0-9]+)?$/" class="span4" ng-model="wizard.offers[0].price" name="offer1Price" ng-disabled="!wizard.offers[0].title" required l="appwizard.step4.price" l-attribute="placeholder" >
-								<div style="clear: both;">
-									<span class="inline-help" ng-show="wizardForm.offer1Shortdesc.$dirty && wizardForm.offer1Shortdesc.$invalid" l="registration.form.requiredfield">Please provide a value.</span>
-									<span class="inline-help pull-right" ng-show="wizardForm.offer1Price.$dirty && wizardForm.offer1Price.$error.required" l="registration.form.requiredfield">Please provide a value.</span>
-									<span class="inline-help pull-right" style="max-width: 300px; text-align: right;" ng-show="wizardForm.offer1Price.$dirty && wizardForm.offer1Price.$error.pattern" l="product.editor.price.validation">Please provide a valid price.</span>			
-								</div>	
+						<div class="step-section">
+							 <div class="control-group">
+							 	<div class="controls controls-row">
+								<input type="text" class="span8" l="appwizard.step4.offer3.title" l-attribute="placeholder" ng-model="wizard.offers[2].title" name="offer3Title">
+								<button class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
+								</div>
 							</div>
-						</div>
-					</div>
-					<div class="step-section">
-						 <div class="control-group">
-						 	<div class="controls controls-row">
-							<input type="text" class="span8" l="appwizard.step4.offer2.title" l-attribute="placeholder" ng-model="wizard.offers[1].title" name="offer2Title">
-							<button class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
+							 <div class="control-group">
+							 	<div class="controls controls-row">
+									<input type="text" class="span8" ng-model="wizard.offers[2].shortdesc" name="offer3ShortDesc" ng-disabled="!wizard.offers[2].title" l="appwizard.step4.shortdesc" l-attribute="placeholder" >
+									<input type="text" ng-pattern="/^[0-9]+([.][0-9]+)?$/" class="span4" ng-model="wizard.offers[2].price" name="offer3Price" ng-disabled="!wizard.offers[2].title" l="appwizard.step4.price" l-attribute="placeholder" >
+									<div style="clear: both;">
+										<span class="inline-help pull-right" style="max-width: 300px; text-align: right;" ng-show="wizardForm.offer3Price.$dirty && wizardForm.offer3Price.$error.pattern" l="product.editor.price.validation">Please provide a valid price.</span>			
+									</div>	
+								</div>
 							</div>
-						</div>
-						 <div class="control-group">
-						 	<div class="controls controls-row">
-								<input type="text" class="span8" ng-model="wizard.offers[1].shortdesc" ng-disabled="!wizard.offers[1].title" l="appwizard.step4.shortdesc" name="offer2Shortdesc" l-attribute="placeholder" >
-								<input type="text" ng-pattern="/^[0-9]+([.][0-9]+)?$/" class="span4" ng-model="wizard.offers[1].price" name="offer2Price" ng-disabled="!wizard.offers[1].title" l="appwizard.step4.price" l-attribute="placeholder" >
-								<div style="clear: both;">
-									<span class="inline-help pull-right" style="max-width: 300px; text-align: right;" ng-show="wizardForm.offer2Price.$dirty && wizardForm.offer2Price.$error.pattern" l="product.editor.price.validation">Please provide a valid price.</span>			
-								</div>	
-							</div>
-						</div>
-					</div>
-					<div class="step-section">
-						 <div class="control-group">
-						 	<div class="controls controls-row">
-							<input type="text" class="span8" l="appwizard.step4.offer3.title" l-attribute="placeholder" ng-model="wizard.offers[2].title" name="offer3Title">
-							<button class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
-							</div>
-						</div>
-						 <div class="control-group">
-						 	<div class="controls controls-row">
-								<input type="text" class="span8" ng-model="wizard.offers[2].shortdesc" name="offer3ShortDesc" ng-disabled="!wizard.offers[2].title" l="appwizard.step4.shortdesc" l-attribute="placeholder" >
-								<input type="text" ng-pattern="/^[0-9]+([.][0-9]+)?$/" class="span4" ng-model="wizard.offers[2].price" name="offer3Price" ng-disabled="!wizard.offers[2].title" l="appwizard.step4.price" l-attribute="placeholder" >
-								<div style="clear: both;">
-									<span class="inline-help pull-right" style="max-width: 300px; text-align: right;" ng-show="wizardForm.offer3Price.$dirty && wizardForm.offer3Price.$error.pattern" l="product.editor.price.validation">Please provide a valid price.</span>			
-								</div>	
-							</div>
-						</div>
-					</div>					
+						</div>		
+					</div>			
 				</div>
 				<div class="step-wrapper" ng-class="{'step-inactive' : !activeBusinessId}">
 					<div class="step-counter">5</div>
@@ -167,8 +168,14 @@
 				</form>
 			</div>			
 		</div>
-	</div>
+	</div>	
+	<div class="span4">
+		<div class="data-container-with-title no-border">
+			<div class="app-help-image"></div>
+		</div>
+	</div>	
 </div>
+
 </div>
 <div ng-controller="Cloobster.InfoPage">
 </div>

@@ -860,4 +860,11 @@ $step-element-maxwidth: 600px;
   display: block;
 }
 
+.app-help-image {
+  height: 500px;
+  background-image: url('../img/apphelp.jpg');
+  background-size: 100% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 

@@ -959,3 +959,12 @@ ul.options-list li:hover {
 .drop-active .mask {
   display: block;
 }
+
+/* line 863, sass/cloobster.scss */
+.app-help-image {
+  height: 500px;
+  background-image: url("../img/apphelp.jpg");
+  background-size: 100% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}
