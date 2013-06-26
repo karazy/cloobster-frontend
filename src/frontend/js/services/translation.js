@@ -2270,8 +2270,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "drop a tile"
 		},
 		"appconfig.tile.maximum" : {
-			"DE" :  "Max 20 Kachel erreicht.",
-			"EN" : "Max 20 tiles reached."
+			"DE" :  "Max 10 Kachel erreicht.",
+			"EN" : "Max 10 tiles reached."
 		},
 		"appconfig.tiledetail.title" : {
 			"DE" :  "Kacheldetails",
