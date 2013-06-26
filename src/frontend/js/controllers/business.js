@@ -74,11 +74,11 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	/** Filter object for language selection dialog. */
 	$scope.languageQuery = {};
 
-	if(!$rootScope.businessWizardEvent) {
-		$rootScope.businessWizardEvent = $rootScope.$on("wizard-create-app", function(eventData, wizardData) {		
-			addBusinessByWizard(wizardData);
-		});	
-	}
+	// if(!$rootScope.businessWizardEvent) {
+	// 	$rootScope.businessWizardEvent = $rootScope.$on("wizard-create-app", function(eventData, wizardData) {		
+	// 		addBusinessByWizard(wizardData);
+	// 	});	
+	// }
 	
 
 

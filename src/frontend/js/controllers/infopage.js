@@ -34,11 +34,11 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	/** Map of all languages. */
 	$scope.langcodesMap = langcodesMap;
 
-	if(!$rootScope.infopageWizardEvent) {
-		$rootScope.infopageWizardEvent = $rootScope.$on("wizard-created-business", function(eventData, wizardData, locationId) {
-			addInfopageByWizard(wizardData, locationId);
-		});
-	}
+	// if(!$rootScope.infopageWizardEvent) {
+	// 	$rootScope.infopageWizardEvent = $rootScope.$on("wizard-created-business", function(eventData, wizardData, locationId) {
+	// 		addInfopageByWizard(wizardData, locationId);
+	// 	});
+	// }
 
 	function loadInfoPages (language) {
 		var params = {};

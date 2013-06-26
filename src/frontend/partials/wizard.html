@@ -80,7 +80,7 @@
 							</div>
 							 <div class="control-group">
 							 	<div class="controls controls-row">
-									<input type="text" class="span8" ng-model="wizard.offers[0].shortdesc" name="offer1Shortdesc" ng-disabled="!wizard.offers[0].title" required l="appwizard.step4.shortdesc" l-attribute="placeholder" >
+									<input type="text" class="span8" ng-model="wizard.offers[0].shortDesc" name="offer1Shortdesc" ng-disabled="!wizard.offers[0].title" required l="appwizard.step4.shortdesc" l-attribute="placeholder" >
 									<input type="text" ng-pattern="/^[0-9]+([.][0-9]+)?$/" class="span4" ng-model="wizard.offers[0].price" name="offer1Price" ng-disabled="!wizard.offers[0].title" required l="appwizard.step4.price" l-attribute="placeholder" >
 									<div style="clear: both;">
 										<span class="inline-help" ng-show="wizardForm.offer1Shortdesc.$dirty && wizardForm.offer1Shortdesc.$invalid" l="registration.form.requiredfield">Please provide a value.</span>
@@ -99,7 +99,7 @@
 							</div>
 							 <div class="control-group">
 							 	<div class="controls controls-row">
-									<input type="text" class="span8" ng-model="wizard.offers[1].shortdesc" ng-disabled="!wizard.offers[1].title" l="appwizard.step4.shortdesc" name="offer2Shortdesc" l-attribute="placeholder" >
+									<input type="text" class="span8" ng-model="wizard.offers[1].shortDesc" ng-disabled="!wizard.offers[1].title" l="appwizard.step4.shortdesc" name="offer2Shortdesc" l-attribute="placeholder" >
 									<input type="text" ng-pattern="/^[0-9]+([.][0-9]+)?$/" class="span4" ng-model="wizard.offers[1].price" name="offer2Price" ng-disabled="!wizard.offers[1].title" l="appwizard.step4.price" l-attribute="placeholder" >
 									<div style="clear: both;">
 										<span class="inline-help pull-right" style="max-width: 300px; text-align: right;" ng-show="wizardForm.offer2Price.$dirty && wizardForm.offer2Price.$error.pattern" l="product.editor.price.validation">Please provide a valid price.</span>			
@@ -116,7 +116,7 @@
 							</div>
 							 <div class="control-group">
 							 	<div class="controls controls-row">
-									<input type="text" class="span8" ng-model="wizard.offers[2].shortdesc" name="offer3ShortDesc" ng-disabled="!wizard.offers[2].title" l="appwizard.step4.shortdesc" l-attribute="placeholder" >
+									<input type="text" class="span8" ng-model="wizard.offers[2].shortDesc" name="offer3ShortDesc" ng-disabled="!wizard.offers[2].title" l="appwizard.step4.shortdesc" l-attribute="placeholder" >
 									<input type="text" ng-pattern="/^[0-9]+([.][0-9]+)?$/" class="span4" ng-model="wizard.offers[2].price" name="offer3Price" ng-disabled="!wizard.offers[2].title" l="appwizard.step4.price" l-attribute="placeholder" >
 									<div style="clear: both;">
 										<span class="inline-help pull-right" style="max-width: 300px; text-align: right;" ng-show="wizardForm.offer3Price.$dirty && wizardForm.offer3Price.$error.pattern" l="product.editor.price.validation">Please provide a valid price.</span>			
