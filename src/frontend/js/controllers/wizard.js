@@ -286,8 +286,12 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 		}
 	}
 
-	function resetWizard() {
-
+	/**
+	* Delete all transient images.
+	* Called when user cancels wizard process.
+	*/
+	function cleanupImages() {
+		//TODO
 	}
 
 	function loadWelcomeSpot (location) {
@@ -378,9 +382,25 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 		}
 	}, true);
 
-	$scope.$on('$locationChangeStart', function(next, current) { 
-   		alert('routeChangeStart');
+	//prevent accidental tab switching and data loss
+	$scope.locationChangeStartListener =  $scope.$on('$locationChangeStart', function(event, next, current) { 
+   		if($scope.wizardForm.$dirty) {
+   			//warn user that changes maybe lost
+   			event.preventDefault();
+   			$scope.changeUrl = $location.url($location.url(next).hash());
+   			jQuery("#wizardQuitModal").modal();
+   		}
  	});
+
+ 	$scope.switchTab = function() {
+ 		if($scope.changeUrl) {
+ 			//unregister listener
+ 			$scope.locationChangeStartListener();
+ 			jQuery("#wizardQuitModal").modal("hide");
+ 			cleanupImages();
+ 			$location.url($scope.changeUrl);
+ 		}
+ 	}
 
 	$scope.isWizardWorking = function() {
 		return $scope.wizard.complete || $scope.wizard.saving;

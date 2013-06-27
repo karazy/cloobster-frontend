@@ -62,7 +62,7 @@
 						<div class="step-section">
 
 						 	<div simple-image-editor="wizard.images.logo" editor-title-key="appwizard.step3.logobutton" editor-image-id="logo" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('logo')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('logo')" editor-no-persist="true" editor-enabled="!wizard.complete && !wizard.saving">
-								<div ng-show="wizard.images.logo.url">
+								<div ng-show="wizard.images.logo.url" class="step-grid-image">
 									<img  ng-src="{{wizard.images.logo.url}}=s96" alt="click to edit" />
 									<p  l="business.detail.picture.edit">Click image to edit</p>
 								</div>
@@ -71,7 +71,7 @@
 
 							<div simple-image-editor="wizard.images.appheader" editor-title-key="appwizard.step3.mainpicbutton" editor-image-id="appheader" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('appheader')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('appheader')" editor-no-persist="true"
 							editor-crop-text="business.detail.app.header.description" editor-ratio="3:1" editor-enabled="!wizard.complete && !wizard.saving">
-								<div ng-show="wizard.images.appheader.url">
+								<div ng-show="wizard.images.appheader.url" class="step-grid-image">
 									<img  ng-src="{{wizard.images.appheader.url}}=s96" alt="click to edit" />
 									<p  l="business.detail.picture.edit">Click image to edit</p>
 								</div>
@@ -92,7 +92,7 @@
 							 	<div class="controls controls-row">
 									<input type="text" class="span8" required l="appwizard.step4.offer1.title" l-attribute="placeholder" ng-model="wizard.offers[0].title" name="offer1Title">
 									<div simple-image-editor="wizard.images.offer1" editor-title-key="fileupload.button.add" editor-image-id="offer1" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('offer1')" editor-image-resource="imageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" editor-on-delete="deleteWizardImage(offer1)" editor-no-persist="true" editor-enabled="!wizard.complete && !wizard.saving">
-											<div ng-show="wizard.images.offer1">
+											<div ng-show="wizard.images.offer1" class="step-grid-image">
 												<img  ng-src="{{wizard.images.offer1.url}}=s96" alt="click to edit" />
 												<p l="common.image.edit">Click image to edit</p>
 											</div>
@@ -121,7 +121,7 @@
 									<input type="text" class="span8" l="appwizard.step4.offer2.title" l-attribute="placeholder" ng-model="wizard.offers[1].title" name="offer2Title">
 
 									<div simple-image-editor="wizard.images.offer2" editor-title-key="fileupload.button.add" editor-image-id="offer2" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('offer2')" editor-image-resource="imageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" editor-on-delete="deleteWizardImage(offer2)" editor-no-persist="true" editor-enabled="!wizard.complete && !wizard.saving">
-											<div ng-show="wizard.images.offer2">
+											<div ng-show="wizard.images.offer2" class="step-grid-image">
 												<img  ng-src="{{wizard.images.offer2.url}}=s96" alt="click to edit" />
 												<p l="common.image.edit">Click image to edit</p>
 											</div>
@@ -145,7 +145,7 @@
 									<input type="text" class="span8" l="appwizard.step4.offer3.title" l-attribute="placeholder" ng-model="wizard.offers[2].title" name="offer3Title">
 
 									<div simple-image-editor="wizard.images.offer3" editor-title-key="fileupload.button.add" editor-image-id="offer3" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('offer3')" editor-image-resource="imageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" editor-on-delete="deleteWizardImage(offer3)" editor-no-persist="true" editor-enabled="!wizard.complete && !wizard.saving">
-											<div ng-show="wizard.images.offer3">
+											<div ng-show="wizard.images.offer3" class="step-grid-image">
 												<img  ng-src="{{wizard.images.offer3.url}}=s96" alt="click to edit" />
 												<p l="common.image.edit">Click image to edit</p>
 											</div>
@@ -180,7 +180,7 @@
 						 		<input type="text" class="span8" ng-model="wizard.fbUrl">
 
 								<div simple-image-editor="wizard.images.fbwallpost" editor-title-key="appwizard.step3.mainpicbutton" editor-image-id="fbwallpost" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('fbwallpost')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('fbwallpost')" editor-no-persist="true" editor-crop-text="business.detail.facebook.wallpost.image.description"  editor-ratio="4:3" editor-enabled="!wizard.complete && !wizard.saving">
-									<div ng-show="wizard.images.fbwallpost.url">
+									<div ng-show="wizard.images.fbwallpost.url" class="step-grid-image">
 										<img  ng-src="{{wizard.images.fbwallpost.url}}=s96" alt="click to edit" />
 										<p  l="business.detail.picture.edit">Click image to edit</p>
 									</div>
@@ -247,4 +247,19 @@
 <div ng-controller="Cloobster.InfoPage">
 </div>
 <div ng-controller="Cloobster.Business">
+</div>
+
+<!-- Warn modal if user wants to leave -->
+<div class="modal hide fade" id="wizardQuitModal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 l="appwizard.quit.title">Changes will be lost!</h3>
+  </div>
+  <div class="modal-body">
+    <p l="appwizard.quit.message">Your data will be lost if you leave the wizard!</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" l="common.cancel" data-dismiss="modal">Cancel</a>
+    <a href="#" class="btn btn-danger" l="common.ok" ng-click="switchTab()">Ok</a>
+  </div>
 </div>

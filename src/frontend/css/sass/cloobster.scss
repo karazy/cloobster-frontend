@@ -525,7 +525,7 @@ ul.options-list li:hover {
 
 /** howto partial */
 
-$step-element-maxwidth: 600px;
+$step-element-maxwidth: 650px;
 
 .step-wrapper {
   position: relative;
@@ -624,6 +624,11 @@ $step-element-maxwidth: 600px;
   font-weight: bold;  
   color: white;
   margin-right: 3px;
+}
+
+.step-grid-image {
+  float: left;
+  margin-left: 2.564102564102564%;
 }
 
 .howto-bar {
