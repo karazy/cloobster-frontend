@@ -250,8 +250,8 @@
 	    		<img ng-show="currentSpot.qrImageUrl" ng-src="{{currentSpot.qrImageUrl}}" alt="Spot Barcode"/>
 	    		<p>{{currentSpot.barcode}}</p>
 	    		<p ng-show="currentSpot.master" l="spot.master.description">This is the "master" Spot for this area, it cannot be deleted, unless you delete the Area.</p>
-	    		<div class="row-fluid" ng-show="currentSpot.id">
-    			<!-- code for cloobster widget button -->
+	    		<div class="row-fluid" ng-show="currentSpot.id && currentSpot.welcome">
+    			<!-- code for cloobster widget button, show only for welcome spots -->
 	    			<p><small l="spot.cloobsterwidget">Copy and paste snippet on a website for direct cloobster Check-in at this spot when app is isntalled!</small></p>
 					<textarea readonly="readonly" rows="4" class="span12" style="white-space:nowrap">
 						<a href="https://go.cloobster.com/x/spot/{{currentSpot.barcode}}" class="cloobster-checkin-button">cloobster Check-in</a>
