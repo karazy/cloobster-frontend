@@ -80,13 +80,6 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	/** Filter object for language selection dialog. */
 	$scope.languageQuery = {};
 
-	// if(!$rootScope.businessWizardEvent) {
-	// 	$rootScope.businessWizardEvent = $rootScope.$on("wizard-create-app", function(eventData, wizardData) {		
-	// 		addBusinessByWizard(wizardData);
-	// 	});	
-	// }
-	
-
 
 	/**
 	* Returns all businesses
@@ -256,29 +249,6 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 		return;
 	};
-
-	function addBusinessByWizard(wizardData) {
-		var resource,
-			entity;
-
-		if(!wizardData && !wizardData.newLocationName) {
-			console.error('Wizard: cannot save business without name');
-			return;
-		}
-
-		console.log('Wizard: generate business: ' + wizardData.newLocationName);
-
-		resource = Business.buildResource(loginService.getAccount().id);
-		entity = new resource({
-			"name": wizardData.newLocationName
-		});
-
-		entity.$save(function(response) {
-			// wizardData.locationId = entity.id;
-			$rootScope.$broadcast('wizard-created-business', wizardData, entity.id);
-			$scope.$broadcast('update-businesses');			
-		}, handleError);
-	}
 
 	/**
 	* Closes the new business form and resets values.
@@ -683,8 +653,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
  		}
 
   	marker = new google.maps.Marker({
-  	  position: position,
-	    map: map
+  		position: position,
+		map: map
   	});
 
   	map.panTo(position);

@@ -10,7 +10,7 @@
 * 	View and manage wizard.
 * 	@constructor
 */
-Cloobster.Wizard = function($scope, $location, loginService, Company, $routeParams, handleError, Business, $route, $log, $rootScope, Spot, $injector, InfoPage, Menu, Product, randomUtil, langService) {
+Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, Company, $routeParams, handleError, Business, $route, $log, $rootScope, Spot, $injector, InfoPage, Menu, Product, randomUtil, langService, DashboardItem, appConfig) {
 	var businessResource = null;
 
 	/* Holds data of wizard. */
@@ -20,157 +20,8 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 		progress: {}
 	};
 
-	$scope.imageResource =	Business.buildImageResource();
-
-	$scope.cond = function(expression, trueValue, falseValue) {
-		return (expression ? trueValue : falseValue);
-	};
-
-	/**
-	* Checks if given path is the active path.
-	* @param path
-	*	Path to check
-	* @param suffix
-	*	Check for appended suffix. If true tries to exactly match location and path.
-	*   If a string than just looks if the suffix is contained in url.
-	* @return
-	*	true if path is active, false otherwise
-	*/
-	$scope.getActive = function(path, suffix) {
-		return $scope.isActive(path, suffix) ? "active" : "";
-	}
-
-	$scope.isActive = function(path, suffix) {
-		var location = $location.path(),
-			active;
-			
-		//check if given path is part of real path
-		active = $location.path().indexOf(path) === 0;
-
-		if(suffix) {
-			if(suffix === true) {
-				active = (location == path);
-			}
-			else {
-				active = active && location.indexOf(suffix, location.length - suffix.length) !== -1;	
-			}
-		}
-
-		return active;
-	};
-
-	$scope.businesses = Business.getActiveBusinesses();
-	$scope.company = Company.getActiveCompany();
-
-	$scope.$on('update-businesses', function() {
-		$scope.businesses = Business.getActiveBusinesses(true);
-	});
-
-	if(!$rootScope.activeBusinessId) {
-		$rootScope.activeBusinessId = $scope.businesses.length > 0 ? $scope.businesses[0]['id'] : null;	
-	}
-	
-
-	$scope.canSwitchBusiness = false;
-
-	if($routeParams['businessId']) {
-		$rootScope.activeBusinessId = parseInt($routeParams['businessId']);
-		$scope.canSwitchBusiness = true;
-	}
-
-	$scope.switchBusiness = function() {
-		var newPath = $location.path().replace(/^\/businesses\/\d+/, '/businesses/'+$scope.activeBusinessId);
-		$rootScope.activeBusinessId = $scope.activeBusinessId;
-		$location.path(newPath);
-	};
-	
-	$scope.$watch('businesses.length', function (newValue, oldValue) {
-		if(!$rootScope.activeBusinessId && (newValue > 0)) {
-			$rootScope.activeBusinessId = $scope.businesses[0]['id'];
-		} 
-	});
-
-	/**
-	* Filter given business based on trash status.
-	* @return
-	*	true if not trashed
-	*/
-	$scope.filterTrashedBusiness = function(business) {
-		return !business.trash;
-	}
-
-	/**
-	* Adds a new business.
-	* @param businessName
-	*	Name for the new business
-	*/
-	$scope.addNewBusiness = function() {
-		var account;
-
-		if(!$scope.newBusiness.name) {
-			return;
-		}
-
-		if(!$scope.businessResource) {
-			account = loginService.getAccount();
-			$scope.businessResource = Business.buildResource(account.id);	
-		}
-
-		
-
-		$scope.newBusinessEntity = new $scope.businessResource($scope.newBusiness);
-
-		$scope.newBusinessEntity.$save(function(response) {
-			$scope.$broadcast('update-businesses');
-			$location.url('/businesses/'+response.id+'?howto=1');
-		}, handleError);
-	};
-
-	/**
-	* Load welcome spot for active business.
-	*/
-	// $scope.loadWelcomeSpot = function() {
-
-	// 	if(!$scope.spotResource) {
-	// 		$scope.spotResource = Spot.buildResource($rootScope.activeBusinessId);
-	// 	}
-
-	// 	$scope.welcomeSpots = $scope.spotResource.query({'bid' : $rootScope.activeBusinessId, 'welcome' : true});
-	// }
-
-	if($location.url() == "/howto") {
-		//if activeBusinessId changes reload welcome spot
-		$scope.$watch('activeBusinessId', function(newValue, oldValue) {
-			if(newValue) {
-				$scope.loadWelcomeSpot();	
-			} else {
-				$scope.welcomeSpots = null;
-			}	
-		});
-	}
-
-	$scope.$watch('loggedIn', function(newValue, oldValue) {
-		if(newValue === true) {
-			$scope.company = Company.getActiveCompany();
-			$scope.businesses = Business.getActiveBusinesses(false, checkBusinessesCount);					
-		}
-	});
-
-	/**
-	* @private
-	*	If no locations exist redirect to howto page.
-	*/
-	function checkBusinessesCount() {
-		if($scope.businesses && $scope.businesses.length == 0) {
-			$location.url("/howto");
-		}
-	}
-
-	// var howtostep = $location.search('howto');
-	if($routeParams['howto']) {
-		$scope.howtoMode = true;
-		$scope.howtoStep = $routeParams['howto'];
-	}
+	//a dummy resource used for image uploads. the correct saving happens later with the correct resource
+	$scope.imageResource =	$resource('');
 
 	//wizard logic
 	$scope.generateApp = function() {
@@ -196,6 +47,7 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 			loadWelcomeSpot(location);
 			addInfopageByWizard($scope.wizard, location);
 			addProductsByWizard($scope.wizard, location);
+			saveLocationImages($scope.wizard, location);
 		}
 	}
 
@@ -205,11 +57,11 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 			entity;
 
 		if(!wizardData || !wizardData.newLocationName) {
-			console.error('Wizard: cannot save business without name');
+			$log.log('Wizard: cannot save business without name');
 			return;
 		}
 
-		console.log('Wizard: generate business: ' + wizardData.newLocationName);
+		$log.log('Wizard: generate business: ' + wizardData.newLocationName);
 
 		resource = Business.buildResource(loginService.getAccount().id);
 		entity = new resource({
@@ -220,9 +72,123 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 		entity.$save(function(response) {
 			$scope.$broadcast('update-businesses');		
 			$scope.createdLocation = entity;
-			$scope.wizard.progress.location = true;
+			$scope.wizard.progress.location = true;			
 			callback(entity);
 		}, handleError);
+	}
+
+	function checkWizardAndLocation(wizardData, property, location) {
+		if(!wizardData || !wizardData[property]) {
+			$log.log('Wizard: cannot proceed without wizard data for ' + property);
+			return false;
+		}
+
+		if(!location || !location.id) {
+			$log.log('Wizard: cannot proceed without location');
+			return false;
+		}
+
+		return true;
+	}
+
+	function saveLocationImages(wizardData, location) {
+		var resource,
+			image;
+		//get image resource
+		//save images
+
+		if(!checkWizardAndLocation(wizardData, 'images', location)) {
+			return;
+		}
+
+		if(!wizardData.images) {
+			$log.log('Wizard.saveLocationImages: No images exist.');
+			return;
+		}
+
+		resource = Business.buildImageResource(location.id);
+
+		if(wizardData.images.logo) {
+			image = new resource({
+				id: wizardData.images.logo.id,
+				blobKey: wizardData.images.logo.blobKey,
+				url: wizardData.images.logo.url
+			});
+			image.$save();
+		}
+
+		if(wizardData.images.appheader) {
+			image = new resource({
+				id: wizardData.images.appheader.id,
+				blobKey: wizardData.images.appheader.blobKey,
+				url: wizardData.images.appheader.url
+			});
+			image.$save();
+		}
+
+		if(wizardData.images.fbwallpost) {
+			image = new resource({
+				id: wizardData.images.fbwallpost.id,
+				blobKey: wizardData.images.fbwallpost.blobKey,
+				url: wizardData.images.fbwallpost.url
+			});
+			image.$save();
+		}
+
+		//set progress 
+		// $scope.wizard.progress.images = true;
+	}
+
+	function saveProductImage(wizardData, location, imageId, product) {
+		var resource,
+			image;
+
+
+		if(!checkWizardAndLocation(wizardData, 'images', location)) {
+			return;
+		}
+
+		if(!product || product.id) {
+			$log.log("Wizard.saveProductImage: no product");
+			return;
+		}
+
+		if(!wizardData.images[imageId]) {
+			$log.log("Wizard.saveProductImage: no image for product " + product.id);
+			return;
+		}
+
+		resource = Product.buildImageResource(location.id, product.id);
+
+		image = new resource({
+			id: wizardData.images[imageId].id,
+			blobKey: wizardData.images[imageId].blobKey,
+			url: wizardData.images[imageId].url
+		});
+
+		image.$save();
+
+		// if(wizardData.images.offer2) {
+		// 	resource = Product.buildImageResource(location.id, wizardData.offers[1].id);
+
+		// 	image = new resource({
+		// 		id: wizardData.images.offer2.id,
+		// 		blobKey: wizardData.images.offer2.blobKey,
+		// 		url: wizardData.images.offer2.url
+		// 	});
+		// 	image.$save();
+		// }
+
+		// if(wizardData.images.offer3) {
+		// 	resource = Product.buildImageResource(location.id, wizardData.offers[2].id);
+
+		// 	image = new resource({
+		// 		id: wizardData.images.offer3.id,
+		// 		blobKey: wizardData.images.offer3.blobKey,
+		// 		url: wizardData.images.offer3.url
+		// 	});
+		// 	image.$save();
+		// }
 	}
 
 	//create infopage
@@ -231,12 +197,12 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 			resource;
 
 		if(!wizardData || !wizardData.infopageDescription) {
-			console.error('Wizard: cannot create infopage without data');
+			$log.log('Wizard: cannot create infopage without data');
 			return;
 		}
 
 		if(!location || !location.id) {
-			console.error('Wizard: cannot create infopage without location id');
+			$log.log('Wizard: cannot create infopage without location id');
 			return;
 		}
 		
@@ -258,12 +224,12 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 			product;
 
 		if(!wizardData) {
-			console.error('Wizard: cannot create products without data');
+			$log.log('Wizard: cannot create products without data');
 			return;
 		}
 
 		if(!location || !location.id) {
-			console.error('Wizard: cannot create products without location id');
+			$log.log('Wizard: cannot create products without location id');
 			return;
 		}
 
@@ -291,7 +257,11 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 					});	
 
 					product.choices = new Array();
-					product.$save(function() {
+					product.$save(function(response) {
+						var _imageIndex = index + 1,
+							_productImageId = 'offer' + _imageIndex;
+
+						saveProductImage(wizardData, location, _productImageId, response);
 						if(index == wizardData.offers.length - 1) {
 							$scope.wizard.progress.products = true;
 						}
@@ -313,7 +283,7 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 	function loadWelcomeSpot (location) {
 		
 		if(!location) {
-			console.error('Wizard: cannot load spot without location');
+			$log.log('Wizard: cannot load spot without location');
 			return;
 		}
 
@@ -325,21 +295,31 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 	}
 
 	$scope.setWizardImage = function(image, type) {
-		if(!$scope.wizard.images) {
-			$scope.wizard.images = new Array();
-		}
+		var _id = image.id;
 
-		$scope.wizard.images[type] = image;
+		$scope.wizard.images = $scope.wizard.images || {};
+		$scope.wizard.images[_id] = image;
 	}
 
-	$scope.discardWizardImage = function(image, type) {
-		if(!$scope.wizard.images) {
+	$scope.deleteWizardImage = function(imageId) {
+
+		if(!$scope.wizard || !$scope.wizard.images ||  !$scope.wizard.images[imageId] || !$scope.wizard.images[imageId].blobKey) {
+			$log.log('Wizard.deleteWizardImage: no image to delete for ' + imageId)
 			return;
 		}
-
-		$scope.wizard.images[type] = null;
-		//delete image from blobstore
+		//hard delete on blobstore since image is not yet assgined to existing business
+		$http['delete'](appConfig['serviceUrl'] + '/uploads/images/'+ $scope.wizard.images[imageId].blobKey);
+		delete $scope.wizard.images[imageId];
 	}
+
+	// $scope.discardWizardImage = function(image, type) {
+	// 	if(!$scope.wizard.images) {
+	// 		return;
+	// 	}
+
+	// 	$scope.wizard.images[type] = null;
+	// 	//delete image from blobstore
+	// }
 
 	$scope.showLocationDetails = function() {
 		if(!$scope.createdLocation || !$scope.createdLocation.id) {
@@ -370,4 +350,4 @@ Cloobster.Wizard = function($scope, $location, loginService, Company, $routePara
 	}
 
 };
-Cloobster.Wizard.$inject = ['$scope', '$location', 'login', 'Company', '$routeParams', 'errorHandler', 'Business', '$route', '$log', '$rootScope', 'Spot', '$injector', 'InfoPage', 'Menu', 'Product', 'randomUtil', 'lang'];
+Cloobster.Wizard.$inject = ['$scope', '$http', '$location', '$resource', 'login', 'Company', '$routeParams', 'errorHandler', 'Business', '$route', '$log', '$rootScope', 'Spot', '$injector', 'InfoPage', 'Menu', 'Product', 'randomUtil', 'lang', 'DashboardItem', 'config'];

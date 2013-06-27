@@ -154,39 +154,18 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 
 	/**
 	* @private
-	*	If no locations exist redirect to howto page.
+	*	If no locations exist redirect to wizard page.
 	*/
 	function checkBusinessesCount() {
 		if($scope.businesses && $scope.businesses.length == 0) {
-			$location.url("/howto");
+			//formerly howto
+			$location.url("/wizard");
 		}
 	}
 
-	// var howtostep = $location.search('howto');
 	if($routeParams['howto']) {
 		$scope.howtoMode = true;
 		$scope.howtoStep = $routeParams['howto'];
-	}
-
-	//wizard logic
-	$scope.generateApp = function() {
-		if(!$scope.wizard) {
-			//no wizard data
-			return;
-		}
-
-		$scope.wizardForm.$dirty = true;
-		$scope.wizardForm.newLocationName.$dirty = true;
-		$scope.wizardForm.infopageDescription.$dirty = true;
-		$scope.wizardForm.offer1Title.$dirty = true;
-		$scope.wizardForm.offer1Shortdesc.$dirty = true;
-		$scope.wizardForm.offer1Price.$dirty = true;
-
-		// if($scope.wizardForm.$valid) {
-			//fire initial creation event
-			$rootScope.$broadcast('wizard-create-app', $scope.wizard);
-		// }
-
 	}
 
 };

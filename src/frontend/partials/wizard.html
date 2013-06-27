@@ -53,16 +53,22 @@
 					<div class="step-content">
 						<div class="step-section">
 
-						 	<div simple-image-editor="wizardData.images.logo" editor-title-key="appwizard.step3.logobutton" editor-image-id="logo" editor-on-save="setWizardImage(image, 'logo')" editor-on-cancel="discardWizardImage(image)"  editor-image-resource="imageResource" editor-crop-text="business.detail.app.header.description" editor-on-delete="deleteExistingImage('logo')" editor-no-persist="true">
-								<div ng-show="wizardData.images.logo.url">
-									<img  ng-src="{{wizardData.images.logo.url}}=s96" alt="click to edit" />
+						 	<div simple-image-editor="wizard.images.logo" editor-title-key="appwizard.step3.logobutton" editor-image-id="logo" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('logo')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('logo')" editor-no-persist="true">
+								<div ng-show="wizard.images.logo.url">
+									<img  ng-src="{{wizard.images.logo.url}}=s96" alt="click to edit" />
 									<p  l="business.detail.picture.edit">Click image to edit</p>
 								</div>
-								<button ng-show="!wizardData.images.logo" class="btn btn-primary span4" l="appwizard.step3.logobutton">Upload logo</button>
+								<button ng-show="!wizard.images.logo" class="btn btn-primary span4" l="appwizard.step3.logobutton">Upload logo</button>
 							</div>
-								
-								<button class="btn btn-primary span4" l="appwizard.step3.mainpicbutton">Upload main picture</button>
 
+							<div simple-image-editor="wizard.images.appheader" editor-title-key="appwizard.step3.mainpicbutton" editor-image-id="appheader" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('appheader')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('appheader')" editor-no-persist="true"
+							editor-crop-text="business.detail.app.header.description" editor-ratio="3:1">
+								<div ng-show="wizard.images.appheader.url">
+									<img  ng-src="{{wizard.images.appheader.url}}=s96" alt="click to edit" />
+									<p  l="business.detail.picture.edit">Click image to edit</p>
+								</div>
+								<button ng-show="!wizard.images.appheader" class="btn btn-primary span4" l="appwizard.step3.mainpicbutton">Upload main picture</button>
+							</div>															
 						</div>
 					</div>
 				</div>
@@ -76,8 +82,14 @@
 						<div class="step-section">
 							 <div class="control-group">
 							 	<div class="controls controls-row">
-									<input type="text" class="span8" required l="appwizard.step4.offer1.title" l-attribute="placeholder" ng-model="wizard.offers[0].title" name="offer1Title">								
-									<button class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
+									<input type="text" class="span8" required l="appwizard.step4.offer1.title" l-attribute="placeholder" ng-model="wizard.offers[0].title" name="offer1Title">
+									<div simple-image-editor="wizard.images.offer1" editor-title-key="fileupload.button.add" editor-image-id="offer1" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('offer1')" editor-image-resource="imageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" editor-on-delete="deleteWizardImage(offer1)" editor-no-persist="true">
+											<div ng-show="wizard.images.offer1">
+												<img  ng-src="{{wizard.images.offer1.url}}=s96" alt="click to edit" />
+												<p l="common.image.edit">Click image to edit</p>
+											</div>
+											<button ng-show="!wizard.images.offer1" class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
+									</div>																
 									<div style="clear: both;">
 										<span class="inline-help" ng-show="wizardForm.offer1Title.$dirty && wizardForm.offer1Title.$invalid" l="registration.form.requiredfield">Please provide a value.</span>
 									</div>							
@@ -98,8 +110,15 @@
 						<div class="step-section">
 							 <div class="control-group">
 							 	<div class="controls controls-row">
-								<input type="text" class="span8" l="appwizard.step4.offer2.title" l-attribute="placeholder" ng-model="wizard.offers[1].title" name="offer2Title">
-								<button class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
+									<input type="text" class="span8" l="appwizard.step4.offer2.title" l-attribute="placeholder" ng-model="wizard.offers[1].title" name="offer2Title">
+
+									<div simple-image-editor="wizard.images.offer2" editor-title-key="fileupload.button.add" editor-image-id="offer2" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('offer2')" editor-image-resource="imageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" editor-on-delete="deleteWizardImage(offer2)" editor-no-persist="true">
+											<div ng-show="wizard.images.offer2">
+												<img  ng-src="{{wizard.images.offer2.url}}=s96" alt="click to edit" />
+												<p l="common.image.edit">Click image to edit</p>
+											</div>
+											<button ng-show="!wizard.images.offer2" class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
+									</div>
 								</div>
 							</div>
 							 <div class="control-group">
@@ -115,8 +134,16 @@
 						<div class="step-section">
 							 <div class="control-group">
 							 	<div class="controls controls-row">
-								<input type="text" class="span8" l="appwizard.step4.offer3.title" l-attribute="placeholder" ng-model="wizard.offers[2].title" name="offer3Title">
-								<button class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
+									<input type="text" class="span8" l="appwizard.step4.offer3.title" l-attribute="placeholder" ng-model="wizard.offers[2].title" name="offer3Title">
+
+									<div simple-image-editor="wizard.images.offer3" editor-title-key="fileupload.button.add" editor-image-id="offer3" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('offer3')" editor-image-resource="imageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" editor-on-delete="deleteWizardImage(offer3)" editor-no-persist="true">
+											<div ng-show="wizard.images.offer3">
+												<img  ng-src="{{wizard.images.offer3.url}}=s96" alt="click to edit" />
+												<p l="common.image.edit">Click image to edit</p>
+											</div>
+											<button ng-show="!wizard.images.offer3" class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
+									</div>
+
 								</div>
 							</div>
 							 <div class="control-group">
@@ -143,7 +170,14 @@
 						<div class="control-group">
 						 	<div class="controls controls-row">
 						 		<input type="text" class="span8" ng-model="wizard.fbUrl">
-								<button class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
+
+								<div simple-image-editor="wizard.images.fbwallpost" editor-title-key="appwizard.step3.mainpicbutton" editor-image-id="fbwallpost" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('fbwallpost')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('fbwallpost')" editor-no-persist="true" editor-crop-text="business.detail.facebook.wallpost.image.description"  editor-ratio="4:3">
+									<div ng-show="wizard.images.fbwallpost.url">
+										<img  ng-src="{{wizard.images.fbwallpost.url}}=s96" alt="click to edit" />
+										<p  l="business.detail.picture.edit">Click image to edit</p>
+									</div>
+									<button ng-show="!wizard.images.fbwallpost" class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
+								</div>
 						 	</div>
 						</div>
 					</div>		
@@ -160,17 +194,6 @@
 					</div>
 				</div>
 				
-				<!-- Welcome Spot -->
-			<!-- 	<div class="step-wrapper" ng-show="welcomeSpots[0].qrImageUrl">
-					<img ng-show="welcomeSpots[0].qrImageUrl" ng-src="{{welcomeSpots[0].qrImageUrl}}" alt="Spot Barcode" class="welcome-spot" tooltip="appwizard.success.qr.tooltip"/>
-					<div class="step-content">
-						<div class="step-title" l="appwizard.success.title" style="font-size: 25px; margin-bottom: 6px;">
-							Gratulation
-						</div>
-						<div class="step-description" l="appwizard.success.description">Scannen Sie den QR Code Rechts
-						</div>
-					</div>
-				</div> -->
 				<div style="clear: both;"></div>
 				</form>
 			</div>			

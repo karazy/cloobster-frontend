@@ -34,12 +34,6 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	/** Map of all languages. */
 	$scope.langcodesMap = langcodesMap;
 
-	// if(!$rootScope.infopageWizardEvent) {
-	// 	$rootScope.infopageWizardEvent = $rootScope.$on("wizard-created-business", function(eventData, wizardData, locationId) {
-	// 		addInfopageByWizard(wizardData, locationId);
-	// 	});
-	// }
-
 	function loadInfoPages (language) {
 		var params = {};
 
@@ -304,30 +298,6 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		return tField;
 	}
 
-	function addInfopageByWizard(wizardData, locationId) {
-		var infopage,
-			resource;
-
-		if(!wizardData && !wizardData.infopageDescription) {
-			console.error('Wizard: cannot create infopage without data');
-			return;
-		}
-
-		if(!locationId) {
-			console.error('Wizard: cannot create infopage without location id');
-			return;
-		}
-		
-
-		resource = InfoPage.buildResource(locationId);
-		infopage = new resource({ 'translations' : {} });
-
-		infopage.title = "Über uns";
-		infopage.html = wizardData.infopageDescription;
-		infopage.$save(function() {
-			$rootScope.$broadcast('wizard-created-infopage');	
-		}, handleError);
-	}
 
 	/** 
 	 * Watches loggedIn status and initializes controller when status changes to true.
