@@ -378,6 +378,7 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 		jQuery("#wizardProgressBar").css("width", progress+"%");
 
 		if(complete) {
+			$scope.locationChangeStartListener();
 			$scope.wizard.complete = complete;	
 		}
 	}, true);
