@@ -26,7 +26,7 @@
 			   		<!-- area menus -->
 			    	<div ng-show="currentArea.id">
 			    		<h4 class="data-container-title" l="areas.categories.list.title">Assigned categories</h4>
-			    		<div class="data-container-block data-container-seperator data-container-150">
+			    		<div class="data-container-block data-container-seperator" id="containerToSet" style="min-height: 160px;">
 			    			<p l="areas.categories.list.description">List of product categories (e. .g beverages) available to customers checked in in this service area.</p>
 			    			<p><button type="button" class="btn" ng-click="removeAllCategories()"><i class="icon-minus"></i> <span l="areas.categories.removeall">Remove All</span></button></p>
 			    		</div>
@@ -42,7 +42,7 @@
 				<div class="span6 data-container-with-title">
 					<div>
 						<h4 class="data-container-title" l="areas.allcategories.list.title">All categories</h4>
-						<div class="data-container-block data-container-seperator data-container-150">
+						<div class="data-container-block data-container-seperator" id="containerToWatch" style="min-height: 160px;">
 							<p l="areas.allcategories.list.description">Drag & Drop to assign category to current service area.</p>
 							<div class="input-prepend">
 		    					<span class="add-on"><i class="icon-search icon-black"></i>
@@ -51,7 +51,7 @@
 		    					<i class="icon-remove icon-black" ng-click="allMenusListSearch.title = ''">
 								</i> 
 							</div>
-
+							<br>
 							<button type="button" class="btn" ng-click="addAllCategories()"><i class="icon-plus"></i> <span l="areas.allcategories.addall">Add All</span></button>
 						</div>
 						<div class="data-container-block data-container-large data-container-scrollable" style="background-color: #F6CED8">

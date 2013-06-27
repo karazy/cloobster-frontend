@@ -1077,8 +1077,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Activate/deactivate product. Attention! Product is not available for user."
 		},
 		"menus.product.hideindashboard.tooltip" : {
-			"DE" :  "Auge geschlossen: Produkt auf App Dashboard NIE anzeigen.",
-			"EN" : "Eye closed: NEVEr show product on app dashboard."
+			"DE" :  "Auge geschlossen: Produkt bei Zufallskacheln auf App Dashboard NIE anzeigen.",
+			"EN" : "Eye closed: NEVER show product in a random tile on app dashboard."
 		},
 		"menus.products.link.description" : {
 			"DE" : "Klicken Sie auf eine bestehendes Produkt, um dieses zu kopieren und der aktuellen Kategorie hinzuzufügen. Optional können Auswahlmöglichkeiten <strong>verknüpft</strong> oder <strong>kopiert</strong> werden. <i class='icon-question-sign'></i>",
@@ -1360,8 +1360,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Linked choices"
 		},
 		"menus.choices.field.linkedproducts" : {
-			"DE" : "Wird verwendet in ...",
-			"EN" : "Used in ..."
+			"DE" : "Verwendet in",
+			"EN" : "Used in"
 		},
 		"menus.choices.field.linkedproducts.help" : {
 			"DE" : "Listet alle Produkte auf,<br/> die diese Auswahlmöglichkeit verwenden.",
@@ -1767,6 +1767,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "This is the \"master\" spot for this area. The master spot serves as an entry point. To be able to order a guest has to choose "+
 				"his real spot. For example you can hand out the master spot for rooms and don't need to provide individual stan-up displays for all of them (disable barcode required!)."
 		},
+		"spot.cloobsterwidget" : {
+			"DE" :  "Snippet auswählen, kopieren und auf Website einfügen um bei installierter App mittels Button einen Check-in zu ermöglichen.",
+			"EN" : "Copy and paste snippet on a website for direct cloobster Check-in via a button at this spot when app is installed."
+		},		
 		//infopage partial
 		"infopages.description" : {
 			"DE" :  "Hier können Sie Informationen zur aktuellen Location anlegen. Dies können zum Beispiel Informationen<br/>"+
@@ -2266,8 +2270,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "drop a tile"
 		},
 		"appconfig.tile.maximum" : {
-			"DE" :  "Max 20 Kachel erreicht.",
-			"EN" : "Max 20 tiles reached."
+			"DE" :  "Max 10 Kachel erreicht.",
+			"EN" : "Max 10 tiles reached."
 		},
 		"appconfig.tiledetail.title" : {
 			"DE" :  "Kacheldetails",

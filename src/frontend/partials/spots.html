@@ -250,6 +250,16 @@
 	    		<img ng-show="currentSpot.qrImageUrl" ng-src="{{currentSpot.qrImageUrl}}" alt="Spot Barcode"/>
 	    		<p>{{currentSpot.barcode}}</p>
 	    		<p ng-show="currentSpot.master" l="spot.master.description">This is the "master" Spot for this area, it cannot be deleted, unless you delete the Area.</p>
+	    		<div class="row-fluid" ng-show="currentSpot.id && currentSpot.welcome">
+    			<!-- code for cloobster widget button, show only for welcome spots -->
+	    			<p><small l="spot.cloobsterwidget">Copy and paste snippet on a website for direct cloobster Check-in at this spot when app is isntalled!</small></p>
+					<textarea readonly="readonly" rows="4" class="span12" style="white-space:nowrap">
+						<a href="https://go.cloobster.com/x/spot/{{currentSpot.barcode}}" class="cloobster-checkin-button">cloobster Check-in</a>
+						<script type="text/javascript">
+							!function(f,a,g){var e,b=f.getElementsByTagName(a)[0],c=/^http:/.test(f.location)?"http":"https";if(!f.getElementById(g)){e=f.createElement(a);e.id=g;e.src=c+"://cloobster.com/js/widget.js";b.parentNode.insertBefore(e,b)}}(document,"script","cloobster-widget");
+						</script>					 
+					</textarea>
+				</div>
 	    		<div class="row-fluid" ng-show="currentSpot.id">	    			
 	    			<button class="btn btn-success span6" type="button" ng-click="toggleSpotActive()" ng-model="currentSpot.active" ng-show="currentSpot.active && currentSpot.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
 		  			<button class="btn btn-danger span6" style="margin-left: 0px !important;" type="button" ng-click="toggleSpotActive()" ng-model="currentSpot.active" ng-show="!currentSpot.active && currentSpot.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
