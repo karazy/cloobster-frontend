@@ -17,7 +17,18 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 	$scope.wizard = {
 		offers : [{}, {}, {}],
 		complete: false,
-		progress: {}
+		progress: {
+			location: false,
+			infopages: false,
+			products: false,
+			imageLogo: false,
+			imageFb: false,
+			imageAppheader: false,
+			//product images
+			offer1: false,
+			offer2: false,
+			offer3: false
+		}
 	};
 
 	//a dummy resource used for image uploads. the correct saving happens later with the correct resource
@@ -38,10 +49,12 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 		$scope.wizardForm.offer1Price.$dirty = true;
 
 		if($scope.wizardForm.$valid) {
+			//start saving
+			$scope.wizard.saving = true;
 			//fire initial creation event
 			// $rootScope.$broadcast('wizard-create-app', $scope.wizard);
 			addBusinessByWizard($scope.wizard, locationCreated);
-		}
+		}		
 
 		function locationCreated(location) {
 			loadWelcomeSpot(location);
@@ -78,7 +91,12 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 	}
 
 	function checkWizardAndLocation(wizardData, property, location) {
-		if(!wizardData || !wizardData[property]) {
+		if(!wizardData) {
+			$log.log('Wizard: no wizardData');
+			return false;
+		}
+
+		if(property && !wizardData[property]) {
 			$log.log('Wizard: cannot proceed without wizard data for ' + property);
 			return false;
 		}
@@ -94,15 +112,11 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 	function saveLocationImages(wizardData, location) {
 		var resource,
 			image;
-		//get image resource
-		//save images
 
 		if(!checkWizardAndLocation(wizardData, 'images', location)) {
-			return;
-		}
-
-		if(!wizardData.images) {
-			$log.log('Wizard.saveLocationImages: No images exist.');
+			$scope.wizard.progress.imageLogo = true;
+			$scope.wizard.progress.imageAppheader = true;
+			$scope.wizard.progress.imageFb = true;
 			return;
 		}
 
@@ -114,7 +128,11 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 				blobKey: wizardData.images.logo.blobKey,
 				url: wizardData.images.logo.url
 			});
-			image.$save();
+			image.$save(function() {
+				$scope.wizard.progress.imageLogo = true;
+			});
+		} else {
+			$scope.wizard.progress.imageLogo = true;
 		}
 
 		if(wizardData.images.appheader) {
@@ -123,7 +141,11 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 				blobKey: wizardData.images.appheader.blobKey,
 				url: wizardData.images.appheader.url
 			});
-			image.$save();
+			image.$save(function() {
+				$scope.wizard.progress.imageAppheader = true;
+			});
+		} else {
+			$scope.wizard.progress.imageAppheader = true;
 		}
 
 		if(wizardData.images.fbwallpost) {
@@ -132,7 +154,11 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 				blobKey: wizardData.images.fbwallpost.blobKey,
 				url: wizardData.images.fbwallpost.url
 			});
-			image.$save();
+			image.$save(function() {
+				$scope.wizard.progress.imageFb = true;
+			});
+		} else {
+			$scope.wizard.progress.imageFb = true;
 		}
 
 		//set progress 
@@ -145,15 +171,18 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 
 
 		if(!checkWizardAndLocation(wizardData, 'images', location)) {
+			$scope.wizard.progress[imageId] = true;	
 			return;
 		}
 
-		if(!product || product.id) {
+		if(!product || !product.id) {
+			$scope.wizard.progress[imageId] = true;	
 			$log.log("Wizard.saveProductImage: no product");
 			return;
 		}
 
 		if(!wizardData.images[imageId]) {
+			$scope.wizard.progress[imageId] = true;	
 			$log.log("Wizard.saveProductImage: no image for product " + product.id);
 			return;
 		}
@@ -166,29 +195,9 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 			url: wizardData.images[imageId].url
 		});
 
-		image.$save();
-
-		// if(wizardData.images.offer2) {
-		// 	resource = Product.buildImageResource(location.id, wizardData.offers[1].id);
-
-		// 	image = new resource({
-		// 		id: wizardData.images.offer2.id,
-		// 		blobKey: wizardData.images.offer2.blobKey,
-		// 		url: wizardData.images.offer2.url
-		// 	});
-		// 	image.$save();
-		// }
-
-		// if(wizardData.images.offer3) {
-		// 	resource = Product.buildImageResource(location.id, wizardData.offers[2].id);
-
-		// 	image = new resource({
-		// 		id: wizardData.images.offer3.id,
-		// 		blobKey: wizardData.images.offer3.blobKey,
-		// 		url: wizardData.images.offer3.url
-		// 	});
-		// 	image.$save();
-		// }
+		image.$save(function() {
+			$scope.wizard.progress[imageId] = true;	
+		});
 	}
 
 	//create infopage
@@ -245,6 +254,8 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 
 		function saveProducts() {
 			angular.forEach(wizardData.offers, function(offer, index) {
+				var _imageIndex = index + 1,
+					_productImageId = 'offer' + _imageIndex;
 
 				if(offer.title && offer.shortDesc && offer.price) {
 					product = new pResource({
@@ -253,20 +264,19 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 						longDesc: offer.shortDesc,
 						price: offer.price,
 						menuId: menu.id,
-						active: true
+						active: true,
+						special: (index == 0) ? true : false
 					});	
 
 					product.choices = new Array();
-					product.$save(function(response) {
-						var _imageIndex = index + 1,
-							_productImageId = 'offer' + _imageIndex;
-
+					product.$save(function(response) {						
 						saveProductImage(wizardData, location, _productImageId, response);
 						if(index == wizardData.offers.length - 1) {
 							$scope.wizard.progress.products = true;
 						}
 					}, handleError);
 				} else {
+					$scope.wizard.progress[_productImageId] = true;	
 					if(index == wizardData.offers.length - 1) {
 						$scope.wizard.progress.products = true;
 					}
@@ -329,10 +339,52 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 	}
 
 	$scope.$watch('wizard.progress', function(newVal, oldVal) {
-		if(newVal.location && newVal.products && newVal.infopages) {
-			$scope.wizard.complete = true;
+		var totalProgressSteps,
+			completedSteps,
+			complete = true,
+			progress,
+			progessToCheck = ['location', 'products', 'infopages', 'imageLogo', 'imageAppheader', 'imageFb'];
+
+		if(!newVal) {
+			return;
+		}
+		
+		if(Object && Object.keys) {
+			totalProgressSteps = Object.keys(newVal).length;
+		} else {
+			//backwards compatibility
+			for (var key in newVal) {
+			  if (newVal.hasOwnProperty(key)) {
+			  	totalProgressSteps += 1;
+			  }
+			}
+		}
+		
+		completedSteps = totalProgressSteps;
+
+		angular.forEach(progessToCheck, function(element, index) {
+			if(!newVal[element]) {
+				complete = false;
+				completedSteps -= 1;
+			}
+		});
+
+		progress = Math.floor(completedSteps/totalProgressSteps * 100);
+
+		jQuery("#wizardProgressBar").css("width", progress+"%");
+
+		if(complete) {
+			$scope.wizard.complete = complete;	
 		}
 	}, true);
+
+	$scope.$on('$locationChangeStart', function(next, current) { 
+   		alert('routeChangeStart');
+ 	});
+
+	$scope.isWizardWorking = function() {
+		return $scope.wizard.complete || $scope.wizard.saving;
+	}
 
 	$scope.fillWithDummyData = function() {
 		$scope.wizard.newLocationName = randomUtil.genRndString(15);

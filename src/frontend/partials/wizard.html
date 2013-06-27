@@ -2,9 +2,17 @@
 <div ng-include="'partials/businesses_header.html'">
 </div>
 <h1 l="appwizard.title" ng-hide="wizard.complete">Create your own app presence in 5 simple steps</h1>
+<div class="row-fluid">
+	<div class="span8" ng-show="wizard.saving && !wizard.complete">
+		<div class="progress progress-striped active">
+  			<div class="bar" style="width: 0%;" id="wizardProgressBar"></div>
+		</div>
+		<h4 l="wizard.saving">Creating app...</h4>
+	</div>
+</div>
 <div class="row-fluid" ng-hide="wizard.complete">
 	<div class="span8">		
-		<div class="data-container-with-title no-border">			
+		<div class="data-container-with-title no-border">
 			<div class="data-container-block" style="margin-top:15px;">
 				<form name='wizardForm' novalidate>
 				<div class="step-wrapper">
@@ -53,7 +61,7 @@
 					<div class="step-content">
 						<div class="step-section">
 
-						 	<div simple-image-editor="wizard.images.logo" editor-title-key="appwizard.step3.logobutton" editor-image-id="logo" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('logo')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('logo')" editor-no-persist="true">
+						 	<div simple-image-editor="wizard.images.logo" editor-title-key="appwizard.step3.logobutton" editor-image-id="logo" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('logo')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('logo')" editor-no-persist="true" editor-enabled="!wizard.complete && !wizard.saving">
 								<div ng-show="wizard.images.logo.url">
 									<img  ng-src="{{wizard.images.logo.url}}=s96" alt="click to edit" />
 									<p  l="business.detail.picture.edit">Click image to edit</p>
@@ -62,7 +70,7 @@
 							</div>
 
 							<div simple-image-editor="wizard.images.appheader" editor-title-key="appwizard.step3.mainpicbutton" editor-image-id="appheader" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('appheader')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('appheader')" editor-no-persist="true"
-							editor-crop-text="business.detail.app.header.description" editor-ratio="3:1">
+							editor-crop-text="business.detail.app.header.description" editor-ratio="3:1" editor-enabled="!wizard.complete && !wizard.saving">
 								<div ng-show="wizard.images.appheader.url">
 									<img  ng-src="{{wizard.images.appheader.url}}=s96" alt="click to edit" />
 									<p  l="business.detail.picture.edit">Click image to edit</p>
@@ -83,7 +91,7 @@
 							 <div class="control-group">
 							 	<div class="controls controls-row">
 									<input type="text" class="span8" required l="appwizard.step4.offer1.title" l-attribute="placeholder" ng-model="wizard.offers[0].title" name="offer1Title">
-									<div simple-image-editor="wizard.images.offer1" editor-title-key="fileupload.button.add" editor-image-id="offer1" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('offer1')" editor-image-resource="imageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" editor-on-delete="deleteWizardImage(offer1)" editor-no-persist="true">
+									<div simple-image-editor="wizard.images.offer1" editor-title-key="fileupload.button.add" editor-image-id="offer1" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('offer1')" editor-image-resource="imageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" editor-on-delete="deleteWizardImage(offer1)" editor-no-persist="true" editor-enabled="!wizard.complete && !wizard.saving">
 											<div ng-show="wizard.images.offer1">
 												<img  ng-src="{{wizard.images.offer1.url}}=s96" alt="click to edit" />
 												<p l="common.image.edit">Click image to edit</p>
@@ -112,7 +120,7 @@
 							 	<div class="controls controls-row">
 									<input type="text" class="span8" l="appwizard.step4.offer2.title" l-attribute="placeholder" ng-model="wizard.offers[1].title" name="offer2Title">
 
-									<div simple-image-editor="wizard.images.offer2" editor-title-key="fileupload.button.add" editor-image-id="offer2" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('offer2')" editor-image-resource="imageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" editor-on-delete="deleteWizardImage(offer2)" editor-no-persist="true">
+									<div simple-image-editor="wizard.images.offer2" editor-title-key="fileupload.button.add" editor-image-id="offer2" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('offer2')" editor-image-resource="imageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" editor-on-delete="deleteWizardImage(offer2)" editor-no-persist="true" editor-enabled="!wizard.complete && !wizard.saving">
 											<div ng-show="wizard.images.offer2">
 												<img  ng-src="{{wizard.images.offer2.url}}=s96" alt="click to edit" />
 												<p l="common.image.edit">Click image to edit</p>
@@ -136,7 +144,7 @@
 							 	<div class="controls controls-row">
 									<input type="text" class="span8" l="appwizard.step4.offer3.title" l-attribute="placeholder" ng-model="wizard.offers[2].title" name="offer3Title">
 
-									<div simple-image-editor="wizard.images.offer3" editor-title-key="fileupload.button.add" editor-image-id="offer3" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('offer3')" editor-image-resource="imageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" editor-on-delete="deleteWizardImage(offer3)" editor-no-persist="true">
+									<div simple-image-editor="wizard.images.offer3" editor-title-key="fileupload.button.add" editor-image-id="offer3" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('offer3')" editor-image-resource="imageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" editor-on-delete="deleteWizardImage(offer3)" editor-no-persist="true" editor-enabled="!wizard.complete && !wizard.saving">
 											<div ng-show="wizard.images.offer3">
 												<img  ng-src="{{wizard.images.offer3.url}}=s96" alt="click to edit" />
 												<p l="common.image.edit">Click image to edit</p>
@@ -171,7 +179,7 @@
 						 	<div class="controls controls-row">
 						 		<input type="text" class="span8" ng-model="wizard.fbUrl">
 
-								<div simple-image-editor="wizard.images.fbwallpost" editor-title-key="appwizard.step3.mainpicbutton" editor-image-id="fbwallpost" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('fbwallpost')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('fbwallpost')" editor-no-persist="true" editor-crop-text="business.detail.facebook.wallpost.image.description"  editor-ratio="4:3">
+								<div simple-image-editor="wizard.images.fbwallpost" editor-title-key="appwizard.step3.mainpicbutton" editor-image-id="fbwallpost" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('fbwallpost')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('fbwallpost')" editor-no-persist="true" editor-crop-text="business.detail.facebook.wallpost.image.description"  editor-ratio="4:3" editor-enabled="!wizard.complete && !wizard.saving">
 									<div ng-show="wizard.images.fbwallpost.url">
 										<img  ng-src="{{wizard.images.fbwallpost.url}}=s96" alt="click to edit" />
 										<p  l="business.detail.picture.edit">Click image to edit</p>
@@ -187,7 +195,7 @@
 					<div class="step-content">
 						<div class="step-section">
 							<div class="text-error" ng-show="wizardForm.newLocationName.$dirty && wizardForm.newLocationName.$invalid" l="validation.field.required">Please fill out all required fields</div>
-							<button type="submit" ng-click="generateApp()" class="btn btn-primary span4" style="margin-left:0;"><i class="icon-ok icon-white"></i> <span l="appwizard.generateapp">Generate App</span></button>
+							<button type="submit" ng-click="generateApp()" class="btn btn-primary span4" style="margin-left:0;" ng-disabled="wizard.complete || wizard.saving"><i class="icon-ok icon-white"></i> <span l="appwizard.generateapp">Generate App</span></button>
 
 							<button type="button" ng-click="fillWithDummyData()" class="btn btn-primary span4" style="margin-left:0; margin-top: 10px; clear: both;"><i class="icon-font icon-white"></i> Dummy Data</span></button>
 						</div>
@@ -209,23 +217,23 @@
 	<div class="span2"></div>
 	<div class="span8">	
 		<div class="hero-unit">			
-			<h3 l="wizard.complete.text1">Your app is ready!</h3>
+			<h3 l="appwizard.complete.text1">Your app is ready!</h3>
 			<div class="row-fluid">
 				<div class="span8">
 					<img ng-show="welcomeSpots[0].qrImageUrl" ng-src="{{welcomeSpots[0].qrImageUrl}}" alt="Welcome Spot Barcode" class=""
-					style= "margin-left: auto; margin-right: auto; display: block"/>
-					<h3 l="wizard.complete.text2">You can directly start using this qr code.</h3>
+					style= "display: block !important; margin-left: auto; margin-right: auto;"/>
+					<h3 l="appwizard.complete.text2">You can directly start using this qr code.</h3>
+					<a href="https://go.cloobster.com/x/spot/{{welcomeSpots[0].barcode}}" class="cloobster-checkin-button">cloobster Check-in</a>
+					<span> <small l="appwizard.complete.checkinbtn">(App installed and on a mobile device? Directly check-in via button!)</small></span>
+					<script type="text/javascript">
+						!function(f,a,g){var e,b=f.getElementsByTagName(a)[0],c=/^http:/.test(f.location)?"http":"https";if(!f.getElementById(g)){e=f.createElement(a);e.id=g;e.src=c+"://cloobster.com/js/widget.js";b.parentNode.insertBefore(e,b)}}(document,"script","cloobster-widget");
+					</script>	
 				</div>
 				<div class="span4">
 					<img src="../img/app_screenshot.png" alt="cloobster app" width="100%"/>
 					<!-- <div class="app-help-image"></div> -->
 				</div>
 			</div>
-			<!-- <div>
-				<img ng-show="welcomeSpots[0].qrImageUrl" ng-src="{{welcomeSpots[0].qrImageUrl}}" alt="Welcome Spot Barcode" class=""/>
-				<p l="wizard.complete.text2">You can directly start using this qr code.</p>
-			</div>
-			<div class="app-help-image"></div> -->
 			<div>
 				<button ng-click="showLocationDetails()" l="appwizard.continuebutton" class="btn btn-primary btn-large">Continue editing</button>
 			</div>
