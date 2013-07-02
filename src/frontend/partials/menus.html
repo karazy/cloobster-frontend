@@ -504,7 +504,7 @@
 			    		</select>
 			    	</div>
 			    	<div ng-show="currentChoice.overridePrice == 'OVERRIDE_SINGLE_PRICE' || currentChoice.overridePrice == 'OVERRIDE_FIXED_SUM'">
-				    	<div simple-property-editor editor-title="choice.editor.price" editor-property="currentChoice.price" editor-on-save="saveChoice()" editor-required>
+				    	<div simple-property-editor editor-title="choice.editor.price" editor-property="currentChoice.price" editor-on-save="saveChoice()" editor-required editor-pattern="/^[0-9]+([.][0-9]+)?$/" editor-pattern-text="product.editor.price.validation" >
 				    		<p class="edit"><span l="menus.choices.field.price">Price: {{currentChoice.price | kcurrency:activeBusiness.currency}}</span> <i class="icon-edit icon-black"></i></p>
 				    	</div>
 			    	</div>
@@ -563,7 +563,7 @@
 			       	 				<p class="edit">{{option.name}} <i class="icon-edit icon-black"></i></p>
 			       	 			</div> 
 			       	 			<div ng-hide="currentChoice.overridePrice == 'OVERRIDE_SINGLE_PRICE' || currentChoice.overridePrice == 'OVERRIDE_FIXED_SUM'">
-								<div class="edit" simple-property-editor editor-title="option.editor.price.tooltip" editor-property="option.price" editor-on-save="	saveChoice()" editor-required >
+											<div class="edit" simple-property-editor editor-title="option.editor.price.tooltip" editor-property="option.price" editor-on-save="saveChoice()" editor-pattern="/^[0-9]+([.][0-9]+)?$/" editor-pattern-text="product.editor.price.validation">
 			       	 				<p class="edit">{{option.price | kcurrency:activeBusiness.currency}} <i class="icon-edit icon-black"></i></p>
 			       	 			</div>
 			       	 			</div> 
