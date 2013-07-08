@@ -312,13 +312,11 @@
 	    <div class="span3" ng-show="currentProduct">
 		    <div class="data-container-with-title">
 		    	<h4 class="data-container-title" l="product.container.title">Product edit</h4>
-		    	<div style="position: absolute; top:2px; right: 2px;">
-					<!-- <div ng-show="currentProduct.special" > -->
+		    	<div style="position: absolute; top:7px; right: 2px; left: 7px;">
+						<span l="common.save"></span>
+						<div class="loading-indicator-small"></div>
 						<span ng-show="currentProduct.special" class="badge badge-warning pull-right" style="margin-left: 3px;" l="menus.product.special.badge">special offer</span>
-		<!-- 			</div><
-		    		<div ng-show="!currentProduct.active" > -->
 		    			<span ng-show="!currentProduct.active" class="badge badge-important pull-right" l="menus.product.inactive.badge">inactive</span>
-		    		<!-- </div> -->
 		    	</div>
 		    	
 		    	<div class="data-container-block">

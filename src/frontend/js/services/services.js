@@ -1079,4 +1079,40 @@ Cloobster.services.factory('listUtil', ['$filter','$log', function($filter,$log)
 	return listFunctions;
 }]);
 
+/**
+* @constructor
+* Factory function for 'utilFn' service.
+* Contains convienient methods for everyday use. ;)
+* 
+* 	@author Frederik Reifschneider
+*
+*/
+Cloobster.services.factory('utilFn', ['$log', function($log) {
+	var utilFns = {
+		dumpObject: function(obj, description) {
+			if(!obj) {
+  				return;
+	  		}
+
+	  		if(description) {
+	  			$log.log(description);
+	  		} else {
+	  			$log.log('dumpObject');	
+	  		}	  		
+
+	  		try {
+		  		for (var key in obj) {
+				  if (obj.hasOwnProperty(key)) {
+				  	console.log('### ' + key + ' -> ' + obj[key]);
+				  }
+				}
+	  		} catch(e) {
+	  			$log.log('dumpObject: failed to dump object ' + e);
+	  		}
+		}
+	}
+
+	return utilFns;
+}]);
+
 

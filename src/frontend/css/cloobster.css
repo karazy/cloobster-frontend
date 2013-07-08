@@ -458,6 +458,16 @@ ul.options-list li:hover {
   right: 15px;
 }
 
+.loading-indicator-small {
+  height: 16px;
+  width: 16px;
+  background-image: url('../img/ajax-loader_old.gif');
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+}
+
 .show-grid {
   margin: 5px 0;
 }

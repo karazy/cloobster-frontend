@@ -55,9 +55,9 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 			name: true
 		};
 
-	/** Menu Resource. */
+	/** Menu resource. */
 	$scope.menusResource = null;
-	/** */
+	/** Product resource. */
 	$scope.productsResource = null;
 	/** Business to which these menus belong to. */
 	$scope.activeBusiness = null;
