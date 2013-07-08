@@ -1,7 +1,20 @@
 //contains all resources used in frontend
 angular.module('Cloobster.services').factory('cloobsterResource',['$resource','config', function($resource, config) {
+
 	function ResourceFactory(url, paramDefaults, actions) {
-		return $resource(config['serviceUrl'] + url, paramDefaults, actions);
+		var _resource = $resource(config['serviceUrl'] + url, paramDefaults, actions);
+
+		_resource.prototype.saving = false;
+
+		_resource.prototype.isSaving = function() {
+			return _resource.prototype.saving;
+		}
+
+		_resource.prototype.setSaving = function(saving) {
+			_resource.prototype.saving = saving;
+		}
+
+		return _resource;
 	}
 
 	return ResourceFactory;

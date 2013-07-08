@@ -363,6 +363,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 	}
 
 	function saveProductSuccess(product) {
+		product.setSaving(false);
 		$scope.products.push(product);
 		$scope.currentMenu.productIds.push(product.id);
 		$scope.productImageResource = Product.buildImageResource(activeBusinessId, product.id);
@@ -384,6 +385,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 		if(productToSave && productToSave.id) {
 			productToSave.$update(null, null, handleError);
 		} else {
+			productToSave.setSaving(true);
 			productToSave.$save(saveProductSuccess, handleError);
 		}
 	}
@@ -809,6 +811,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 	}
 
 	/**
+	* @deprecated
 	* Load product by an id.
 	* @param
 	*	product Id
