@@ -24,7 +24,8 @@
 	    		</div>
 				<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable" id="menuList">
 			        <li ng-repeat="menu in menus | orderBy:['title'] " ng-class="{active: currentMenu.id == menu.id}">	        	
-			        	<a ng-click="loadMenu(menu)">{{menu.title}} <i class="icon-ban-circle icon-black" ng-hide="menu.active"></i></a>			        	
+			        	<a ng-click="loadMenu(menu)">{{menu.title}} <i class="icon-ban-circle icon-black" ng-hide="menu.active"></i>
+			        	</a>			        	
 			        </li>
 			        <li class="nav-header" l="menu.speciallist.header">Special lists</li>
 			        <li ng-class="{active: allProductsList.length > 0 && !currentMenu}">
@@ -32,8 +33,8 @@
 			        </li>			        
 			        <li ng-class="{active: orphanedProducts.length > 0 && !currentMenu}">
 			        	<a ng-click="loadOrphanedProducts()">
-			        		<!-- <i class="icon-exclamation-sign icon-black" tooltip="menus.list.orphaned.tooltip" tooltip-position="right"></i>  -->
-			        		<span l="menus.list.orphaned">Unassigned products</span></a>
+			        		<span l="menus.list.orphaned">Unassigned products</span>
+			        	</a>
 			        </li>
 			    </ul>
 			</div>
@@ -176,7 +177,7 @@
 	    </div>
 
 		<!-- Orphaned products list -->
-		<div class="span3 product-wrapper data-container-with-title data-container-large" ng-show="orphanedProducts.length > 0">
+		<div class="span3 product-wrapper data-container-with-title" ng-show="orphanedProducts.length > 0">
 	    	<h4 class="data-container-title" l="menu.products.orphaned.container.title">Orphaned Products</h4>
 	    	<div class="data-container-block data-container-seperator">
 		    	<p l="menus.products.orphaned.description">List of products not assigned to any menu.</p>

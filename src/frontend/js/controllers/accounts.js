@@ -190,7 +190,6 @@ Cloobster.Accounts = function($scope, $http, $routeParams, $location, $filter, l
 
 
 	$scope.moveBusiness = function(event, ui) {
-		$log.log("moveProduct");
 		var business = angular.element(ui.item).scope().business,
 			destinationList = ui.sender.attr("id") == "assignedBusinessesList" ? $scope.allBusinesses : $scope.adminBusinesses;
 

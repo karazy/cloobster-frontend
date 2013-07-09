@@ -441,19 +441,27 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 		menuItem.productIds.push(productToMove.id);
 		// Save new product order.
 		menuItem.$update(angular.noop, handleError);
+		productToMove.$update(angular.noop, handleError);
 
+		manageViewHiearchy("moved-product");
+
+		
 		angular.forEach(products, function(product, index) {
 			if(product.id == productToMove.id) {
-				$scope.currentMenu.productIds.splice(index,1);
-				products.splice(index, 1);
+				//remove from currentMenu 
+				if($scope.currentMenu) {					
+					$scope.currentMenu.productIds.splice(index,1);
+					//TODO do we have to save old menu?
+					$scope.currentMenu.$update(angular.noop, handleError);
+				}
+				if($scope.currentMenu || $scope.orphanedProducts) {
+					products.splice(index, 1);
+				}				
 				//exist loop
 				return false;
 			}
 		});
-		productToMove.$update(angular.noop, handleError);
-
-		manageViewHiearchy("moved-product");
-	
+		
 	};
 
 	/**
