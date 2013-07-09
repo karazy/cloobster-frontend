@@ -319,30 +319,30 @@
 		    	
 		    	<div class="data-container-block">
 		    		<div simple-property-editor editor-title="product.editor.name" editor-property="currentProduct.name" editor-on-save="saveProduct()" editor-required editor-placeholder="product.placeholder.name" editor-enabled="!currentProduct.isSaving()">
-			    		<h4 class="edit" tooltip="product.editor.name.tooltip">
+			    		<h4 ng-class="{edit: !currentProduct.isSaving(), muted: currentProduct.isSaving()}" tooltip="product.editor.name.tooltip">
 			    			<span l="product.placeholder.name" ng-hide="currentProduct.name" ng-class="{'text-error' : productInvalid, 'simple-property-placeholder' : !productInvalid}">Name*</span>
 			    			{{currentProduct.name}} <i class="icon-edit icon-black"></i>
 			    		</h4>
 			    	</div>
 			    	<div simple-property-editor editor-title="product.editor.shortDesc" editor-property="currentProduct.shortDesc" editor-on-save="saveProduct()" editor-type="textarea" editor-placeholder="product.placeholder.shortDesc" editor-enabled="!currentProduct.isSaving()">
-			    		<p class="edit" tooltip="product.editor.shortDesc.tooltip">
+			    		<p ng-class="{edit: !currentProduct.isSaving(), muted: currentProduct.isSaving()}" tooltip="product.editor.shortDesc.tooltip">
 			    			<span l="product.placeholder.shortDesc" ng-hide="currentProduct.shortDesc" class="simple-property-placeholder">Short description*</span>
 			    			{{currentProduct.shortDesc}} <i class="icon-edit icon-black"></i>
 			    		</p>
 			    	</div>
 			    	<div simple-property-editor editor-title="product.editor.longDesc" editor-property="currentProduct.longDesc" editor-on-save="saveProduct()" editor-type="textarea" editor-placeholder="product.placeholder.longDesc" editor-enabled="!currentProduct.isSaving()">
-			    		<p class="edit" tooltip="product.editor.longDesc.tooltip">
+			    		<p ng-class="{edit: !currentProduct.isSaving(), muted: currentProduct.isSaving()}" tooltip="product.editor.longDesc.tooltip">
 			    			<span l="product.placeholder.longDesc" ng-hide="currentProduct.longDesc" class="simple-property-placeholder">Long description*</span>
 			    			{{currentProduct.longDesc}} <i class="icon-edit icon-black"></i>
 			    		</p>
 			    	</div>
 			    	<div simple-property-editor editor-title="product.editor.price" editor-property="currentProduct.price" editor-on-save="saveProduct()" editor-required editor-pattern="/^[0-9]+([.][0-9]+)?$/" editor-pattern-text="product.editor.price.validation" editor-placeholder="product.placeholder.price" editor-enabled="!currentProduct.isSaving()">
-			    		<p class="edit"  tooltip="product.editor.price.tooltip">
+			    		<p ng-class="{edit: !currentProduct.isSaving(), muted: currentProduct.isSaving()}"  tooltip="product.editor.price.tooltip">
 			    			{{currentProduct.price | kcurrency:activeBusiness.currency}} <i class="icon-edit icon-black"></i>
 			    		</p>
 			    	</div>
-			    	<div ng-show="currentProduct.isSaving()">
-			    		<span l="common.save"></span> <div class="loading-indicator-small"></div>
+			    	<div ng-show="currentProduct.isSaving()" style="margin: 5px 0 5px 0;">
+			    		<span l="common.create"></span> <div class="loading-indicator-small"></div>
 			    	</div>
 			    	<div ng-show="productInvalid" class="text-error">
 			    		<span l="validation.field.required">* Please fill out all required fields.</span>
