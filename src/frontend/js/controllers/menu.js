@@ -229,7 +229,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 		if($scope.currentMenu && $scope.currentMenu.id) {
 			$scope.currentMenu.$update(null, null, handleError);	
 		} else {
-			$scope.currentMenu.$save(saveMenuSuccess, handleError);
+			$scope.currentMenu.$create(saveMenuSuccess, handleError);
 		}
 
 		$scope.menuInvalid = false;
@@ -893,7 +893,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 		if($scope.currentChoice && $scope.currentChoice.id) {
 			$scope.currentChoice.$update(null, null, handleError);	
 		} else {
-			$scope.currentChoice.$save(saveChoiceSuccess, handleError);
+			$scope.currentChoice.$create(saveChoiceSuccess, handleError);
 		}
 
 	};

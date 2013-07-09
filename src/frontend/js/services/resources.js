@@ -45,12 +45,12 @@ angular.module('Cloobster.services').factory('cloobsterResource',['$resource','c
 
 	    	 	
 	    	me.setSaving(true);
-	       	me.$save(params, function() {
+	       	me.$save(params, function(record, responseHeaders) {
 	       		me.setSaving(false);
-	       		success();
-	       	}, function() {
+	       		success(record, responseHeaders);
+	       	}, function(_response, _status, _headers, _config) {
 	       		me.setSaving(false);
-	       		handleError();	       		
+	       		handleError(_response, _status, _headers, _config);
 	       	});
 	    };
 
