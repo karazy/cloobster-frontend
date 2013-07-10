@@ -2153,12 +2153,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "About us"
 		},
 		"appwizard.complete.text1" : {
-			"DE" :  "Ihre App wurde generiert. Sie können Sie mit dem QR Code unten	testen. Einfach	cloobster herunterladen oder Code mit Barcoo scannen.",
-			"EN" : ""
+			"DE" :  "Ihre App wurde generiert. Scannen Sie mit cloobster den QR-Code, um Ihre App zu sehen. Falls die cloobster App noch nicht installiert ist, einfach herunterladen oder QR-Code einmalig mit scannen (z.B. mit Barcoo).",
+			"EN" : "Your App has been generated. Scan qr code with cloobster to see your app. If you don't have cloobster app installed, just download or scan qr code once (e.g. with Barcoo)."
 		},
 		"appwizard.complete.text2" : {
-			"DE" :  "Den QR Code können Sie übrigens schon jetzt benutzen und auf Flyer, Aufsteller, Facebook, Webseite veröﬀentlichen.",
-			"EN" : ""
+			"DE" : "Den QR Code können Sie übrigens schon jetzt benutzen und auf Flyer, Aufsteller, Facebook, Webseite veröﬀentlichen.",
+			"EN" : "You can start immediately to use the qr code on facebook, flyers and your website."
 		},
 		"appwizard.complete.checkinbtn" : {
 			"DE" :  "(App installiert und diese Seite mit Smartphone geöffnet? Dann direkt einchecken mit dem Button!)",
