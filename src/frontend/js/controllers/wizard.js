@@ -16,6 +16,7 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 	/* Holds data of wizard. */
 	$scope.wizard = {
 		offers : [{}, {}, {}],
+		images: {},
 		complete: false,
 		progress: {
 			location: false,
@@ -114,7 +115,8 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 		var resource,
 			logoImage,
 			headerImage,
-			fbImage;
+			fbImage,
+			imageArray = [];
 
 		if(!checkWizardAndLocation(wizardData, 'images', location)) {
 			$scope.wizard.progress.imageLogo = true;
@@ -126,43 +128,84 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 		resource = Business.buildImageResource(location.id);
 
 		if(wizardData.images.logo) {
-			logoImage = new resource({
+			imageArray.push({
 				id: wizardData.images.logo.id,
 				blobKey: wizardData.images.logo.blobKey,
 				url: wizardData.images.logo.url
 			});
-			logoImage.$save(function() {
-				$scope.wizard.progress.imageLogo = true;
-			});
-		} else {
-			$scope.wizard.progress.imageLogo = true;
 		}
 
 		if(wizardData.images.appheader) {
-			headerImage = new resource({
+			imageArray.push({
 				id: wizardData.images.appheader.id,
 				blobKey: wizardData.images.appheader.blobKey,
 				url: wizardData.images.appheader.url
 			});
-			headerImage.$save(function() {
-				$scope.wizard.progress.imageAppheader = true;
-			});
-		} else {
-			$scope.wizard.progress.imageAppheader = true;
 		}
 
 		if(wizardData.images.fbwallpost) {
-			fbImage = new resource({
+			imageArray.push({
 				id: wizardData.images.fbwallpost.id,
 				blobKey: wizardData.images.fbwallpost.blobKey,
 				url: wizardData.images.fbwallpost.url
 			});
-			fbImage.$save(function() {
-				$scope.wizard.progress.imageFb = true;
-			});
-		} else {
-			$scope.wizard.progress.imageFb = true;
 		}
+
+
+		$http({
+			method: 'PUT',
+			url: appConfig['serviceUrl'] + '/businesses'+location.id+'/images/',
+			data: imageArray
+		})
+		.success(function(data, status, headers, config) {
+			$scope.wizard.progress.imageLogo = true;
+			$scope.wizard.progress.imageAppheader = true;
+			$scope.wizard.progress.imageFb = true;
+		}).error(function(data, status, headers, config) {
+			$scope.wizard.progress.imageLogo = true;
+			$scope.wizard.progress.imageAppheader = true;
+			$scope.wizard.progress.imageFb = true;
+			$log.log('Wizard.saveLocationImages: failed to save images')
+		});
+
+		// if(wizardData.images.logo) {
+		// 	logoImage = new resource({
+		// 		id: wizardData.images.logo.id,
+		// 		blobKey: wizardData.images.logo.blobKey,
+		// 		url: wizardData.images.logo.url
+		// 	});
+		// 	logoImage.$save(function() {
+		// 		$scope.wizard.progress.imageLogo = true;
+		// 	});
+		// } else {
+		// 	$scope.wizard.progress.imageLogo = true;
+		// }
+
+		// if(wizardData.images.appheader) {
+		// 	headerImage = new resource({
+		// 		id: wizardData.images.appheader.id,
+		// 		blobKey: wizardData.images.appheader.blobKey,
+		// 		url: wizardData.images.appheader.url
+		// 	});
+		// 	headerImage.$save(function() {
+		// 		$scope.wizard.progress.imageAppheader = true;
+		// 	});
+		// } else {
+		// 	$scope.wizard.progress.imageAppheader = true;
+		// }
+
+		// if(wizardData.images.fbwallpost) {
+		// 	fbImage = new resource({
+		// 		id: wizardData.images.fbwallpost.id,
+		// 		blobKey: wizardData.images.fbwallpost.blobKey,
+		// 		url: wizardData.images.fbwallpost.url
+		// 	});
+		// 	fbImage.$save(function() {
+		// 		$scope.wizard.progress.imageFb = true;
+		// 	});
+		// } else {
+		// 	$scope.wizard.progress.imageFb = true;
+		// }
 
 		//set progress 
 		// $scope.wizard.progress.images = true;
@@ -324,7 +367,6 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 
 		$scope.wizard.images = $scope.wizard.images || {};
 		$scope.wizard.images[_id] = image;
-		$scope.$digest();
 	}
 
 	$scope.deleteWizardImage = function(imageId) {
