@@ -1144,7 +1144,7 @@ Cloobster.services.factory('utilFn', ['$log', function($log) {
 	  		try {
 		  		for (var key in obj) {
 				  if (obj.hasOwnProperty(key)) {
-				  	console.log('### ' + key + ' -> ' + obj[key]);
+				  	$log.log('### ' + key + ' -> ' + obj[key]);
 				  }
 				}
 	  		} catch(e) {

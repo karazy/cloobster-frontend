@@ -2176,6 +2176,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Wenn Sie diesen Bereich verlassen, gehen die eingetragenen Daten verloren.",
 			"EN" : "Your data entries will be lost when you leave this area."
 		},
+		"appwizard.saving" : {
+			"DE" :  "Erstelle App...",
+			"EN" : "Creating App..."
+		},
 		//report partial
 		"reports.description" : {
 			"DE" :  "Hier können Sie die wichtigsten Kennzahlen (KPI) anschauen. Wählen Sie zunächst welche Kennzahl Sie anschauen möchten<br/>"+

@@ -10,7 +10,7 @@
 * 	View and manage wizard.
 * 	@constructor
 */
-Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, Company, $routeParams, handleError, Business, $route, $log, $rootScope, Spot, $injector, InfoPage, Menu, Product, randomUtil, langService, DashboardItem, appConfig) {
+Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, Company, $routeParams, handleError, Business, $route, $log, $rootScope, Spot, $injector, InfoPage, Menu, Product, randomUtil, langService, DashboardItem, appConfig, utilFn) {
 	var businessResource = null;
 
 	/* Holds data of wizard. */
@@ -74,7 +74,8 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 			return;
 		}
 
-		$log.log('Wizard: generate business: ' + wizardData.newLocationName);
+		utilFn.dumpObject(wizardData, 'Wizard: generate business');
+		utilFn.dumpObject(wizardData.images, 'Images');
 
 		resource = Business.buildResource(loginService.getAccount().id);
 		entity = new resource({
@@ -111,7 +112,9 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 
 	function saveLocationImages(wizardData, location) {
 		var resource,
-			image;
+			logoImage,
+			headerImage,
+			fbImage;
 
 		if(!checkWizardAndLocation(wizardData, 'images', location)) {
 			$scope.wizard.progress.imageLogo = true;
@@ -123,12 +126,12 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 		resource = Business.buildImageResource(location.id);
 
 		if(wizardData.images.logo) {
-			image = new resource({
+			logoImage = new resource({
 				id: wizardData.images.logo.id,
 				blobKey: wizardData.images.logo.blobKey,
 				url: wizardData.images.logo.url
 			});
-			image.$save(function() {
+			logoImage.$save(function() {
 				$scope.wizard.progress.imageLogo = true;
 			});
 		} else {
@@ -136,12 +139,12 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 		}
 
 		if(wizardData.images.appheader) {
-			image = new resource({
+			headerImage = new resource({
 				id: wizardData.images.appheader.id,
 				blobKey: wizardData.images.appheader.blobKey,
 				url: wizardData.images.appheader.url
 			});
-			image.$save(function() {
+			headerImage.$save(function() {
 				$scope.wizard.progress.imageAppheader = true;
 			});
 		} else {
@@ -149,12 +152,12 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 		}
 
 		if(wizardData.images.fbwallpost) {
-			image = new resource({
+			fbImage = new resource({
 				id: wizardData.images.fbwallpost.id,
 				blobKey: wizardData.images.fbwallpost.blobKey,
 				url: wizardData.images.fbwallpost.url
 			});
-			image.$save(function() {
+			fbImage.$save(function() {
 				$scope.wizard.progress.imageFb = true;
 			});
 		} else {
@@ -206,11 +209,13 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 			resource;
 
 		if(!wizardData || !wizardData.infopageDescription) {
+			$scope.wizard.progress.infopages = true;
 			$log.log('Wizard: cannot create infopage without data');
 			return;
 		}
 
 		if(!location || !location.id) {
+			$scope.wizard.progress.infopages = true;
 			$log.log('Wizard: cannot create infopage without location id');
 			return;
 		}
@@ -291,7 +296,13 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 	* Called when user cancels wizard process.
 	*/
 	function cleanupImages() {
-		//TODO
+		//issue delete requests for all images
+		$scope.deleteWizardImage('logo');
+		$scope.deleteWizardImage('appheader');
+		$scope.deleteWizardImage('offer1');
+		$scope.deleteWizardImage('offer2');
+		$scope.deleteWizardImage('offer3');
+		$scope.deleteWizardImage('fbwallpost');		
 	}
 
 	function loadWelcomeSpot (location) {
@@ -313,6 +324,7 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 
 		$scope.wizard.images = $scope.wizard.images || {};
 		$scope.wizard.images[_id] = image;
+		$scope.$digest();
 	}
 
 	$scope.deleteWizardImage = function(imageId) {
@@ -339,6 +351,7 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 		if(!$scope.createdLocation || !$scope.createdLocation.id) {
 			return;
 		}
+
 		$location.url("/businesses/"+$scope.createdLocation.id);
 	}
 
@@ -380,12 +393,14 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 		if(complete) {
 			$scope.locationChangeStartListener();
 			$scope.wizard.complete = complete;	
+			window.onbeforeunload=null;
 		}
 	}, true);
 
 	window.onbeforeunload = function(event) {
 		if($scope.wizardForm.$dirty) {
 			//warn user that changes maybe lost
+			//we cant call cleanupImages here :()
 			return langService.translate("appwizard.quit.message");
    		}
 	}
@@ -398,6 +413,9 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 
    			if(check == false) {
    				event.preventDefault();	
+   			} else {
+   				window.onbeforeunload=null;
+   				cleanupImages();
    			}
    			
    			//using bootstrap modal does not work, reason not clear
@@ -436,4 +454,4 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 	}
 
 };
-Cloobster.Wizard.$inject = ['$scope', '$http', '$location', '$resource', 'login', 'Company', '$routeParams', 'errorHandler', 'Business', '$route', '$log', '$rootScope', 'Spot', '$injector', 'InfoPage', 'Menu', 'Product', 'randomUtil', 'lang', 'DashboardItem', 'config'];
+Cloobster.Wizard.$inject = ['$scope', '$http', '$location', '$resource', 'login', 'Company', '$routeParams', 'errorHandler', 'Business', '$route', '$log', '$rootScope', 'Spot', '$injector', 'InfoPage', 'Menu', 'Product', 'randomUtil', 'lang', 'DashboardItem', 'config', 'utilFn'];
