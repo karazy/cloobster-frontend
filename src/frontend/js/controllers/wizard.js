@@ -383,13 +383,26 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 		}
 	}, true);
 
+	window.onbeforeunload = function(event) {
+		if($scope.wizardForm.$dirty) {
+			//warn user that changes maybe lost
+			return langService.translate("appwizard.quit.message");
+   		}
+	}
+
 	//prevent accidental tab switching and data loss
 	$scope.locationChangeStartListener =  $scope.$on('$locationChangeStart', function(event, next, current) { 
    		if($scope.wizardForm.$dirty) {
    			//warn user that changes maybe lost
-   			event.preventDefault();
-   			$scope.changeUrl = $location.url($location.url(next).hash());
-   			jQuery("#wizardQuitModal").modal();
+   			var check = confirm(langService.translate("appwizard.quit.message"));
+
+   			if(check == false) {
+   				event.preventDefault();	
+   			}
+   			
+   			//using bootstrap modal does not work, reason not clear
+   			// $scope.changeUrl = $location.url($location.url(next).hash());
+   			// jQuery("#wizardQuitModal").modal();
    		}
  	});
 

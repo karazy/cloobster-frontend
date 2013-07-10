@@ -2101,7 +2101,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Whats the name of the location you'll want to use the app with?"
 		},
 		"appwizard.step1.description" : {
-			"DE" :  "Beispiel: Hotel Dobaunlick, Zum Kuckuck, Kixx",
+			"DE" :  "Beispiel: Hotel Donaublick, Zum Grünen Baum, Bäcker Müller",
 			"EN" : "Example: Hotel Mountain View, Restaurant Golden Burger ..."
 		},
 		"appwizard.step2.title" : {
