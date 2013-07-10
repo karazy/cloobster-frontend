@@ -8,7 +8,7 @@
 * 	View and manage infopages for static information (e.g. contact information).
 * 	@constructor
 */
-Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginService, langService, $log, handleError, InfoPage, Business, langcodesMap, validator, $rootScope) {
+Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginService, langService, $log, handleError, InfoPage, Business, langcodesMap, validator, utilFn) {
 
 	var activeBusinessId,
 			requiredInfoPageFields = {
@@ -42,7 +42,17 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		}
 
 		//load info pages
-		$scope.infopages = $scope.infoPageResource.query(params, angular.noop,	handleError);
+		$scope.infopages = $scope.infoPageResource.query(params, function() {
+			//reload occured e.g. after language switch, retrieve correct page
+			if($scope.selectedInfoPage) {
+				angular.forEach($scope.infopages, function(page, index) {
+					if(page.id == $scope.selectedInfoPage.id) {						
+						$log.log('Infopage.loadInfoPages: restore selection for id='+page.id);
+						$scope.selectInfoPage(page);
+					}
+				});
+			}			
+		},	handleError);
 	}
 
 	/**
@@ -72,7 +82,13 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 
 	function updateSelectedInfoPage (newData) {
 		if($scope.selectedInfoPage && newData) {
-			angular.extend($scope.selectedInfoPage, newData);
+			if($scope.selectedInfoPage.id = newData.id) {
+				utilFn.dumpObject(newData, 'Infopage.updateSelectedInfoPage');
+				angular.extend($scope.selectedInfoPage, newData);
+			} else {
+				$log.log("Infopage.updateSelectedInfoPage: ID mismatch!! newId="+newData.id+" oldId="+$scope.selectedInfoPage.id);
+			}
+			
 		}
 	}
 
@@ -89,6 +105,8 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	*/
 	$scope.loadInfoPage =  function(page, languageCode) {
 		var params = {'id': page.id};
+
+		$log.log("Infopage.loadInfoPage: id=" + page.id);
 		
 		if(languageCode) {
 			params.lang = languageCode;
@@ -121,6 +139,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 
 		$scope.currentInfoPage = new $scope.infoPageResource(newPage);
 		$scope.infoPageInvalid = false;
+		$scope.selectedInfoPage = null;
 	}
 
 	$scope.saveInfoPage = function(callback) {
@@ -148,13 +167,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		}
 
 		if($scope.currentInfoPage && $scope.currentInfoPage.id) {
-			if($scope.currentLanguage) {
-				$scope.currentInfoPage.$update(null, null, handleError);
-			}
-			else {
-				// use callback here to update the infopage in the list because we updated the default language
-				$scope.currentInfoPage.$update(updateSuccess, handleError);	
-			}
+			$scope.currentInfoPage.$update(updateSuccess, handleError);	
 		} else {
 			$scope.currentInfoPage.$save(saveSuccess, handleError);
 		}
@@ -225,17 +238,18 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		$scope.resetSearchField();		
 	}
 
-	$scope.isSelectedLanguage = function(langToFilter) {
-		if(!$scope.activeBusiness.lang) {
-			return false;
-		}
+	//@deprecated
+	// $scope.isSelectedLanguage = function(langToFilter) {
+	// 	if(!$scope.activeBusiness.lang) {
+	// 		return false;
+	// 	}
 
-		if(jQuery.inArray(langToFilter.code, $scope.activeBusiness.lang) >= 0) {
-			return true;
-		}
+	// 	if(jQuery.inArray(langToFilter.code, $scope.activeBusiness.lang) >= 0) {
+	// 		return true;
+	// 	}
 
-		return false;
-	}
+	// 	return false;
+	// }
 
 	/**
 	*
@@ -264,18 +278,21 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	}
 
 	/**
-	* Returns an infopage based on the current translation.
+	* Returns an infopage field based on the current translation.
 	* @param {String} fieldName
 	*	Name of field to return
 	* @param {Boolean} useDefault (optional)
 	*	If true, uses default language value if none was found in translation.
+	* @param {Object} page
+	*	If set uses given object to retrieve value. Otheriwse $scope.currentInfoPage.
 	* @return
 	*	Translated infopage
 	*/
-	$scope.translatedInfoPage = function(fieldName, useDefault) {
-		var tField;
+	$scope.translatedInfoPage = function(fieldName, useDefault, page) {
+		var tField,
+			_infopage = page || $scope.currentInfoPage;
 
-		if(!$scope.currentInfoPage) {
+		if(!_infopage) {
 			return;
 		}
 
@@ -285,14 +302,14 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		}
 
 		//no translations exist
-		if(!$scope.currentInfoPage.translations || !$scope.currentLanguage) {
-			return $scope.currentInfoPage[fieldName];
+		if(!_infopage.translations || !$scope.currentLanguage) {
+			return _infopage[fieldName];
 		}
 
-		tField = $scope.currentInfoPage.translations[$scope.currentLanguage.code][fieldName];
+		tField = _infopage.translations[$scope.currentLanguage.code][fieldName];
 
 		if(!tField && useDefault) {
-			tField = $scope.currentInfoPage[fieldName];
+			tField = _infopage[fieldName];
 		}
 
 		return tField;
@@ -313,4 +330,4 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	});
 }
 
-Cloobster.InfoPage.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', 'errorHandler', 'InfoPage', 'Business', 'langcodesMap','validator', '$rootScope'];
+Cloobster.InfoPage.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', 'errorHandler', 'InfoPage', 'Business', 'langcodesMap','validator', 'utilFn'];

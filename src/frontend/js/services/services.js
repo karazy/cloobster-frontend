@@ -664,7 +664,8 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
     		done: function (e, data) {
     			//data properties: name, blobKey, url
     			var images = data.result;
-    			//create logo resource object
+    			// Set blobkey and url after upload success
+    			//TODO check this code. May be useless
     			resource.blobKey = images[0].blobKey;
     			resource.url = images[0].url;
 
@@ -1117,5 +1118,43 @@ Cloobster.services.factory('randomUtil', function() {
 
 	return randomFns;
 });
+
+
+/**
+* @constructor
+* Factory function for 'utilFn' service.
+* Contains convienient methods for everyday use. ;)
+* 
+* 	@author Frederik Reifschneider
+*
+*/
+Cloobster.services.factory('utilFn', ['$log', function($log) {
+	var utilFns = {
+		dumpObject: function(obj, description) {
+			if(!obj) {
+  				return;
+	  		}
+
+	  		if(description) {
+	  			$log.log(description);
+	  		} else {
+	  			$log.log('dumpObject');	
+	  		}	  		
+
+	  		try {
+		  		for (var key in obj) {
+				  if (obj.hasOwnProperty(key)) {
+				  	console.log('### ' + key + ' -> ' + obj[key]);
+				  }
+				}
+	  		} catch(e) {
+	  			$log.log('dumpObject: failed to dump object ' + e);
+	  		}
+		}
+	}
+
+	return utilFns;
+}]);
+
 
 

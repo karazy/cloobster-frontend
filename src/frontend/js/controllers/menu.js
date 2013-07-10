@@ -55,9 +55,9 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 			name: true
 		};
 
-	/** Menu Resource. */
+	/** Menu resource. */
 	$scope.menusResource = null;
-	/** */
+	/** Product resource. */
 	$scope.productsResource = null;
 	/** Business to which these menus belong to. */
 	$scope.activeBusiness = null;
@@ -229,7 +229,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 		if($scope.currentMenu && $scope.currentMenu.id) {
 			$scope.currentMenu.$update(null, null, handleError);	
 		} else {
-			$scope.currentMenu.$save(saveMenuSuccess, handleError);
+			$scope.currentMenu.$create(saveMenuSuccess, handleError);
 		}
 
 		$scope.menuInvalid = false;
@@ -384,7 +384,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 		if(productToSave && productToSave.id) {
 			productToSave.$update(null, null, handleError);
 		} else {
-			productToSave.$save(saveProductSuccess, handleError);
+			productToSave.$create(saveProductSuccess, handleError);
 		}
 	}
 
@@ -441,19 +441,27 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 		menuItem.productIds.push(productToMove.id);
 		// Save new product order.
 		menuItem.$update(angular.noop, handleError);
+		productToMove.$update(angular.noop, handleError);
 
+		manageViewHiearchy("moved-product");
+
+		
 		angular.forEach(products, function(product, index) {
 			if(product.id == productToMove.id) {
-				$scope.currentMenu.productIds.splice(index,1);
-				products.splice(index, 1);
+				//remove from currentMenu 
+				if($scope.currentMenu) {					
+					$scope.currentMenu.productIds.splice(index,1);
+					//TODO do we have to save old menu?
+					$scope.currentMenu.$update(angular.noop, handleError);
+				}
+				if($scope.currentMenu || $scope.orphanedProducts) {
+					products.splice(index, 1);
+				}				
 				//exist loop
 				return false;
 			}
 		});
-		productToMove.$update(angular.noop, handleError);
-
-		manageViewHiearchy("moved-product");
-	
+		
 	};
 
 	/**
@@ -809,6 +817,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 	}
 
 	/**
+	* @deprecated
 	* Load product by an id.
 	* @param
 	*	product Id
@@ -892,7 +901,7 @@ Cloobster.Menu = function($scope, $http, $routeParams, $location, $filter, login
 		if($scope.currentChoice && $scope.currentChoice.id) {
 			$scope.currentChoice.$update(null, null, handleError);	
 		} else {
-			$scope.currentChoice.$save(saveChoiceSuccess, handleError);
+			$scope.currentChoice.$create(saveChoiceSuccess, handleError);
 		}
 
 	};

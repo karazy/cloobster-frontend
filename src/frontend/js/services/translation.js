@@ -2619,6 +2619,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Deaktiviert",
 			"EN" : "Disabled"
 		},
+		"common.create" : {
+			"DE" :  "Anlegen",
+			"EN" : "Create"
+		},
 		//breadcrumb
 		"breadcrumb.home" : {
 			"DE" : "Home",
