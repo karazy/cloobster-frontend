@@ -154,7 +154,7 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 
 		$http({
 			method: 'PUT',
-			url: appConfig['serviceUrl'] + '/businesses'+location.id+'/images/',
+			url: appConfig['serviceUrl'] + '/b/businesses/'+location.id+'/images',
 			data: imageArray
 		})
 		.success(function(data, status, headers, config) {
