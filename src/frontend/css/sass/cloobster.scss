@@ -879,7 +879,16 @@ $step-element-maxwidth: 650px;
 .app-help-image {
   height: 500px;
   background-image: url('../img/apphelp.jpg');
-  background-size: 100% auto;
+  background-size: auto 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-width: 350px;
+}
+
+.app-image {
+  height: 500px;
+  background-image: url('../img/app_screenshot.png');
+  background-size: auto 100%;
   background-position: center;
   background-repeat: no-repeat;
 }

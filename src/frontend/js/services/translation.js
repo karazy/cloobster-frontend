@@ -18,9 +18,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Logout",
 			"EN" : "Logout"
 		},
-		"nav.login" : {
-			"DE:" : "Login",
-			"EN": "Login"
+		"login.title" : {
+			"DE" : "Login für Geschäftskunden",
+			"EN": "Login für corporate customers"
 		},
 		"nav.restaurants" : {
 			"DE" : "Administration",
@@ -45,6 +45,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"nav.accounts" : {
 			"DE" : "Benutzerkonten",
 			"EN" : "User accounts"
+		},
+		"home.signup" : {
+			"DE" :  "Zur Registrierung!",
+			"EN" : "Sign up!"
+		},
+		"home.notregistered" : {
+			"DE" :  "In 5 Schritten Ihre eigene App Präsenz gestalten!<br>Jetzt registrieren und 30 Tage kostenfrei und unverbindlich ausprobieren.",
+			"EN" : "Create your app in 5 simple steps.<br/>Register now and get your first month for free."
 		},
 		//businesses header partial
 		"businesses.headertabs.howto" : {
@@ -340,8 +348,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "You have no current locations. You need at least one location (hotel, restaurant) to use cloobster."
 		},
 		"businesses.description" : {
-			"DE" :  "Hier können Sie Ihre unterschiedlichen Locations (Hotels, Restaurants) verwalten und für cloobster vorbereiten.",
-			"EN" :  "You can add, edit, or delete your locations (hotels, restaurants) here."
+			"DE" :  "Hier können Sie Ihre unterschiedlichen Locations verwalten und für cloobster vorbereiten.",
+			"EN" :  "You can add, edit, or delete your locations here."
 		},
 		"businesses.add" : {
 			"DE" : "Location hinzufügen",

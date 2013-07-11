@@ -982,7 +982,17 @@ ul.options-list li:hover {
 .app-help-image {
   height: 500px;
   background-image: url("../img/apphelp.jpg");
-  background-size: 100% auto;
+  background-size: auto 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-width: 350px;
+}
+
+/* line 888, sass/cloobster.scss */
+.app-image {
+  height: 500px;
+  background-image: url("../img/app_screenshot.png");
+  background-size: auto 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
