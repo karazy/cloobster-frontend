@@ -169,7 +169,7 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 		if($scope.currentInfoPage && $scope.currentInfoPage.id) {
 			$scope.currentInfoPage.$update(updateSuccess, handleError);	
 		} else {
-			$scope.currentInfoPage.$save(saveSuccess, handleError);
+			$scope.currentInfoPage.$create(saveSuccess, handleError);
 		}
 
 		function updateSuccess(infopage) {

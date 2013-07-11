@@ -169,7 +169,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			$scope.currentArea.$update(angular.noop, handleError);
 		} else {
 			$log.log("save new area");
-			$scope.currentArea.$save(
+			$scope.currentArea.$create(
 				function() { 
 					$scope.areas.push($scope.currentArea);
 					$scope.loadArea($scope.currentArea);
@@ -247,7 +247,7 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 			$scope.currentSpot.$update(angular.noop, handleError);			
 		} else {
 			$log.log("save new spot");
-			$scope.currentSpot.$save(
+			$scope.currentSpot.$create(
 				function() { 
 					$scope.spots.push($scope.currentSpot);
 					$scope.updateSpotCount(1, false);
