@@ -982,7 +982,7 @@ ul.options-list li:hover {
 .app-help-image {
   height: 500px;
   background-image: url("../img/apphelp.jpg");
-  background-size: auto 100%;
+  background-size: 350px auto;
   background-position: center;
   background-repeat: no-repeat;
   min-width: 350px;
