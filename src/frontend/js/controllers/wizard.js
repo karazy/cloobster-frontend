@@ -367,6 +367,12 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 
 		$scope.wizard.images = $scope.wizard.images || {};
 		$scope.wizard.images[_id] = image;
+
+		try {
+			$scope.$digest();
+		} catch(e) {
+			$log.log('Wizard.setWizardImage: digest failed ' + e);
+		}
 	}
 
 	$scope.deleteWizardImage = function(imageId) {

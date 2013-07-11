@@ -21,21 +21,8 @@
 				        		<span class="help-inline" ng-show="wizardForm.newLocationName.$dirty && wizardForm.newLocationName.$error.required" l="registration.form.requiredfield">Please provide a value.</span>
 							</div>
 						</div>						
-						<!-- <span simple-confirm-dialog dialog-title="business.new.title" dialog-text="business.new.text" dialog-on-confirm="addNewBusiness()" dialog-confirm-button="common.confirm" dialog-disabled="!newBusiness.name">
-							<button type="button" class="btn btn-primary" ng-disabled="!newBusiness.name"><i class="icon-plus-sign icon-white"></i> <span l="common.new">New</span></button>
-						</span> -->
 					</div>
-				</div>				
-	<!-- 			<div class="step-wrapper">
-					<div class="step-content">
-						<div ng-hide="activeBusinessId" l="appwizard.location.select" style="color: red;">
-							Select or create your location to proceed ...
-						</div>
-					<select ng-model="activeBusinessId" style="margin-top: 15px" ng-options="b.id as b.name for b in businesses | filter:filterTrashedBusiness" ng-change="switchBusiness()" ng-show="businesses.length > 0">
-						<option value="" selected="selected" l="common.dropdown.select">-- select --</option>
-					</select>
-					</div>
-				</div> -->				
+				</div>			
 				<div class="step-wrapper">
 					<div class="step-counter">2</div>
 					<div class="step-content">
@@ -53,12 +40,12 @@
 					<div class="step-content">
 						<div class="step-section">
 
-						 	<div simple-image-editor="wizard.images.logo" editor-title-key="appwizard.step3.logobutton" editor-image-id="logo" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('logo')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('logo')" editor-no-persist="true" editor-enabled="!wizard.complete && !wizard.saving">
+							<div simple-image-editor="wizard.images.logo" editor-title-key="appwizard.step3.mainpicbutton" editor-image-id="logo" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('logo')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('logo')" editor-no-persist="true" editor-enabled="!wizard.complete && !wizard.saving">
 								<div ng-show="wizard.images.logo.url" class="step-grid-image">
 									<img  ng-src="{{wizard.images.logo.url}}=s96" alt="click to edit" />
 									<p  l="business.detail.picture.edit">Click image to edit</p>
 								</div>
-								<button ng-show="!wizard.images.logo" class="btn btn-primary span4" l="appwizard.step3.logobutton">Upload logo</button>
+								<button ng-show="!wizard.images.logo" class="btn btn-primary span4" l="appwizard.step3.logobutton">Upload main picture</button>
 							</div>
 
 							<div simple-image-editor="wizard.images.appheader" editor-title-key="appwizard.step3.mainpicbutton" editor-image-id="appheader" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('appheader')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('appheader')" editor-no-persist="true"

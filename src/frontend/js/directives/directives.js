@@ -27,6 +27,9 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 			editorMinHeight: '@',
 			simpleImageEditor: '=',
 			editorEnabled: '=',
+			//if true, only uploads the image to blobstore but won't save the image resource
+			//this may be useful if you have to upload an image before the entity it will be
+			//assigned to exists
 			editorNoPersist: '='
 		},
 		compile: function(element, attrs, transclude) {
@@ -303,8 +306,8 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 				    				scope.barStyle.width = '100%';
 				    				scope.editorOnSave({ "image" : activeImage});
 					        		dialog.modal('hide');
-										},
-										 // Error
+								},
+								// Error
 				    			function() {
 									deleteActiveUpload();
 									resetScope();
@@ -312,11 +315,11 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 									scope.errorMessage = langService.translate("fileupload.save.error");
 							});
 		        		} else {
-		        			//this is just an image upload without persisting information in datastore
+		        			//this is just an image upload without persisting information in datastore		        			
 		        			scope.fileSaving = false;
 		    				scope.barStyle.width = '100%';
 		    				scope.editorOnSave({ "image" : activeImage});
-			        		dialog.modal('hide');
+		    				dialog.modal('hide');
 		        		}
 		        		
 		        	};
