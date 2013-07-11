@@ -369,6 +369,7 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 		$scope.wizard.images[_id] = image;
 
 		try {
+			//Workaround because in case of logo digest runs to early
 			$scope.$digest();
 		} catch(e) {
 			$log.log('Wizard.setWizardImage: digest failed ' + e);

@@ -556,7 +556,7 @@ $step-element-maxwidth: 650px;
   line-height: 50px;
   position: absolute;
   margin-right: 10px;
-  margin-left: 25px;
+  margin-left: 10px;
   color: white;
 }
 
@@ -568,8 +568,9 @@ $step-element-maxwidth: 650px;
 }
 
 .step-content {
-  margin-left: 90px;
+  margin-left: 75px;
   padding-top: 12px;
+  overflow: hidden;
 
   input.fillspace, textarea.fillspace {
     width: 90%;

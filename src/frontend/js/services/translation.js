@@ -2097,12 +2097,12 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Create your own app presence in 5 simple steps"
 		},
 		"appwizard.step1.title" : {
-			"DE" :  "Wie soll die Location heißen, in der Sie die App einsetzen werden.",
+			"DE" :  "Wie soll die Location heißen, in der Sie die App einsetzen werden?",
 			"EN" : "Whats the name of the location you'll want to use the app with?"
 		},
 		"appwizard.step1.description" : {
-			"DE" :  "Beispiel: Hotel Donaublick, Zum Grünen Baum, Bäcker Müller",
-			"EN" : "Example: Hotel Mountain View, Restaurant Golden Burger ..."
+			"DE" :  "Beispiel: Hotel Donaublick, Zum Grünen Baum, Bäcker Müller...",
+			"EN" : "Example: Hotel Mountain View, Restaurant Big Burger, Bakery Cronut..."
 		},
 		"appwizard.step2.title" : {
 			"DE" :  "Beschreiben Sie die Location",
@@ -2153,7 +2153,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "About us"
 		},
 		"appwizard.complete.text1" : {
-			"DE" :  "Ihre App wurde generiert. Scannen Sie mit cloobster den QR-Code, um Ihre App zu sehen. Falls die cloobster App noch nicht installiert ist, einfach herunterladen oder QR-Code einmalig mit scannen (z.B. mit Barcoo).",
+			"DE" :  "Ihre App wurde generiert. Scannen Sie mit cloobster den QR-Code, um Ihre App zu sehen. Falls die cloobster App noch nicht installiert ist, einfach herunterladen oder QR-Code einmalig scannen (z.B. mit Barcoo).",
 			"EN" : "Your App has been generated. Scan qr code with cloobster to see your app. If you don't have cloobster app installed, just download or scan qr code once (e.g. with Barcoo)."
 		},
 		"appwizard.complete.text2" : {

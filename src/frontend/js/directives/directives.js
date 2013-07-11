@@ -165,7 +165,7 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 							activeImage = null;
 
 						if(success) {
-									//TODO check this block
+									//TODO what is the purpose here?
 									// Maybe not necessary to create new resource object?
 			        		activeImage = new imageResource({
 			    				id: scope.editorImageId,

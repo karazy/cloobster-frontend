@@ -14,10 +14,10 @@
 							<div class="step-title" l="appwizard.step1.title">Whats the name of the location you'll want to use the app with?</div>
 							<div class="step-description" l="appwizard.step1.description">Example: Hotel XYZ</div>
 						</div>
-						 <div class="control-group">
+						 <div class="step-section control-group">
 						 	<!-- ng-class="{error : wizardForm.newLocationName.$invalid && wizardForm.newLocationName.$dirty}" -->
-							<div class="controls">
-								<input type="text" required ng-model="wizard.newLocationName" name="newLocationName" class="fillspace">
+							<div class="controls controls-row">
+								<input type="text" required ng-model="wizard.newLocationName" name="newLocationName" class="span12">
 				        		<span class="help-inline" ng-show="wizardForm.newLocationName.$dirty && wizardForm.newLocationName.$error.required" l="registration.form.requiredfield">Please provide a value.</span>
 							</div>
 						</div>						
@@ -27,9 +27,9 @@
 					<div class="step-counter">2</div>
 					<div class="step-content">
 					<div class="step-title"><div l="appwizard.step2.title">Describe your location</div></div>
-						<div class="control-group">
-							<div class="controls">
-								<textarea rows="4" class="fillspace" ng-model="wizard.infopageDescription" name="infopageDescription" required></textarea>
+						<div class="step-section control-group">
+							<div class="controls controls-row">
+								<textarea rows="4" class="span12" ng-model="wizard.infopageDescription" name="infopageDescription" required></textarea>
 								<span class="help-inline" ng-show="wizardForm.infopageDescription.$dirty && wizardForm.infopageDescription.$error.required" l="registration.form.requiredfield">Please provide a value.</span>
 							</div>
 						</div>
@@ -38,23 +38,22 @@
 				<div class="step-wrapper">
 					<div class="step-counter">3</div>
 					<div class="step-content">
-						<div class="step-section">
-
-							<div simple-image-editor="wizard.images.logo" editor-title-key="appwizard.step3.mainpicbutton" editor-image-id="logo" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('logo')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('logo')" editor-no-persist="true" editor-enabled="!wizard.complete && !wizard.saving">
+						<div class="step-section row-fluid">
+							<div simple-image-editor="wizard.images.logo" editor-title-key="appwizard.step3.logobutton" editor-image-id="logo" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('logo')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('logo')" editor-no-persist="true" editor-enabled="!wizard.complete && !wizard.saving" class="span6">
 								<div ng-show="wizard.images.logo.url" class="step-grid-image">
 									<img  ng-src="{{wizard.images.logo.url}}=s96" alt="click to edit" />
 									<p  l="business.detail.picture.edit">Click image to edit</p>
 								</div>
-								<button ng-show="!wizard.images.logo" class="btn btn-primary span4" l="appwizard.step3.logobutton">Upload main picture</button>
+								<button ng-show="!wizard.images.logo" class="btn btn-primary btn-block" l="appwizard.step3.logobutton">Upload logo</button>
 							</div>
 
 							<div simple-image-editor="wizard.images.appheader" editor-title-key="appwizard.step3.mainpicbutton" editor-image-id="appheader" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('appheader')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('appheader')" editor-no-persist="true"
-							editor-crop-text="business.detail.app.header.description" editor-ratio="3:1" editor-enabled="!wizard.complete && !wizard.saving">
+							editor-crop-text="business.detail.app.header.description" editor-ratio="3:1" editor-enabled="!wizard.complete && !wizard.saving" class="span6">
 								<div ng-show="wizard.images.appheader.url" class="step-grid-image">
 									<img  ng-src="{{wizard.images.appheader.url}}=s96" alt="click to edit" />
 									<p  l="business.detail.picture.edit">Click image to edit</p>
 								</div>
-								<button ng-show="!wizard.images.appheader" class="btn btn-primary span4" l="appwizard.step3.mainpicbutton">Upload main picture</button>
+								<button ng-show="!wizard.images.appheader" class="btn btn-primary btn-block" l="appwizard.step3.mainpicbutton">Upload main picture</button>
 							</div>															
 						</div>
 					</div>
@@ -158,7 +157,7 @@
 						 	<div class="controls controls-row">
 						 		<input type="text" class="span8" ng-model="wizard.fbUrl">
 
-								<div simple-image-editor="wizard.images.fbwallpost" editor-title-key="appwizard.step3.mainpicbutton" editor-image-id="fbwallpost" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('fbwallpost')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('fbwallpost')" editor-no-persist="true" editor-crop-text="business.detail.facebook.wallpost.image.description"  editor-ratio="4:3" editor-enabled="!wizard.complete && !wizard.saving">
+								<div simple-image-editor="wizard.images.fbwallpost" editor-title-key="business.detail.facebook.wallpost.image" editor-image-id="fbwallpost" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('fbwallpost')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('fbwallpost')" editor-no-persist="true" editor-crop-text="business.detail.facebook.wallpost.image.description"  editor-ratio="4:3" editor-enabled="!wizard.complete && !wizard.saving">
 									<div ng-show="wizard.images.fbwallpost.url" class="step-grid-image">
 										<img  ng-src="{{wizard.images.fbwallpost.url}}=s96" alt="click to edit" />
 										<p  l="business.detail.picture.edit">Click image to edit</p>
@@ -237,7 +236,7 @@
 </div>
 
 <!-- Warn modal if user wants to leave -->
-<div class="modal hide fade" id="wizardQuitModal">
+<!-- <div class="modal hide fade" id="wizardQuitModal">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3 l="appwizard.quit.title">Changes will be lost!</h3>
@@ -249,4 +248,4 @@
     <a href="#" class="btn" l="common.cancel" data-dismiss="modal">Cancel</a>
     <a href="#" class="btn btn-danger" l="common.ok" ng-click="switchTab()">Ok</a>
   </div>
-</div>
+</div> -->
