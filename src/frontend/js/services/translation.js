@@ -18,9 +18,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Logout",
 			"EN" : "Logout"
 		},
-		"nav.login" : {
-			"DE:" : "Login",
-			"EN": "Login"
+		"login.title" : {
+			"DE" : "Login für Geschäftskunden",
+			"EN": "Login für corporate customers"
 		},
 		"nav.restaurants" : {
 			"DE" : "Administration",
@@ -45,6 +45,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"nav.accounts" : {
 			"DE" : "Benutzerkonten",
 			"EN" : "User accounts"
+		},
+		"home.signup" : {
+			"DE" :  "Zur Registrierung!",
+			"EN" : "Sign up!"
+		},
+		"home.notregistered" : {
+			"DE" :  "In 5 Schritten Ihre eigene App Präsenz gestalten!<br>Jetzt registrieren und 30 Tage kostenfrei und unverbindlich ausprobieren.",
+			"EN" : "Create your app in 5 simple steps.<br/>Register now and get your first month for free."
 		},
 		//businesses header partial
 		"businesses.headertabs.howto" : {
@@ -340,8 +348,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "You have no current locations. You need at least one location (hotel, restaurant) to use cloobster."
 		},
 		"businesses.description" : {
-			"DE" :  "Hier können Sie Ihre unterschiedlichen Locations (Hotels, Restaurants) verwalten und für cloobster vorbereiten.",
-			"EN" :  "You can add, edit, or delete your locations (hotels, restaurants) here."
+			"DE" :  "Hier können Sie Ihre unterschiedlichen Locations verwalten und für cloobster vorbereiten.",
+			"EN" :  "You can add, edit, or delete your locations here."
 		},
 		"businesses.add" : {
 			"DE" : "Location hinzufügen",
@@ -2091,6 +2099,95 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Wählen oder erstellen Sie eine Location bevor Sie mit Schritt 2-4 fortfahren.",
 			"EN" : "Choose or create a location before proceeding with step 2-4."
 		},
+		//wizard partial
+		"appwizard.title" : {
+			"DE" :  "Gestalten Sie Ihre App Präsenz in 5 Schritten",
+			"EN" : "Create your own app presence in 5 simple steps"
+		},
+		"appwizard.step1.title" : {
+			"DE" :  "Wie soll die Location heißen, in der Sie die App einsetzen werden?",
+			"EN" : "Whats the name of the location you'll want to use the app with?"
+		},
+		"appwizard.step1.description" : {
+			"DE" :  "Beispiel: Hotel Donaublick, Zum Grünen Baum, Bäcker Müller...",
+			"EN" : "Example: Hotel Mountain View, Restaurant Big Burger, Bakery Cronut..."
+		},
+		"appwizard.step2.title" : {
+			"DE" :  "Beschreiben Sie die Location",
+			"EN" : "Describe your Location"
+		},
+		"appwizard.step3.logobutton" : {
+			"DE" :  "Logo auswählen",
+			"EN" : "Upload logo"
+		},
+		"appwizard.step3.mainpicbutton" : {
+			"DE" :  "Hauptbild auswählen",
+			"EN" : "Upload main picture"
+		},
+		"appwizard.step5.title" : {
+			"DE" :  "Wie ist der Link zu Ihrer Facebookseite?",
+			"EN" : "Link to your facebook page"
+		},
+		"appwizard.step4.title" : {
+			"DE" :  "Was möchten Sie Ihren Kunden anbieten?",
+			"EN" : "What do you want to offer your customers?"
+		},
+		"appwizard.step4.offer1.title" : {
+			"DE" :  "Titel Angebot 1",
+			"EN" : "Title offer 1"
+		},
+		"appwizard.step4.offer2.title" : {
+			"DE" :  "Titel Angebot 2",
+			"EN" : "Title offer 2"
+		},
+		"appwizard.step4.offer3.title" : {
+			"DE" :  "Titel Angebot 3",
+			"EN" : "Title offer 4"
+		},
+		"appwizard.step4.shortdesc" : {
+			"DE" :  "Kurzbeschreibung",
+			"EN" : "Short description"
+		},
+		"appwizard.step4.price" : {
+			"DE" :  "Preis",
+			"EN" : "Price"
+		},
+		"appwizard.generateapp" : {
+			"DE" :  "App jetzt generieren",
+			"EN" : "Generate App"
+		},
+		"appwizard.infopage.title" : {
+			"DE" :  "Über uns",
+			"EN" : "About us"
+		},
+		"appwizard.complete.text1" : {
+			"DE" :  "Ihre App wurde generiert. Scannen Sie mit cloobster den QR-Code, um Ihre App zu sehen. Falls die cloobster App noch nicht installiert ist, einfach herunterladen oder QR-Code einmalig scannen (z.B. mit Barcoo).",
+			"EN" : "Your App has been generated. Scan qr code with cloobster to see your app. If you don't have cloobster app installed, just download or scan qr code once (e.g. with Barcoo)."
+		},
+		"appwizard.complete.text2" : {
+			"DE" : "Den QR Code können Sie übrigens schon jetzt benutzen und auf Flyer, Aufsteller, Facebook, Webseite veröﬀentlichen.",
+			"EN" : "You can start immediately to use the qr code on facebook, flyers and your website."
+		},
+		"appwizard.complete.checkinbtn" : {
+			"DE" :  "(App installiert und diese Seite mit Smartphone geöffnet? Dann direkt einchecken mit dem Button!)",
+			"EN" : "(App installed and on a mobile device? Directly check-in via button!)"
+		},
+		"appwizard.continuebutton" : {
+			"DE" :  "App weiter bearbeiten",
+			"EN" : "Continue editing"
+		},
+		"appwizard.quit.title" : {
+			"DE" :  "Änderungen gehen verloren!",
+			"EN" : "Changes will be lost!"
+		},
+		"appwizard.quit.message" : {
+			"DE" :  "Wenn Sie diesen Bereich verlassen, gehen die eingetragenen Daten verloren.",
+			"EN" : "Your data entries will be lost when you leave this area."
+		},
+		"appwizard.saving" : {
+			"DE" :  "Erstelle App...",
+			"EN" : "Creating App..."
+		},
 		//report partial
 		"reports.description" : {
 			"DE" :  "Hier können Sie die wichtigsten Kennzahlen (KPI) anschauen. Wählen Sie zunächst welche Kennzahl Sie anschauen möchten<br/>"+
@@ -2533,6 +2630,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.disabled" : {
 			"DE" :  "Deaktiviert",
 			"EN" : "Disabled"
+		},
+		"common.create" : {
+			"DE" :  "Anlegen",
+			"EN" : "Create"
 		},
 		//breadcrumb
 		"breadcrumb.home" : {

@@ -10,8 +10,8 @@
 */
 Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginService, langService, $log, $timeout, handleError, Business, DashboardItem, listUtil, Product, InfoPage) {
 	var dashboardItemsResource,
-			productsResource,
-			infoPagesResource;
+		productsResource,
+		infoPagesResource;
 
 	/** Tile configuration map */
 	$scope.tiles = {
