@@ -363,10 +363,6 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Einstellungen",
 			"EN" : "Settings"
 		},
-		"businesses.action.spots" : {
-			"DE" : "Spots",
-			"EN" : "Spots"
-		},
 		"businesses.action.menus" : {
 			"DE" : "Angebote",
 			"EN" : "Offers"
@@ -388,8 +384,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Delete location"
 		},
 		"businesses.action.activate" : {
-			"DE" :  "Aktivieren",
-			"EN" : "Activate"
+			"DE" :  "Zuweisen",
+			"EN" : "Assign"
 		},
 		"businesses.form.name" : {
 			"DE" : "Name*",

@@ -71,8 +71,8 @@
 						<div class="value">{{activeBusiness.postcode}}</div>
 					</div>
 				</div>				
-			</div>
-			<div class="span6">
+			<!-- </div>
+			<div class="span6"> -->
 				<div simple-property-editor editor-title="business.detail.stars" editor-property="activeBusiness.stars" editor-on-save="saveBusiness()"  editor-type="number" editor-required>
 					<div class="data-element edit">
 						<div class="key" l="business.detail.stars">Stars</div>
@@ -117,18 +117,28 @@
 						</ul>
 					</div>
 				</div>
-			</div>							
+			</div>		
+			<div class="span6">				
+				<div class="">
+					<!-- <div class="key" id="coordinatesLabel"><span l="business.detail.coordinates">Coordinates</span> <i class="icon-question-sign"></i></div> -->
+					<h4 l="business.detail.coordinates">Coordinates</h4>
+					<div class="value">{{activeBusiness.geoLat | number:6}}, {{activeBusiness.geoLong | number:6}}</div>
+					<p l="business.help.coordinates.popover"></p>
+				</div>
+				<div id="map-canvas" style="height: 300px" class="">
+				</div>
+			</div>					
 		</div>
-		<div class="row-fluid">
+	<!-- 	<div class="row-fluid">
 			<div id="map-canvas" style="height: 300px" class="span4">
 			</div>
 			<div class="span4">
-				<!-- <div class="key" id="coordinatesLabel"><span l="business.detail.coordinates">Coordinates</span> <i class="icon-question-sign"></i></div> -->
+				<div class="key" id="coordinatesLabel"><span l="business.detail.coordinates">Coordinates</span> <i class="icon-question-sign"></i></div>
 				<h4 l="business.detail.coordinates">Coordinates</h4>
 				<div class="value">{{activeBusiness.geoLat | number:6}}, {{activeBusiness.geoLong | number:6}}</div>
 				<p l="business.help.coordinates.popover"></p>
 			</div>
-		</div>		
+		</div>	 -->	
 	</div>
 		
 		<div class="data-container-block data-container-seperator" id="subscriptionBlock" name="subscriptionBlock">

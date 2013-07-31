@@ -1,5 +1,7 @@
 /* cloobster css stylesheet */
 
+$global-border-radius: 3px;
+
 /* helber style for ng-cloak directive to hide elements until after angular is completely loaded*/
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none;
@@ -70,6 +72,15 @@ html, body {
   right: 10px;
 }
 
+.edit {
+  padding: 2px;
+}
+  
+/* extend bootstrap muted class, since edit gets removed, text will jump */
+.muted {
+  padding: 2px;
+}
+
 .data-section {
 
 }
@@ -89,10 +100,7 @@ html, body {
 
 .data-element.edit:hover, .edit:hover {
     background-color: lightblue;
-}
-
-h1.edit:hover, h2.edit:hover {
-    background-color: lightblue;
+    border-radius: $global-border-radius;
 }
 
 .data-element .key {
@@ -121,7 +129,7 @@ h1.edit:hover, h2.edit:hover {
 .imagebox {
   position: relative;
   border: lightgray 1px solid;
-  border-radius: 0.5em;
+  border-radius: $global-border-radius;
   margin: 1em 0 1em 0;
   padding: 0.5em;
 }
@@ -161,16 +169,15 @@ ul.payment-method-list li {
 }
 
 
-.menus-wrapper {
+/*.menus-wrapper {
   
-}
+}*/
 
-.menus-list {
+/*.menus-list {
   margin-left: 1em;
-  /*float: left;*/
-} 
+} */
 
-.menu-wrapper {
+/*.menu-wrapper {
   
 }
 
@@ -185,12 +192,12 @@ ul.payment-method-list li {
   border-radius: 0.5em;
   padding: 0.5em;
   margin: 1.5em 0;
-}
+}*/
 
 /* data container start */
 .data-container-floating { 
   border: 1px solid gray; 
-  border-radius: 3px;
+  border-radius: $global-border-radius;
   position: fixed;
   top: 75px;
   right: 50px;
@@ -202,7 +209,7 @@ ul.payment-method-list li {
 
 .data-container-with-title { 
   border: 1px solid gray; 
-  border-radius: 3px;
+  border-radius: $global-border-radius;
   margin: 15px 0 10px 0;
   position: relative;
   padding-top: 15px;
@@ -278,7 +285,7 @@ ul.payment-method-list li {
   background-color: white;
   padding: 5px;
   box-sizing:border-box;
-  border-radius: 0.5em;
+  border-radius: $global-border-radius;
   right: 5px;
   left: 5px;
   z-index: 101;
@@ -326,7 +333,7 @@ ul.payment-method-list li {
 
 .product-wrapper {
   border: 1px solid gray;
-  border-radius: 0.5em;  
+  border-radius: $global-border-radius;  
 }
 
 .product-detail {
@@ -345,7 +352,7 @@ ul.payment-method-list li {
 
 .choice-wrapper {
   border: 1px solid gray;
-  border-radius: 0.5em;  
+  border-radius: $global-border-radius;  
 }
 
 .choice-detail {
@@ -391,7 +398,7 @@ ul.options-list li:hover {
 
 .spot-wrapper {
   border: 1px solid gray;
-  border-radius: 0.5em;  
+  border-radius: $global-border-radius;  
 }
 
 .spot-detail {
@@ -408,8 +415,7 @@ ul.options-list li:hover {
 
 .common-wrapper {
   border: 1px solid silver;
-  /* Testing square edges */
-  border-radius: 0.5em; 
+  border-radius: $global-border-radius; 
 }
 
 .common-detail {
@@ -448,7 +454,7 @@ ul.options-list li:hover {
 
 .business-theme-preview.active {
   border: 1px solid red;
-  border-radius: 0.5em;  
+  border-radius: $global-border-radius;  
 }
 
 /* General classes */
@@ -487,9 +493,9 @@ ul.options-list li:hover {
   padding-bottom: 8px;
   margin-top: 2px;
   margin-bottom: 2px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+  -webkit-border-radius: $global-border-radius;
+  -moz-border-radius: $global-border-radius;
+  border-radius: $global-border-radius;
   color: #08C;
 }
 
