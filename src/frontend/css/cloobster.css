@@ -856,16 +856,17 @@ ul.options-list li:hover {
   font-size: 16px;
   font-weight: bold;
   color: white;
+  z-index: 1;
 }
 
-/* line 774, sass/cloobster.scss */
+/* line 775, sass/cloobster.scss */
 .tile-disabled {
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
-/* line 780, sass/cloobster.scss */
+/* line 781, sass/cloobster.scss */
 .tile-disabled .tile-mask {
   background-color: white;
   opacity: .55;
@@ -873,7 +874,7 @@ ul.options-list li:hover {
   height: 100%;
 }
 
-/* line 787, sass/cloobster.scss */
+/* line 788, sass/cloobster.scss */
 .tile-disabled .tile-text {
   position: absolute;
   top: 40%;
@@ -887,37 +888,37 @@ ul.options-list li:hover {
   -webkit-transform: rotate(30deg);
 }
 
-/* line 800, sass/cloobster.scss */
+/* line 801, sass/cloobster.scss */
 .tile:hover .tile-delete {
   display: block;
 }
 
-/* line 804, sass/cloobster.scss */
+/* line 805, sass/cloobster.scss */
 .tile-config-highlight {
   background-color: yellow;
 }
 
-/* line 808, sass/cloobster.scss */
+/* line 809, sass/cloobster.scss */
 .tile-feedback .tile-icon {
   background-image: url("../img/tiles/feedback.png");
 }
 
-/* line 812, sass/cloobster.scss */
+/* line 813, sass/cloobster.scss */
 .tile-products .tile-icon {
   background-image: url("../img/tiles/menue_bag.png");
 }
 
-/* line 816, sass/cloobster.scss */
+/* line 817, sass/cloobster.scss */
 .tile-infopages .tile-icon {
   background-image: url("../img/tiles/info.png");
 }
 
-/* line 820, sass/cloobster.scss */
+/* line 821, sass/cloobster.scss */
 .tile-actions .tile-icon {
   background-image: url("../img/tiles/vip.png");
 }
 
-/* line 824, sass/cloobster.scss */
+/* line 825, sass/cloobster.scss */
 .smartphone-frame {
   background-image: url("../img/tiles/gn_frame.png");
   width: 100%;
@@ -927,7 +928,7 @@ ul.options-list li:hover {
   background-repeat: no-repeat;
 }
 
-/* line 833, sass/cloobster.scss */
+/* line 834, sass/cloobster.scss */
 .smartphone-content {
   width: 300px;
   height: 464px;
@@ -940,12 +941,12 @@ ul.options-list li:hover {
   box-sizing: border-box;
 }
 
-/* line 845, sass/cloobster.scss */
+/* line 846, sass/cloobster.scss */
 .tile-container-config-highlight {
   border: 2px dashed red !important;
 }
 
-/* line 849, sass/cloobster.scss */
+/* line 850, sass/cloobster.scss */
 .mask {
   top: 0;
   left: 0;
@@ -967,18 +968,18 @@ ul.options-list li:hover {
   height: 464px;
 }
 
-/* line 870, sass/cloobster.scss */
+/* line 871, sass/cloobster.scss */
 .mask > div {
   top: 150px;
   position: relative;
 }
 
-/* line 875, sass/cloobster.scss */
+/* line 876, sass/cloobster.scss */
 .drop-active .mask {
   display: block;
 }
 
-/* line 879, sass/cloobster.scss */
+/* line 880, sass/cloobster.scss */
 .app-help-image {
   height: 500px;
   background-image: url("../img/apphelp.jpg");
@@ -988,7 +989,7 @@ ul.options-list li:hover {
   min-width: 350px;
 }
 
-/* line 888, sass/cloobster.scss */
+/* line 889, sass/cloobster.scss */
 .app-image {
   height: 500px;
   background-image: url("../img/app_screenshot.png");
