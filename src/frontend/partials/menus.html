@@ -204,12 +204,12 @@
 				<div class="data-container-block">
 					<div l="menu.container.hint" class="alert">Don't forget to assign this category to an area afterwards.</div>
 					<div simple-property-editor editor-title="menu.editor.title" editor-property="currentMenu.title" editor-on-save="saveMenu()" editor-placeholder="menus.placeholder.title" editor-required editor-enabled="!currentMenu.isSaving()">
-					<h4 ng-class="{edit: !currentMenu.isSaving(), muted: currentMenu.isSaving()}" tooltip="menus.editor.title.tooltip">
+					<h4 ng-class="{edit: !currentMenu.isSaving(), muted: currentMenu.isSaving()}">
 						<span l="menus.placeholder.title" ng-hide="currentMenu.title" ng-class="{'text-error' : menuInvalid, 'simple-property-placeholder' : !menuInvalid}">Title*</span>
 						{{currentMenu.title}} <i class="icon-edit icon-black"></i></h4>
 					</div>					
 					<div simple-property-editor editor-title="menu.editor.description" editor-property="currentMenu.description" editor-type="textarea" editor-placeholder="menus.placeholder.description" editor-on-save="saveMenu()" editor-enabled="!currentMenu.isSaving()">
-			    		<p ng-class="{edit: !currentMenu.isSaving(), muted: currentMenu.isSaving()}" tooltip="menus.editor.description.tooltip">
+			    		<p ng-class="{edit: !currentMenu.isSaving(), muted: currentMenu.isSaving()}">
 			    			<span l="menus.placeholder.description" ng-hide="currentMenu.description" class="simple-property-placeholder">e.g. always fresh and seasonal*</span>
 			    			{{currentMenu.description}} <i class="icon-edit icon-black"></i>
 			    		</p>
@@ -323,13 +323,13 @@
 		    	
 		    	<div class="data-container-block">
 		    		<div simple-property-editor editor-title="product.editor.name" editor-property="currentProduct.name" editor-on-save="saveProduct()" editor-required editor-placeholder="product.placeholder.name" editor-enabled="!currentProduct.isSaving()">
-			    		<h4 ng-class="{edit: !currentProduct.isSaving(), muted: currentProduct.isSaving()}" tooltip="product.editor.name.tooltip">
+			    		<h4 ng-class="{edit: !currentProduct.isSaving(), muted: currentProduct.isSaving()}">
 			    			<span l="product.placeholder.name" ng-hide="currentProduct.name" ng-class="{'text-error' : productInvalid, 'simple-property-placeholder' : !productInvalid}">Name*</span>
 			    			{{currentProduct.name}} <i class="icon-edit icon-black"></i>
 			    		</h4>
 			    	</div>
 			    	<div simple-property-editor editor-title="product.editor.shortDesc" editor-property="currentProduct.shortDesc" editor-on-save="saveProduct()" editor-type="textarea" editor-placeholder="product.placeholder.shortDesc" editor-enabled="!currentProduct.isSaving()">
-			    		<p ng-class="{edit: !currentProduct.isSaving(), muted: currentProduct.isSaving()}" tooltip="product.editor.shortDesc.tooltip">
+			    		<p ng-class="{edit: !currentProduct.isSaving(), muted: currentProduct.isSaving()}">
 			    			<span l="product.placeholder.shortDesc" ng-hide="currentProduct.shortDesc" class="simple-property-placeholder">Short description*</span>
 			    			{{currentProduct.shortDesc}} <i class="icon-edit icon-black"></i>
 			    		</p>
@@ -341,7 +341,7 @@
 			    		</p>
 			    	</div> -->
 			    	<div richtext-property-editor editor-title="roduct.editor.longDesc" editor-entity="currentProduct" editor-field="longDesc" editor-on-save="saveProduct()" editor-placeholder="product.placeholder.longDesc" editor-enabled="!currentProduct.isSaving()" style="overflow:scroll; max-height:200px;">
-			    		<div ng-class="{edit: !currentProduct.isSaving(), muted: currentProduct.isSaving()}" tooltip="product.editor.longDesc.tooltip">
+			    		<div ng-class="{edit: !currentProduct.isSaving(), muted: currentProduct.isSaving()}">
 							<span l="product.placeholder.longDesc" ng-hide="currentProduct.longDesc" class="simple-property-placeholder">Long description*</span>
 							<div ng-bind-html-unsafe="currentProduct.longDesc">
 							</div> <i class="icon-edit icon-black"></i>
@@ -352,7 +352,7 @@
 			    		</p> -->
 					</div>
 			    	<div simple-property-editor editor-title="product.editor.price" editor-property="currentProduct.price" editor-on-save="saveProduct()" editor-required editor-pattern="/^[0-9]+([.][0-9]+)?$/" editor-pattern-text="product.editor.price.validation" editor-placeholder="product.placeholder.price" editor-enabled="!currentProduct.isSaving()">
-			    		<p ng-class="{edit: !currentProduct.isSaving(), muted: currentProduct.isSaving()}"  tooltip="product.editor.price.tooltip">
+			    		<p ng-class="{edit: !currentProduct.isSaving(), muted: currentProduct.isSaving()}">
 			    			{{currentProduct.price | kcurrency:activeBusiness.currency}} <i class="icon-edit icon-black"></i>
 			    		</p>
 			    	</div>
@@ -495,19 +495,19 @@
 	    		<h4 class="data-container-title" l="choice.container.title">Choice edit</h4>    		
 		    	<div class="data-container-block">
 		    		<div simple-property-editor editor-title="choice.editor.text" editor-property="currentChoice.text" editor-on-save="saveChoice()" editor-placeholder="choice.placeholder.text" editor-required editor-enabled="!currentChoice.isSaving()">
-		    		<h4 ng-class="{edit: !currentChoice.isSaving(), muted: currentChoice.isSaving()}" tooltip="choice.editor.text.tooltip">
+		    		<h4 ng-class="{edit: !currentChoice.isSaving(), muted: currentChoice.isSaving()}">
 		    			<span l="choice.placeholder.text" ng-hide="currentChoice.text" ng-class="{'text-error' : choiceInvalid, 'simple-property-placeholder' : !choiceInvalid}">Choice text*</span>
 		    			{{currentChoice.text}} <i class="icon-edit icon-black"></i>
 		    		</h4>
 		    		</div>
 			    	<div simple-property-editor editor-type="number" editor-title="choice.editor.maxOccurence" editor-property="currentChoice.maxOccurence" editor-on-save="saveChoice()" editor-required editor-validate="value >= currentChoice.minOccurence || value == 0" editor-validate-text="choice.editor.maxOccurence.error" editor-enabled="!currentChoice.isSaving()">
-			    		<p ng-class="{edit: !currentChoice.isSaving(), muted: currentChoice.isSaving()}" tooltip="choice.editor.maxOccurence.tooltip"><span l="menus.choices.field.maxOccurence">Guest has to chose max: {{currentChoice.maxOccurence}}</span> <i class="icon-edit icon-black"></i></p>
+			    		<p ng-class="{edit: !currentChoice.isSaving(), muted: currentChoice.isSaving()}"><span l="menus.choices.field.maxOccurence">Guest has to chose max: {{currentChoice.maxOccurence}}</span> <i class="icon-edit icon-black"></i></p>
 			    	</div>
 			    	<div simple-property-editor editor-type="number" editor-title="choice.editor.minOccurence" editor-property="currentChoice.minOccurence" editor-on-save="saveChoice()" editor-required editor-validate="(currentChoice.maxOccurence == 0) || (value <= currentChoice.maxOccurence)" editor-validate-text="choice.editor.minOccurence.error" editor-enabled="!currentChoice.isSaving()">
-			    		<p ng-class="{edit: !currentChoice.isSaving(), muted: currentChoice.isSaving()}" tooltip="choice.editor.minOccurence.tooltip"><span l="menus.choices.field.minOccurence">Min. selected: {{currentChoice.minOccurence}}</span> <i class="icon-edit icon-black"></i></p>
+			    		<p ng-class="{edit: !currentChoice.isSaving(), muted: currentChoice.isSaving()}"><span l="menus.choices.field.minOccurence">Min. selected: {{currentChoice.minOccurence}}</span> <i class="icon-edit icon-black"></i></p>
 			    	</div>
 			    	<div simple-property-editor editor-title="choice.editor.included" editor-property="currentChoice.included" editor-type="number" editor-on-save="saveChoice()" editor-required editor-enabled="!currentChoice.isSaving()">
-			    		<p ng-class="{edit: !currentChoice.isSaving(), muted: currentChoice.isSaving()}" tooltip="choice.editor.included.tooltip"><span l="menus.choices.field.included">Options included: {{currentChoice.included}}</span> <i class="icon-edit icon-black"></i></p>
+			    		<p ng-class="{edit: !currentChoice.isSaving(), muted: currentChoice.isSaving()}"><span l="menus.choices.field.included">Options included: {{currentChoice.included}}</span> <i class="icon-edit icon-black"></i></p>
 			    	</div>
 			    	<div>
 			    		<label for="choiceOverridePriceSelect" id="choiceOverridePriceLabel"><span l="menus.choices.field.overridePrice.label">Price per selection</span> <i class="icon-question-sign"></i></label>
