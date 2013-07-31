@@ -56,8 +56,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		},
 		//businesses header partial
 		"businesses.headertabs.howto" : {
-			"DE" :  "Los geht's",
-			"EN" : "Howto"
+			"DE" :  "Assistent",
+			"EN" : "Wizard"
 		},
 		"businesses.headertabs.location" : {
 			"DE" :  "Locations",
@@ -1630,6 +1630,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "{{currentSpot.name}} wird gelöscht!<br/>Bereits ausgedruckte Barcodes können nicht wiederverwendet werden!",
 			"EN" : "{{currentSpot.name}} will be deleted!<br/>Barcode cannot be reused!"
 		},
+		"spot.action.testcheckin" : {
+			"DE" :  "App anschauen",
+			"EN" : "App anschauen"
+		},
 		"spots.masscreation.title" : {
 			"DE" :  "Mehrere Spots anlegen",
 			"EN" :  "Create multiple spots"
@@ -2169,8 +2173,16 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "You can start immediately to use the qr code on facebook, flyers and your website."
 		},
 		"appwizard.complete.checkinbtn" : {
-			"DE" :  "(App installiert und diese Seite mit Smartphone geöffnet? Dann direkt einchecken mit dem Button!)",
-			"EN" : "(App installed and on a mobile device? Directly check-in via button!)"
+			"DE" :  "Smartphone Check-in (App muss installiert sein!)",
+			"EN" : "Mobile Device Check-in (App must be installed)"
+		},
+		"appwizard.complete.checkinbtn.desktop" : {
+			"DE" : "Desktop Check-in (für Google Chrome oder Apple Safari!)",
+			"EN" : "Desktop Check-in (for Google Chrome or Apple Safari!)"
+		},
+		"appwizard.complete.checkinbtn.description" : {
+			"DE" :  "Alternativer Check-in mittels Button",
+			"EN" : "Alternative Check-in via button"
 		},
 		"appwizard.continuebutton" : {
 			"DE" :  "App weiter bearbeiten",

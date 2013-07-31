@@ -209,11 +209,24 @@
 					<img ng-show="welcomeSpots[0].qrImageUrl" ng-src="{{welcomeSpots[0].qrImageUrl}}" alt="Welcome Spot Barcode" class=""
 					style= "display: block !important; margin-left: auto; margin-right: auto;"/>
 					<h3 l="appwizard.complete.text2">You can directly start using this qr code.</h3>
-					<a href="https://go.cloobster.com/x/spot/{{welcomeSpots[0].barcode}}" class="cloobster-checkin-button">cloobster Check-in</a>
-					<span> <small l="appwizard.complete.checkinbtn">(App installed and on a mobile device? Directly check-in via button!)</small></span>
-					<script type="text/javascript">
-						!function(f,a,g){var e,b=f.getElementsByTagName(a)[0],c=/^http:/.test(f.location)?"http":"https";if(!f.getElementById(g)){e=f.createElement(a);e.id=g;e.src=c+"://cloobster.com/js/widget.js";b.parentNode.insertBefore(e,b)}}(document,"script","cloobster-widget");
-					</script>	
+					<p l="appwizard.complete.checkinbtn.description">Alternative: CheckIn via Button</p>
+					<p>						
+						<a href="https://go.cloobster.com/x/spot/{{welcomeSpots[0].barcode}}" class="cloobster-checkin-button">cloobster Check-in</a>
+						<span>
+							<small l="appwizard.complete.checkinbtn">Mobile Device CheckIn (App must be installed)</small>
+						</span>
+						<!-- Test CheckIn Button Mobile -->
+						<script type="text/javascript">
+							!function(f,a,g){var e,b=f.getElementsByTagName(a)[0],c=/^http:/.test(f.location)?"http":"https";if(!f.getElementById(g)){e=f.createElement(a);e.id=g;e.src=c+"://cloobster.com/js/widget.js";b.parentNode.insertBefore(e,b)}}(document,"script","cloobster-widget");
+						</script>
+					</p>
+					<p>						
+						<!-- Test CheckIn Button Desktop -->
+						<button class="btn btn-primary" onclick="window.open('/app/#checkin/{{welcomeSpots[0].barcode}}','targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=480,height=800')" ><i class="icon-wrench icon-white"></i><span l="spot.action.testcheckin">Test CheckIn</span></button>
+						<span>						
+							<small l="appwizard.complete.checkinbtn.desktop">(App installed and on a mobile device? Directly check-in via button!)</small>
+						</span>
+					</p>
 				</div>
 				<div class="span4">
 					<img src="../img/app_screenshot.png" alt="cloobster app" width="100%"/>

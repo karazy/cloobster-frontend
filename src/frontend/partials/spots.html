@@ -94,7 +94,7 @@
 			    			<button class="btn btn-danger span4" style="margin-left: 0px !important;" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="!currentArea.active && currentArea.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
 								<!-- Barcode required toggle buttons -->
 							<button class="btn btn-warning span6" type="button"ng-click="currentArea.barcodeRequired = false;saveArea()" ng-show="currentArea.barcodeRequired && currentArea.id"><i class="icon-qrcode icon-white"></i> <span l="areas.editor.barcoderequired.true">Barcode required</span><i class="icon-question-sign icon-white pull-right barcodeRequiredHelp"></i></button>
-			    			<button class="btn span6"type="button" ng-click="currentArea.barcodeRequired = true;saveArea()" ng-show="!currentArea.barcodeRequired && currentArea.id"><i class="icon-qrcode"></i> <span l="areas.editor.barcoderequired.false">No Barcode required</span><i class="icon-question-sign pull-right barcodeRequiredHelp"></i></button>
+			    			<button class="btn span6"type="button" ng-click="currentArea.barcodeRequired = true;saveArea()" ng-show="!currentArea.barcodeRequired && currentArea.id && !currentArea.welcome"><i class="icon-qrcode"></i> <span l="areas.editor.barcoderequired.false">No Barcode required</span><i class="icon-question-sign pull-right barcodeRequiredHelp"></i></button>
 			    			<!-- <p class="span1"><i class="icon-question-sign" id="barcodeRequiredHelp"></i></p> -->
 		    				<!-- Delete area button  -->
 							<button class="btn span2" data-toggle="modal" data-target="#deleteAreaModal" ng-show="!currentArea.welcome"><i class="icon-trash"></i></button>
@@ -256,7 +256,7 @@
 		    		</div>
 	    		<img ng-show="currentSpot.qrImageUrl" ng-src="{{currentSpot.qrImageUrl}}" alt="Spot Barcode"/>
 	    		<p>{{currentSpot.barcode}}</p>
-	    		<p ng-show="currentSpot.master" l="spot.master.description">This is the "master" Spot for this area, it cannot be deleted, unless you delete the Area.</p>
+	    		<p ng-show="currentSpot.master" l="spot.master.description">This is the "master" Spot for this area, it cannot be deleted, unless you delete the Area.</p>	    		
 	    		<div class="row-fluid" ng-show="currentSpot.id && currentSpot.welcome">
     			<!-- code for cloobster widget button, show only for welcome spots -->
 	    			<p><small l="spot.cloobsterwidget">Copy and paste snippet on a website for direct cloobster Check-in at this spot when app is isntalled!</small></p>
@@ -268,24 +268,26 @@
 					</textarea>
 				</div>
 	    		<div class="row-fluid" ng-show="currentSpot.id">	    			
-	    			<button class="btn btn-success span6" type="button" ng-click="toggleSpotActive()" ng-model="currentSpot.active" ng-show="currentSpot.active && currentSpot.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
-		  			<button class="btn btn-danger span6" style="margin-left: 0px !important;" type="button" ng-click="toggleSpotActive()" ng-model="currentSpot.active" ng-show="!currentSpot.active && currentSpot.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
+	    			<button class="btn btn-success span4" type="button" ng-click="toggleSpotActive()" ng-model="currentSpot.active" ng-show="currentSpot.active && currentSpot.id"><i class="icon-ok icon-white"></i> <span l="common.active">Active</span></button>
+		  			<button class="btn btn-danger span4" style="margin-left: 0px !important;" type="button" ng-click="toggleSpotActive()" ng-model="currentSpot.active" ng-show="!currentSpot.active && currentSpot.id"><i class="icon-ban-circle icon-white"></i> <span l="common.inactive">Inactive</span></button>
 
-		    		<button class="btn span6" data-toggle="modal" data-target="#deleteSpotModal" ng-show="!currentSpot.welcome && !currentSpot.master"><i class="icon-trash"></i></button>
+		    		<button class="btn span4" data-toggle="modal" data-target="#deleteSpotModal" ng-show="!currentSpot.welcome && !currentSpot.master"><i class="icon-trash"></i></button>
 		    		<!-- Modal delete dialog. -->
 		    		<div class="modal hide" id="deleteSpotModal">
-						 	<div class="modal-header">
-						    	<button type="button" class="close" data-dismiss="modal">×</button>
-						    	<h3 l="spot.action.delete">Delete Spot</h3>
-							</div>
-							<div class="modal-body alert-error">
-						    	<p><span l="spot.action.delete.text">{{currentSpot.name}} will be deleted!<br/>Already printed barcodes can't be reused afterwards!</span></p>
-						    </div>  
-						  	<div class="modal-footer">
-						  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
-						    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteSpot(currentSpot)" l="common.delete">Delete</button>
-							</div>
+					 	<div class="modal-header">
+					    	<button type="button" class="close" data-dismiss="modal">×</button>
+					    	<h3 l="spot.action.delete">Delete Spot</h3>
 						</div>
+						<div class="modal-body alert-error">
+					    	<p><span l="spot.action.delete.text">{{currentSpot.name}} will be deleted!<br/>Already printed barcodes can't be reused afterwards!</span></p>
+					    </div>  
+					  	<div class="modal-footer">
+					  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
+					    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteSpot(currentSpot)" l="common.delete">Delete</button>
+						</div>
+					</div>
+					<!-- Test CheckIn Button -->
+					<button class="btn btn-primary span4" onclick="window.open('/app/#checkin/{{currentSpot.barcode}}','targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=480,height=800')" ><i class="icon-wrench icon-white"></i><span l="spot.action.testcheckin">Test CheckIn</span></button>
 		    	</div>
 				</div>
 			</div>
