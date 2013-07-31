@@ -80,8 +80,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Assign offers"
 		},
 		"businesses.headertabs.areas" : {
-			"DE" :  "Spots",
-			"EN" : "Spots"
+			"DE" :  "QR Codes",
+			"EN" : "QR Codes"
 		},
 		"businesses.headertabs.infopages" : {
 			"DE" :  "Info-Seiten",
@@ -92,8 +92,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Documents"
 		},
 		"businesses.headertabs.appconfig" : {
-			"DE" : "Look & Feel",
-			"EN" : "Look & Feel"
+			"DE" : "App gestalten",
+			"EN" : "Customize App"
 		},
 		//registration partial
 		"registration.title" : {
@@ -1483,9 +1483,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		//spots partial
 		"areas.description" : {
 			"DE" :  "Für jede \"cloobster location\" können Sie mehrere \"Servicebereiche\" anlegen(z.B. \"Bar\", \"Zimmer\", \"Spa\", \"Konferenzraum\", etc.).<br>"
-			+"Jeder Servicebereich beinhaltet verschiedene Spots (Barcode für den Check-in). Ein Spot repräsentiert einen konkreten Standort (z. B. Zimmer 101).",
+			+"Jeder Servicebereich beinhaltet verschiedene Spots (QR Code für den Check-in). Ein Spot repräsentiert einen konkreten Standort (z. B. Zimmer 101).",
 			"EN" : "For each \"cloobster location\" you can add several \"service areas\" (like \"Bar\", \"Rooms\", \"Spa\", \"Conference Area\", etc.).<br>"+
-				"Each service area has different spots (barcode for check-in). A spot represents a real location (e.g. room 101)."
+				"Each service area has different spots (QR Code for check-in). A spot represents a real location (e.g. room 101)."
 		},
 		"areas.list.title" : {
 			"DE" :  "Servicebereiche",
@@ -2834,7 +2834,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.password.invalid" : {
 			"DE" : "Passwort inkorrekt!",
 			"EN" : "Password invalid!"
-		}
+		},
+		"common.more" : {
+			"DE" :  "Mehr",
+			"EN" : "More"
+		},
 	};
 
 	$provide.value("translation", map);

@@ -57,7 +57,7 @@
 				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId,'')}}" l="businesses.headertabs.locationsettings">Location Settings</a>
 			</li>
 			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/spots',true), 'disabled': businesses.length==0}">
-				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/spots','')}}" l="businesses.headertabs.areas">Service Areas and Spots</a>
+				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/spots','')}}" l="businesses.headertabs.areas">Service Spots</a>
 			</li>
 			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/menus',true), 'disabled': businesses.length==0}">
 				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/menus','')}}" l="businesses.headertabs.categories">Categories and Products/Services</a>
@@ -71,15 +71,25 @@
 			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/appconfig',true), 'disabled': businesses.length==0}">
 				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/appconfig','')}}" l="businesses.headertabs.appconfig">App Config</a>
 			</li>
-			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/reports',true), 'disabled': businesses.length==0}">
-				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/reports','')}}" l="businesses.headertabs.reports">Reports</a>
-			</li>
-			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/documents',true), 'disabled': businesses.length==0}">
-				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/documents','')}}" l="businesses.headertabs.documents">Documents</a>
-			</li>
-			<li ng-class="{'active': isActive('/accounts',true)}">
-				<a href="#/accounts" l="businesses.headertabs.accounts">Accounts</a>
-			</li>
+			 <li class="dropdown">
+			    <a class="dropdown-toggle"
+			       data-toggle="dropdown"
+			       href="#">
+			        <span l="common.more">More</span>
+			        <b class="caret"></b>
+			      </a>
+			    <ul class="dropdown-menu">
+			      	<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/reports',true), 'disabled': businesses.length==0}">
+						<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/reports','')}}" l="businesses.headertabs.reports">Reports</a>
+					</li>
+					<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/documents',true), 'disabled': businesses.length==0}">
+						<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/documents','')}}" l="businesses.headertabs.Documents">Documents</a>
+						</li>
+					<li ng-class="{'active': isActive('/accounts',true)}">
+						<a href="#/accounts" l="businesses.headertabs.accounts">Accounts</a>
+					</li>
+			    </ul>
+			  </li>			
 			<div class="loading-indicator" ng-show="ajaxLoading">
 			</div>
 		</ul>		
