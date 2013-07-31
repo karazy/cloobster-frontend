@@ -72,13 +72,13 @@
 					<!-- <div class=" common-wrapper common-wrapper-detail-list" > -->
 
 						<div simple-property-editor editor-title="areas.editor.name" editor-property="currentArea.name" editor-on-save="saveArea()" editor-max-length="20" editor-required editor-placeholder="areas.placeholder.name" editor-enabled="!currentArea.isSaving()">
-							<h4 ng-class="{edit: !currentArea.isSaving(), muted: currentArea.isSaving()}" tooltip="areas.editor.name.tooltip">
+							<h4 ng-class="{edit: !currentArea.isSaving(), muted: currentArea.isSaving()}">
 							<span l="areas.placeholder.name" ng-hide="currentArea.name" ng-class="{'text-error' : areaInvalid, 'simple-property-placeholder' : !areaInvalid}">e. g. Room service*</span>
 							{{currentArea.name}} <i class="icon-edit icon-black"></i></h4>
 						</div>
 						<div simple-property-editor editor-title="areas.editor.description" editor-property="currentArea.description" editor-on-save="saveArea()" editor-type="textarea" editor-placeholder="areas.placeholder.description"
 						editor-enabled="!currentArea.isSaving()">
-							<p ng-class="{edit: !currentArea.isSaving(), muted: currentArea.isSaving()}" tooltip="areas.editor.description.tooltip">
+							<p ng-class="{edit: !currentArea.isSaving(), muted: currentArea.isSaving()}">
 								<span l="areas.placeholder.description" ng-hide="currentArea.description" class="simple-property-placeholder">Description</span>
 								{{currentArea.description}} <i class="icon-edit icon-black"></i></p>
 						</div>
@@ -244,7 +244,7 @@
 				<h4 class="data-container-title" l="areas.spot.detail.title">Edit Spot</h4>
 				<div class="data-container-block">
 					<div simple-property-editor editor-title="spots.editor.name" editor-property="currentSpot.name" editor-on-save="saveSpot()" editor-required editor-max-length="20" editor-enabled="!currentSpot.isSaving()">
-						<h4 ng-class="{edit: !currentSpot.isSaving(), muted: currentSpot.isSaving()}" tooltip="spots.editor.name.tooltip">
+						<h4 ng-class="{edit: !currentSpot.isSaving(), muted: currentSpot.isSaving()}">
 						<span l="areas.placeholder.name" ng-hide="currentSpot.name" ng-class="{'text-error' : spotInvalid, 'simple-property-placeholder' : !spotInvalid}">Name *</span>
 						{{currentSpot.name}} <i class="icon-edit icon-black"></i></h4>
 					</div>

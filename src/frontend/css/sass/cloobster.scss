@@ -252,7 +252,10 @@ ul.payment-method-list li {
   position: absolute;
   background-color: white;
   padding: 0 5px 0 5px;
-  /*margin-bottom: 10px;*/
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
+  white-space: nowrap;
 }
 
 .data-container-block {
