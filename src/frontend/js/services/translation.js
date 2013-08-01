@@ -2834,7 +2834,7 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.more" : {
 			"DE" :  "Mehr",
 			"EN" : "More"
-		},
+		}
 	};
 
 	$provide.value("translation", map);

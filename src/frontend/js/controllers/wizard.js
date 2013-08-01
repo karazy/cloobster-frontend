@@ -356,7 +356,7 @@ Cloobster.Wizard = function($scope, $http, $location, $resource, loginService, C
 		}
 
 		if(!$scope.spotResource) {
-			$scope.spotResource = Spot.buildResource($rootScope.activeBusinessId);
+			$scope.spotResource = Spot.buildResource(location.id);
 		}
 
 		$scope.welcomeSpots = $scope.spotResource.query({'bid' : location.id, 'welcome' : true});
