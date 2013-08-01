@@ -44,11 +44,13 @@ Cloobster.filters.filter('kcurrency', ['$locale', '$log','config', function($loc
 
 		if(!price && price == null) {
 			return;
-		}		
+		}				
 
 		try {
-			fixedPrice = price.toFixed(2);
-			formattedPrice = fixedPrice.replace(priceRegExp, matcher);
+			if(typeof price == 'number') {
+				fixedPrice = price.toFixed(2);
+				formattedPrice = fixedPrice.replace(priceRegExp, matcher);	
+			}			
 		} catch(e) {
 			$log.log('price formatting failed reason:' + e);
 		}

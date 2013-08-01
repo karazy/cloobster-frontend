@@ -39,7 +39,7 @@
 				<td ng-show="b.trash">{{b.name}} <i class="icon-trash icon-black" tooltip="busineses.business.deleted.tooltip" tooltip-position="right"></i></td>
 				<td ng-hide="b.trash" ng-click="showLocationSettings(b)" style="cursor: pointer;"><strong>{{b.name}}</strong> <span class="label label-important" ng-show="b.basic" l="subscription.basic">Basic</span> <i class="icon-edit pull-right"/></td>
 				<!-- <td ng-hide="b.trash"><a href="#/businesses/{{b.id}}"><i class="icon-edit"/> <span l="businesses.action.show">Edit</span></a></td> -->
-				<td ng-hide="b.trash"><a href="#/businesses/{{b.id}}/spots" l="businesses.action.spots">Service areas</a></td>
+				<td ng-hide="b.trash"><a href="#/businesses/{{b.id}}/spots" l="businesses.headertabs.areas">Service areas</a></td>
 				<td ng-hide="b.trash"><a href="#/businesses/{{b.id}}/menus" l="businesses.action.menus">Menus</a></td>
 				<td ng-hide="b.trash"><a href="#/businesses/{{b.id}}/category_assignment" l="businesses.action.activate">Activate</a></td>
 				<td ng-hide="b.trash"><a href="#/businesses/{{b.id}}/infopages" l="businesses.action.infopages">Infopages</a></td>

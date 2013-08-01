@@ -1,0 +1,263 @@
+<div class="partial-wrapper">
+<div ng-include="'partials/businesses_header.html'">
+</div>
+<h1 l="appwizard.title" ng-hide="wizard.complete">Create your own app presence in 5 simple steps</h1>
+<div class="row-fluid" ng-hide="wizard.complete">
+	<div class="span8">		
+		<div class="data-container-with-title no-border">
+			<div class="data-container-block" style="margin-top:15px;">
+				<form name='wizardForm' novalidate>
+				<div class="step-wrapper">
+					<div class="step-counter">1</div>
+					<div class="step-content">
+						<div class="step-section">
+							<div class="step-title" l="appwizard.step1.title">Whats the name of the location you'll want to use the app with?</div>
+							<div class="step-description" l="appwizard.step1.description">Example: Hotel XYZ</div>
+						</div>
+						 <div class="step-section control-group">
+						 	<!-- ng-class="{error : wizardForm.newLocationName.$invalid && wizardForm.newLocationName.$dirty}" -->
+							<div class="controls controls-row">
+								<input type="text" required ng-model="wizard.newLocationName" name="newLocationName" class="span12">
+				        		<span class="help-inline" ng-show="wizardForm.newLocationName.$dirty && wizardForm.newLocationName.$error.required" l="registration.form.requiredfield">Please provide a value.</span>
+							</div>
+						</div>						
+					</div>
+				</div>			
+				<div class="step-wrapper">
+					<div class="step-counter">2</div>
+					<div class="step-content">
+					<div class="step-title"><div l="appwizard.step2.title">Describe your location</div></div>
+						<div class="step-section control-group">
+							<div class="controls controls-row">
+								<textarea rows="4" class="span12" ng-model="wizard.infopageDescription" name="infopageDescription" required></textarea>
+								<span class="help-inline" ng-show="wizardForm.infopageDescription.$dirty && wizardForm.infopageDescription.$error.required" l="registration.form.requiredfield">Please provide a value.</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="step-wrapper">
+					<div class="step-counter">3</div>
+					<div class="step-content">
+						<div class="step-section row-fluid">
+							<div simple-image-editor="wizard.images.logo" editor-title-key="appwizard.step3.logobutton" editor-image-id="logo" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('logo')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('logo')" editor-no-persist="true" editor-enabled="!wizard.complete && !wizard.saving" class="span6">
+								<div ng-show="wizard.images.logo.url" class="step-grid-image">
+									<img  ng-src="{{wizard.images.logo.url}}=s96" alt="click to edit" />
+									<p  l="business.detail.picture.edit">Click image to edit</p>
+								</div>
+								<button ng-show="!wizard.images.logo" class="btn btn-primary btn-block" l="appwizard.step3.logobutton">Upload logo</button>
+							</div>
+
+							<div simple-image-editor="wizard.images.appheader" editor-title-key="appwizard.step3.mainpicbutton" editor-image-id="appheader" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('appheader')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('appheader')" editor-no-persist="true"
+							editor-crop-text="business.detail.app.header.description" editor-ratio="3:1" editor-enabled="!wizard.complete && !wizard.saving" class="span6">
+								<div ng-show="wizard.images.appheader.url" class="step-grid-image">
+									<img  ng-src="{{wizard.images.appheader.url}}=s96" alt="click to edit" />
+									<p  l="business.detail.picture.edit">Click image to edit</p>
+								</div>
+								<button ng-show="!wizard.images.appheader" class="btn btn-primary btn-block" l="appwizard.step3.mainpicbutton">Upload main picture</button>
+							</div>															
+						</div>
+					</div>
+				</div>
+				<div class="step-wrapper">
+					<div class="step-counter">4</div>
+					<div class="step-content">
+						<div class="step-title">						
+							<div l="appwizard.step4.title">What do you want to offer your customers?
+							</div>
+						</div>
+						<div class="step-section">
+							 <div class="control-group">
+							 	<div class="controls controls-row">
+									<input type="text" class="span8" required l="appwizard.step4.offer1.title" l-attribute="placeholder" ng-model="wizard.offers[0].title" name="offer1Title">
+									<div simple-image-editor="wizard.images.offer1" editor-title-key="fileupload.button.add" editor-image-id="offer1" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('offer1')" editor-image-resource="imageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" editor-on-delete="deleteWizardImage(offer1)" editor-no-persist="true" editor-enabled="!wizard.complete && !wizard.saving">
+											<div ng-show="wizard.images.offer1" class="step-grid-image">
+												<img  ng-src="{{wizard.images.offer1.url}}=s96" alt="click to edit" />
+												<p l="common.image.edit">Click image to edit</p>
+											</div>
+											<button ng-show="!wizard.images.offer1" class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
+									</div>																
+									<div style="clear: both;">
+										<span class="inline-help" ng-show="wizardForm.offer1Title.$dirty && wizardForm.offer1Title.$invalid" l="registration.form.requiredfield">Please provide a value.</span>
+									</div>							
+								</div>
+							</div>
+							 <div class="control-group">
+							 	<div class="controls controls-row">
+									<input type="text" class="span8" ng-model="wizard.offers[0].shortDesc" name="offer1Shortdesc" ng-disabled="!wizard.offers[0].title" required l="appwizard.step4.shortdesc" l-attribute="placeholder" >
+									<input type="text" ng-pattern="/^[0-9]+([.][0-9]+)?$/" class="span4" ng-model="wizard.offers[0].price" name="offer1Price" ng-disabled="!wizard.offers[0].title" required l="appwizard.step4.price" l-attribute="placeholder" >
+									<div style="clear: both;">
+										<span class="inline-help" ng-show="wizardForm.offer1Shortdesc.$dirty && wizardForm.offer1Shortdesc.$invalid" l="registration.form.requiredfield">Please provide a value.</span>
+										<span class="inline-help pull-right" ng-show="wizardForm.offer1Price.$dirty && wizardForm.offer1Price.$error.required" l="registration.form.requiredfield">Please provide a value.</span>
+										<span class="inline-help pull-right" style="max-width: 300px; text-align: right;" ng-show="wizardForm.offer1Price.$dirty && wizardForm.offer1Price.$error.pattern" l="product.editor.price.validation">Please provide a valid price.</span>			
+									</div>	
+								</div>
+							</div>
+						</div>
+						<div class="step-section">
+							 <div class="control-group">
+							 	<div class="controls controls-row">
+									<input type="text" class="span8" l="appwizard.step4.offer2.title" l-attribute="placeholder" ng-model="wizard.offers[1].title" name="offer2Title">
+
+									<div simple-image-editor="wizard.images.offer2" editor-title-key="fileupload.button.add" editor-image-id="offer2" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('offer2')" editor-image-resource="imageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" editor-on-delete="deleteWizardImage(offer2)" editor-no-persist="true" editor-enabled="!wizard.complete && !wizard.saving">
+											<div ng-show="wizard.images.offer2" class="step-grid-image">
+												<img  ng-src="{{wizard.images.offer2.url}}=s96" alt="click to edit" />
+												<p l="common.image.edit">Click image to edit</p>
+											</div>
+											<button ng-show="!wizard.images.offer2" class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
+									</div>
+								</div>
+							</div>
+							 <div class="control-group">
+							 	<div class="controls controls-row">
+									<input type="text" class="span8" ng-model="wizard.offers[1].shortDesc" ng-disabled="!wizard.offers[1].title" l="appwizard.step4.shortdesc" name="offer2Shortdesc" l-attribute="placeholder" >
+									<input type="text" ng-pattern="/^[0-9]+([.][0-9]+)?$/" class="span4" ng-model="wizard.offers[1].price" name="offer2Price" ng-disabled="!wizard.offers[1].title" l="appwizard.step4.price" l-attribute="placeholder" >
+									<div style="clear: both;">
+										<span class="inline-help pull-right" style="max-width: 300px; text-align: right;" ng-show="wizardForm.offer2Price.$dirty && wizardForm.offer2Price.$error.pattern" l="product.editor.price.validation">Please provide a valid price.</span>			
+									</div>	
+								</div>
+							</div>
+						</div>
+						<div class="step-section">
+							 <div class="control-group">
+							 	<div class="controls controls-row">
+									<input type="text" class="span8" l="appwizard.step4.offer3.title" l-attribute="placeholder" ng-model="wizard.offers[2].title" name="offer3Title">
+
+									<div simple-image-editor="wizard.images.offer3" editor-title-key="fileupload.button.add" editor-image-id="offer3" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('offer3')" editor-image-resource="imageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" editor-on-delete="deleteWizardImage(offer3)" editor-no-persist="true" editor-enabled="!wizard.complete && !wizard.saving">
+											<div ng-show="wizard.images.offer3" class="step-grid-image">
+												<img  ng-src="{{wizard.images.offer3.url}}=s96" alt="click to edit" />
+												<p l="common.image.edit">Click image to edit</p>
+											</div>
+											<button ng-show="!wizard.images.offer3" class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
+									</div>
+
+								</div>
+							</div>
+							 <div class="control-group">
+							 	<div class="controls controls-row">
+									<input type="text" class="span8" ng-model="wizard.offers[2].shortDesc" name="offer3ShortDesc" ng-disabled="!wizard.offers[2].title" l="appwizard.step4.shortdesc" l-attribute="placeholder" >
+									<input type="text" ng-pattern="/^[0-9]+([.][0-9]+)?$/" class="span4" ng-model="wizard.offers[2].price" name="offer3Price" ng-disabled="!wizard.offers[2].title" l="appwizard.step4.price" l-attribute="placeholder" >
+									<div style="clear: both;">
+										<span class="inline-help pull-right" style="max-width: 300px; text-align: right;" ng-show="wizardForm.offer3Price.$dirty && wizardForm.offer3Price.$error.pattern" l="product.editor.price.validation">Please provide a valid price.</span>			
+									</div>	
+								</div>
+							</div>
+						</div>		
+					</div>			
+				</div>
+				<div class="step-wrapper">
+					<div class="step-counter">5</div>
+					<div class="step-content">
+					<div class="step-title">
+						<div l="appwizard.step5.title">
+						Link to your facebook page
+						</div>
+					</div>
+					<div class="step-section">
+						<div class="control-group">
+						 	<div class="controls controls-row">
+						 		<input type="text" class="span8" ng-model="wizard.fbUrl">
+
+								<div simple-image-editor="wizard.images.fbwallpost" editor-title-key="business.detail.facebook.wallpost.image" editor-image-id="fbwallpost" editor-on-save="setWizardImage(image)" editor-on-cancel="deleteWizardImage('fbwallpost')"  editor-image-resource="imageResource" editor-on-delete="deleteWizardImage('fbwallpost')" editor-no-persist="true" editor-crop-text="business.detail.facebook.wallpost.image.description"  editor-ratio="4:3" editor-enabled="!wizard.complete && !wizard.saving">
+									<div ng-show="wizard.images.fbwallpost.url" class="step-grid-image">
+										<img  ng-src="{{wizard.images.fbwallpost.url}}=s96" alt="click to edit" />
+										<p  l="business.detail.picture.edit">Click image to edit</p>
+									</div>
+									<button ng-show="!wizard.images.fbwallpost" class="btn btn-primary span4" l="fileupload.button.add">Upload picture</button>
+								</div>
+						 	</div>
+						</div>
+					</div>		
+					</div>
+				</div>
+				<div class="step-wrapper">
+					<div class="step-content">
+						<div class="step-section">
+							<div class="text-error" ng-show="wizardForm.newLocationName.$dirty && wizardForm.newLocationName.$invalid" l="validation.field.required">Please fill out all required fields</div>
+							<button type="submit" ng-click="generateApp()" class="btn btn-primary span4" style="margin-left:0; float: none;" ng-disabled="wizard.complete || wizard.saving"><i class="icon-ok icon-white"></i> <span l="appwizard.generateapp">Generate App</span></button>
+
+							<button type="button" ng-click="fillWithDummyData()" class="btn btn-primary span4" style="margin-left:0; margin-top: 10px; clear: both; float: none; display: none;"><i class="icon-font icon-white"></i> Dummy Data</span></button>
+						</div>
+						<div class="row-fluid" style="clear: both; margin-top: 10px;">
+							<div class="span12" ng-show="wizard.saving && !wizard.complete">
+								<div class="progress progress-striped active">
+						  			<div class="bar" style="width: 0%;" id="wizardProgressBar"></div>
+								</div>
+								<h4 l="appwizard.saving">Creating app...</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div style="clear: both;"></div>
+				</form>
+			</div>			
+		</div>
+	</div>		
+	<div class="span4">
+		<div class="data-container-with-title no-border">
+			<div class="app-help-image"></div>
+		</div>
+	</div>	
+</div>
+<div class="row-fluid" ng-show="wizard.complete">
+	<div class="span2"></div>
+	<div class="span8">	
+		<div class="hero-unit">			
+			<h3 l="appwizard.complete.text1">Your app is ready!</h3>
+			<div class="row-fluid">
+				<div class="span8">
+					<img ng-show="welcomeSpots[0].qrImageUrl" ng-src="{{welcomeSpots[0].qrImageUrl}}" alt="Welcome Spot Barcode" class=""
+					style= "display: block !important; margin-left: auto; margin-right: auto;"/>
+					<h3 l="appwizard.complete.text2">You can directly start using this qr code.</h3>
+					<p l="appwizard.complete.checkinbtn.description">Alternative: CheckIn via Button</p>
+					<p>						
+						<a href="https://go.cloobster.com/x/spot/{{welcomeSpots[0].barcode}}" class="cloobster-checkin-button">cloobster Check-in</a>
+						<span>
+							<small l="appwizard.complete.checkinbtn">Mobile Device CheckIn (App must be installed)</small>
+						</span>
+						<!-- Test CheckIn Button Mobile -->
+						<script type="text/javascript">
+							!function(f,a,g){var e,b=f.getElementsByTagName(a)[0],c=/^http:/.test(f.location)?"http":"https";if(!f.getElementById(g)){e=f.createElement(a);e.id=g;e.src=c+"://cloobster.com/js/widget.js";b.parentNode.insertBefore(e,b)}}(document,"script","cloobster-widget");
+						</script>
+					</p>
+					<p>						
+						<!-- Test CheckIn Button Desktop -->
+						<button class="btn btn-primary" onclick="window.open('/app/#checkin/{{welcomeSpots[0].barcode}}','targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=480,height=800')" ><i class="icon-wrench icon-white"></i><span l="spot.action.testcheckin">Test CheckIn</span></button>
+						<span>						
+							<small l="appwizard.complete.checkinbtn.desktop">(App installed and on a mobile device? Directly check-in via button!)</small>
+						</span>
+					</p>
+				</div>
+				<div class="span4">
+					<img src="../img/app_screenshot.png" alt="cloobster app" width="100%"/>
+				</div>
+			</div>
+			<div>
+				<button ng-click="showLocationDetails()" l="appwizard.continuebutton" class="btn btn-primary btn-large">Continue editing</button>
+			</div>
+			
+		</div>
+	</div>
+	<div class="span2"></div>
+</div>
+</div>
+
+<div ng-controller="Cloobster.InfoPage">
+</div>
+<div ng-controller="Cloobster.Business">
+</div>
+
+<!-- Warn modal if user wants to leave -->
+<!-- <div class="modal hide fade" id="wizardQuitModal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 l="appwizard.quit.title">Changes will be lost!</h3>
+  </div>
+  <div class="modal-body">
+    <p l="appwizard.quit.message">Your data will be lost if you leave the wizard!</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" l="common.cancel" data-dismiss="modal">Cancel</a>
+    <a href="#" class="btn btn-danger" l="common.ok" ng-click="switchTab()">Ok</a>
+  </div>
+</div> -->

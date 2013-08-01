@@ -44,8 +44,11 @@
 <div class="row-fluid">
 	<div class="span12">
 		<ul class="nav nav-tabs">
-			<li ng-class="{'active': isActive('/howto',true)}">
+			<!-- <li ng-class="{'active': isActive('/howto',true)}">
 				<a href="#/howto" l="businesses.headertabs.howto" style="background-color: rgba(223, 107, 32, .5); color: white;" ng-class="'active-howto-tab'">Howto</a>
+			</li> -->
+			<li ng-class="{'active': isActive('/wizard',true)}">
+				<a href="#/wizard" l="businesses.headertabs.howto" style="background-color: rgba(223, 107, 32, .5); color: white;" ng-class="'active-howto-tab'">Wizard</a>
 			</li>
 			<li ng-class="{'active': isActive('/businesses',true)}">
 				<a href="#/businesses" l="businesses.headertabs.locations">Locations</a>
@@ -54,10 +57,10 @@
 				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId,'')}}" l="businesses.headertabs.locationsettings">Location Settings</a>
 			</li>
 			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/spots',true), 'disabled': businesses.length==0}">
-				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/spots','')}}" l="businesses.headertabs.areas">Service Areas and Spots</a>
+				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/spots','')}}" l="businesses.headertabs.areas">QR Codes</a>
 			</li>
 			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/menus',true), 'disabled': businesses.length==0}">
-				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/menus','')}}" l="businesses.headertabs.categories">Categories and Products/Services</a>
+				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/menus','')}}" l="businesses.headertabs.categories">Offers</a>
 			</li>
 			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/category_assignment',true), 'disabled': businesses.length==0}">
 				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/category_assignment','')}}" l="businesses.headertabs.activation">Assign categories</a>
@@ -68,17 +71,28 @@
 			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/appconfig',true), 'disabled': businesses.length==0}">
 				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/appconfig','')}}" l="businesses.headertabs.appconfig">App Config</a>
 			</li>
-			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/reports',true), 'disabled': businesses.length==0}">
-				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/reports','')}}" l="businesses.headertabs.reports">Reports</a>
+			 <li class="dropdown">
+			    <a class="dropdown-toggle"
+			       data-toggle="dropdown"
+			       href="#">
+			        <span l="common.more">More</span>
+			        <b class="caret"></b>
+			      </a>
+			    <ul class="dropdown-menu">
+			      	<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/reports',true), 'disabled': businesses.length==0}">
+						<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/reports','')}}" l="businesses.headertabs.reports">Reports</a>
+					</li>
+					<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/documents',true), 'disabled': businesses.length==0}">
+						<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/documents','')}}" l="businesses.headertabs.Documents">Documents</a>
+						</li>
+					<li ng-class="{'active': isActive('/accounts',true)}">
+						<a href="#/accounts" l="businesses.headertabs.accounts">Accounts</a>
+					</li>
+			    </ul>
+			  </li>	
+			  <li>
+				<div class="loading-indicator" ng-show="ajaxLoading"></div>
 			</li>
-			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/documents',true), 'disabled': businesses.length==0}">
-				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/documents','')}}" l="businesses.headertabs.documents">Documents</a>
-			</li>
-			<li ng-class="{'active': isActive('/accounts',true)}">
-				<a href="#/accounts" l="businesses.headertabs.accounts">Accounts</a>
-			</li>
-			<div class="loading-indicator" ng-show="ajaxLoading">
-			</div>
 		</ul>		
 	</div>	
 </div>

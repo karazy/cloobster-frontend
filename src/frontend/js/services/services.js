@@ -664,7 +664,8 @@ Cloobster.services.factory('upload', ['$window','$http','$q','$rootScope', '$log
     		done: function (e, data) {
     			//data properties: name, blobKey, url
     			var images = data.result;
-    			//create logo resource object
+    			// Set blobkey and url after upload success
+    			//TODO check this code. May be useless
     			resource.blobKey = images[0].blobKey;
     			resource.url = images[0].url;
 
@@ -1077,5 +1078,83 @@ Cloobster.services.factory('listUtil', ['$filter','$log', function($filter,$log)
 
 	return listFunctions;
 }]);
+
+/**
+* @constructor
+* Factory function for 'randomUtil' service.
+* Contains convienient to generate random strings for testing purpose.
+* 
+* 	@author Frederik Reifschneider
+*
+*/
+Cloobster.services.factory('randomUtil', function() {
+	var randomFns = {
+		/**
+		* Generate a random string of given length.
+		* String consists of letters and numbers.
+		*/
+		genRndString: function(length) {
+			var _length = length || 10,
+				_text = "",
+				possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+	    	for( var i=0; i < length; i++ ) {
+	    		_text += possible.charAt(Math.floor(Math.random() * possible.length));	
+	    	}
+	        
+	    	return _text;
+		},
+		/**
+		* Generates a random integer for given range.
+		* @return 
+		*	a random integer 
+		*/
+		genRndNumber: function(min, max) {
+			var _number = Math.random() * (max - min) + min;
+
+			return Math.floor(_number);
+		}
+	}
+
+	return randomFns;
+});
+
+
+/**
+* @constructor
+* Factory function for 'utilFn' service.
+* Contains convienient methods for everyday use. ;)
+* 
+* 	@author Frederik Reifschneider
+*
+*/
+Cloobster.services.factory('utilFn', ['$log', function($log) {
+	var utilFns = {
+		dumpObject: function(obj, description) {
+			if(!obj) {
+  				return;
+	  		}
+
+	  		if(description) {
+	  			$log.log(description);
+	  		} else {
+	  			$log.log('dumpObject');	
+	  		}	  		
+
+	  		try {
+		  		for (var key in obj) {
+				  if (obj.hasOwnProperty(key)) {
+				  	$log.log('### ' + key + ' -> ' + obj[key]);
+				  }
+				}
+	  		} catch(e) {
+	  			$log.log('dumpObject: failed to dump object ' + e);
+	  		}
+		}
+	}
+
+	return utilFns;
+}]);
+
 
 

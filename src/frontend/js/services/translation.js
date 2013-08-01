@@ -18,9 +18,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Logout",
 			"EN" : "Logout"
 		},
-		"nav.login" : {
-			"DE:" : "Login",
-			"EN": "Login"
+		"login.title" : {
+			"DE" : "Login für Geschäftskunden",
+			"EN": "Login für corporate customers"
 		},
 		"nav.restaurants" : {
 			"DE" : "Administration",
@@ -46,10 +46,18 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Benutzerkonten",
 			"EN" : "User accounts"
 		},
+		"home.signup" : {
+			"DE" :  "Zur Registrierung!",
+			"EN" : "Sign up!"
+		},
+		"home.notregistered" : {
+			"DE" :  "In 5 Schritten Ihre eigene App Präsenz gestalten!<br>Jetzt registrieren und 30 Tage kostenfrei und unverbindlich ausprobieren.",
+			"EN" : "Create your app in 5 simple steps.<br/>Register now and get your first month for free."
+		},
 		//businesses header partial
 		"businesses.headertabs.howto" : {
-			"DE" :  "Los geht's",
-			"EN" : "Howto"
+			"DE" :  "Assistent",
+			"EN" : "Wizard"
 		},
 		"businesses.headertabs.location" : {
 			"DE" :  "Locations",
@@ -72,8 +80,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Assign offers"
 		},
 		"businesses.headertabs.areas" : {
-			"DE" :  "Spots",
-			"EN" : "Spots"
+			"DE" :  "QR Codes",
+			"EN" : "QR Codes"
 		},
 		"businesses.headertabs.infopages" : {
 			"DE" :  "Info-Seiten",
@@ -84,8 +92,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Documents"
 		},
 		"businesses.headertabs.appconfig" : {
-			"DE" : "Look & Feel",
-			"EN" : "Look & Feel"
+			"DE" : "App gestalten",
+			"EN" : "Customize App"
 		},
 		//registration partial
 		"registration.title" : {
@@ -340,8 +348,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "You have no current locations. You need at least one location (hotel, restaurant) to use cloobster."
 		},
 		"businesses.description" : {
-			"DE" :  "Hier können Sie Ihre unterschiedlichen Locations (Hotels, Restaurants) verwalten und für cloobster vorbereiten.",
-			"EN" :  "You can add, edit, or delete your locations (hotels, restaurants) here."
+			"DE" :  "Hier können Sie Ihre unterschiedlichen Locations verwalten und für cloobster vorbereiten.",
+			"EN" :  "You can add, edit, or delete your locations here."
 		},
 		"businesses.add" : {
 			"DE" : "Location hinzufügen",
@@ -354,10 +362,6 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"businesses.action.show" : {
 			"DE" : "Einstellungen",
 			"EN" : "Settings"
-		},
-		"businesses.action.spots" : {
-			"DE" : "Spots",
-			"EN" : "Spots"
 		},
 		"businesses.action.menus" : {
 			"DE" : "Angebote",
@@ -380,8 +384,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Delete location"
 		},
 		"businesses.action.activate" : {
-			"DE" :  "Aktivieren",
-			"EN" : "Activate"
+			"DE" :  "Zuweisen",
+			"EN" : "Assign"
 		},
 		"businesses.form.name" : {
 			"DE" : "Name*",
@@ -1475,9 +1479,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		//spots partial
 		"areas.description" : {
 			"DE" :  "Für jede \"cloobster location\" können Sie mehrere \"Servicebereiche\" anlegen(z.B. \"Bar\", \"Zimmer\", \"Spa\", \"Konferenzraum\", etc.).<br>"
-			+"Jeder Servicebereich beinhaltet verschiedene Spots (Barcode für den Check-in). Ein Spot repräsentiert einen konkreten Standort (z. B. Zimmer 101).",
+			+"Jeder Servicebereich beinhaltet verschiedene Spots (QR Code für den Check-in). Ein Spot repräsentiert einen konkreten Standort (z. B. Zimmer 101).",
 			"EN" : "For each \"cloobster location\" you can add several \"service areas\" (like \"Bar\", \"Rooms\", \"Spa\", \"Conference Area\", etc.).<br>"+
-				"Each service area has different spots (barcode for check-in). A spot represents a real location (e.g. room 101)."
+				"Each service area has different spots (QR Code for check-in). A spot represents a real location (e.g. room 101)."
 		},
 		"areas.list.title" : {
 			"DE" :  "Servicebereiche",
@@ -1621,6 +1625,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"spot.action.delete.text" : {
 			"DE" : "{{currentSpot.name}} wird gelöscht!<br/>Bereits ausgedruckte Barcodes können nicht wiederverwendet werden!",
 			"EN" : "{{currentSpot.name}} will be deleted!<br/>Barcode cannot be reused!"
+		},
+		"spot.action.testcheckin" : {
+			"DE" :  "App anschauen",
+			"EN" : "App anschauen"
 		},
 		"spots.masscreation.title" : {
 			"DE" :  "Mehrere Spots anlegen",
@@ -2091,6 +2099,103 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Wählen oder erstellen Sie eine Location bevor Sie mit Schritt 2-4 fortfahren.",
 			"EN" : "Choose or create a location before proceeding with step 2-4."
 		},
+		//wizard partial
+		"appwizard.title" : {
+			"DE" :  "Gestalten Sie Ihre App Präsenz in 5 Schritten",
+			"EN" : "Create your own app presence in 5 simple steps"
+		},
+		"appwizard.step1.title" : {
+			"DE" :  "Wie soll die Location heißen, in der Sie die App einsetzen werden?",
+			"EN" : "Whats the name of the location you'll want to use the app with?"
+		},
+		"appwizard.step1.description" : {
+			"DE" :  "Beispiel: Hotel Donaublick, Zum Grünen Baum, Bäcker Müller...",
+			"EN" : "Example: Hotel Mountain View, Restaurant Big Burger, Bakery Cronut..."
+		},
+		"appwizard.step2.title" : {
+			"DE" :  "Beschreiben Sie die Location",
+			"EN" : "Describe your Location"
+		},
+		"appwizard.step3.logobutton" : {
+			"DE" :  "Logo auswählen",
+			"EN" : "Upload logo"
+		},
+		"appwizard.step3.mainpicbutton" : {
+			"DE" :  "Hauptbild auswählen",
+			"EN" : "Upload main picture"
+		},
+		"appwizard.step5.title" : {
+			"DE" :  "Wie ist der Link zu Ihrer Facebookseite?",
+			"EN" : "Link to your facebook page"
+		},
+		"appwizard.step4.title" : {
+			"DE" :  "Was möchten Sie Ihren Kunden anbieten?",
+			"EN" : "What do you want to offer your customers?"
+		},
+		"appwizard.step4.offer1.title" : {
+			"DE" :  "Titel Angebot 1",
+			"EN" : "Title offer 1"
+		},
+		"appwizard.step4.offer2.title" : {
+			"DE" :  "Titel Angebot 2",
+			"EN" : "Title offer 2"
+		},
+		"appwizard.step4.offer3.title" : {
+			"DE" :  "Titel Angebot 3",
+			"EN" : "Title offer 4"
+		},
+		"appwizard.step4.shortdesc" : {
+			"DE" :  "Kurzbeschreibung",
+			"EN" : "Short description"
+		},
+		"appwizard.step4.price" : {
+			"DE" :  "Preis",
+			"EN" : "Price"
+		},
+		"appwizard.generateapp" : {
+			"DE" :  "App jetzt generieren",
+			"EN" : "Generate App"
+		},
+		"appwizard.infopage.title" : {
+			"DE" :  "Über uns",
+			"EN" : "About us"
+		},
+		"appwizard.complete.text1" : {
+			"DE" :  "Ihre App wurde generiert. Scannen Sie mit cloobster den QR-Code, um Ihre App zu sehen. Falls die cloobster App noch nicht installiert ist, einfach herunterladen oder QR-Code einmalig scannen (z.B. mit Barcoo).",
+			"EN" : "Your App has been generated. Scan qr code with cloobster to see your app. If you don't have cloobster app installed, just download or scan qr code once (e.g. with Barcoo)."
+		},
+		"appwizard.complete.text2" : {
+			"DE" : "Den QR Code können Sie übrigens schon jetzt benutzen und auf Flyer, Aufsteller, Facebook, Webseite veröﬀentlichen.",
+			"EN" : "You can start immediately to use the qr code on facebook, flyers and your website."
+		},
+		"appwizard.complete.checkinbtn" : {
+			"DE" :  "Smartphone Check-in (App muss installiert sein!)",
+			"EN" : "Mobile Device Check-in (App must be installed)"
+		},
+		"appwizard.complete.checkinbtn.desktop" : {
+			"DE" : "Desktop Check-in (für Google Chrome oder Apple Safari!)",
+			"EN" : "Desktop Check-in (for Google Chrome or Apple Safari!)"
+		},
+		"appwizard.complete.checkinbtn.description" : {
+			"DE" :  "Alternativer Check-in mittels Button",
+			"EN" : "Alternative Check-in via button"
+		},
+		"appwizard.continuebutton" : {
+			"DE" :  "App weiter bearbeiten",
+			"EN" : "Continue editing"
+		},
+		"appwizard.quit.title" : {
+			"DE" :  "Änderungen gehen verloren!",
+			"EN" : "Changes will be lost!"
+		},
+		"appwizard.quit.message" : {
+			"DE" :  "Wenn Sie diesen Bereich verlassen, gehen die eingetragenen Daten verloren.",
+			"EN" : "Your data entries will be lost when you leave this area."
+		},
+		"appwizard.saving" : {
+			"DE" :  "Erstelle App...",
+			"EN" : "Creating App..."
+		},
 		//report partial
 		"reports.description" : {
 			"DE" :  "Hier können Sie die wichtigsten Kennzahlen (KPI) anschauen. Wählen Sie zunächst welche Kennzahl Sie anschauen möchten<br/>"+
@@ -2534,6 +2639,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Deaktiviert",
 			"EN" : "Disabled"
 		},
+		"common.create" : {
+			"DE" :  "Anlegen",
+			"EN" : "Create"
+		},
 		//breadcrumb
 		"breadcrumb.home" : {
 			"DE" : "Home",
@@ -2721,7 +2830,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"common.password.invalid" : {
 			"DE" : "Passwort inkorrekt!",
 			"EN" : "Password invalid!"
-		}
+		},
+		"common.more" : {
+			"DE" :  "Mehr",
+			"EN" : "More"
+		},
 	};
 
 	$provide.value("translation", map);

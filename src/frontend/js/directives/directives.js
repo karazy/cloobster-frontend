@@ -26,7 +26,11 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 			editorMinWidth: '@',
 			editorMinHeight: '@',
 			simpleImageEditor: '=',
-			editorEnabled: '='
+			editorEnabled: '=',
+			//if true, only uploads the image to blobstore but won't save the image resource
+			//this may be useful if you have to upload an image before the entity it will be
+			//assigned to exists
+			editorNoPersist: '='
 		},
 		compile: function(element, attrs, transclude) {
 			var html = '<div class="toggler" ng-transclude></div>'+
@@ -161,6 +165,8 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 							activeImage = null;
 
 						if(success) {
+									//TODO what is the purpose here?
+									// Maybe not necessary to create new resource object?
 			        		activeImage = new imageResource({
 			    				id: scope.editorImageId,
 			    				blobKey: imageResource.blobKey,
@@ -291,21 +297,31 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 		        	function saveImageAndClose() {
 		        		var activeImage = scope.activeImage;		        		
 		        		scope.fileSaving = true;
-		        		activeImage.$save(
-		        			// Success
-		        			function() {
-		        				scope.fileSaving = false;
-		        				scope.barStyle.width = '100%';
-		        				scope.editorOnSave({ "image" : activeImage});
-				        		dialog.modal('hide');
-									},
-									 // Error
-		        			function() {
-										deleteActiveUpload();
-										resetScope();
-										scope.error = true;
-										scope.errorMessage = langService.translate("fileupload.save.error");
-									});
+		        		//save image to assigned object
+		        		if(!scope.editorNoPersist) {
+							activeImage.$save(
+				    			// Success
+				    			function() {
+				    				scope.fileSaving = false;
+				    				scope.barStyle.width = '100%';
+				    				scope.editorOnSave({ "image" : activeImage});
+					        		dialog.modal('hide');
+								},
+								// Error
+				    			function() {
+									deleteActiveUpload();
+									resetScope();
+									scope.error = true;
+									scope.errorMessage = langService.translate("fileupload.save.error");
+							});
+		        		} else {
+		        			//this is just an image upload without persisting information in datastore		        			
+		        			scope.fileSaving = false;
+		    				scope.barStyle.width = '100%';
+		    				scope.editorOnSave({ "image" : activeImage});
+		    				dialog.modal('hide');
+		        		}
+		        		
 		        	};
 
 		        	/*

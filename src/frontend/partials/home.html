@@ -1,25 +1,38 @@
 <div class="hero-unit">
-	<img src="../home/img/Logo_cloobster_gross.png"></img>
-	<div class="signup-greeting" ng-hide="loggedIn">
-		<p>because they are guest<br/>
-		and they are mobile</p>
-		<p>
-			<a href="#/registration" class="btn btn-primary btn-large">
-				Sign up with your business!
-			</a>	
-		</p>
+	<a href="http://www.cloobster.com" target="_blank">
+		<img src="../home/img/Logo_cloobster_gross.png" alt="cloobster logo"></img>
+	</a>
+	<div ng-hide="loggedIn">
+		<div class="row-fluid">
+			<p class="span6" l="home.notregistered" style="max-width: 410px;">Not registered yet?</p>
+			<p class="span6">
+				<a href="#/registration" class="btn btn-primary btn-large" l="home.signup">
+					Sign up with your business!
+				</a>	
+			</p>
+		</div>
 	</div>
 	<hr>
-	<div class="login-greeting" ng-hide="loggedIn">
-		<h2 l="nav.login">Management Login</h2>
-	    <div class="row-fluid" ng-include src="'partials/login_form.html'"></div>
+	<div class="row-fluid">
+		<div class="span6">
+			<div ng-hide="loggedIn">
+				<!-- <h3 l="login.title">Management Login</h3> -->
+		    	<div ng-include src="'partials/login_form.html'"></div>
+			</div>
+			<div ng-show="loggedIn">
+				<h2>Welcome {{getAccount().name}}</h2>
+				<p>
+					Do you want to <a href="#/profile">view your profile.</a><br>
+					Or maybe <a href="#/businesses">manage your locations?</a>
+				</p>
+				<p>
+					<button class="btn" ng-click="logout()">Logout</button>
+				</p>
+			</div>	
+		</div>
+		<div class="span4">
+			<div class="app-image" style="height: 300px;"></div>
+		</div>
 	</div>
-	<div class="login-greeting" ng-show="loggedIn">
-		<h2>Welcome {{getAccount().name}}</h2>
-		<p>
-			Do you want to <a href="#/profile">view your profile.</a><br>
-			Or maybe <a href="#/businesses">manage your locations?</a>
-		</p>
-		<p><button class="btn" ng-click="logout()">Logout</button></p>
-	</div>	
+
 </div>

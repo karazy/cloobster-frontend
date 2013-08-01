@@ -10,8 +10,13 @@
 * 	View and manage profiles.
 * 	@constructor
 */
-Cloobster.Navigation = function($scope, $location, loginService, Company,$routeParams,handleError,Business,$route,$log, $rootScope, Spot) {
+Cloobster.Navigation = function($scope, $location, loginService, Company,$routeParams,handleError,Business,$route,$log, $rootScope, Spot, $injector, InfoPage) {
 	var businessResource = null;
+
+	/* Holds data of wizard. */
+	$scope.wizard = {
+		offers : [{}, {}, {}]
+	};
 
 	$scope.cond = function(expression, trueValue, falseValue) {
 		return (expression ? trueValue : falseValue);
@@ -149,18 +154,19 @@ Cloobster.Navigation = function($scope, $location, loginService, Company,$routeP
 
 	/**
 	* @private
-	*	If no locations exist redirect to howto page.
+	*	If no locations exist redirect to wizard page.
 	*/
 	function checkBusinessesCount() {
 		if($scope.businesses && $scope.businesses.length == 0) {
-			$location.url("/howto");
+			//formerly howto
+			$location.url("/wizard");
 		}
 	}
 
-	// var howtostep = $location.search('howto');
 	if($routeParams['howto']) {
 		$scope.howtoMode = true;
 		$scope.howtoStep = $routeParams['howto'];
 	}
+
 };
-Cloobster.Navigation.$inject = ['$scope', '$location', 'login', 'Company','$routeParams','errorHandler','Business','$route','$log','$rootScope', 'Spot'];
+Cloobster.Navigation.$inject = ['$scope', '$location', 'login', 'Company','$routeParams','errorHandler','Business','$route','$log','$rootScope', 'Spot', '$injector', 'InfoPage'];
