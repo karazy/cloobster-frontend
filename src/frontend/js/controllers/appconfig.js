@@ -324,7 +324,10 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 		$scope.currentTile.entityIds = [];
 		angular.forEach(itemList, function(item){
 			if(item.checked) {
-				$scope.currentTile.entityIds.push(item.id);
+				//for products we only use active 
+				if(!item.hasOwnProperty('active') || item.active === true) {
+					$scope.currentTile.entityIds.push(item.id);	
+				}
 			}
 		});
 
