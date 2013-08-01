@@ -527,8 +527,8 @@ ul.options-list li:hover {
   background-image: url("../img/ajax-loader.gif");
   background-size: auto;
   background-repeat: no-repeat;
-  position: absolute;
-  right: 15px;
+  /*position: absolute;
+  right: 15px;*/
 }
 
 /* line 475, sass/cloobster.scss */
