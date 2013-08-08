@@ -20,6 +20,11 @@ Cloobster.Externals = function($scope, lang) {
 			name: lang.translate('externals.de.ztix.name'),
 			template: baseFolder + 'de_ztix_config.html',
 			configuration: 'de.ztix'
+		},
+		{
+			name: lang.translate('externals.de.panoramafotobuch.name'),
+			template: baseFolder + 'de_ztix_config.html',
+			configuration: 'de.panoramafotobuch'
 		}
 	]
 

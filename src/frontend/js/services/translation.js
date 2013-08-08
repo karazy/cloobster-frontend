@@ -2738,6 +2738,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Ztix",
 			"EN" : "Ztix"
 		},
+		"externals.de.panoramafotobuch.name" : {
+			"DE" :  "Panorama Fotobuch",
+			"EN" : "Panorama Photobook"
+		},
 		//login_form partial
 		"login.message" : {
 			"DE" : "Zugang mit Ihrem Geschäftskundenkonto.",
