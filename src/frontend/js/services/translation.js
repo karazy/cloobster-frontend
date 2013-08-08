@@ -2733,6 +2733,11 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Bitte eine gültige E-Mail-Adresse eingeben.",
 			"EN" : "Please enter a valid email."
 		},
+		//externals partial
+		"externals.de.ztix.name" : {
+			"DE" :  "Ztix",
+			"EN" : "Ztix"
+		},
 		//login_form partial
 		"login.message" : {
 			"DE" : "Zugang mit Ihrem Geschäftskundenkonto.",
