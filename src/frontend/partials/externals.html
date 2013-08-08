@@ -11,7 +11,7 @@
 		<div class="data-container-with-title">
 			<h4 class="data-container-title" externals.list.title>External Partner</h4>
 			<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable">
-		        <li ng-repeat="ext in externals | orderBy:['name'] " ng-class="{active: currentExternal.configuration == ext.configuration}">	        	
+		        <li ng-repeat="ext in externals | orderBy:['name'] " ng-class="{active: currentExternal.id == ext.id}">	        	
 		        	<a ng-click="loadExternal(ext)">{{ext.name}}</a>			        	
 		        </li>
 		    </ul>
@@ -20,10 +20,9 @@
 	<div class="span9" ng-show="currentExternal">
 		<div class="data-container-with-title">
 			<h4 class="data-container-title" l="externals.title">External Partner configuration</h4>
-			<div>
-
+			<div class="data-container-block">
+				<div ng-include="currentExternal.template"></div>
 			</div>
-			<div ng-include="'partials/externals/de_ztix_config.html'"></div>
 		</div>
 	</div>
 	<div class="span9" ng-hide="currentExternal">

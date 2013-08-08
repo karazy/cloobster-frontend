@@ -1,9 +1,13 @@
 <!-- Configuration for ztix -->
 <div class="row-fluid">
 	<div class="span12">
-		<form class="form-inline">
-			<label for="deZtixHost" l="externa.de.ztix.host">Host</label>
-			<input type="text" id="deZtixHost">
-		</form>
+		<p>Description</p>
+		<p>Add Logo and URL</p>
+		<a href="http://www.ztix.de" target="_blank">ztix</a>
+		<div simple-property-editor editor-title="externals.de.ztix.editor.host" editor-property="currentConfiguration.configMap.hosts" editor-on-save="saveConfiguration()" editor-max-length="20" editor-required editor-placeholder="externals.de.ztix.editor.host.placeholder">
+			<h4 ng-class="{edit: !currentArea.isSaving(), muted: currentArea.isSaving()}">
+			<span l="externals.de.ztix.editor.host.placeholder">Host IDs</span>
+			{{currentConfiguration.configMap.hosts}} <i class="icon-edit icon-black"></i></h4>
+		</div>
 	</div>
 </div>

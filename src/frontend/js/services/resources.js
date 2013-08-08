@@ -741,3 +741,50 @@ angular.module('Cloobster.services').factory('DashboardItem', ['cloobsterResourc
 	return DashboardItem;
 
 }]);
+
+
+/**
+* @constructor
+* Factory function that creates the 'LocationConfiguration' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Frederik Reifschneider
+*/
+angular.module('Cloobster.services').factory('LocationConfiguration', ['cloobsterResource', function($resource) {
+
+	/**
+	*	@name Cloobster.services.LocationConfiguration
+	*	
+	*/
+	var LocationConfiguration = {
+
+		buildResource: function(businessId) {
+			return $resource('/b/businesses/:bid/configurations/:name',
+				//params
+				{
+					'name' : '@name',
+					'bid' : businessId
+				},
+				//Custom actions can be called with $'methodname' on the Account.
+				{
+					/**
+					* @name Cloobster.services.LocationConfiguration#$query
+					* @override
+					* Overrides default query method by overriding businessId as default parameter
+					*/
+					'query':  {method:'GET', params: { 'bid' : businessId}, isArray:true},
+					/*
+					* @name Cloobster.services.LocationConfiguration#$update
+					* Like a save but uses PUT instead of POST.
+					*/
+					'update': { 
+						method: 'PUT'
+					}
+				}
+			)
+		}
+
+	}
+	return LocationConfiguration;
+
+}]);
