@@ -34,7 +34,7 @@
 			  <p l="businesses.empty.description">Currently you don't have any locations. To use cloobster, you need at least one location (hotel, restaurant).</p>
 			</div>
 		</div>
-		<table class="table table-striped table-hover table-bordered" ng-show="businesses.length > 0">
+		<table class="table table-striped table-hover table-bordered table-condensed" ng-show="businesses.length > 0">
 			<tr ng-repeat="b in businesses | filter:filterTrashedBusiness">
 				<td ng-show="b.trash">{{b.name}} <i class="icon-trash icon-black" tooltip="busineses.business.deleted.tooltip" tooltip-position="right"></i></td>
 				<td ng-hide="b.trash" ng-click="showLocationSettings(b)" style="cursor: pointer;"><strong>{{b.name}}</strong> <span class="label label-important" ng-show="b.basic" l="subscription.basic">Basic</span> <i class="icon-edit pull-right"/></td>
@@ -44,10 +44,11 @@
 				<td ng-hide="b.trash"><a href="#/businesses/{{b.id}}/category_assignment" l="businesses.action.activate">Activate</a></td>
 				<td ng-hide="b.trash"><a href="#/businesses/{{b.id}}/infopages" l="businesses.action.infopages">Infopages</a></td>
 				<td ng-hide="b.trash"><a href="#/businesses/{{b.id}}/appconfig" l="businesses.headertabs.appconfig">App Config</a></td>
+				<td ng-hide="b.trash"><a href="#/businesses/{{b.id}}/externals" l="businesses.headertabs.externals">External partners</a></td>
 				<td ng-hide="b.trash"><a href="#/businesses/{{b.id}}/reports" l="businesses.action.reports">Reports</a></td>
 				<td ng-hide="b.trash"><a href="#/businesses/{{b.id}}/documents" l="businesses.action.documents">Documents</a></td>
 				<td ng-hide="b.trash"><a href="#/accounts" l="businesses.action.accounts">Accounts</a></td>
-				<td ng-hide="b.trash"><a href="../cockpit" target="_blank" >Cockpit</a></td>
+				<td ng-hide="b.trash"><a href="../cockpit" target="_blank" >Cockpit</a></td>				
 			</tr>
 		</table>
 	</div>

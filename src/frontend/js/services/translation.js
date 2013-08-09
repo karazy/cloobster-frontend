@@ -95,6 +95,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "App gestalten",
 			"EN" : "Customize App"
 		},
+		"businesses.headertabs.externals" : {
+			"DE" :  "Externe Partner",
+			"EN" : "External partners"
+		},
 		//registration partial
 		"registration.title" : {
 			"DE" : "cloobster Registrierung",

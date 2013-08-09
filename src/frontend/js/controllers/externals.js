@@ -8,7 +8,6 @@
 * 	Controller for external Data ProvidersInfopage controller 
 * 	@constructor
 */
-
 Cloobster.Externals = function($scope, $routeParams, $http, lang, errorHandler, LocationConfiguration) {
 
 	var baseFolder = 'partials/externals/';
@@ -20,12 +19,12 @@ Cloobster.Externals = function($scope, $routeParams, $http, lang, errorHandler, 
 			name: lang.translate('externals.de.ztix.name'),
 			template: baseFolder + 'de_ztix_config.html',
 			id: 'de.ztix'
-		},
-		{
-			name: lang.translate('externals.de.panoramafotobuch.name'),
-			template: baseFolder + 'de_panoramafotobuch_config.html',
-			id: 'de.panoramafotobuch'
 		}
+		// {
+		// 	name: lang.translate('externals.de.panoramafotobuch.name'),
+		// 	template: baseFolder + 'de_panoramafotobuch_config.html',
+		// 	id: 'de.panoramafotobuch'
+		// }
 	]
 	/** LocationConfiguration Resource */
 	$scope.locConfigResource = null;
