@@ -9,7 +9,7 @@
 <div class="row-fluid">
 	<div class="span3">
 		<div class="data-container-with-title">
-			<h4 class="data-container-title" externals.list.title>External Partner</h4>
+			<h4 class="data-container-title" l="externals.list.title">External Partner</h4>
 			<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable">
 		        <li ng-repeat="ext in externals | orderBy:['name'] " ng-class="{active: currentExternal.id == ext.id}">	        	
 		        	<a ng-click="loadExternal(ext)">{{ext.name}}</a>			        	
@@ -19,7 +19,7 @@
 	</div>
 	<div class="span9" ng-show="currentExternal">
 		<div class="data-container-with-title">
-			<h4 class="data-container-title" l="externals.title">External Partner configuration</h4>
+			<h4 class="data-container-title" l="externals.configuration.title">External Partner configuration</h4>
 			<div class="data-container-block">
 				<div ng-include="currentExternal.template"></div>
 			</div>
@@ -27,7 +27,7 @@
 	</div>
 	<div class="span9" ng-hide="currentExternal">
 		<div class="data-container-with-title data-container-small data-container-inactive">
-			<h4 class="data-container-title" l="externals.title">External Partner configuration</h4>
+			<h4 class="data-container-title" l="externals.configuration.title">External Partner configuration</h4>
 			<div class="data-container-block">
 				<p l="externals.empty.description">Select a configuration.</p>
 			</div>

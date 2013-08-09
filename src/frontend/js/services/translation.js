@@ -2734,6 +2734,24 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Please enter a valid email."
 		},
 		//externals partial
+		"externals.help" : {
+			"DE" :  "Liste externer Partner und zugehörige Konfiguration. cloobster übernimmt keine Verantwortung für"+
+					" Daten von Drittanbietern.",
+			"EN" : "List of external data providers and their configuration."+
+					"cloobster is not responsible for data coming from third parties."
+		},
+		"externals.list.title" : {
+			"DE" :  "Externe Partner",
+			"EN" : "External Partners"
+		},
+		"externals.configuration.title" : {
+			"DE" :  "Konfiguration",
+			"EN" : "Configuration"
+		},
+		"externals.empty.description" : {
+			"DE" :  "Bitte einen Partner aus der Liste auswählen.",
+			"EN" : "Please select a partner from the list."
+		},
 		"externals.de.ztix.name" : {
 			"DE" :  "Ztix",
 			"EN" : "Ztix"
@@ -2741,6 +2759,28 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"externals.de.panoramafotobuch.name" : {
 			"DE" :  "Panorama Fotobuch",
 			"EN" : "Panorama Photobook"
+		},
+		"externals.de.ztix.description" : {
+			"DE" :  "Um Veranstaltungen aus dem ztix System anzuzeigen, tragen Sie bitte die Veranstalter ID ein." +
+					"<br/>Anschließend aktivieren Sie das Feature unter",
+			"EN" : "To display events from ztix platform, simply enter your host ID.<br/>"+
+					"Afterwards enable the feature under"
+		},
+		"externals.de.ztix.title" : {
+			"DE" :  "Ticketing leicht gemacht",
+			"EN" : "Ticketing made easy"
+		},
+		"externals.de.ztix.editor.host.label" : {
+			"DE" :  "Veranstalter",
+			"EN" : "Host"
+		},
+		"externals.de.ztix.editor.host.placeholder" : {
+			"DE" :  "Id Nummer des Veranstalters",
+			"EN" : "Id number of host"
+		},
+		"externals.de.ztix.hosts.error" : {
+			"DE" :  "Bitte eine gültige Zahl eingeben.",
+			"EN" : "Enter a valid number."
 		},
 		//login_form partial
 		"login.message" : {
@@ -2821,9 +2861,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "There has been a connection problem."
 		},
 		"error.appengine" : {
-	   "DE" : "Es liegt eine Serverstörung vor. Wir arbeiten an einer Lösung.",
-     "EN" : "The service has been temporarily interrupted. We are working on a solution."
-     },
+		   "DE" : "Es liegt eine Serverstörung vor. Wir arbeiten an einer Lösung.",
+	       "EN" : "The service has been temporarily interrupted. We are working on a solution."
+	    },
 		"common.error.footer" : {
 			"DE" : "Falls dieser Fehler weiterhin besteht, konktaktieren sie <a href='mailto:support@cloobster.com'>support@cloobster.com</a>.",
 			"EN" : "If this error persists, contact <a href='mailto:support@cloobster.com'>support@cloobster.com</a>."

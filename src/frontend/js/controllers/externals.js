@@ -67,15 +67,13 @@ Cloobster.Externals = function($scope, $routeParams, $http, lang, errorHandler, 
 		$scope.currentConfiguration = $scope.locConfigResource.get({name: external.id}, onSuccess, onError);
 
 		function onSuccess(response) {
-			
+			$scope.currentConfiguration = response;
 		}
 
 		function onError(_response, _status, _headers, _config) {
 			if(_response.status == 404) {
 				//create new configuration
-				$scope.currentConfiguration = new $scope.locConfigResource({
-					name: external.id
-				});
+				$scope.currentConfiguration = new $scope.locConfigResource();
 
 				$scope.currentConfiguration.$update(null, angular.noop, errorHandler);
 
@@ -91,7 +89,7 @@ Cloobster.Externals = function($scope, $routeParams, $http, lang, errorHandler, 
 			return;
 		}
 
-		$scope.currentConfiguration.$update(angular.noop, errorHandler);
+		$scope.currentConfiguration.$update({name: $scope.currentExternal.id} ,angular.noop, errorHandler);
 	}
 
 		/** 
