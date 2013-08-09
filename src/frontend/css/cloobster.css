@@ -929,6 +929,11 @@ ul.options-list li:hover {
 }
 
 /* line 834, sass/cloobster.scss */
+.tile-de-ztix-events .tile-icon {
+  background-image: url("../img/tiles/calendar.png");
+}
+
+/* line 838, sass/cloobster.scss */
 .smartphone-frame {
   background-image: url("../img/tiles/gn_frame.png");
   width: 100%;
@@ -938,7 +943,7 @@ ul.options-list li:hover {
   background-repeat: no-repeat;
 }
 
-/* line 843, sass/cloobster.scss */
+/* line 847, sass/cloobster.scss */
 .smartphone-content {
   width: 300px;
   height: 464px;
@@ -951,12 +956,12 @@ ul.options-list li:hover {
   box-sizing: border-box;
 }
 
-/* line 855, sass/cloobster.scss */
+/* line 859, sass/cloobster.scss */
 .tile-container-config-highlight {
   border: 2px dashed red !important;
 }
 
-/* line 859, sass/cloobster.scss */
+/* line 863, sass/cloobster.scss */
 .mask {
   top: 0;
   left: 0;
@@ -978,18 +983,18 @@ ul.options-list li:hover {
   height: 464px;
 }
 
-/* line 880, sass/cloobster.scss */
+/* line 884, sass/cloobster.scss */
 .mask > div {
   top: 150px;
   position: relative;
 }
 
-/* line 885, sass/cloobster.scss */
+/* line 889, sass/cloobster.scss */
 .drop-active .mask {
   display: block;
 }
 
-/* line 889, sass/cloobster.scss */
+/* line 893, sass/cloobster.scss */
 .app-help-image {
   height: 500px;
   background-image: url("../img/apphelp.jpg");
@@ -999,7 +1004,7 @@ ul.options-list li:hover {
   min-width: 350px;
 }
 
-/* line 898, sass/cloobster.scss */
+/* line 902, sass/cloobster.scss */
 .app-image {
   height: 500px;
   background-image: url("../img/app_screenshot.png");

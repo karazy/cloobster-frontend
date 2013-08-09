@@ -2786,6 +2786,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Bitte eine gültige Zahl eingeben.",
 			"EN" : "Enter a valid number."
 		},
+		"tiles.template.external.de.ztix.events" : {
+			"DE" :  "Ztix Veranstaltungen",
+			"EN" : "Ztix Events"
+		},
+		"tiles.template.external.de.ztix.events.description" : {
+			"DE" :  "Shortcut um in den Veranstaltungen zu gelangen, statt über die seitliche Navigation. (Externer Partner Feature!)",
+			"EN" : "Shortcut to quickly reach Events instead of the navigation menu. (External partner feature!)"
+		},
 		//login_form partial
 		"login.message" : {
 			"DE" : "Zugang mit Ihrem Geschäftskundenkonto.",
