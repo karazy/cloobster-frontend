@@ -231,6 +231,15 @@ angular.module('Cloobster.services').factory('Menu', ['cloobsterResource', funct
 				}
 
 				)
+		},
+		/**
+		*	Returns a product image resource used to save, update the image assigned.
+		*/
+		buildImageResource: function(businessId, id) {
+			return $resource('/b/businesses/:bid/menus/:id/image', {
+				'bid': businessId,
+				'id': id
+			});
 		}
 	}
 

@@ -8,7 +8,7 @@
 * 	Controller for external Data ProvidersInfopage controller 
 * 	@constructor
 */
-Cloobster.Externals = function($scope, $routeParams, $http, lang, errorHandler, LocationConfiguration) {
+Cloobster.Externals = function($scope, $routeParams, $http, $location, $log, lang, errorHandler, LocationConfiguration) {
 
 	var baseFolder = 'partials/externals/';
 	/**
@@ -42,7 +42,7 @@ Cloobster.Externals = function($scope, $routeParams, $http, lang, errorHandler, 
 	$scope.loadExternal = function(external) {
 
 		if(!external) {
-			console.error('Cloobster.Externals.loadExternal: no external given');
+			$log.log('Cloobster.Externals.loadExternal: no external given');
 			return;
 		}
 
@@ -59,7 +59,7 @@ Cloobster.Externals = function($scope, $routeParams, $http, lang, errorHandler, 
 
 	function loadConfiguration(external) {
 		if(!external) {
-			console.error('Cloobster.Externals.loadConfiguration: no external given');
+			$log.log('Cloobster.Externals.loadConfiguration: no external given');
 			return;
 		}
 
@@ -88,7 +88,7 @@ Cloobster.Externals = function($scope, $routeParams, $http, lang, errorHandler, 
 
 	$scope.saveConfiguration = function() {
 		if(!$scope.currentConfiguration) {
-			console.error('Cloobster.Externals.saveConfiguration: no $scope.currentConfiguration exists');
+			$log.log('Cloobster.Externals.saveConfiguration: no $scope.currentConfiguration exists');
 			return;
 		}
 
@@ -110,4 +110,4 @@ Cloobster.Externals = function($scope, $routeParams, $http, lang, errorHandler, 
 
 }
 
-Cloobster.Externals.$inject = ['$scope', '$routeParams', '$http', 'lang', 'errorHandler', 'LocationConfiguration'];
+Cloobster.Externals.$inject = ['$scope', '$routeParams', '$http', '$location', '$log', 'lang', 'errorHandler', 'LocationConfiguration'];

@@ -8,10 +8,11 @@
 * 	Configure Dashboard, App Theme and Images
 * 	@constructor
 */
-Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginService, langService, $log, $timeout, handleError, Business, DashboardItem, listUtil, Product, InfoPage) {
+Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginService, langService, $log, $timeout, handleError, Business, DashboardItem, listUtil, Product, InfoPage, Menu) {
 	var dashboardItemsResource,
 		productsResource,
-		infoPagesResource;
+		infoPagesResource,
+		menusResource;
 
 	/** Tile configuration map */
 	$scope.tiles = {
@@ -101,6 +102,14 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			"static": true,
 			"feature" : "de-ztix"
 		},
+		"menusselected": {	
+			title: langService.translate("tiles.template.menusselected") || "Selected Menus",
+			type: "menusselected",
+			cls: "tile-products",
+			description: langService.translate("tiles.template.menusselected.description"),
+			"static": false,
+			"feature" : "products"
+		}
 	};
 	/** Holds the last tile whose hover delete button was clicked. */
 	$scope.lastHoveredTile = null;
@@ -114,6 +123,7 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 
 		productsResource = Product.buildResource(activeBusinessId);
 		infoPagesResource = InfoPage.buildResource(activeBusinessId);
+		menusResource = Menu.buildResource(activeBusinessId);
 
 		$scope.activeBusiness = Business.buildResource(loginService.getAccount().id).get({'id': activeBusinessId}, function(business) {
 			setupDragAndDrop();
@@ -293,6 +303,8 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			loadEntities(productsResource, 'allProductsList');
 		} else if(tile.type == 'infopagesselected') {
 			loadEntities(infoPagesResource, 'allInfoPages');
+		} else if(tile.type == 'menusselected') {
+			loadEntities(menusResource, 'allMenusList');
 		} else {
 			//delete entity ids for all other types
 			//will exist when changing a tile type via radio button
@@ -344,7 +356,7 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 
 	/**
 	* Check/Uncheck products regarding the search filter.
-	* If less then all filtered spots are checked, check all of them. Otherwise uncheck all.
+	* If less then all filtered products are checked, check all of them. Otherwise uncheck all.
 	*/
 	$scope.checkProducts = function() {
 		listUtil.checkElements($scope.allProductsList, $scope.allProductsQuery);
@@ -366,6 +378,19 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 
 	$scope.infoPageChecked = function() {
 		updateTileEntitiesAndSave($scope.allInfoPages);
+	};
+
+	/**
+	* Check/Uncheck menus regarding the search filter.
+	* If less then all filtered menus are checked, check all of them. Otherwise uncheck all.
+	*/
+	$scope.checkMenus = function() {
+		listUtil.checkElements($scope.allMenusList, $scope.allMenusQuery);
+		updateTileEntitiesAndSave($scope.allMenusList);
+	}
+
+	$scope.menuChecked = function() {
+		updateTileEntitiesAndSave($scope.allMenusList);
 	};
 
 	/**
@@ -438,4 +463,4 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 	// });
 }
 
-Cloobster.AppConfig.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', '$timeout', 'errorHandler', 'Business', 'DashboardItem','listUtil','Product', 'InfoPage'];
+Cloobster.AppConfig.$inject = ['$scope', '$http', '$routeParams', '$location', 'login', 'lang', '$log', '$timeout', 'errorHandler', 'Business', 'DashboardItem','listUtil','Product', 'InfoPage', 'Menu'];

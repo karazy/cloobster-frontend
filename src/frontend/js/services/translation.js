@@ -2394,9 +2394,13 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Produktliste",
 			"EN" : "Product list"
 		},
-		"appconfig.infopages.title" : {
+		"appconfig.tiledetail.infopages.title" : {
 			"DE" :  "Infoseiten Einträge",
 			"EN" : "Infopage entries"
+		},
+		"appconfig.tiledetail.menulist.title" : {
+			"DE" :  "Menüliste",
+			"EN" : "Menu list"
 		},
 		"appconfig.list.dataselection.description" : {
 			"DE" :  "Wählen Sie die Datensätze für diese Kachel aus. Einer der Datensätze wird dann zufällig auf dem Dashboard angezeigt.",
@@ -2438,6 +2442,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Produkte: Ausgewählt",
 			"EN" : "Products: Selected"
 		},
+		"tiles.template.menusselected" : {
+			"DE" :  "Menü: Ausgewählt",
+			"EN" : "Menu: Selected"
+		},
 		"tiles.template.feedback.description" : {
 			"DE" :  "Shortcut um in den Feedbackbereich zu gelangen, statt über die seitliche Navigation.",
 			"EN" : "Shortcut to quickly reach Feedback instead of the navigation menu."
@@ -2471,13 +2479,17 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Display a random product marked as special. Ignores products flagged to be hidden on dashboard. Only products assigned to active area are shown."
 		},
 		"tiles.template.productsselected.description" : {
-			"DE" :  "Zeigt ein zufälliges Produkt aus der Menge der selektierten. Explizites markieren ignoriert die \"verborgen auf Dashboard\" Einstellung.",
+			"DE" :  "Zeigt ein zufälliges Produkt aus der Menge der Selektierten an. Explizites markieren ignoriert die \"verborgen auf Dashboard\" Einstellung.",
 			"EN" : "Displays a random product out of the ones you select. The hide on dashboard flag will be ignored. Only products assigned to active area are shown."
+		},
+		"tiles.template.menusselected.description" : {
+			"DE" :  "Zeigt ein zufälliges Menü aus der Menge der Selektierten an.",
+			"EN" : "Displays a random menu out of the ones you select."
 		},
 		"appconfig.tiledetail.empty.description" : {
 			"DE" :  "Zeigt details einer Kachel an. Wählen Sie eine Kachel aus der Dashboard Vorschau.",
 			"EN" : "Shows the selected tile details. Select a tile from dashboard preview."
-		},
+		},		
 		"tiles.dialog.delete.title" : {
 			"DE" :  "Kachel löschen",
 			"EN" : "Delete tile"
@@ -2493,6 +2505,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"appconfig.features.description" : {
 			"DE" :  "Funktionen (de)aktivieren in der App",
 			"EN" : "Configure features you want to be available in the app."
+		},
+		"appconfig.features.externals.description" : {
+			"DE" :  "Funktionen externer Partner.",
+			"EN" : "Features of external partners."
 		},
 		"appconfig.features.products" : {
 			"DE" :  "Produkte",
