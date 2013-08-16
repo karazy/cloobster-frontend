@@ -2791,16 +2791,16 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Ticketing made easy"
 		},
 		"externals.de.ztix.editor.host.label" : {
-			"DE" :  "Veranstalter",
-			"EN" : "Host"
+			"DE" :  "Veranstalter ID(s)",
+			"EN" : "Host ID(s)"
 		},
 		"externals.de.ztix.editor.host.placeholder" : {
-			"DE" :  "Id Nummer des Veranstalters",
-			"EN" : "Id number of host"
+			"DE" :  "Id Nummer der Veranstalter",
+			"EN" : "Id number of hosts"
 		},
 		"externals.de.ztix.hosts.error" : {
-			"DE" :  "Bitte eine gültige Zahl eingeben.",
-			"EN" : "Enter a valid number."
+			"DE" :  "Bitte eine gültige Zahl eingeben. Mehrere Veranstalter können durch / getrennt werden.",
+			"EN" : "Enter a valid number. Seperate multiple hosts via /"
 		},
 		"tiles.template.external.de.ztix.events" : {
 			"DE" :  "Ztix Veranstaltungen",
