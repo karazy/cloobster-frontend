@@ -79,15 +79,18 @@
 			        <b class="caret"></b>
 			      </a>
 			    <ul class="dropdown-menu">
+			    	<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/externals',true), 'disabled': businesses.length==0}">
+						<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/externals','')}}" l="businesses.headertabs.externals">External Partners</a>
+					</li>
 			      	<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/reports',true), 'disabled': businesses.length==0}">
 						<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/reports','')}}" l="businesses.headertabs.reports">Reports</a>
 					</li>
 					<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/documents',true), 'disabled': businesses.length==0}">
 						<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/documents','')}}" l="businesses.headertabs.Documents">Documents</a>
-						</li>
+					</li>
 					<li ng-class="{'active': isActive('/accounts',true)}">
 						<a href="#/accounts" l="businesses.headertabs.accounts">Accounts</a>
-					</li>
+					</li>					
 			    </ul>
 			  </li>	
 			  <li>

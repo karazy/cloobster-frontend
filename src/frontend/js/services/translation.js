@@ -95,6 +95,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "App gestalten",
 			"EN" : "Customize App"
 		},
+		"businesses.headertabs.externals" : {
+			"DE" :  "Externe Partner",
+			"EN" : "External partners"
+		},
 		//registration partial
 		"registration.title" : {
 			"DE" : "cloobster Registrierung",
@@ -2390,9 +2394,13 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Produktliste",
 			"EN" : "Product list"
 		},
-		"appconfig.infopages.title" : {
+		"appconfig.tiledetail.infopages.title" : {
 			"DE" :  "Infoseiten Einträge",
 			"EN" : "Infopage entries"
+		},
+		"appconfig.tiledetail.menulist.title" : {
+			"DE" :  "Menüliste",
+			"EN" : "Menu list"
 		},
 		"appconfig.list.dataselection.description" : {
 			"DE" :  "Wählen Sie die Datensätze für diese Kachel aus. Einer der Datensätze wird dann zufällig auf dem Dashboard angezeigt.",
@@ -2434,6 +2442,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Produkte: Ausgewählt",
 			"EN" : "Products: Selected"
 		},
+		"tiles.template.menusselected" : {
+			"DE" :  "Menü: Ausgewählt",
+			"EN" : "Menu: Selected"
+		},
 		"tiles.template.feedback.description" : {
 			"DE" :  "Shortcut um in den Feedbackbereich zu gelangen, statt über die seitliche Navigation.",
 			"EN" : "Shortcut to quickly reach Feedback instead of the navigation menu."
@@ -2467,13 +2479,17 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Display a random product marked as special. Ignores products flagged to be hidden on dashboard. Only products assigned to active area are shown."
 		},
 		"tiles.template.productsselected.description" : {
-			"DE" :  "Zeigt ein zufälliges Produkt aus der Menge der selektierten. Explizites markieren ignoriert die \"verborgen auf Dashboard\" Einstellung.",
+			"DE" :  "Zeigt ein zufälliges Produkt aus der Menge der Selektierten an. Explizites markieren ignoriert die \"verborgen auf Dashboard\" Einstellung.",
 			"EN" : "Displays a random product out of the ones you select. The hide on dashboard flag will be ignored. Only products assigned to active area are shown."
+		},
+		"tiles.template.menusselected.description" : {
+			"DE" :  "Zeigt ein zufälliges Menü aus der Menge der Selektierten an.",
+			"EN" : "Displays a random menu out of the ones you select."
 		},
 		"appconfig.tiledetail.empty.description" : {
 			"DE" :  "Zeigt details einer Kachel an. Wählen Sie eine Kachel aus der Dashboard Vorschau.",
 			"EN" : "Shows the selected tile details. Select a tile from dashboard preview."
-		},
+		},		
 		"tiles.dialog.delete.title" : {
 			"DE" :  "Kachel löschen",
 			"EN" : "Delete tile"
@@ -2489,6 +2505,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"appconfig.features.description" : {
 			"DE" :  "Funktionen (de)aktivieren in der App",
 			"EN" : "Configure features you want to be available in the app."
+		},
+		"appconfig.features.externals.description" : {
+			"DE" :  "Funktionen externer Partner.",
+			"EN" : "Features of external partners."
 		},
 		"appconfig.features.products" : {
 			"DE" :  "Produkte",
@@ -2733,6 +2753,63 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Bitte eine gültige E-Mail-Adresse eingeben.",
 			"EN" : "Please enter a valid email."
 		},
+		//externals partial
+		"externals.help" : {
+			"DE" :  "Liste externer Partner und zugehörige Konfiguration. cloobster übernimmt keine Verantwortung für"+
+					" Daten von Drittanbietern.",
+			"EN" : "List of external data providers and their configuration."+
+					"cloobster is not responsible for data coming from third parties."
+		},
+		"externals.list.title" : {
+			"DE" :  "Externe Partner",
+			"EN" : "External Partners"
+		},
+		"externals.configuration.title" : {
+			"DE" :  "Konfiguration",
+			"EN" : "Configuration"
+		},
+		"externals.empty.description" : {
+			"DE" :  "Bitte einen Partner aus der Liste auswählen.",
+			"EN" : "Please select a partner from the list."
+		},
+		"externals.de.ztix.name" : {
+			"DE" :  "Ztix",
+			"EN" : "Ztix"
+		},
+		"externals.de.panoramafotobuch.name" : {
+			"DE" :  "Panorama Fotobuch",
+			"EN" : "Panorama Photobook"
+		},
+		"externals.de.ztix.description" : {
+			"DE" :  "Um Veranstaltungen aus dem ztix System anzuzeigen, tragen Sie bitte die Veranstalter ID ein." +
+					"<br/>Anschließend aktivieren Sie das Feature unter",
+			"EN" : "To display events from ztix platform, simply enter your host ID.<br/>"+
+					"Afterwards enable the feature under"
+		},
+		"externals.de.ztix.title" : {
+			"DE" :  "Ticketing leicht gemacht",
+			"EN" : "Ticketing made easy"
+		},
+		"externals.de.ztix.editor.host.label" : {
+			"DE" :  "Veranstalter ID(s)",
+			"EN" : "Host ID(s)"
+		},
+		"externals.de.ztix.editor.host.placeholder" : {
+			"DE" :  "Id Nummer der Veranstalter",
+			"EN" : "Id number of hosts"
+		},
+		"externals.de.ztix.hosts.error" : {
+			"DE" :  "Bitte eine gültige Zahl eingeben. Mehrere Veranstalter können durch / getrennt werden.",
+			"EN" : "Enter a valid number. Seperate multiple hosts via /"
+		},
+		"tiles.template.external.de.ztix.events" : {
+			"DE" :  "Ztix Veranstaltungen",
+			"EN" : "Ztix Events"
+		},
+		"tiles.template.external.de.ztix.events.description" : {
+			"DE" :  "Shortcut um in den Veranstaltungen zu gelangen, statt über die seitliche Navigation. (Externer Partner Feature!)",
+			"EN" : "Shortcut to quickly reach Events instead of the navigation menu. (External partner feature!)"
+		},
 		//login_form partial
 		"login.message" : {
 			"DE" : "Zugang mit Ihrem Geschäftskundenkonto.",
@@ -2812,9 +2889,9 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "There has been a connection problem."
 		},
 		"error.appengine" : {
-	   "DE" : "Es liegt eine Serverstörung vor. Wir arbeiten an einer Lösung.",
-     "EN" : "The service has been temporarily interrupted. We are working on a solution."
-     },
+		   "DE" : "Es liegt eine Serverstörung vor. Wir arbeiten an einer Lösung.",
+	       "EN" : "The service has been temporarily interrupted. We are working on a solution."
+	    },
 		"common.error.footer" : {
 			"DE" : "Falls dieser Fehler weiterhin besteht, konktaktieren sie <a href='mailto:support@cloobster.com'>support@cloobster.com</a>.",
 			"EN" : "If this error persists, contact <a href='mailto:support@cloobster.com'>support@cloobster.com</a>."
