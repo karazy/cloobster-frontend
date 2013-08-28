@@ -88,6 +88,13 @@
 						<h5>Company Profile</h5>
 						Address:{{c.address}} | City: {{c.city}} | Phone: {{c.phone}}
 					</div>
+					<div class="data-container-block data-container-seperator">
+							<h4>Whitelabel</h4>
+							<p>Select the Whitelabel App that will be associated with this company.</p>
+							<div ng-repeat="wl in whitelabels">
+								<input type="radio" name="{{c.id}}_whitelabel" value="{{wl.key}}" ng-model="c.whitelabel.key" ng-change="saveConfiguration(c)"> {{wl.name}} <br/>
+							</div>
+					</div>
 					<div class="">					
 						
 						<div>							
@@ -154,8 +161,7 @@
 												</div>							 
 											</div>
 										</div>
-									</div>
-									
+									</div>								
 								</div>
 							</div>
 						</div>

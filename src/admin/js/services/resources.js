@@ -101,3 +101,49 @@ CloobsterAdmin.resources.factory('Account', ['$resource', function($resource){
       }
     );
 }]);
+
+/**
+* @constructor
+* Factory function that creates the 'CompanyConfiguration' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Frederik Reifschneider
+*/
+angular.module('CloobsterAdmin.services').factory('CompanyConfiguration', ['$resource', function($resource) {
+
+	/**
+	*	@name Cloobster.services.CompanyConfiguration
+	*	
+	*/
+	var CompanyConfiguration = {
+
+		buildResource: function() {
+			return $resource('/admin/m/companies/:id/configurations/:name',
+				//params	
+				{
+					'name' : '@name',
+					'id' : '@id'
+				},
+				//Custom actions can be called with $'methodname'.
+				{
+					/**
+					* @name Cloobster.services.CompanyConfiguration#$query
+					* @override
+					* Overrides default query method by overriding companyId as default parameter
+					*/
+					'query':  {method:'GET',  isArray:true}, //params: { 'id' : companyId},
+					/*
+					* @name Cloobster.services.CompanyConfiguration#$update
+					* Like a save but uses PUT instead of POST.
+					*/
+					'update': { 
+						method: 'PUT'
+					}
+				}
+			)
+		}
+
+	}
+	return CompanyConfiguration;
+
+}]);
