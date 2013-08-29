@@ -92,11 +92,14 @@
 							<h4>Whitelabel</h4>
 							<p>Select the Whitelabel App that will be associated with this company.</p>
 							<div ng-repeat="wl in whitelabels">
-								<input type="radio" name="{{c.id}}_whitelabel" value="{{wl.key}}" ng-model="c.whitelabel.key" ng-change="saveConfiguration(c)"> {{wl.name}} <br/>
+								<label class="radio" style="float:left; margin-right:10px;">
+								  <input type="radio"  name="{{c.id}}_whitelabel" id="{{c.id}}_whitelabel" value="{{wl.key}}" ng-model="c.whitelabel.key" ng-change="saveConfiguration(c)">
+								  {{wl.name}} 
+								</label>
 							</div>
+							<div style="clear: both; margin-bottom: 10px"></div>
 					</div>
-					<div class="">					
-						
+					<div class="">											
 						<div>							
 							<div class="data-container-block">	
 								<h5>Locations</h5>

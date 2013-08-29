@@ -83,16 +83,17 @@
 									<div simple-property-editor editor-title="Name" editor-property="wl.name" editor-on-save="saveWhitelabel(wl)" editor-placeholder="Name" editor-required>
 										<p class="edit">{{wl.name}} <i class="icon-edit icon-black"></i></p>
 									</div>
-									<div simple-property-editor editor-title="Key" editor-property="wl.key" editor-on-save="saveWhitelabel(wl)" editor-placeholder="e.g. net.karazy.cloobster" editor-required>
+									<!-- <div simple-property-editor editor-title="Key" editor-property="wl.key" editor-on-save="saveWhitelabel(wl)" editor-placeholder="e.g. net.karazy.cloobster" editor-required>
 										<p class="edit">{{wl.key}} <i class="icon-edit icon-black"></i></p>
-									</div>
-									<div simple-property-editor editor-title="Apple App Store" editor-property="wl.ios" editor-on-save="saveWhitelabel(wl)" editor- editor-required>
+									</div> -->
+									<p>{{wl.key}} <span style="color:red; font-size: 10px;">Key has to be unique and is not editable.</span></p>
+									<div simple-property-editor editor-title="Apple App Store" editor-property="wl.ios" editor-on-save="saveWhitelabel(wl)" editor- editor-required editor-placeholder="Url to App in Apple App Store">
 										<p class="edit">{{wl.ios}} <i class="icon-edit icon-black"></i></p>
 									</div>
-									<div simple-property-editor editor-title="Google Play" editor-property="wl.android" editor-on-save="saveWhitelabel(wl)" editor- editor-required>
+									<div simple-property-editor editor-title="Google Play" editor-property="wl.android" editor-on-save="saveWhitelabel(wl)" editor- editor-required editor-placeholder="Url to App in Google Play">
 										<p class="edit">{{wl.android}} <i class="icon-edit icon-black"></i></p>
 									</div>
-									<div simple-property-editor editor-title="Desktop Redirect" editor-property="wl.desktop" editor-on-save="saveWhitelabel(wl)"  editor-required>
+									<div simple-property-editor editor-title="Desktop Redirect" editor-property="wl.desktop" editor-on-save="saveWhitelabel(wl)"  editor-required editor-placeholder="Url to show when using a desktop browser.">
 										<p class="edit">{{wl.desktop}} <i class="icon-edit icon-black"></i></p>
 									</div>
 								</div>
