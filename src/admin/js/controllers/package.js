@@ -1,7 +1,7 @@
 /** @module CloobsterAdmin */
 'use strict';
 
-CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, CompanyConfiguration, Location, LocationSubscription,$routeParams) {
+CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, CompanyConfiguration, Location, LocationSubscription, $routeParams, WhitelabelConfiguration) {
 
 	//available template subscriptions
 	$scope.packages = null;
@@ -20,19 +20,19 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Co
 	//Resource to interact with configurations
 	$scope.companyConfigResource = null;
 
-	$scope.whitelabels = 
-		[{
-					key: 'net.karazy.cloobster',
-					name: 'Cloobster (default)'
-				},
-				{
-					key: 'net.karazy.cloobster.frizz',
-					name: 'FRIZZ'
-				},
-				{
-					key: 'net.karazy.cloobster.darmstadt',
-					name: 'Darmstadt'
-		}];
+	// $scope.whitelabels = 
+	// 	[{
+	// 				key: 'net.karazy.cloobster',
+	// 				name: 'Cloobster (default)'
+	// 			},
+	// 			{
+	// 				key: 'net.karazy.cloobster.frizz',
+	// 				name: 'FRIZZ'
+	// 			},
+	// 			{
+	// 				key: 'net.karazy.cloobster.darmstadt',
+	// 				name: 'Darmstadt'
+	// 	}];
 
 	//Manage subscription template functions start
 	$scope.loadPackages = function() {
@@ -142,7 +142,7 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Co
 
 		function success(response) {
 			angular.forEach(response, function(company) {
-				$scope.loadLocationsForCompany(company);
+				$scope.loadLocationsForCompany(company);				
 				$scope.loadWhitelabelConfig(company);
 			});
 		}
@@ -371,6 +371,10 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Co
 
 	//Configuration Handling
 
+	$scope.loadWhitelabels = function() {
+		$scope.whitelabels = $scope.whitelabelResource.query();
+	}
+
 	$scope.loadWhitelabelConfig = function(company) {
 		if(!company) {
 			$log.log('CloobsterAdmin.Package.loadConfiguration: no company given');
@@ -440,12 +444,14 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Co
 
 	/** Initialization. */
 
+	$scope.companyConfigResource = CompanyConfiguration.buildResource();
+	$scope.whitelabelResource = WhitelabelConfiguration.buildResource();
+
 	$scope.activeTab = 'locations';
 	$scope.loadPackages();
-	$scope.loadCompanies();
-
-	$scope.companyConfigResource = CompanyConfiguration.buildResource();
+	$scope.loadWhitelabels();
+	$scope.loadCompanies();	
 
 }
 
-CloobsterAdmin.Package.$inject = ['$scope', '$http', '$log', 'Subscription', 'Company', 'CompanyConfiguration', 'Location', 'LocationSubscription','$routeParams'];
+CloobsterAdmin.Package.$inject = ['$scope', '$http', '$log', 'Subscription', 'Company', 'CompanyConfiguration', 'Location', 'LocationSubscription','$routeParams', 'WhitelabelConfiguration'];

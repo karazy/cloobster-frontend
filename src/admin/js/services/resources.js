@@ -145,5 +145,47 @@ angular.module('CloobsterAdmin.services').factory('CompanyConfiguration', ['$res
 
 	}
 	return CompanyConfiguration;
+}]);
 
+/**
+* @constructor
+* Factory function that creates the 'WhitelabelConfiguration' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Frederik Reifschneider
+*/
+angular.module('CloobsterAdmin.services').factory('WhitelabelConfiguration', ['$resource', function($resource) {
+
+	/**
+	*	@name Cloobster.services.WhitelabelConfiguration
+	*	
+	*/
+	var WhitelabelConfiguration = {
+
+		buildResource: function() {
+			return $resource('/admin/s/configuration/whitelabels/:name',
+				//params	
+				{
+					'name' : '@name',
+				},
+				//Custom actions can be called with $'methodname'.
+				{
+					/**
+					* @name Cloobster.services.WhitelabelConfiguration#$query
+					* @override
+					*/
+					'query':  {method:'GET',  isArray:true}, 
+					/*
+					* @name Cloobster.services.WhitelabelConfiguration#$update
+					* Like a save but uses PUT instead of POST.
+					*/
+					'update': { 
+						method: 'PUT'
+					}
+				}
+			)
+		}
+
+	}
+	return WhitelabelConfiguration;
 }]);

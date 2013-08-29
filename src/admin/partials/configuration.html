@@ -67,15 +67,75 @@
 			<div class="accordion-group">
 				<div class="accordion-heading">
 					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-						Collapsible Group Item #2
+						Whitelabel Templates
 					</a>
 				</div>
-				<div id="collapseTwo" class="accordion-body collapse">
+				<div id="collapseTwo" class="accordion-body collapse in" ng-controller="CloobsterAdmin.WhitelabelConfiguration">
 					<div class="accordion-inner">
-						Anim pariatur cliche...
-						test
-						test
-						test
+						<h3>Whitelabels</h3>
+						<div ng-repeat="wl in whitelabels">
+							<div class="data-container-with-title">
+								<h4 class="data-container-title">{{wl.name}}</h4>
+								<div class="data-container-block data-container-seperator">
+									<button type="button" class="btn btn-danger" ng-click="deleteWhitelabel(wl)"><i class="icon-white icon-trash"></i></button>
+								</div>
+								<div class="data-container-block">
+									<div simple-property-editor editor-title="Name" editor-property="wl.name" editor-on-save="saveWhitelabel(wl)" editor-placeholder="Name" editor-required>
+										<p class="edit">{{wl.name}} <i class="icon-edit icon-black"></i></p>
+									</div>
+									<div simple-property-editor editor-title="Key" editor-property="wl.key" editor-on-save="saveWhitelabel(wl)" editor-placeholder="e.g. net.karazy.cloobster" editor-required>
+										<p class="edit">{{wl.key}} <i class="icon-edit icon-black"></i></p>
+									</div>
+									<div simple-property-editor editor-title="Apple App Store" editor-property="wl.ios" editor-on-save="saveWhitelabel(wl)" editor- editor-required>
+										<p class="edit">{{wl.ios}} <i class="icon-edit icon-black"></i></p>
+									</div>
+									<div simple-property-editor editor-title="Google Play" editor-property="wl.android" editor-on-save="saveWhitelabel(wl)" editor- editor-required>
+										<p class="edit">{{wl.android}} <i class="icon-edit icon-black"></i></p>
+									</div>
+									<div simple-property-editor editor-title="Desktop Redirect" editor-property="wl.desktop" editor-on-save="saveWhitelabel(wl)"  editor-required>
+										<p class="edit">{{wl.desktop}} <i class="icon-edit icon-black"></i></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<from class="form-horizontal">
+							<h3>Add new Whitelabel</h3>
+							 <div class="control-group">
+							 	<label class="control-label" for="newWhitelabelName">Name</label>
+    							<div class="controls">
+									<input type="text" placeholder="Name" name="newWhitelabelName" ng-model="newWhitelabelName" required class="span8">
+								</div>
+							</div>
+							 <div class="control-group">
+							 	<label class="control-label" for="newWhitelabelKey">Key</label>
+								<div class="controls">
+									<input type="text" placeholder="net.karazy.cloobster.{WHITELABEL}" name="newWhitelabelKey" ng-model="newWhitelabelKey" required class="span8">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="newWhitelabeliOS">Apple App Store</label>
+   								 <div class="controls">
+									<input type="text" placeholder="http://itunes.apple.com/us/app/cloobster/id532351667?l=de&ls=1&mt=8" name="newWhitelabeliOS" ng-model="newWhitelabeliOS" class="span8">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="newWhitelabelAndroid">Google Play</label>
+   							 <div class="controls">
+									<input type="text" placeholder="http://play.google.com/store/apps/details?id=net.karazy.cloobster" name="newWhitelabelAndroid" ng-model="newWhitelabelAndroid" class="span8">
+								</div>
+							</div>
+							 <div class="control-group">
+							 	<label class="control-label" for="newWhitelabelDesktop">Desktop Redirect</label>
+    							<div class="controls">
+									<input type="text" placeholder="http://www.cloobster.com" name="newWhitelabelDesktop" ng-model="newWhitelabelDesktop" class="span8">
+								</div>
+							</div>
+							<div class="control-group">
+    							<div class="controls">
+									<button type="button" ng-click="createWhitelabel()" class="btn btn-primary" ng-disabled="!formValid()"><i class="icon-white icon-plus"></i> Add</button>
+								</div>
+							</div>
+						</from>
 					</div>
 				</div>
 			</div>

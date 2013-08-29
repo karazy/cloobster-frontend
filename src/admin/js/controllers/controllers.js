@@ -433,3 +433,81 @@ CloobsterAdmin.InfoPages = function($scope, $http, $anchorScroll) {
 }
 CloobsterAdmin.InfoPages.$inject = ['$scope', '$http', '$anchorScroll'];
 
+/**
+* 	@name CloobsterAdmin.WhitelabelConfiguration
+*	@requires $http
+*
+* 	Manages Whitelabel template handling
+* 	@constructor
+*/
+CloobsterAdmin.WhitelabelConfiguration = function($scope, WhitelabelConfiguration) {	
+
+	$scope.loadWhitelabels = function() {
+		$scope.whitelabels = $scope.whitelabelResource.query();
+	}
+
+	$scope.saveWhitelabel = function(wl) {
+		if(!wl) {
+			return;
+		}
+
+		$scope.whitelabelResource.update(wl, angular.noop, function() {alert('ERROR UPDATING WHITELABEL')});
+	}
+
+	$scope.createWhitelabel = function() {
+		if(!$scope.newWhitelabelName) {
+			return;
+		}
+
+		$scope.whitelabelResource.update(
+			{
+				'name': $scope.newWhitelabelName,
+				'key': $scope.newWhitelabelKey,
+				'ios': $scope.newWhitelabeliOS,
+				'android': $scope.newWhitelabelAndroid,
+				'desktop': $scope.newWhitelabelDesktop
+			}, 
+			function(response) {				
+				//add new whitelabel to list
+				$scope.whitelabels.push(response);
+				//reset form
+				$scope.resetForm();
+			},
+			function() {alert('ERROR SAVING WHITELABEL')});
+	}
+
+	$scope.formValid = function() {
+		if($scope.newWhitelabelName && $scope.newWhitelabelKey) {
+			return true;
+		}
+	}
+
+	$scope.resetForm = function() {
+		$scope.newWhitelabelName = '';
+		$scope.newWhitelabelKey = '';
+		$scope.newWhitelabeliOS = '';
+		$scope.newWhitelabelAndroid = '';
+		$scope.newWhitelabelDesktop = '';
+	}
+
+	$scope.deleteWhitelabel = function(wlToDelete) {
+		$scope.whitelabelResource.delete({'name': wlToDelete.name}, 
+			onSuccess,
+			 function() {alert('ERROR DELETING WHITELABEL')});
+
+		function onSuccess() {
+			angular.forEach($scope.whitelabels, function(wl, index) {
+			if(wlToDelete.key == wl.key) {
+				$scope.whitelabels.splice(index, 1);
+				//exit loop
+				return false;
+			}
+		});
+		}
+	}
+
+	$scope.whitelabelResource = WhitelabelConfiguration.buildResource();
+	$scope.loadWhitelabels();
+}
+CloobsterAdmin.WhitelabelConfiguration.$inject = ['$scope', 'WhitelabelConfiguration']
+
