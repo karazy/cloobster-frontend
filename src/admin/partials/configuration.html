@@ -90,6 +90,9 @@
 									<div simple-property-editor editor-title="Apple App Store" editor-property="wl.ios" editor-on-save="saveWhitelabel(wl)" editor- editor-required editor-placeholder="Url to App in Apple App Store">
 										<p class="edit">{{wl.ios}} <i class="icon-edit icon-black"></i></p>
 									</div>
+									<div simple-property-editor editor-title="iOS Url Scheme" editor-property="wl.iosUrlScheme" editor-on-save="saveWhitelabel(wl)" editor- editor-required editor-placeholder="iOS Url Scheme to start App">
+										<p class="edit">{{wl.iosUrlScheme}} <i class="icon-edit icon-black"></i></p>
+									</div>
 									<div simple-property-editor editor-title="Google Play" editor-property="wl.android" editor-on-save="saveWhitelabel(wl)" editor- editor-required editor-placeholder="Url to App in Google Play">
 										<p class="edit">{{wl.android}} <i class="icon-edit icon-black"></i></p>
 									</div>
@@ -117,6 +120,12 @@
 								<label class="control-label" for="newWhitelabeliOS">Apple App Store</label>
    								 <div class="controls">
 									<input type="text" placeholder="http://itunes.apple.com/us/app/cloobster/id532351667?l=de&ls=1&mt=8" name="newWhitelabeliOS" ng-model="newWhitelabeliOS" class="span8">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="newWhitelabeliOSUrlScheme">iOS Url Scheme</label>
+   								 <div class="controls">
+									<input type="text" placeholder="cloobster://" name="newWhitelabeliOSUrlScheme" ng-model="newWhitelabeliOSUrlScheme" class="span8">
 								</div>
 							</div>
 							<div class="control-group">

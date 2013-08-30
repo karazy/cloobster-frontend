@@ -465,7 +465,8 @@ CloobsterAdmin.WhitelabelConfiguration = function($scope, WhitelabelConfiguratio
 				'key': $scope.newWhitelabelKey,
 				'ios': $scope.newWhitelabeliOS,
 				'android': $scope.newWhitelabelAndroid,
-				'desktop': $scope.newWhitelabelDesktop
+				'desktop': $scope.newWhitelabelDesktop,
+				'iosUrlScheme' : $scope.newWhitelabeliOSUrlScheme
 			}, 
 			function(response) {				
 				//add new whitelabel to list
@@ -488,6 +489,7 @@ CloobsterAdmin.WhitelabelConfiguration = function($scope, WhitelabelConfiguratio
 		$scope.newWhitelabeliOS = '';
 		$scope.newWhitelabelAndroid = '';
 		$scope.newWhitelabelDesktop = '';
+		$scope.newWhitelabeliOSUrlScheme = '';
 	}
 
 	$scope.deleteWhitelabel = function(wlToDelete) {
