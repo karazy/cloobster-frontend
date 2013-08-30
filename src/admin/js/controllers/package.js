@@ -134,18 +134,30 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Co
 		$scope.loadCompanies();
 	}
 
+	/**
+	* Set given company active.
+	*
+	*/
+	$scope.loadCompany = function(company) {
+		$scope.currentCompany = company;
+
+		//load correnspaonding locations and whitelabel config
+		$scope.loadLocationsForCompany(company);				
+		$scope.loadWhitelabelConfig(company);
+	}
+
 	
 
 
 	$scope.loadCompanies = function() {
-		$scope.companies = Company.query(success);
+		$scope.companies = Company.query();
 
-		function success(response) {
-			angular.forEach(response, function(company) {
-				$scope.loadLocationsForCompany(company);				
-				$scope.loadWhitelabelConfig(company);
-			});
-		}
+		// function success(response) {
+		// 	angular.forEach(response, function(company) {
+		// 		$scope.loadLocationsForCompany(company);				
+		// 		$scope.loadWhitelabelConfig(company);
+		// 	});
+		// }
 	}
 
 
@@ -402,11 +414,11 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Co
 				company.configuration.whitelabel = new $scope.companyConfigResource();
 
 				company.configuration.whitelabel.$update({id: company.id, name: 'whitelabel'}, angular.noop, function(_response, _status, _headers, _config) {
-					errorHandler(_response, _status, _headers, _config);
+					alert('Could not create whitelabel configuration');
 				});
 
 			} else {
-				errorHandler(_response, _status, _headers, _config);
+				alert('Could not load whitelabel configuration');
 			}
 		}
 	}

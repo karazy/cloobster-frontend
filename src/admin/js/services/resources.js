@@ -109,7 +109,7 @@ CloobsterAdmin.resources.factory('Account', ['$resource', function($resource){
 * 
 * 	@author Frederik Reifschneider
 */
-angular.module('CloobsterAdmin.services').factory('CompanyConfiguration', ['$resource', function($resource) {
+CloobsterAdmin.resources.factory('CompanyConfiguration', ['$resource', function($resource) {
 
 	/**
 	*	@name Cloobster.services.CompanyConfiguration
@@ -154,7 +154,7 @@ angular.module('CloobsterAdmin.services').factory('CompanyConfiguration', ['$res
 * 
 * 	@author Frederik Reifschneider
 */
-angular.module('CloobsterAdmin.services').factory('WhitelabelConfiguration', ['$resource', function($resource) {
+CloobsterAdmin.resources.factory('WhitelabelConfiguration', ['$resource', function($resource) {
 
 	/**
 	*	@name Cloobster.services.WhitelabelConfiguration
@@ -166,7 +166,7 @@ angular.module('CloobsterAdmin.services').factory('WhitelabelConfiguration', ['$
 			return $resource('/admin/s/configuration/whitelabels/:name',
 				//params	
 				{
-					'name' : '@name',
+					'name' : '@name'
 				},
 				//Custom actions can be called with $'methodname'.
 				{
