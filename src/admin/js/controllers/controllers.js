@@ -442,20 +442,28 @@ CloobsterAdmin.InfoPages.$inject = ['$scope', '$http', '$anchorScroll'];
 */
 CloobsterAdmin.WhitelabelController = function($scope, WhitelabelConfiguration, errorHandler) {	
 
+	/**
+	* Load all existing whitelabels.
+	*/
 	$scope.loadWhitelabels = function() {
 		$scope.whitelabels = $scope.whitelabelResource.query();
 	}
 
+	/**
+	* Update given whitelabel.
+	*/
 	$scope.saveWhitelabel = function(wl) {
 		if(!wl) {
 			return;
 		}
-
 		$scope.whitelabelResource.update(wl, angular.noop, errorHandler);
 	}
 
+	/**
+	* Creates a new whitelabel and adds it to list.
+	*/
 	$scope.createWhitelabel = function() {
-		if(!$scope.newWhitelabelName) {
+		if(!$scope.formValid()) {
 			return;
 		}
 
@@ -477,12 +485,21 @@ CloobsterAdmin.WhitelabelController = function($scope, WhitelabelConfiguration, 
 			function() {alert('ERROR SAVING WHITELABEL')});
 	}
 
+	/**
+	* Check if whitelabel form is valid.
+	* @return
+	*	true if valid, false otherwise
+	*/
 	$scope.formValid = function() {
 		if($scope.newWhitelabelName && $scope.newWhitelabelKey) {
 			return true;
 		}
 	}
 
+	/**
+	* Reset new whitelabel form!
+	*
+	*/
 	$scope.resetForm = function() {
 		$scope.newWhitelabelName = '';
 		$scope.newWhitelabelKey = '';
@@ -492,6 +509,9 @@ CloobsterAdmin.WhitelabelController = function($scope, WhitelabelConfiguration, 
 		$scope.newWhitelabeliOSUrlScheme = '';
 	}
 
+	/**
+	* Delete Whitelabel.
+	*/
 	$scope.deleteWhitelabel = function(wlToDelete) {
 		$scope.whitelabelResource['delete'](
 			{'name': wlToDelete.name}, 
