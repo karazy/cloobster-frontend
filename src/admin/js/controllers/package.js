@@ -1,7 +1,7 @@
 /** @module CloobsterAdmin */
 'use strict';
 
-CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Location, LocationSubscription,$routeParams) {
+CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, CompanyConfiguration, Location, LocationSubscription, $routeParams, WhitelabelConfiguration, errorHandler) {
 
 	//available template subscriptions
 	$scope.packages = null;
@@ -17,6 +17,22 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 	$scope.companies = null;
 	//map of locations grouped by company id
 	$scope.locationsMap = null;
+	//Resource to interact with configurations
+	$scope.companyConfigResource = null;
+
+	// $scope.whitelabels = 
+	// 	[{
+	// 				key: 'net.karazy.cloobster',
+	// 				name: 'Cloobster (default)'
+	// 			},
+	// 			{
+	// 				key: 'net.karazy.cloobster.frizz',
+	// 				name: 'FRIZZ'
+	// 			},
+	// 			{
+	// 				key: 'net.karazy.cloobster.darmstadt',
+	// 				name: 'Darmstadt'
+	// 	}];
 
 	//Manage subscription template functions start
 	$scope.loadPackages = function() {
@@ -118,17 +134,25 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 		$scope.loadCompanies();
 	}
 
+	/**
+	* Set given company active 
+	* and load locations and whitelabel config.
+	*/
+	$scope.loadCompany = function(company) {
+		$scope.currentCompany = company;
+
+		//load correnspaonding locations and whitelabel config
+		$scope.loadLocationsForCompany(company);				
+		$scope.loadWhitelabelConfig(company);
+	}
+
 	
 
-
+	/**
+	* Load all avail companies.
+	*/
 	$scope.loadCompanies = function() {
-		$scope.companies = Company.query(success);
-
-		function success(response) {
-			angular.forEach(response, function(company) {
-				$scope.loadLocationsForCompany(company);
-			});
-		}
+		$scope.companies = Company.query(angular.noop, errorHandler);
 	}
 
 
@@ -149,7 +173,7 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 		jQuery('#toggle_close_'+location.id).toggle();
 		//load subscriptions
 		if(jQuery('#details_'+location.id).is(":visible")) {
-			$scope.loadSubscriptionsForLocation(location);	
+			$scope.loadSubscriptionsForLocation(location);			
 		}
 	}
 
@@ -352,6 +376,57 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 
 	};
 
+	//Configuration Handling
+
+	$scope.loadWhitelabels = function() {
+		$scope.whitelabels = $scope.whitelabelResource.query();
+	}
+
+	$scope.loadWhitelabelConfig = function(company) {
+		if(!company) {
+			$log.log('CloobsterAdmin.Package.loadConfiguration: no company given');
+			return;
+		}
+
+		if(!company.configuration) {
+			company.configuration = {};
+		}
+
+		if(!company.whitelabel) {
+			company.whitelabel = {};
+		}
+
+		company.configuration.whitelabel = $scope.companyConfigResource.get({id: company.id, name: 'whitelabel'}, onSuccess, onError);
+
+		function onSuccess(response) {
+			company.configuration.whitelabel = response;
+			company.whitelabel.key = response.key;
+		}
+
+		function onError(_response, _status, _headers, _config) {
+			if(_response.status == 404) {
+				//create new configuration
+				company.configuration.whitelabel = new $scope.companyConfigResource();
+
+				company.configuration.whitelabel.$update({id: company.id, name: 'whitelabel'}, angular.noop, errorHandler);
+
+			} else {
+				errorHandler(_response, _status, _headers, _config);
+			}
+		}
+	}
+
+	$scope.saveConfiguration = function(company) {
+		if(!company.configuration) {
+			$log.log('CloobsterAdmin.Package.saveConfiguration: no company.configuration exists');
+			return;
+		}
+
+		company.configuration.whitelabel.key = company.whitelabel.key;
+
+		company.configuration.whitelabel.$update({id: company.id, name: 'whitelabel'} , angular.noop, errorHandler);
+	}
+
 	//General Functions
 
 	/*
@@ -372,10 +447,14 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Lo
 
 	/** Initialization. */
 
+	$scope.companyConfigResource = CompanyConfiguration.buildResource();
+	$scope.whitelabelResource = WhitelabelConfiguration.buildResource();
+
 	$scope.activeTab = 'locations';
 	$scope.loadPackages();
-	$scope.loadCompanies();
+	$scope.loadWhitelabels();
+	$scope.loadCompanies();	
 
 }
 
-CloobsterAdmin.Package.$inject = ['$scope', '$http', '$log', 'Subscription', 'Company', 'Location', 'LocationSubscription','$routeParams'];
+CloobsterAdmin.Package.$inject = ['$scope', '$http', '$log', 'Subscription', 'Company', 'CompanyConfiguration', 'Location', 'LocationSubscription','$routeParams', 'WhitelabelConfiguration', 'errorHandler'];

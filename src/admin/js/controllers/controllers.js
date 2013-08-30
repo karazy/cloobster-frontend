@@ -433,3 +433,104 @@ CloobsterAdmin.InfoPages = function($scope, $http, $anchorScroll) {
 }
 CloobsterAdmin.InfoPages.$inject = ['$scope', '$http', '$anchorScroll'];
 
+/**
+* 	@name CloobsterAdmin.WhitelabelController
+*	@requires $http
+*
+* 	Manages Whitelabel template handling
+* 	@constructor
+*/
+CloobsterAdmin.WhitelabelController = function($scope, WhitelabelConfiguration, errorHandler) {	
+
+	/**
+	* Load all existing whitelabels.
+	*/
+	$scope.loadWhitelabels = function() {
+		$scope.whitelabels = $scope.whitelabelResource.query();
+	}
+
+	/**
+	* Update given whitelabel.
+	*/
+	$scope.saveWhitelabel = function(wl) {
+		if(!wl) {
+			return;
+		}
+		$scope.whitelabelResource.update(wl, angular.noop, errorHandler);
+	}
+
+	/**
+	* Creates a new whitelabel and adds it to list.
+	*/
+	$scope.createWhitelabel = function() {
+		if(!$scope.formValid()) {
+			return;
+		}
+
+		$scope.whitelabelResource.update(
+			{
+				'name': $scope.newWhitelabelName,
+				'key': $scope.newWhitelabelKey,
+				'ios': $scope.newWhitelabeliOS,
+				'android': $scope.newWhitelabelAndroid,
+				'desktop': $scope.newWhitelabelDesktop,
+				'iosUrlScheme' : $scope.newWhitelabeliOSUrlScheme
+			}, 
+			function(response) {				
+				//add new whitelabel to list
+				$scope.whitelabels.push(response);
+				//reset form
+				$scope.resetForm();
+			},
+			function() {alert('ERROR SAVING WHITELABEL')});
+	}
+
+	/**
+	* Check if whitelabel form is valid.
+	* @return
+	*	true if valid, false otherwise
+	*/
+	$scope.formValid = function() {
+		if($scope.newWhitelabelName && $scope.newWhitelabelKey) {
+			return true;
+		}
+	}
+
+	/**
+	* Reset new whitelabel form!
+	*
+	*/
+	$scope.resetForm = function() {
+		$scope.newWhitelabelName = '';
+		$scope.newWhitelabelKey = '';
+		$scope.newWhitelabeliOS = '';
+		$scope.newWhitelabelAndroid = '';
+		$scope.newWhitelabelDesktop = '';
+		$scope.newWhitelabeliOSUrlScheme = '';
+	}
+
+	/**
+	* Delete Whitelabel.
+	*/
+	$scope.deleteWhitelabel = function(wlToDelete) {
+		$scope.whitelabelResource['delete'](
+			{'name': wlToDelete.name}, 
+			onSuccess,
+			errorHandler);
+
+		function onSuccess() {
+			angular.forEach($scope.whitelabels, function(wl, index) {
+			if(wlToDelete.key == wl.key) {
+				$scope.whitelabels.splice(index, 1);
+				//exit loop
+				return false;
+			}
+		});
+		}
+	}
+
+	$scope.whitelabelResource = WhitelabelConfiguration.buildResource();
+	$scope.loadWhitelabels();
+}
+CloobsterAdmin.WhitelabelController.$inject = ['$scope', 'WhitelabelConfiguration', 'errorHandler']
+

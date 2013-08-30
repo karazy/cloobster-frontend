@@ -101,3 +101,91 @@ CloobsterAdmin.resources.factory('Account', ['$resource', function($resource){
       }
     );
 }]);
+
+/**
+* @constructor
+* Factory function that creates the 'CompanyConfiguration' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Frederik Reifschneider
+*/
+CloobsterAdmin.resources.factory('CompanyConfiguration', ['$resource', function($resource) {
+
+	/**
+	*	@name Cloobster.services.CompanyConfiguration
+	*	
+	*/
+	var CompanyConfiguration = {
+
+		buildResource: function() {
+			return $resource('/admin/m/companies/:id/configurations/:name',
+				//params	
+				{
+					'name' : '@name',
+					'id' : '@id'
+				},
+				//Custom actions can be called with $'methodname'.
+				{
+					/**
+					* @name Cloobster.services.CompanyConfiguration#$query
+					* @override
+					* Overrides default query method by overriding companyId as default parameter
+					*/
+					'query':  {method:'GET',  isArray:true}, //params: { 'id' : companyId},
+					/*
+					* @name Cloobster.services.CompanyConfiguration#$update
+					* Like a save but uses PUT instead of POST.
+					*/
+					'update': { 
+						method: 'PUT'
+					}
+				}
+			)
+		}
+
+	}
+	return CompanyConfiguration;
+}]);
+
+/**
+* @constructor
+* Factory function that creates the 'WhitelabelConfiguration' resource service.
+* 	See ngResource for further information on resource objects.
+* 
+* 	@author Frederik Reifschneider
+*/
+CloobsterAdmin.resources.factory('WhitelabelConfiguration', ['$resource', function($resource) {
+
+	/**
+	*	@name Cloobster.services.WhitelabelConfiguration
+	*	
+	*/
+	var WhitelabelConfiguration = {
+
+		buildResource: function() {
+			return $resource('/admin/s/configuration/whitelabels/:name',
+				//params	
+				{
+					'name' : '@name'
+				},
+				//Custom actions can be called with $'methodname'.
+				{
+					/**
+					* @name Cloobster.services.WhitelabelConfiguration#$query
+					* @override
+					*/
+					'query':  {method:'GET',  isArray:true}, 
+					/*
+					* @name Cloobster.services.WhitelabelConfiguration#$update
+					* Like a save but uses PUT instead of POST.
+					*/
+					'update': { 
+						method: 'PUT'
+					}
+				}
+			)
+		}
+
+	}
+	return WhitelabelConfiguration;
+}]);
