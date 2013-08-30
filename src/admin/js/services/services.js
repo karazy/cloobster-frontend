@@ -62,7 +62,7 @@ CloobsterAdmin.services.factory('lang', ['$log', 'translation', function($log, t
 					return "";
 				}
 
-				return translation[key][browserLang] || key;
+				return translation[key][browserLang] || "";
 		}
 	}
 

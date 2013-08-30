@@ -440,7 +440,7 @@ CloobsterAdmin.InfoPages.$inject = ['$scope', '$http', '$anchorScroll'];
 * 	Manages Whitelabel template handling
 * 	@constructor
 */
-CloobsterAdmin.WhitelabelController = function($scope, WhitelabelConfiguration) {	
+CloobsterAdmin.WhitelabelController = function($scope, WhitelabelConfiguration, errorHandler) {	
 
 	$scope.loadWhitelabels = function() {
 		$scope.whitelabels = $scope.whitelabelResource.query();
@@ -451,7 +451,7 @@ CloobsterAdmin.WhitelabelController = function($scope, WhitelabelConfiguration) 
 			return;
 		}
 
-		$scope.whitelabelResource.update(wl, angular.noop, function() {alert('ERROR UPDATING WHITELABEL')});
+		$scope.whitelabelResource.update(wl, angular.noop, errorHandler);
 	}
 
 	$scope.createWhitelabel = function() {
@@ -496,7 +496,7 @@ CloobsterAdmin.WhitelabelController = function($scope, WhitelabelConfiguration) 
 		$scope.whitelabelResource['delete'](
 			{'name': wlToDelete.name}, 
 			onSuccess,
-			function() {alert('ERROR DELETING WHITELABEL')});
+			errorHandler);
 
 		function onSuccess() {
 			angular.forEach($scope.whitelabels, function(wl, index) {
@@ -512,5 +512,5 @@ CloobsterAdmin.WhitelabelController = function($scope, WhitelabelConfiguration) 
 	$scope.whitelabelResource = WhitelabelConfiguration.buildResource();
 	$scope.loadWhitelabels();
 }
-CloobsterAdmin.WhitelabelController.$inject = ['$scope', 'WhitelabelConfiguration']
+CloobsterAdmin.WhitelabelController.$inject = ['$scope', 'WhitelabelConfiguration', 'errorHandler']
 

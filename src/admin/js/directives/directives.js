@@ -33,7 +33,7 @@ CloobsterAdmin.directives.directive('simplePropertyEditor', ['lang','$timeout', 
 				'<div class="toggler" ng-transclude></div>'+
 				'<div class="simple-property-editor-mask"></div>'+			
 				'<div class="simple-property-editor" style="display:none; position:absolute; background-color:white;">'+
-				'<h5 class="editor-title" l="{{editorTitle}}">Edit property</h5>'+
+				'<h5 class="editor-title" l="{{editorTitle}}" l-force-override="true">Edit property</h5>'+
 				'<form name="simplePropertyForm" novalidate ng-submit="save()" class="edit-property-form">'+
 					'<div class="">'+
 					 	'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty.$invalid)">'+
@@ -285,6 +285,7 @@ CloobsterAdmin.directives.directive('l', ['$locale', 'lang', '$interpolate', fun
 		var key = iAttrs.l,
 			//attribute whos value to translate, if nothing provided html content is replaced
 			replaceAttr = iAttrs.lAttribute,
+			forceOverride = iAttrs.lForceOverride,
 			translation,
 			interpolation,
 			oldWatch;
@@ -295,7 +296,17 @@ CloobsterAdmin.directives.directive('l', ['$locale', 'lang', '$interpolate', fun
 			}
 
 			//if no translation is found, don't replace html, this is useful to provide default values in html
-			translation = langService.translate(value) || (replaceAttr ? iAttrs[replaceAttr]  : iElement.html());
+			translation = langService.translate(value);// || (replaceAttr ? iAttrs[replaceAttr]  : iElement.html());
+
+			if(!translation) {
+				if(replaceAttr) {
+					translation = iAttrs[replaceAttr]
+				} else if(forceOverride) {
+					translation = value
+				} else {
+					translation = iElement.html();
+				}
+			}
 
 			// Interpolate the text to parse possible {{expressions}}
 			interpolation = $interpolate(translation);

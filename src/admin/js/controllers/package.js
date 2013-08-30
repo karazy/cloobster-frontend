@@ -1,7 +1,7 @@
 /** @module CloobsterAdmin */
 'use strict';
 
-CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, CompanyConfiguration, Location, LocationSubscription, $routeParams, WhitelabelConfiguration) {
+CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, CompanyConfiguration, Location, LocationSubscription, $routeParams, WhitelabelConfiguration, errorHandler) {
 
 	//available template subscriptions
 	$scope.packages = null;
@@ -135,8 +135,8 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Co
 	}
 
 	/**
-	* Set given company active.
-	*
+	* Set given company active 
+	* and load locations and whitelabel config.
 	*/
 	$scope.loadCompany = function(company) {
 		$scope.currentCompany = company;
@@ -148,16 +148,11 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Co
 
 	
 
-
+	/**
+	* Load all avail companies.
+	*/
 	$scope.loadCompanies = function() {
-		$scope.companies = Company.query();
-
-		// function success(response) {
-		// 	angular.forEach(response, function(company) {
-		// 		$scope.loadLocationsForCompany(company);				
-		// 		$scope.loadWhitelabelConfig(company);
-		// 	});
-		// }
+		$scope.companies = Company.query(angular.noop, errorHandler);
 	}
 
 
@@ -413,12 +408,10 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Co
 				//create new configuration
 				company.configuration.whitelabel = new $scope.companyConfigResource();
 
-				company.configuration.whitelabel.$update({id: company.id, name: 'whitelabel'}, angular.noop, function(_response, _status, _headers, _config) {
-					alert('Could not create whitelabel configuration');
-				});
+				company.configuration.whitelabel.$update({id: company.id, name: 'whitelabel'}, angular.noop, errorHandler);
 
 			} else {
-				alert('Could not load whitelabel configuration');
+				errorHandler(_response, _status, _headers, _config);
 			}
 		}
 	}
@@ -431,9 +424,7 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Co
 
 		company.configuration.whitelabel.key = company.whitelabel.key;
 
-		company.configuration.whitelabel.$update({id: company.id, name: 'whitelabel'} , angular.noop, function() {
-			alert('Could not save whitelabel configuration');
-		});
+		company.configuration.whitelabel.$update({id: company.id, name: 'whitelabel'} , angular.noop, errorHandler);
 	}
 
 	//General Functions
@@ -466,4 +457,4 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Co
 
 }
 
-CloobsterAdmin.Package.$inject = ['$scope', '$http', '$log', 'Subscription', 'Company', 'CompanyConfiguration', 'Location', 'LocationSubscription','$routeParams', 'WhitelabelConfiguration'];
+CloobsterAdmin.Package.$inject = ['$scope', '$http', '$log', 'Subscription', 'Company', 'CompanyConfiguration', 'Location', 'LocationSubscription','$routeParams', 'WhitelabelConfiguration', 'errorHandler'];
