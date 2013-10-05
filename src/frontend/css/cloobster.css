@@ -1012,3 +1012,9 @@ ul.options-list li:hover {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+/*Fix for bottstrap.css causing gmaps to not display controls correctly. http://stackoverflow.com/questions/8511436/zoom-control-and-streetview-not-showing-on-my-google-map*/
+/* line 911, sass/cloobster.scss */
+.gmnoprint img {
+  max-width: none;
+}

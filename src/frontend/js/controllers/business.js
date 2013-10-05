@@ -25,18 +25,20 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		defaultPaymentMethod = {
 			name: langService.translate("paymentmethod.new.default.name") || "New payment method"
 		},
+		defaultMapZoom = 14,
 		/** Google Map options */
 		mapOptions = {
 			// center on Darmstadt for now
-    	center: new google.maps.LatLng(49.882247,8.652023),
-    	scrollwheel: false,
-    	zoomControl: true,
-    	streetViewControl: false,
-    	zoom: 8,
-    	mapTypeId: google.maps.MapTypeId.ROADMAP,
-    	zoomControlOptions: {
-		    style: google.maps.ZoomControlStyle.SMALL
-		}
+	    	center: new google.maps.LatLng(49.882247,8.652023),
+	    	scrollwheel: false,
+	    	zoomControl: true,
+	    	streetViewControl: false,
+	    	zoom: defaultMapZoom,
+	    	panControl: false,
+	    	mapTypeId: google.maps.MapTypeId.ROADMAP,
+	    	zoomControlOptions: {
+			    style: google.maps.ZoomControlStyle.SMALL
+			}
   	},
   	/** reference to the Google Map */
   	map,
@@ -189,7 +191,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 				centerOnLocation($scope.activeBusiness, true);				
 			}
 			else {
-				map.setZoom(16);
+				map.setZoom(defaultMapZoom);
 			}
 
 			// Center Google Map
@@ -629,7 +631,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
  		}
 
  		map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
- 		map.setZoom(14);
+ 		map.setZoom(defaultMapZoom);
 	  geocoder = new google.maps.Geocoder();
 
 	  // register click event
@@ -687,7 +689,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	    		$scope.saveBusiness();
 	    	}
 	    	$scope.activeCoords = results[0].geometry.location;
-	    	map.setZoom(14);
+	    	map.setZoom(defaultMapZoom);
 	    	map.setCenter(results[0].geometry.location);
 	    	placeMarker(results[0].geometry.location);
 	    } else {
