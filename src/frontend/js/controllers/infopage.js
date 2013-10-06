@@ -126,10 +126,11 @@ Cloobster.InfoPage = function($scope, $http, $routeParams, $location, loginServi
 	*
 	*/
 	$scope.createInfoPage = function() {
-		var newPage = { 'translations' : {} };
+		var newPage = {};
 		
 		
 		if($scope.activeBusiness.lang) {
+			newPage.translations = {};
 			// Init embedded translations object
 			for (var i = $scope.activeBusiness.lang.length - 1; i >= 0; i--) {
 				newPage.translations[$scope.activeBusiness.lang[i]] = {};

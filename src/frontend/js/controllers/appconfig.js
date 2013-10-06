@@ -103,7 +103,7 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			"feature" : "de-ztix"
 		},
 		"menusselected": {	
-			title: langService.translate("tiles.template.menusselected") || "Selected Menus",
+			title: langService.translate("tiles.template.menusselected") || "Offers category",
 			type: "menusselected",
 			cls: "tile-products",
 			description: langService.translate("tiles.template.menusselected.description"),

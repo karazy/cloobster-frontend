@@ -173,12 +173,26 @@ CloobsterAdmin.Package = function($scope, $http, $log, Subscription, Company, Co
 		jQuery('#toggle_close_'+location.id).toggle();
 		//load subscriptions
 		if(jQuery('#details_'+location.id).is(":visible")) {
-			$scope.loadSubscriptionsForLocation(location);			
-		}
+			$scope.loadSubscriptionsForLocation(location);	
+			loadWelcomeSpot(location);
+		}		
+		//load welcome Spot
 	}
 
 	$scope.loadSubscriptionsForLocation = function(location) {
 		location.subscriptions = LocationSubscription.query({'bid' : location.id});
+	}
+
+	function loadWelcomeSpot (location) {
+		
+		if(!location) {
+			$log.log('Wizard: cannot load welcome spot without location');
+			return;
+		}
+
+		$http.get('/admin/m/locations/' + location.id + '/welcomespot').success(function(response) {
+			location.welcomeSpot = response;
+		});
 	}
 
 	$scope.setActivePackageForLocation = function(location) {

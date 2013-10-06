@@ -2411,8 +2411,8 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Feedback"
 		},
 		"tiles.template.products" : {
-			"DE" :  "Produkte",
-			"EN" : "Products"
+			"DE" :  "Angebote",
+			"EN" : "Offers"
 		},
 		"tiles.template.infopages" : {
 			"DE" :  "Infoseiten",
@@ -2431,20 +2431,20 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Infopage: Selected"
 		},
 		"tiles.template.productsall" : {
-			"DE" :  "Produkte: Zufall",
-			"EN" : "Products: Random"
+			"DE" :  "Produkte (Zufall)",
+			"EN" : "Products (Random)"
 		},
 		"tiles.template.productsspecial" : {
-			"DE" :  "Produkte: Angebote",
-			"EN" : "Products: Random"
+			"DE" :  "Produkte (Special)",
+			"EN" : "Products (Special)"
 		},
 		"tiles.template.productsselected" : {
-			"DE" :  "Produkte: Ausgewählt",
-			"EN" : "Products: Selected"
+			"DE" :  "Produkte (Ausgewählt)",
+			"EN" : "Products (Selected)"
 		},
 		"tiles.template.menusselected" : {
-			"DE" :  "Menü: Ausgewählt",
-			"EN" : "Menu: Selected"
+			"DE" :  "Kategorie",
+			"EN" : "Category"
 		},
 		"tiles.template.feedback.description" : {
 			"DE" :  "Shortcut um in den Feedbackbereich zu gelangen, statt über die seitliche Navigation.",

@@ -907,3 +907,5 @@ $step-element-maxwidth: 650px;
   background-repeat: no-repeat;
 }
 
+/*Fix for bottstrap.css causing gmaps to not display controls correctly. http://stackoverflow.com/questions/8511436/zoom-control-and-streetview-not-showing-on-my-google-map*/
+.gmnoprint img { max-width: none; }
