@@ -1780,8 +1780,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 				"his real spot. For example you can hand out the master spot for rooms and don't need to provide individual stan-up displays for all of them (disable barcode required!)."
 		},
 		"spot.cloobsterwidget" : {
-			"DE" :  "Snippet auswählen, kopieren und auf Website einfügen um bei installierter App mittels Button einen Check-in zu ermöglichen.",
-			"EN" : "Copy and paste snippet on a website for direct cloobster Check-in via a button at this spot when app is installed."
+			"DE" :  "Snippet auswählen, kopieren und auf Website einfügen um bei installierter App mittels Button einen Check-in zu ermöglichen. "+
+				"Oder untenstehenden Link benutze. Desktop Nutzer werden auf eine Website weitergeleitet.",
+			"EN" : "Copy and paste snippet on a website for direct Check-in via a button at this spot when app is installed. "+
+				"Or use the link at the bottom. Desktop users will be redirected to a website."
 		},		
 		//infopage partial
 		"infopages.description" : {
