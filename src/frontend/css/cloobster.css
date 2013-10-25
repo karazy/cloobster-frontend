@@ -934,6 +934,11 @@ ul.options-list li:hover {
 }
 
 /* line 838, sass/cloobster.scss */
+.tile-de-ztix-coupons .tile-icon {
+  background-image: url("../img/tiles/gift.png");
+}
+
+/* line 842, sass/cloobster.scss */
 .smartphone-frame {
   background-image: url("../img/tiles/gn_frame.png");
   width: 100%;
@@ -943,7 +948,7 @@ ul.options-list li:hover {
   background-repeat: no-repeat;
 }
 
-/* line 847, sass/cloobster.scss */
+/* line 851, sass/cloobster.scss */
 .smartphone-content {
   width: 300px;
   height: 464px;
@@ -956,12 +961,12 @@ ul.options-list li:hover {
   box-sizing: border-box;
 }
 
-/* line 859, sass/cloobster.scss */
+/* line 863, sass/cloobster.scss */
 .tile-container-config-highlight {
   border: 2px dashed red !important;
 }
 
-/* line 863, sass/cloobster.scss */
+/* line 867, sass/cloobster.scss */
 .mask {
   top: 0;
   left: 0;
@@ -983,18 +988,18 @@ ul.options-list li:hover {
   height: 464px;
 }
 
-/* line 884, sass/cloobster.scss */
+/* line 888, sass/cloobster.scss */
 .mask > div {
   top: 150px;
   position: relative;
 }
 
-/* line 889, sass/cloobster.scss */
+/* line 893, sass/cloobster.scss */
 .drop-active .mask {
   display: block;
 }
 
-/* line 893, sass/cloobster.scss */
+/* line 897, sass/cloobster.scss */
 .app-help-image {
   height: 500px;
   background-image: url("../img/apphelp.jpg");
@@ -1004,7 +1009,7 @@ ul.options-list li:hover {
   min-width: 350px;
 }
 
-/* line 902, sass/cloobster.scss */
+/* line 906, sass/cloobster.scss */
 .app-image {
   height: 500px;
   background-image: url("../img/app_screenshot.png");
@@ -1014,7 +1019,7 @@ ul.options-list li:hover {
 }
 
 /*Fix for bottstrap.css causing gmaps to not display controls correctly. http://stackoverflow.com/questions/8511436/zoom-control-and-streetview-not-showing-on-my-google-map*/
-/* line 911, sass/cloobster.scss */
+/* line 915, sass/cloobster.scss */
 .gmnoprint img {
   max-width: none;
 }

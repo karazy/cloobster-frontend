@@ -57,7 +57,7 @@
 					</div>
 					<div class="data-container-block">
 						<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable">
-							<li ng-repeat="c in companies | filter:companyQuery" ng-class="{active: currentCompany.id == c.id}">
+							<li ng-repeat="c in companies | filter:companyQuery | orderBy:'name'" ng-class="{active: currentCompany.id == c.id}">
 								<a ng-click="loadCompany(c)">{{c.name}}</a>
 							</li>
 						</ul>
@@ -138,7 +138,7 @@
 									<div class="span2" style="font-weight:bold;">Website</div>						
 								</div>
 							</div>
-							<div ng-repeat="l in locationsMap[currentCompany.id]" class="data-container-block data-container-seperator">
+							<div ng-repeat="l in locationsMap[currentCompany.id] | orderBy:'name'" class="data-container-block data-container-seperator">
 								<div class="row-fluid">
 									<div class="span1">
 										<button class="btn btn-small" ng-click="showLocationDetail(l)">

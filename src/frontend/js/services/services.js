@@ -54,7 +54,7 @@ Cloobster.services.provider('config', function() {
 	*	If called with two arguments, set the format string (specified by the second argument)
 	*	for currency specified by the first argument.
 	*	@param {(Object.<string, string>|string)} a1 - Map or currency identifier if called with the second argument.
-	*	@param {=string} a2 - format string for regex replacement for currency values.
+	*	@param {String} a2 - format string for regex replacement for currency values.
 	*/
 	self.setCurrencyFormats = function(a1, a2) {
 		if(arguments.length == 1) {
@@ -1036,7 +1036,7 @@ Cloobster.services.factory('listUtil', ['$filter','$log', function($filter,$log)
 		/**
 		* Check/Uncheck elements regarding the given search filter.
 		* If less then all filtered spots are checked, check all of them. Otherwise uncheck all.
-		* @param {Array<Object>} list
+		* @param {Array} list
 		*	List of objects to check/uncheck
 		* @param {Object} filter (optional)
 		*  e.g. someProduct.name= 'XYZ' where someProduct is a product object and list gets filtered by name value

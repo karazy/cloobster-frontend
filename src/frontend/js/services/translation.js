@@ -1780,8 +1780,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 				"his real spot. For example you can hand out the master spot for rooms and don't need to provide individual stan-up displays for all of them (disable barcode required!)."
 		},
 		"spot.cloobsterwidget" : {
-			"DE" :  "Snippet auswählen, kopieren und auf Website einfügen um bei installierter App mittels Button einen Check-in zu ermöglichen.",
-			"EN" : "Copy and paste snippet on a website for direct cloobster Check-in via a button at this spot when app is installed."
+			"DE" :  "Snippet auswählen, kopieren und auf Website einfügen um bei installierter App mittels Button einen Check-in zu ermöglichen. "+
+				"Oder untenstehenden Link benutze. Desktop Nutzer werden auf eine Website weitergeleitet.",
+			"EN" : "Copy and paste snippet on a website for direct Check-in via a button at this spot when app is installed. "+
+				"Or use the link at the bottom. Desktop users will be redirected to a website."
 		},		
 		//infopage partial
 		"infopages.description" : {
@@ -2773,8 +2775,16 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Please select a partner from the list."
 		},
 		"externals.de.ztix.name" : {
-			"DE" :  "Ztix",
-			"EN" : "Ztix"
+			"DE" :  "ztix",
+			"EN" : "ztix"
+		},
+		"externals.de.ztix.hosts.name" : {
+			"DE" :  "ztix - Verantaltungen",
+			"EN" : "ztix - Events"
+		},
+		"externals.de.ztix.coupons.name" : {
+			"DE" :  "ztix - Gutscheine",
+			"EN" : "ztix - coupons"
 		},
 		"externals.de.panoramafotobuch.name" : {
 			"DE" :  "Panorama Fotobuch",
@@ -2786,6 +2796,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "To display events from ztix platform, simply enter your host ID.<br/>"+
 					"Afterwards enable the feature under"
 		},
+		"externals.de.ztix.coupons.description" : {
+			"DE" :  "Um Gutscheine aus dem ztix System anzuzeigen, tragen Sie bitte die ID der Gutscheinverwaltungseinheit ein.",
+			"EN" : "To display coupons from ztix platform, simply enter ID of the coupon issuer."
+		},
 		"externals.de.ztix.title" : {
 			"DE" :  "Ticketing leicht gemacht",
 			"EN" : "Ticketing made easy"
@@ -2794,21 +2808,33 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Veranstalter ID(s)",
 			"EN" : "Host ID(s)"
 		},
+		"externals.de.ztix.editor.coupons.label" : {
+			"DE" :  "Gutscheinausgabe ID(s)",
+			"EN" : "Coupon issuer ID(s)"
+		},
 		"externals.de.ztix.editor.host.placeholder" : {
-			"DE" :  "Id Nummer der Veranstalter",
-			"EN" : "Id number of hosts"
+			"DE" :  "Eine Id oder mehrere Id/Id/Id",
+			"EN" : "One Id or multiple Id/Id/id"
 		},
 		"externals.de.ztix.hosts.error" : {
-			"DE" :  "Bitte eine gültige Zahl eingeben. Mehrere Veranstalter können durch / getrennt werden.",
-			"EN" : "Enter a valid number. Seperate multiple hosts via /"
+			"DE" :  "Bitte eine gültige Zahl eingeben. Mehrere IDs können durch / getrennt werden.",
+			"EN" : "Enter a valid number. Seperate multiple IDs via /"
 		},
 		"tiles.template.external.de.ztix.events" : {
-			"DE" :  "Ztix Veranstaltungen",
-			"EN" : "Ztix Events"
+			"DE" :  "ztix Veranstaltungen",
+			"EN" : "ztix Events"
 		},
 		"tiles.template.external.de.ztix.events.description" : {
 			"DE" :  "Shortcut um in den Veranstaltungen zu gelangen, statt über die seitliche Navigation. (Externer Partner Feature!)",
 			"EN" : "Shortcut to quickly reach Events instead of the navigation menu. (External partner feature!)"
+		},
+		"tiles.template.external.de.ztix.coupons" : {
+			"DE" :  "ztix Gutscheine",
+			"EN" : "ztix coupons"
+		},
+		"tiles.template.external.de.ztix.coupons.description" : {
+			"DE" :  "Shortcut um in den Gutscheinebereich zu gelangen, statt über die seitliche Navigation. (Externer Partner Feature!)",
+			"EN" : "Shortcut to quickly reach coupons instead of the navigation menu. (External partner feature!)"
 		},
 		//login_form partial
 		"login.message" : {
