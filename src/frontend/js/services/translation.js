@@ -786,6 +786,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Eine E-Mail wird bei Eingang von neuen Bestellungen an die eingetragene Addresse geschickt.",
 			"EN" : "An e-mail will be send to the configured address for incoming orders."
 		},
+		"business.detail.section.storecard" : {
+			"DE" :  "Kundenkarte",
+			"EN" : "Storecard"
+		},
+		"business.detail.section.storecard.description" : {
+			"DE" :  "Wenn Sie in Ihrer Location eine Kundenkarte anbieten, wählen Sie bitte den Barcode Typ aus.",
+			"EN" : "Please choose barcode type of your storecards if you offer them in location."
+		},
 		//profile partial
 		"profile.title" : {
 			"DE" : "Profil",
@@ -2539,6 +2547,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"appconfig.features.contact" : {
 			"DE" :  "Kontaktinformation",
 			"EN" : "Contact information"
+		},
+		"appconfig.features.storecard" : {
+			"DE" :  "Kundenkarte",
+			"EN" : "Customer storecard"
 		},
 		//general
 		"common.warning.title" : {

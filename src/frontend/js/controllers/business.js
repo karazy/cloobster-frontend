@@ -10,7 +10,7 @@
 * 	View and manage businesses such as restaurants.
 * 	@constructor
 */
-Cloobster.Business = function($scope, $http, $routeParams, $location, loginService, uploadService, langService, Business, $log, handleError, Company, Subscription, langcodes, $rootScope) {
+Cloobster.Business = function($scope, $http, $routeParams, $location, loginService, uploadService, langService, Business, $log, handleError, Company, Subscription, langcodes, $rootScope, LocationConfiguration) {
 
 		/** Holds the Id of the active modal dialog.
 		@type {string} */
@@ -45,7 +45,9 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
   	/** For geocoding searches */
   	geocoder,
   	/** Map marker*/
-  	marker;
+  	marker,
+  	/** Name of store card configuration */
+  	scConfName = 'storecard';
  	
 	/** Resource for CRUD on businesses. */	
 	$scope.businessResource = null;
@@ -53,6 +55,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.imageResource = null;
 	/** Subscription resource */
 	$scope.subscriptionResource = null;
+	/** LocationConfiguration Resource */
+	$scope.locConfigResource = null;
 	$scope.businesses = null;
 	$scope.subscriptions = null;
 	/** The currently selected business. */
@@ -81,6 +85,21 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.langcodes = langcodes;
 	/** Filter object for language selection dialog. */
 	$scope.languageQuery = {};
+	/** List of avail barcodes for storecards.*/
+	$scope.barcodeTypes = [
+		{
+			name: '-',
+			type: 'none'
+		},
+		{
+			name: 'QR',
+			type: 'qr'
+		}, 
+		{
+			name: 'Code 39',
+			type: 'code39'
+		}
+	];
 
 
 	/**
@@ -182,18 +201,22 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 			$scope.imageResource =	createImageResource($scope.activeBusiness.id);
 
+			//resource for generic location configuration (e.g. used for ztix or storecards)
+			$scope.locConfigResource = LocationConfiguration.buildResource($scope.activeBusiness.id);
+
 			$scope.loadBusinessSubscriptions($scope.activeBusiness);
 			
 			// init map
 			initMap($scope.activeBusiness);
 
 			if(!$scope.activeBusiness.geoLat && !$scope.activeBusiness.geoLong) {
-				centerOnLocation($scope.activeBusiness, true);				
+				centerOnLocation($scope.agctiveBusiness, true);				
 			}
 			else {
 				map.setZoom(defaultMapZoom);
 			}
 
+			loadStoreCardConfiguration();
 			// Center Google Map
 			registerAddressWatch();
 
@@ -698,6 +721,63 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	  });
 	}
 
+	//StoreCard configuration logic
+
+	function loadStoreCardConfiguration() {		
+
+		// if(!external) {
+		// 	$log.log('Cloobster.Externals.loadConfiguration: no external given');
+		// 	return;
+		// }
+
+		$scope.storeCardConfiguration = $scope.locConfigResource.get({name: scConfName}, onSuccess, onError);
+
+		function onSuccess(response) {
+			$scope.storeCardConfiguration = response;
+		}
+
+		function onError(_response, _status, _headers, _config) {
+			if(_response.status == 404) {
+				//create new configuration
+				$scope.storeCardConfiguration = new $scope.locConfigResource();
+
+				$scope.storeCardConfiguration.$update({name: scConfName}, angular.noop, function(_response, _status, _headers, _config) {
+					errorHandler(_response, _status, _headers, _config);
+				});
+
+			} else {
+				handleError(_response, _status, _headers, _config);
+			}
+		}
+	}
+
+	$scope.saveStoreCardConfiguration = function() {
+		if(!$scope.storeCardConfiguration) {
+			$log.log('Cloobster.Business.saveConfiguration: no $scope.storeCardConfiguration exists');
+			return;
+		}
+
+		$scope.storeCardConfiguration.$update({name: scConfName} ,angular.noop, handleError);
+	}
+
 };
 
-Cloobster.Business.$inject = ['$scope', '$http','$routeParams', '$location', 'login', 'upload', 'lang', 'Business', '$log','errorHandler','Company', 'Subscription', 'langcodes', '$rootScope'];
+Cloobster.Business.$inject = 
+	[
+		'$scope', 
+		'$http',
+		'$routeParams', 
+		'$location', 
+		'login', 
+		'upload', 
+		'lang', 
+		'Business', 
+		'$log',
+		'errorHandler',
+		'Company', 
+		'Subscription', 
+		'langcodes', 
+		'$rootScope', 
+		'LocationConfiguration'
+	];
+
