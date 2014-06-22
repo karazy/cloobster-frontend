@@ -118,6 +118,14 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			"static": true,
 			"feature" : "de-ztix-coupons"
 		},
+		"storecard": {	
+			title: langService.translate("tiles.template.storecard") || "Storecard",
+			type: "storecard",
+			cls: "tile-storecard",
+			description: langService.translate("tiles.template.storecard.description"),
+			"static": true,
+			"feature" : "storecard"
+		}
 	};
 	/** Holds the last tile whose hover delete button was clicked. */
 	$scope.lastHoveredTile = null;

@@ -27,19 +27,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		},
 		defaultMapZoom = 14,
 		/** Google Map options */
-		mapOptions = {
-			// center on Darmstadt for now
-	    	center: new google.maps.LatLng(49.882247,8.652023),
-	    	scrollwheel: false,
-	    	zoomControl: true,
-	    	streetViewControl: false,
-	    	zoom: defaultMapZoom,
-	    	panControl: false,
-	    	mapTypeId: google.maps.MapTypeId.ROADMAP,
-	    	zoomControlOptions: {
-			    style: google.maps.ZoomControlStyle.SMALL
-			}
-  	},
+		mapOptions,
   	/** reference to the Google Map */
   	map,
   	/** For geocoding searches */
@@ -100,6 +88,22 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			type: 'code39'
 		}
 	];
+
+	if(typeof google != "undefined") {
+		mapOptions = {
+			// center on Darmstadt for now
+	    	center: new google.maps.LatLng(49.882247,8.652023),
+	    	scrollwheel: false,
+	    	zoomControl: true,
+	    	streetViewControl: false,
+	    	zoom: defaultMapZoom,
+	    	panControl: false,
+	    	mapTypeId: google.maps.MapTypeId.ROADMAP,
+	    	zoomControlOptions: {
+			    style: google.maps.ZoomControlStyle.SMALL
+			}
+  		}
+	}
 
 
 	/**
