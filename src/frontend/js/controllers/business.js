@@ -700,6 +700,11 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
   
   // Center the google map based on given location address
 	function centerOnLocation(location, setCoordsOnLocation) {
+
+	  if(!location) {
+	  	$log.log('centerOnLocation: no location given')
+	  	return;
+	  }
 	  var address = location.address + ' ' + location.postcode + ' ' + location.city;
 
 	  geocoder.geocode( { 'address': address}, function(results, status) {				  	
@@ -744,6 +749,8 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			if(_response.status == 404) {
 				//create new configuration
 				$scope.storeCardConfiguration = new $scope.locConfigResource();
+				//Default is no storecard configuration
+				$scope.storeCardConfiguration.barcodeType = 'none';
 
 				$scope.storeCardConfiguration.$update({name: scConfName}, angular.noop, function(_response, _status, _headers, _config) {
 					errorHandler(_response, _status, _headers, _config);
