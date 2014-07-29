@@ -73,7 +73,11 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 	$scope.langcodes = langcodes;
 	/** Filter object for language selection dialog. */
 	$scope.languageQuery = {};
-	/** List of avail barcodes for storecards.*/
+	/** 
+	* List of avail barcodes for storecards.
+	* urlTemplate points to the service for generating the specific barcode with placeholders that can be
+	* replaced by sencha Ext.Template
+	*/
 	$scope.barcodeTypes = [
 		{
 			name: '-',
@@ -81,11 +85,15 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		},
 		{
 			name: 'QR',
-			type: 'qr'
+			type: 'qr',
+			validationPattern: '^([0-9A-Za-z\.\$\/\+\% ]+)$',
+			urlTemplate: 'http://zxing.org/w/chart?cht=qr&chs=150x150&chl={content}'
 		}, 
 		{
-			name: 'Code 39',
-			type: 'code39'
+			name: 'Code 39', //\.\$\/\+\% 
+			type: 'code39',
+			validationPattern: '^([0-9A-Za-z]+)$',
+			urlTemplate: 'http://54.76.228.227:8080/BarcodeService/rest/barcodes/code39/{content}'
 		}
 	];
 
@@ -743,6 +751,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 
 		function onSuccess(response) {
 			$scope.storeCardConfiguration = response;
+			$scope.selectedStoreCardType = response;
 		}
 
 		function onError(_response, _status, _headers, _config) {
@@ -767,6 +776,14 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 			$log.log('Cloobster.Business.saveConfiguration: no $scope.storeCardConfiguration exists');
 			return;
 		}
+
+		angular.forEach($scope.barcodeTypes, function(t) {
+			//select correct type and set other params before save
+			if(t.type == $scope.storeCardConfiguration.barcodeType) {
+				$scope.storeCardConfiguration.validationPattern = t.validationPattern;
+				$scope.storeCardConfiguration.urlTemplate = t.urlTemplate;
+			}
+		});
 
 		$scope.storeCardConfiguration.$update({name: scConfName} ,angular.noop, handleError);
 	}
