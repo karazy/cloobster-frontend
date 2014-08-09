@@ -791,8 +791,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"EN" : "Storecard"
 		},
 		"business.detail.section.storecard.description" : {
-			"DE" :  "Wenn Sie in Ihrer Location eine Kundenkarte anbieten, wählen Sie bitte den Barcode Typ aus.",
-			"EN" : "Please choose barcode type of your storecards if you offer them in location."
+			"DE" :  "Wenn Sie in Ihrer Location eine Kundenkarte anbieten, wählen Sie bitte den Barcode Typ aus.<br>"+
+				"Das Kundenkarten Feature kann in der <a href='#/businesses/{{activeBusinessId}}/appconfig'>App Konfiguration</a> aktiviert werden.",
+			"EN" : "Please choose barcode type of your storecards if you offer them in location.<br>"+
+			"Activate the feature in <a href='#/businesses/{{activeBusinessId}}/appconfig'>app configuration</a>."
 		},
 		//profile partial
 		"profile.title" : {
@@ -2495,6 +2497,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"tiles.template.menusselected.description" : {
 			"DE" :  "Zeigt ein zufälliges Menü aus der Menge der Selektierten an.",
 			"EN" : "Displays a random menu out of the ones you select."
+		},
+		"tiles.template.storecard" : {
+			"DE" :  "Kundenkarte",
+			"EN" : "Storecard"
+		},
+		"tiles.template.storecard.description" : {
+			"DE" :  "Schnellzugriff auf den Kundekartenbereich.",
+			"EN" : "Quick access to storecard."
 		},
 		"appconfig.tiledetail.empty.description" : {
 			"DE" :  "Zeigt details einer Kachel an. Wählen Sie eine Kachel aus der Dashboard Vorschau.",
