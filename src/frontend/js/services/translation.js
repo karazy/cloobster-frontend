@@ -786,6 +786,16 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" : "Eine E-Mail wird bei Eingang von neuen Bestellungen an die eingetragene Addresse geschickt.",
 			"EN" : "An e-mail will be send to the configured address for incoming orders."
 		},
+		"business.detail.section.storecard" : {
+			"DE" :  "Kundenkarte",
+			"EN" : "Storecard"
+		},
+		"business.detail.section.storecard.description" : {
+			"DE" :  "Wenn Sie in Ihrer Location eine Kundenkarte anbieten, wählen Sie bitte den Barcode Typ aus.<br>"+
+				"Das Kundenkarten Feature kann in der <a href='#/businesses/{{activeBusinessId}}/appconfig'>App Konfiguration</a> aktiviert werden.",
+			"EN" : "Please choose barcode type of your storecards if you offer them in location.<br>"+
+			"Activate the feature in <a href='#/businesses/{{activeBusinessId}}/appconfig'>app configuration</a>."
+		},
 		//profile partial
 		"profile.title" : {
 			"DE" : "Profil",
@@ -2488,6 +2498,14 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 			"DE" :  "Zeigt ein zufälliges Menü aus der Menge der Selektierten an.",
 			"EN" : "Displays a random menu out of the ones you select."
 		},
+		"tiles.template.storecard" : {
+			"DE" :  "Kundenkarte",
+			"EN" : "Storecard"
+		},
+		"tiles.template.storecard.description" : {
+			"DE" :  "Schnellzugriff auf den Kundekartenbereich.",
+			"EN" : "Quick access to storecard."
+		},
 		"appconfig.tiledetail.empty.description" : {
 			"DE" :  "Zeigt details einer Kachel an. Wählen Sie eine Kachel aus der Dashboard Vorschau.",
 			"EN" : "Shows the selected tile details. Select a tile from dashboard preview."
@@ -2539,6 +2557,10 @@ angular.module("Cloobster.translations", [], ["$provide", function($provide) {
 		"appconfig.features.contact" : {
 			"DE" :  "Kontaktinformation",
 			"EN" : "Contact information"
+		},
+		"appconfig.features.storecard" : {
+			"DE" :  "Kundenkarte",
+			"EN" : "Customer storecard"
 		},
 		//general
 		"common.warning.title" : {
