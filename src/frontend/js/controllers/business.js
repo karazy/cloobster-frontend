@@ -765,7 +765,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 				$scope.storeCardConfiguration.barcodeType = 'none';
 
 				$scope.storeCardConfiguration.$update({name: scConfName}, angular.noop, function(_response, _status, _headers, _config) {
-					errorHandler(_response, _status, _headers, _config);
+					handleError(_response, _status, _headers, _config);
 				});
 
 			} else {
