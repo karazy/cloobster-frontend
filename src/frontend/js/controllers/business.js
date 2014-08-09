@@ -86,13 +86,16 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		{
 			name: 'QR',
 			type: 'qr',
-			validationPattern: '^([0-9A-Za-z\.\$\/\+\% ]+)$',
+			//Pattern for qr validation. Removed some symbols due to errors (*, /)
+			// validationPattern: '^([0-9A-Za-z\*\-\+\.\%\$ ]+)$',
+			// validationPattern: '^[.*]$',
 			urlTemplate: 'http://zxing.org/w/chart?cht=qr&chs=150x150&chl={content}'
 		}, 
 		{
 			name: 'Code 39', //\.\$\/\+\% 
 			type: 'code39',
-			validationPattern: '^([0-9A-Za-z]+)$',
+			//Pattern for code39 validation. Removed some symbols due to errors (*, /)
+			validationPattern: '^([0-9A-Za-z\\\-\\\+\\\.\\\%\\\$ ]+)$',
 			urlTemplate: 'http://54.76.228.227:8080/BarcodeService/rest/barcodes/code39/{content}'
 		}
 	];
