@@ -14,10 +14,10 @@ module.exports = function(grunt) {
 		},
 		connect: {
 	      options: {
-	        port: 9000,
+	        port: 9001,
 	        // Change this to '0.0.0.0' to access the server from outside.
 	        hostname: '0.0.0.0',
-	        livereload: 35729
+	        livereload: 35730
 	      },
 	      livereload: {
 	        options: {
@@ -58,7 +58,7 @@ module.exports = function(grunt) {
 		        	// 'copy:whitelabelSrc'
 		        ],
 		        options: {
-		          livereload: true,
+		          livereload: 35730,
 		          //spawn no child processes, needed to access options
 		          spawn: false
 		        }
