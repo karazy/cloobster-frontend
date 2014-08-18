@@ -1,5 +1,5 @@
 {
-  "name": "cloobster",
+  "name": "cloobster_frontend",
   "version": "0.2.5",
   "devDependencies": {
     "grunt": "~0.4.5",
