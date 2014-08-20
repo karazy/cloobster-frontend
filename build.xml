@@ -5,6 +5,8 @@
 	<property name="admindir" value="admin"/>
 	<property name="frontenddir" value="frontend"/>
 	<property name="customerhomedir" value="home"/>
+	<property name="serviceUrlProd" value="https://karazy-cloobster.appspot.com"></property>
+	<property name="serviceUrlLocal" value="https://localhost:8888"></property>
 
 	<target name="build-all" depends="clean-all, build-frontend, build-customerhome, build-admin">
 	</target>
@@ -12,9 +14,9 @@
 		</target>
 	<target name="build-admin" depends="compile-admin, copylibs-admin, copyresources-admin">
 	</target>
-	<target name="build-frontend" depends="compile-frontend, copylibs-frontend, copyresources-frontend, setversion">
+	<target name="build-frontend" depends="configure-frontend, compile-frontend, copylibs-frontend, copyresources-frontend, setversion">
 	</target>
-	<target name="build-customerhome" depends="compile-customerhome, copylibs-customerhome, copyresources-customerhome">
+	<target name="build-customerhome" depends="configure-home, compile-customerhome, copylibs-customerhome, copyresources-customerhome">
 	</target>
 
 	<target name="clean-frontend">
@@ -29,6 +31,7 @@
 		<delete dir="build/${admindir}">
 			</delete>
 	</target>
+	
 	<target name="setversion">
 		<echo message="Setting version number" />
 		<exec executable="${git.cmd}" dir="${basedir}" outputproperty="build.commit" vmlauncher="${git.vmlauncher}">
@@ -39,6 +42,7 @@
 		<replaceregexp file="${basedir}/build/${frontenddir}/partials/about.html" match="\{VERSIONINFO\}" replace="${build.commit}" byline="true">
 		</replaceregexp>
 	</target>
+	
 	<target name="compile-admin">
 		<jscomp compilationLevel="simple" warning="verbose" debug="false" output="build/${admindir}/app-all.min.js">
 			<path id="sources">
@@ -51,6 +55,7 @@
 			</externs>
 		</jscomp>
 	</target>
+	
 	<target name="compile-frontend">
 		<jscomp compilationLevel="simple" warning="verbose" debug="false" output="build/${frontenddir}/app-all.min.js">
 			<path id="sources">
@@ -63,6 +68,7 @@
 			</externs>
 		</jscomp>
 	</target>
+	
 	<target name="compile-customerhome">
 		<jscomp compilationLevel="simple" warning="verbose" debug="false" output="build/${customerhomedir}/app-all.min.js">
 			<path id="sources">
@@ -75,6 +81,7 @@
 			</externs>
 		</jscomp>
 	</target>
+	
 	<target name="copylibs-admin">
 		<copy todir="build/${admindir}/lib">
 			<filelist id="adminlibfiles" dir="src/${admindir}/lib" >
@@ -84,6 +91,7 @@
 			</filelist>
 		</copy>
 	</target>
+	
 	<target name="copylibs-customerhome">
 		<copy todir="build/${customerhomedir}/lib">
 			<filelist id="customerhomelibfiles" dir="src/${customerhomedir}/lib" >
@@ -92,6 +100,7 @@
 			</filelist>
 		</copy>
 	</target>
+	
 	<target name="copylibs-frontend">
 		<copy todir="build/${frontenddir}/lib">
 			<filelist id="frontendlibfiles" dir="src/${frontenddir}/lib" >
@@ -114,6 +123,7 @@
 			</fileset>
 		</copy>	
 	</target>
+	
 	<target name="copyresources-admin">
 		<copy todir="build/${admindir}">
 			<fileset id="indexfiles" dir="src/${admindir}/" >
@@ -135,6 +145,7 @@
 		</copy>
 		<move file="build/${admindir}/index.prod.html" tofile="build/${admindir}/index.html" />
 	</target>
+	
 	<target name="copyresources-customerhome">
 		<copy todir="build/${customerhomedir}">
 			<fileset id="indexfiles" dir="src/${customerhomedir}/" >
@@ -154,6 +165,7 @@
 		</copy>
 		<move file="build/${customerhomedir}/index.prod.html" tofile="build/${customerhomedir}/index.html" />
 	</target>
+	
 	<target name="copyresources-frontend">
 		<copy todir="build/${frontenddir}">
 			<fileset id="indexfiles" dir="src/${frontenddir}/" >
@@ -182,5 +194,31 @@
 			</fileset>
 		</copy>
 		<move file="build/${frontenddir}/index.prod.html" tofile="build/${frontenddir}/index.html" />
+	</target>
+	
+	<target name="configure-frontend">
+	    <antcall target="setConfigProd">
+		    <param name="${configFile}" value="src/${frontenddir}/js/services/config.js"></param>
+		</antcall>
+	</target>
+	
+	<target name="configure-home">
+	    <antcall target="setConfigProd">
+		    <param name="${configFile}" value="src/${frontenddir}/js/services/services.js"></param>
+		</antcall>
+	</target>
+	
+	<target name="setConfigProd">
+	    </condition>
+		<echo message="Setting config values" />
+		<replaceregexp file="${configFile}" match="('serviceUrl' :) .*" replace="\1 '${serviceUrlProd}'," byline="true">
+		</replaceregexp>
+	</target>
+	
+	<target name="setConfigLocal">
+	    </condition>
+		<echo message="Setting config values" />
+		<replaceregexp file="${configFile}" match="('serviceUrl' :) .*" replace="\1 '${serviceUrlLocal}'," byline="true">
+		</replaceregexp>
 	</target>
 </project>
