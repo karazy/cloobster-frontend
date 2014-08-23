@@ -1,22 +1,22 @@
 <div ng-include="'views/businesses_header.html'">
 </div>
-<div class="row-fluid">
-	<div class="span12">
+<div class="row">
+	<div class="col-md-12">
 		<p l="businesses.description">You have more than one site you want to use cloobster with.<br/>
 		Here you can maintain the different locations you want to "cloobsterize".</p>
 	</div>
 </div>
 
-<!-- <div class="row-fluid" >
-	<div class="span4">
+<!-- <div class="row" >
+	<div class="col-md-4">
 		<h2 l="businesses.title">My Locations</h2>
 	</div>
-	<div class="span4" show-role="companyowner">
+	<div class="col-md-4" show-role="companyowner">
 		<button type="button" ng-hide="showNewBusinessForm" ng-click="toggleNewBusiness()" class="btn btn-primary pull-right" l="businesses.add">Add new restaurant</button>
 	</div>
 </div> -->
-<div class="row-fluid">
-<div class="data-container-with-title span12">
+<div class="row">
+<div class="data-container-with-title col-md-12">
 	<h4 class="data-container-title" l="businesses.title">My Locations</h4>
 	<div class="data-container-block data-container-seperator">
 		<form class="form-inline">
@@ -29,8 +29,8 @@
 	</div>
 	<div class="data-container-block">
 		<!-- Hint when no locations exist -->
-		<div class="row-fluid" ng-show="!ajaxLoading && businesses.length == 0">
-			<div class="alert alert-block alert-info span8">
+		<div class="row" ng-show="!ajaxLoading && businesses.length == 0">
+			<div class="alert alert-block alert-info col-md-8">
 			  <p l="businesses.empty.description">Currently you don't have any locations. To use cloobster, you need at least one location (hotel, restaurant).</p>
 			</div>
 		</div>
@@ -55,8 +55,8 @@
 
 </div>
 </div>
-<div class="row-fluid">
-<div ng-show="showNewBusinessForm" class="data-container-with-title span4">
+<div class="row">
+<div ng-show="showNewBusinessForm" class="data-container-with-title col-md-4">
 	<h4 class="data-container-title" l="businesses.add.title">Add Location</h4>
 	<div class="data-container-block">		
 		<form ng-submit="addNewBusiness()" name="newBusinessForm" class="form-vertical" novalidate>

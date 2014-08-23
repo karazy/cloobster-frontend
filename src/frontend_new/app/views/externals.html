@@ -1,13 +1,13 @@
 <!-- Konfiguration for external data providers like ztix. -->
 <div ng-include="'views/businesses_header.html'"></div>
-<div class="row-fluid">
-	<div class="span8">
+<div class="row">
+	<div class="col-md-8">
 	<p l="externals.help">List of external data providers and their configuration.</p>
 	</div>
 </div>
 
-<div class="row-fluid">
-	<div class="span3">
+<div class="row">
+	<div class="col-md-3">
 		<div class="data-container-with-title">
 			<h4 class="data-container-title" l="externals.list.title">External Partner</h4>
 			<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable">
@@ -17,7 +17,7 @@
 		    </ul>
 		</div>
 	</div>
-	<div class="span9" ng-show="currentExternal">
+	<div class="col-md-9" ng-show="currentExternal">
 		<div class="data-container-with-title">
 			<h4 class="data-container-title" l="externals.configuration.title">External Partner configuration</h4>
 			<div class="data-container-block">
@@ -25,7 +25,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="span9" ng-hide="currentExternal">
+	<div class="col-md-9" ng-hide="currentExternal">
 		<div class="data-container-with-title data-container-small data-container-inactive">
 			<h4 class="data-container-title" l="externals.configuration.title">External Partner configuration</h4>
 			<div class="data-container-block">

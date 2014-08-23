@@ -1,14 +1,14 @@
 <div class="partial-wrapper">
 	<div ng-include="'views/businesses_header.html'">
 	</div>
-	<div class="row-fluid">
-		<div class="span8">
+	<div class="row">
+		<div class="col-md-8">
 			<p l="reports.description">Get a report about number of checkins, orders and so on</p>
 		</div>
 	</div>
-	<div class="row-fluid">
+	<div class="row">
 		<!-- Report selection list -->
-		<div class="span2">
+		<div class="col-md-2">
 			<div class="data-container-with-title">
 				<h4 class="data-container-title" l="reports.types.title">Report Type</h4>
 				<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable">
@@ -18,7 +18,7 @@
 			    </ul>
 			</div>
 		</div>
-		<div class="span10">
+		<div class="col-md-10">
 			<!-- feedback report configuration -->
 			<div class="data-container-with-title data-container-150" ng-show="currentReport.type == 'feedbackreport'">
 				<h4 class="data-container-title" l="reports.parameters.title">Report parameter</h4>
@@ -38,15 +38,15 @@
 					</form>
 					
 				</div>
-				<div class="row-fluid data-container-block">
+				<div class="row data-container-block">
 						<button class="btn btn-primary" ng-click="loadFeedbackReport()"><i class="glyphicon glyphicon-th glyphicon glyphicon-white"></i><span l="reports.action.show">Show report</span></button>
 					</div>
 			</div>
 
 			<!-- feedback report -->
-			<div class="row-fluid data-container-with-title" ng-show="currentReport && feedbackReportData && feedbackReportData != 'noresult'">
+			<div class="row data-container-with-title" ng-show="currentReport && feedbackReportData && feedbackReportData != 'noresult'">
 				<h4 class="data-container-title">Report</h4>
-				<div class="span10">
+				<div class="col-md-10">
 					<div class="data-container-block data-container-scrollable" style="max-height: 500px;">
 						<h5><span l="reports.feedback.form.title">Form title:</span> {{selectedFeedbackForm.title}}</h5>
 
@@ -112,7 +112,7 @@
 					</select>
 					</form>
 				</div>	
-				<div class="row-fluid data-container-block">
+				<div class="row data-container-block">
 					<div class="btn-toolbar">
 						<div class="btn-group">
 							<button class="btn btn-primary" ng-click="loadReport()"><i class="glyphicon glyphicon-th glyphicon glyphicon-white"></i><span l="reports.action.show">Show report</span></button>
@@ -145,17 +145,17 @@
 				</div>
 			</div>
 			<!-- report configuration empty placeholder -->
-			<div class="row-fluid data-container-with-title data-container-150 data-container-inactive" ng-hide="currentReport">
+			<div class="row data-container-with-title data-container-150 data-container-inactive" ng-hide="currentReport">
 				<h4 class="data-container-title" l="reports.parameters.title">Report parameter</h4>
 				<div class="data-container-block">
 					<p l="reports.parameters.empty.description">Report parameter configuration. First select a report type from the list on the left.</p>
 				</div>
 			</div>
 			<!-- report -->
-			<div class="row-fluid data-container-with-title" ng-show="currentReport && reportData && reportData != 'noresult'">
+			<div class="row data-container-with-title" ng-show="currentReport && reportData && reportData != 'noresult'">
 				<h4 class="data-container-title" l="reports.report.title" ng-show="!currentReportParameters">Report</h4>
 				<h4 class="data-container-title" l="reports.report.title.params" ng-show="currentReportParameters">Report</h4>
-				<div class="span4">
+				<div class="col-md-4">
 					<div class="data-container-block data-container-scrollable" style="max-height: 500px;">
 						<table class="table table-striped">
 							<thead>
@@ -180,19 +180,19 @@
 					</div>
 				</div>
 				<!-- report chart -->
-				<div class="span6">
+				<div class="col-md-6">
 					<div id="chart_div"></div>
 				</div>
 			</div>
 			<!-- report no results placeholder -->
-			<div class="row-fluid data-container-with-title data-container-small" ng-show="currentReport && reportData == 'noresult'">
+			<div class="row data-container-with-title data-container-small" ng-show="currentReport && reportData == 'noresult'">
 				<h4 class="data-container-title" l="reports.report.title">Report</h4>
 				<div class="data-container-block">
 					<h4 l="reports.report.noresult">No results found</h4>
 				</div>
 			</div>
 			<!-- report empty placeholder -->
-			<div class="row-fluid data-container-with-title data-container-small data-container-inactive" ng-hide="currentReport && (reportData || feedbackReportData)">
+			<div class="row data-container-with-title data-container-small data-container-inactive" ng-hide="currentReport && (reportData || feedbackReportData)">
 				<h4 class="data-container-title" l="reports.report.title">Report</h4>
 				<div class="data-container-block">
 					<p l="reports.report.empty.description">Contains the report. Select a type and parameters and click show report.</p>

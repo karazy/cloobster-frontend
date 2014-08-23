@@ -52,20 +52,20 @@
 </div>
 
 <div class="partial_wrapper">
-	<div class="row-fluid">
-		<div class="span8">
+	<div class="row">
+		<div class="col-md-8">
 			<h1 l="profile.title">Profile</h1>
 			<p l="profile.description">Here you can edit your profile data.</p>
 		</div>
 	</div>
-	<div class="row-fluid">
-		<div class="span6">
+	<div class="row">
+		<div class="col-md-6">
 			<div class="data-container-with-title">
 				<h5 class="data-container-title" l="profile.account.title">Account Data</h5>
 				<div class="data-container-block data-container-seperator">
-					<div class="row-fluid">
-						<button class="btn span6" ng-click="showChangePasswordModal()" l="profile.account.action.changepassword">Change password</button>
-						<button type="button" class="btn btn-primary span6" ng-click="toggleEditMode('account')" data-toggle="button">
+					<div class="row">
+						<button class="btn col-md-6" ng-click="showChangePasswordModal()" l="profile.account.action.changepassword">Change password</button>
+						<button type="button" class="btn btn-primary col-md-6" ng-click="toggleEditMode('account')" data-toggle="button">
 							<span l="profile.account.action.edit.enable" ng-hide="editModeAccount">Edit Account Profile</span><span ng-show="editModeAccount" l="profile.account.action.edit.disable">Done editing</span>						
 						</button>
 					</div>
@@ -104,11 +104,11 @@
 			</div>
 		</div>
 		
-		<div class="data-container-with-title span6" show-role="companyowner">
+		<div class="data-container-with-title col-md-6" show-role="companyowner">
 			<h5 class="data-container-title" l="profile.company.title">Company Data</h5>
 			<div class="data-container-block data-container-seperator">
-				<div class="row-fluid">
-					<button type="button" class="btn btn-primary span6" ng-click="toggleEditMode('company')" data-toggle="button">
+				<div class="row">
+					<button type="button" class="btn btn-primary col-md-6" ng-click="toggleEditMode('company')" data-toggle="button">
 						<span l="profile.company.action.edit.enable" ng-hide="editModeCompany">Edit Company Profile</span><span ng-show="editModeCompany" l="profile.company.action.edit.disable">Done editing</span>
 					</button>
 				</div>

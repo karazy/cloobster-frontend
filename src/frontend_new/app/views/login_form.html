@@ -1,28 +1,30 @@
-<div class="row-fluid">
-    <div class="login-module span12">
+<div class="row">
+    <div class="login-module col-md-12">
         <h3 l="login.title">Login</h3>
     	<div ng-hide="loginProgress">
-    <!--             <form ng-submit="fbLogin()" >
-                    <button type="submit" class="btn btn-primary" type="submit" l="login.facebook">Login with Facebook</button>
-                </form> -->    
-            <form name="loginForm" ng-submit="login()">
-                <div class="control-group">
-                    <div class="controls controls-row">
+            <form name="loginForm" ng-submit="login()" class="form-horizontal">
+                <div class="form-group">
+                    <!-- <div class="input-group"> -->
+                    <div class="col-md-6">
                     	<input name="login" type="text" ng-model="loginData.login"  size="30" placeholder="login" l="login.input.login" l-attribute="placeholder" required
-                        class="span6">
+                        class="form-control">
+                    </div>
+                    <div class="col-md-6">
                     	<input name="password" type="password" ng-model="loginData.password"  size="30" placeholder="password" l="login.input.password" l-attribute="placeholder" required
-                        class="span6">
+                        class="form-control">
                     </div>
                 </div>
-                <div class="control-group">
-                    <div class="controls controls-row">
-                        <button type="submit" class="btn btn-primary span6" type="submit" ng-disabled="loginForm.$invalid">Login</button>
-                        <label class="checkbox span6">
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary btn-block" type="submit" ng-disabled="loginForm.$invalid">Login</button>
+                    </div>
+                    <div class="col-md-6 checkbox">
+                        <label>
                             <input name="rememberLogin" type="checkbox" ng-model="loginData.save"> <span l="login.remember">remember login</span></input>
-                        </label>        	
+                        </label>        
+                    </div>	
                     </div>
                 </div>                
-                <!-- <small l="login.message">Login with your business account</small> -->
           	</form>
             <p>
                 <small><a href="#/login/forgot" l="login.password.forgot">Forgot password?</a></small>

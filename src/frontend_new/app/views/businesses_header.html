@@ -1,12 +1,12 @@
 <div ng-controller="Cloobster.Navigation">
-<div class="row-fluid">
-	<div class="span12">
+<div class="row">
+	<div class="col-md-12">
 		<h2 style="float:left; margin-right: 20px"  ng-bind="company.name">Your company name</h2>
 		<select ng-model="activeBusinessId" style="margin-top: 15px; margin-right: 20px;" ng-options="b.id as b.name for b in businesses | filter:filterTrashedBusiness" ng-change="switchBusiness()" ng-show="canSwitchBusiness"></select>		
 	</div>
 </div>
-<div class="row-fluid" ng-show="howtoMode">
-	<div class="span12">
+<div class="row" ng-show="howtoMode">
+	<div class="col-md-12">
 		<div class="howto-bar">
 			<!-- <a href="#/howto">
 				<div class="howto-step">
@@ -41,8 +41,8 @@
 		</div>
 	</div>
 </div>
-<div class="row-fluid">
-	<div class="span12">
+<div class="row">
+	<div class="col-md-12">
 		<ul class="nav nav-tabs">
 			<!-- <li ng-class="{'active': isActive('/howto',true)}">
 				<a href="#/howto" l="businesses.headertabs.howto" style="background-color: rgba(223, 107, 32, .5); color: white;" ng-class="'active-howto-tab'">Howto</a>
