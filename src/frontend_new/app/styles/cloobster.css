@@ -1,0 +1,1030 @@
+/* cloobster css stylesheet */
+/* helber style for ng-cloak directive to hide elements until after angular is completely loaded*/
+/* line 6, sass/cloobster.scss */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none;
+}
+
+/* line 10, sass/cloobster.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 14, sass/cloobster.scss */
+.fill {
+  min-height: 100%;
+  height: 100%;
+}
+
+/* line 19, sass/cloobster.scss */
+.partial-wrapper {
+  margin: 0 0 1em 0;
+}
+
+/* line 23, sass/cloobster.scss */
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+/* line 30, sass/cloobster.scss */
+.menu:before {
+  content: "[";
+}
+
+/* line 34, sass/cloobster.scss */
+.menu:after {
+  content: "]";
+}
+
+/* line 38, sass/cloobster.scss */
+.menu > li {
+  display: inline;
+}
+
+/* line 42, sass/cloobster.scss */
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+/* line 47, sass/cloobster.scss */
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+/* Profile view */
+/* line 53, sass/cloobster.scss */
+.content-wrapper {
+  position: relative;
+}
+
+/* line 57, sass/cloobster.scss */
+.noLogo {
+  background-color: gray;
+}
+
+/* line 61, sass/cloobster.scss */
+.noLogo div {
+  font-size: 1.5em;
+  text-align: center;
+  top: 45%;
+  position: relative;
+}
+
+/* line 68, sass/cloobster.scss */
+.logo {
+  position: absolute;
+  text-align: right;
+  top: -48px;
+  right: 10px;
+}
+
+/* line 75, sass/cloobster.scss */
+.edit {
+  padding: 2px;
+}
+
+/* extend bootstrap muted class, since edit gets removed, text will jump */
+/* line 80, sass/cloobster.scss */
+.muted {
+  padding: 2px;
+}
+
+/* line 88, sass/cloobster.scss */
+.data-section-seperator {
+  border-top: 2px solid #C3C3C3;
+}
+
+/* line 92, sass/cloobster.scss */
+.data-element {
+  color: #333;
+  font: normal 13px arial,sans-serif;
+  margin: 0;
+  padding: 10px 0;
+  text-align: left;
+}
+
+/* line 101, sass/cloobster.scss */
+.data-element.edit:hover, .edit:hover {
+  background-color: lightblue;
+  border-radius: 3px;
+}
+
+/* line 106, sass/cloobster.scss */
+.data-element .key {
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 1.2em;
+  margin-bottom: 0;
+  text-align: right;
+  vertical-align: top;
+  width: 130px;
+  float: left;
+}
+
+/* line 117, sass/cloobster.scss */
+.data-element div.value {
+  padding: 0 0 0 13px;
+  vertical-align: top;
+  line-height: 1.39em;
+  display: inline-block;
+}
+
+/* line 124, sass/cloobster.scss */
+.data-element select.value {
+  position: relative;
+  left: 13px;
+}
+
+/* line 129, sass/cloobster.scss */
+.imagebox {
+  position: relative;
+  border: lightgray 1px solid;
+  border-radius: 3px;
+  margin: 1em 0 1em 0;
+  padding: 0.5em;
+}
+
+/* line 137, sass/cloobster.scss */
+.edit-property-form {
+  margin: 0;
+}
+
+/* line 141, sass/cloobster.scss */
+.edit-property-form-inputs {
+  max-height: 400px;
+  overflow: auto;
+  margin-bottom: 5px;
+}
+
+/* line 147, sass/cloobster.scss */
+.upload-image-form {
+  margin: 0;
+}
+
+/* line 151, sass/cloobster.scss */
+.upload-image-placeholder {
+  width: 128px;
+  height: 128px;
+  background-color: gray;
+}
+
+/* line 157, sass/cloobster.scss */
+.upload-image {
+  width: 128px;
+  height: 128px;
+  margin-left: 10px;
+}
+
+/* line 163, sass/cloobster.scss */
+ul.payment-method-list {
+  list-style: none;
+}
+
+/* line 167, sass/cloobster.scss */
+ul.payment-method-list li {
+  margin: 0.3em 0;
+}
+
+/*.menus-wrapper {
+  
+}*/
+/*.menus-list {
+  margin-left: 1em;
+} */
+/*.menu-wrapper {
+  
+}
+
+.menu-detail {
+  padding: 0.5em;
+  border: 1px solid gray;
+  border-radius: 0.5em;
+}
+
+.menu-products-list { 
+  border: 1px solid gray; 
+  border-radius: 0.5em;
+  padding: 0.5em;
+  margin: 1.5em 0;
+}*/
+/* data container start */
+/* line 198, sass/cloobster.scss */
+.data-container-floating {
+  border: 1px solid gray;
+  border-radius: 3px;
+  position: fixed;
+  top: 75px;
+  right: 50px;
+  left: 50px;
+  /*bottom: 50px;*/
+  background-color: #FFF;
+  padding-top: 15px;
+}
+
+/* line 210, sass/cloobster.scss */
+.data-container-with-title {
+  border: 1px solid gray;
+  border-radius: 3px;
+  margin: 15px 0 10px 0;
+  position: relative;
+  padding-top: 15px;
+}
+
+/* line 218, sass/cloobster.scss */
+.no-border {
+  border: none !important;
+  border-radius: 0px;
+}
+
+/* line 223, sass/cloobster.scss */
+.data-container-500 {
+  height: 500px;
+}
+
+/* line 227, sass/cloobster.scss */
+.data-container-large {
+  height: 400px;
+}
+
+/* line 231, sass/cloobster.scss */
+.data-container-medium {
+  height: 300px;
+}
+
+/* line 235, sass/cloobster.scss */
+.data-container-small {
+  height: 200px;
+}
+
+/* line 239, sass/cloobster.scss */
+.data-container-150 {
+  height: 150px;
+}
+
+/* line 243, sass/cloobster.scss */
+.data-container-tiny {
+  height: 100px;
+}
+
+/* line 248, sass/cloobster.scss */
+.data-container-title {
+  display: inline-block;
+  top: -20px;
+  left: 10px;
+  position: absolute;
+  background-color: white;
+  padding: 0 5px 0 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
+  white-space: nowrap;
+}
+
+/* line 261, sass/cloobster.scss */
+.data-container-block {
+  padding: 0.5em;
+  word-break: break-word;
+}
+
+/* line 266, sass/cloobster.scss */
+.data-container-block [simple-property-editor] {
+  word-break: break-word;
+}
+
+/* line 270, sass/cloobster.scss */
+.data-container-scrollable {
+  overflow: auto;
+}
+
+/* line 274, sass/cloobster.scss */
+.data-container-seperator {
+  border-bottom: 1px solid gray;
+}
+
+/* line 278, sass/cloobster.scss */
+.data-container-inactive {
+  color: gray;
+  border-color: #C3C3C3 !important;
+}
+
+/* data container end */
+/* line 286, sass/cloobster.scss */
+.simple-property-editor {
+  border: 1px solid gray;
+  background-color: white;
+  padding: 5px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  right: 5px;
+  left: 5px;
+  z-index: 101;
+  max-width: 400px;
+  min-width: 250px;
+}
+
+/* line 299, sass/cloobster.scss */
+.simple-property-editor input {
+  width: 85%;
+}
+
+/* line 303, sass/cloobster.scss */
+.simple-property-editor textarea {
+  width: 85%;
+}
+
+/* line 307, sass/cloobster.scss */
+.simple-property-placeholder {
+  color: gray;
+}
+
+/* line 311, sass/cloobster.scss */
+.simple-property-editor-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: #000;
+  opacity: .4;
+  display: none;
+}
+
+/* line 321, sass/cloobster.scss */
+.richtext-property-editor-big {
+  width: 950px;
+  margin-left: -475px;
+}
+
+/* line 326, sass/cloobster.scss */
+.richtext-property-editor-big-left {
+  width: 440px;
+  float: left;
+  margin-top: 40px;
+}
+
+/* line 332, sass/cloobster.scss */
+.richtext-property-editor-big-right {
+  width: 440px;
+  float: right;
+}
+
+/* line 337, sass/cloobster.scss */
+.product-wrapper {
+  border: 1px solid gray;
+  border-radius: 3px;
+}
+
+/* line 342, sass/cloobster.scss */
+.product-detail {
+  padding: 0.5em;
+}
+
+/* line 346, sass/cloobster.scss */
+.product-choices-list {
+  border-top: 1px solid gray;
+  padding: 0.5em;
+  margin: 0.5em 0;
+}
+
+/* line 352, sass/cloobster.scss */
+.product-choice-item {
+  margin: 0 0 0.3em 0;
+}
+
+/* line 356, sass/cloobster.scss */
+.choice-wrapper {
+  border: 1px solid gray;
+  border-radius: 3px;
+}
+
+/* line 361, sass/cloobster.scss */
+.choice-detail {
+  padding: 0.5em;
+}
+
+/* line 365, sass/cloobster.scss */
+.choice-options-list {
+  border-top: 1px solid gray;
+  padding: 0.5em;
+  margin: 0.5em 0;
+}
+
+/* line 371, sass/cloobster.scss */
+.activation-checkbox input {
+  float: left;
+  margin-right: 0.5em;
+}
+
+/* line 376, sass/cloobster.scss */
+.language-checkbox {
+  float: left;
+}
+
+/* line 380, sass/cloobster.scss */
+ul.options-list {
+  list-style: none;
+}
+
+/* line 384, sass/cloobster.scss */
+ul.options-list li {
+  margin: 0.3em 0;
+}
+
+/* line 388, sass/cloobster.scss */
+ul.options-list li:hover {
+  border-radius: 5px;
+  background-color: #eeeeee;
+}
+
+/* line 397, sass/cloobster.scss */
+.spots-list {
+  margin-left: 1em;
+  /*float: left;*/
+}
+
+/* line 402, sass/cloobster.scss */
+.spot-wrapper {
+  border: 1px solid gray;
+  border-radius: 3px;
+}
+
+/* line 407, sass/cloobster.scss */
+.spot-detail {
+  padding: 0.5em;
+}
+
+/* line 411, sass/cloobster.scss */
+.sortable-placeholder {
+  border: 1px dashed gray;
+}
+
+/* line 415, sass/cloobster.scss */
+.organizable-list {
+  min-height: 50px;
+}
+
+/* line 419, sass/cloobster.scss */
+.common-wrapper {
+  border: 1px solid silver;
+  border-radius: 3px;
+}
+
+/* line 424, sass/cloobster.scss */
+.common-detail {
+  padding: 0.5em;
+}
+
+/* line 428, sass/cloobster.scss */
+.common-scrollable {
+  height: 400px;
+  overflow: auto;
+}
+
+/* line 433, sass/cloobster.scss */
+.common-wrapper-detail-list {
+  border-top: 1px solid silver;
+  padding: 0.5em;
+  margin: 0.5em 0;
+}
+
+/* line 439, sass/cloobster.scss */
+.business-theme-preview {
+  width: 200px;
+  float: left;
+  min-height: 50px;
+  padding: 0.5em;
+  margin: 1em;
+}
+
+/* line 447, sass/cloobster.scss */
+.business-theme-preview img {
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 0.3em 1em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 0.3em 1em;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 0.3em 1em;
+}
+
+/* line 453, sass/cloobster.scss */
+.business-theme-preview p {
+  text-align: center;
+  margin: 0.3em 0;
+}
+
+/* line 458, sass/cloobster.scss */
+.business-theme-preview.active {
+  border: 1px solid red;
+  border-radius: 3px;
+}
+
+/* General classes */
+/* line 465, sass/cloobster.scss */
+.loading-indicator {
+  height: 32px;
+  width: 32px;
+  background-image: url("../images/ajax-loader.gif");
+  background-size: auto;
+  background-repeat: no-repeat;
+  /*position: absolute;
+  right: 15px;*/
+}
+
+/* line 475, sass/cloobster.scss */
+.loading-indicator-small {
+  height: 16px;
+  width: 16px;
+  background-image: url("../images/ajax-loader_old.gif");
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+}
+
+/* line 485, sass/cloobster.scss */
+.show-grid {
+  margin: 5px 0;
+}
+
+/* Styles to display a list with checkboxes at start. Inspired by bootstrap style "nav nav-pills nav-pills-stacked" */
+/* line 490, sass/cloobster.scss */
+.nav-pills-checkbox {
+  margin: 0;
+}
+
+/* line 494, sass/cloobster.scss */
+.nav-pills-checkbox > li > div {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  color: #08C;
+}
+
+/* line 505, sass/cloobster.scss */
+.nav-pills-checkbox > li > div:hover {
+  background-color: #EEE;
+}
+
+/* line 509, sass/cloobster.scss */
+.nav-pills-checkbox > li > div.active {
+  color: white;
+  background-color: #08C;
+}
+
+/* line 514, sass/cloobster.scss */
+.nav-pills-checkbox > li > div > div:first-child {
+  /*display: inline;*/
+  float: left;
+}
+
+/* line 519, sass/cloobster.scss */
+.nav-pills-checkbox > li > div > div:nth-child(2) {
+  /*display: inline;*/
+  width: 100%;
+}
+
+/* line 524, sass/cloobster.scss */
+.nav-pills-checkbox > li > div input {
+  margin: 0 5px 0 5px;
+}
+
+/* line 528, sass/cloobster.scss */
+.nav-pills-checkbox > li > div.active > span {
+  color: white;
+}
+
+/* Add overflow hidden to cut long names. */
+/* line 533, sass/cloobster.scss */
+.nav-pills.nav-stacked > li > a {
+  overflow: hidden;
+}
+
+/** spots partial */
+/* line 539, sass/cloobster.scss */
+.spot-count-information {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+/** howto partial */
+/* line 549, sass/cloobster.scss */
+.step-wrapper {
+  position: relative;
+  clear: both;
+  margin-bottom: 12px;
+  min-height: 50px;
+}
+
+/* line 556, sass/cloobster.scss */
+.step-counter {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: green;
+  text-align: center;
+  float: left;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 50px;
+  position: absolute;
+  margin-right: 10px;
+  margin-left: 10px;
+  color: white;
+}
+
+/* line 572, sass/cloobster.scss */
+.welcome-spot {
+  float: left;
+  width: 150px;
+  height: 150px;
+  margin-right: 10px;
+}
+
+/* line 579, sass/cloobster.scss */
+.step-content {
+  margin-left: 75px;
+  padding-top: 12px;
+  overflow: hidden;
+}
+/* line 584, sass/cloobster.scss */
+.step-content input.fillspace, .step-content textarea.fillspace {
+  width: 90%;
+  max-width: 650px;
+}
+
+/* line 591, sass/cloobster.scss */
+.step-counter input, .step-content textarea {
+  width: 90%;
+  max-width: 650px;
+}
+
+/* line 596, sass/cloobster.scss */
+.step-section {
+  margin-bottom: 8px;
+  max-width: 650px;
+}
+/* line 600, sass/cloobster.scss */
+.step-section > .step-title, .step-section > .step-description {
+  margin-bottom: 0px;
+}
+
+/* line 605, sass/cloobster.scss */
+.step-offer {
+  max-width: 650px;
+}
+
+/* line 609, sass/cloobster.scss */
+.step-title {
+  left: 60px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* line 617, sass/cloobster.scss */
+.step-description {
+  left: 60px;
+  max-width: 650px;
+  margin-bottom: 8px;
+  /*clear: both;*/
+}
+
+/* line 624, sass/cloobster.scss */
+.step-inactive {
+  opacity: .6;
+}
+
+/* line 629, sass/cloobster.scss */
+.step-inactive a {
+  color: gray;
+}
+
+/* line 633, sass/cloobster.scss */
+.step-inactive a:hover {
+  color: gray;
+  text-decoration: none;
+}
+
+/* line 638, sass/cloobster.scss */
+.step-counter-bar {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #e46c0a;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  margin-right: 3px;
+}
+
+/* line 649, sass/cloobster.scss */
+.step-grid-image {
+  float: left;
+  margin-left: 2.564102564102564%;
+}
+
+/* line 654, sass/cloobster.scss */
+.howto-bar {
+  clear: both;
+  margin: 0px 0 10px 0;
+}
+
+/* line 659, sass/cloobster.scss */
+.howto-step {
+  float: left;
+  padding: 3px;
+  color: grey;
+  line-height: 20px;
+  font-size: 15px;
+  height: 20px;
+}
+
+/* line 668, sass/cloobster.scss */
+.howto-step:hover > div:nth-child(2) {
+  color: red;
+}
+
+/* line 672, sass/cloobster.scss */
+.howto-step > div {
+  float: left;
+}
+
+/* line 676, sass/cloobster.scss */
+.howto-step > div:nth-child(2) {
+  margin-right: 5px;
+  background-color: white !important;
+}
+
+/* line 681, sass/cloobster.scss */
+.active-step .step-counter-bar {
+  background-color: green;
+}
+
+/* line 685, sass/cloobster.scss */
+.active-step > div:nth-child(2) {
+  color: black;
+}
+
+/** howto partial */
+/* line 691, sass/cloobster.scss */
+.active > .active-howto-tab {
+  background-color: #DF6B20 !important;
+  color: white !important;
+}
+
+/** app config partial */
+/* line 702, sass/cloobster.scss */
+.tile, .tile-template {
+  font-size: 0.9em;
+  color: black;
+  position: relative;
+  background-color: #f5f5f5;
+  border: 1px solid lightgray;
+  border-radius: 2px;
+  height: 120px;
+  width: 120px;
+  max-height: 200px;
+  -webkit-box-shadow: 0 4px 2px -2px #eee;
+  box-shadow: 0 4px 2px -2px #eee;
+  margin: 0 5px 5px 0;
+  float: left;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* static tiles like feedback have another background color to distinguise the, */
+/* line 721, sass/cloobster.scss */
+.tile-static {
+  background-color: #e9e9e9;
+}
+
+/* line 725, sass/cloobster.scss */
+.tile-active {
+  background-color: lightblue !important;
+}
+
+/* line 729, sass/cloobster.scss */
+.tile-empty {
+  float: left;
+  height: 120px;
+  width: 120px;
+  border: 1px dashed lightgray;
+  /*background-color: #f5f5f5;*/
+  text-align: center;
+  margin: 0 5px 5px 0;
+}
+
+/* line 739, sass/cloobster.scss */
+.tile-icon {
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 80px;
+  background-size: 75px;
+}
+
+/* line 747, sass/cloobster.scss */
+.tile-title {
+  width: 100%;
+  /*height: 25px;*/
+  font-size: 1.1em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: black;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 0 3px;
+}
+
+/* line 759, sass/cloobster.scss */
+.tile-number {
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: bold;
+  text-align: center;
+  color: #C3C3C3;
+}
+
+/* line 767, sass/cloobster.scss */
+.tile-delete {
+  display: none;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  background-color: black;
+  line-height: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  z-index: 1;
+}
+
+/* line 784, sass/cloobster.scss */
+.tile-disabled {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 790, sass/cloobster.scss */
+.tile-disabled .tile-mask {
+  background-color: white;
+  opacity: .55;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 797, sass/cloobster.scss */
+.tile-disabled .tile-text {
+  position: absolute;
+  top: 40%;
+  text-align: center;
+  color: #d14641;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  transform: rotate(30deg);
+  -ms-transform: rotate(30deg);
+  -webkit-transform: rotate(30deg);
+}
+
+/* line 810, sass/cloobster.scss */
+.tile:hover .tile-delete {
+  display: block;
+}
+
+/* line 814, sass/cloobster.scss */
+.tile-config-highlight {
+  background-color: yellow;
+}
+
+/* line 818, sass/cloobster.scss */
+.tile-feedback .tile-icon {
+  background-image: url("../img/tiles/feedback.png");
+}
+
+/* line 822, sass/cloobster.scss */
+.tile-products .tile-icon {
+  background-image: url("../img/tiles/menue_bag.png");
+}
+
+/* line 826, sass/cloobster.scss */
+.tile-infopages .tile-icon {
+  background-image: url("../img/tiles/info.png");
+}
+
+/* line 830, sass/cloobster.scss */
+.tile-actions .tile-icon {
+  background-image: url("../img/tiles/vip.png");
+}
+
+/* line 834, sass/cloobster.scss */
+.tile-de-ztix-events .tile-icon {
+  background-image: url("../img/tiles/calendar.png");
+}
+
+/* line 838, sass/cloobster.scss */
+.tile-de-ztix-coupons .tile-icon {
+  background-image: url("../img/tiles/gift.png");
+}
+
+/* line 842, sass/cloobster.scss */
+.tile-storecard .tile-icon {
+  background-image: url("../img/tiles/storecard.png");
+}
+
+/* line 846, sass/cloobster.scss */
+.smartphone-frame {
+  background-image: url("../img/tiles/gn_frame.png");
+  width: 100%;
+  height: 800px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* line 855, sass/cloobster.scss */
+.smartphone-content {
+  width: 300px;
+  height: 464px;
+  position: relative;
+  top: 147px;
+  left: 84px;
+  overflow-y: auto;
+  padding-left: 15px;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+}
+
+/* line 867, sass/cloobster.scss */
+.tile-container-config-highlight {
+  border: 2px dashed red !important;
+}
+
+/* line 871, sass/cloobster.scss */
+.mask {
+  top: 0;
+  left: 0;
+  /* must be lower than dragable */
+  z-index: 99;
+  background-color: #000;
+  opacity: .4;
+  display: none;
+  height: 1000px;
+  width: 100%;
+  position: absolute;
+  color: white;
+  text-align: center;
+  font-size: 50px;
+  line-height: 50px;
+  top: 277px;
+  left: 84px;
+  width: 281px;
+  height: 464px;
+}
+
+/* line 892, sass/cloobster.scss */
+.mask > div {
+  top: 150px;
+  position: relative;
+}
+
+/* line 897, sass/cloobster.scss */
+.drop-active .mask {
+  display: block;
+}
+
+/* line 901, sass/cloobster.scss */
+.app-help-image {
+  height: 500px;
+  background-image: url("../img/apphelp.jpg");
+  background-size: 350px auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-width: 350px;
+}
+
+/* line 910, sass/cloobster.scss */
+.app-image {
+  height: 500px;
+  background-image: url("../img/app_screenshot.png");
+  background-size: auto 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/*Fix for bottstrap.css causing gmaps to not display controls correctly. http://stackoverflow.com/questions/8511436/zoom-control-and-streetview-not-showing-on-my-google-map*/
+/* line 919, sass/cloobster.scss */
+.gmnoprint img {
+  max-width: none;
+}

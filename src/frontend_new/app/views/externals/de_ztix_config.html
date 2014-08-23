@@ -1,0 +1,26 @@
+<!-- Configuration for ztix -->
+<div class="row-fluid">
+	<div class="span12">				
+		<a href="http://www.ztix.de" target="_blank"><img src="//www.ztix.de/wp-content/themes/ztix/images/ztix_logo.png" alt="ztix logo" width="116px" height="34px"/></a>
+		<h4 l="externals.de.ztix.title">Ticketing leicht gemacht</h4>
+		<p style="margin-top: 5px;"><span l="externals.de.ztix.description">Um Veranstaltungen aus dem ztix System anzuzeigen, tragen Sie bitte die Veranstalter ID ein.<br/>Anschließend aktivieren
+		Sie das Feature unter</span> <a href="#/businesses/{{activeBusinessId}}/appconfig" l="businesses.headertabs.appconfig"></a></p>
+		<div simple-property-editor editor-title="externals.de.ztix.editor.host" editor-property="currentConfiguration.hosts" editor-on-save="saveConfiguration()" editor-max-length="150" editor-required editor-placeholder="externals.de.ztix.editor.host.placeholder"
+		 editor-pattern-text="externals.de.ztix.hosts.error" editor-pattern="/^[0-9]+[0-9\/]*$/">
+			<p ng-class="{edit: !currentArea.isSaving(), muted: currentArea.isSaving()}">
+				<span><strong l="externals.de.ztix.editor.host.label">Host</strong></span>
+				<span l="externals.de.ztix.editor.host.placeholder" ng-hide="currentConfiguration.hosts">Host IDs</span>
+				{{currentConfiguration.hosts}} <i class="glyphicon glyphicon-edit glyphicon glyphicon-black"></i>
+			</p>
+		</div>
+		<p style="margin-top: 5px;"><span l="externals.de.ztix.coupons.description">Um Gutscheine aus dem ztix System anzuzeigen, tragen Sie bitte die ID der Gutscheinverwaltungseinheit ein.</p>
+		<div simple-property-editor editor-title="externals.de.ztix.editor.coupons" editor-property="currentConfiguration.coupons" editor-on-save="saveConfiguration()" editor-max-length="150" editor-required editor-placeholder="externals.de.ztix.editor.host.placeholder"
+		 editor-pattern-text="externals.de.ztix.hosts.error" editor-pattern="/^[0-9]+[0-9\/]*$/">
+			<p ng-class="{edit: !currentArea.isSaving(), muted: currentArea.isSaving()}">
+				<span><strong l="externals.de.ztix.editor.coupons.label">Coupons</strong></span>
+				<span l="externals.de.ztix.editor.host.placeholder" ng-hide="currentConfiguration.coupons">Coupon Issuer IDs</span>
+				{{currentConfiguration.coupons}} <i class="glyphicon glyphicon-edit glyphicon glyphicon-black"></i>
+			</p>
+		</div>		
+	</div>
+</div>

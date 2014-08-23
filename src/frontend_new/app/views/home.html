@@ -1,0 +1,38 @@
+<div class="hero-unit">
+	<a href="http://www.cloobster.com" target="_blank">
+		<img src="images/Logo_cloobster_gross.png" alt="cloobster logo"></img>
+	</a>
+	<div ng-hide="loggedIn">
+		<div class="row-fluid">
+			<p class="span6" l="home.notregistered" style="max-width: 410px;">Not registered yet?</p>
+			<p class="span6">
+				<a href="#/registration" class="btn btn-primary btn-large" l="home.signup">
+					Sign up with your business!
+				</a>	
+			</p>
+		</div>
+	</div>
+	<hr>
+	<div class="row-fluid">
+		<div class="span6">
+			<div ng-hide="loggedIn">
+				<!-- <h3 l="login.title">Management Login</h3> -->
+		    	<div ng-include src="'views/login_form.html'"></div>
+			</div>
+			<div ng-show="loggedIn">
+				<h2>Welcome {{getAccount().name}}</h2>
+				<p>
+					Do you want to <a href="#/profile">view your profile.</a><br>
+					Or maybe <a href="#/businesses">manage your locations?</a>
+				</p>
+				<p>
+					<button class="btn" ng-click="logout()">Logout</button>
+				</p>
+			</div>	
+		</div>
+		<div class="span4">
+			<div class="app-image" style="height: 300px;"></div>
+		</div>
+	</div>
+
+</div>

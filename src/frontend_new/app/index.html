@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en" ng-app="Cloobster">
+<head>
+  <meta charset="utf-8">
+  <title>cloobster - frontend</title>
+  <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--   <link rel="stylesheet" href="styles/bootstrap.css"/>
+  <link rel="stylesheet" href="styles/bootstrap-responsive.css"> -->
+  <link rel="stylesheet" href="bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css"/>  
+  <link rel="stylesheet" href="styles/jquery.fileupload-ui.css"/>
+  <link rel="stylesheet" href="styles/jquery-ui-1.10.1.custom.min.css"/>
+  <link rel="stylesheet" type="text/css" href="styles/imgareaselect-default.css" />
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+</head>
+<body>
+  <div id="fb-root"></div>
+  <script>
+      window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '359215437471990',
+            status     : true,
+            channelUrl : '//localhost/facebookchannel.html', // Channel File
+            cookie     : true,
+            xfbml      : false,
+            oauth      : true
+          });
+          angular.element(document).scope().$broadcast('fbInit');
+
+         };
+        (function(d){
+           var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+           js = d.createElement('script'); js.id = id; js.async = true;
+           js.src = "//connect.facebook.net/en_US/all.js";
+           d.getElementsByTagName('head')[0].appendChild(js);
+         }(document));
+  </script>
+  <!-- Include top bar navigation -->
+  <div ng-include="'views/nav.html'"></div>
+  
+  <div class="container-fluid">
+    <!-- Error alert -->
+    <div class="row-fluid ng-cloak" ng-show="error">
+      <div class="alert alert-danger alert-block span6 fade in" >
+        <button class="close" ng-click="error=false;">×</button>
+        <h4 class="alert-heading" l="common.warning.title">Error!</h4>
+        <p ng-bind="errorMessage"></p>
+      </div>
+    </div>    
+    <div ng-view></div>
+  </div> <!-- /container -->
+  
+  <!-- // <script src="lib/jquery/jquery-1.9.1.js"></script>
+  <script src="lib/bootstrap/bootstrap.js"></script>  
+  <script src="lib/bootstrap/bootstrapSwitch.js"></script>
+  <script src="lib/angular-1.0.7/angular.js"></script>
+  <script src="lib/angular-1.0.7/angular-resource.js"></script>
+  <script src="lib/angular-1.0.7/angular-sanitize.js"></script>
+  <script src="lib/angular-1.0.7/i18n/angular-locale_de-de.js"></script> -->
+
+
+      <!-- build:js(.) scripts/oldieshim.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/bootstrap-switch/dist/js/bootstrap-switch.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- non bower managed libs -->
+    <script type="text/javascript" src="//www.google.com/jsapi"></script>
+    <script src="lib/jquery/jquery-ui-1.10.1.custom.min.js"></script>   
+    <script src="lib/jquery/jquery.ui.widget.js"></script>
+    <!-- Begin File Upload Plugin -->
+    <script src="lib/jquery/jquery.iframe-transport.js"></script>  
+    <script src="lib/jquery/jquery.fileupload.js"></script>
+    <script src="lib/jquery/jquery.fileupload-fp.js"></script>
+    <script src="lib/jquery/jquery.fileupload-ui.js"></script>
+    <!-- End File Upload Plugin -->
+    <!-- Begin ckeditor -->
+    <script type="text/javascript" src="lib/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="lib/ckeditor/adapters/jquery.js"></script>
+    <!-- End ckeditor -->
+    <script src="lib/jquery/jquery.imgareaselect.js"></script>
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script type="text/javascript" src="lib/angular-ui-0.4.0/build/angular-ui.js"></script>  
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBND2bvOETsvyxSoDV6a0Rx5gn1u1g9zD8&sensor=false" type="text/javascript"></script> 
+  <script src="scripts/controllers/registration.js"></script>
+  <script src="scripts/controllers/login.js"></script>
+  <script src="scripts/controllers/business.js"></script>
+  <script src="scripts/controllers/menu.js"></script>
+  <script src="scripts/controllers/spot.js"></script>
+  <script src="scripts/controllers/navigation.js"></script>
+  <script src="scripts/controllers/profile.js"></script>
+  <script src="scripts/controllers/accounts.js"></script>
+  <script src="scripts/controllers/infopage.js"></script>
+  <script src="scripts/controllers/documents.js"></script>
+  <script src="scripts/controllers/reports.js"></script>
+  <script src="scripts/controllers/appconfig.js"></script>
+  <script src="scripts/controllers/wizard.js"></script>
+  <script src="scripts/controllers/externals.js"></script>
+  <script src="scripts/filters/filters.js"></script>
+  <script src="scripts/filters/maxSpotCountFormatFilter.js"></script>
+  <script src="scripts/services/translation.js"></script>
+  <script src="scripts/services/languagecodes.js"></script>
+  <script src="scripts/services/countrycodes.js"></script>
+  <script src="scripts/services/config.js"></script>
+  <script src="scripts/services/services.js"></script>
+  <script src="scripts/services/resources.js"></script>
+  <script src="scripts/directives/directives.js"></script>
+  <script src="scripts/directives/simpleConfirmDialog.js"></script>  
+  <script src="scripts/directives/simplePropertyEditor.js"></script>  
+  <script src="scripts/directives/richtextPropertyEditor.js"></script>  
+  <script src="scripts/directives/switchButton.js"></script>  
+    <!-- endbuild -->
+</body>
+</html>

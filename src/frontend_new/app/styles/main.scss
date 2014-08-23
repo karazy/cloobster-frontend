@@ -1,0 +1,924 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
+// endbower
+
+/* cloobster css stylesheet */
+
+$global-border-radius: 3px;
+
+/* helber style for ng-cloak directive to hide elements until after angular is completely loaded*/
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none;
+}
+
+html, body {
+  height: 100%;
+}
+
+.fill { 
+    min-height: 100%;
+    height: 100%;
+}
+
+.partial-wrapper {
+  margin: 0 0 1em 0;
+}
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+/* Profile view */
+.content-wrapper {
+  position: relative;
+}
+
+.noLogo {
+  background-color: gray;
+}
+
+.noLogo div {
+  font-size: 1.5em;
+  text-align: center;
+  top: 45%;
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  text-align: right;
+  top: -48px;
+  right: 10px;
+}
+
+.edit {
+  padding: 2px;
+}
+  
+/* extend bootstrap muted class, since edit gets removed, text will jump */
+.muted {
+  padding: 2px;
+}
+
+.data-section {
+
+}
+
+.data-section-seperator {
+  border-top: 2px solid #C3C3C3;
+}
+
+.data-element {
+  color: 
+  #333;
+  font: normal 13px arial,sans-serif;
+  margin: 0;
+  padding: 10px 0;
+  text-align: left;
+}
+
+.data-element.edit:hover, .edit:hover {
+    background-color: lightblue;
+    border-radius: $global-border-radius;
+}
+
+.data-element .key {
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 1.2em;
+  margin-bottom: 0;
+  text-align: right;
+  vertical-align: top;
+  width: 130px;
+  float: left;
+}
+
+.data-element div.value {
+  padding: 0 0 0 13px;
+  vertical-align: top;
+  line-height: 1.39em;
+  display: inline-block;
+}
+
+.data-element select.value {
+  position: relative;;
+  left: 13px;
+}
+
+.imagebox {
+  position: relative;
+  border: lightgray 1px solid;
+  border-radius: $global-border-radius;
+  margin: 1em 0 1em 0;
+  padding: 0.5em;
+}
+
+.edit-property-form {
+  margin: 0;
+}
+
+.edit-property-form-inputs {
+  max-height: 400px;
+  overflow: auto;
+  margin-bottom: 5px;
+}
+
+.upload-image-form {
+  margin: 0;
+}
+
+.upload-image-placeholder {
+  width: 128px;
+  height: 128px;
+  background-color: gray;
+}
+
+.upload-image {
+  width:128px; 
+  height:128px; 
+  margin-left: 10px;
+}
+
+ul.payment-method-list {
+  list-style: none;
+}
+
+ul.payment-method-list li {
+  margin: 0.3em 0;
+}
+
+
+/*.menus-wrapper {
+  
+}*/
+
+/*.menus-list {
+  margin-left: 1em;
+} */
+
+/*.menu-wrapper {
+  
+}
+
+.menu-detail {
+  padding: 0.5em;
+  border: 1px solid gray;
+  border-radius: 0.5em;
+}
+
+.menu-products-list { 
+  border: 1px solid gray; 
+  border-radius: 0.5em;
+  padding: 0.5em;
+  margin: 1.5em 0;
+}*/
+
+/* data container start */
+.data-container-floating { 
+  border: 1px solid gray; 
+  border-radius: $global-border-radius;
+  position: fixed;
+  top: 75px;
+  right: 50px;
+  left: 50px;
+  /*bottom: 50px;*/
+  background-color: #FFF;
+  padding-top: 15px;  
+}
+
+.data-container-with-title { 
+  border: 1px solid gray; 
+  border-radius: $global-border-radius;
+  margin: 15px 0 10px 0;
+  position: relative;
+  padding-top: 15px;
+}
+
+.no-border {
+  border: none !important;
+  border-radius: 0px;
+}
+
+.data-container-500 {
+  height: 500px;
+}
+
+.data-container-large {
+  height: 400px;
+}
+
+.data-container-medium {
+  height: 300px;
+}
+
+.data-container-small {
+  height: 200px;
+}
+
+.data-container-150 {
+  height: 150px;
+}
+
+.data-container-tiny {
+  height: 100px;
+}
+
+
+.data-container-title {
+  display: inline-block;
+  top: -20px;
+  left: 10px;
+  position: absolute;
+  background-color: white;
+  padding: 0 5px 0 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
+  white-space: nowrap;
+}
+
+.data-container-block {
+  padding: 0.5em; 
+  word-break: break-word;
+}
+
+.data-container-block [simple-property-editor] {
+  word-break: break-word;
+}
+
+.data-container-scrollable {
+  overflow: auto;
+}
+
+.data-container-seperator {
+  border-bottom: 1px solid gray;
+}
+
+.data-container-inactive {
+  color: gray;
+  border-color: #C3C3C3 !important;
+}
+
+
+/* data container end */
+
+.simple-property-editor {
+  border: 1px solid gray;
+  background-color: white;
+  padding: 5px;
+  box-sizing:border-box;
+  border-radius: $global-border-radius;
+  right: 5px;
+  left: 5px;
+  z-index: 101;
+  max-width: 400px;
+  min-width: 250px;
+}
+
+.simple-property-editor input {
+  width: 85%;
+}
+
+.simple-property-editor textarea {
+  width: 85%;
+}
+
+.simple-property-placeholder {
+  color: gray;
+}
+
+.simple-property-editor-mask {
+  position:fixed;
+  top: 0;
+  left: 0;
+  z-index:100;
+  background-color:#000;
+  opacity: .4;
+  display:none;
+}
+
+.richtext-property-editor-big {
+  width: 950px;
+  margin-left: -475px;
+}
+
+.richtext-property-editor-big-left {
+  width: 440px;
+  float: left;
+  margin-top: 40px;
+}
+
+.richtext-property-editor-big-right {
+  width: 440px;
+  float: right;
+}
+
+.product-wrapper {
+  border: 1px solid gray;
+  border-radius: $global-border-radius;  
+}
+
+.product-detail {
+  padding: 0.5em; 
+}
+
+.product-choices-list {
+  border-top: 1px solid gray; 
+  padding: 0.5em;
+  margin: 0.5em 0;
+}
+
+.product-choice-item {
+  margin: 0 0 0.3em 0;
+}
+
+.choice-wrapper {
+  border: 1px solid gray;
+  border-radius: $global-border-radius;  
+}
+
+.choice-detail {
+  padding: 0.5em; 
+}
+
+.choice-options-list {
+  border-top: 1px solid gray; 
+  padding: 0.5em;
+  margin: 0.5em 0;
+}
+
+.activation-checkbox input {
+  float: left;
+  margin-right: 0.5em
+}
+
+.language-checkbox {
+  float: left;
+}
+
+ul.options-list {
+  list-style: none;
+}
+
+ul.options-list li {
+  margin: 0.3em 0;
+}
+
+ul.options-list li:hover {
+  border-radius: 5px;
+  background-color: #eeeeee;
+}
+
+.spots-wrapper {
+
+}
+
+.spots-list {
+  margin-left: 1em;
+  /*float: left;*/
+} 
+
+.spot-wrapper {
+  border: 1px solid gray;
+  border-radius: $global-border-radius;  
+}
+
+.spot-detail {
+  padding: 0.5em;
+}
+
+.sortable-placeholder {
+  border: 1px dashed gray;
+}
+
+.organizable-list {
+  min-height: 50px;
+}
+
+.common-wrapper {
+  border: 1px solid silver;
+  border-radius: $global-border-radius; 
+}
+
+.common-detail {
+  padding: 0.5em;
+}
+
+.common-scrollable {
+  height: 400px; 
+  overflow: auto;
+}
+
+.common-wrapper-detail-list { 
+  border-top: 1px solid silver; 
+  padding: 0.5em;
+  margin: 0.5em 0;
+}
+
+.business-theme-preview {
+  width: 200px;
+  float: left;
+  min-height: 50px;
+  padding: 0.5em;
+  margin: 1em;
+}
+
+.business-theme-preview img {
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 0.3em 1em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 0.3em 1em;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 0.3em 1em;
+}
+
+.business-theme-preview p {
+  text-align: center;
+  margin: 0.3em 0;
+}
+
+.business-theme-preview.active {
+  border: 1px solid red;
+  border-radius: $global-border-radius;  
+}
+
+/* General classes */
+
+.loading-indicator {
+  height: 32px;
+  width: 32px;
+  background-image: url('../images/ajax-loader.gif');
+  background-size: auto;
+  background-repeat: no-repeat;
+  /*position: absolute;
+  right: 15px;*/
+}
+
+.loading-indicator-small {
+  height: 16px;
+  width: 16px;
+  background-image: url('../images/ajax-loader_old.gif');
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+}
+
+.show-grid {
+  margin: 5px 0;
+}
+
+/* Styles to display a list with checkboxes at start. Inspired by bootstrap style "nav nav-pills nav-pills-stacked" */
+.nav-pills-checkbox {
+  margin: 0;
+}
+
+.nav-pills-checkbox > li > div {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  -webkit-border-radius: $global-border-radius;
+  -moz-border-radius: $global-border-radius;
+  border-radius: $global-border-radius;
+  color: #08C;
+}
+
+.nav-pills-checkbox > li > div:hover {
+  background-color: #EEE;
+}
+
+.nav-pills-checkbox > li > div.active {
+  color: white;
+  background-color: #08C;
+}
+
+.nav-pills-checkbox > li > div > div:first-child {
+  /*display: inline;*/
+  float: left;
+}
+
+.nav-pills-checkbox > li > div > div:nth-child(2) {
+  /*display: inline;*/
+  width: 100%;
+}
+
+.nav-pills-checkbox > li > div input {
+  margin: 0 5px 0 5px;
+}
+
+.nav-pills-checkbox > li > div.active > span{
+  color: white;
+}
+
+/* Add overflow hidden to cut long names. */
+.nav-pills.nav-stacked > li > a {
+  overflow: hidden;
+}
+
+/** spots partial */
+
+.spot-count-information {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+/** howto partial */
+
+$step-element-maxwidth: 650px;
+
+.step-wrapper {
+  position: relative;
+  clear: both;
+  margin-bottom: 12px;
+  min-height: 50px;
+}
+
+.step-counter {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: green;
+  text-align: center;
+  float: left;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 50px;
+  position: absolute;
+  margin-right: 10px;
+  margin-left: 10px;
+  color: white;
+}
+
+.welcome-spot {
+  float: left;
+  width: 150px;
+  height: 150px;
+  margin-right: 10px;
+}
+
+.step-content {
+  margin-left: 75px;
+  padding-top: 12px;
+  overflow: hidden;
+
+  input.fillspace, textarea.fillspace {
+    width: 90%;
+    max-width: $step-element-maxwidth;
+  }
+
+}
+
+.step-counter input, .step-content textarea {
+  width: 90%;
+  max-width: $step-element-maxwidth;
+}
+
+.step-section {
+  margin-bottom: 8px;  
+  max-width: $step-element-maxwidth;
+
+  & > .step-title, & > .step-description{
+    margin-bottom: 0px;
+  }
+}
+
+.step-offer {
+  max-width: $step-element-maxwidth;
+}
+
+.step-title {
+  left: 60px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px; 
+
+}
+
+.step-description {
+  left: 60px;
+  max-width: $step-element-maxwidth;
+  margin-bottom: 8px;
+  /*clear: both;*/
+}
+
+.step-inactive {
+  opacity: .6;
+  
+}
+
+.step-inactive a {
+  color: gray;  
+}
+
+.step-inactive a:hover {
+  color: gray;
+  text-decoration: none;
+}
+
+.step-counter-bar {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #e46c0a;
+  text-align: center;
+  font-weight: bold;  
+  color: white;
+  margin-right: 3px;
+}
+
+.step-grid-image {
+  float: left;
+  margin-left: 2.564102564102564%;
+}
+
+.howto-bar {
+  clear: both;
+  margin: 0px 0 10px 0;
+}
+
+.howto-step {
+  float: left;
+  padding: 3px;
+  color: grey;
+  line-height: 20px;
+  font-size: 15px;
+  height: 20px;
+}
+
+.howto-step:hover > div:nth-child(2) {
+  color: red;
+}
+
+.howto-step > div {
+  float: left;
+}
+
+.howto-step > div:nth-child(2) {
+  margin-right: 5px;
+  background-color: white !important;
+}
+
+.active-step .step-counter-bar {
+    background-color: green;
+}
+
+.active-step > div:nth-child(2) {
+    color: black;
+}
+
+/** howto partial */
+
+.active > .active-howto-tab {
+  background-color: #DF6B20 !important;
+  color: white !important;
+}
+
+/** app config partial */
+
+.tile-container {
+
+}
+
+.tile, .tile-template {
+  font-size: 0.9em;
+  color: black;
+  position: relative;
+  background-color: #f5f5f5;
+  border: 1px solid lightgray;
+  border-radius: 2px;
+  height: 120px;
+  width: 120px;
+  max-height: 200px;
+  -webkit-box-shadow: 0 4px 2px -2px #eee;
+  box-shadow: 0 4px 2px -2px #eee;
+  margin: 0 5px 5px 0;
+  float: left;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* static tiles like feedback have another background color to distinguise the, */
+.tile-static {
+  background-color: #e9e9e9;
+}
+
+.tile-active {
+  background-color: lightblue !important;
+}
+
+.tile-empty {
+  float: left;
+  height: 120px;
+  width: 120px;
+  border: 1px dashed lightgray;
+  /*background-color: #f5f5f5;*/
+  text-align: center;
+  margin: 0 5px 5px 0;
+}
+
+.tile-icon {
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 80px;
+  background-size: 75px;
+}
+
+.tile-title {
+  width: 100%;
+  /*height: 25px;*/
+  font-size: 1.1em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: black;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 0 3px;
+}
+
+.tile-number {
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: bold;
+  text-align: center;
+  color: #C3C3C3;
+}
+
+.tile-delete {
+  display: none;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  background-color: black;
+  line-height: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  z-index: 1;
+}
+
+.tile-disabled {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.tile-disabled .tile-mask {
+  background-color: white;
+  opacity: .55;
+  width: 100%;
+  height: 100%;
+}
+
+.tile-disabled .tile-text {
+  position: absolute;
+  top:40%;
+  text-align: center;
+  color: #d14641;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  transform: rotate(30deg);
+  -ms-transform: rotate(30deg);
+  -webkit-transform: rotate(30deg);
+}
+
+.tile:hover .tile-delete {
+  display: block;
+}
+
+.tile-config-highlight {
+  background-color: yellow;
+}
+
+.tile-feedback .tile-icon {
+  background-image: url('../images/tiles/feedback.png');  
+}
+
+.tile-products .tile-icon {
+  background-image: url('../images/tiles/menue_bag.png');  
+}
+
+.tile-infopages .tile-icon {
+  background-image: url('../images/tiles/info.png');  
+}
+
+.tile-actions .tile-icon {
+  background-image: url('../images/tiles/vip.png');  
+}
+
+.tile-de-ztix-events .tile-icon {
+  background-image: url('../images/tiles/calendar.png');  
+}
+
+.tile-de-ztix-coupons .tile-icon {
+  background-image: url('../images/tiles/gift.png');   
+}
+
+.tile-storecard .tile-icon {
+  background-image: url('../images/tiles/storecard.png');   
+}
+
+.smartphone-frame {
+  background-image: url('../images/tiles/gn_frame.png');  
+  width: 100%;
+  height: 800px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.smartphone-content {
+  width: 300px;
+  height: 464px;
+  position: relative;
+  top: 147px;
+  left: 84px;
+  overflow-y: auto;
+  padding-left: 15px;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+}
+
+.tile-container-config-highlight {
+  border: 2px dashed red !important;
+}
+
+.mask {
+  top: 0;
+  left: 0;
+  /* must be lower than dragable */
+  z-index: 99;
+  background-color: #000;
+  opacity: .4;
+  display: none;
+  height: 1000px;
+  width: 100%;
+  position: absolute;
+  color: white;
+  text-align: center;
+  font-size: 50px;
+  line-height: 50px; 
+  top: 277px;
+  left: 84px;
+  width: 281px;
+  height: 464px;
+}
+
+.mask > div {
+  top: 150px;
+  position: relative;
+}
+
+.drop-active .mask {
+  display: block;
+}
+
+.app-help-image {
+  height: 500px;
+  background-image: url("../images/apphelp.jpg");
+  background-size: 350px auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-width: 350px;
+}
+
+.app-image {
+  height: 500px;
+  background-image: url('../images/app_screenshot.png');
+  background-size: auto 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/*Fix for bottstrap.css causing gmaps to not display controls correctly. http://stackoverflow.com/questions/8511436/zoom-control-and-streetview-not-showing-on-my-google-map*/
+.gmnoprint img { max-width: none; }

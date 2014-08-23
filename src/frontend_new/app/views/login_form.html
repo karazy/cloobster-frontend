@@ -1,0 +1,35 @@
+<div class="row-fluid">
+    <div class="login-module span12">
+        <h3 l="login.title">Login</h3>
+    	<div ng-hide="loginProgress">
+    <!--             <form ng-submit="fbLogin()" >
+                    <button type="submit" class="btn btn-primary" type="submit" l="login.facebook">Login with Facebook</button>
+                </form> -->    
+            <form name="loginForm" ng-submit="login()">
+                <div class="control-group">
+                    <div class="controls controls-row">
+                    	<input name="login" type="text" ng-model="loginData.login"  size="30" placeholder="login" l="login.input.login" l-attribute="placeholder" required
+                        class="span6">
+                    	<input name="password" type="password" ng-model="loginData.password"  size="30" placeholder="password" l="login.input.password" l-attribute="placeholder" required
+                        class="span6">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls controls-row">
+                        <button type="submit" class="btn btn-primary span6" type="submit" ng-disabled="loginForm.$invalid">Login</button>
+                        <label class="checkbox span6">
+                            <input name="rememberLogin" type="checkbox" ng-model="loginData.save"> <span l="login.remember">remember login</span></input>
+                        </label>        	
+                    </div>
+                </div>                
+                <!-- <small l="login.message">Login with your business account</small> -->
+          	</form>
+            <p>
+                <small><a href="#/login/forgot" l="login.password.forgot">Forgot password?</a></small>
+            </p>
+        </div>
+        <div ng-show="loginProgress">
+            <div class="loading-indicator" style="float: left; position: relative; right: 0"></div> 
+        </div>
+    </div>
+</div>

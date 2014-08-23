@@ -1,0 +1,30 @@
+<div class="page-header">
+	<h1 l="account.activation.admin.title">Activate account</h1>
+</div>
+<div class="row-fluid">
+	<div class="span6">
+		<p l="account.activation.admin.description">To complete your account activation, please enter the missing details below!</p>
+		<form class="well" name="accountActivationForm" ng-submit="completeAdminActivation()" novalidate>
+			<div class="control-group" ng-class="getFieldInputClass(accountActivationForm.password.$dirty, accountActivationForm.password.$invalid)">
+				<label for="password" class="control-label" l="registration.form.password">Password*</label>
+				<div class="controls">
+					<input name="password" type="password" ng-model="adminActivationPassword" required ng-pattern="/^(?=[!-~]*$)(?=.*([^A-Za-z0-9]|\d))(?=.*[a-zA-Z]).*$/" ng-change="matchPasswords()" placeholder="your password" l-attribute="placeholder" l="registration.form.password.placeholder">
+					<div class="help-inline" ng-show="accountActivationForm.password.$dirty && accountActivationForm.password.$invalid">
+		          		<span ng-show="accountActivationForm.password.$error.required" l="registration.form.password.error.required">Provide a password.</span>
+		          		<span ng-show="accountActivationForm.password.$error.pattern" l="registration.form.password.error.pattern">Min. 6 characters. Must contain a letter and a number or one special character.</span>
+		        	</div>
+				</div>
+			</div>
+			<div class="control-group" ng-class="getFieldInputClass(accountActivationForm.passwordRepeat.$dirty, accountActivationForm.passwordRepeat.$invalid)">
+				<label class="control-label" for="passwordRepeat" l="registration.form.passwordrepeat">Repeat password*</label>
+				<div class="controls">
+					<input name='passwordRepeat' type='password' ng-model="passwordRepeat" required ng-change="matchPasswords(accountActivationForm)" placeholder="repeat your password" l-attribute="placeholder" l="registration.form.passwordrepeat.placeholder">
+					<div class="help-inline" ng-show="accountActivationForm.passwordRepeat.$dirty && accountActivationForm.passwordRepeat.$invalid">
+		          		<span ng-show="accountActivationForm.passwordRepeat.$error.match" l="registration.form.passwordrepeat.error.match">Passwords don't match.</span>
+	        		</div>
+				</div>
+			</div>
+			<button type="submit" l="account.activation.admin.submit" class="btn btn-primary" ng-disabled="accountActivationForm.$invalid">Activate</button>
+		</form>		
+	</div>
+</div>

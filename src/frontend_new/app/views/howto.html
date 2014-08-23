@@ -1,0 +1,81 @@
+<div class="partial-wrapper">
+<div ng-include="'views/businesses_header.html'">
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="data-container-with-title">
+			<h4 class="data-container-title" l="howto.title">4 steps for your own app</h4>
+			<div class="data-container-block" style="margin-top:15px;">
+				<div class="step-wrapper">
+					<div class="step-counter">1</div>
+					<div class="step-content">
+						<div class="step-title" l="howto.step1.title">Create location</div>
+						<div class="step-description" style="float: left; margin-right: 10px;" l="howto.step1.description">Legen Sie Ihre Location an. Laden Sie Bilder hoch, wählen das Farbschema aus und konfigurieren Facebook. Geben Sie einfach den Namen der Location ein und klicken auf "Neu".</div>
+						<form class="form-inline">
+							<!-- <div class="input-append"> -->
+							<input type="text" required l="businesses.new.name.placeholder" l-attribute="placeholder" ng-model="newBusiness.name" style="width: 170px;">
+							<span simple-confirm-dialog dialog-title="business.new.title" dialog-text="business.new.text" dialog-on-confirm="addNewBusiness()" dialog-confirm-button="common.confirm" dialog-disabled="!newBusiness.name">
+								<button type="button" class="btn btn-primary" ng-disabled="!newBusiness.name"><i class="glyphicon glyphicon-plus-sign glyphicon glyphicon-white"></i> <span l="common.new">New</span></button>
+							</span>
+						<!-- </div> -->
+						</form>
+					</div>
+				</div>				
+				<div class="step-wrapper">
+					<div class="step-content">
+						<div ng-hide="activeBusinessId" l="howto.location.select" style="color: red;">
+							Select or create your location to proceed ...
+						</div>
+					<select ng-model="activeBusinessId" style="margin-top: 15px" ng-options="b.id as b.name for b in businesses | filter:filterTrashedBusiness" ng-change="switchBusiness()" ng-show="businesses.length > 0">
+						<option value="" selected="selected" l="common.dropdown.select">-- select --</option>
+					</select>
+					</div>
+				</div>				
+				<div class="step-wrapper" ng-class="{'step-inactive' : !activeBusinessId}">
+					<div class="step-counter">2</div>
+					<div class="step-content">
+					<div class="step-title"><a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/menus?howto=2','')}}" ng-disabled="!activeBusinessId" l="howto.step2.title">Add services and products</a></div>
+					<div class="step-description" l="howto.step2.description">Step description</div>
+					</div>
+				</div>
+				<div class="step-wrapper" ng-class="{'step-inactive' : !activeBusinessId}">
+					<div class="step-counter">3</div>
+					<div class="step-content">
+					<div class="step-title">
+						<a href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/category_assignment?howto=3','')}}" l="howto.step3.title">Activate Services and products
+						</a>
+					</div>
+					<div class="step-description" l="howto.step3.description">Step description</div>
+					</div>
+				</div>
+				<div class="step-wrapper" ng-class="{'step-inactive' : !activeBusinessId}">
+					<div class="step-counter">4</div>
+					<div class="step-content">
+					<div class="step-title">
+						<a href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/infopages?howto=4','')}}" l="howto.step4.title">
+						Create infopages
+						</a>
+					</div>
+						<div class="step-description" l="howto.step4.description">Step description</div>
+					</div>
+				</div>
+				<!-- Welcome Spot -->
+				<div class="step-wrapper" ng-show="welcomeSpots[0].qrImageUrl">
+					<img ng-show="welcomeSpots[0].qrImageUrl" ng-src="{{welcomeSpots[0].qrImageUrl}}" alt="Spot Barcode" class="welcome-spot" tooltip="howto.success.qr.tooltip"/>
+					<div class="step-content">
+						<div class="step-title" l="howto.success.title" style="font-size: 25px; margin-bottom: 6px;">
+							Gratulation
+						</div>
+						<div class="step-description" l="howto.success.description">Scannen Sie den QR Code Rechts
+						</div>
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>			
+		</div>
+		
+	</div>
+</div>
+
+
+</div>

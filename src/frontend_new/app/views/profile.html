@@ -1,0 +1,165 @@
+<!-- <div ng-include="'views/businesses_header.html'">
+</div> -->
+<div class="modal hide" id="changePasswordModal">
+ 	<div class="modal-header">
+    	<button type="button" class="close" data-dismiss="modal">×</button>
+    	<h3 l="profile.dialog.changepassword.title">Change Password</h3>
+	</div>
+	<form name="changePasswordForm" ng-submit="savePassword()" novalidate>
+		<fieldset>
+			<div class="modal-body">
+				<div class="alert alert-danger" ng-show="changePasswordError">
+					<button class="close" ng-click="changePasswordError=false;">×</button>
+        			<h4 class="alert-heading" l="common.warning.title">Error!</h4>
+        			<p ng-bind="changePasswordErrorMessage"></p>
+				</div>
+			   	<p class="help-block" l="profile.dialog.changepassword.text">Please enter the current and new password. After submitting the new password you will have to login again with the new credentials.</p>
+			   	<div class="control-group" ng-class="getFieldInputClass(changePasswordForm.password)">
+			   		<label for="password" class="control-label" l="common.password">Password</label>
+		    		<div class="controls">
+		    			<input type="password" id="password" name="password" ng-model="password" required l-attribute="placeholder" placeholder="CurrentPassword" l="common.password" />
+		    			<div class="help-inline" ng-show="changePasswordForm.password.$dirty">
+			          		<span ng-show="changePasswordForm.password.$error.required" l="profile.account.password.error.required">Enter your current password.</span>
+			          	</div>
+		    		</div>
+		    	</div>
+	    		<div class="control-group" ng-class="getFieldInputClass(changePasswordForm.newPassword)">
+	    			<label for="password" class="control-label" l="profile.account.newpassword">New password</label>
+		    		<div class="controls">
+		    			<input type="password" id="newPassword" name="newPassword" ng-model="newPassword" required l-attribute="placeholder"  l="profile.account.newpassword" ng-pattern="/^(?=[!-~]*$)(?=.*([^A-Za-z0-9]|\d))(?=.*[a-zA-Z]).*$/" ng-change="matchPasswords(changePasswordForm)" />
+						<div class="help-inline" ng-show="changePasswordForm.newPassword.$dirty">
+		          			<span ng-show="changePasswordForm.newPassword.$error.required" l="profile.account.newpassword.error.required">Provide a new password.</span>
+		          			<span ng-show="changePasswordForm.newPassword.$error.pattern" l="registration.form.password.error.pattern">Min. 6 characters. Must contain a letter and a number or one special character.</span>
+		        		</div>
+		        	</div>
+	        	</div>
+	        	<div class="control-group" ng-class="getFieldInputClass(changePasswordForm.newPasswordRepeat)">
+	        		<label for="password" class="control-label" l="profile.account.newpasswordrepeat">Repeat new password</label>
+		        	<div class="controls">
+			    		<input type="password" id="newPasswordRepeat" name="newPasswordRepeat" ng-model="newPasswordRepeat" ng-change="matchPasswords(changePasswordForm)" required placeholder="repeat your new password" l-attribute="placeholder" l="profile.account.newpasswordrepeat" />
+						<div class="help-inline" ng-show="registrationForm.newPasswordRepeat.$dirty">
+			          		<span ng-show="registrationForm.newPasswordRepeat.$error.match" l="profile.account.newpassword.error.match">Passwords don't match.</span>
+			    		</div>
+			    	</div>
+		    	</div>
+		    </div>
+		  	<div class="modal-footer">
+		  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
+		    	<button type="submit" class="btn btn-primary" ng-disabled="changePasswordForm.$invalid || changePasswordProgress" l="common.save">Save</button>
+			</div>
+		</fieldset>
+	</form>
+</div>
+
+<div class="partial_wrapper">
+	<div class="row-fluid">
+		<div class="span8">
+			<h1 l="profile.title">Profile</h1>
+			<p l="profile.description">Here you can edit your profile data.</p>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span6">
+			<div class="data-container-with-title">
+				<h5 class="data-container-title" l="profile.account.title">Account Data</h5>
+				<div class="data-container-block data-container-seperator">
+					<div class="row-fluid">
+						<button class="btn span6" ng-click="showChangePasswordModal()" l="profile.account.action.changepassword">Change password</button>
+						<button type="button" class="btn btn-primary span6" ng-click="toggleEditMode('account')" data-toggle="button">
+							<span l="profile.account.action.edit.enable" ng-hide="editModeAccount">Edit Account Profile</span><span ng-show="editModeAccount" l="profile.account.action.edit.disable">Done editing</span>						
+						</button>
+					</div>
+					<div style="height: 20px">
+						<span ng-show="editModeAccount" l="profile.account.action.edit.disable.hint">Click a account profile feature to edit.</span>
+					</div>
+				</div>
+				<div class="data-container-block data-container-medium">					
+					<div simple-property-editor editor-enabled="editModeAccount" editor-type="text" editor-title="profile.account.login" editor-property="account.login" editor-on-save="saveAccount()">
+						<div class="data-element" ng-class="getEditModeClass('account')">
+							<div class="key" l="profile.account.login">User name</div>
+							<div class="value" style="font-weight: bold;">
+								<span ng-bind="account.login"></span><span ng-show="!account.login && editModeAccount">(Add Login)</span>
+							</div>
+						</div>
+					</div>
+					<div simple-property-editor editor-enabled="editModeAccount" editor-type="text" editor-title="profile.account.name" editor-property="account.name" editor-required editor-on-save="saveAccount()">
+						<div class="data-element" ng-class="getEditModeClass('account')">
+							<div class="key" l="profile.account.name">Name</div>
+							<div class="value">{{account.name}}</div>
+						</div>
+					</div>
+					<div simple-property-editor editor-enabled="editModeAccount" editor-type="email" editor-title="profile.account.email" editor-property="account.email" editor-repeat editor-required editor-on-save="saveAccount()">
+						<div class="data-element" ng-class="getEditModeClass('account')">
+							<div class="key" l="profile.account.email">Email</div>
+							<div class="value">{{account.email}}<span ng-show="account.newEmail" tooltip="Awaiting confirmation."> - {{account.newEmail}} ?</span></div>
+						</div>
+					</div>
+					<div simple-property-editor editor-enabled="editModeAccount" editor-title="profile.account.phone" editor-property="account.phone" editor-on-save="saveAccount()">
+						<div class="data-element" ng-class="getEditModeClass('account')">
+							<div class="key" l="profile.account.phone">Phone</div>
+							<div class="value">{{account.phone}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="data-container-with-title span6" show-role="companyowner">
+			<h5 class="data-container-title" l="profile.company.title">Company Data</h5>
+			<div class="data-container-block data-container-seperator">
+				<div class="row-fluid">
+					<button type="button" class="btn btn-primary span6" ng-click="toggleEditMode('company')" data-toggle="button">
+						<span l="profile.company.action.edit.enable" ng-hide="editModeCompany">Edit Company Profile</span><span ng-show="editModeCompany" l="profile.company.action.edit.disable">Done editing</span>
+					</button>
+				</div>
+				<div style="height: 20px">
+					<span ng-show="editModeCompany" l="profile.company.action.edit.disable.hint">Click a profile feature to edit.</span>
+				</div>
+			</div>
+			<div class="data-container-block data-container-medium">
+				<div simple-property-editor editor-title="Name" editor-property="company.name" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
+					<div class="data-element" ng-class="getEditModeClass('company')">
+						<div class="key" l="profile.company.name">Company name</div>
+						<div class="value" style="font-weight: bold;">{{company.name}}</div>
+					</div>
+				</div>
+				<div simple-property-editor editor-title="profile.company.address.editor.title" editor-property="company.address" editor-required editor-on-save="saveCompany()" editor-enabled="editModeCompany">
+					<div class="data-element" ng-class="getEditModeClass('company')">
+					<div class="key" l="profile.company.address">Address</div>
+						<div class="value">{{company.address}}</div>
+					</div>
+				</div>
+				<div simple-property-editor editor-title="profile.company.city.editor.title" editor-property="company.city" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
+					<div class="data-element" ng-class="getEditModeClass('company')">
+						<div class="key" l="profile.company.city">City</div>
+						<div class="value">{{company.city}}</div>
+					</div>
+				</div>
+				<div simple-property-editor editor-title="profile.company.postcode.editor.title" editor-property="company.postcode" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
+					<div class="data-element" ng-class="getEditModeClass('company')" >
+						<div class="key" l="profile.company.postcode">Postcode</div>
+						<div class="value">{{company.postcode}}</div>
+					</div>
+				</div>
+				<div simple-property-editor editor-title="profile.company.phone.editor.title" editor-property="company.phone" editor-on-save="saveCompany()" editor-enabled="editModeCompany" editor-required>
+					<div class="data-element" ng-class="getEditModeClass('company')" >
+						<div class="key" l="profile.company.phone">Business phone</div>
+						<div class="value">{{company.phone}}</div>
+					</div>
+				</div>
+				<div simple-property-editor editor-title="profile.company.url.editor.title" editor-property="company.url" editor-on-save="saveCompany()" editor-enabled="editModeCompany">
+					<div class="data-element" ng-class="getEditModeClass('company')">
+						<div class="key" l="profile.company.url">Website</div>
+						<div class="value">{{company.url}}</div>
+					</div>
+				</div>
+				<div class="data-element">
+					<div class="key" l="profile.company.country">Country</div>
+					<select ng-model="company.country" class="value" ng-disabled="!editModeCompany" ng-change="saveCompany()" required>
+						<option selected="selected" value="DE">Germany</option>
+					</select>
+				</div>
+			</div>	
+		</div>
+	</div>
+</div>

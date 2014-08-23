@@ -1,0 +1,42 @@
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="Cloobster.Navigation">
+    <div class="container-fluid">   
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-links">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#" style="padding: 0px 5px">
+          <img src="images/Logo_cloobster_weiss.png" l="product.brand" l-attribute="alt" style="max-height: 40px;"></img>
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="nav-links">
+      <!-- Business Menu -->
+        <ul class="nav navbar-nav" ng-hide="customer">
+          <li ng-class="getActive('/home')"><a href="#/home">Home</a></li>
+          <li ng-show="loggedIn" ng-class="getActive('/businesses')"><a href="#/businesses" l="nav.restaurants">Management</a></li>
+          <li><a href="../cockpit" target="_blank">Cockpit</a></li>
+          <li ng-class="getActive('/support')"><a href="#/support" l="nav.support">Support</a></li>
+          <li ng-class="getActive('/about')"><a href="#/about" l="nav.about">About</a></li>
+        </ul>
+      <!-- Customer Menu -->
+        <ul class="nav navbar-nav" ng-show="customer">
+          <li ng-class="getActive('/about')"><a href="#/about" l="nav.about">About</a></li>
+        </ul>
+      <!-- Login Drop Down -->
+      <ul class="nav navbar-nav navbar-right" ng-controller="Cloobster.Login">
+        <li class="dropdown">
+          <a href="" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-user"></i> {{getDisplayName()}} <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#/profile" l="nav.profile">Profile</a></li>
+            <li class="divider"></li>
+            <li><a href="#" ng-click="logout()" l="nav.logout">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+      </div>     
+    </div>
+</div>
