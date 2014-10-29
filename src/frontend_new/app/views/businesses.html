@@ -6,21 +6,12 @@
 		Here you can maintain the different locations you want to "cloobsterize".</p>
 	</div>
 </div>
-
-<!-- <div class="row" >
-	<div class="col-md-4">
-		<h2 l="businesses.title">My Locations</h2>
-	</div>
-	<div class="col-md-4" show-role="companyowner">
-		<button type="button" ng-hide="showNewBusinessForm" ng-click="toggleNewBusiness()" class="btn btn-primary pull-right" l="businesses.add">Add new restaurant</button>
-	</div>
-</div> -->
 <div class="row">
 <div class="data-container-with-title col-md-12">
 	<h4 class="data-container-title" l="businesses.title">My Locations</h4>
 	<div class="data-container-block data-container-seperator">
 		<form class="form-inline">
-			<input type="text" required l="businesses.new.name.placeholder" l-attribute="placeholder" ng-model="newBusiness.name">
+			<input type="text" required l="businesses.new.name.placeholder" l-attribute="placeholder" ng-model="newBusiness.name" class="form-control">
 			<!-- ng-click="toggleNewBusiness()" -->
 			<span simple-confirm-dialog dialog-title="business.new.title" dialog-text="business.new.text" dialog-on-confirm="addNewBusiness()" dialog-confirm-button="common.confirm" dialog-disabled="!newBusiness.name">
 				<button type="button" class="btn btn-primary" ng-disabled="!newBusiness.name"><i class="glyphicon glyphicon-plus-sign glyphicon glyphicon-white"></i> <span l="common.new">New</span></button>
