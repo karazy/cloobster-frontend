@@ -22,37 +22,43 @@
 		<!-- end first column -->
 		<div class="col-md-8" ng-show="currentArea.id">
 			<div class="row ">
-				<div class="col-md-6 data-container-with-title">
+				<div class="col-md-6">
+					<div class="data-container-with-title">
 			   		<!-- area menus -->
-			    	<div ng-show="currentArea.id">
-			    		<h4 class="data-container-title" l="areas.categories.list.title">Assigned categories</h4>
-			    		<div class="data-container-block data-container-seperator" id="containerToSet" style="min-height: 160px;">
-			    			<p l="areas.categories.list.description">List of product categories (e. .g beverages) available to customers checked in in this service area.</p>
-			    			<p><button type="button" class="btn" ng-click="removeAllCategories()"><i class="glyphicon glyphicon-minus"></i> <span l="areas.categories.removeall">Remove All</span></button></p>
-			    		</div>
-			    		<div class="data-container-block data-container-large data-container-scrollable" style="background-color: #CEF6CE">
-			    			<ul class="nav nav-pills nav-stacked organizable-list" id="assignedMenusList" >
-					        <li ng-repeat="category in currentAreaCategories"> <!-- filter:filterNotAssignedCockpitBusinesses -->
-					        	<a><i class="glyphicon glyphicon-move glyphicon glyphicon-black" tooltip="areas.categories.moveable.tooltip"></i> {{category.title}} <i class="glyphicon glyphicon-ban-circle glyphicon glyphicon-black" ng-hide="category.active"></i></a>
-				        	</li>
-			    		</ul>
-			    		</div>			    		
+				    	<div ng-show="currentArea.id">
+				    		<h4 class="data-container-title" l="areas.categories.list.title">Assigned categories</h4>
+				    		<div class="data-container-block data-container-seperator" id="containerToSet" style="min-height: 160px;">
+				    			<p l="areas.categories.list.description">List of product categories (e. .g beverages) available to customers checked in in this service area.</p>
+				    			<p><button type="button" class="btn btn-default" ng-click="removeAllCategories()"><i class="glyphicon glyphicon-minus"></i> <span l="areas.categories.removeall">Remove All</span></button></p>
+				    		</div>
+				    		<div class="data-container-block data-container-large data-container-scrollable" style="background-color: #CEF6CE">
+				    			<ul class="nav nav-pills nav-stacked organizable-list" id="assignedMenusList" >
+						        <li ng-repeat="category in currentAreaCategories"> <!-- filter:filterNotAssignedCockpitBusinesses -->
+						        	<a><i class="glyphicon glyphicon-move glyphicon glyphicon-black" tooltip="areas.categories.moveable.tooltip"></i> {{category.title}} <i class="glyphicon glyphicon-ban-circle glyphicon glyphicon-black" ng-hide="category.active"></i></a>
+					        	</li>
+				    		</ul>
+				    		</div>
+			    		</div>		    		
 			    	</div>
 			   	</div>
-				<div class="col-md-6 data-container-with-title">
-					<div>
+				<div class="col-md-6">
+					<div class="data-container-with-title">
 						<h4 class="data-container-title" l="areas.allcategories.list.title">All categories</h4>
 						<div class="data-container-block data-container-seperator" id="containerToWatch" style="min-height: 160px;">
 							<p l="areas.allcategories.list.description">Drag & Drop to assign category to current service area.</p>
-							<div class="input-prepend">
-		    					<span class="add-on"><i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
+							<div class="input-group">
+		    					<span class="input-group-addon">
+		    						<i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
 		    					</span>
-		    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="allMenusListSearch.title">
-		    					<i class="glyphicon glyphicon-remove glyphicon glyphicon-black" ng-click="allMenusListSearch.title = ''">
-								</i> 
+		    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="allMenusListSearch.title" class="form-control">
+		    					<span class="input-group-btn">
+        							<button class="btn btn-default" ng-click="resetSearchField()" ng-click="allMenusListSearch.title = ''">
+        								<i class="glyphicon glyphicon-remove glyphicon glyphicon-black"></i> 
+        							</button>        						
+        						</span> 
 							</div>
 							<br>
-							<button type="button" class="btn" ng-click="addAllCategories()"><i class="glyphicon glyphicon-plus"></i> <span l="areas.allcategories.addall">Add All</span></button>
+							<button type="button" class="btn btn-default" ng-click="addAllCategories()"><i class="glyphicon glyphicon-plus"></i> <span l="areas.allcategories.addall">Add All</span></button>
 						</div>
 						<div class="data-container-block data-container-large data-container-scrollable" style="background-color: #F6CED8">
 							<ul class="nav nav-pills nav-stacked organizable-list" id="allMenusList">
