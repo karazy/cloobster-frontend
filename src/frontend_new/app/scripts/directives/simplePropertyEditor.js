@@ -14,8 +14,10 @@ angular.module('Cloobster.directives').directive('simplePropertyEditor', ['$time
 			editorValidate: '&',
 			editorValidateText: '@',
 			editorPlaceholder: '@',
+			//Only a single property needs to edited. No translations exist.
 			//property to edit
-			editorProperty: '=',
+			editorProperty: '=',	
+			//Use field and entity when working on items with translations		
 			//field name to edit
 			editorField: '@',
 			//complete entity
@@ -28,16 +30,18 @@ angular.module('Cloobster.directives').directive('simplePropertyEditor', ['$time
 				editorEntityAttr = attrs.hasOwnProperty('editorEntity') ? attrs.editorEntity : null,
 				html;
 
+			//Edit only a property of an entity. 
 			if(!editorFieldAttr || !editorEntityAttr) {
-				html =	'<div class="toggler" ng-transclude></div>'+
+				html =	
+				'<div class="toggler" ng-transclude></div>'+
 				'<div class="simple-property-editor-mask"></div>'+			
 				'<div class="simple-property-editor" style="display:none; position:absolute; background-color:white;">'+
-				'<h5 class="editor-title" l="{{editorTitle}}">Edit property</h5>'+
-				'<form name="simplePropertyForm" novalidate ng-submit="save()" class="edit-property-form">'+
+					'<h5 class="editor-title" l="{{editorTitle}}">Edit property</h5>'+
+					'<form name="simplePropertyForm" novalidate ng-submit="save()" class="edit-property-form">'+
 					'<div class="">'+
 					 	'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty.$invalid)">'+
 					 		'<div class="controls">'+
-					 			createFormInput(attrs)+
+						 		createFormInput(attrs)+
 					 			'<i class="glyphicon glyphicon-remove" ng-click="clearInput()"></i>'+
 								'<div class="help-inline text-danger" ng-show="simplePropertyForm.simpleProperty.$dirty && simplePropertyForm.simpleProperty.$invalid">'+
 									'<span ng-show="simplePropertyForm.simpleProperty.$error.required">'+ l('propertyeditor.error.required') +'</span>'+
@@ -52,18 +56,20 @@ angular.module('Cloobster.directives').directive('simplePropertyEditor', ['$time
 					'</div>'+
 					// '<div class="row">'+
 					// 	'<div class="col-md-12">'+
-							'<button type="button" ng-click="closeDialog()" style="margin: 5px 5px 0 0;" class="btn" data-dismiss="modal">'+l('common.cancel')+'</button>'+
-							'<button type="submit" class="btn btn-primary" style="margin-top: 5px;" ng-disabled="simplePropertyForm.$invalid">'+l('common.save')+'</button>'+
+					'<button type="button" ng-click="closeDialog()" style="margin: 5px 5px 0 0;" class="btn btn-default" data-dismiss="modal">'+l('common.cancel')+'</button>'+
+					'<button type="submit" class="btn btn-primary" style="margin-top: 5px;" ng-disabled="simplePropertyForm.$invalid">'+l('common.save')+'</button>'+
 					// 	'</div>'+
 					// '</div>'+
 					'</form>'+
 				'</div>';
 			} else {
-				html =	'<div class="toggler" ng-transclude></div>'+
+				//Edit translated values as well
+				html =	
+				'<div class="toggler" ng-transclude></div>'+
 				'<div class="simple-property-editor-mask"></div>'+			
 				'<div class="simple-property-editor" style="display:none; position:absolute; background-color:white;">'+
-				'<h5 class="editor-title" l="{{editorTitle}}">Edit property</h5>'+
-				'<form name="simplePropertyForm" novalidate ng-submit="save()" class="edit-property-form">'+
+					'<h5 class="editor-title" l="{{editorTitle}}">Edit property</h5>'+
+					'<form name="simplePropertyForm" novalidate ng-submit="save()" class="edit-property-form">'+
 					'<div class="edit-property-form-inputs">'+
 						//bind default entity
 					 	'<div class="control-group" ng-class="getFieldInputClass(simplePropertyForm.simpleProperty.$invalid)">'+
@@ -94,8 +100,8 @@ angular.module('Cloobster.directives').directive('simplePropertyEditor', ['$time
 					'</div>'+
 					// '<div class="row" style="margin-top: 5px">'+
 						// '<div class="col-md-12">'+
-						'<button type="button" ng-click="closeDialog()" style="margin: 5px 5px 0 0;" class="btn" data-dismiss="modal>'+l('cancel')+'</button>'+
-						'<button type="submit" class="btn btn-primary" style="margin-top: 5px;" ng-disabled="simplePropertyForm.$invalid">'+l('save')+'</button>'+
+					'<button type="button" ng-click="closeDialog()" style="margin: 5px 5px 0 0;" class="btn btn-default" data-dismiss="modal">'+l('common.cancel')+'</button>'+
+					'<button type="submit" class="btn btn-primary" style="margin-top: 5px;" ng-disabled="simplePropertyForm.$invalid">'+l('common.save')+'</button>'+
 						// '</div>'+
 					// '</div>'+
 					'</form>'+

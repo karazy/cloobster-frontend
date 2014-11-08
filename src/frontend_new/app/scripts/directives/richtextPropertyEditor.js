@@ -22,7 +22,9 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','langcodesMap',
 				editorEntityAttr = attrs.hasOwnProperty('editorEntity') ? attrs.editorEntity : null,
 				html = 
 				'<div class="toggler" ng-transclude></div>'+
-				'<div class="modal hide" ng-class="{\'richtext-property-editor-big\' : editorEntity.translations}">'+
+				'<div class="modal fade" ng-class="{\'richtext-property-editor-big\' : editorEntity.translations}">'+
+					'<div class="modal-dialog">'+
+    					'<div class="modal-content">'+
 				  '<div class="modal-header">'+
 				   ' <button type="button" class="close" data-dismiss="modal">×</button>'+
 				    '<h3 l="{{editorTitle}}">Edit property</h3>'+
@@ -57,6 +59,8 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','langcodesMap',
 						'<button type="submit" class="btn btn-primary" ng-disabled="simplePropertyForm.$invalid">'+l('common.save')+'</button>'+
 					'</div>'+
 					'</form>'+
+					'</div>'+
+					'</div>'+
 				'</div>';
 			
 			// element.append(html);
@@ -74,6 +78,7 @@ Cloobster.directives.directive('richtextPropertyEditor', ['lang','langcodesMap',
 		        		editorTextarea = iElement.find('textarea.property-input'),
 		        		editorTranslationTextarea = iElement.find('textarea.translation-input'),
 		        		ctrl = scope.simplePropertyForm.simpleProperty,
+		        		editorEntityAttr = attrs.hasOwnProperty('editorEntity') ? attrs.editorEntity : null,
 		        		editorConfig = {
 			        		//config
 			        		resize_enabled: false,

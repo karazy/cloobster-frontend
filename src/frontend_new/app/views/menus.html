@@ -348,7 +348,7 @@
 			    	<div richtext-property-editor editor-title="product.editor.longDesc" editor-entity="currentProduct" editor-field="longDesc" editor-on-save="saveProduct()" editor-placeholder="product.placeholder.longDesc" editor-enabled="!currentProduct.isSaving()" style="overflow:scroll; max-height:200px;">
 			    		<div ng-class="{edit: !currentProduct.isSaving(), muted: currentProduct.isSaving()}">
 							<span l="product.placeholder.longDesc" ng-hide="currentProduct.longDesc" class="simple-property-placeholder">Long description*</span>
-							<div ng-bind-html-unsafe="currentProduct.longDesc">
+							<div ng-bind-html="currentProduct.longDesc">
 							</div> <i class="glyphicon glyphicon-edit glyphicon glyphicon-black"></i>
 						</div>
 					</div>
