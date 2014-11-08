@@ -10,7 +10,7 @@
 */
 Cloobster.Externals = function($scope, $routeParams, $http, $location, $log, lang, errorHandler, LocationConfiguration) {
 
-	var baseFolder = 'partials/externals/';
+	var baseFolder = 'views/externals/';
 	/**
 	* List of all external providers.
 	*/

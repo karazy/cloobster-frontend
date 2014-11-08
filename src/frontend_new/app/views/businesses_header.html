@@ -2,7 +2,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<h2 style="float:left; margin-right: 20px"  ng-bind="company.name">Your company name</h2>
-		<select ng-model="activeBusinessId" style="margin-top: 15px; margin-right: 20px;" ng-options="b.id as b.name for b in businesses | filter:filterTrashedBusiness" ng-change="switchBusiness()" ng-show="canSwitchBusiness"></select>		
+		<select ng-model="activeBusinessId" style="margin-top: 20px; margin-right: 20px; width:auto;" ng-options="b.id as b.name for b in businesses | filter:filterTrashedBusiness" ng-change="switchBusiness()" ng-show="canSwitchBusiness" class="form-control"></select>		
 	</div>
 </div>
 <div class="row" ng-show="howtoMode">
@@ -71,10 +71,10 @@
 			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/appconfig',true), 'disabled': businesses.length==0}">
 				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/appconfig','')}}" l="businesses.headertabs.appconfig">App Config</a>
 			</li>
-			 <li class="dropdown">
+			 <li role="presentation" class="dropdown">
 			    <a class="dropdown-toggle"
 			       data-toggle="dropdown"
-			       href="#">
+			       >
 			        <span l="common.more">More</span>
 			        <b class="caret"></b>
 			      </a>

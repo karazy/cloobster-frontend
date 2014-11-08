@@ -50,10 +50,12 @@ angular.module('Cloobster.directives').directive('simplePropertyEditor', ['$time
 						'</div>'+
 						createRepeatInput(attrs)+
 					'</div>'+
-					'<div class="row-fluid">'+
-						'<button type="button" ng-click="closeDialog()" class="btn span6" data-dismiss="modal">'+l('common.cancel')+'</button>'+
-						'<button type="submit" class="btn btn-primary span6" ng-disabled="simplePropertyForm.$invalid">'+l('common.save')+'</button>'+
-					'</div>'+
+					// '<div class="row">'+
+					// 	'<div class="col-md-12">'+
+							'<button type="button" ng-click="closeDialog()" style="margin: 5px 5px 0 0;" class="btn" data-dismiss="modal">'+l('common.cancel')+'</button>'+
+							'<button type="submit" class="btn btn-primary" style="margin-top: 5px;" ng-disabled="simplePropertyForm.$invalid">'+l('common.save')+'</button>'+
+					// 	'</div>'+
+					// '</div>'+
 					'</form>'+
 				'</div>';
 			} else {
@@ -90,10 +92,12 @@ angular.module('Cloobster.directives').directive('simplePropertyEditor', ['$time
 						//repeat over translations
 						// createRepeatedFormInput(editorEntityAttr.translations, attrs) +							
 					'</div>'+
-					'<div class="row-fluid" style="margin-top: 5px">'+
-						'<button type="button" ng-click="closeDialog()" class="btn" data-dismiss="modal" style="margin-right: 5px;">'+l('cancel')+'</button>'+
-						'<button type="submit" class="btn btn-primary" ng-disabled="simplePropertyForm.$invalid">'+l('save')+'</button>'+
-					'</div>'+
+					// '<div class="row" style="margin-top: 5px">'+
+						// '<div class="col-md-12">'+
+						'<button type="button" ng-click="closeDialog()" style="margin: 5px 5px 0 0;" class="btn" data-dismiss="modal>'+l('cancel')+'</button>'+
+						'<button type="submit" class="btn btn-primary" style="margin-top: 5px;" ng-disabled="simplePropertyForm.$invalid">'+l('save')+'</button>'+
+						// '</div>'+
+					// '</div>'+
 					'</form>'+
 				'</div>';
 			}

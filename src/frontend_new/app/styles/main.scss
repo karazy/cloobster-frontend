@@ -124,6 +124,13 @@ html, body {
   vertical-align: top;
   line-height: 1.39em;
   display: inline-block;
+
+  img {
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+    border: 0;
+  }
 }
 
 .data-element select.value {

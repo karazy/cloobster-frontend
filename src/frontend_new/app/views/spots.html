@@ -41,15 +41,18 @@
 	</div>
 	<div class="row">
 		<!-- first column -->
-		<div class="data-container-with-title col-md-3">
+		<div class="col-md-3">
+		<div class="data-container-with-title">
 			<h4 class="data-container-title" l="areas.list.title">Your service areas</h4>
 			<div class="data-container-block data-container-seperator">
-				<div class="row">					
-					<button class="btn btn-primary col-md-6" ng-click="createArea()" ng-hide="activeBusiness.basic"><i class="glyphicon glyphicon-plus-sign glyphicon glyphicon-white"></i> <span l="common.new">New</span></button>
-					<span simple-confirm-dialog dialog-title="common.hint" dialog-text="areas.basicmode.message.text" dialog-class="alert-danger"
-					 dialog-on-confirm="createArea()" dialog-confirm-button="common.confirm" dialog-disabled="!activeBusiness.basic" ng-show="activeBusiness.basic">
-						<button class="btn btn-primary col-md-6" ng-show="activeBusiness.basic"><i class="glyphicon glyphicon-plus-sign glyphicon glyphicon-white"></i> <span l="common.new">New</span></button>
-					</span>
+				<div class="row">				
+					<div class="col-md-6">	
+						<button class="btn btn-primary btn-block" ng-click="createArea()" ng-hide="activeBusiness.basic"><i class="glyphicon glyphicon-plus-sign glyphicon glyphicon-white"></i> <span l="common.new">New</span></button>
+						<span simple-confirm-dialog dialog-title="common.hint" dialog-text="areas.basicmode.message.text" dialog-class="alert-danger"
+						 dialog-on-confirm="createArea()" dialog-confirm-button="common.confirm" dialog-disabled="!activeBusiness.basic" ng-show="activeBusiness.basic">
+							<button class="btn btn-primary btn-block" ng-show="activeBusiness.basic"><i class="glyphicon glyphicon-plus-sign glyphicon glyphicon-white"></i> <span l="common.new">New</span></button>
+						</span>
+					</div>
 				</div>
 			</div>
 		<!-- 	<div class="loading-indicator" ng-show="areas == null">
@@ -62,7 +65,9 @@
 		        	<a ng-click="loadArea(area)">{{area.name}}  <i class="glyphicon glyphicon-ban-circle glyphicon glyphicon-black" ng-hide="area.active"></i></a>
 		        </li>
 		    </ul>	
-		</div><!-- end first column -->
+		</div>
+		</div>
+		<!-- end first column -->
 
 		<!-- 2. column menu -->
 		<div class="col-md-5" ng-show="currentArea">
@@ -90,14 +95,20 @@
 			    		</div>
 						<div class="row" ng-show="currentArea.id">
 							<!-- Active toggle buttons -->
-							<button class="btn btn-success col-md-4" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="currentArea.active && currentArea.id"><i class="glyphicon glyphicon-ok glyphicon glyphicon-white"></i> <span l="common.active">Active</span></button>
-			    			<button class="btn btn-danger col-md-4" style="margin-left: 0px !important;" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="!currentArea.active && currentArea.id"><i class="glyphicon glyphicon-ban-circle glyphicon glyphicon-white"></i> <span l="common.inactive">Inactive</span></button>
+							<div class="col-md-4">
+								<button class="btn btn-success btn-block" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="currentArea.active && currentArea.id"><i class="glyphicon glyphicon-ok glyphicon glyphicon-white"></i> <span l="common.active">Active</span></button>
+			    				<button class="btn btn-danger btn-block" style="margin-left: 0px !important;" type="button" ng-click="toggleAreaActive()" ng-model="currentArea.active" ng-show="!currentArea.active && currentArea.id"><i class="glyphicon glyphicon-ban-circle glyphicon glyphicon-white"></i> <span l="common.inactive">Inactive</span></button>
+			    			</div>
 								<!-- Barcode required toggle buttons -->
-							<button class="btn btn-warning col-md-6" type="button"ng-click="currentArea.barcodeRequired = false;saveArea()" ng-show="currentArea.barcodeRequired && currentArea.id"><i class="glyphicon glyphicon-qrcode glyphicon glyphicon-white"></i> <span l="areas.editor.barcoderequired.true">Barcode required</span><i class="glyphicon glyphicon-question-sign glyphicon glyphicon-white pull-right barcodeRequiredHelp"></i></button>
-			    			<button class="btn col-md-6"type="button" ng-click="currentArea.barcodeRequired = true;saveArea()" ng-show="!currentArea.barcodeRequired && currentArea.id && !currentArea.welcome"><i class="glyphicon glyphicon-qrcode"></i> <span l="areas.editor.barcoderequired.false">No Barcode required</span><i class="glyphicon glyphicon-question-sign pull-right barcodeRequiredHelp"></i></button>
+							<div class="col-md-6">
+								<button class="btn btn-warning btn-block" type="button"ng-click="currentArea.barcodeRequired = false;saveArea()" ng-show="currentArea.barcodeRequired && currentArea.id"><i class="glyphicon glyphicon-qrcode glyphicon glyphicon-white"></i> <span l="areas.editor.barcoderequired.true">Barcode required</span><i class="glyphicon glyphicon-question-sign glyphicon glyphicon-white pull-right barcodeRequiredHelp"></i></button>
+			    				<button class="btn btn-block"type="button" ng-click="currentArea.barcodeRequired = true;saveArea()" ng-show="!currentArea.barcodeRequired && currentArea.id && !currentArea.welcome"><i class="glyphicon glyphicon-qrcode"></i> <span l="areas.editor.barcoderequired.false">No Barcode required</span><i class="glyphicon glyphicon-question-sign pull-right barcodeRequiredHelp"></i></button>
+			    			</div>
 			    			<!-- <p class="col-md-1"><i class="glyphicon glyphicon-question-sign" id="barcodeRequiredHelp"></i></p> -->
 		    				<!-- Delete area button  -->
-							<button class="btn col-md-2" data-toggle="modal" data-target="#deleteAreaModal" ng-show="!currentArea.welcome"><i class="glyphicon glyphicon-trash"></i></button>
+							<div class="col-md-2">
+								<button class="btn btn-block" data-toggle="modal" data-target="#deleteAreaModal" ng-show="!currentArea.welcome"><i class="glyphicon glyphicon-trash"></i></button>
+							</div>
 						</div>
 						<div class="modal hide" id="deleteAreaModal">
 						 	<div class="modal-header">
@@ -134,28 +145,28 @@
 							
 						</div>	 -->					
 					<!-- </div> -->
-					<div class="btn-toolbar">						
+					<div class="btn-toolbar" role="toolbar">						
 						<div class="btn-group">						
-							<button  class="btn" ng-click="checkSpots()" tooltip="common.masscheck.tooltip">
+							<button  class="btn btn-default" ng-click="checkSpots()" tooltip="common.masscheck.tooltip">
 								<i class="glyphicon glyphicon-check glyphicon glyphicon-black"></i>
 							</button>						
 						</div>
 						<div class="btn-group">
-						  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+						  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 						  	<span l="common.action">Action</span>
 						    <span class="caret"></span>
-						  </a>
-						  <ul class="dropdown-menu">
-						  	<li class="nav-header" l="spots.listheader.selected">
+						  </button>
+						  <ul class="dropdown-menu" role="menu">
+						  	<li l="spots.listheader.selected">
 						  		Selected ...
 						  	</li>
 						  	<li>
-						  		<a  class="" ng-click="setCheckedSpotsActiveState(true)">
+						  		<a  ng-click="setCheckedSpotsActiveState(true)">
 									<i class="glyphicon glyphicon-ok glyphicon glyphicon-black"></i> <span l="spots.action.setactive">Set active</span>
 								</a>
 						  	</li>						    
 							<li>
-								<a  class="" ng-click="setCheckedSpotsActiveState(false)">
+								<a  ng-click="setCheckedSpotsActiveState(false)">
 									<i class="glyphicon glyphicon-ban-circle glyphicon glyphicon-black"></i> <span l="spots.action.setinactive">Set inactive</span>
 								</a>
 							</li>
@@ -171,7 +182,7 @@
 							</li>
 							<li class="divider">
 							</li>
-							<li class="nav-header" l="spots.listheader.create">
+							<li l="spots.listheader.create">
 						  		Create ...
 						  	</li>
 							<li>
@@ -197,17 +208,21 @@
 							</button>
 						</div> -->					
 		    			<div class="btn-group">
-			    			<!-- <form class="form-inline">
-		 						<div class="controls">  -->
-			    					<div class="input-prepend" style="margin-bottom:0;">
-		            					<span class="add-on"><i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
+			    			<form class="form-inline" role="form">
+		 						<div class="form-group"> 
+			    					<div class="input-group" style="margin-bottom:0;">
+		            					<span class="input-group-addon"><i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
 		            					</span>
-		            					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="spotsQuery.name">
-		            					<i class="glyphicon glyphicon-remove glyphicon glyphicon-black" ng-click="spotsQuery = null">
+		            					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="spotsQuery.name" class="form-control">
+		            					<span class="input-group-btn">
+		            						<button class="btn btn-default">
+		            							<i class="glyphicon glyphicon-remove glyphicon glyphicon-black" ng-click="spotsQuery = null">
+		            						</i>
 		        						</i> 
+		        						</span>
 		        					</div>
-							<!-- 	</div>
-			    			</form> -->
+								</div>
+			    			</form>
  			    			</div>
 					</div>
 					<span style="font-size: 10px;" l="spots.filtered.status">Spots count {{filteredSpots.length}} | checked {{getCheckedSpotsCount()}}</span>

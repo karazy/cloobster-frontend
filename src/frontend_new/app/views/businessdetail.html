@@ -1,5 +1,6 @@
 <div ng-include="'views/businesses_header.html'"></div>
 	<div class="row">
+		<div class="col-md-12">
 		<p l="business.detail.help">Here you can manage the profil information for your selected business.<br>
 			You also can customize the CI which affects how your business is presented in the app.</p>
 		<div class="alert alert-block" ng-show="!activeSubscription || activeSubscription.basic">
@@ -9,6 +10,7 @@
 		 	<span class="label label-important">Basic</span> You have a basic subscription. Upgrade now to gain more features or <a href="https://www.cloobster.com" target="_blank">learn more</a>
 		 </div>
 		</div>	
+		</div>
 	</div>
 </div>
 <div class="data-container-with-title">
@@ -352,9 +354,7 @@
 			<h3 l="business.detail.section.storecard">Customer storecard</h3>
 			<p l="business.detail.section.storecard.description">Please choose barcode type of your storecards if you offer them in location.
 				storecards</p>
-			<div class="row">
-				<select ng-model="storeCardConfiguration.barcodeType" ng-options="b.type as b.name for b in barcodeTypes" ng-change="saveStoreCardConfiguration()"></select>	
-			</div>
+			<select ng-model="storeCardConfiguration.barcodeType" ng-options="b.type as b.name for b in barcodeTypes" ng-change="saveStoreCardConfiguration()" class="form-control" style="width: 220px;"></select>	
 		</div>
 		<div class="data-container-block">
 			<h3 l="business.detail.section.cockpit">Cockpit Settings</h3>
