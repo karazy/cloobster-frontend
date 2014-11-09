@@ -274,18 +274,20 @@
 	    		<p ng-show="currentSpot.master" l="spot.master.description">This is the "master" Spot for this area, it cannot be deleted, unless you delete the Area.</p>	    		
 	    		<div class="row" ng-show="currentSpot.id && currentSpot.welcome">
     			<!-- code for cloobster widget button, show only for welcome spots -->
-	    			<p><small l="spot.cloobsterwidget">Copy and paste snippet on a website for direct Check-in at this spot when app is installed!</small></p>
-	    			<p>Button</p>
-					<textarea readonly="readonly" rows="4" class="col-md-12" style="white-space:nowrap">
-						<a href="https://go.cloobster.com/x/spot/{{currentSpot.barcode}}" class="cloobster-checkin-button">cloobster Check-in</a>
-						<script type="text/javascript">
-							!function(f,a,g){var e,b=f.getElementsByTagName(a)[0],c=/^http:/.test(f.location)?"http":"https";if(!f.getElementById(g)){e=f.createElement(a);e.id=g;e.src=c+"://cloobster.com/js/widget.js";b.parentNode.insertBefore(e,b)}}(document,"script","cloobster-widget");
-						</script>					 
-					</textarea>
-					<p>Link<p/>
-					<textarea readonly="readonly" rows="2" class="col-md-12">https://go.cloobster.com/x/spot/{{currentSpot.barcode}}</textarea>
+    				<div class="col-md-12">
+		    			<p><small l="spot.cloobsterwidget">Copy and paste snippet on a website for direct Check-in at this spot when app is installed!</small></p>
+		    			<p>Button</p>
+						<textarea readonly="readonly" rows="4" style="white-space:nowrap" class="form-control">
+							<a href="https://go.cloobster.com/x/spot/{{currentSpot.barcode}}" class="cloobster-checkin-button">cloobster Check-in</a>
+							<script type="text/javascript">
+								!function(f,a,g){var e,b=f.getElementsByTagName(a)[0],c=/^http:/.test(f.location)?"http":"https";if(!f.getElementById(g)){e=f.createElement(a);e.id=g;e.src=c+"://cloobster.com/js/widget.js";b.parentNode.insertBefore(e,b)}}(document,"script","cloobster-widget");
+							</script>					 
+						</textarea>
+						<p>Link</p>
+						<textarea readonly="readonly" rows="2" class="form-control">https://go.cloobster.com/x/spot/{{currentSpot.barcode}}</textarea>
+					</div>
 				</div>
-	    		<div class="row" ng-show="currentSpot.id">
+	    		<div class="row" ng-show="currentSpot.id" style="margin-top: 5px;">
 	    			<div class="col-md-12">
 			    		<div class="btn-toolbar" role="toolbar">  
 			    			<div class="btn-group" ng-show="currentSpot.active && currentSpot.id">

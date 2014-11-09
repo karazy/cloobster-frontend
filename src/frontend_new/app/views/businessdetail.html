@@ -386,7 +386,7 @@
 	<!-- </div> -->
 </div>
 
-<div class="modal hide" id="deleteModal">
+<div class="modal fade" id="deleteModal">
 	<div class="modal-dialog">
 		<div class="modal-content">
 		 	<div class="modal-header">
@@ -418,28 +418,42 @@
 		<!-- <div class="row"> -->
 		<form class="form-inline" style="margin: 7px 0;">
 			<!-- <div class="controls"> -->
-				<div class="input-prepend">
-					<span class="add-on"><i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i></span><input type="text" l="common.search" l-attribute="placeholder" placeholder="Search" ng-model="languageQuery.lang">
+				<div class="input-group">
+					<span class="input-group-addon">
+						<i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
+					</span>
+					<input type="text" l="common.search" l-attribute="placeholder" placeholder="Search" ng-model="languageQuery.lang" class="form-control">
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="languageQuery.lang = ''">
+							<i class="glyphicon glyphicon-remove glyphicon glyphicon-black"></i>	
+						</button>
+					</span>
 				</div>
-				<i class="glyphicon glyphicon-remove glyphicon glyphicon-black" ng-click="languageQuery.lang = ''"></i>								
+										
 				<button class="btn btn-success" style="margin-left: 10px;" type="button" ng-click="languageQuery.selected = ''" ng-model="currentMenu.active" ng-show="languageQuery.selected"><i class="glyphicon glyphicon-ok glyphicon glyphicon-white"></i> <span l="common.active">Active</span></button>
 
-	    		<button class="btn" style="margin-left: 10px;" type="button" ng-click="languageQuery.selected = true" ng-model="currentMenu.active" ng-show="!languageQuery.selected"><i class="glyphicon glyphicon-ban-circle glyphicon glyphicon-black"></i> <span l="common.all">All</span></button>
+	    		<button class="btn btn-default" style="margin-left: 10px;" type="button" ng-click="languageQuery.selected = true" ng-model="currentMenu.active" ng-show="!languageQuery.selected"><i class="glyphicon glyphicon-ban-circle glyphicon glyphicon-black"></i> <span l="common.all">All</span></button>
 			<!-- </div>			 -->
 		</form>		
 		
 		<!-- </div> -->
 	</div>
-	<div class="data-container-block row data-container-scrollable data-container-dynamic">
-		<div ng-repeat="lang in langcodes | filter:languageQuery" class="col-md-2" style="margin-left: 5px;">
+	<div class="data-container-block row data-container-scrollable data-container-dynamic">		
+		<div ng-repeat="lang in langcodes | filter:languageQuery" style="margin-left: 5px;">
+			<!-- <div class="col-md-2"> -->
 			<span>
 				<input type="checkbox" ng-model="lang.selected" id="langcode_{{lang.code}}" value="{{lang.code}}"> <label for="langcode_{{lang.code}}" style="display: inline;">{{lang.lang}}</label>
 			</span>
+			<!-- </div> -->
 		</div>
 	</div>
 	<div class="row data-container-block">
-		<button class="btn col-md-3" l="common.cancel" ng-click="langSelection = false;">Cancel</button>
-		<button class="btn btn-primary col-md-3" l="common.save" ng-click="saveLanguageSelection()">Save</button>
+		<div class="col-md-3">
+			<button class="btn btn-default btn-block" l="common.cancel" ng-click="langSelection = false;">Cancel</button>
+		</div>
+		<div class="col-md-3">
+			<button class="btn btn-primary btn-block" l="common.save" ng-click="saveLanguageSelection()">Save</button>
+		</div>
 	</div>
 	<!-- </div> -->
 </div>
