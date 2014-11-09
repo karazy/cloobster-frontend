@@ -2552,8 +2552,8 @@ angular.module('Cloobster.translations', [], ['$provide', function($provide) {
 			'EN' : 'Facebook Post'
 		},
 		'appconfig.features.contact' : {
-			'DE' :  'Kontaktinformation',
-			'EN' : 'Contact information'
+			'DE' :  'Kontaktinfo',
+			'EN' : 'Contact info'
 		},
 		'appconfig.features.storecard' : {
 			'DE' :  'Kundenkarte',

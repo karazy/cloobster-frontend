@@ -134,17 +134,21 @@
 				</div>
 			</div>
 			<!-- Modal tile delete dialog. -->
-    		<div class="modal hide" id="deleteHoverTileModal">
-			 	<div class="modal-header">
-			    	<button type="button" class="close" data-dismiss="modal">×</button>
-			    	<h4 l="tiles.dialog.delete.title">Delete infopage</h4>
-				</div>
-				<div class="modal-body alert-danger">
-		    	<p><span l="tiles.dialog.delete.text">{{lastHoveredTile.title}} tile will be deleted!<br/>This can't be undone.</span></p>
-		    </div>  
-		  	<div class="modal-footer">
-		  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
-		    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteTile(lastHoveredTile)" l="common.delete">Delete</button>
+    		<div class="modal fade" id="deleteHoverTileModal">
+    			<div class="modal-dialog">
+    				<div class="modal-content">
+					 	<div class="modal-header">
+					    	<button type="button" class="close" data-dismiss="modal">×</button>
+					    	<h4 l="tiles.dialog.delete.title">Delete infopage</h4>
+						</div>
+						<div class="modal-body alert-danger">
+				    	<p><span l="tiles.dialog.delete.text">{{lastHoveredTile.title}} tile will be deleted!<br/>This can't be undone.</span></p>
+				    </div>  
+				  	<div class="modal-footer">
+				  		<button type="button" class="btn btn-default" data-dismiss="modal" l="common.cancel">Cancel</button>
+				    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteTile(lastHoveredTile)" l="common.delete">Delete</button>
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- End modal -->
@@ -153,29 +157,39 @@
 			<div class="col-md-4" ng-show="currentTile">
 				<div class="data-container-with-title">
 					<h4 class="data-container-title" l="appconfig.tiledetail.title">Tile details</h4>
-					<div class="data-container-block data-container-small">
+					<div class="data-container-block data-container-medium">
 						<h4>{{tiles[currentTile.type].title}}</h4>
 						<p>{{tiles[currentTile.type].description}}</p>
 						<div ng-show="showProductTileToggle()">
-							<label class="radio">
+							<div class="radio">
+							<label>
 								<input type="radio" name="productiletype" ng-model="currentTile.type" value="productsall" ng-change="updateTile()"><span l="tiles.template.productsall">Random</span><br/>
 							</label>
-							<label class="radio">
+							</div>
+							<div class="radio">
+							<label>
 								<input type="radio" name="productiletype" value="productsspecial" ng-model="currentTile.type" ng-change="updateTile()"><span l="tiles.template.productsspecial">Random special</span><br/>
 							</label>
-							<label class="radio">
+							</div>
+							<div class="radio">
+							<label>
 								<input type="radio" name="productiletype" value="productsselected" ng-model="currentTile.type" ng-change="updateTile()"><span l="tiles.template.productsselected">Selected</span><br/>
 							</label>
+							</div>
 						</div>
 						<div ng-show="showInfopageTileToggle()">
-							<label class="radio">
+							<div class="radio">
+							<label>
 								<input type="radio" name="infopagetiletype" ng-model="currentTile.type" value="infopagesall" ng-change="updateTile()"><span l="tiles.template.allinfopages">Random</span><br/>
 							</label>
-							<label class="radio">
+							</div>
+							<div class="radio">
+							<label>
 								<input type="radio" name="infopagetiletype" value="infopagesselected" ng-model="currentTile.type" ng-change="updateTile()"><span l="tiles.template.infopagesselected">Selected</span><br/>
 							</label>
+							</div>
 						</div>
-						<button class="btn" data-toggle="modal" data-target="#deleteTileModal"><i class="glyphicon glyphicon-trash"></i></button>
+						<button class="btn btn-default" data-toggle="modal" data-target="#deleteTileModal"><i class="glyphicon glyphicon-trash"></i></button>
     				</div>
 				</div>
 				<div class="data-container-with-title" ng-show="currentTile.type == 'productsselected'">
@@ -185,18 +199,25 @@
 				    	<p l="appconfig.list.dataselection.description">List of all products</p>
 						<div class="btn-toolbar">
 							<div class="btn-group">						
-								<button  class="btn" ng-click="checkProducts()" tooltip="common.masscheck.tooltip">
+								<button  class="btn btn-default" ng-click="checkProducts()" tooltip="common.masscheck.tooltip">
 									<i class="glyphicon glyphicon-check glyphicon glyphicon-black"></i>
 								</button>						
 							</div>
 							<div class="btn-group">
-								<div class="input-prepend" style="margin-bottom: 0px;">
-			    					<span class="add-on"><i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
-			    					</span>
-			    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="allProductsQuery.name" style="width: 150px;">
-			    					<i class="glyphicon glyphicon-remove glyphicon glyphicon-black" ng-click="allProductsQuery.name = ''">
-									</i> 
-								</div>
+								<form class="form-inline">
+ 									<div class="controls">
+										<div class="input-group" style="margin-bottom: 0px;">
+					    					<span class="input-group-addon"><i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
+					    					</span>
+					    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="allProductsQuery.name"class="form-control" style="width:auto;">
+					    					<span class="input-group-btn">
+					    						<button class="btn btn-default" ng-click="allProductsQuery.name = ''">
+					    						<i class="glyphicon glyphicon-remove glyphicon glyphicon-black"></i> 
+											</button>
+											</span>
+										</div>
+									</div>
+								</form>
 				    		</div>
 						</div>						
 			    	</div>
@@ -225,18 +246,26 @@
 				    	<p l="appconfig.list.dataselection.description">Select the data entries for this tile. One of those entires will be displayed randomly on the dashboard.</p>
 						<div class="btn-toolbar">
 							<div class="btn-group">						
-								<button  class="btn" ng-click="checkInfoPages()" tooltip="common.masscheck.tooltip">
+								<button  class="btn btn-default" ng-click="checkInfoPages()" tooltip="common.masscheck.tooltip">
 									<i class="glyphicon glyphicon-check glyphicon glyphicon-black"></i>
 								</button>
 							</div>
 							<div class="btn-group">
-								<div class="input-prepend"  style="margin-bottom: 0px;">
-			    					<span class="add-on"><i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
-			    					</span>
-			    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="allInfoPagesQuery.title" style="width: 150px;">
-			    					<i class="glyphicon glyphicon-remove glyphicon glyphicon-black" ng-click="allInfoPagesQuery.title = ''">
-									</i> 
-								</div>
+								<form class="form-inline">
+ 									<div class="controls">
+										<div class="input-group"  style="margin-bottom: 0px;">
+					    					<span class="input-group-addon"><i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
+					    					</span>
+					    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="allInfoPagesQuery.title" class="form-control" style="width:auto;">
+					    					<span class="input-group-btn">
+					    						<button type="button" class="btn btn-default" ng-click="allInfoPagesQuery.title = ''">
+					    						<i class="glyphicon glyphicon-remove glyphicon glyphicon-black" >
+												</i> 
+											</button>
+											</span>
+										</div>
+									</div>
+								</form>
 				    		</div>
 						</div>						
 			    	</div>
@@ -263,18 +292,26 @@
 				    	<p l="appconfig.list.dataselection.description">List of all menus</p>
 						<div class="btn-toolbar">
 							<div class="btn-group">						
-								<button  class="btn" ng-click="checkMenus()" tooltip="common.masscheck.tooltip">
+								<button  class="btn btn-default" ng-click="checkMenus()" tooltip="common.masscheck.tooltip">
 									<i class="glyphicon glyphicon-check glyphicon glyphicon-black"></i>
 								</button>						
 							</div>
 							<div class="btn-group">
-								<div class="input-prepend" style="margin-bottom: 0px;">
-			    					<span class="add-on"><i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
-			    					</span>
-			    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="allMenusQuery.title" style="width: 150px;">
-			    					<i class="glyphicon glyphicon-remove glyphicon glyphicon-black" ng-click="allMenusQuery.title = ''">
-									</i> 
-								</div>
+								<form class="form-inline">
+ 									<div class="controls">
+										<div class="input-group"  style="margin-bottom: 0px;">
+					    					<span class="input-group-addon"><i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
+					    					</span>
+					    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="allMenusQuery.title" class="form-control" style="width:auto;">
+					    					<span class="input-group-btn">
+					    						<button type="button" class="btn btn-default" ng-click="allMenusQuery.title = ''">
+					    						<i class="glyphicon glyphicon-remove glyphicon glyphicon-black" >
+												</i> 
+											</button>
+											</span>
+										</div>
+									</div>
+								</form>
 				    		</div>
 						</div>						
 			    	</div>
@@ -298,7 +335,7 @@
 
 			<!-- third column: tile details placeholder -->
 		    <div ng-hide="currentTile" class="col-md-4">
-		    	<div class="data-container-with-title data-container-small data-container-inactive">
+		    	<div class="data-container-with-title data-container-medium data-container-inactive">
 		    		<h4 class="data-container-title data-container-inactive" l="appconfig.tiledetail.title">Tile details</h4>
 		    		<div class="data-container-block">
 		    			<p l="appconfig.tiledetail.empty.description">Shows the selected tile details. Select a tile from dashboard preview.</p>
@@ -307,17 +344,21 @@
 		    </div>
 
 			<!-- Modal tile delete dialog. -->
-    		<div class="modal hide" id="deleteTileModal">
-			 	<div class="modal-header">
-			    	<button type="button" class="close" data-dismiss="modal">×</button>
-			    	<h4 l="tiles.dialog.delete.title">Delete tile</h4>
-				</div>
-				<div class="modal-body alert-danger">
-		    	<p><span l="tiles.dialog.delete.text">Tile will be removed!</span></p>
-		    </div>  
-		  	<div class="modal-footer">
-		  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
-		    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteTile(currentTile)" l="common.delete">Delete</button>
+    		<div class="modal fade" id="deleteTileModal">
+    			<div class="modal-dialog">
+    				<div class="modal-content">
+					 	<div class="modal-header">
+					    	<button type="button" class="close" data-dismiss="modal">×</button>
+					    	<h4 l="tiles.dialog.delete.title">Delete tile</h4>
+						</div>
+						<div class="modal-body alert-danger">
+				    	<p><span l="tiles.dialog.delete.text">Tile will be removed!</span></p>
+				    </div>  
+				  	<div class="modal-footer">
+				  		<button type="button" class="btn btn-default" data-dismiss="modal" l="common.cancel">Cancel</button>
+				    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteTile(currentTile)" l="common.delete">Delete</button>
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- End modal -->
