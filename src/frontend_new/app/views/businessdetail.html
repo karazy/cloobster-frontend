@@ -16,7 +16,7 @@
 <div class="data-container-with-title">
 	<h4 class="data-container-title" l="businesses.headertabs.locationsettings">Location Settings</h4>
 	<div class="data-container-block data-container-seperator">
-		<button  ng-click="showDeleteDialog(activeBusiness)" class="btn"><i class="glyphicon glyphicon-trash glyphicon glyphicon-black"></i> <span l="businesses.action.delete">Delete Business</span></button>		
+		<button  ng-click="showDeleteDialog(activeBusiness)" class="btn btn-default"><i class="glyphicon glyphicon-trash glyphicon glyphicon-black"></i> <span l="businesses.action.delete">Delete Business</span></button>		
 	</div>
 	<div class="data-container-block data-container-seperator">
 		<h3 l="business.detail.section.profile">Location Profile</h3>
@@ -83,7 +83,7 @@
 				</div>
 				<div class="data-element">
 					<div class="key" l="business.detail.currency">Currency</div>
-					<select ng-model="activeBusiness.currency" class="value"  ng-change="saveBusiness()" required>
+					<select ng-model="activeBusiness.currency" class="value form-control"  ng-change="saveBusiness()" required style="width:auto;">
 						<option selected="selected" value="EUR">Euro</option>
 						<option selected="selected" value="USD">US Dollar</option>
 					</select>
@@ -91,7 +91,7 @@
 				<div class="data-element">
 					<div class="key" l="business.detail.language">Sprachen</div>
 					<div class="value">
-							<button  class="btn" ng-click="loadLanguageSelection()">Auswählen</button>
+							<button  class="btn btn-default" ng-click="loadLanguageSelection()">Auswählen</button>
 				</div>				
 				</div>
 				<div class="data-element">
@@ -101,7 +101,7 @@
 					<div class="value">
 						<ul class="payment-method-list">
 							<li>
-								<button class="btn" ng-click="addPaymentMethod()" ><i class="glyphicon glyphicon-plus glyphicon glyphicon-black"></i><span l="business.detail.paymentmethods.list.new"> New payment method...</span></button>
+								<button class="btn btn-default" ng-click="addPaymentMethod()" ><i class="glyphicon glyphicon-plus glyphicon glyphicon-black"></i><span l="business.detail.paymentmethods.list.new"> New payment method...</span></button>
 							</li>
 							<li ng-repeat="method in activeBusiness.paymentMethods" class="edit">
 								<!-- add position relative for correct positioning of simple-property-editor -->
@@ -112,7 +112,7 @@
 										</div>
 									</div>
 									<div class="col-md-2">
-										<button class="btn btn-small" ng-click="removePaymentMethod($index)" ><i class="glyphicon glyphicon-trash"></i></button>
+										<button class="btn btn-default btn-small" ng-click="removePaymentMethod($index)" ><i class="glyphicon glyphicon-trash"></i></button>
 									</div>
 								</div>
 							</li>
@@ -237,7 +237,7 @@
 						<img  ng-src="{{activeBusiness.images.appheader.url}}=s96" alt="click to edit" />
 						<p  l="business.detail.picture.edit">Click image to edit</p>
 					</div>
-					<button ng-show="!activeBusiness.images.appheader"  class="btn" l="business.detail.add.image.button">Add Image</button>
+					<button ng-show="!activeBusiness.images.appheader"  class="btn btn-default" l="business.detail.add.image.button">Add Image</button>
 				</div>
 				<!-- <button  ng-show="activeBusiness.images.appheader.url" class="btn" ng-click="deleteExistingImage(appheader)"><i class="glyphicon glyphicon-trash glyphicon glyphicon-black"></i></button> -->
 				</div>
@@ -252,7 +252,7 @@
 							<img  ng-src="{{activeBusiness.images.logo.url}}=s96" alt="click to edit" />
 							<p  l="business.detail.picture.edit">Click image to edit</p>							
 						</div>						
-						<button ng-show="!activeBusiness.images.logo"  class="btn" l="business.detail.logo.button">Add Logo</button>						
+						<button ng-show="!activeBusiness.images.logo"  class="btn btn-default" l="business.detail.logo.button">Add Logo</button>						
 					</div>
 					<!-- <button  ng-show="activeBusiness.images.logo.url" class="btn" ng-click="deleteExistingImage('logo')"><i class="glyphicon glyphicon-trash glyphicon glyphicon-black"></i></button> -->
 				</div>
@@ -305,7 +305,7 @@
 							<img  ng-src="{{activeBusiness.images.fbwallpost.url}}=s96" alt="click to edit" />
 							<p  l="business.detail.picture.edit">Click image to edit</p>
 						</div>
-						<button ng-show="!activeBusiness.images.fbwallpost"  class="btn" l="business.detail.add.image.button">Add Image</button>
+						<button ng-show="!activeBusiness.images.fbwallpost"  class="btn btn-default" l="business.detail.add.image.button">Add Image</button>
 					</div>
 					<!-- <button  ng-show="activeBusiness.images.fbwallpost.url" class="btn" ng-click="deleteExistingImage('fbwallpost')"><i class="glyphicon glyphicon-trash glyphicon glyphicon-black"></i></button> -->
 				</div>
@@ -322,7 +322,7 @@
 									<img  ng-src="{{activeBusiness.images.picture1.url}}=s128" alt="click to edit" />
 									<p  l="business.detail.picture.edit">Click image to edit</p>
 								</div>
-								<button ng-show="!activeBusiness.images.picture1"  class="btn" l="business.detail.picture1.button">Add Profile Picture1</button>
+								<button ng-show="!activeBusiness.images.picture1"  class="btn btn-default" l="business.detail.picture1.button">Add Profile Picture1</button>
 							</div>
 						<!-- 	<button  ng-show="activeBusiness.images.picture1.url" class="btn" ng-click="deleteExistingImage('picture1')"><i class="glyphicon glyphicon-trash glyphicon glyphicon-black"></i></button> -->
 						</div>
@@ -332,7 +332,7 @@
 									<img  ng-src="{{activeBusiness.images.picture2.url}}=s128" alt="click to edit" />
 									<p  l="business.detail.picture.edit">Click image to edit</p>
 								</div>
-								<button ng-show="!activeBusiness.images.picture2"  class="btn" l="business.detail.picture2.button">Add Profile Picture2</button>
+								<button ng-show="!activeBusiness.images.picture2"  class="btn btn-default" l="business.detail.picture2.button">Add Profile Picture2</button>
 							</div>
 							<!-- <button  ng-show="activeBusiness.images.picture2.url" class="btn" ng-click="deleteExistingImage('picture2')"><i class="glyphicon glyphicon-trash glyphicon glyphicon-black"></i></button> -->
 						</div>
@@ -342,7 +342,7 @@
 									<img  ng-src="{{activeBusiness.images.picture3.url}}=s128" alt="click to edit" />
 									<p  l="business.detail.picture.edit">Click image to edit</p>
 								</div>
-								<button ng-show="!activeBusiness.images.picture3"  class="btn" l="business.detail.picture3.button">Add Profile Picture3</button>
+								<button ng-show="!activeBusiness.images.picture3"  class="btn btn-default" l="business.detail.picture3.button">Add Profile Picture3</button>
 							</div>
 							<!-- <button  ng-show="activeBusiness.images.picture3.url" class="btn" ng-click="deleteExistingImage('picture3')"><i class="glyphicon glyphicon-trash glyphicon glyphicon-black"></i></button> -->
 						</div>
@@ -387,23 +387,27 @@
 </div>
 
 <div class="modal hide" id="deleteModal">
- 	<div class="modal-header">
-    	<button type="button" class="close" data-dismiss="modal">×</button>
-    	<h3 l="businesses.dialog.delete">Delete Location</h3>
-	</div>
-	<form name="businessDeleteForm" ng-submit="deleteBusiness()" novalidate>
-		<div class="modal-body alert-danger">
-	    	<p l="business.dialog.delete.text">Attention! You're about to delete {{activeBusiness.name}}. The location will be inactivated and put into a read-only mode. Users currently locked in will be able to see their current status (e. g. orders) but can't execute further actions. Location will be kept for a while before it will be deleted permanently.</p>
-	    	<p l="dialog.delete.confirm">Please confirm your delete attempt by entering your password.</p>
-    		<label for="deletePassword" l="common.password">Password</label>
-    		<input type="password" id="deletePassword" name="deletePassword" ng-model="deletePassword" required></input>
-    		<span>{{deleteError}}</span>
-	    </div>
-	  	<div class="modal-footer">
-	  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
-	    	<button type="submit" class="btn btn-danger" ng-disabled="!deletePassword" l="common.delete">Delete</button>
+	<div class="modal-dialog">
+		<div class="modal-content">
+		 	<div class="modal-header">
+		    	<button type="button" class="close" data-dismiss="modal">×</button>
+		    	<h3 l="businesses.dialog.delete">Delete Location</h3>
+			</div>
+			<form name="businessDeleteForm" ng-submit="deleteBusiness()" novalidate>
+				<div class="modal-body alert-danger">
+			    	<p l="business.dialog.delete.text">Attention! You're about to delete {{activeBusiness.name}}. The location will be inactivated and put into a read-only mode. Users currently locked in will be able to see their current status (e. g. orders) but can't execute further actions. Location will be kept for a while before it will be deleted permanently.</p>
+			    	<p l="dialog.delete.confirm">Please confirm your delete attempt by entering your password.</p>
+		    		<label for="deletePassword" l="common.password">Password</label>
+		    		<input type="password" id="deletePassword" name="deletePassword" ng-model="deletePassword" required></input>
+		    		<span>{{deleteError}}</span>
+			    </div>
+			  	<div class="modal-footer">
+			  		<button type="button" class="btn btn-default" data-dismiss="modal" l="common.cancel">Cancel</button>
+			    	<button type="submit" class="btn btn-danger" ng-disabled="!deletePassword" l="common.delete">Delete</button>
+				</div>
+			</form>
 		</div>
-	</form>
+	</div>
 </div>
 <!-- Floating Dialog for language selection -->
 <div class="data-container-floating" ng-show="langSelection">
