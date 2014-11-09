@@ -81,7 +81,8 @@ Cloobster.directives.directive('tooltip', ['$locale', 'lang', function($locale, 
 		if(translation) {
 			iElement.tooltip({
 				"title" : translation,
-				"placement" : position
+				"placement" : position,
+				"trigger" : "hover focus"
 			});
 		}
 

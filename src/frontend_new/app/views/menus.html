@@ -11,198 +11,209 @@
 			</div>
     	</div>
 		<div class="row">
-			<div class="data-container-with-title col-md-3">
-				<h4 class="data-container-title" l="menus.list.title">Categories</h4>
-				<div class="data-container-block data-container-seperator">					
-					<div class="row">
-						<!-- <div class="input-append">
-    						<input l="menus.new.placeholder" class="col-md-6" l-attribute="placeholder" type="text" placeholder="new category title" ng-model="newCategoryTitle">
-    						<button class="btn btn-primary" ng-disabled="!newCategoryTitle" ng-click="createMenu(newCategoryTitle)"><i class="glyphicon glyphicon-plus-sign glyphicon glyphicon-white"></i> <span l="common.new">New</span></button>
-						</div> -->
-	    				<button class="btn btn-primary col-md-6" ng-click="createMenu()"><i class="glyphicon glyphicon-plus-sign glyphicon glyphicon-white"></i> <span l="common.new">New</span></button>
-	    			</div>
-	    		</div>
-				<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable" id="menuList">
-			        <li ng-repeat="menu in menus | orderBy:['title'] " ng-class="{active: currentMenu.id == menu.id}">	        	
-			        	<a ng-click="loadMenu(menu)">{{menu.title}} <i class="glyphicon glyphicon-ban-circle glyphicon glyphicon-black" ng-hide="menu.active"></i>
-			        	</a>			        	
-			        </li>
-			        <li class="nav-header" l="menu.speciallist.header">Special lists</li>
-			        <li ng-class="{active: allProductsList.length > 0 && !currentMenu}">
-			        	<a ng-click="showAllProductsList()" l="menus.list.allproducts">All Products</a>
-			        </li>			        
-			        <li ng-class="{active: orphanedProducts.length > 0 && !currentMenu}">
-			        	<a ng-click="loadOrphanedProducts()">
-			        		<span l="menus.list.orphaned">Unassigned products</span>
-			        	</a>
-			        </li>
-			    </ul>
+			<div class="col-md-3">
+				<div class="data-container-with-title">
+					<h4 class="data-container-title" l="menus.list.title">Categories</h4>
+					<div class="data-container-block data-container-seperator">					
+						<div class="row">
+							<div class="col-md-6">
+		    					<button class="btn btn-primary btn-block" ng-click="createMenu()"><i class="glyphicon glyphicon-plus-sign glyphicon glyphicon-white"></i> <span l="common.new">New</span>
+		    					</button>
+		    				</div>
+		    			</div>
+		    		</div>
+					<ul class="nav nav-pills nav-stacked data-container-block data-container-large data-container-scrollable" id="menuList">
+				        <li ng-repeat="menu in menus | orderBy:['title'] " ng-class="{active: currentMenu.id == menu.id}">	        	
+				        	<a ng-click="loadMenu(menu)">{{menu.title}} <i class="glyphicon glyphicon-ban-circle glyphicon glyphicon-black" ng-hide="menu.active"></i>
+				        	</a>			        	
+				        </li>
+				        <li class="nav-header" l="menu.speciallist.header">Special lists</li>
+				        <li ng-class="{active: allProductsList.length > 0 && !currentMenu}">
+				        	<a ng-click="showAllProductsList()" l="menus.list.allproducts">All Products</a>
+				        </li>			        
+				        <li ng-class="{active: orphanedProducts.length > 0 && !currentMenu}">
+				        	<a ng-click="loadOrphanedProducts()">
+				        		<span l="menus.list.orphaned">Unassigned products</span>
+				        	</a>
+				        </li>
+				    </ul>
+				</div>
 			</div>
 
 		<!-- special all products list -->
-		<div class="col-md-3 product-wrapper data-container-with-title" ng-show="allProductsList.length > 0">
-	    	<h4 class="data-container-title" l="menus.list.allproducts">All Products</h4>
-	    	<div class="data-container-block data-container-seperator">
-		    	<p l="menus.list.allproducts.description">List of all products</p>
-		    	<div class="accordion" id="accordion2">
-					  <div class="accordion-group">
-					    <div class="accordion-heading">
-					      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-					        <i class="glyphicon glyphicon-question-sign glyphicon glyphicon-black"></i> <span l="common.help">Help</span>
-					      </a>
-					    </div>
-					    <div id="collapseOne" class="accordion-body collapsed collapse">
-					      <div class="accordion-inner" l="menus.list.allproducts.help">
-					      </div>
-					    </div>
-					  </div>
+		<div class="col-md-3" ng-show="allProductsList.length > 0">
+			<div class="product-wrapper data-container-with-title">
+		    	<h4 class="data-container-title" l="menus.list.allproducts">All Products</h4>
+		    	<div class="data-container-block data-container-seperator">
+			    	<p l="menus.list.allproducts.description">List of all products</p>
+			    	<div class="panel-group" id="helpAllProductsList" role="tablist">
+						  <div class="panel panel-default">
+						    <div class="panel-heading" role="tab" id="headingOne">
+						    	<div class="panel-title ">
+						      <a class="collapsed" data-toggle="collapse" data-parent="#helpAllProductsList" href="#collapseOne" aria-controls="collapseOne">
+						        <i class="glyphicon glyphicon-question-sign glyphicon glyphicon-black"></i> <span l="common.help">Help</span>
+						      </a>
+						  	</div>
+						    </div>
+						    <div id="collapseOne" class="panel-collapse collapse collapsed" role="tabpanel" aria-labelledby="headingOne">
+						      <div class="panel-body" l="menus.list.allproducts.help">
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					<div class="btn-toolbar">						
+						<div class="btn-group">
+							<button  class="btn btn-small btn-default" ng-click="toggleProductActiveFilter()" ng-model="allProductsQuery.active" tooltip="products.filter.active.tooltip" ng-class="{'btn-warning': allProductsQuery.active == false}">
+								<i class="glyphicon glyphicon-ban-circle glyphicon glyphicon-black"></i>
+							</button>
+							<button  class="btn btn-small btn-default" ng-click="toggleProductVisibleOnDashboardFilter()" ng-model="allProductsQuery.hideInDashboard" tooltip="products.filter.showindashboard.tooltip" ng-class="{'btn-warning': isQueryVisibleOnDashboardActive()}">
+								<i class="glyphicon glyphicon-eye-open glyphicon glyphicon-black"></i>
+							</button>	
+							<button  class="btn btn-small btn-default" ng-click="toggleProductHideInDashboardFilter()" ng-model="allProductsQuery.hideInDashboard" tooltip="products.filter.hideindashboard.tooltip" ng-class="{'btn-warning': allProductsQuery.hideInDashboard}">
+								<i class="glyphicon glyphicon-eye-close glyphicon glyphicon-black"></i>
+							</button>
+							<button  class="btn btn-small btn-default" ng-click="toggleProductSpecialFilter()" ng-model="allProductsQuery.special" tooltip="products.filter.special.tooltip" ng-class="{'btn-warning': allProductsQuery.special}">
+								<i class="glyphicon glyphicon-star glyphicon glyphicon-black"></i>
+							</button>
+							<button  class="btn btn-small btn-default" ng-click="toggleProductNoOrderFilter()" ng-model="allProductsQuery.noOrder" tooltip="products.filter.noorder.tooltip" ng-class="{'btn-warning': allProductsQuery.noOrder}">
+								<i class="glyphicon glyphicon-info-sign glyphicon glyphicon-black"></i>
+							</button>					
+						</div>						
 					</div>
-				<div class="btn-toolbar">						
-					<div class="btn-group">						
-						<button  class="btn" ng-click="checkProducts()" tooltip="common.masscheck.tooltip">
-							<i class="glyphicon glyphicon-check glyphicon glyphicon-black"></i>
-						</button>						
+					<div class="btn-toolbar" style="margin-top: 5px;">						
+						<div class="btn-group">						
+							<button  class="btn btn-default" ng-click="checkProducts()" tooltip="common.masscheck.tooltip">
+								<i class="glyphicon glyphicon-check glyphicon glyphicon-black"></i>
+							</button>						
+						</div>
+						<div class="btn-group">							
+							  <button  type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+							  	<span l="common.action">Action</span>
+							    <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu">
+							  	<li class="nav-header" l="spots.listheader.selected">
+							  		Selected ...
+							  	</li>
+							  	<li>
+							  		<a  class="" ng-click="setCheckedProductsProperty('active', true)">
+										<i class="glyphicon glyphicon-ok glyphicon glyphicon-black"></i> <span l="products.action.setactive">Set active</span>
+									</a>
+							  	</li>						    
+								<li>
+									<a  class="" ng-click="setCheckedProductsProperty('active', false)">
+										<i class="glyphicon glyphicon-ban-circle glyphicon glyphicon-black"></i> <span l="products.action.setinactive">Set inactive</span>
+									</a>
+								</li>
+								<li>
+							  		<a  class="" ng-click="setCheckedProductsProperty('special', true)">
+										<i class="glyphicon glyphicon-star glyphicon glyphicon-black"></i> <span l="products.action.setspecial">Set special</span>
+									</a>
+							  	</li>						    
+								<li>
+									<a  class="" ng-click="setCheckedProductsProperty('special', false)">
+										<i class="glyphicon glyphicon-star-empty glyphicon glyphicon-black"></i> <span l="products.action.setnotspecial">Remove special</span>
+									</a>
+								</li>
+								<li>
+							  		<a  class="" ng-click="setCheckedProductsProperty('hideInDashboard', true)">
+										<i class="glyphicon glyphicon-eye-close glyphicon glyphicon-black"></i> <span l="products.action.sethideindashboard">Set hidden</span>
+									</a>
+							  	</li>						    
+								<li>
+									<a  class="" ng-click="setCheckedProductsProperty('hideInDashboard', false)">
+										<i class="glyphicon glyphicon-eye-open glyphicon glyphicon-black"></i> <span l="products.action.setshowindashboard">Set visible</span>
+									</a>
+								</li>											
+								<li>
+							  		<a  class="" ng-click="setCheckedProductsProperty('noOrder', true)">
+										<i class="glyphicon glyphicon-info-sign glyphicon glyphicon-black"></i> <span l="products.action.setnoorder">Set only display</span>
+									</a>
+							  	</li>						    
+								<li>
+									<a  class="" ng-click="setCheckedProductsProperty('noOrder', false)">
+										<i class="glyphicon glyphicon-shopping-cart glyphicon glyphicon-black"></i> <span l="products.action.setorder">Set shopable</span>
+									</a>
+								</li>
+							  </ul>
+						</div>
 					</div>
-					<div class="btn-group">
-						<button  class="btn btn-small" ng-click="toggleProductActiveFilter()" ng-model="allProductsQuery.active" tooltip="products.filter.active.tooltip" ng-class="{'btn-warning': allProductsQuery.active == false}">
-							<i class="glyphicon glyphicon-ban-circle glyphicon glyphicon-black"></i>
-						</button>
-						<button  class="btn btn-small" ng-click="toggleProductVisibleOnDashboardFilter()" ng-model="allProductsQuery.hideInDashboard" tooltip="products.filter.showindashboard.tooltip" ng-class="{'btn-warning': isQueryVisibleOnDashboardActive()}">
-							<i class="glyphicon glyphicon-eye-open glyphicon glyphicon-black"></i>
-						</button>	
-						<button  class="btn btn-small" ng-click="toggleProductHideInDashboardFilter()" ng-model="allProductsQuery.hideInDashboard" tooltip="products.filter.hideindashboard.tooltip" ng-class="{'btn-warning': allProductsQuery.hideInDashboard}">
-							<i class="glyphicon glyphicon-eye-close glyphicon glyphicon-black"></i>
-						</button>
-						<button  class="btn btn-small" ng-click="toggleProductSpecialFilter()" ng-model="allProductsQuery.special" tooltip="products.filter.special.tooltip" ng-class="{'btn-warning': allProductsQuery.special}">
-							<i class="glyphicon glyphicon-star glyphicon glyphicon-black"></i>
-						</button>
-						<button  class="btn btn-small" ng-click="toggleProductNoOrderFilter()" ng-model="allProductsQuery.noOrder" tooltip="products.filter.noorder.tooltip" ng-class="{'btn-warning': allProductsQuery.noOrder}">
-							<i class="glyphicon glyphicon-info-sign glyphicon glyphicon-black"></i>
-						</button>					
-					</div>
-					<div class="btn-group">
-					  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-					  	<span l="common.action">Action</span>
-					    <span class="caret"></span>
-					  </a>
-					  <ul class="dropdown-menu">
-					  	<li class="nav-header" l="spots.listheader.selected">
-					  		Selected ...
-					  	</li>
-					  	<li>
-					  		<a  class="" ng-click="setCheckedProductsProperty('active', true)">
-								<i class="glyphicon glyphicon-ok glyphicon glyphicon-black"></i> <span l="products.action.setactive">Set active</span>
-							</a>
-					  	</li>						    
-						<li>
-							<a  class="" ng-click="setCheckedProductsProperty('active', false)">
-								<i class="glyphicon glyphicon-ban-circle glyphicon glyphicon-black"></i> <span l="products.action.setinactive">Set inactive</span>
-							</a>
-						</li>
-						<li>
-					  		<a  class="" ng-click="setCheckedProductsProperty('special', true)">
-								<i class="glyphicon glyphicon-star glyphicon glyphicon-black"></i> <span l="products.action.setspecial">Set special</span>
-							</a>
-					  	</li>						    
-						<li>
-							<a  class="" ng-click="setCheckedProductsProperty('special', false)">
-								<i class="glyphicon glyphicon-star-empty glyphicon glyphicon-black"></i> <span l="products.action.setnotspecial">Remove special</span>
-							</a>
-						</li>
-						<li>
-					  		<a  class="" ng-click="setCheckedProductsProperty('hideInDashboard', true)">
-								<i class="glyphicon glyphicon-eye-close glyphicon glyphicon-black"></i> <span l="products.action.sethideindashboard">Set hidden</span>
-							</a>
-					  	</li>						    
-						<li>
-							<a  class="" ng-click="setCheckedProductsProperty('hideInDashboard', false)">
-								<i class="glyphicon glyphicon-eye-open glyphicon glyphicon-black"></i> <span l="products.action.setshowindashboard">Set visible</span>
-							</a>
-						</li>											
-						<li>
-					  		<a  class="" ng-click="setCheckedProductsProperty('noOrder', true)">
-								<i class="glyphicon glyphicon-info-sign glyphicon glyphicon-black"></i> <span l="products.action.setnoorder">Set only display</span>
-							</a>
-					  	</li>						    
-						<li>
-							<a  class="" ng-click="setCheckedProductsProperty('noOrder', false)">
-								<i class="glyphicon glyphicon-shopping-cart glyphicon glyphicon-black"></i> <span l="products.action.setorder">Set shopable</span>
-							</a>
-						</li>
-					  </ul>
-					</div>
-				</div>
-				<div class="btn-group">
-					<div class="input-prepend">
-    					<span class="add-on"><i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
-    					</span>
-    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="allProductsQuery.name">
-    					<i class="glyphicon glyphicon-remove glyphicon glyphicon-black" ng-click="allProductsQuery.name = ''">
-						</i> 
-					</div>
-	    		</div>
-	    	</div>
-	    	<div class="data-container-block data-container-large data-container-scrollable">
-	    		<ul class="nav nav-pills-checkbox nav-stacked">
-		       	 	<li ng-repeat="product in allProductsList | filter:allProductsQuery | orderBy:['order', 'name']" class="product-item">
-			        	<div ng-class="{active: currentProduct.id == product.id}" ng-click="loadProduct(product, $event)">
-			        		<div>
-			        			<input type="checkbox" ng-model="product.checked">
-			        		</div>
-		        			<div>
-		        				<span ng-bind="product.name"></span>
+					<div class="btn-group" style="margin-top: 5px;">
+						<div class="input-group">
+	    					<span class="input-group-addon"><i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
+	    					</span>
+	    					<input l="common.search" class="form-control" type="text" l-attribute="placeholder" placeholder="Search" ng-model="allProductsQuery.name">
+	    					<span class="input-group-btn">
+	    						<button type="button" ng-click="allProductsQuery.name = ''" class="btn btn-default">
+	    						<i class="glyphicon glyphicon-remove glyphicon glyphicon-black"></i> 
+							</button>
+							</span>
+						</div>
+		    		</div>
+		    	</div>
+		    	<div class="data-container-block data-container-large data-container-scrollable">
+		    		<ul class="nav nav-pills-checkbox nav-stacked">
+			       	 	<li ng-repeat="product in allProductsList | filter:allProductsQuery | orderBy:['order', 'name']" class="product-item">
+				        	<div ng-class="{active: currentProduct.id == product.id}" ng-click="loadProduct(product, $event)">
+				        		<div>
+				        			<input type="checkbox" ng-model="product.checked">
+				        		</div>
+			        			<div>
+			        				<span ng-bind="product.name"></span>
+			        			</div>
+			        			<div class="btn-group" style="margin-left: 5px; margin-top: 2px;">
+					    			<!-- active button -->
+					    			<button class="btn btn-small" ng-class="{'btn-success' : product.active, 'btn-danger' : !product.active}" type="button" ng-click="toggleProductActive(product)" ng-model="product.active"> 
+					    				<i class="glyphicon glyphicon-white" ng-class="{'glyphicon glyphicon-ok' : product.active, 'glyphicon glyphicon-ban-circle' : !product.active}"></i>
+					    			</button>
+					    			<!-- hide from dashboard-->
+					    			<button class="btn btn-small btn-default" type="button" ng-click="toggleProductDashboard(product)" ng-model="product.hideInDashboard" ng-class="{'btn-success' : !product.hideInDashboard}">
+					    				<i class="glyphicon glyphicon-black" ng-class="{'glyphicon glyphicon-eye-close' : product.hideInDashboard, 'glyphicon glyphicon-eye-open glyphicon glyphicon-white' : !product.hideInDashboard}"></i>
+					    			</button>
+					    			<!-- special flag -->
+					    			<button class="btn btn-small btn-default" ng-class="{'btn-success' : product.special == true}" type="button" ng-click="toggleProductSpecial(product)" ng-model="product.special">
+					    				<i class="glyphicon glyphicon-star glyphicon glyphicon-black" ng-class="{'glyphicon glyphicon-star glyphicon glyphicon-white' : product.special, 'glyphicon glyphicon-star-empty' : !product.special}"></i>
+					    			</button>	
+					    			<!-- noOrder flag -->
+					    			<button class="btn btn-small btn-default" ng-class="{'btn-success' : product.noOrder == true}" type="button" ng-click="toggleProductNoOrder(product)" ng-model="product.noOrder">
+				    					<i class="glyphicon glyphicon-shopping-cart glyphicon glyphicon-black" ng-class="{'glyphicon glyphicon-info-sign glyphicon glyphicon-white' : product.noOrder, 'glyphicon glyphicon-shopping-cart' : !product.noOrder}"></i>
+				    				</button>			    			
+					    		</div>
 		        			</div>
-		        			<div class="btn-group" style="margin-left: 5px; margin-top: 2px;">
-				    			<!-- active button -->
-				    			<button class="btn btn-small" ng-class="{'btn-success' : product.active, 'btn-danger' : !product.active}" type="button" ng-click="toggleProductActive(product)" ng-model="product.active"> 
-				    				<i class="glyphicon glyphicon-white" ng-class="{'glyphicon glyphicon-ok' : product.active, 'glyphicon glyphicon-ban-circle' : !product.active}"></i>
-				    			</button>
-				    			<!-- hide from dashboard-->
-				    			<button class="btn btn-small" type="button" ng-click="toggleProductDashboard(product)" ng-model="product.hideInDashboard" ng-class="{'btn-success' : !product.hideInDashboard}">
-				    				<i class="glyphicon glyphicon-black" ng-class="{'glyphicon glyphicon-eye-close' : product.hideInDashboard, 'glyphicon glyphicon-eye-open glyphicon glyphicon-white' : !product.hideInDashboard}"></i>
-				    			</button>
-				    			<!-- special flag -->
-				    			<button class="btn btn-small" ng-class="{'btn-success' : product.special == true}" type="button" ng-click="toggleProductSpecial(product)" ng-model="product.special">
-				    				<i class="glyphicon glyphicon-star glyphicon glyphicon-black" ng-class="{'glyphicon glyphicon-star glyphicon glyphicon-white' : product.special, 'glyphicon glyphicon-star-empty' : !product.special}"></i>
-				    			</button>	
-				    			<!-- noOrder flag -->
-				    			<button class="btn btn-small" ng-class="{'btn-success' : product.noOrder == true}" type="button" ng-click="toggleProductNoOrder(product)" ng-model="product.noOrder">
-			    					<i class="glyphicon glyphicon-shopping-cart glyphicon glyphicon-black" ng-class="{'glyphicon glyphicon-info-sign glyphicon glyphicon-white' : product.noOrder, 'glyphicon glyphicon-shopping-cart' : !product.noOrder}"></i>
-			    				</button>			    			
-				    		</div>
-	        			</div>
+				        </li>
+		    		</ul>
+	    		</div>
+		    </div>
+		</div>
+		<!-- Orphaned products list -->
+		<div class="col-md-3" ng-show="orphanedProducts.length > 0">
+			<div class="product-wrapper data-container-with-title">
+		    	<h4 class="data-container-title" l="menu.products.orphaned.container.title">Orphaned Products</h4>
+		    	<div class="data-container-block data-container-seperator">
+			    	<p l="menus.products.orphaned.description">List of products not assigned to any menu.</p>
+			    	<div class="btn-group">
+						<div class="input-prepend">
+	    					<span class="add-on"><i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
+	    					</span>
+	    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="productOrphanedQuery.name">
+	    					<i class="glyphicon glyphicon-remove glyphicon glyphicon-black" ng-click="productOrphanedQuery.name = ''">
+							</i> 
+						</div>
+		    		</div>
+		    	</div>
+	    		<ul class="data-container-block data-container-large data-container-scrollable nav nav-pills nav-stacked">
+		       	 	<li ng-repeat="product in orphanedProducts | filter:productOrphanedQuery | orderBy:['order', 'name']" class="product-item" ng-class="{active: currentProduct.id == product.id}">
+			        	<a ng-click="loadProduct(product)">{{product.name}}</a>
 			        </li>
 	    		</ul>
-    		</div>
-	    </div>
-
-		<!-- Orphaned products list -->
-		<div class="col-md-3 product-wrapper data-container-with-title" ng-show="orphanedProducts.length > 0">
-	    	<h4 class="data-container-title" l="menu.products.orphaned.container.title">Orphaned Products</h4>
-	    	<div class="data-container-block data-container-seperator">
-		    	<p l="menus.products.orphaned.description">List of products not assigned to any menu.</p>
-		    	<div class="btn-group">
-					<div class="input-prepend">
-    					<span class="add-on"><i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
-    					</span>
-    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="productOrphanedQuery.name">
-    					<i class="glyphicon glyphicon-remove glyphicon glyphicon-black" ng-click="productOrphanedQuery.name = ''">
-						</i> 
-					</div>
-	    		</div>
-	    	</div>
-    		<ul class="data-container-block data-container-large data-container-scrollable nav nav-pills nav-stacked">
-	       	 	<li ng-repeat="product in orphanedProducts | filter:productOrphanedQuery | orderBy:['order', 'name']" class="product-item" ng-class="{active: currentProduct.id == product.id}">
-		        	<a ng-click="loadProduct(product)">{{product.name}}</a>
-		        </li>
-    		</ul>
-	    </div>
+		    </div>
+		</div>
 	    <!-- Menu detail -->
 	    <div class="col-md-3 menu-wrapper" ng-show="currentMenu">
 	    	<div class="data-container-with-title">
 	    		<h4 class="data-container-title" l="menu.container.title">Category edit</h4>		    	
 				<div class="data-container-block">
-					<div l="menu.container.hint" class="alert">Don't forget to assign this category to an area afterwards.</div>
+					<div l="menu.container.hint" class="alert alert-warning">Don't forget to assign this category to an area afterwards.</div>
 					<div simple-property-editor editor-title="menu.editor.title" editor-property="currentMenu.title" editor-on-save="saveMenu()" editor-placeholder="menus.placeholder.title" editor-required editor-enabled="!currentMenu.isSaving()">
 					<h4 ng-class="{edit: !currentMenu.isSaving(), muted: currentMenu.isSaving()}">
 						<span l="menus.placeholder.title" ng-hide="currentMenu.title" ng-class="{'text-error' : menuInvalid, 'simple-property-placeholder' : !menuInvalid}">Title*</span>
@@ -221,33 +232,41 @@
 			    		<span l="validation.field.required">* Please fill out all required fields.</span>
 			    	</div>
 			    	<div class="row">
-				    	<div simple-image-editor="currentMenu.image" editor-title-key="common.image.add" editor-image-id="image" editor-on-save="setMenuImage(image)" editor-on-cancel="discardImage(image)" editor-image-resource="menuImageResource" style="margin: 0 0 10px;" class="col-md-6" editor-on-delete="deleteMenuImage()">
+				    	<div simple-image-editor="currentMenu.image" editor-title-key="common.image.add" editor-image-id="image" editor-on-save="setMenuImage(image)" editor-on-cancel="discardImage(image)" editor-image-resource="menuImageResource" style="margin: 0 0 10px;" class="col-md-12" editor-on-delete="deleteMenuImage()">
 								<div ng-show="currentMenu.image.url">
 									<img  ng-src="{{currentMenu.image.url}}=s96" alt="click to edit" />
 									<p l="common.image.edit">Click image to edit</p>
 								</div>
 								<div ng-show="!currentMenu.image && currentMenu.id">
-									<button  class="btn btn-primary" style="width: 100%"><i class="glyphicon glyphicon-picture glyphicon glyphicon-white"></i> <span l="common.image.add">Add Image</span></button>
+									<button  class="btn btn-primary btn-block"><i class="glyphicon glyphicon-picture glyphicon glyphicon-white"></i> <span l="common.image.add">Add Image</span></button>
 								</div>
 						</div>					 
 					</div>
 			    	<div class="row">
-				    		<button class="btn  btn-success col-md-6" type="button" ng-click="toggleMenuActive()" ng-model="currentMenu.active" ng-show="currentMenu.active && currentMenu.id"><i class="glyphicon glyphicon-ok glyphicon glyphicon-white"></i> <span l="common.active">Active</span></button>
+			    		<div class="col-md-6">
+				    		<button class="btn  btn-success btn-block" type="button" ng-click="toggleMenuActive()" ng-model="currentMenu.active" ng-show="currentMenu.active && currentMenu.id"><i class="glyphicon glyphicon-ok glyphicon glyphicon-white"></i> <span l="common.active">Active</span></button>
 
-				    		<button class="btn  btn-danger col-md-6" style="margin-left: 0px !important;" type="button" ng-click="toggleMenuActive()" ng-model="currentMenu.active" ng-show="!currentMenu.active && currentMenu.id"><i class="glyphicon glyphicon-ban-circle glyphicon glyphicon-white"></i> <span l="common.inactive">Inactive</span></button>
-			    		<button class="btn col-md-6" data-toggle="modal" data-target="#deleteMenuModal" ng-show="currentMenu.id"><i class="glyphicon glyphicon-trash"></i><!--  <span l="menus.menu.delete">Delete</span> --></button>
+				    		<button class="btn  btn-danger btn-block" style="margin-left: 0px !important;" type="button" ng-click="toggleMenuActive()" ng-model="currentMenu.active" ng-show="!currentMenu.active && currentMenu.id"><i class="glyphicon glyphicon-ban-circle glyphicon glyphicon-white"></i> <span l="common.inactive">Inactive</span></button>
+				    	</div>
+				    	<div class="col-md-6">
+			    			<button class="btn btn-block btn-default" data-toggle="modal" data-target="#deleteMenuModal" ng-show="currentMenu.id"><i class="glyphicon glyphicon-trash"></i><!--  <span l="menus.menu.delete">Delete</span> --></button>
 			    		<!-- Modal delete dialog. -->
-			    		<div class="modal hide" id="deleteMenuModal">
-						 	<div class="modal-header">
-						    	<button type="button" class="close" data-dismiss="modal">×</button>
-						    	<h4 l="menus.menu.dialog.delete.title">Delete</h4>
-							</div>
-							<div class="modal-body alert-danger">
-						    	<p><span l="menus.menu.dialog.delete.text">{{currentMenu.title}} will be deleted!<br/>This can't be undone.</span></p>
-						    </div>  
-						  	<div class="modal-footer">
-						  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
-						    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteMenu(currentMenu)" l="common.delete">Delete</button>
+			    		</div>
+			    		<div class="modal fade" id="deleteMenuModal">
+			    			<div class="modal-dialog">
+			    				<div class="modal-content">
+								 	<div class="modal-header">
+								    	<button type="button" class="close" data-dismiss="modal">×</button>
+								    	<h4 l="menus.menu.dialog.delete.title">Delete</h4>
+									</div>
+									<div class="modal-body alert-danger">
+								    	<p><span l="menus.menu.dialog.delete.text">{{currentMenu.title}} will be deleted!<br/>This can't be undone.</span></p>
+								    </div>  
+								  	<div class="modal-footer">
+								  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
+								    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteMenu(currentMenu)" l="common.delete">Delete</button>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -258,8 +277,12 @@
 	    		<h5 class="data-container-title" l="menu.products.container.title">Products of category</h5>
 	    		<div class="data-container-block data-container-seperator">
 	    			<div class="row">
-		    			<button class="btn btn-primary col-md-6" ng-click="createProduct()"><i class="glyphicon glyphicon-plus-sign glyphicon glyphicon-white"></i> <span l="menus.products.list.new">New</span></button>
-		    			<button class="btn btn-primary col-md-6" ng-click="showAllProducts()"><i class="glyphicon glyphicon-share-alt glyphicon glyphicon-white"></i> <span l="common.copy">Copy</span></button>
+	    				<div class="col-md-6">
+		    				<button class="btn btn-primary btn-block" ng-click="createProduct()"><i class="glyphicon glyphicon-plus-sign glyphicon glyphicon-white"></i> <span l="menus.products.list.new">New</span></button>		    			
+		    			</div>
+		    			<div class="col-md-6">
+		    				<button class="btn btn-primary btn-block" ng-click="showAllProducts()"><i class="glyphicon glyphicon-share-alt glyphicon glyphicon-white"></i> <span l="common.copy">Copy</span></button>
+		    			</div>
 	    			</div>
 	    		</div>
 	    		
@@ -291,37 +314,42 @@
 	    	</div>
 	    </div>
 	     <!-- All products list -->
-	    <div class="col-md-3 data-container-with-title" ng-show="allProducts.length > 0">
-	    	<h4 class="data-container-title" l="menu.products.container.link.title">All Products</h4>
-	    	<div class="data-container-block data-container-seperator">
-	    		<p l="menus.products.link.description" id="menusLinkHelp">Select an existing product to copy it and assign to active menu.</p>
-		        <div class="btn-group">
-					<div class="input-prepend">
-    					<span class="add-on"><i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
-    					</span>
-    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="productCopyQuery.name">
-    					<i class="glyphicon glyphicon-remove glyphicon glyphicon-black" ng-click="productCopyQuery.name = ''">
-						</i> 
-					</div>
-	    		</div>
-	    	</div>	    	
-    		<ul class="nav nav-pills nav-stacked data-container-block data-container-small data-container-scrollable">
-	       	 	<li ng-repeat="product in allProducts | filter:productCopyQuery" class="product-item dropdown">
-		        	<a class="dropdown-toggle" data-toggle="dropdown">{{product.name}}<b class="caret"></b></a>
-		        	<ul class="dropdown-menu">
-		        		<li>
-		        			<a ng-click="copyProduct(product)" l="menus.products.link.action.copy">Copy Product</a>
-		        		</li>
-		        		<li>
-		        			<a ng-click="copyProduct(product, 'link')" l="menus.products.link.action.copylink">Copy Product & Link Choices</a>
-		        		</li>
-		        		<li>
-		        			<a ng-click="copyProduct(product, 'copy')" l="menus.products.link.action.deepcopy">Copy Product & Copy Choices</a>
-		        		</li>		        			        			        		
-    				</ul>
-		        </li>
-    		</ul>
-	    </div>
+	     <div class="col-md-3" ng-show="allProducts.length > 0">
+		    <div class="data-container-with-title">
+		    	<h4 class="data-container-title" l="menu.products.container.link.title">All Products</h4>
+		    	<div class="data-container-block data-container-seperator">
+		    		<p l="menus.products.link.description" id="menusLinkHelp">Select an existing product to copy it and assign to active menu.</p>
+			        <div class="btn-group">
+						<div class="input-group">
+	    					<span class="input-group-addon"><i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
+	    					</span>	    					
+	    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="productCopyQuery.name"
+	    						class="form-control">
+	    					<span class="input-group-btn">
+	    						<button type="button" class="btn btn-default" ng-click="productCopyQuery.name = ''">
+	    						<i class="glyphicon glyphicon-remove glyphicon glyphicon-black"></i> 
+	    					</button>
+						</div>
+		    		</div>
+		    	</div>	    	
+	    		<ul class="nav nav-pills nav-stacked data-container-block data-container-small data-container-scrollable">
+		       	 	<li ng-repeat="product in allProducts | filter:productCopyQuery" class="product-item dropdown">
+			        	<a class="dropdown-toggle" data-toggle="dropdown">{{product.name}}<b class="caret"></b></a>
+			        	<ul class="dropdown-menu">
+			        		<li>
+			        			<a ng-click="copyProduct(product)" l="menus.products.link.action.copy">Copy Product</a>
+			        		</li>
+			        		<li>
+			        			<a ng-click="copyProduct(product, 'link')" l="menus.products.link.action.copylink">Copy Product & Link Choices</a>
+			        		</li>
+			        		<li>
+			        			<a ng-click="copyProduct(product, 'copy')" l="menus.products.link.action.deepcopy">Copy Product & Copy Choices</a>
+			        		</li>		        			        			        		
+	    				</ul>
+			        </li>
+	    		</ul>
+		    </div>
+		</div>
 
 	     <!-- Product detail -->
 	    <div class="col-md-3" ng-show="currentProduct">
@@ -364,13 +392,13 @@
 			    		<span l="validation.field.required">* Please fill out all required fields.</span>
 			    	</div>	
 			    	<div class="row">
-				    	<div simple-image-editor="currentProduct.image" editor-title-key="common.image.add" editor-image-id="image" editor-on-save="setProductImage(image)" editor-on-cancel="discardImage(image)" editor-image-resource="productImageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" style="margin: 0 0 10px;" class="col-md-6" editor-on-delete="deleteProductImage()">
+				    	<div simple-image-editor="currentProduct.image" editor-title-key="common.image.add" editor-image-id="image" editor-on-save="setProductImage(image)" editor-on-cancel="discardImage(image)" editor-image-resource="productImageResource" editor-ratio="7:3" editor-crop-text="product.editor.image.description" style="margin: 0 0 10px;" class="col-md-12" editor-on-delete="deleteProductImage()">
 								<div ng-show="currentProduct.image.url">
 									<img  ng-src="{{currentProduct.image.url}}=s96" alt="click to edit" />
 									<p l="common.image.edit">Click image to edit</p>
 								</div>
 								<div ng-show="!currentProduct.image && currentProduct.id">
-									<button  class="btn btn-primary" style="width: 100%"><i class="glyphicon glyphicon-picture glyphicon glyphicon-white"></i> <span l="common.image.add">Add Image</span></button>
+									<button  class="btn btn-primary btn-block" style="width: 100%"><i class="glyphicon glyphicon-picture glyphicon glyphicon-white"></i> <span l="common.image.add">Add Image</span></button>
 								</div>
 						</div>					 
 					</div>
@@ -383,15 +411,15 @@
 			    				<i class="glyphicon glyphicon-white" ng-class="{'glyphicon glyphicon-ok' : currentProduct.active, 'glyphicon glyphicon-ban-circle' : !currentProduct.active}"></i>
 			    			</button>
 			    			<!-- special -->
-			    			<button class="btn" ng-class="{'btn-success' : currentProduct.special == true}" type="button" ng-click="toggleProductSpecial()" ng-model="currentProduct.special" tooltip="menus.product.special.tooltip">
+			    			<button class="btn btn-default" ng-class="{'btn-success' : currentProduct.special == true}" type="button" ng-click="toggleProductSpecial()" ng-model="currentProduct.special" tooltip="menus.product.special.tooltip">
 			    				<i class="glyphicon glyphicon-star glyphicon glyphicon-black" ng-class="{'glyphicon glyphicon-star glyphicon glyphicon-white' : currentProduct.special, 'glyphicon glyphicon-star-empty' : !currentProduct.special}"></i>
 			    			</button>
 			    			<!-- noOrder -->
-			    			<button class="btn" ng-class="{'btn-success' : !currentProduct.noOrder}" type="button" ng-click="toggleProductNoOrder()" ng-model="currentProduct.noOrder" tooltip="menus.product.noorder.tooltip">
+			    			<button class="btn btn-default" ng-class="{'btn-success' : !currentProduct.noOrder}" type="button" ng-click="toggleProductNoOrder()" ng-model="currentProduct.noOrder" tooltip="menus.product.noorder.tooltip">
 			    				<i class="glyphicon glyphicon-shopping-cart glyphicon glyphicon-black" ng-class="{'glyphicon glyphicon-info-sign' : currentProduct.noOrder, 'glyphicon glyphicon-shopping-cart glyphicon glyphicon-white' : !currentProduct.noOrder}"></i>
 			    			</button>
 			    			<!-- hide from dashboard-->
-			    			<button class="btn" type="button" ng-class="{'btn-success' : !currentProduct.hideInDashboard}" ng-click="toggleProductDashboard();" ng-model="currentProduct.hideInDashboard" tooltip="menus.product.hideindashboard.tooltip">
+			    			<button class="btn btn-default" type="button" ng-class="{'btn-success' : !currentProduct.hideInDashboard}" ng-click="toggleProductDashboard();" ng-model="currentProduct.hideInDashboard" tooltip="menus.product.hideindashboard.tooltip">
 			    				<i class="glyphicon glyphicon-black" ng-class="{'glyphicon glyphicon-eye-close' : currentProduct.hideInDashboard, 'glyphicon glyphicon-eye-open glyphicon glyphicon-white' : !currentProduct.hideInDashboard}"></i>
 			    			</button>
 			    		</div>
@@ -410,23 +438,27 @@
 		    				</ul>
 				    	</div>				    	
 				    	<div class="btn-group">
-			    			<button class="btn" data-toggle="modal" data-target="#deleteProductModal" ng-show="currentProduct.id">
+			    			<button class="btn btn-default" data-toggle="modal" data-target="#deleteProductModal" ng-show="currentProduct.id">
 			    				<i class="glyphicon glyphicon-trash"></i>
 			    			</button>
 			    		</div>			    				    
 			    	</div>
 			    	<!-- Modal delete dialog. Must be outside of btn-toolbar -->
-		    		<div class="modal hide" id="deleteProductModal">
-					 	<div class="modal-header">
-					    	<button type="button" class="close" data-dismiss="modal">×</button>
-					    	<h4 l="menus.product.dialog.delete.title">Delete Product</h4>
-						</div>
-						<div class="modal-body alert-danger">
-					    	<p><span l="menus.product.dialog.delete.text">{{currentProduct.name}} will be deleted!<br/>This can't be undone.</span></p>
-					    </div>  
-					  	<div class="modal-footer">
-					  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
-					    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteProduct(currentProduct)" l="common.delete">Delete</button>
+		    		<div class="modal fade" id="deleteProductModal">
+		    			<div class="modal-dialog">
+		    				<div class="modal-content">
+							 	<div class="modal-header">
+							    	<button type="button" class="close" data-dismiss="modal">×</button>
+							    	<h4 l="menus.product.dialog.delete.title">Delete Product</h4>
+								</div>
+								<div class="modal-body alert-danger">
+							    	<p><span l="menus.product.dialog.delete.text">{{currentProduct.name}} will be deleted!<br/>This can't be undone.</span></p>
+							    </div>  
+							  	<div class="modal-footer">
+							  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
+							    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteProduct(currentProduct)" l="common.delete">Delete</button>
+								</div>
+							</div>
 						</div>
 					</div>	
 			    </div>		   
@@ -436,8 +468,12 @@
 		    	<h5 class="data-container-title" l="product.choices.container.title">Choices</h5>
 		    	<div class="data-container-block data-container-seperator">
 		    		<div class="row">
-		    			<button class="btn btn-primary col-md-6" ng-click="createChoice()"><i class="glyphicon glyphicon-plus-sign glyphicon glyphicon-white"></i> <span l="common.new">New</span></button>
-		    			<button class="btn btn-primary col-md-6" ng-click="showAllChoices()"><i class="glyphicon glyphicon-share-alt glyphicon glyphicon-white"></i> <span l="common.copy">Copy</span></button>
+		    			<div class="col-md-6">
+		    				<button class="btn btn-primary btn-block" ng-click="createChoice()"><i class="glyphicon glyphicon-plus-sign glyphicon glyphicon-white"></i> <span l="common.new">New</span></button>
+		    			</div>
+		    			<div class="col-md-6">
+		    				<button class="btn btn-primary btn-block" ng-click="showAllChoices()"><i class="glyphicon glyphicon-share-alt glyphicon glyphicon-white"></i> <span l="common.copy">Copy</span></button>
+		    			</div>
 	    			</div>
 	    		</div>
 		    	 <div class="data-container-block data-container-small data-container-scrollable" ng-show="currentProduct.id">	    		
@@ -462,34 +498,39 @@
 	    	</div>
 	    </div>
 	    <!-- All choices list -->
-	    <div class="col-md-3 data-container-with-title" ng-show="allChoices.length > 0">
-	    	<h4 class="data-container-title" l="choices.container.link.title">All Choices</h4>
-	    	<div class="data-container-block data-container-seperator">
-	    		<p l="menus.choices.link.description">Select an existing choice to add it to the current product.</p>
-	    		<div class="btn-group">
-					<div class="input-prepend">
-    					<span class="add-on"><i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
-    					</span>
-    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="choiceLinkQuery.text">
-    					<i class="glyphicon glyphicon-remove glyphicon glyphicon-black" ng-click="choiceLinkQuery.text = ''">
-						</i> 
-					</div>
-	    		</div>
-	    	</div>
-    		<ul class="nav nav-pills nav-stacked data-container-block data-container-small data-container-scrollable">
-	       	 	<li ng-repeat="choice in allChoices | filter:filterOnlyChoiceParents | filter:filterOnlyNotLinkedChoices | filter:choiceLinkQuery" class="product-choice-item dropdown">
-		        	<a class="dropdown-toggle"  data-toggle="dropdown">{{choice.text}}<b class="caret"></b></a>
-		        	<ul class="dropdown-menu">
-		        		<li>
-		        			<a ng-click="copyChoice(choice)" l="menus.choices.link.action.copy">Copy</a>
-		        		</li>
-		        		<li>
-		        			<a ng-click="linkChoice(choice)" l="menus.choices.link.action.link">Link</a>
-		        		</li>		        			        		
-    				</ul>
-		        </li>
-    		</ul>
-	    </div>
+	    <div class="col-md-3">
+		    <div class="data-container-with-title" ng-show="allChoices.length > 0">
+		    	<h4 class="data-container-title" l="choices.container.link.title">All Choices</h4>
+		    	<div class="data-container-block data-container-seperator">
+		    		<p l="menus.choices.link.description">Select an existing choice to add it to the current product.</p>
+		    		<div class="btn-group">
+						<div class="input-group">
+	    					<span class="input-group-addon"><i class="glyphicon glyphicon-search glyphicon glyphicon-black"></i>
+	    					</span>
+	    					<input l="common.search" type="text" l-attribute="placeholder" placeholder="Search" ng-model="choiceLinkQuery.text" class="form-control">
+	    					<span class="input-group-btn">
+	    						<button class="btn btn-default" ng-click="choiceLinkQuery.text = ''">
+	    						<i class="glyphicon glyphicon-remove glyphicon glyphicon-black"></i> 
+								</button>
+							</span>
+						</div>
+		    		</div>
+		    	</div>
+	    		<ul class="nav nav-pills nav-stacked data-container-block data-container-small data-container-scrollable">
+		       	 	<li ng-repeat="choice in allChoices | filter:filterOnlyChoiceParents | filter:filterOnlyNotLinkedChoices | filter:choiceLinkQuery" class="product-choice-item dropdown">
+			        	<a class="dropdown-toggle"  data-toggle="dropdown">{{choice.text}}<b class="caret"></b></a>
+			        	<ul class="dropdown-menu">
+			        		<li>
+			        			<a ng-click="copyChoice(choice)" l="menus.choices.link.action.copy">Copy</a>
+			        		</li>
+			        		<li>
+			        			<a ng-click="linkChoice(choice)" l="menus.choices.link.action.link">Link</a>
+			        		</li>		        			        		
+	    				</ul>
+			        </li>
+	    		</ul>
+		    </div>
+		</div>
 	    <!-- Choice detail -->
 	    <div class="col-md-3" ng-show="currentChoice">
 	    	<div class="data-container-with-title">
@@ -512,7 +553,7 @@
 			    	</div>
 			    	<div>
 			    		<label for="choiceOverridePriceSelect" id="choiceOverridePriceLabel"><span l="menus.choices.field.overridePrice.label">Price per selection</span> <i class="glyphicon glyphicon-question-sign"></i></label>
-			    		<select ng-model="currentChoice.overridePrice" id="choiceOverridePriceSelect" ng-change="saveChoice()" ng-disabled="currentChoice.isSaving()">
+			    		<select ng-model="currentChoice.overridePrice" id="choiceOverridePriceSelect" ng-change="saveChoice()" ng-disabled="currentChoice.isSaving()" class="form-control">
 			    			<option value="NONE" l="menus.choices.field.overridePrice.none">nothing</option>
 			    			<option value="OVERRIDE_SINGLE_PRICE" l="menus.choices.field.overridePrice.overridesingleprice">Price per product</option>
 			    			<option value="OVERRIDE_FIXED_SUM" l="menus.choices.field.overridePrice.overridefixedsum">Total price</option>
@@ -544,22 +585,27 @@
 			    	<div ng-show="choiceInvalid" class="text-error">
 			    		<span l="validation.field.required">* Please fill out all required fields.</span>
 			    	</div>	
-			    	<div class="row" style="margin-top: 7px;" ng-show="currentChoice.id">	    		
-			    		<button class="btn col-md-6" data-toggle="modal" data-target="#deleteChoiceModal">
-			    			<i class="glyphicon glyphicon-trash"></i>
-			    		</button>
+			    	<div class="row" style="margin-top: 7px;" ng-show="currentChoice.id">	    	<div class="col-md-6">
+			    			<button class="btn btn-default btn-block" data-toggle="modal" data-target="#deleteChoiceModal">
+			    				<i class="glyphicon glyphicon-trash"></i>
+			    			</button>
+			    		</div>
 			    		<!-- Modal delete dialog. -->
-			    		<div class="modal hide" id="deleteChoiceModal">
-						 	<div class="modal-header">
-						    	<button type="button" class="close" data-dismiss="modal">×</button>
-						    	<h4 l="menus.choices.action.remove">Remove choice from product</h4>
-							</div>
-							<div class="modal-body alert-danger">
-						    	<p><span l="menus.choice.dialog.delete.text">{{currentChoice.text}} will be removed from this product.</span></p>
-						    </div>  
-						  	<div class="modal-footer">
-						  		<button type="button" class="btn" data-dismiss="modal" l="common.cancel">Cancel</button>
-						    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="removeChoice(currentChoice)" l="common.delete">Delete</button>
+			    		<div class="modal fade" id="deleteChoiceModal">
+			    			<div class="modal-dialog">
+			    				<div class="modal-content">
+								 	<div class="modal-header">
+								    	<button type="button" class="close" data-dismiss="modal">×</button>
+								    	<h4 l="menus.choices.action.remove">Remove choice from product</h4>
+									</div>
+									<div class="modal-body alert-danger">
+								    	<p><span l="menus.choice.dialog.delete.text">{{currentChoice.text}} will be removed from this product.</span></p>
+								    </div>  
+								  	<div class="modal-footer">
+								  		<button type="button" class="btn btn-default" data-dismiss="modal" l="common.cancel">Cancel</button>
+								    	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="removeChoice(currentChoice)" l="common.delete">Delete</button>
+									</div>
+								</div>
 							</div>
 						</div>
 			    	</div>
@@ -570,13 +616,16 @@
 	    		<!-- <button class="" ng-click="addOption()"><i class="glyphicon glyphicon-plus-sign"></i> <span l="menus.options.list.new">Add Option</span></button> -->
 	    		<div class="data-container-block data-container-seperator">
 	    			<div class="row">
-	    				<button class="btn btn-primary col-md-6" ng-click="addOption()" type="button" ><i class="glyphicon glyphicon-plus-sign glyphicon glyphicon-white"></i> <span l="common.new">New</span></button>
+	    				<div class="col-md-6">
+	    					<button class="btn btn-primary" ng-click="addOption()" type="button" ><i class="glyphicon glyphicon-plus-sign glyphicon glyphicon-white"></i> <span l="common.new">New</span></button>
+	    				</div>
 	    			</div>
 	    		</div>
 	    		<ul class="data-container-block data-container-small data-container-scrollable options-list" style="margin:0px">
 		       	 	<li ng-repeat="option in currentChoice.options" class="choice-option-item">
 		       	 		<div class="row">
-		       	 			<div class="col-md-10">
+		       	 			<div class="col-md-12">
+		       	 				<button class="btn btn-default" style="float: right; margin-left: 3px;" ng-click="removeOption($index)" ng-disabled="currentChoice.options.length == 1 || currentChoice.isSaving()"><i class="glyphicon glyphicon-trash"></i></button>
 			       	 			<div simple-property-editor editor-title="option.editor.name.tooltip" editor-property="option.name" editor-on-save="saveChoice()" editor-required editor-enabled="!currentChoice.isSaving()">
 			       	 				<p ng-class="{edit: !currentChoice.isSaving(), muted: currentChoice.isSaving()}">{{option.name}} <i class="glyphicon glyphicon-edit glyphicon glyphicon-black"></i></p>
 			       	 			</div> 
@@ -584,10 +633,7 @@
 											<div class="edit" simple-property-editor editor-title="option.editor.price.tooltip" editor-property="option.price" editor-on-save="saveChoice()" editor-pattern="/^[0-9]+([.][0-9]+)?$/" editor-pattern-text="product.editor.price.validation" editor-enabled="!currentChoice.isSaving()">
 			       	 				<p ng-class="{edit: !currentChoice.isSaving(), muted: currentChoice.isSaving()}">{{option.price | kcurrency:activeBusiness.currency}} <i class="glyphicon glyphicon-edit glyphicon glyphicon-black"></i></p>
 			       	 			</div>
-			       	 			</div> 
-		       	 			</div>
-		       	 			<div class="col-md-2" style="margin-left:0px;">
-		       	 			 	<button class="btn" ng-click="removeOption($index)" ng-disabled="currentChoice.options.length == 1 || currentChoice.isSaving()"><i class="glyphicon glyphicon-trash"></i></button>
+			       	 			</div> 		       	 			 	
 		       	 			</div>
 		       	 		</div>		       	 				       	 		
 			        </li>
