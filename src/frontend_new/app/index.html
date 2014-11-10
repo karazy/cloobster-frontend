@@ -47,10 +47,12 @@
   <div class="container-fluid">
     <!-- Error alert -->
     <div class="row ng-cloak" ng-show="error">
-      <div class="alert alert-danger alert-block col-md-6 fade in" >
-        <button class="close" ng-click="error=false;">×</button>
-        <h4 class="alert-heading" l="common.warning.title">Error!</h4>
-        <p ng-bind="errorMessage"></p>
+      <div class="col-md-6">
+        <div class="alert alert-danger alert-block fade in" >
+          <button class="close" ng-click="error=false;">×</button>
+          <h4 class="alert-heading" l="common.warning.title">Error!</h4>
+          <p ng-bind="errorMessage"></p>
+        </div>
       </div>
     </div>
     <!-- <div class="row"> -->
