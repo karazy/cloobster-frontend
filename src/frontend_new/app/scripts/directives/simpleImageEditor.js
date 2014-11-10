@@ -24,12 +24,12 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 		},
 		template: function(element, attrs) {
 			var html = '<div class="toggler" ng-transclude></div>'+
-				'<div class="modal fade">'+
-					'<div class="modal-header">'+
-				   		'<h3>{{getTitle()}}</h3>'+
-					'</div>'+
-					'<div class="modal-dialog">'+
+				'<div class="modal fade">'+					
+					'<div class="modal-dialog">'+						
 						'<div class="modal-content">'+
+							'<div class="modal-header">'+
+					   			'<h3>{{getTitle()}}</h3>'+
+							'</div>'+
 							'<form name="simpleImageForm" novalidate ng-submit="save()" class="upload-image-form">'+
 								'<div class="modal-body">'+
 									'<div class="alert alert-danger alert-block" ng-show="error">'+
@@ -68,10 +68,10 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 								'</div>'+
 								'<div class="modal-footer" style="clear:both;">'+
 									//image delete button, hide when no delete function is provided, file is uploading, no image exists or selection is active!
-									'<button class="btn" type="button" ng-click="deleteImage()" ng-hide="selectionActive || fileUploading || fileSaving || !imageUrl || !deleteImage"><i class="icon-trash icon-black"></i></button>'+
+									'<button class="btn btn-default" type="button" ng-click="deleteImage()" ng-hide="selectionActive || fileUploading || fileSaving || !imageUrl || !deleteImage"><i class="glyphicon glyphicon-trash glyphicon glyphicon-black"></i></button>'+
 									'<button type="button" class="btn btn-default" ng-click="cancel()" data-dismiss="modal" l="common.cancel">Close</button>'+
 								 	'<span class="btn btn-success fileinput-button" style="float: none;" ng-hide="selectionActive || fileUploading || fileSaving">'+
-								 		'<i class="icon-plus icon-white"></i>'+
+								 		'<i class="glyphicon glyphicon-plus glyphicon-white"></i>'+
 		            					'<span l="fileupload.button.add">Add image...</span>'+
 								 		'<input type="file" name="files[]" accept="image/jpeg,image/png,image/gif"></input>'+
 								 		'<input type="hidden" value="{{editorImageId}}">'+
@@ -402,12 +402,12 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 					};
 
 					/** Reset private scope variables. */
-					dialog.on("show", function() {
+					dialog.on("show.bs.modal", function() {
 						resetScope();
 						scope.$digest();
 					});
 
-					dialog.on("hide", function() {
+					dialog.on("hide.bs.modal", function() {
 						disableCropping();
 
 						if(!scope.userCropped && !scope.userSaved) {
@@ -429,24 +429,26 @@ Cloobster.directives.directive('simpleImageEditor',['upload', 'lang','$log','$in
 	   							dialog.modal('show');
 
 							if(editorCropText) {
-								modalBodyHeight = (($(window).height() - dialogFooter.outerHeight() - dialogHeader.outerHeight() - 0.2 * $(window).height())) + 'px';
-								dialogBody.css('height', modalBodyHeight);
-
+								modalBodyHeight = (($(window).height() - dialogFooter.outerHeight() - dialogHeader.outerHeight() - 0.2 * $(window).height())) + 'px';								
 								dialogBody.css('max-height', modalBodyHeight);
 								// Expand the dialog to 80% width and 80% height of window.								
-								dialog.css('width', '80%');
+								//Start Changes Bootstrap 3
+								//dialogBody.css('height', modalBodyHeight);
+								//dialog.css('width', '80%');
+								// 'margin-left': function () { 
+								// 	return -($(this).width() / 2); 
+								//	}
+								//End Changes Bootstrap 3
 								dialog.css('top', '5%');
-								dialog.css({
+								//dialog.css({
 								    // 'height': function () { 
 								    // 	return ($(window).height() * .8) + 'px';
 								    // },								    
-								    'margin-left': function () { 
-								    	return -($(this).width() / 2); 
-								   	}
+								  
 								   	//,'margin-top': function () { 
 								    //	return -($(this).height() / 2); 
 								   	//}
-								});
+								//});
 								
 							}
 							
