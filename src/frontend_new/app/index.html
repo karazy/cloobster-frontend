@@ -104,8 +104,8 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- non bower managed libs -->
-    <script type="text/javascript" src="//www.google.com/jsapi"></script>
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <!-- non bower managed libs -->    
     <script src="lib/jquery/jquery-ui-1.10.1.custom.min.js"></script>   
     <script src="lib/jquery/jquery.ui.widget.js"></script>
     <!-- Begin File Upload Plugin -->
@@ -118,12 +118,9 @@
     <script type="text/javascript" src="lib/ckeditor/ckeditor.js"></script>
     <script type="text/javascript" src="lib/ckeditor/adapters/jquery.js"></script>
     <!-- End ckeditor -->
-    <script src="lib/jquery/jquery.imgareaselect.js"></script>
-
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="lib/jquery/jquery.imgareaselect.js"></script>    
     <script src="scripts/app.js"></script>
-    <script type="text/javascript" src="lib/angular-ui-0.4.0/build/angular-ui.js"></script>  
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBND2bvOETsvyxSoDV6a0Rx5gn1u1g9zD8&sensor=false" type="text/javascript"></script> 
+    <script type="text/javascript" src="lib/angular-ui-0.4.0/build/angular-ui.js"></script>      
   <script src="scripts/controllers/registration.js"></script>
   <script src="scripts/controllers/login.js"></script>
   <script src="scripts/controllers/business.js"></script>
@@ -153,5 +150,7 @@
   <script src="scripts/directives/simpleImageEditor.js"></script> 
   <script src="scripts/directives/switchButton.js"></script>  
     <!-- endbuild -->
+    <script type="text/javascript" src="//www.google.com/jsapi"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBND2bvOETsvyxSoDV6a0Rx5gn1u1g9zD8&sensor=false" type="text/javascript"></script> 
 </body>
 </html>
