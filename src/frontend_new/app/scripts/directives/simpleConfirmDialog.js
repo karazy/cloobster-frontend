@@ -19,7 +19,7 @@ angular.module('Cloobster.directives').directive('simpleConfirmDialog', ['lang',
 
 			html = 
 			'<span class="toggler" ng-transclude></span>'+
-			'<div class="modal confirm-modal">'+
+			'<div class="modal fade confirm-modal" role="dialog" aria-hidden="true">'+
 				'<div class="modal-dialog">'+
 					'<div class="modal-content">'+
 				 	'<div class="modal-header">'+
