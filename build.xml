@@ -11,7 +11,7 @@
 	<target name="build-all" depends="clean-all, build-frontend, build-customerhome, build-admin">
 	</target>
 	<target name="clean-all" depends="clean-frontend, clean-customerhome, clean-admin">
-		</target>
+	</target>
 	<target name="build-admin" depends="compile-admin, copylibs-admin, copyresources-admin">
 	</target>
 	<target name="build-frontend" depends="configure-frontend, compile-frontend, copylibs-frontend, copyresources-frontend, setversion">
@@ -208,15 +208,13 @@
 		</antcall>
 	</target>
 	
-	<target name="setConfigProd">
-	    </condition>
+	<target name="setConfigProd">	    
 		<echo message="Setting config values" />
 		<replaceregexp file="${configFile}" match="('serviceUrl' :) .*" replace="\1 '${serviceUrlProd}'," byline="true">
 		</replaceregexp>
 	</target>
 	
 	<target name="setConfigLocal">
-	    </condition>
 		<echo message="Setting config values" />
 		<replaceregexp file="${configFile}" match="('serviceUrl' :) .*" replace="\1 '${serviceUrlLocal}'," byline="true">
 		</replaceregexp>

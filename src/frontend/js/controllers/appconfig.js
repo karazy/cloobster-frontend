@@ -110,14 +110,14 @@ Cloobster.AppConfig = function($scope, $http, $routeParams, $location, loginServ
 			"static": false,
 			"feature" : "products"
 		},
-		"deztixcoupons": {	
-			title: langService.translate("tiles.template.external.de.ztix.coupons") || "Ztix Coupons",
-			type: "deztixcoupons",
-			cls: "tile-de-ztix-coupons",
-			description: langService.translate("tiles.template.external.de.ztix.coupons.description"),
-			"static": true,
-			"feature" : "de-ztix-coupons"
-		},
+		// "deztixcoupons": {	
+		// 	title: langService.translate("tiles.template.external.de.ztix.coupons") || "Ztix Coupons",
+		// 	type: "deztixcoupons",
+		// 	cls: "tile-de-ztix-coupons",
+		// 	description: langService.translate("tiles.template.external.de.ztix.coupons.description"),
+		// 	"static": true,
+		// 	"feature" : "de-ztix-coupons"
+		// },
 		"storecard": {	
 			title: langService.translate("tiles.template.storecard") || "Storecard",
 			type: "storecard",
