@@ -12,9 +12,9 @@ Cloobster.services.provider('config', function() {
 		@private
 	*/
 	self.config_ = {
-		// 'serviceUrl' : 'https://karazy-cloobster.appspot.com',
+		 'serviceUrl' : 'https://karazy-cloobster.appspot.com',
 		// 'serviceUrl' : 'https://cloobster-test.appspot.com',
-		'serviceUrl' : 'http://127.0.0.1:8888',
+		//'serviceUrl' : 'http://127.0.0.1:8888',
 		'priceRegExp' : /([0123456789]+)\.([0123456789]*)/,
 		'currencyFormats' : {
 			'EUR': '$1,$2 €',

@@ -71,14 +71,12 @@
 			<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/appconfig',true), 'disabled': businesses.length==0}">
 				<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/appconfig','')}}" l="businesses.headertabs.appconfig">App Config</a>
 			</li>
-			 <li role="presentation" class="dropdown">
-			    <a class="dropdown-toggle"
-			       data-toggle="dropdown"
-			       >
-			        <span l="common.more">More</span>
-			        <b class="caret"></b>
-			      </a>
-			    <ul class="dropdown-menu">
+			 <li role="presentation" class="dropdown" dropdown is-open="dd.status.isopen">
+			    <a class="dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+			       <span l="common.more">More</span>
+			       <span class="caret"></span>
+			    </a>
+			    <ul class="dropdown-menu" role="menu">
 			    	<li ng-class="{'active': isActive('/businesses/'+activeBusinessId+'/externals',true), 'disabled': businesses.length==0}">
 						<a ng-href="{{cond(activeBusinessId,'#/businesses/'+activeBusinessId+'/externals','')}}" l="businesses.headertabs.externals">External Partners</a>
 					</li>
@@ -93,7 +91,7 @@
 					</li>					
 			    </ul>
 			  </li>	
-			  <li>
+			<li>
 				<div class="loading-indicator" ng-show="ajaxLoading"></div>
 			</li>
 		</ul>		
