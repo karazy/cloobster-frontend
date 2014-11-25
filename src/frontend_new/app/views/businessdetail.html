@@ -430,21 +430,21 @@
 					</span>
 				</div>
 										
-				<button class="btn btn-success" style="margin-left: 10px;" type="button" ng-click="languageQuery.selected = ''" ng-model="currentMenu.active" ng-show="languageQuery.selected"><i class="glyphicon glyphicon-ok glyphicon glyphicon-white"></i> <span l="common.active">Active</span></button>
+				<button class="btn btn-success" style="margin-left: 10px;" type="button" ng-click="languageQuery.selected = ''" ng-show="languageQuery.selected"><i class="glyphicon glyphicon-ok glyphicon glyphicon-white"></i> <span l="common.active">Active</span></button>
 
-	    		<button class="btn btn-default" style="margin-left: 10px;" type="button" ng-click="languageQuery.selected = true" ng-model="currentMenu.active" ng-show="!languageQuery.selected"><i class="glyphicon glyphicon-ban-circle glyphicon glyphicon-black"></i> <span l="common.all">All</span></button>
+	    		<button class="btn btn-default" style="margin-left: 10px;" type="button" ng-click="languageQuery.selected = true" ng-show="!languageQuery.selected"><i class="glyphicon glyphicon-ban-circle glyphicon glyphicon-black"></i> <span l="common.all">All</span></button>
 			<!-- </div>			 -->
 		</form>		
 		
 		<!-- </div> -->
 	</div>
 	<div class="data-container-block row data-container-scrollable data-container-dynamic">		
-		<div ng-repeat="lang in langcodes | filter:languageQuery" style="margin-left: 5px;">
-			<!-- <div class="col-md-2"> -->
+		<div ng-repeat="lang in langcodes | filter:languageQuery.lang" style="margin-left: 5px;">
+			<div class="col-md-2" ng-hide="languageQuery.selected == true && languageQuery.selected != lang.selected">
 			<span>
 				<input type="checkbox" ng-model="lang.selected" id="langcode_{{lang.code}}" value="{{lang.code}}"> <label for="langcode_{{lang.code}}" style="display: inline;">{{lang.lang}}</label>
 			</span>
-			<!-- </div> -->
+			</div>
 		</div>
 	</div>
 	<div class="row data-container-block">
