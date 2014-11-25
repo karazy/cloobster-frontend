@@ -789,7 +789,7 @@ Cloobster.Business = function($scope, $http, $routeParams, $location, loginServi
 		});
 
 		$scope.storeCardConfiguration.$update({name: scConfName} ,angular.noop, handleError);
-	}
+	}	
 
 };
 

@@ -309,7 +309,7 @@
 							</div>
 							<div class="btn-group">
 								<!-- Test CheckIn Button -->
-								<button class="btn btn-primary" onclick="window.open('http://app.cloobster.com/#checkin/{{currentSpot.barcode}}','targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=480,height=800')" type="button">
+								<button class="btn btn-primary" ng-click="previewAppForActiveSpot()" type="button">
 									<i class="glyphicon glyphicon-wrench glyphicon glyphicon-white"></i>
 									<span l="spot.action.testcheckin">Test CheckIn</span>
 								</button>

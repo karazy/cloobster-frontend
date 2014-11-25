@@ -10,7 +10,8 @@
 * 	@constructor
 */
 
-Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, loginService, Business, Area, Spot, Menu, Documents, langService, $log, handleError, helperFn, validator) {
+Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, loginService, Business, Area, Spot, Menu, Documents, langService, $log, handleError, helperFn, validator, 
+	config) {
 		//default information when adding a new barcode
 	var defaultSpot = {
 			//name: langService.translate("barcode.new.default.name") || "New Spot",
@@ -741,7 +742,27 @@ Cloobster.Spot = function($scope, $http, $routeParams, $location, $filter, login
 		content: langService.translate("areas.editor.barcoderequired.help")
 	});
 
+	/**
+	* Preview the app by checking in with the active spot.
+	*
+	*/
+	$scope.previewAppForActiveSpot = function() {
+
+		if(!$scope.currentSpot) {
+			console.log("Spot.previewAppForActiveSpot: no currentSpot");
+			return;
+		}
+
+		window.open(
+			config.previewAppUrl
+			+'/#checkin/'
+			+ $scope.currentSpot.barcode
+			,'targetWindow',
+			'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=480,height=800');
+	}
+
 
 }
 
-Cloobster.Spot.$inject = ['$scope', '$http', '$routeParams', '$location', '$filter', 'login', 'Business', 'Area', 'Spot', 'Menu', 'Documents', 'lang', '$log', 'errorHandler', 'helper','validator'];
+Cloobster.Spot.$inject = ['$scope', '$http', '$routeParams', '$location', '$filter', 'login', 'Business', 'Area', 'Spot', 'Menu', 'Documents', 'lang', '$log', 'errorHandler', 'helper','validator',
+'config'];

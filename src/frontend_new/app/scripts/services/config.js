@@ -19,7 +19,8 @@ Cloobster.services.provider('config', function() {
 		'currencyFormats' : {
 			'EUR': '$1,$2 €',
 			'USD': '\$ $1.$2'
-		}
+		},
+		previewAppUrl: 'http://app.cloobster.com'
 	}
 
 	/**
